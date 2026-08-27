@@ -1,0 +1,16 @@
+{
+  "name": "ossian-stack",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Repo-local tooling for the ossian-stack plugin. Not shipped, not published — the plugin itself is just skills/.",
+  "scripts": {
+    "check": "bun run validate && bun run plugin:validate",
+    "validate": "bun scripts/validate.ts",
+    "plugin:validate": "claude plugin validate .claude-plugin/marketplace.json --strict && claude plugin validate .claude-plugin/plugin.json --strict",
+    "check:upstream": "scripts/check-upstream.sh",
+    "docs:list": "bin/docs-list"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  }
+}

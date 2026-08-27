@@ -3,3 +3,11 @@ __pycache__/
 *.pyc
 .mypy_cache/
 .ruff_cache/
+
+# .agents/skills/ is the internal-skill tier and IS tracked (.claude/skills symlinks to it).
+# Everything else npx/skills tooling drops in .agents/ is scratch.
+.agents/*
+!.agents/skills/
+
+node_modules/
+bun.lockb

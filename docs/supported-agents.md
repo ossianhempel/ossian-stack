@@ -40,8 +40,15 @@ into them:
 Repo source of truth: `~/Developer/ossian-stack/skills` (this machine) or
 `~/repos/ossian-stack/skills` (varies by machine — see AGENTS.md).
 
-There is no project or profile skill tier. Per-project scoping is done by enabling
-or disabling the plugin in a project's `.claude/settings.json`.
+Per-project scoping of the *plugin* is done by enabling or disabling it in a
+project's `.claude/settings.json`.
+
+Runtimes also read a **project** skill tier relative to the cwd: Claude Code reads
+`.claude/skills/`, while Codex and Cursor read `.agents/skills/`. This repo keeps its
+internal maintenance skills in `.agents/skills/` and symlinks `.claude/skills` to it,
+so one copy serves every runtime that opens the checkout (see
+`.agents/skills/README.md`). Those skills reach no one outside this repo — anything
+users need belongs in `skills/`.
 
 ## Session / transcript logs
 
