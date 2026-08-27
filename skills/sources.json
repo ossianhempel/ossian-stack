@@ -1,0 +1,287 @@
+{
+  "version": 1,
+  "updated": "2026-08-03",
+  "description": "Upstream map for skills/ — the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
+  "skills": {
+    "ai-slop-reviewer": {
+      "origin": "local",
+      "notes": "Extracted from copywriter on 2026-08-02. The checklist includes patterns adapted from petergyang/no-ai-slop; the review workflow and linter integration are maintained locally."
+    },
+    "animation-vocabulary": {
+      "origin": "vendored",
+      "repo": "https://github.com/emilkowalski/skills",
+      "path": "skills/animation-vocabulary",
+      "refresh": "npx skills add emilkowalski/skills -y --skill animation-vocabulary && cp -R .agents/skills/animation-vocabulary/* skills/animation-vocabulary/"
+    },
+    "app-store-optimization": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (commit 3b1f581). Bespoke ASO workflow."
+    },
+    "app-store-screenshots": {
+      "origin": "adapted",
+      "repo": "https://github.com/ParthJadhav/app-store-screenshots",
+      "path": "skills/app-store-screenshots",
+      "refresh": "npx skills add ParthJadhav/app-store-screenshots -y --skill app-store-screenshots && cp -R .agents/skills/app-store-screenshots/* skills/app-store-screenshots/",
+      "notes": "Replaced prior skill in 20088a7. Local copy may drift from upstream — diff before refresh."
+    },
+    "asc-metadata": {
+      "origin": "adapted",
+      "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
+      "path": "asc-aso-audit, asc-localize-metadata, asc-whats-new-writer",
+      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh — diff reference/ against upstream skills manually."
+    },
+    "asc-pricing": {
+      "origin": "adapted",
+      "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
+      "path": "asc-ppp-pricing, asc-revenuecat-catalog-sync",
+      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh."
+    },
+    "asc-release": {
+      "origin": "adapted",
+      "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
+      "path": "asc-cli-usage, asc-xcode-build, asc-release-flow, asc-workflow",
+      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh."
+    },
+    "asc-version-guard": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (3a35eef). Runnable install/version guard infra — not from rudrank bundle."
+    },
+    "autoreview": {
+      "origin": "vendored",
+      "repo": "https://github.com/openclaw/agent-skills",
+      "path": "skills/autoreview",
+      "refresh": "npx skills add openclaw/agent-skills -y --skill autoreview && cp -R .agents/skills/autoreview/* skills/autoreview/",
+      "notes": "Local overrides possible (see CHANGELOG). Diff before overwriting customizations."
+    },
+    "better-accessibility": {
+      "origin": "vendored",
+      "repo": "https://github.com/jakubkrehel/skills",
+      "path": "skills/better-accessibility",
+      "refresh": "npx skills add jakubkrehel/skills -y --skill better-accessibility && cp -R .agents/skills/better-accessibility/* skills/better-accessibility/"
+    },
+    "better-colors": {
+      "origin": "vendored",
+      "repo": "https://github.com/jakubkrehel/skills",
+      "path": "skills/better-colors",
+      "refresh": "npx skills add jakubkrehel/skills -y --skill better-colors && cp -R .agents/skills/better-colors/* skills/better-colors/"
+    },
+    "better-interface": {
+      "origin": "vendored",
+      "repo": "https://github.com/jakubkrehel/skills",
+      "path": "skills/better-interface",
+      "refresh": "npx skills add jakubkrehel/skills -y --skill better-interface && cp -R .agents/skills/better-interface/* skills/better-interface/"
+    },
+    "better-layout": {
+      "origin": "vendored",
+      "repo": "https://github.com/jakubkrehel/skills",
+      "path": "skills/better-layout",
+      "refresh": "npx skills add jakubkrehel/skills -y --skill better-layout && cp -R .agents/skills/better-layout/* skills/better-layout/"
+    },
+    "better-typography": {
+      "origin": "vendored",
+      "repo": "https://github.com/jakubkrehel/skills",
+      "path": "skills/better-typography",
+      "refresh": "npx skills add jakubkrehel/skills -y --skill better-typography && cp -R .agents/skills/better-typography/* skills/better-typography/"
+    },
+    "better-ui": {
+      "origin": "vendored",
+      "repo": "https://github.com/jakubkrehel/skills",
+      "path": "skills/better-ui",
+      "refresh": "npx skills add jakubkrehel/skills -y --skill better-ui && cp -R .agents/skills/better-ui/* skills/better-ui/"
+    },
+    "better-writing": {
+      "origin": "vendored",
+      "repo": "https://github.com/jakubkrehel/skills",
+      "path": "skills/better-writing",
+      "refresh": "npx skills add jakubkrehel/skills -y --skill better-writing && cp -R .agents/skills/better-writing/* skills/better-writing/"
+    },
+    "bro": {
+      "origin": "vendored",
+      "repo": "https://github.com/dmmulroy/skills",
+      "path": "bro",
+      "refresh": "npx skills add dmmulroy/skills -y --skill bro && cp -R .agents/skills/bro/* skills/bro/"
+    },
+    "clerk-cli": {
+      "origin": "vendored",
+      "repo": "https://github.com/clerk/skills",
+      "path": "skills/core/clerk-cli",
+      "refresh": "npx skills add clerk/skills -y --skill clerk-cli && cp -R .agents/skills/clerk-cli/* skills/clerk-cli/",
+      "lastSynced": "2026-07-26",
+      "notes": "Also upgrade global CLI: npm i -g clerk@latest"
+    },
+    "codex-first": {
+      "origin": "vendored",
+      "repo": "https://github.com/steipete/agent-scripts",
+      "path": "skills/codex-first",
+      "refresh": "npx skills add steipete/agent-scripts -y --skill codex-first && cp -R .agents/skills/codex-first/* skills/codex-first/"
+    },
+    "convex-cli": {
+      "origin": "companion",
+      "repo": "https://github.com/get-convex/convex-js",
+      "notes": "Documents npx convex CLI; no vendored copy. Track Convex CLI release notes."
+    },
+    "coolify": {
+      "origin": "companion",
+      "repo": "https://github.com/coollabsio/coolify-cli",
+      "notes": "Documents coolify CLI install/usage (see SKILL.md install script). Not a skill copy."
+    },
+    "copywriter": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (1a3cfa4). Hooks and shared conversion principles remain here; AI-slop review and complete slideshow production were extracted into focused sibling skills on 2026-08-02."
+    },
+    "create-cli": {
+      "origin": "derived",
+      "repo": "https://github.com/cli-guidelines/cli-guidelines",
+      "notes": "Encodes clig.dev principles; not a file copy."
+    },
+    "emil-design-eng": {
+      "origin": "vendored",
+      "repo": "https://github.com/emilkowalski/skills",
+      "path": "skills/emil-design-eng",
+      "refresh": "npx skills add emilkowalski/skills -y --skill emil-design-eng && cp -R .agents/skills/emil-design-eng/* skills/emil-design-eng/"
+    },
+    "find-animation-opportunities": {
+      "origin": "vendored",
+      "repo": "https://github.com/emilkowalski/skills",
+      "path": "skills/find-animation-opportunities",
+      "refresh": "npx skills add emilkowalski/skills -y --skill find-animation-opportunities && cp -R .agents/skills/find-animation-opportunities/* skills/find-animation-opportunities/",
+      "lastSynced": "2026-07-25"
+    },
+    "frontend-slides": {
+      "origin": "vendored",
+      "repo": "https://github.com/zarazhangrui/frontend-slides",
+      "path": "SKILL.md, STYLE_PRESETS.md, animation-patterns.md, html-template.md, viewport-base.css, scripts/, bold-template-pack/",
+      "notes": "Repo ships the same skill twice (root and plugins/frontend-slides/skills/frontend-slides/) — vendored from the root copy. No refresh script; diff upstream root manually."
+    },
+    "git-cleanup": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (25d65c8). Independent of trailofbits/skills git-cleanup."
+    },
+    "grill-design": {
+      "origin": "vendored",
+      "repo": "https://github.com/will-ness-ai/skills",
+      "path": "skills/grill-design",
+      "refresh": "npx skills add will-ness-ai/skills -y --skill grill-design && cp -R .agents/skills/grill-design/* skills/grill-design/",
+      "notes": "Renamed from upstream skills/engineering/grilling-frontend-prototyping (redirect stub). Composes the grilling and prototype skills."
+    },
+    "grill-me": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/productivity/grilling",
+      "refresh": "npx skills add mattpocock/skills -y --skill grilling && cp .agents/skills/grilling/SKILL.md /tmp/grilling-upstream.md",
+      "lastSynced": "2026-08-11",
+      "notes": "Merged grilling body into grill-me (upstream also has a thin grill-me router). Pairs with ce-brainstorm / ce-plan."
+    },
+    "handoff": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/productivity/handoff",
+      "refresh": "npx skills add mattpocock/skills -y --skill handoff && cp -R .agents/skills/handoff/* skills/handoff/",
+      "lastSynced": "2026-08-03"
+    },
+    "improve-animations": {
+      "origin": "vendored",
+      "repo": "https://github.com/emilkowalski/skills",
+      "path": "skills/improve-animations",
+      "refresh": "npx skills add emilkowalski/skills -y --skill improve-animations && cp -R .agents/skills/improve-animations/* skills/improve-animations/",
+      "lastSynced": "2026-07-25"
+    },
+    "ios-marketing-capture": {
+      "origin": "adapted",
+      "repo": "https://github.com/ParthJadhav/ios-marketing-capture",
+      "path": "skills/ios-marketing-capture",
+      "refresh": "npx skills add ParthJadhav/ios-marketing-capture -y --skill ios-marketing-capture && cp -R .agents/skills/ios-marketing-capture/* skills/ios-marketing-capture/",
+      "notes": "Added bc43428 from ParthJadhav; local customizations may differ."
+    },
+    "obsidian": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (848085c). Vault-specific Obsidian workflows."
+    },
+    "onboarding-flow": {
+      "origin": "adapted",
+      "repo": "https://github.com/adamlyttleapps/claude-skill-app-onboarding-questionnaire",
+      "notes": "MIT-adapted (SKILL.md:518); heavily customized for Ossian's stack."
+    },
+    "one-password": {
+      "origin": "companion",
+      "repo": "https://developer.1password.com/docs/cli",
+      "notes": "Documents op CLI usage patterns for this environment."
+    },
+    "online-writing": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts. Method distilled from Nicolas Cole's 'The Art and Business of Online Writing' via Ossian's Obsidian vault notes (3. Resources/Notes/Online writing.md and linked notes; Readwise highlights). No upstream code vendored."
+    },
+    "peekaboo": {
+      "origin": "vendored",
+      "repo": "https://github.com/steipete/peekaboo",
+      "path": "skills/peekaboo",
+      "refresh": "npx skills add steipete/peekaboo -y --skill peekaboo && cp -R .agents/skills/peekaboo/* skills/peekaboo/"
+    },
+    "post-queue-cli": {
+      "origin": "companion",
+      "repo": "https://github.com/ossianhempel/post-queue",
+      "notes": "Documents post-queue package.json scripts; track repo when commands change."
+    },
+    "postq-bridge": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (21038b4). Content Machine ↔ Post Queue bridge workflow."
+    },
+    "privacy-policy": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (cf7b4ab)."
+    },
+    "readwise-cli": {
+      "origin": "companion",
+      "repo": "https://www.npmjs.com/package/@readwise/cli",
+      "notes": "Documents @readwise/cli; no upstream skill repo."
+    },
+    "release-ios-app": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (af475d9). Orchestrates asc-* + .ios-release.env; mirrors release-mac-app pattern."
+    },
+    "release-mac-app": {
+      "origin": "adapted",
+      "repo": "https://github.com/steipete/agent-scripts",
+      "path": "skills/release-mac-app",
+      "refresh": "npx skills add steipete/agent-scripts -y --skill release-mac-app && cp -R .agents/skills/release-mac-app/* skills/release-mac-app/",
+      "notes": "Adapted from Peter Steinberger's release-mac-app (SKILL.md:9); profile-scoped macOS customizations."
+    },
+    "revenuecat-api": {
+      "origin": "companion",
+      "repo": "https://github.com/RevenueCat/docs",
+      "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured."
+    },
+    "review-animations": {
+      "origin": "vendored",
+      "repo": "https://github.com/emilkowalski/skills",
+      "path": "skills/review-animations",
+      "refresh": "npx skills add emilkowalski/skills -y --skill review-animations && cp -R .agents/skills/review-animations/* skills/review-animations/"
+    },
+    "skill-cleaner": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (311f9f1). Audits skill installs across agent runtimes."
+    },
+    "skill-creator": {
+      "origin": "adapted",
+      "repo": "https://github.com/anthropics/skills",
+      "path": ".agents/skills/skill-creator",
+      "refresh": "npx skills add anthropics/skills -y --skill skill-creator && cp -R .agents/skills/skill-creator/* skills/skill-creator/",
+      "notes": "Updated from Anthropic upstream (dd63a74); local eval harness may differ."
+    },
+    "teach": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/productivity/teach",
+      "refresh": "npx skills add mattpocock/skills -y --skill teach && cp -R .agents/skills/teach/* skills/teach/"
+    },
+    "things": {
+      "origin": "companion",
+      "repo": "https://github.com/ossianhempel/things3-cli",
+      "notes": "Documents things3-cli; lives in ~/Developer/things3-cli."
+    },
+    "video-editor": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts. Original implementation informed by Arcturus Labs' transcript-to-FCPXML experiment and browser-use/video-use's transcript-led inspection pattern; no upstream code vendored."
+    }
+  }
+}

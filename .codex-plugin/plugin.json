@@ -1,0 +1,34 @@
+{
+  "name": "ossian-stack",
+  "version": "1.0.0",
+  "description": "Ossian's personal agent stack: skills for iOS and App Store releases, Convex/Clerk/RevenueCat/Coolify ops, frontend design and animation, copywriting and editorial writing, and macOS automation.",
+  "author": {
+    "name": "Ossian Hempel",
+    "url": "https://github.com/ossianhempel"
+  },
+  "homepage": "https://github.com/ossianhempel/ossian-stack",
+  "repository": "https://github.com/ossianhempel/ossian-stack",
+  "license": "MIT",
+  "skills": "./skills/",
+  "keywords": [
+    "ios",
+    "app-store",
+    "convex",
+    "clerk",
+    "revenuecat",
+    "coolify",
+    "frontend-design",
+    "animation",
+    "copywriting",
+    "macos-automation"
+  ],
+  "interface": {
+    "displayName": "Ossian Stack",
+    "shortDescription": "Ossian's personal skill collection for shipping apps.",
+    "longDescription": "Skills for iOS and App Store releases, Convex/Clerk/RevenueCat/Coolify operations, frontend design and animation review, copywriting and editorial writing, and macOS automation.",
+    "developerName": "Ossian Hempel",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://github.com/ossianhempel/ossian-stack"
+  }
+}

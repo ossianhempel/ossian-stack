@@ -1,0 +1,310 @@
+# Short-Form Video (Reels + TikTok)
+
+Guide for short-form video copy and scripting on Reels and TikTok. The two
+platforms are functionally the same surface — same formats win on both, so
+this reference covers them together. For the post description that pairs
+with the video, see [ig-captions.md](./ig-captions.md). For static stacks
+(carousels and TikTok slideshows), see
+The repo-local `/slideshow-creator` skill covers the complete slideshow workflow. For curated hook and
+overlay examples, see [swipe-file.md](./swipe-file.md).
+
+## The 3-Second Reality
+
+Average watch time on Ossian's TikToks is **3-5 seconds**. That is the
+window. If the first 3 seconds don't trigger an involuntary emotional
+reaction — curiosity, recognition, "wait, what?", "that's me", indignation
+— the viewer is already gone. Doesn't matter how good seconds 4-15 are;
+they don't get watched.
+
+This applies to both modes below. Every script, hook overlay, and opening
+visual must be judged against one question: *does this trigger emotion
+before 3 seconds?* Either the copy does it (hook text on screen from
+frame 1) or the visual does it (a surprising image, a face mid-reaction,
+something that shouldn't be possible). Usually both.
+
+A "setup" that pays off at second 5 is a dead post. Move the payoff to
+second 1 and build from there.
+
+---
+
+## Hook Angles That Work for Apps
+
+Seven proven angles for app marketing on short-form video. Pick the one
+that fits the app's category — they're not interchangeable. Each can be
+executed in UGC or hook-overlay mode (see below).
+
+| Angle | Pattern | Best for |
+|-------|---------|----------|
+| **POV** | `"POV: you discover an app that..."` | Discovery / consumer apps |
+| **Day in life** | Creator uses app naturally during routine | Fitness, productivity, wellness |
+| **Before / after** | Result transformation | Photo, fitness, finance |
+| **"Things I wish I knew"** | Listicle of features | Utilities, niche apps |
+| **Reaction** | Creator's first time using | Surprising or novel apps |
+| **Tutorial / how-to** | Solves a problem with the app | Productivity, creative tools |
+| **Trend-jacking** | App in a trending sound/format | All — ride the algo |
+
+Notes:
+
+- **POV and reaction angles** are the most forgiving — the format itself
+  signals "watch this", which buys you a beat. Still has to trigger
+  emotion before 3s.
+- **Day in life** only works if the moment feels real. The instant it
+  reads as scripted, it dies. See "The Tool, Not the Pitch" below.
+- **Before / after** front-loads the after as the hook. Never open on
+  the "before" — that's the setup, and setup loses the viewer.
+- **Tutorial / how-to** must promise the payoff in slide 1 / second 1.
+  "Here's how to..." is a topic announcement and gets skipped.
+- **Trend-jacking** is the fastest growth lever but has a short
+  expiration window. Use trending sounds within ~5-7 days of them
+  breaking, not after.
+
+---
+
+## Two Modes
+
+Short-form video for app marketing splits into two modes. Pick one before
+scripting — they have different goals and different rules.
+
+1. **UGC / native (the tool, not the pitch).** A creator filming a real
+   moment in their life where the app happens to be the tool. Looks
+   indistinguishable from organic content. Best for converting viewers
+   into downloads.
+
+2. **Hook-overlay (7-second loop).** A short looping clip with on-screen
+   text that *is* the hook, paired with a long caption that delivers the
+   value. Best for growing a new account from zero with near-zero
+   production effort.
+
+Don't mix them. A UGC clip with on-screen "DOWNLOAD NOW" instantly reads
+as an ad and tanks. A hook-overlay clip pretending to be UGC fails at both
+jobs.
+
+---
+
+## Mode 1: UGC / Native ("The Tool, Not the Pitch")
+
+The single most important insight for app marketing on short-form video:
+
+> The best-performing content for a calorie tracker isn't "download this
+> amazing app." It's a creator filming their lunch and saying "let me see
+> how many calories are in this." The app is the tool, not the pitch.
+
+The viewer doesn't think they're being sold to. They're watching someone
+solve a problem, and the app shows up as the obvious tool for the job. The
+download intent comes from the viewer thinking *"I want to do that too,"*
+not from being told to download anything.
+
+### Why It Converts
+
+- **No ad signal.** The brain pattern-matches "this is a person, not a
+  promo" in the first second. Promo signals (logo intros, polished
+  voiceover, on-screen CTAs) flip the viewer into ad-skip mode.
+- **Demonstrates the use case better than any pitch.** Seeing the app
+  used in a real moment teaches the viewer when *they* would use it.
+- **The viewer self-recruits.** They project themselves into the
+  creator's situation. Self-projection is stronger than persuasion.
+
+### The Native Moment Structure
+
+```
+1. The setup (1-2s)         → Creator in a real moment. No ad signal.
+2. The trigger (1-2s)       → A natural reason to use the app.
+3. The use (3-8s)           → App on screen, shown briefly mid-action.
+4. The reaction (1-3s)      → Result lands. Often the punchline.
+```
+
+Total length: 8-15 seconds for most niches. Longer (20-40s) only if the
+result needs setup or the reaction earns its time.
+
+### Trigger Patterns That Work
+
+Open with a line that *creates a reason* to use the app. The line is the
+hook. The app is the answer.
+
+- `"Let me see how many calories are in this..."` → calorie tracker
+- `"Checking if my form is actually right..."` → form analysis
+- `"Let's see what my sleep score was last night..."` → sleep tracker
+- `"POV: I just realized I have no idea where my money went this month"` → budgeting
+- `"Trying to figure out if this plant is dying or just dramatic"` → plant ID
+- `"Let me check what's in this before I eat it"` → ingredient scanner
+- `"Quick check on what I lifted last time..."` → workout log
+
+The structure is always the same: a real-life trigger that makes the app
+the obvious next move. The creator never says "I love this app." They
+just *use it*.
+
+### Secondhand Discovery (Borrowed Trust)
+
+A variant where the creator isn't the user — they're the messenger. The
+app gets introduced through someone *they* know, not through their own
+discovery. Underrated because it sidesteps the "why are you telling me
+about this" suspicion that direct first-person discovery triggers.
+
+> "I found this app" → reads as promo.
+> "my sister uses this every night" → reads as a friend telling you something.
+
+Borrowed trust converts harder than self-promotion because the viewer's
+brain pattern-matches it as peer recommendation, not advertising. The
+creator is doing what the viewer would do — passing on something that
+worked for someone close to them.
+
+Patterns:
+
+- `"my sister has been using this every night and her skin is insane now"`
+- `"this girl in my class put me on to this and I haven't stopped"`
+- `"my friend showed me this app last week, I'm obsessed"`
+- `"my roommate uses this every morning, finally tried it"`
+- `"my coworker won't shut up about this so I caved"`
+
+Rules for this variant:
+
+- **The relationship has to feel specific.** "My friend" with no detail
+  reads as fake. "My sister", "this girl in my class", "my roommate" —
+  named roles with implied proximity work better than generic "a friend".
+- **Don't claim the source said something they wouldn't say.** "My
+  sister told me this app changed her life" sounds scripted. "My sister
+  uses this every night" is a behavior observation, which is harder to
+  fake-detect.
+- **The creator's reaction sells it, not the source's endorsement.**
+  End on *the creator* trying it and reacting, not on a quote from the
+  source. Self-projection still does the work.
+- **Avoid if the relationship is implausible.** A 19-year-old saying
+  "my CFO friend uses this for budgeting" breaks the frame. The named
+  source has to fit the creator's life.
+
+### Rules
+
+- **No CTA on the video itself.** No "download now", no logo flash, no
+  "link in bio" overlay. The CTA lives in the caption and bio. The video
+  stays native. (For pure organic-growth content, even the corner-overlay
+  CTA recommended in [ig-captions.md](./ig-captions.md) is too much —
+  skip it for UGC and let the caption do the work.)
+- **No voiceover unless it's diaristic.** A scripted voiceover instantly
+  reads as an ad. If you talk, talk like you're FaceTiming a friend.
+- **App on screen, but not the focus.** The app should appear for 2-5
+  seconds inside the clip — long enough to register, short enough that
+  the *moment* is what the viewer remembers, not the UI.
+- **The result is the punchline.** End on the reaction or insight the
+  app delivered, not on a logo. "Oh, that's WAY more than I thought" is
+  a stronger close than "Get the app."
+- **Don't over-edit.** Vertical, raw, one-take feel. Polished editing
+  triggers ad-detection. Jump cuts are fine. Captions baked in are fine.
+  Color grading and motion graphics are not.
+- **Real environments, real people.** Filmed at a kitchen table, in a
+  car, at the gym. Not a studio. Not a desk with branded mug.
+
+### Anti-Pitch Checklist
+
+Before posting, run the clip through this filter:
+
+- [ ] No spoken or written CTA in the video itself
+- [ ] No logo or brand name said out loud
+- [ ] App appears for under 30% of the clip's runtime
+- [ ] Could pass for someone's normal post if you didn't know it was promo
+- [ ] The hook is a *moment*, not a claim about the app
+- [ ] Ends on a reaction, not a sell
+
+If any box fails, it's a pitch in UGC clothing. Cut the offending part.
+
+### Sourcing the Creator
+
+- **Founder filming themselves** is the highest-trust version. Lowest
+  production cost, highest authenticity.
+- **Paid UGC creators** (TikTok Creator Marketplace, Insense, Billo) work
+  if the brief is "show yourself using this in a real moment", not
+  "explain why this app is great". Brief them on the moment, not the
+  features.
+- **Licensed real customer clips** (with permission) outperform almost
+  everything else. If a real user posts about the app organically, ask
+  to license and re-cut.
+
+### When UGC Beats Hook-Overlay
+
+- App with a clear *use moment* (calorie tracker, form check, scanner,
+  identifier, tracker, sleep, finance, planner).
+- Goal is downloads and trial, not follower growth.
+- You have access to a creator (founder, employee, hired UGC, or real
+  user) willing to film a real moment.
+
+UGC is weaker when the app's value is abstract or hard to show in 10
+seconds (a B2B tool, a complex SaaS dashboard, anything where the win
+takes a week to feel). For those, hook-overlay or carousel is better.
+
+---
+
+## Mode 2: Hook-Overlay (7-Second Loop)
+
+The playbook for growing a new account or pushing app downloads with
+minimal production effort. Built for Reels and TikTok identically.
+
+### The Video
+
+- 7 seconds, looping. No voiceover needed. No face-cam needed.
+- Stock B-roll from Pexels, Canva, or any free short-clip library in
+  your niche.
+- Hook text on screen for the entire 7 seconds. Not a flash. The whole
+  clip.
+- Final 3 seconds: add a second line of text saying
+  `read description below...`
+- The goal is not to entertain. The goal is to make people replay the
+  video and read the caption. Replays and time-on-post are the strongest
+  signals you can send the algorithm.
+
+### Why It Works
+
+- 7 seconds is intentional. The reader cannot finish the hook before the
+  clip ends, so it auto-replays. Two views in one session.
+- `read description below...` pulls them into a long caption. A long
+  caption they actually read stretches time-on-post even further.
+- Replays + time-on-post = reach.
+
+### The Hook Text
+
+Same rules as a slideshow's slide 1 hook (see
+(the repo-local `/slideshow-creator` skill). Under 10 words. One
+line. Pain or reassurance, not pure aspiration. See
+[ig-captions.md](./ig-captions.md) for the full hook formula bank.
+
+### The Caption
+
+The video sold the click. The caption is the value delivery. See the
+caption template in [ig-captions.md](./ig-captions.md) — the long-caption
+format pairs directly with this video format.
+
+### When Hook-Overlay Beats UGC
+
+- Brand new account, no creator on hand, need to ship volume.
+- App's value is hard to show visually in 10 seconds.
+- Goal is follower growth and audience-building, not immediate downloads.
+
+---
+
+## Picking the Mode
+
+| If... | Use... |
+|-------|--------|
+| App has a clear use-moment and you can film it | UGC / native |
+| Goal is downloads and trial conversion | UGC / native |
+| Brand new account, need volume fast | Hook-overlay |
+| Value is abstract, hard to show in 10s | Hook-overlay |
+| Goal is follower growth | Hook-overlay |
+
+A mature account often runs both: hook-overlay for top-of-funnel reach,
+UGC for conversion. Don't run a single video that tries to do both.
+
+## Cadence
+
+Lock the format, change the angle. 1-2 posts per day while growing,
+1/day once growth is compounding. When a post hits, generate more
+variations on that winning hook or moment before moving to the next
+pattern.
+
+## Don't
+
+- Don't put a download CTA inside a UGC clip. It kills the format.
+- Don't script a UGC clip like an ad. The viewer can tell.
+- Don't switch modes mid-batch. Pick one for the run, ship 5-10, measure.
+- Don't film polished, color-graded UGC. It defeats the purpose.
+- Don't skip the `read description below...` overlay on hook-overlay.
+  It's the move.
+- Don't change the format post to post. Lock it in.

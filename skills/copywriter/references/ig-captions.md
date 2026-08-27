@@ -1,0 +1,228 @@
+# IG Caption Reference
+
+Captions / post descriptions for Instagram and TikTok posts (Reels,
+carousels, slideshows, video). This file is about the caption only —
+the text under the post that pairs with the asset above.
+
+For long captions and thread-style posts, draft beat-by-beat using
+[persuasion-skeleton.md](./persuasion-skeleton.md) (Hook → Agitate →
+Empathize → Solve → Payoff), then tighten to caption length here.
+
+For the asset itself, see:
+- [short-form-video.md](./short-form-video.md) — Reels and TikTok video
+- The repo-local `/slideshow-creator` skill owns the complete IG carousel and TikTok slideshow workflow.
+- [swipe-file.md](./swipe-file.md) — curated caption and hook examples (read before drafting)
+
+## Two Caption Modes
+
+Pick the mode before you write:
+
+1. **Standard.** Educational, opinion, or story-driven. The video or
+   stack itself carries most of the value. Short hook, short body,
+   closing line, CTA.
+
+2. **Long caption (paired with hook-overlay video).** Used with the
+   7-second hook-overlay video format documented in
+   [short-form-video.md](./short-form-video.md). The video sells the
+   click; the caption is where the value gets delivered. See the
+   long-caption template at the bottom of this file.
+
+## Pattern Over Originality
+
+Don't invent hooks. Save posts in your niche that already have traction, find the formats that repeat, and translate them into your voice. The move is recognising patterns that already convert, not inventing new ones.
+
+When a post goes viral, feed it back to the LLM and ask for more posts in the same format with different angles. Keep mining the winner until it stops working.
+
+## Niche Specificity
+
+Every caption should be tied to one specific audience. "Fitness" is invisible. "Postpartum recovery" or "Hypertrophy for lifters stuck at intermediate" tells the algorithm and the reader exactly who the post is for. Specificity in the first line does more work than any adjective.
+
+## Profile Copy
+
+See `references/social-profiles.md` for the full cross-platform profile guide
+(display name, bio structure, what to cut, platform-specific notes). That
+reference covers IG, X, TikTok, and LinkedIn.
+
+**IG-specific reminder:** set up 5 highlight covers before the first post.
+Name them for the viewer: `Tips`, `Reviews`, `Features`, `FAQ`, `How it works`.
+Skip generic `About` or `Story`.
+
+## Structure (standard mode)
+
+```
+[Hook line, 1-2 sentences with 1 emoji at the end]
+
+[Body paragraph. Educational, story, or context.
+Short paragraphs. No walls of text.]
+
+[Closing line. Leave a feeling before the CTA]
+
+-
+[CTA line]
+-
+
+#hashtag1 #hashtag2 #hashtag3 #hashtag4
+```
+
+## Hook Line
+
+The hook is the first 1-2 sentences visible in the feed before "more". Make it earn the tap.
+
+- **The first two words decide your reach.** Test openers until one converts in your niche, then repeat it every single day.
+- End with 1 relevant emoji. No stacks (no 💪🔥📈).
+- Be specific. Generic hooks get skipped.
+- Never start with greetings ("Hej allihopa!", "Welcome back!").
+- Frame around pain, not hype. Don't overpromise.
+
+### Proven Hook Formulas
+
+These work across niches. Translate them, don't reinvent them.
+
+- **Listicle with stakes:** `"5 [things / signs / reasons / mistakes] that [outcome]"`
+  - "5 signs your lower back pain is from your deadlift setup"
+  - "5 reasons your bench press has stopped growing"
+  - "5 things nobody tells you about cutting on high protein"
+- **Silent warning:** `"X things that are silently [bad outcome]"`
+  - "5 things that are silently killing your muscle growth"
+- **Mistake call-out:** `"The #1 mistake [audience] makes when [situation]"`
+  - "The #1 mistake natty lifters make in a bulk"
+- **Fear diagnosis:** `"Your [thing] is [bad state] and here's why"`
+  - "Your bench press is stalling and here's why"
+- **Contrarian claim:** `"You don't need [common thing]"`
+- **Direct comparison:** `"A > B for [goal]?"`
+- **Before/after:** `"How I changed one thing and got [result]"`
+
+## Emotional Framing
+
+Two framings consistently outperform neutral positivity. Pick one before writing the hook.
+
+1. **Negativity.** Fear, warnings, mistakes, things going wrong. People scroll to avoid pain more than they scroll to find inspiration. "5 signs something is wrong" will always beat "5 signs you're doing it right". This is not manipulation, it's how attention works.
+
+2. **Reassurance.** Posts that calm a specific worry for a specific audience. "It's normal if..." and "You're not behind because..." travel fast because the audience is desperate to hear it.
+
+Positive motivation without a pain or a worry behind it rarely breaks through.
+
+## Body
+
+- Short paragraphs. Never a wall of text.
+- Explain the *why*, not just the *what*.
+- Acknowledge nuance: "Does X work? Yes. But..."
+- Real numbers, concrete outcomes.
+- Don't oversell.
+- Skip emojis unless one adds genuine emphasis.
+
+## Closing Line
+
+Leave a feeling before the CTA. Motivation, curiosity to try, or validation.
+
+- Challenge: "Try it next time and feel the difference"
+- Simplification: "One change. Better results."
+- Casual confidence: "Not complicated, but it works"
+
+The CTA should never be the emotional close.
+
+## CTA
+
+Bracketed by `-` separators. Keep it short and clear.
+
+The job of organic content is to build an audience around the exact problem
+your app solves, then hand them the solution. The CTA is the handoff. For
+app marketing, it should live in three places at once:
+1. The caption (bracketed)
+2. A small text overlay in the corner of the video
+3. The bio, with a direct download link
+
+## Hashtags
+
+One line, 4-6 tags max. No spam. Match the topic and the audience.
+
+## Punctuation
+
+- No em dashes. Don't substitute hyphens as a workaround either. Restructure using commas, periods, or parentheses.
+- Short sentences preferred.
+
+## What NOT to Do
+
+- No "Don't forget to like and follow!" CTAs.
+- No overclaiming ("the BEST ever").
+- No commanding tone ("You MUST do this"). Share your own reasoning instead.
+- No numbered lists in the body unless listing specific items (exercises, steps, bullet points of a hook).
+- No long disclaimers.
+
+## Example (standard)
+
+```
+Why I always choose cables over dumbbells for lateral raises 📈
+
+Dumbbells give peak resistance at the top, but the muscle works through the whole range. Cables match the load better through full ROM, especially in the stretched position. That's where most growth happens.
+
+Does it work with dumbbells? Absolutely. But personally, cables win every time if the goal is maximum delt growth.
+
+One small adjustment. Big difference over time.
+
+-
+[CTA]
+-
+
+#gym #bodybuilding #hypertrophy #training
+```
+
+---
+
+## Long Caption (Pairs With Hook-Overlay Video)
+
+The caption format for the 7-second hook-overlay video documented in
+[short-form-video.md](./short-form-video.md). The video sold the click —
+the caption is the value delivery.
+
+### Rules
+
+- Repeat the on-screen hook in the first line so it matches the video.
+- Deliver what the hook promised. If the hook is "5 signs X", write 5
+  specific bullets. Each bullet should feel like something the reader
+  didn't already know.
+- Keep the bullets concrete. No filler, no "stay consistent and trust
+  the process".
+- Close with one line of validation or a next step.
+- End with the CTA and 4-6 niche hashtags.
+
+### Caption Template
+
+```
+[Repeat the on-screen hook] 👇
+
+1. [Specific point. One sentence, one insight]
+2. [Specific point]
+3. [Specific point]
+4. [Specific point]
+5. [Specific point]
+
+[One closing line that lands the feeling]
+
+-
+[CTA. Download, follow for more, save this]
+-
+
+#niche1 #niche2 #niche3 #niche4
+```
+
+### Workflow
+
+When the user gives you a hook, expand it into the caption yourself in one
+pass. Don't ask them to write bullets, don't hand it off — the hook is the
+input, the full caption is the output.
+
+- Match the caption structure to the hook's promise exactly. "5 signs..." = 5
+  bullets. "3 reasons..." = 3 bullets. Never more, never fewer.
+- Each bullet should feel like a real insight in the niche, not a paraphrase
+  of the hook. If you can't think of five specific points, push back and
+  suggest a tighter number rather than padding.
+- Once a post hits, reuse the same hook pattern with new angles. Generating
+  the next 5-10 variations is part of the job.
+
+### Don't
+
+- Don't waste the caption on a life story. The reader came for the
+  promise the hook made. Deliver it.
+- Don't pad to 5 bullets if the topic only has 3 real points. Match the
+  count to the hook, then tighten the hook.

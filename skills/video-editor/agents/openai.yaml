@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Editor"
+  short_description: "Autonomous edits with MP4 and Final Cut output"
+  default_prompt: "Use $video-editor to turn this footage into a polished, captioned edit and an editable Final Cut timeline."
