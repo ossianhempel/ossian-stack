@@ -18,7 +18,7 @@
 
 ### Changed
 - `AGENTS.md` drops the sync/audit section; adds plugin source-of-truth and
-  version-bump rules, and points at `agent-scripts` as the archived predecessor.
+  version-bump rules, and points at `agent-scripts` as the predecessor repo.
   It is repo-local guidance only — nothing injects it into other repos, and the
   downstream pointer lines are not part of this migration.
 - Skill prose that referenced `agent-scripts` paths now points at `ossian-stack`.

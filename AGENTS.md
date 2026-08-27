@@ -59,6 +59,7 @@ Replies must be clear and succinct — actionable, not essay-length.
   work across runtimes.
 
 ### Predecessor
-`~/Developer/agent-scripts` is the archived predecessor. It holds the git history,
-the old `sync-agent-scripts.sh` fan-out, `archived-skills/`, and the maintenance
-tooling under `tools/`. It is no longer synced. Do not add skills there.
+`~/Developer/agent-scripts` (private) is where these skills came from. It holds the
+git history, the `sync-agent-scripts.sh` fan-out, `archived-skills/`, and the
+maintenance tooling under `tools/`. Once the cutover is done it stops being the
+source of truth for skills — add and edit skills here instead.

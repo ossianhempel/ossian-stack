@@ -3,10 +3,9 @@
 Ossian's personal agent skill collection, packaged as a Claude Code / Codex
 **plugin**. One repo, which is also its own marketplace.
 
-Successor to [`agent-scripts`](https://github.com/ossianhempel/agent-scripts),
-which fanned the same skills out by symlink via `sync-agent-scripts.sh`. That
-repo is archived — history, `archived-skills/`, and the maintenance tooling
-under `tools/` still live there.
+These skills previously lived in a private repo that fanned them out to each
+runtime's skill directory by symlink. This repo replaces that setup: the runtime
+installs and updates the plugin itself.
 
 ## Install
 
