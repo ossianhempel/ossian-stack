@@ -21,8 +21,18 @@ bun run check:upstream   # which vendored skills moved upstream (needs `gh` + `j
 bun run docs:list        # index docs/ — do this before coding
 ```
 
-Bun is a **dev-time task runner only**. The plugin ships no code that needs it, and
-nothing under `skills/` may assume Bun or Node exists on a user's machine.
+Bun is a **dev-time task runner** for this repo's own checks. Skills may bundle
+executables, but only in a runtime the user is likely to already have: Python 3 is
+the default, and several skills ship `.py` helpers. Do not reach for Bun or Node in
+a skill without a reason worth writing down.
+
+One skill breaks this: `babysit` vendors `scripts/watch-pr`, a Bun-only TypeScript
+CLI, because it is the mechanism the playbook is built around and rewriting it on
+`gh` would lose its merge-state verdict. It runs `bun install` into its own
+directory on first use — under a plugin install that is the versioned cache, which
+is replaced on every update. The skill degrades to plain status reporting when
+`bun` is absent. Any further exception needs the same kind of justification in
+`skills/sources.json`.
 
 ## Local plugin development
 
@@ -51,7 +61,9 @@ Full loop: `docs/plugin-workflow.md`.
 - **Safety:** use `trash` for deletes, never `rm`. Do not touch installed plugin
   caches or other repos' checkouts.
 - **Validation:** run `bun run check` after any change to `skills/`, the manifests,
-  `sources.json`, or `README.md`. It is fast and offline.
+  `sources.json`, or `README.md`. It is fast and offline. `.githooks/pre-commit`
+  runs `bun run validate` automatically; enable it once per clone with
+  `git config core.hooksPath .githooks`.
 - **Version bumps:** any change that should reach an installed runtime bumps
   `version` in **all three** manifests (`.claude-plugin/plugin.json`,
   `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`). They must agree —
@@ -165,6 +177,13 @@ way. It is not a state machine.
   context" rather than "read `AGENTS.md`/`CLAUDE.md`" — the filename differs per
   harness and the content is already loaded. Name a concrete file only when writing
   a convention back, or when a fresh subagent (which inherits nothing) must open it.
+- **`GLOSSARY.md` is this plugin's name for a project's shared vocabulary.** Vendored
+  skills arrive using other conventions and must be converted on the way in;
+  `bun run validate` fails on `CONTEXT.md`, `CONCEPTS.md`, or `VOCABULARY.md`
+  anywhere under `skills/`.
+- **A skill may only name a sibling this plugin ships.** Pruning a skill leaves
+  inbound references behind in the ones that pointed at it; `bun run validate`
+  warns on each. Fix the pointer in the same change as the removal.
 - **Describe the capability, not the tool.** "the project's issue tracker (GitHub
   Issues, Linear, Jira)" and "whatever interface it exposes" — never assume a
   specific CLI exists, and never treat a missing binary as proof the capability is

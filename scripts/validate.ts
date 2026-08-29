@@ -7,7 +7,9 @@
  * Checks (all deterministic, no network):
  *   1. The three manifests parse, agree on name, and agree on version.
  *   2. Every skills/<name>/ has a SKILL.md with name + description frontmatter,
- *      and the frontmatter name matches the directory name.
+ *      and the frontmatter name matches the directory name. Invocation policy
+ *      agrees across runtimes: disable-model-invocation (Claude Code, Cursor)
+ *      and agents/openai.yaml policy.allow_implicit_invocation (Codex).
  *   3. skills/sources.json covers every skill exactly once, with no orphans;
  *      vendored/adapted entries carry repo + upstreamRev.
  *   4. No shipped skill references a path outside its own directory.
@@ -68,6 +70,11 @@ for (const [file, name] of [
 }
 
 // ------------------------------------------------------------------ 2. skills
+// Backticked kebab tokens that are deliberately not skill names.
+const KNOWN_NON_SKILL_REFS = new Set([
+  "allow-implicit-invocation", "disable-model-invocation", "merge-queue",
+  "read-only", "user-invoke-only", "red-capable", "well-known",
+]);
 const skillDirs = readdirSync(join(ROOT, "skills"))
   .filter((n) => !n.startsWith(".") && statSync(join(ROOT, "skills", n)).isDirectory())
   .sort();
@@ -107,6 +114,53 @@ for (const dir of skillDirs) {
   if (!fm.description) fail(`${skillMd}: frontmatter has no description`);
   else if (fm.description.length > 1024) fail(`${skillMd}: description is ${fm.description.length} chars (max 1024)`);
   if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(dir)) fail(`skills/${dir}: not kebab-case`);
+
+  // Invocation policy must agree across runtimes. Claude Code and Cursor read
+  // `disable-model-invocation` in SKILL.md; Codex ignores that field entirely and
+  // reads `policy.allow_implicit_invocation` from agents/openai.yaml. Declaring
+  // one without the other means the skill silently auto-invokes on the runtime
+  // that was never told.
+  const yamlPath = join("skills", dir, "agents", "openai.yaml");
+  const noAuto = fm["disable-model-invocation"] === "true";
+  // undefined = no declaration, which is Codex's default of "implicit allowed"
+  let implicit: unknown;
+
+  if (existsSync(join(ROOT, yamlPath))) {
+    let doc: any;
+    let parsed = true;
+    try {
+      doc = Bun.YAML.parse(read(yamlPath));
+    } catch (err) {
+      fail(`${yamlPath}: not valid YAML — ${(err as Error).message}`);
+      parsed = false;
+    }
+    if (parsed) {
+      if (doc === null || typeof doc !== "object" || Array.isArray(doc)) {
+        fail(`${yamlPath}: top level must be a mapping`);
+      } else {
+        const iface = doc.interface;
+        if (iface === undefined) fail(`${yamlPath}: no interface block`);
+        else if (typeof iface !== "object" || iface === null || Array.isArray(iface))
+          fail(`${yamlPath}: interface must be a mapping`);
+        else {
+          if (!iface.display_name) fail(`${yamlPath}: interface.display_name is missing`);
+          if (!iface.short_description) fail(`${yamlPath}: interface.short_description is missing`);
+        }
+        implicit = doc.policy?.allow_implicit_invocation;
+        if (implicit !== undefined && typeof implicit !== "boolean") {
+          fail(`${yamlPath}: policy.allow_implicit_invocation must be true or false, got ${JSON.stringify(implicit)}`);
+          implicit = undefined; // don't let a bad value drive the parity verdict below
+        }
+      }
+    }
+  }
+
+  if (noAuto && implicit === true)
+    fail(`${yamlPath}: policy.allow_implicit_invocation is true but ${skillMd} sets disable-model-invocation: true — the two runtimes are told opposite things`);
+  else if (noAuto && implicit === undefined)
+    fail(`${skillMd}: disable-model-invocation is set but ${yamlPath} does not set policy.allow_implicit_invocation: false — Codex will auto-invoke it`);
+  if (implicit === false && !noAuto)
+    fail(`${yamlPath}: policy.allow_implicit_invocation is false but ${skillMd} has no disable-model-invocation: true — Claude Code will auto-invoke it`);
 }
 
 // -------------------------------------------------------------- 3. sources.json
@@ -149,6 +203,51 @@ for (const dir of skillDirs) {
     for (const { re, why } of OUTSIDE) {
       if (re.test(body)) fail(`${file}: ${why} — skills must be self-contained`);
       re.lastIndex = 0;
+    }
+  }
+}
+
+// ------------------------------------------------- 4b. project-convention names
+// This plugin's term for a project's shared-vocabulary document is GLOSSARY.md.
+// Vendored skills arrive using other conventions (mattpocock reads CONTEXT.md,
+// Every's compound reads CONCEPTS.md); a skill that tells a user to write the
+// wrong filename splits the convention across their repos.
+const BANNED_DOC_NAMES = ["CONTEXT.md", "CONCEPTS.md", "VOCABULARY.md"];
+for (const dir of skillDirs) {
+  for (const file of walk(join("skills", dir))) {
+    if (!/\.(md|ya?ml|txt)$/i.test(file)) continue;
+    const body = read(file);
+    for (const banned of BANNED_DOC_NAMES) {
+      if (new RegExp(`\\b${banned.replace(".", "\\.")}\\b`).test(body))
+        fail(`${file}: references ${banned} — this plugin uses GLOSSARY.md for a project's shared vocabulary`);
+    }
+  }
+}
+
+// ------------------------------------------------- 4c. cross-skill references
+// A skill that names a sibling we do not ship routes the reader to a dead end.
+// Only four shapes are unambiguous; anything looser matches CSS properties, model
+// ids, API routes, and filesystem paths, and a check that cries wolf gets ignored.
+// A bare `/name` is NOT enough — that matches /tmp, /docs, and other tools' slash
+// commands. Recognised: "`name` skill", "the skill `name`", "`/name` skill",
+// "`principle-*`". Warn, not fail: pruning a skill leaves inbound references
+// behind in siblings, and that debt should surface without blocking a commit.
+const SKILL_REF_PATTERNS = [
+  /`([a-z][a-z0-9-]*)` skill\b/g,
+  /\bskill `([a-z][a-z0-9-]*)`/g,
+  /`\/([a-z][a-z0-9-]*)` skill\b/g,
+  /`(principle-[a-z0-9-]+)`/g,
+];
+for (const dir of skillDirs) {
+  const body = read(join("skills", dir, "SKILL.md"));
+  const seen = new Set<string>();
+  for (const re of SKILL_REF_PATTERNS) {
+    for (const m of body.matchAll(re)) {
+      const ref = m[1];
+      if (ref === dir || seen.has(ref)) continue;
+      seen.add(ref);
+      if (!skillDirs.includes(ref))
+        warn(`skills/${dir}/SKILL.md: refers to the \`${ref}\` skill, but no skills/${ref}/ exists`);
     }
   }
 }

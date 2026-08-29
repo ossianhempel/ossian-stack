@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Runs the repo's offline consistency checks before every commit.
+# Enable once per clone:  git config core.hooksPath .githooks
+# Bypass deliberately:    git commit --no-verify
+set -euo pipefail
+
+command -v bun >/dev/null || {
+  echo "pre-commit: bun not on PATH — skipping validate" >&2
+  exit 0
+}
+
+# validate only; plugin:validate needs `claude` on PATH and is not always present.
+bun run validate
