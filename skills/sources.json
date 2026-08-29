@@ -136,6 +136,16 @@
       "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
       "upstreamCheckedAt": "2026-08-29"
     },
+    "domain-modeling": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/domain-modeling",
+      "refresh": "npx skills add mattpocock/skills -y --skill domain-modeling && echo 'hand-merge into skills/domain-modeling/ then: trash .agents/skills/domain-modeling'",
+      "notes": "From mattpocock/skills, with ADR-FORMAT.md and agents/openai.yaml. Adapted 2026-08-29: upstream names the glossary CONTEXT.md, this plugin uses GLOSSARY.md, so all 21 references were converted, CONTEXT-FORMAT.md renamed to GLOSSARY-FORMAT.md, and CONTEXT-MAP.md to GLOSSARY-MAP.md. Upstream's own text argues for it -- the file 'is a glossary and nothing else.' Pairs with principle-model-the-domain. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "skills/engineering/domain-modeling",
+      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
+      "upstreamCheckedAt": "2026-08-29"
+    },
     "emil-design-eng": {
       "origin": "vendored",
       "repo": "https://github.com/emilkowalski/skills",
@@ -266,6 +276,16 @@
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
     },
+    "principle-model-the-domain": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-model-the-domain",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-model-the-domain && cp -R .agents/skills/principle-model-the-domain/. skills/principle-model-the-domain/ && trash .agents/skills/principle-model-the-domain",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Encode the domain in a structure instead of scattered conditionals; the write-time counterpart to the domain-modeling skill. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/principle-model-the-domain",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
     "principle-prove-it-works": {
       "origin": "vendored",
       "repo": "https://github.com/cursor/plugins",
@@ -283,6 +303,16 @@
       "refresh": "npx skills add cursor/plugins -y --skill principle-redesign-from-first-principles && cp -R .agents/skills/principle-redesign-from-first-principles/. skills/principle-redesign-from-first-principles/ && trash .agents/skills/principle-redesign-from-first-principles",
       "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Integrate a new requirement as if it had been a founding assumption. Cited by the refactoring skill's target-shape step. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
       "upstreamPath": "pstack/skills/principle-redesign-from-first-principles",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
+    "principle-subtract-before-you-add": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-subtract-before-you-add",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-subtract-before-you-add && cp -R .agents/skills/principle-subtract-before-you-add/. skills/principle-subtract-before-you-add/ && trash .agents/skills/principle-subtract-before-you-add",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Remove complexity first, then build on the simpler base. Also folded into simplify-code as its subtract-then-collapse-then-polish ordering; vendored standalone as well so it can be invoked while planning, before any code exists. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/principle-subtract-before-you-add",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
     },

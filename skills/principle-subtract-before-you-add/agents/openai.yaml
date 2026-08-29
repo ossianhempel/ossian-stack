@@ -1,0 +1,5 @@
+interface:
+  display_name: "Subtract Before You Add"
+  short_description: "Remove complexity first, then build on the simpler base"
+policy:
+  allow_implicit_invocation: false

@@ -211,11 +211,15 @@ for (const dir of skillDirs) {
 // This plugin's term for a project's shared-vocabulary document is GLOSSARY.md.
 // Vendored skills arrive using other conventions (mattpocock reads CONTEXT.md,
 // Every's compound reads CONCEPTS.md); a skill that tells a user to write the
-// wrong filename splits the convention across their repos.
+// wrong filename splits the convention across their repos. Checked in what an
+// agent actually reads -- SKILL.md and references -- not in per-skill READMEs.
 const BANNED_DOC_NAMES = ["CONTEXT.md", "CONCEPTS.md", "VOCABULARY.md"];
 for (const dir of skillDirs) {
   for (const file of walk(join("skills", dir))) {
     if (!/\.(md|ya?ml|txt)$/i.test(file)) continue;
+    // A skill's own README is maintainer documentation, not something an agent
+    // loads. Vendoring notes must be able to name the convention they converted.
+    if (file.endsWith("/README.md")) continue;
     const body = read(file);
     for (const banned of BANNED_DOC_NAMES) {
       if (new RegExp(`\\b${banned.replace(".", "\\.")}\\b`).test(body))

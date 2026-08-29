@@ -43,7 +43,7 @@ you are about to delete is wasted work.
    arguments, narrower types, unions instead of loose combinations.
 3. **Polish.** Naming, early returns, line count.
 
-Never polish before you cut.
+Never polish before you cut. This ordering is the `principle-subtract-before-you-add` skill, restated here because `simplify-code` needs it every run.
 
 ## The standard
 
