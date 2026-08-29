@@ -1,0 +1,5 @@
+interface:
+  display_name: "Exhaust the Design Space"
+  short_description: "Build 2-3 competing prototypes before committing"
+policy:
+  allow_implicit_invocation: false

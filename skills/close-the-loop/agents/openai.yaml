@@ -1,0 +1,5 @@
+interface:
+  display_name: "Close the Loop"
+  short_description: "Generate a project-local skill that proves the app works"
+policy:
+  allow_implicit_invocation: false

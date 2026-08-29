@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diagnosing Bugs"
+  short_description: "Own a bug: build a red-capable loop, prove the cause, fix at the root"

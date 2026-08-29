@@ -2,9 +2,9 @@
 
 The single source of truth for what counts as AI-generated writing in reviewed
 output. This file is the operational rubric. The lint script
-(`scripts/ai_slop_lint.py`) parses
-its machine-readable word lists directly from this file, so edit the lists
-**here** and the linter stays in sync automatically.
+(`scripts/ai_slop_lint.py`) parses its machine-readable word lists directly
+from this file, so edit the lists **here** and the linter stays in sync
+automatically.
 
 Two kinds of rules live here:
 
@@ -17,9 +17,9 @@ Two kinds of rules live here:
 Run the linter as the cheap first gate, then read the judgment section yourself:
 
 ```bash
-python3 skills/ai-slop-reviewer/scripts/ai_slop_lint.py path/to/draft.md
+python3 skills/unslop/scripts/ai_slop_lint.py path/to/draft.md
 # or pipe a draft straight in:
-pbpaste | python3 skills/ai-slop-reviewer/scripts/ai_slop_lint.py -
+pbpaste | python3 skills/unslop/scripts/ai_slop_lint.py -
 ```
 
 Exit code is non-zero when anything is flagged.
@@ -40,7 +40,8 @@ captivate, watershed, solidify, multifaceted, nuanced, robust, leverage,
 utilize, facilitate, paradigm, synergy, holistic, comprehensive, streamline,
 innovative, cutting-edge, game-changing, revolutionary, seamless, intuitive,
 best-in-class, empower, transformative, supercharge, ever-evolving, realm,
-beacon, meticulous, paramount, game changer
+beacon, meticulous, paramount, game changer, enduring, garner,
+interplay, showcasing, vibrant
 <!-- /lint:banned-vocab -->
 
 ### Conjunctive filler
@@ -170,6 +171,18 @@ hand rather than linted:
 - **`in order to` → `to`.** Almost always removable padding.
 - **`when it comes to`.** Usually cuttable ("when it comes to logging, it's fast"
   → "logging is fast"). Common enough that linting it is noisy.
+
+### Abstract metaphor nouns (judgment, not a hard ban)
+
+Substrate, wedge, vector, locus, vantage, nexus, primitive (as noun), harness
+(as metaphor), surface (as in "API surface"), bedrock, scaffolding (as
+metaphor), modality, gold-plating, ratchet (as metaphor), evacuate (for moving
+code), endgame, north star, flywheel. These read as technical but usually have
+a plainer concrete word: "substrate" becomes "base", "wedge in" becomes "add",
+"vector" becomes "way" or "method", "gold-plating" becomes "more than the job
+needs", "ratchet" becomes the mechanism's real name, "evacuate" becomes "move
+out", "endgame" becomes "the last phase". Several have literal uses (a real
+wedge, an actual surface area) — swap only when the metaphor is doing the work.
 
 ### The read-aloud test
 

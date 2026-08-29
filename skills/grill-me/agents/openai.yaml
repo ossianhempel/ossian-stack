@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Me"
+  short_description: "Stress-test a plan or idea with relentless questions"
+policy:
+  allow_implicit_invocation: false

@@ -31,7 +31,7 @@ sufficient; a clear-but-slow sentence still loses the skim.
 - **This skill:** long-form articles, essays, threads, newsletters. Structure,
   headline, introduction, Main Points, endings, topic selection.
 - `better-writing`: interface copy - buttons, errors, empty states.
-- `ai-slop-reviewer`: final pass for AI tells. Run it *after* this skill on
+- `unslop`: final pass for AI tells. Run it *after* this skill on
   anything drafted or heavily rewritten by a model.
 
 ### Split with `copywriter` - by intent, not by format

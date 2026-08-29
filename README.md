@@ -2,7 +2,7 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code and Codex.
 
-![skills](https://img.shields.io/badge/skills-34-blue)
+![skills](https://img.shields.io/badge/skills-45-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex-8957e5)
 
@@ -46,15 +46,17 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-34 skills, grouped by what they are for.
+45 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
-| **Ship an app** | App Store Connect, iOS releases, store metadata, legal | `app-store-optimization` · `app-store-screenshots` · `asc-metadata` · `asc-pricing` · `asc-release` · `asc-version-guard` · `ios-marketing-capture` · `release-ios-app` · `privacy-policy` |
+| **Ship an app** | App Store Connect, iOS releases, store metadata, legal | `app-store-optimization` · `asc-metadata` · `asc-pricing` · `asc-release` · `asc-version-guard` · `ios-marketing-capture` · `release-ios-app` · `privacy-policy` |
 | **Design & frontend** | Accessibility, UI craft and motion, decks, onboarding | `better-accessibility` · `emil-design-eng` · `grill-design` · `frontend-slides` · `onboarding-flow` |
-| **Words** | Marketing copy, editorial, slop removal | `copywriter` · `online-writing` · `ai-slop-reviewer` |
-| **Backend & infra** | Convex, Clerk, RevenueCat, Coolify, secrets, Post Queue | `convex-cli` · `clerk-cli` · `revenuecat-api` · `coolify` · `one-password` · `post-queue-cli` |
-| **Agent workflow** | Review, routing, git hygiene, skill maintenance | `autoreview` · `codex-first` · `create-cli` · `git-cleanup` · `grill-me` · `handoff` · `teach` · `bro` · `skill-creator` |
+| **Words** | Marketing copy, editorial, slop removal | `copywriter` · `online-writing` · `unslop` |
+| **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` |
+| **Agent workflow** | Review, routing, simplification, refactoring, debugging, verification, PR babysitting, git hygiene, skill maintenance | `autoreview` · `babysit` · `diagnosing-bugs` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `simplify-code` · `bro` · `skill-creator` |
+| **Principles** | Short, explicitly-invoked rules for how to work — verification, design exploration, debugging posture | `principle-encode-lessons-in-structure` · `principle-exhaust-the-design-space` · `principle-fix-root-causes` · `principle-prove-it-works` · `principle-redesign-from-first-principles` |
+| **Understand code** | Codebase walkthroughs, design rationale, explaining a change | `how` · `why` · `teach` |
 | **Personal tooling** | Notes and tasks | `obsidian` · `things` |
 
 Each skill's own `SKILL.md` frontmatter carries its full description and trigger

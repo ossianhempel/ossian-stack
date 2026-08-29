@@ -1,5 +1,6 @@
 ---
 name: revenuecat-api
+disable-model-invocation: true
 description: Manage RevenueCat API v2 resources and the official RevenueCat MCP workflow for Claude Code and Codex. Use when inspecting or changing RevenueCat projects, apps, products, entitlements, offerings, packages, customers, subscriptions, purchases, webhooks, paywalls, invoices, or metrics.
 compatibility: Designed for Claude Code and OpenAI Codex. Best with the RevenueCat MCP server configured; otherwise requires internet access plus RC_API_KEY and usually RC_PROJECT_ID. Python 3 is required for the bundled API helper script.
 metadata:

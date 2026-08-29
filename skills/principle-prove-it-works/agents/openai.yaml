@@ -1,0 +1,5 @@
+interface:
+  display_name: "Prove It Works"
+  short_description: "Verify against the real artifact, not a proxy or self-report"
+policy:
+  allow_implicit_invocation: false

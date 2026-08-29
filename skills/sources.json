@@ -1,31 +1,17 @@
 {
   "version": 1,
-  "updated": "2026-08-28",
-  "description": "Upstream map for skills/ — the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
+  "updated": "2026-08-29",
+  "description": "Upstream map for skills/ \u2014 the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
-    "ai-slop-reviewer": {
-      "origin": "local",
-      "notes": "Extracted from copywriter on 2026-08-02. The checklist includes patterns adapted from petergyang/no-ai-slop; the review workflow and linter integration are maintained locally."
-    },
     "app-store-optimization": {
       "origin": "local",
       "notes": "Authored in agent-scripts (commit 3b1f581). Bespoke ASO workflow."
-    },
-    "app-store-screenshots": {
-      "origin": "adapted",
-      "repo": "https://github.com/ParthJadhav/app-store-screenshots",
-      "path": "skills/app-store-screenshots",
-      "refresh": "npx skills add ParthJadhav/app-store-screenshots -y --skill app-store-screenshots && cp -R .agents/skills/app-store-screenshots/* skills/app-store-screenshots/ && trash .agents/skills/app-store-screenshots",
-      "notes": "Replaced prior skill in 20088a7. Local copy may drift from upstream — diff before refresh.",
-      "upstreamPath": "skills/app-store-screenshots",
-      "upstreamRev": "98302f1d4869c0c466a1f81a11ee854926824c19",
-      "upstreamCheckedAt": "2026-08-27"
     },
     "asc-metadata": {
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
       "path": "asc-aso-audit, asc-localize-metadata, asc-whats-new-writer",
-      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh — diff reference/ against upstream skills manually.",
+      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh \u2014 diff reference/ against upstream skills manually.",
       "upstreamPath": null,
       "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
       "upstreamCheckedAt": "2026-08-27"
@@ -50,7 +36,7 @@
     },
     "asc-version-guard": {
       "origin": "local",
-      "notes": "Authored in agent-scripts (3a35eef). Runnable install/version guard infra — not from rudrank bundle."
+      "notes": "Authored in agent-scripts (3a35eef). Runnable install/version guard infra \u2014 not from rudrank bundle."
     },
     "autoreview": {
       "origin": "vendored",
@@ -61,6 +47,16 @@
       "upstreamPath": "skills/autoreview",
       "upstreamRev": "1b52afd0954511b8bfdf680361b1f4bed69f1355",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "babysit": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/poteto-mode",
+      "refresh": "npx skills add cursor/plugins -y --skill poteto-mode && echo 'hand-merge playbooks/babysit.md, references/bugbot-triage.md, scripts/ from .agents/skills/poteto-mode/ then: trash .agents/skills/poteto-mode'",
+      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/babysit.md into a standalone skill, with references/bugbot-triage.md and the scripts/watch-pr toolchain vendored alongside. Adapted: sibling paths rewritten to this directory, the three playbooks/shipping.md routes replaced with stop-and-hand-back, the watcher invocation anchored via SKILL_DIR, and /loop described as a host capability. Ships Bun-only TypeScript (scripts/watch-pr), the sole exception to the runtime rule in AGENTS.md. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "pstack/skills/poteto-mode",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
     },
     "better-accessibility": {
       "origin": "vendored",
@@ -78,7 +74,8 @@
       "refresh": "npx skills add dmmulroy/skills -y --skill bro && cp -R .agents/skills/bro/* skills/bro/ && trash .agents/skills/bro",
       "upstreamPath": "bro",
       "upstreamRev": "cbd1929589267453029859a43d2ecf411c865b54",
-      "upstreamCheckedAt": "2026-08-27"
+      "upstreamCheckedAt": "2026-08-27",
+      "notes": " Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh."
     },
     "clerk-cli": {
       "origin": "vendored",
@@ -90,6 +87,26 @@
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "close-the-loop": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/create-verification-skill",
+      "refresh": "npx skills add cursor/plugins -y --skill create-verification-skill && echo 'hand-merge into skills/close-the-loop/ then: trash .agents/skills/create-verification-skill'",
+      "notes": "From Cursor's pstack plugin, upstream name create-verification-skill. Generates a project-local verification skill (launch/doctor/drive/evidence/cleanup) plus a feature map, and proves it end to end before handing over. Ships references/feature-map-example/ verbatim. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted \u2014 merge by hand on refresh, never overwrite.",
+      "upstreamPath": "pstack/skills/create-verification-skill",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
+    "close-the-loop-audit": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/maintain-verification-skill",
+      "refresh": "npx skills add cursor/plugins -y --skill maintain-verification-skill && echo 'hand-merge into skills/close-the-loop-audit/ then: trash .agents/skills/maintain-verification-skill'",
+      "notes": "From Cursor's pstack plugin, upstream name maintain-verification-skill. Upkeep pass for the skill close-the-loop generates: parallel source readers per feature, one live driving pass, at most one PR of proven corrections. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted \u2014 merge by hand on refresh, never overwrite.",
+      "upstreamPath": "pstack/skills/maintain-verification-skill",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
     },
     "codex-first": {
       "origin": "vendored",
@@ -105,19 +122,19 @@
       "repo": "https://github.com/get-convex/convex-js",
       "notes": "Documents npx convex CLI; no vendored copy. Track Convex CLI release notes."
     },
-    "coolify": {
-      "origin": "companion",
-      "repo": "https://github.com/coollabsio/coolify-cli",
-      "notes": "Documents coolify CLI install/usage (see SKILL.md install script). Not a skill copy."
-    },
     "copywriter": {
       "origin": "local",
       "notes": "Authored in agent-scripts (1a3cfa4). Hooks and shared conversion principles remain here; AI-slop review and complete slideshow production were extracted into focused sibling skills on 2026-08-02."
     },
-    "create-cli": {
-      "origin": "derived",
-      "repo": "https://github.com/cli-guidelines/cli-guidelines",
-      "notes": "Encodes clig.dev principles; not a file copy."
+    "diagnosing-bugs": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/diagnosing-bugs",
+      "refresh": "npx skills add mattpocock/skills -y --skill diagnosing-bugs && cp -R .agents/skills/diagnosing-bugs/. skills/diagnosing-bugs/ && trash .agents/skills/diagnosing-bugs",
+      "notes": "Merged 2026-08-29 into a single debugging skill. Spine is mattpocock/skills skills/engineering/diagnosing-bugs (six phases; thesis is phase 1, build a tight red-capable feedback loop before theorising), with agents/openai.yaml and scripts/hitl-loop.template.sh. Folded in cursor/plugins pstack/skills/poteto-mode/playbooks/bug-fix.md: task ownership, the evidence discipline (every shipped line traces to runtime evidence; revert what a refuted hypothesis motivated), drive the repro yourself rather than handing it to the user, seed hypotheses by fanning out how + why concurrently, confirm the mechanism before designing the fix, and stage the failing repro before the fix so history tells the story. References resolved: the HITL template is now SKILL_DIR-anchored with a copy-then-edit step; the domain-model doc is this plugin's GLOSSARY.md, not upstream's own convention; six citations to skills we do not ship were replaced with principle-fix-root-causes, principle-exhaust-the-design-space, principle-prove-it-works, and close-the-loop. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "skills/engineering/diagnosing-bugs",
+      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
+      "upstreamCheckedAt": "2026-08-29"
     },
     "emil-design-eng": {
       "origin": "vendored",
@@ -132,7 +149,7 @@
       "origin": "vendored",
       "repo": "https://github.com/zarazhangrui/frontend-slides",
       "path": "SKILL.md, STYLE_PRESETS.md, animation-patterns.md, html-template.md, viewport-base.css, scripts/, bold-template-pack/",
-      "notes": "Repo ships the same skill twice (root and plugins/frontend-slides/skills/frontend-slides/) — vendored from the root copy. No refresh script; diff upstream root manually.",
+      "notes": "Repo ships the same skill twice (root and plugins/frontend-slides/skills/frontend-slides/) \u2014 vendored from the root copy. No refresh script; diff upstream root manually.",
       "upstreamPath": null,
       "upstreamRev": "9906a34d640d2111f724544cbc50f7f130569ae1",
       "upstreamCheckedAt": "2026-08-27"
@@ -157,7 +174,7 @@
       "path": "skills/productivity/grilling",
       "refresh": "npx skills add mattpocock/skills -y --skill grilling && cp .agents/skills/grilling/SKILL.md /tmp/grilling-upstream.md && trash .agents/skills/grill-me",
       "lastSynced": "2026-08-11",
-      "notes": "Merged grilling body into grill-me (upstream also has a thin grill-me router). Pairs with ce-brainstorm / ce-plan.",
+      "notes": "Merged grilling body into grill-me (upstream also has a thin grill-me router). Pairs with ce-brainstorm / ce-plan. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
       "upstreamPath": "skills/productivity/grilling",
       "upstreamRev": "85f83d3fde1d3a90d5c9a657f6998c79a6c37308",
       "upstreamCheckedAt": "2026-08-27"
@@ -171,6 +188,17 @@
       "upstreamPath": "skills/productivity/handoff",
       "upstreamRev": "d28dfdc39beadc3142a33359b5cfa4765dcbd0bc",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "how": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/how",
+      "refresh": "npx skills add cursor/plugins -y --skill how && cp -R .agents/skills/how/. skills/how/ && trash .agents/skills/how",
+      "notes": "From Cursor's pstack plugin. Explains how a subsystem works via parallel explorers plus an explainer; can critique architecture. Companion to `why`; both are invoked by `teach`.",
+      "upstreamPath": "pstack/skills/how",
+      "upstreamRev": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
+      "upstreamCheckedAt": "2026-08-28",
+      "lastSynced": "2026-08-28"
     },
     "ios-marketing-capture": {
       "origin": "adapted",
@@ -208,18 +236,93 @@
       "repo": "https://github.com/ossianhempel/post-queue",
       "notes": "Documents post-queue package.json scripts; track repo when commands change."
     },
+    "principle-encode-lessons-in-structure": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-encode-lessons-in-structure",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-encode-lessons-in-structure && cp -R .agents/skills/principle-encode-lessons-in-structure/. skills/principle-encode-lessons-in-structure/ && trash .agents/skills/principle-encode-lessons-in-structure",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Turn a repeated instruction into a mechanism (lint, metadata flag, runtime check, script) instead of more prose. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/principle-encode-lessons-in-structure",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
+    "principle-exhaust-the-design-space": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-exhaust-the-design-space",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-exhaust-the-design-space && cp -R .agents/skills/principle-exhaust-the-design-space/. skills/principle-exhaust-the-design-space/ && trash .agents/skills/principle-exhaust-the-design-space",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Build 2-3 competing prototypes when there is no precedent. Cited by the refactoring skill when the target shape is not obvious. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/principle-exhaust-the-design-space",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
+    "principle-fix-root-causes": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-fix-root-causes",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-fix-root-causes && cp -R .agents/skills/principle-fix-root-causes/. skills/principle-fix-root-causes/ && trash .agents/skills/principle-fix-root-causes",
+      "notes": "From Cursor's pstack plugin, verbatim. A debugging principle, kept separate from simplify-code deliberately: that skill restructures working code and is explicitly not a bug hunt. Its transferable parts (guards are symptom fixes; fix the pattern not the instance) are stated inline in simplify-code. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/principle-fix-root-causes",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
+    "principle-prove-it-works": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-prove-it-works",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-prove-it-works && cp -R .agents/skills/principle-prove-it-works/. skills/principle-prove-it-works/ && trash .agents/skills/principle-prove-it-works",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Verify against the real artifact, never a proxy or a delegate's self-report. Cited by the refactoring skill's pin and equivalence steps. Note: mentions a show-me-your-work skill this plugin does not ship \u2014 a single parenthetical, not a route, left verbatim to keep the copy refreshable. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/principle-prove-it-works",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
+    "principle-redesign-from-first-principles": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-redesign-from-first-principles",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-redesign-from-first-principles && cp -R .agents/skills/principle-redesign-from-first-principles/. skills/principle-redesign-from-first-principles/ && trash .agents/skills/principle-redesign-from-first-principles",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Integrate a new requirement as if it had been a founding assumption. Cited by the refactoring skill's target-shape step. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/principle-redesign-from-first-principles",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
+    },
     "privacy-policy": {
       "origin": "local",
       "notes": "Authored in agent-scripts (cf7b4ab)."
+    },
+    "refactoring": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/poteto-mode",
+      "refresh": "npx skills add cursor/plugins -y --skill poteto-mode && echo 'hand-merge playbooks/refactoring.md from .agents/skills/poteto-mode/ then: trash .agents/skills/poteto-mode'",
+      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/refactoring.md into a standalone skill. Adapted: the playbook cites twelve sibling skills this plugin does not ship, so each citation was replaced with the principle it stood for, stated inline. Three were restored on 2026-08-29 once we vendored them (principle-prove-it-works, principle-redesign-from-first-principles, principle-exhaust-the-design-space); the 'how' reference is kept since we ship it; a hardcoded default refactoring model was dropped. Boundary with simplify-code: that one makes settled code readable in place, this one moves modules, APIs, and call graphs. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "pstack/skills/poteto-mode",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-29"
     },
     "release-ios-app": {
       "origin": "local",
       "notes": "Authored in agent-scripts (af475d9). Orchestrates asc-* + .ios-release.env; mirrors release-mac-app pattern."
     },
+    "resolving-merge-conflicts": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/resolving-merge-conflicts",
+      "refresh": "npx skills add mattpocock/skills -y --skill resolving-merge-conflicts && cp -R .agents/skills/resolving-merge-conflicts/. skills/resolving-merge-conflicts/ && trash .agents/skills/resolving-merge-conflicts",
+      "notes": "Vendored verbatim 2026-08-29, including agents/openai.yaml (Codex display metadata only). Part of migrating off the installed mattpocock-skills plugin: vendor the wanted skills here, then uninstall the plugin.",
+      "upstreamPath": "skills/engineering/resolving-merge-conflicts",
+      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
+      "upstreamCheckedAt": "2026-08-29"
+    },
     "revenuecat-api": {
       "origin": "companion",
       "repo": "https://github.com/RevenueCat/docs",
-      "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured."
+      "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured. Added disable-model-invocation: true on 2026-08-29 to match the author's own allow_implicit_invocation: false in agents/openai.yaml \u2014 the skill makes live RevenueCat writes, so explicit invocation only. Remove that one frontmatter line (and the policy block) to restore auto-triggering."
+    },
+    "simplify-code": {
+      "origin": "derived",
+      "lastSynced": "2026-08-29",
+      "notes": "Authored 2026-08-29 from three inputs. The standard is Ossian's own 14 rules (skimmable code, minimal state space, discriminated unions, asserts over defensive fallbacks), supplied verbatim in conversation \u2014 that is the heart of the skill and has no upstream. Scope resolution, the behavior-preservation contract, and the verify step are structural borrows from EveryInc/compound-engineering-plugin docs/guides/ce-simplify-code.md. Three cursor/plugins principle skills are folded in rather than vendored separately: principle-subtract-before-you-add (the subtract-then-collapse-then-polish ordering), principle-laziness-protocol (rules 15-17 and the maintainer-fatigue directive closing the standard), and the transferable half of principle-fix-root-causes (guards are symptom fixes; fix the pattern not the instance). principle-fix-root-causes is ALSO vendored whole as its own skill, since the rest of it is debugging guidance that does not belong here. The adversarial re-read loop encodes Ossian's practice of pushing a model past its first simplification; it dispatches two bundled reviewer personas (references/reviewers/) written here, following the persona-file pattern used by EveryInc's ce-code-review references/personas/ and by our own skill-creator agents/, rather than a host-specific agent registry. No file is reproduced from either source, so there is nothing to pin; re-read both if they change."
     },
     "skill-creator": {
       "origin": "adapted",
@@ -233,17 +336,41 @@
     },
     "teach": {
       "origin": "vendored",
-      "repo": "https://github.com/mattpocock/skills",
-      "path": "skills/productivity/teach",
-      "refresh": "npx skills add mattpocock/skills -y --skill teach && cp -R .agents/skills/teach/* skills/teach/ && trash .agents/skills/teach",
-      "upstreamPath": "skills/productivity/teach",
-      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
-      "upstreamCheckedAt": "2026-08-27"
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/teach",
+      "refresh": "npx skills add cursor/plugins -y --skill teach && cp -R .agents/skills/teach/. skills/teach/ && trash .agents/skills/teach",
+      "notes": "From Cursor's pstack plugin. Replaced the prior mattpocock/skills `teach` (a stateful multi-session learning workspace) on 2026-08-28. Delegates to `how` and `why` and writes through `unslop` \u2014 keep all three vendored together. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "upstreamPath": "pstack/skills/teach",
+      "upstreamRev": "8f008c41981dca484d5beaf688d3aa2ea4ecf89b",
+      "upstreamCheckedAt": "2026-08-28",
+      "lastSynced": "2026-08-28"
     },
     "things": {
       "origin": "companion",
       "repo": "https://github.com/ossianhempel/things3-cli",
       "notes": "Documents things3-cli; lives in ~/Developer/things3-cli."
+    },
+    "unslop": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/unslop",
+      "refresh": "npx skills add cursor/plugins -y --skill unslop && cp -R .agents/skills/unslop/. skills/unslop/ && trash .agents/skills/unslop",
+      "notes": "From Cursor's pstack plugin. Adapted 2026-08-28 by merging in the former local ai-slop-reviewer (bundled linter + checklist). Upstream rules 1-31 kept verbatim; local additions continue at 32. Merge by hand on refresh.",
+      "upstreamPath": "pstack/skills/unslop",
+      "upstreamRev": "99559f2f52047978602ef365589275831e76af07",
+      "upstreamCheckedAt": "2026-08-28",
+      "lastSynced": "2026-08-28"
+    },
+    "why": {
+      "origin": "vendored",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/why",
+      "refresh": "npx skills add cursor/plugins -y --skill why && cp -R .agents/skills/why/. skills/why/ && trash .agents/skills/why",
+      "notes": "From Cursor's pstack plugin. Investigates design rationale by discovering available MCPs and querying seven evidence categories in parallel. Companion to `how`; both are invoked by `teach`.",
+      "upstreamPath": "pstack/skills/why",
+      "upstreamRev": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
+      "upstreamCheckedAt": "2026-08-28",
+      "lastSynced": "2026-08-28"
     }
   }
 }

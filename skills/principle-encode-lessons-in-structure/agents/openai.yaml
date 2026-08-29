@@ -1,0 +1,5 @@
+interface:
+  display_name: "Encode Lessons in Structure"
+  short_description: "Turn a repeated instruction into a lint, check, or script"
+policy:
+  allow_implicit_invocation: false
