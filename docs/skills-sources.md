@@ -107,8 +107,8 @@ jq -r '.skills | to_entries[] | select(.value.origin == "adapted") | "\(.key)\t\
 jq -r '.skills | to_entries[] | select(.value.origin == "local") | .key' skills/sources.json
 ```
 
-**Origin breakdown (2026-08-27):** 22 vendored · 8 adapted · 7 companion · 1 derived · 12 local (50 total).
-30 of these (all `vendored` + `adapted`) carry an `upstreamRev` pin.
+**Origin breakdown (2026-08-28):** 13 vendored · 8 adapted · 6 companion · 1 derived · 8 local (36 total).
+21 of these (all `vendored` + `adapted`) carry an `upstreamRev` pin.
 
 ## Related
 
