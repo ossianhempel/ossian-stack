@@ -320,6 +320,16 @@
       "origin": "local",
       "notes": "Authored in agent-scripts (cf7b4ab)."
     },
+    "prototype": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/prototype",
+      "refresh": "npx skills add mattpocock/skills -y --skill prototype && echo 'LOGIC.md and UI.md are verbatim; hand-merge SKILL.md, which also carries cursor/plugins poteto-mode playbooks/prototype.md'",
+      "notes": "Merged 2026-08-29 from two upstreams. mattpocock/skills skills/engineering/prototype supplies the logic-vs-UI branch split and both bundled shapes (LOGIC.md, UI.md, verbatim) plus the throwaway rules and the capture-as-primary-source step. cursor/plugins pstack/skills/poteto-mode/playbooks/prototype.md supplies the workflow: scope the decision first (no decision, no prototype), gather references when the space is open, one switcher for all variants, observe rather than assert, present a recommendation. Also from Cursor: the framing that this is the one place the smallest-change bias and the verification bar invert. References resolved to principle-exhaust-the-design-space and close-the-loop; Feature/architect citations dropped; Laziness Protocol stated inline since it is folded into simplify-code rather than shipped. Cursor rev 68836ddaf5697224520f1847d90cdb90ca8babaa. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "skills/engineering/prototype",
+      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
+      "upstreamCheckedAt": "2026-08-29"
+    },
     "refactoring": {
       "origin": "adapted",
       "repo": "https://github.com/cursor/plugins",
