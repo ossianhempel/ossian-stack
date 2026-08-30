@@ -256,6 +256,58 @@ for (const dir of skillDirs) {
   }
 }
 
+// --------------------------------------------------------------- 4d. hooks
+// hooks/hooks.json is read by BOTH Claude Code and Codex in Claude's format --
+// Codex normalises the PascalCase event names itself. Two failure modes are
+// silent and worth catching here: a command whose script is missing or not
+// executable, and a root variable Codex does not set. Codex exports PLUGIN_ROOT
+// and CLAUDE_PLUGIN_ROOT (verified against the binary); it does NOT export
+// extensionPath, so a `${extensionPath:-.}` fallback resolves to the user's cwd
+// there rather than the plugin.
+const HOOK_EVENTS = new Set([
+  "SessionStart", "SessionEnd", "UserPromptSubmit", "PreToolUse", "PostToolUse",
+  "PermissionRequest", "Notification", "SubagentStart", "SubagentStop", "Stop",
+  "PreCompact", "PostCompact",
+]);
+if (existsSync(join(ROOT, "hooks/hooks.json"))) {
+  let doc: any = null;
+  try {
+    doc = JSON.parse(read("hooks/hooks.json"));
+  } catch (err) {
+    fail(`hooks/hooks.json: not valid JSON — ${(err as Error).message}`);
+  }
+  const events = doc?.hooks;
+  if (doc && (!events || typeof events !== "object"))
+    fail("hooks/hooks.json: no hooks object");
+  for (const [event, groups] of Object.entries(events ?? {})) {
+    if (!HOOK_EVENTS.has(event))
+      fail(`hooks/hooks.json: unknown hook event "${event}"`);
+    if (event === "Stop")
+      warn(`hooks/hooks.json: Stop fires on both runtimes, but Codex has no followUpMessage — its Stop output is continue/stopReason/suppressOutput/systemMessage. Use SessionStart + additionalContext for anything that must prompt the model.`);
+    for (const group of (groups as any[]) ?? []) {
+      for (const h of group?.hooks ?? []) {
+        const cmd: string = h?.command ?? "";
+        if (!cmd) { fail(`hooks/hooks.json: ${event} has a hook with no command`); continue; }
+        if (cmd.includes("extensionPath"))
+          fail(`hooks/hooks.json: ${event} command uses \`extensionPath\`, which Codex does not set — it resolves to the user's cwd there. Use \`\${CLAUDE_PLUGIN_ROOT}\`, which both runtimes export.`);
+        if (cmd.includes("/") && !cmd.includes("${CLAUDE_PLUGIN_ROOT}"))
+          fail(`hooks/hooks.json: ${event} command references a path without \`\${CLAUDE_PLUGIN_ROOT}\`; a relative path resolves against the user's project, not the plugin`);
+        const m = cmd.match(/\$\{CLAUDE_PLUGIN_ROOT\}\/([^"'\s]+)/);
+        if (m) {
+          const script = m[1];
+          if (!existsSync(join(ROOT, script))) fail(`hooks/hooks.json: ${event} command points at ${script}, which does not exist`);
+          else {
+            try {
+              if (!(statSync(join(ROOT, script)).mode & 0o111))
+                warn(`${script}: referenced by hooks/hooks.json but not executable`);
+            } catch { /* unreadable is already covered by existsSync */ }
+          }
+        }
+      }
+    }
+  }
+}
+
 // ------------------------------------------------------------------ 5. README
 const readme = read("README.md");
 for (const dir of skillDirs) {

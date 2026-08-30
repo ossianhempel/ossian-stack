@@ -74,6 +74,7 @@ Full loop: `docs/plugin-workflow.md`.
 
 ```
 skills/                 The plugin. One directory per skill, SKILL.md entry point
+hooks/                  hooks.json + scripts; read by Claude Code and Codex alike
 skills/sources.json     Upstream origin, pinned rev, refresh command per skill
 commands/               Slash commands (currently empty)
 .claude-plugin/         Claude Code plugin manifest + marketplace catalog
@@ -152,10 +153,15 @@ way. It is not a state machine.
   not the skill directory. If two skills need the same file, duplicate it.
   `bun run validate` greps for the broken patterns.
 - **Cross-runtime by default.** Skills are authored once and loaded by both Claude
-  Code and Codex. Avoid Claude-only constructs: `${CLAUDE_PLUGIN_ROOT}` and
-  `${CLAUDE_SKILL_DIR}` are empty on Codex, so a call guarded on one silently never
-  fires there. When a platform variable is genuinely unavoidable, resolve it in one
-  shell call and state what to do when it comes back empty.
+  Code and Codex. Avoid Claude-only constructs: inside a **skill**,
+  `${CLAUDE_PLUGIN_ROOT}` and `${CLAUDE_SKILL_DIR}` are empty on Codex, so a call
+  guarded on one silently never fires there — derive the path from the SKILL.md
+  you just read instead. Inside a **hook** the opposite holds: Codex exports both
+  `PLUGIN_ROOT` and `CLAUDE_PLUGIN_ROOT`, so `${CLAUDE_PLUGIN_ROOT}` is the correct
+  and portable way to locate a bundled script. It does not export `extensionPath`,
+  so an `${extensionPath:-.}` fallback silently resolves to the user's cwd there.
+  When a platform variable is genuinely unavoidable, resolve it in one shell call
+  and state what to do when it comes back empty.
 - **Executed bundled scripts get an anchor.** The Bash tool's working directory is
   the user's project, so `bash scripts/x.sh` in a fenced block resolves to
   `<project>/scripts/x.sh` and exits 127. Set the path inline in the same command —

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Continual Learning"
+  short_description: "Mine past transcripts into the project's agent instructions"
+policy:
+  allow_implicit_invocation: false

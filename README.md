@@ -2,7 +2,7 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code and Codex.
 
-![skills](https://img.shields.io/badge/skills-49-blue)
+![skills](https://img.shields.io/badge/skills-51-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex-8957e5)
 
@@ -46,7 +46,7 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-49 skills, grouped by what they are for.
+51 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
@@ -54,7 +54,7 @@ refreshed instead of quietly rotting.
 | **Design & frontend** | Accessibility, UI craft and motion, decks, onboarding, throwaway prototypes | `better-accessibility` · `emil-design-eng` · `grill-design` · `frontend-slides` · `onboarding-flow` · `prototype` |
 | **Words** | Marketing copy, editorial, slop removal | `copywriter` · `online-writing` · `unslop` |
 | **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` |
-| **Agent workflow** | Review, routing, simplification, refactoring, debugging, verification, PR babysitting, git hygiene, skill maintenance | `autoreview` · `babysit` · `diagnosing-bugs` · `domain-modeling` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `simplify-code` · `bro` · `skill-creator` |
+| **Agent workflow** | Review, routing, simplification, refactoring, debugging, verification, PR babysitting, git hygiene, install and skill maintenance | `autoreview` · `babysit` · `continual-learning` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `simplify-code` · `bro` · `skill-creator` |
 | **Principles** | Short, explicitly-invoked rules for how to work — verification, design exploration, debugging posture, domain modeling | `principle-encode-lessons-in-structure` · `principle-exhaust-the-design-space` · `principle-fix-root-causes` · `principle-model-the-domain` · `principle-prove-it-works` · `principle-redesign-from-first-principles` · `principle-subtract-before-you-add` |
 | **Understand code** | Codebase walkthroughs, design rationale, explaining a change | `how` · `why` · `teach` |
 | **Personal tooling** | Notes and tasks | `obsidian` · `things` |
@@ -68,6 +68,7 @@ conditions — that is the one place a description is maintained.
 | --- | --- |
 | `skills/` | **The plugin.** One directory per skill, `SKILL.md` entry point |
 | `skills/sources.json` | Upstream origin, pinned rev, and refresh command for every skill |
+| `hooks/` | `hooks.json` + scripts; Claude Code and Codex both read this format |
 | `commands/` | Slash commands (currently empty) |
 | `.claude-plugin/plugin.json` | Claude Code plugin manifest |
 | `.claude-plugin/marketplace.json` | Marketplace manifest (this repo hosts itself) |

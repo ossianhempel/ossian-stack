@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-29",
+  "updated": "2026-08-30",
   "description": "Upstream map for skills/ \u2014 the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -116,6 +116,16 @@
       "upstreamPath": "skills/codex-first",
       "upstreamRev": "034471e2ce1c72f5884890befa8afc2b2a961c2f",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "continual-learning": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "continual-learning",
+      "refresh": "npx skills add cursor/plugins -y --skill continual-learning && echo 'hand-merge; this copy re-hosts the trigger on SessionStart and bundles the persona'",
+      "notes": "From cursor/plugins' standalone continual-learning plugin (not pstack). Kept: the orchestration-only skill and the memory-updater persona, rewritten locally. Changed on 2026-08-30 after verifying both runtimes: upstream triggers on a Cursor Stop hook via a follow-up message, which does not port -- 'followUpMessage' appears zero times in the Codex binary and Stop has no HookSpecificOutputWire there, only continue/stopReason/suppressOutput/systemMessage. Re-hosted on SessionStart + additionalContext, which both Claude Code and Codex support. The Bun/TypeScript hook was rewritten as bash + jq (hooks/scripts/continual-learning-session-start.sh), and the registered agents-memory-updater subagent became a bundled persona under references/, since a plugin cannot register a Codex subagent. Upstream's transcript-path guessing is gone: the runtime hands the hook its own transcript_path.",
+      "upstreamPath": "continual-learning",
+      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
+      "upstreamCheckedAt": "2026-08-30"
     },
     "convex-cli": {
       "origin": "companion",
@@ -358,6 +368,10 @@
       "origin": "companion",
       "repo": "https://github.com/RevenueCat/docs",
       "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured. Added disable-model-invocation: true on 2026-08-29 to match the author's own allow_implicit_invocation: false in agents/openai.yaml \u2014 the skill makes live RevenueCat writes, so explicit invocation only. Remove that one frontmatter line (and the policy block) to restore auto-triggering."
+    },
+    "setup-ossian-stack": {
+      "origin": "local",
+      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored: setup-pstack configures per-role models this plugin does not have, and mattpocock's scaffolds per-repo config that our skills do not yet read. This one installs the plugin and migrates off what it replaces -- superseded plugins, hand-maintained skill symlinks -- and covers the runtime hook-approval gate, since Codex ships plugin hooks disabled and hash-pinned."
     },
     "simplify-code": {
       "origin": "derived",

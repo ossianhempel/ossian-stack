@@ -1,0 +1,5 @@
+interface:
+  display_name: "Setup ossian-stack"
+  short_description: "Install the plugin and migrate off what it replaces"
+policy:
+  allow_implicit_invocation: false
