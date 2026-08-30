@@ -24,12 +24,9 @@ codex plugin marketplace add ossianhempel/ossian-stack
 Skills are then addressed as `ossian-stack:<name>` — or just described in plain
 language, since each one carries its own trigger description.
 
-**Authoring machine.** Register the local clone instead, so a marketplace refresh
-picks up your edits without a push:
-
-```
-/plugin marketplace add ~/Developer/ossian-stack
-```
+**Authoring machine.** Register the GitHub repo here too, rather than the local
+clone — a local-directory marketplace is what disables automatic updates. The
+trade is that pushing is what publishes: an unpushed edit reaches no runtime.
 
 ## Philosophy
 

@@ -36,18 +36,35 @@ only decides which path *this machine* reads from.
 /plugin marketplace add ossianhempel/ossian-stack
 ```
 
-Then `/plugin install ossian-stack@ossian-stack`. Edits require
-commit + push + `/plugin marketplace update ossian-stack` before they go live.
+Then `/plugin install ossian-stack@ossian-stack`. **This is the setup to use**,
+on every machine including the one you author on. Edits require commit + push;
+after that each runtime refreshes on its own, or immediately with
+`/plugin marketplace update ossian-stack`.
 
-### Directory source — for the Mac you actually author on
+The same repo is registered natively in all three:
+
+```
+claude  plugin marketplace add ossianhempel/ossian-stack
+codex   plugin marketplace add ossianhempel/ossian-stack
+copilot plugin marketplace add ossianhempel/ossian-stack
+```
+
+### Directory source — avoid, including on the Mac you author on
 
 ```
 /plugin marketplace add ~/Developer/ossian-stack
 ```
 
-Then `/plugin install ossian-stack@ossian-stack`. `/plugin marketplace update
-ossian-stack` re-copies straight off local disk, so the edit loop needs no
-commit or push. Still the same GitHub repo; still pushable.
+This re-copies straight off local disk, so the edit loop needs no commit or push
+— and that convenience is what costs you automatic updates. Measured 2026-08-30:
+
+| Runtime | Local directory source | Git source |
+| --- | --- | --- |
+| Claude Code 2.1.250 | refuses to update when the version is unchanged; no `--force` in this build | auto-updates on version change; commit SHA if `version` is omitted |
+| Codex 0.151.0-alpha | `plugin marketplace upgrade` reports "No configured Git marketplaces to upgrade" | `plugin marketplace upgrade` refreshes it |
+| Copilot CLI 1.0.80 | `plugin update` re-copies, but nothing refreshes on its own | auto-updates at session start in a trusted directory |
+
+Use it only to test something you genuinely cannot push.
 
 Use the directory source on the authoring Mac and the GitHub source everywhere
 else. Same plugin name in both places.

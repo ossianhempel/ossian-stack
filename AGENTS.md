@@ -36,13 +36,24 @@ is replaced on every update. The skill degrades to plain status reporting when
 
 ## Local plugin development
 
-Skills are **copied** into the runtime's cache, not symlinked, so an edit here is
-not live until the marketplace is refreshed. On the authoring machine, register the
-local clone rather than the GitHub repo:
+Skills are **copied** into every runtime's cache, not symlinked, so an edit here is
+never live until that runtime refreshes.
+
+**Register the GitHub repo, not the local clone**, on the authoring machine too:
 
 ```
-/plugin marketplace add ~/Developer/ossian-stack
+/plugin marketplace add ossianhempel/ossian-stack
 ```
+
+A local-directory marketplace looks convenient and costs you automatic updates.
+Measured on Claude Code 2.1.250, Codex 0.151.0-alpha and Copilot CLI 1.0.80:
+Codex's `plugin marketplace upgrade` refreshes **git marketplaces only** and
+reports "No configured Git marketplaces to upgrade" for a local path, and Claude
+Code refuses to update a directory source whose version is unchanged, with no
+`--force` in that build. Pointing at GitHub restores auto-refresh on all three.
+
+The trade is that **pushing is what publishes**. An unpushed edit reaches no
+runtime, which is also why `bun run check` runs as a pre-commit hook.
 
 Plugin skills cache at session start, so invoking an edited skill in the session
 that edited it tests stale content — restart the session. To know which copy is
