@@ -23,10 +23,22 @@ of transcripts is exactly the kind of work that should not fill this one.
    instructions, plus the transcript directory path and the path to the project's
    agent instruction file. Give it paths, not transcript contents.
 3. **Return its result unchanged.** Do not re-summarise it and do not editorialise
-   the bullets it wrote.
+   the bullets it wrote. Its report ends with the arithmetic — removed, corrected,
+   sharpened, added. If it added more than it removed or corrected, that is worth
+   the user seeing, not smoothing over.
 4. **Mark the mine.** On a successful run, touch the marker file the session-start
    notice named, so the nudge stops repeating. If no marker path was given, skip
    this — do not invent one.
+
+## What this is for
+
+The file should get **better**, not longer. Its value is that a future session
+reads it in full and acts on it — which stops the moment it becomes a changelog of
+everything anyone ever noticed.
+
+So the bias is `principle-subtract-before-you-add`: remove and correct first,
+sharpen second, append last. Short-lived, task-specific, or already-enforced facts
+are the failure mode to guard against, not the material to collect.
 
 ## Guardrails
 
