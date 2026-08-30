@@ -41,6 +41,9 @@ on every machine including the one you author on. Edits require commit + push;
 after that each runtime refreshes on its own, or immediately with
 `/plugin marketplace update ossian-stack`.
 
+The manifests declare **no version**, so the commit SHA is the release — there is
+nothing to bump. Claude Code shows the short SHA where a version would go.
+
 The same repo is registered natively in all three:
 
 ```

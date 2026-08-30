@@ -1,6 +1,5 @@
 {
   "name": "ossian-stack",
-  "version": "1.8.0",
   "description": "Ossian's personal agent stack: skills for iOS and App Store releases, Convex/Clerk/RevenueCat/Coolify ops, frontend design and animation, copywriting and editorial writing, and macOS automation.",
   "author": {
     "name": "Ossian Hempel",

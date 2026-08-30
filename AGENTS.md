@@ -75,10 +75,15 @@ Full loop: `docs/plugin-workflow.md`.
   `sources.json`, or `README.md`. It is fast and offline. `.githooks/pre-commit`
   runs `bun run validate` automatically; enable it once per clone with
   `git config core.hooksPath .githooks`.
-- **Version bumps:** any change that should reach an installed runtime bumps
-  `version` in **all three** manifests (`.claude-plugin/plugin.json`,
-  `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`). They must agree —
-  `bun run validate` enforces it. Repo-tooling and docs-only changes do not need a bump.
+- **No version field. The commit is the release.** All three manifests ship
+  version-less on purpose, so every runtime keys its install off the git SHA and a
+  push is all that publishes. Verified 2026-08-30: Claude Code adopts the short SHA
+  as the version and updated `c7c72b25bc7c` → `463681f1b29a` on a plain commit;
+  Codex falls back to a constant key it overwrites on `plugin marketplace upgrade`.
+  Adding a `version` back silently re-pins Claude Code to it and blocks every later
+  push, so `bun run validate` fails on the field's presence.
+  `bun run plugin:validate` runs without `--strict` for the same reason — the
+  absent version is a strict-mode warning, and it is the state we want.
 - **Secrets:** `.env*` files and/or 1Password (`op` CLI). Never commit one.
 
 ## Repo Layout

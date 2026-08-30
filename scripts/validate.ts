@@ -5,7 +5,8 @@
  * Run: bun run validate
  *
  * Checks (all deterministic, no network):
- *   1. The three manifests parse, agree on name, and agree on version.
+ *   1. The three manifests parse, agree on name, and declare no version
+ *      (the commit SHA drives updates; see the block below).
  *   2. Every skills/<name>/ has a SKILL.md with name + description frontmatter,
  *      and the frontmatter name matches the directory name. Invocation policy
  *      agrees across runtimes: disable-model-invocation (Claude Code, Cursor)
@@ -45,21 +46,26 @@ const codexPlugin = readJson(".codex-plugin/plugin.json");
 const marketplaceEntry = marketplace?.plugins?.find((p: any) => p.name === "ossian-stack");
 if (marketplace && !marketplaceEntry) fail(".claude-plugin/marketplace.json: no plugin entry named ossian-stack");
 
-const versions: Record<string, string | undefined> = {
+// The manifests deliberately declare NO version. Every runtime then keys the
+// install off the git commit instead, so a push is the release and nothing has
+// to be hand-bumped: Claude Code adopts the short SHA as the version (verified:
+// "updated from c7c72b25bc7c to 463681f1b29a" on a plain commit), and Codex
+// falls back to a constant key it overwrites on `plugin marketplace upgrade`.
+// Re-adding a version silently restores version-gating on Claude Code, so a
+// stale one would stop every later push from reaching it.
+const versioned = Object.entries({
   ".claude-plugin/plugin.json": claudePlugin?.version,
   ".claude-plugin/marketplace.json": marketplaceEntry?.version,
   ".codex-plugin/plugin.json": codexPlugin?.version,
-};
-const distinct = new Set(Object.values(versions).filter(Boolean));
-if (distinct.size > 1) {
+}).filter(([, v]) => v !== undefined);
+for (const [file, v] of versioned) {
   fail(
-    `manifest versions disagree — bump all three together:\n` +
-      Object.entries(versions)
-        .map(([f, v]) => `        ${v ?? "(missing)"}  ${f}`)
-        .join("\n"),
+    `${file}: declares "version": "${v}". This plugin ships version-less so the ` +
+      `commit SHA drives updates; a declared version pins Claude Code to it and ` +
+      `blocks every later push. Remove the field.`,
   );
 }
-const VERSION = claudePlugin?.version ?? "0.0.0";
+const VERSION = "git";
 
 for (const [file, name] of [
   [".claude-plugin/plugin.json", claudePlugin?.name],
