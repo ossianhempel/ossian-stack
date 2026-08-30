@@ -65,14 +65,49 @@ The hook needs `jq`. Without it, it exits silently and nothing else breaks.
 
 ## 5. Report what will not work
 
-Name each missing CLI, the skills that depend on it, and what happens without it.
-Degradation is per-skill, not global — a missing tool disables a few skills, not
-the plugin.
+Check each of these by asking the shell, and name the ones that are missing
+alongside what stops working. Degradation is per-skill, not global — a missing
+tool disables a few skills, not the plugin.
 
-Say this plainly rather than burying it. A skill that fails on first use because
-a binary was never installed reads as a broken plugin.
+| Binary | Needed by | Missing means |
+| --- | --- | --- |
+| `asc` | `asc-metadata`, `asc-pricing`, `asc-release`, `asc-version-guard`, `release-ios-app` | No App Store Connect work at all |
+| `gh` | `autoreview`, `babysit`, `why`, `release-ios-app` | No PR, CI, or issue-history access |
+| `jq` | `clerk-cli`, **and the session-start hook** | The hook exits silently — continual learning never nudges |
+| `op` | `one-password`, `post-queue-cli` | No secret retrieval |
+| `xcodebuild` | `ios-marketing-capture`, `release-ios-app` | No native builds or simulator captures |
+| `gt`, `bun` | `babysit` | `watch-pr` cannot run; PR status falls back to plain reporting |
+| `clerk` / `convex` / `rc` | `clerk-cli` / `convex-cli` / `revenuecat-api` | That backend's skill is unusable |
+| `trash` | `git-cleanup` | Deletions have no recoverable path |
+| `npx` | `clerk-cli`, `convex-cli`, `frontend-slides` | Skill-vendoring and scaffolding commands fail |
 
-## 6. Verify
+`jq` deserves its own line in the report: without it the hook fails **silently and
+by design**, so nothing looks broken and continual learning simply never happens.
+
+Say all of this plainly rather than burying it. A skill that fails on first use
+because a binary was never installed reads as a broken plugin.
+
+## 6. Project prerequisites — check, do not scaffold
+
+When run inside a project, some skills expect a file the repo owns. **Most are
+created lazily on purpose; pre-creating them is a mistake**, because an empty
+`GLOSSARY.md` is a file that gets read, believed, and found empty.
+
+- `GLOSSARY.md`, `GLOSSARY-MAP.md`, `docs/adr/` — `domain-modeling` creates these
+  the moment it has something real to write, and `diagnosing-bugs` reads whichever
+  exists. Do not create them here. Do not create them empty ever.
+- A project-local skills directory — `close-the-loop` resolves or creates it when
+  it generates a verifier. Leave it alone until then.
+- `.env`, `.env.local` and friends — the project's own, never ours to write.
+- **`.ios-release.env` is the exception.** `release-ios-app` reads it first and
+  assumes it exists, so an iOS repo without one cannot use that skill. If this
+  looks like an iOS app repo and the manifest is absent, say so and point at that
+  skill's own `references/manifest.md`, which documents every key. Do not guess
+  values — the manifest carries app IDs and branch names only its owner knows.
+
+Report what is missing and who creates it. Create nothing in this step.
+
+## 7. Verify
 
 Confirm the installed copy is the one that answers. A skill list that still shows
 the old source means step 3 did not finish, or the runtime needs a restart —

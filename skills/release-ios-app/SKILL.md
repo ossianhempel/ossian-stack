@@ -7,8 +7,8 @@ description: "Release iOS and Expo apps to TestFlight and the App Store. Trigger
 
 One release flow for all of Ossian's iOS apps. The shared decision/submission logic lives
 here; each repo owns a `.ios-release.env` manifest with its app-specific values and a
-`references/`-style notes file for genuine repo gotchas. This mirrors `release-mac-app`
-(profile skill + repo-owned `.mac-release.env`).
+`references/`-style notes file for genuine repo gotchas. Same shape as the macOS flow: a
+shared profile skill plus a repo-owned manifest.
 
 ## Rules
 
