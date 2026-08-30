@@ -188,8 +188,11 @@ way. It is not a state machine.
   `bun run validate` fails on `CONTEXT.md`, `CONCEPTS.md`, or `VOCABULARY.md`
   anywhere under `skills/`.
 - **A skill may only name a sibling this plugin ships.** Pruning a skill leaves
-  inbound references behind in the ones that pointed at it; `bun run validate`
-  warns on each. Fix the pointer in the same change as the removal.
+  inbound references behind in the ones that pointed at it. `bun run validate`
+  fails on each: every backticked kebab token in a `SKILL.md` must be a shipped
+  skill, a path bundled with that skill, or listed in `NON_SKILL_TOKENS`. Adding
+  a new CSS property or model id means adding it to that list — deliberate
+  friction, because the earlier heuristic silently missed real dead links.
 - **Describe the capability, not the tool.** "the project's issue tracker (GitHub
   Issues, Linear, Jira)" and "whatever interface it exposes" — never assume a
   specific CLI exists, and never treat a missing binary as proof the capability is

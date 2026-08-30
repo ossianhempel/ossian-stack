@@ -9,7 +9,7 @@ Run the bundled structured review helper as a closeout check. This is code revie
 
 Codex review is the default when no engine is set. It uses `gpt-5.6-sol` with `medium` reasoning by default, then retries once with `gpt-5.6-terra` only when the account cannot access Sol. Claude review is optional and uses `claude-fable-5` by default.
 
-For user-visible behavior, pair autoreview with `behavior-validator`. Autoreview is source-aware and judges the change bundle; behavior validation is source-blind and judges the running product or tool against a behavior contract. A clean autoreview is not proof that a UI, CLI, API, or generated artifact works from the user's perspective.
+For user-visible behavior, pair autoreview with a source-blind behavior check. Autoreview is source-aware and judges the change bundle; behavior validation judges the running product or tool against a behavior contract. A clean autoreview is not proof that a UI, CLI, API, or generated artifact works from the user's perspective.
 
 Use when:
 

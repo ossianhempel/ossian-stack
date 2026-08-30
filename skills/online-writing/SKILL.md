@@ -12,7 +12,7 @@ description: >-
   editorial pieces that teach, argue, or tell belong here; a thread,
   newsletter, or post whose job is to sell, convert, or drive signups belongs
   to copywriter and its persuasion-skeleton. Not for UI microcopy, App Store
-  metadata, or ad copy - use better-writing or copywriter for those.
+  metadata, or ad copy - use copywriter for those.
 ---
 
 # Online Writing
@@ -30,7 +30,6 @@ sufficient; a clear-but-slow sentence still loses the skim.
 
 - **This skill:** long-form articles, essays, threads, newsletters. Structure,
   headline, introduction, Main Points, endings, topic selection.
-- `better-writing`: interface copy - buttons, errors, empty states.
 - `unslop`: final pass for AI tells. Run it *after* this skill on
   anything drafted or heavily rewritten by a model.
 

@@ -12,7 +12,7 @@ description: >-
   CONVEX_DEPLOYMENT, deploy key, preview deployment, or requests to inspect or
   fix production Convex data. Prefer `npx convex` over raw HTTP or dashboard-only
   workflows; it handles auth, deployment targeting, and codegen. Do not use for
-  authoring new Convex functions in code — use convex-function-creator instead.
+  authoring new Convex functions in code.
 ---
 
 # Convex CLI
@@ -42,7 +42,7 @@ npx convex --version
 test -d convex && test -f .env.local && grep -q CONVEX_DEPLOYMENT .env.local
 ```
 
-If `convex/` or `CONVEX_DEPLOYMENT` is missing, use `convex-quickstart` first — do not guess deployment URLs.
+If `convex/` or `CONVEX_DEPLOYMENT` is missing, run the project's own Convex setup first — do not guess deployment URLs.
 
 ## Deployment targeting
 
@@ -214,16 +214,6 @@ If `insights` is missing locally, retry with `npx -y convex@latest insights --de
 4. **Preview destructive ops.** For `import`, `env remove`, or prod `deploy`, state the target deployment first.
 5. **Commit `_generated/`.** Codegen output belongs in git; run `dev --once` or `codegen` after backend edits.
 6. **Auth failures in sandboxes are inconclusive.** Rerun on the host before reporting "not logged in".
-
-## Relationship to other Convex skills
-
-| Skill | Use when |
-| --- | --- |
-| `convex-quickstart` | New project, provider wiring, first-time setup |
-| `convex-function-creator` | Writing queries, mutations, actions in code |
-| `convex-schema-builder` | Designing tables and indexes |
-| `convex-setup-auth` | Auth integration |
-| `convex-cli` (this skill) | Operating deployments, data, env, logs, deploy/run from terminal |
 
 ## References
 

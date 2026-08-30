@@ -230,29 +230,58 @@ for (const dir of skillDirs) {
 
 // ------------------------------------------------- 4c. cross-skill references
 // A skill that names a sibling we do not ship routes the reader to a dead end.
-// Only four shapes are unambiguous; anything looser matches CSS properties, model
-// ids, API routes, and filesystem paths, and a check that cries wolf gets ignored.
-// A bare `/name` is NOT enough — that matches /tmp, /docs, and other tools' slash
-// commands. Recognised: "`name` skill", "the skill `name`", "`/name` skill",
-// "`principle-*`". Warn, not fail: pruning a skill leaves inbound references
-// behind in siblings, and that debt should surface without blocking a commit.
-const SKILL_REF_PATTERNS = [
-  /`([a-z][a-z0-9-]*)` skill\b/g,
-  /\bskill `([a-z][a-z0-9-]*)`/g,
-  /`\/([a-z][a-z0-9-]*)` skill\b/g,
-  /`(principle-[a-z0-9-]+)`/g,
+//
+// Matching only "skill-shaped" phrasings missed three real cases: a bare mention
+// with no "skill" after it, one inside a parenthetical, and one wrapped across a
+// line break. So the test is inverted: EVERY backticked kebab token must be a
+// shipped skill, a path bundled with that skill, or explicitly listed below.
+// That turns a guess into an assertion. The cost is that a new CSS property or
+// model id has to be added to the list -- visible friction with an obvious fix,
+// versus silent misses.
+const NON_SKILL_TOKENS = new Set([
+  // CSS properties, media features, and utility classes
+  "background-image", "clip-path", "ease-in", "ease-out", "min-height",
+  "pointer-events", "prefers-reduced-motion", "scroll-margin-top",
+  "border-red-500", "size-4",
+  // enum / mode / status values
+  "merge-queue", "read-only", "threads-only", "verified-unreachable",
+  "pre-push", "allow-implicit-invocation", "disable-model-invocation",
+  "user-invoke-only", "red-capable", "well-known",
+  // CLI subcommands and flags
+  "sign-in", "sign-out", "user-id", "update-project", "function-spec",
+  "watch-pr", "convex-test",
+  // issue-tracker labels
+  "incident-followup", "perf-regression",
+  // named in order to forbid it, not to route to it
+  "skill-test",
+  // named things that are not skills
+  "mac-mini-agents", "mac-mini-agents-multi", "service-account",
+  "ossian-stack", "ossians-second-brain-sync", "readwise-claim",
+  "xcodegen-xcodecloud",
+]);
+// Model ids and HTML attributes are open-ended families; match them by shape.
+const NON_SKILL_PATTERNS = [
+  /^(claude|gpt|grok|gemini|llama|mistral|kimi|fable|sonnet|opus|haiku)-/,
+  /^(aria|data)-/,
 ];
 for (const dir of skillDirs) {
-  const body = read(join("skills", dir, "SKILL.md"));
+  // Collapse whitespace first: a reference wrapped across a line break is still
+  // a reference, and that is exactly how one of the misses hid.
+  const body = read(join("skills", dir, "SKILL.md")).replace(/\s+/g, " ");
   const seen = new Set<string>();
-  for (const re of SKILL_REF_PATTERNS) {
-    for (const m of body.matchAll(re)) {
-      const ref = m[1];
-      if (ref === dir || seen.has(ref)) continue;
-      seen.add(ref);
-      if (!skillDirs.includes(ref))
-        warn(`skills/${dir}/SKILL.md: refers to the \`${ref}\` skill, but no skills/${ref}/ exists`);
-    }
+  for (const m of body.matchAll(/`\/?([a-z][a-z0-9]*(?:-[a-z0-9]+)+)`/g)) {
+    const ref = m[1];
+    if (ref === dir || seen.has(ref)) continue;
+    seen.add(ref);
+    if (skillDirs.includes(ref)) continue;                                 // resolves
+    if (/\.(md|json|ya?ml|ts|js|py|sh|toml|lock|html|css|txt)$/.test(ref)) continue;
+    if (existsSync(join(ROOT, "skills", dir, ref))) continue;              // bundled path
+    if (NON_SKILL_TOKENS.has(ref)) continue;
+    if (NON_SKILL_PATTERNS.some((re) => re.test(ref))) continue;
+    fail(
+      `skills/${dir}/SKILL.md: \`${ref}\` reads as a skill reference but no skills/${ref}/ exists. ` +
+      `If it is not a skill, add it to NON_SKILL_TOKENS in scripts/validate.ts.`
+    );
   }
 }
 
