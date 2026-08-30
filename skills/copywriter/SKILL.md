@@ -368,8 +368,7 @@ describing features, show what changes for the user.
 3. **Open the right reference file.** Match the medium. For multi-beat
    persuasive copy (landing page, long caption, App Store
    description), also open `references/persuasion-skeleton.md` and draft beat
-   by beat. Route complete TikTok slideshow or Instagram carousel requests to
-   the `slideshow-creator` skill. If none fits, fall back to the core principles.
+   by beat. If none fits, fall back to the core principles.
 4. **Name the lever, then the outcome.** Before structure, before length,
    before keywords: (a) which psychological lever is this pulling - one
    sentence, "this makes the reader feel ___"; (b) what changes for the user -

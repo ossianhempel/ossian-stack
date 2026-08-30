@@ -26,9 +26,9 @@ Use audit mode when there's a measurable funnel and the user asks "why are users
 
 ## Companion Skills
 
-Onboarding works best when it combines static screens, **short motion videos** demonstrating core value, and **interactive demos** the user can touch. Two sibling skills handle the heavy lifting; reach for them at the right phase instead of reinventing the work here.
+Onboarding works best when it combines static screens, **short motion videos** demonstrating core value, and **interactive demos** the user can touch. This skill owns the flow; the sections below say what each asset has to be, so whoever produces it has a spec rather than a vibe.
 
-- **`create-onboarding-video`** — produces short (3–8s per beat), punchy Remotion videos that show a single feature in action by animating cropped UI pieces (a button being tapped, a row reordering, a sheet sliding up). Use this whenever an onboarding screen needs a video instead of (or above) a static screenshot — the Welcome hook, a feature-spotlight beat, the processing-to-result reveal, or a paywall preview. The output renders to MP4 and drops cleanly into a SwiftUI/React Native video player. Hand it 2–4 stills per screen plus a one-line "what should this beat communicate" brief and let it produce the asset. **Don't try to design those videos in this skill — invoke `create-onboarding-video` instead.**
+- **Onboarding videos** — short (3–8s per beat) and punchy, showing a single feature in action by animating cropped UI pieces (a button being tapped, a row reordering, a sheet sliding up). Reach for one whenever a screen needs motion instead of (or above) a static screenshot: the Welcome hook, a feature-spotlight beat, the processing-to-result reveal, a paywall preview. Render to MP4 so it drops cleanly into a SwiftUI or React Native video player. The input is 2–4 stills of the screen plus a one-line brief saying what the beat must communicate — produce it with whatever motion tooling the project already uses. **Write the brief here; do not storyboard frames here.**
 - **`copywriter`** (with `references/in-app-copy.md` and `references/short-form-video.md`) — for headlines, button labels, video on-screen overlay text, and CTA copy on every screen. Invoke it when drafting screen content in Phase 4.
 
 The pattern: this skill owns the **flow architecture** (which screens, in what order, with what psychological purpose). The companion skills own the **assets** that go inside each screen.
@@ -133,7 +133,7 @@ The flow uses 11 screen archetypes. You MUST include screens marked [REQUIRED]. 
 
 **Pattern:** "Welcome to your new [transformation outcome]" + autoplaying muted loop of the app's core action.
 
-**Producing the video:** Don't design or storyboard the clip here — invoke the `create-onboarding-video` skill with a one-line brief ("show the calorie-scan flow: photo → result card") and 2–4 stills of the relevant screen. It will return an MP4 (and a portrait variant) ready to embed.
+**Producing the video:** Don't storyboard the clip here. Write a one-line brief ("show the calorie-scan flow: photo → result card"), gather 2–4 stills of the relevant screen, and hand both to the project's motion tooling. What comes back is an MP4, plus a portrait variant, ready to embed.
 
 #### Screen 2: GOAL QUESTION [REQUIRED]
 **Objective:** Get the user to self-identify their primary goal. This creates psychological investment — they've now told the app what they want, which makes them feel the app owes them a solution.
@@ -197,7 +197,7 @@ The flow uses 11 screen archetypes. You MUST include screens marked [REQUIRED]. 
 - Optional one-line caption under the video for accessibility / sound-off viewers
 - "Continue" CTA below
 
-**Producing the video:** Hand the brief to the `create-onboarding-video` skill. One feature = one video. Keep it focused on cropped UI pieces in motion — never a full screen recording, never a tutorial. See that skill's intake checklist for what stills to provide.
+**Producing the video:** One feature, one video. Keep it to cropped UI pieces in motion — never a full screen recording, never a tutorial. The intake is the same as above: a one-line brief plus 2–4 stills of the screen the beat lives on.
 
 **Don't:**
 - Stack three feature videos in a row — pick the one feature most worth proving

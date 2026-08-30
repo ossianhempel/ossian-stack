@@ -23,7 +23,7 @@ here; each repo owns a `.ios-release.env` manifest with its app-specific values 
 - Keep app-specific build/sign/upload behavior in repo scripts / the relevant CLI (`xcodebuild`, `xcodegen`, `eas`, `asc`). This skill orchestrates; it does not re-implement them.
 - **Never auto-merge the `develop` → `main` release PR.** Open it, then stop and wait for Ossian to merge.
 - Never print secrets or key material.
-- Final App Store readiness and submission run through the `asc` release flow (the `asc-release` / `asc-release-flow` skill). What's New copy goes through `asc-whats-new-writer`.
+- Final App Store readiness and submission run through the `asc-release` skill. What's New copy goes through `asc-metadata`.
 
 ## Version-bump policy (decide this first)
 
@@ -61,7 +61,7 @@ App Store submissions must **attach an already-uploaded, `VALID` TestFlight buil
 
 1. Confirm the version source matches the version you intend to submit.
 2. Pick the uploaded, `VALID` TestFlight build to ship.
-3. Use `asc-whats-new-writer` to draft/update What's New before submission. If tags are stale, derive notes from the actual commits since the last submitted App Store version.
+3. Use `asc-metadata` to draft/update What's New before submission. If tags are stale, derive notes from the actual commits since the last submitted App Store version.
 4. Hand off to the `asc` release/submission flow to attach the build and run readiness (`asc validate`, screenshots, availability, IAP/subscriptions, App Privacy). **Never create the final review submission without explicit go-ahead.** If a command asks for an IPA path during App Store submission, stop and switch to the attach-existing-build path.
 
 ## Pitfalls

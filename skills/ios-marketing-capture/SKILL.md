@@ -12,7 +12,7 @@ Automate reproducible marketing screenshot capture for a SwiftUI iOS app across 
 1. **Full-screen captures** — every marketing-relevant screen, with deterministic seeded data, real status bar / safe-area chrome
 2. **Element captures** — isolated renders of specific components (cards, widgets, charts) at any scale, with natural background inside rounded corners and transparency outside
 
-This skill is the **capture** step. If the user also wants Apple-style marketing pages composited around the shots (device mockups, headlines, gradients), combine with the `app-store-screenshots` skill as a post-processing step.
+This skill is the **capture** step. If the user also wants Apple-style marketing pages composited around the shots (device mockups, headlines, gradients), that compositing is a separate post-processing step.
 
 ## Core Approach
 
