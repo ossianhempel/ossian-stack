@@ -1,0 +1,23 @@
+{
+  "name": "ossian-stack",
+  "owner": {
+    "name": "Ossian Hempel"
+  },
+  "metadata": {
+    "description": "Marketplace for Ossian's personal agent stack."
+  },
+  "plugins": [
+    {
+      "name": "ossian-stack",
+      "description": "Ossian's personal agent stack: skills for iOS and App Store releases, Convex/Clerk/RevenueCat/Coolify ops, frontend design and animation, copywriting and editorial writing, and macOS automation.",
+      "source": ".",
+      "author": {
+        "name": "Ossian Hempel"
+      },
+      "homepage": "https://github.com/ossianhempel/ossian-stack",
+      "repository": "https://github.com/ossianhempel/ossian-stack",
+      "license": "MIT",
+      "category": "productivity"
+    }
+  ]
+}

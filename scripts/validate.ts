@@ -43,9 +43,12 @@ const claudePlugin = readJson(".claude-plugin/plugin.json");
 const marketplace = readJson(".claude-plugin/marketplace.json");
 const codexPlugin = readJson(".codex-plugin/plugin.json");
 const cursorPlugin = readJson(".cursor-plugin/plugin.json");
+const cursorMarketplace = readJson(".cursor-plugin/marketplace.json");
 
 const marketplaceEntry = marketplace?.plugins?.find((p: any) => p.name === "ossian-stack");
 if (marketplace && !marketplaceEntry) fail(".claude-plugin/marketplace.json: no plugin entry named ossian-stack");
+const cursorMarketplaceEntry = cursorMarketplace?.plugins?.find((p: any) => p.name === "ossian-stack");
+if (cursorMarketplace && !cursorMarketplaceEntry) fail(".cursor-plugin/marketplace.json: no plugin entry named ossian-stack");
 
 // The manifests deliberately declare NO version. Every runtime then keys the
 // install off the git commit instead, so a push is the release and nothing has
@@ -59,6 +62,7 @@ const versioned = Object.entries({
   ".claude-plugin/marketplace.json": marketplaceEntry?.version,
   ".codex-plugin/plugin.json": codexPlugin?.version,
   ".cursor-plugin/plugin.json": cursorPlugin?.version,
+  ".cursor-plugin/marketplace.json": cursorMarketplaceEntry?.version,
 }).filter(([, v]) => v !== undefined);
 for (const [file, v] of versioned) {
   fail(
@@ -74,11 +78,15 @@ for (const [file, name] of [
   [".claude-plugin/marketplace.json", marketplaceEntry?.name],
   [".codex-plugin/plugin.json", codexPlugin?.name],
   [".cursor-plugin/plugin.json", cursorPlugin?.name],
+  [".cursor-plugin/marketplace.json", cursorMarketplaceEntry?.name],
 ] as const) {
   if (name !== "ossian-stack") fail(`${file}: name is ${name ?? "(missing)"}, expected ossian-stack`);
 }
 if (cursorPlugin && cursorPlugin.skills !== "./skills/") {
   fail(`.cursor-plugin/plugin.json: skills is ${JSON.stringify(cursorPlugin.skills)}, expected ./skills/`);
+}
+if (cursorMarketplaceEntry && cursorMarketplaceEntry.source !== ".") {
+  fail(`.cursor-plugin/marketplace.json: source is ${JSON.stringify(cursorMarketplaceEntry.source)}, expected .`);
 }
 
 // ------------------------------------------------------------------ 2. skills

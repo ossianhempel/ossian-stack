@@ -20,7 +20,7 @@ table.
 | --- | --- |
 | Claude Code | `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` |
 | Codex | `.codex-plugin/plugin.json` |
-| Cursor | `.cursor-plugin/plugin.json` |
+| Cursor | `.cursor-plugin/plugin.json` and `.cursor-plugin/marketplace.json` |
 
 ## Installation routing
 
@@ -31,16 +31,16 @@ its skills, it should detect the current harness and use this order:
 | --- | --- | --- |
 | Claude Code | Git marketplace, then `ossian-stack@ossian-stack` | Claude marketplace update |
 | Codex | Git marketplace, then `ossian-stack@ossian-stack` | `codex plugin marketplace upgrade` |
-| Cursor | Official Marketplace entry `ossian-stack` | Cursor-managed, reviewed Marketplace updates |
+| Cursor | Git marketplace, then `ossian-stack` at User scope | `cursor-agent plugin marketplace update ossian-stack` |
 | Gemini CLI | Shared skills installer, global Gemini scope | `npx skills update` |
 | Copilot CLI / app | Shared skills installer, global Copilot scope | `npx skills update` |
 | Windsurf | Shared skills installer, global Windsurf scope | `npx skills update` |
 | Antigravity CLI | Shared skills installer, global Antigravity scope | `npx skills update` |
 
-Cursor's direct GitHub install is a fallback for testing or for a user who accepts
-manual refreshes; it is not the managed personal-update path. A native manifest does
-not publish a Marketplace entry by itself. For skill-only runtimes, install the
-directories under `skills/`, never the checkout-local `.agents/skills/` directory.
+Cursor's `/add-plugin <repo-url>` direct GitHub import is not the Git marketplace
+route and is currently pinned. The public Cursor Marketplace and Team Marketplaces
+are separate channels. For skill-only runtimes, install the directories under
+`skills/`, never the checkout-local `.agents/skills/` directory.
 
 ## Skill install roots
 

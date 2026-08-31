@@ -58,12 +58,14 @@ runtime, which is also why `bun run check` runs as a pre-commit hook.
 
 When an agent is handed this repository URL and asked to install the plugin or its
 skills, it must detect the current harness and prefer the native plugin route:
-Claude Code and Codex use their Git marketplace commands, and Cursor uses the
-official Marketplace entry `ossian-stack` when it is listed. A direct Cursor GitHub
-install is only a fallback with an explicit warning: it is currently pinned and does
-not provide managed personal updates. Gemini CLI, Copilot, Windsurf, and Antigravity
-use the shared skills installer against `skills/`; never install the checkout-local
-`.agents/skills/` tree as the public package.
+Claude Code and Codex use their Git marketplace commands. Cursor adds the Git
+marketplace with `cursor-agent plugin marketplace add <repo-url>`, then completes a
+user-scope install from its `/plugin` Marketplace UI; refreshes use
+`cursor-agent plugin marketplace update ossian-stack`. Cursor's official public
+Marketplace is a separate distribution channel, and `/add-plugin <repo-url>` is a
+direct GitHub import that is currently pinned. Gemini CLI, Copilot, Windsurf, and
+Antigravity use the shared skills installer against `skills/`; never install the
+checkout-local `.agents/skills/` tree as the public package.
 
 Plugin skills cache at session start, so invoking an edited skill in the session
 that edited it tests stale content — restart the session. To know which copy is
@@ -105,7 +107,7 @@ skills/sources.json     Upstream origin, pinned rev, refresh command per skill
 commands/               Slash commands (currently empty)
 .claude-plugin/         Claude Code plugin manifest + marketplace catalog
 .codex-plugin/          Codex plugin manifest, same skills/ tree
-.cursor-plugin/         Cursor plugin manifest, same skills/ tree
+.cursor-plugin/         Cursor plugin manifest + marketplace catalog, same skills/ tree
 bin/docs-list           Docs indexer — ships with the plugin
 scripts/                Repo-local dev tooling — NOT plugin surface
 .agents/skills/         Internal skills — loaded only in this checkout, never shipped

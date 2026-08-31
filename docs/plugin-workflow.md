@@ -10,8 +10,9 @@ read_when:
 
 `ossian-stack` is one plugin, hosted in this repo, which is also its own
 Claude Code marketplace (`.claude-plugin/marketplace.json` declares a single
-plugin with `"source": "./"`). Cursor uses the separate native manifest at
-`.cursor-plugin/plugin.json` because this is a single-plugin repository.
+plugin with `"source": "./"`) and Cursor Git marketplace
+(`.cursor-plugin/marketplace.json` declares the root plugin with `"source": "."`).
+The native plugin manifests point at the same `skills/` tree.
 
 ## The one thing to internalise
 
@@ -50,19 +51,21 @@ The same repo exposes native plugin manifests to all three supported hosts:
 ```
 claude plugin marketplace add ossianhempel/ossian-stack
 codex  plugin marketplace add ossianhempel/ossian-stack
+cursor-agent plugin marketplace add https://github.com/ossianhempel/ossian-stack
 ```
 
-In Cursor, use the official Marketplace entry when it exists:
+In Cursor, finish the install from the plugin UI at user scope:
 
 ```
-/add-plugin ossian-stack
+/plugin
 ```
 
-The `.cursor-plugin/plugin.json` manifest makes the repository valid, but it does not
-publish the public Marketplace entry. That requires a separate Cursor review. A
-direct GitHub import is useful for testing, but it is currently pinned to the commit
-that was installed and does not provide automatic personal updates. Use the official
-listing for public users, or a team marketplace with Auto Refresh for a private team.
+The `.cursor-plugin/marketplace.json` catalog lets Cursor index this Git repository;
+`.cursor-plugin/plugin.json` describes the plugin itself. Refresh the catalog with
+`cursor-agent plugin marketplace update ossian-stack`. Cursor's official public
+Marketplace and Team Marketplaces are separate channels. Do not use
+`/add-plugin https://github.com/ossianhempel/ossian-stack` for the normal install:
+that direct GitHub import is currently pinned.
 
 When a user gives an agent this repository URL and asks it to install the plugin or
 skills, the agent should detect the harness and use the native plugin route first.
@@ -107,9 +110,10 @@ This repo intentionally ships without a `version` field in its native manifests:
 - `.claude-plugin/marketplace.json` (inside the `plugins[0]` entry)
 - `.codex-plugin/plugin.json`
 - `.cursor-plugin/plugin.json`
+- `.cursor-plugin/marketplace.json` (inside the `plugins[0]` entry)
 
 The git commit is the release. Do not add a version to one manifest: `bun run
-validate` checks that the four manifest files remain versionless.
+validate` checks that the five native manifest files remain versionless.
 
 ```bash
 bun run validate
@@ -142,10 +146,14 @@ enabled = true
 
 `.cursor-plugin/plugin.json` points at the same `skills/` tree. Cursor discovers
 the skills from that manifest and keeps the installed copy under its plugin
-storage.
+storage. Register the repository as a Git marketplace before installing:
+
+```
+cursor-agent plugin marketplace add https://github.com/ossianhempel/ossian-stack
+```
 
 For a local test install, copy the checkout into
 `~/.cursor/plugins/local/ossian-stack`, reload Cursor, and confirm the plugin in
-Customize → Plugins. For a friend using the public listing, run
-`/add-plugin ossian-stack` in Cursor. If the listing is not available, explain the
-direct-GitHub pinning limitation before offering `/add-plugin https://github.com/ossianhempel/ossian-stack`.
+Customize → Plugins. For a normal install, open `/plugin`, select the repository's
+`ossian-stack` marketplace entry, and choose User scope. Refresh it later with
+`cursor-agent plugin marketplace update ossian-stack`.

@@ -27,22 +27,24 @@ codex plugin marketplace add ossianhempel/ossian-stack
 codex plugin add ossian-stack@ossian-stack
 ```
 
-**Cursor** — use the official Marketplace entry when it exists:
+**Cursor** — register this repository as a native Git marketplace:
 
 ```
-/add-plugin ossian-stack
+cursor-agent plugin marketplace add https://github.com/ossianhempel/ossian-stack
 ```
 
-That is the native install path and the one that gives personal users Cursor-managed
-updates. Search for `ossian-stack` in Customize → Plugins if the slash command does
-not resolve it. A `.cursor-plugin/plugin.json` file alone does not publish a public
-Marketplace entry. If the entry is not listed yet, tell the user that a direct GitHub
-install is only a temporary option and is currently pinned to its initial commit;
-do not present it as an auto-updating install:
+Then open Cursor's `/plugin` Marketplace UI (or Customize → Plugins), choose
+`ossian-stack`, and install it at **User** scope. The current Cursor CLI can add and
+refresh the marketplace, but does not provide a non-interactive plugin-install
+subcommand:
 
 ```
-/add-plugin https://github.com/ossianhempel/ossian-stack
+cursor-agent plugin marketplace update ossian-stack
 ```
+
+Do not substitute `/add-plugin https://github.com/ossianhempel/ossian-stack` for the
+marketplace flow: direct GitHub imports are pinned. Cursor's public Marketplace and
+Team Marketplaces are separate distribution channels.
 
 For Gemini CLI, Copilot, Windsurf, and Antigravity, there is no native plugin
 manifest in this repository. Install the public `skills/` tree with the shared
@@ -93,7 +95,7 @@ refreshed instead of quietly rotting.
 | **Design & frontend** | Accessibility, UI craft and motion, decks, onboarding, throwaway prototypes | `better-accessibility` · `emil-design-eng` · `grill-design` · `frontend-slides` · `onboarding-flow` · `prototype` |
 | **Words** | Marketing copy, editorial, slop removal | `copywriter` · `online-writing` · `unslop` |
 | **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` |
-| **Agent workflow** | Review, routing, simplification, refactoring, debugging, verification, PR babysitting, git hygiene, install and skill maintenance | `autoreview` · `babysit` · `continual-learning` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `simplify-code` · `bro` · `skill-creator` |
+| **Agent workflow** | Review, routing, simplification, refactoring, debugging, verification, conventions enforcement, issue triage and ticketing, PR babysitting, git hygiene, install and skill maintenance | `autoreview` · `babysit` · `continual-learning` · `codify-conventions` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `resolve-pr-feedback` · `simplify-code` · `triage` · `to-spec` · `to-tickets` · `bro` · `skill-creator` |
 | **Principles** | Short, explicitly-invoked rules for how to work — verification, design exploration, debugging posture, domain modeling | `principle-encode-lessons-in-structure` · `principle-exhaust-the-design-space` · `principle-fix-root-causes` · `principle-model-the-domain` · `principle-prove-it-works` · `principle-redesign-from-first-principles` · `principle-subtract-before-you-add` |
 | **Understand code** | Codebase walkthroughs, design rationale, explaining a change | `how` · `why` · `teach` |
 | **Personal tooling** | Notes and tasks | `obsidian` · `things` |

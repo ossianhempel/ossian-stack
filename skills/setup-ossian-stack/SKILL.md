@@ -39,10 +39,13 @@ user installs so the runtime can refresh it.
   `ossian-stack@ossian-stack`.
 - **Codex:** add `ossianhempel/ossian-stack` as a Git marketplace and install
   `ossian-stack@ossian-stack`.
-- **Cursor:** install the official Marketplace entry `ossian-stack` at user scope.
-  If it is not listed, explain that a direct GitHub install is pinned and does not
-  provide managed personal updates; only use the direct URL if the user accepts
-  that limitation. Local plugin copies are for testing only.
+- **Cursor:** add this repository as a Git marketplace with
+  `cursor-agent plugin marketplace add <repo-url>`, then use Cursor's `/plugin`
+  Marketplace UI to install `ossian-stack` at user scope. The CLI can refresh the
+  catalog with `cursor-agent plugin marketplace update ossian-stack`, but current
+  Cursor builds do not expose a non-interactive plugin-install subcommand. Do not
+  substitute `/add-plugin <repo-url>`: that direct GitHub import is pinned. Local
+  plugin copies are for testing only.
 - **Gemini CLI, Copilot, Windsurf, and Antigravity:** use the shared skills
   installer against this repository, targeting the current runtime's global skill
   scope. Install directories under `skills/` only; `.agents/skills/` is internal
