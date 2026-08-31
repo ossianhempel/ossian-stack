@@ -9,30 +9,59 @@ read_when:
 # Supported Agents
 
 Canonical list of the agent runtimes this repo targets. `ossian-stack` reaches
-Claude Code and Codex through their plugin systems; the other runtimes read one of
-the global skill roots below. Any skill that scans skill installs or agent session
-logs (`skill-cleaner`, `agent-transcript`) should align with this table.
+Claude Code, Codex, and Cursor through their plugin systems; the other runtimes
+read one of the global skill roots below. Any skill that scans skill installs or
+agent session logs (`skill-cleaner`, `agent-transcript`) should align with this
+table.
+
+## Native plugin manifests
+
+| Runtime | Manifest |
+| --- | --- |
+| Claude Code | `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` |
+| Codex | `.codex-plugin/plugin.json` |
+| Cursor | `.cursor-plugin/plugin.json` |
+
+## Installation routing
+
+When an agent receives this repository URL with a request to install the plugin or
+its skills, it should detect the current harness and use this order:
+
+| Runtime | Primary route | Update path |
+| --- | --- | --- |
+| Claude Code | Git marketplace, then `ossian-stack@ossian-stack` | Claude marketplace update |
+| Codex | Git marketplace, then `ossian-stack@ossian-stack` | `codex plugin marketplace upgrade` |
+| Cursor | Official Marketplace entry `ossian-stack` | Cursor-managed, reviewed Marketplace updates |
+| Gemini CLI | Shared skills installer, global Gemini scope | `npx skills update` |
+| Copilot CLI / app | Shared skills installer, global Copilot scope | `npx skills update` |
+| Windsurf | Shared skills installer, global Windsurf scope | `npx skills update` |
+| Antigravity CLI | Shared skills installer, global Antigravity scope | `npx skills update` |
+
+Cursor's direct GitHub install is a fallback for testing or for a user who accepts
+manual refreshes; it is not the managed personal-update path. A native manifest does
+not publish a Marketplace entry by itself. For skill-only runtimes, install the
+directories under `skills/`, never the checkout-local `.agents/skills/` directory.
 
 ## Skill install roots
 
-The repo's `skills/` is the single source of truth. Claude Code and Codex get it
-as a plugin — the runtime copies the tree into its own plugin cache:
+The repo's `skills/` is the single source of truth. Claude Code, Codex, and Cursor
+get it as a plugin — each runtime manages its own installed copy:
 
 | Runtime | Installed copy |
 | --- | --- |
 | Claude Code | `~/.claude/plugins/cache/ossian-stack/ossian-stack/<version>/skills` |
 | Codex | `~/.codex/plugins/cache/…` |
+| Cursor | Cursor-managed plugin copy (local testing: `~/.cursor/plugins/local/ossian-stack`) |
 
-The remaining runtimes have no plugin story and read these global roots directly.
-They are listed because auditing skills scan them, not because this repo installs
-into them:
+These are direct skill roots outside the native plugin installs. They are listed
+because auditing skills scan them, not because this repo installs into them:
 
 | Agent | Skill root | Notes |
 | --- | --- | --- |
 | Claude Code | `~/.claude/skills` | Claude Code only |
 | Codex | `~/.agents/skills` (also reads `~/.codex/skills`) | cross-tool standard |
 | Gemini CLI | `~/.agents/skills` | cross-tool standard |
-| Cursor | `~/.agents/skills` | cross-tool standard |
+| Cursor | `~/.agents/skills` | standalone skills; native plugin support is listed above |
 | Copilot CLI / app | `~/.copilot/skills` (native), `~/.agents/skills` (cross-tool) | Mac app global skills UI reads `~/.copilot/skills` |
 | Windsurf | `~/.agents/skills` | cross-tool standard |
 | Antigravity CLI | `~/.gemini/antigravity-cli/skills` | separate root |

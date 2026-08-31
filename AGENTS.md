@@ -50,10 +50,20 @@ Measured on Claude Code 2.1.250, Codex 0.151.0-alpha and Copilot CLI 1.0.80:
 Codex's `plugin marketplace upgrade` refreshes **git marketplaces only** and
 reports "No configured Git marketplaces to upgrade" for a local path, and Claude
 Code refuses to update a directory source whose version is unchanged, with no
-`--force` in that build. Pointing at GitHub restores auto-refresh on all three.
+`--force` in that build. Pointing at GitHub restores the normal refresh path for
+the native plugin hosts.
 
 The trade is that **pushing is what publishes**. An unpushed edit reaches no
 runtime, which is also why `bun run check` runs as a pre-commit hook.
+
+When an agent is handed this repository URL and asked to install the plugin or its
+skills, it must detect the current harness and prefer the native plugin route:
+Claude Code and Codex use their Git marketplace commands, and Cursor uses the
+official Marketplace entry `ossian-stack` when it is listed. A direct Cursor GitHub
+install is only a fallback with an explicit warning: it is currently pinned and does
+not provide managed personal updates. Gemini CLI, Copilot, Windsurf, and Antigravity
+use the shared skills installer against `skills/`; never install the checkout-local
+`.agents/skills/` tree as the public package.
 
 Plugin skills cache at session start, so invoking an edited skill in the session
 that edited it tests stale content — restart the session. To know which copy is
@@ -75,7 +85,7 @@ Full loop: `docs/plugin-workflow.md`.
   `sources.json`, or `README.md`. It is fast and offline. `.githooks/pre-commit`
   runs `bun run validate` automatically; enable it once per clone with
   `git config core.hooksPath .githooks`.
-- **No version field. The commit is the release.** All three manifests ship
+- **No version field. The commit is the release.** The native manifest files ship
   version-less on purpose, so every runtime keys its install off the git SHA and a
   push is all that publishes. Verified 2026-08-30: Claude Code adopts the short SHA
   as the version and updated `c7c72b25bc7c` → `463681f1b29a` on a plain commit;
@@ -90,11 +100,12 @@ Full loop: `docs/plugin-workflow.md`.
 
 ```
 skills/                 The plugin. One directory per skill, SKILL.md entry point
-hooks/                  hooks.json + scripts; read by Claude Code and Codex alike
+hooks/                  hooks.json + scripts; shared by Claude Code, Codex, and Cursor
 skills/sources.json     Upstream origin, pinned rev, refresh command per skill
 commands/               Slash commands (currently empty)
 .claude-plugin/         Claude Code plugin manifest + marketplace catalog
 .codex-plugin/          Codex plugin manifest, same skills/ tree
+.cursor-plugin/         Cursor plugin manifest, same skills/ tree
 bin/docs-list           Docs indexer — ships with the plugin
 scripts/                Repo-local dev tooling — NOT plugin surface
 .agents/skills/         Internal skills — loaded only in this checkout, never shipped
@@ -106,8 +117,9 @@ docs/                   Repo docs
 
 A change here touches one of three surfaces. Do not assume which without checking:
 
-- **Plugin content** — `skills/`, `commands/`, `bin/docs-list`, and the three
-  manifests. This is what reaches users; changes need a version bump.
+- **Plugin content** — `skills/`, `commands/`, `bin/docs-list`, and the native
+  manifests. This is what reaches users; changes need the relevant manifest and
+  documentation checks.
 - **Repo tooling** — `scripts/`, `package.json`, `.agents/skills/`. Runs only in a
   checkout. No version bump.
 - **Docs** — `docs/`, `README.md`, `AGENTS.md`.
@@ -144,8 +156,9 @@ Layout is identical in both tiers, so promoting a skill is a `git mv` plus a
   `scripts/check-upstream.sh --record <name>` to pin the new rev. Vendored skills
   also get a `skills/<name>/README.md` with the refresh one-liner.
 - **Adding a skill:** create `skills/<name>/SKILL.md`, add the `sources.json` entry,
-  add the name to the right group row in `README.md` and bump the two skill counts
-  (badge + "Skills at a glance" lead), and bump the manifests.
+  add the name to the right group row in `README.md` and update the two skill
+  counts (badge + "Skills at a glance" lead). The manifests discover `skills/`
+  automatically; keep their metadata aligned.
   `bun run validate` enforces the README inventory: every skill name appears in it
   exactly once, no unknown names, counts match `skills/`. Choosing the right group
   is a judgment call it will not make for you.

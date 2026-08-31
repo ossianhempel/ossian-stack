@@ -64,8 +64,9 @@ That sets `upstreamRev`, `upstreamCheckedAt`, and `lastSynced` in one go.
 2. Run its `refresh` command from the `ossian-stack` repo root.
 3. Review the diff — skip or preserve local overrides.
 4. Run `scripts/check-upstream.sh --record <name>` to pin the new rev.
-5. Bump the plugin `version` in all three manifests, commit, and refresh the
-   marketplace (see `docs/plugin-workflow.md`).
+5. Commit and push the change, then refresh the target plugin installation (see
+   `docs/plugin-workflow.md`). This repository's native manifests intentionally
+   omit `version`; the git commit is the release identifier.
 
 Standard pattern (also documented in per-skill `README.md` when vendored):
 

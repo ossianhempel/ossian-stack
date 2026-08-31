@@ -31,10 +31,23 @@ Present this as a short table before proposing anything.
 
 ## 2. Install
 
-Register this repository as a marketplace and install the plugin, through
-whatever interface each runtime exposes for that. On the authoring machine,
-register the **local clone** rather than the remote, so an edit is live after a
-marketplace refresh instead of after a push.
+Detect the current runtime before installing. Prefer the native plugin route when
+one exists, and use the GitHub repository rather than a local directory for normal
+user installs so the runtime can refresh it.
+
+- **Claude Code:** add `ossianhempel/ossian-stack` as a Git marketplace and install
+  `ossian-stack@ossian-stack`.
+- **Codex:** add `ossianhempel/ossian-stack` as a Git marketplace and install
+  `ossian-stack@ossian-stack`.
+- **Cursor:** install the official Marketplace entry `ossian-stack` at user scope.
+  If it is not listed, explain that a direct GitHub install is pinned and does not
+  provide managed personal updates; only use the direct URL if the user accepts
+  that limitation. Local plugin copies are for testing only.
+- **Gemini CLI, Copilot, Windsurf, and Antigravity:** use the shared skills
+  installer against this repository, targeting the current runtime's global skill
+  scope. Install directories under `skills/` only; `.agents/skills/` is internal
+  checkout content. Tell the user that these runtimes refresh through the skills
+  installer rather than a native plugin marketplace.
 
 Install for every runtime found, not just the one you are running in.
 

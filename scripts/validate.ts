@@ -5,7 +5,7 @@
  * Run: bun run validate
  *
  * Checks (all deterministic, no network):
- *   1. The three manifests parse, agree on name, and declare no version
+ *   1. The native manifests parse, agree on name, and declare no version
  *      (the commit SHA drives updates; see the block below).
  *   2. Every skills/<name>/ has a SKILL.md with name + description frontmatter,
  *      and the frontmatter name matches the directory name. Invocation policy
@@ -42,6 +42,7 @@ const readJson = (p: string) => {
 const claudePlugin = readJson(".claude-plugin/plugin.json");
 const marketplace = readJson(".claude-plugin/marketplace.json");
 const codexPlugin = readJson(".codex-plugin/plugin.json");
+const cursorPlugin = readJson(".cursor-plugin/plugin.json");
 
 const marketplaceEntry = marketplace?.plugins?.find((p: any) => p.name === "ossian-stack");
 if (marketplace && !marketplaceEntry) fail(".claude-plugin/marketplace.json: no plugin entry named ossian-stack");
@@ -57,6 +58,7 @@ const versioned = Object.entries({
   ".claude-plugin/plugin.json": claudePlugin?.version,
   ".claude-plugin/marketplace.json": marketplaceEntry?.version,
   ".codex-plugin/plugin.json": codexPlugin?.version,
+  ".cursor-plugin/plugin.json": cursorPlugin?.version,
 }).filter(([, v]) => v !== undefined);
 for (const [file, v] of versioned) {
   fail(
@@ -71,8 +73,12 @@ for (const [file, name] of [
   [".claude-plugin/plugin.json", claudePlugin?.name],
   [".claude-plugin/marketplace.json", marketplaceEntry?.name],
   [".codex-plugin/plugin.json", codexPlugin?.name],
+  [".cursor-plugin/plugin.json", cursorPlugin?.name],
 ] as const) {
   if (name !== "ossian-stack") fail(`${file}: name is ${name ?? "(missing)"}, expected ossian-stack`);
+}
+if (cursorPlugin && cursorPlugin.skills !== "./skills/") {
+  fail(`.cursor-plugin/plugin.json: skills is ${JSON.stringify(cursorPlugin.skills)}, expected ./skills/`);
 }
 
 // ------------------------------------------------------------------ 2. skills

@@ -1,28 +1,70 @@
 # ossian-stack
 
-Ossian's personal agent skills, packaged as one plugin for Claude Code and Codex.
+Ossian's personal agent skills, packaged as one plugin for Claude Code, Codex, and Cursor.
 
 ![skills](https://img.shields.io/badge/skills-51-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
-![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex-8957e5)
+![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-8957e5)
 
 ## Install
 
-**Claude Code**
+If a user gives an agent this repository URL and says “install the plugin” or
+“install the skills”, detect the current harness and follow this routing. Prefer
+the native plugin path whenever the harness supports one. Do not silently install
+only the `skills/` directory when a native plugin path is available.
+
+**Claude Code** — register the GitHub marketplace, then install the plugin:
 
 ```
 /plugin marketplace add ossianhempel/ossian-stack
 /plugin install ossian-stack@ossian-stack
 ```
 
-**Codex**
+**Codex** — register the Git marketplace, then install the named plugin:
 
 ```
 codex plugin marketplace add ossianhempel/ossian-stack
+codex plugin add ossian-stack@ossian-stack
 ```
 
-Skills are then addressed as `ossian-stack:<name>` — or just described in plain
-language, since each one carries its own trigger description.
+**Cursor** — use the official Marketplace entry when it exists:
+
+```
+/add-plugin ossian-stack
+```
+
+That is the native install path and the one that gives personal users Cursor-managed
+updates. Search for `ossian-stack` in Customize → Plugins if the slash command does
+not resolve it. A `.cursor-plugin/plugin.json` file alone does not publish a public
+Marketplace entry. If the entry is not listed yet, tell the user that a direct GitHub
+install is only a temporary option and is currently pinned to its initial commit;
+do not present it as an auto-updating install:
+
+```
+/add-plugin https://github.com/ossianhempel/ossian-stack
+```
+
+For Gemini CLI, Copilot, Windsurf, and Antigravity, there is no native plugin
+manifest in this repository. Install the public `skills/` tree with the shared
+skills installer, targeting the current harness and global scope:
+
+```
+npx skills add https://github.com/ossianhempel/ossian-stack \
+  --global --agent <current-harness> --skill '*' --yes
+```
+
+Use `npx skills update` for later skill refreshes. Do not install `.agents/skills/`;
+that directory is checkout-local maintenance content. If the shared installer does
+not know the current harness, follow that harness's documented global skill root
+and install only the directories under `skills/`.
+
+For local Cursor testing, copy the repository to
+`~/.cursor/plugins/local/ossian-stack`, reload Cursor, and open Customize → Plugins.
+Local copies are development installs and do not update from GitHub.
+
+Claude Code and Codex address skills as `ossian-stack:<name>` — or you can just
+describe the task in plain language. Cursor exposes the same skills by their
+individual names and trigger descriptions.
 
 **Authoring machine.** Register the GitHub repo here too, rather than the local
 clone — a local-directory marketplace is what disables automatic updates. The
@@ -65,11 +107,12 @@ conditions — that is the one place a description is maintained.
 | --- | --- |
 | `skills/` | **The plugin.** One directory per skill, `SKILL.md` entry point |
 | `skills/sources.json` | Upstream origin, pinned rev, and refresh command for every skill |
-| `hooks/` | `hooks.json` + scripts; Claude Code and Codex both read this format |
+| `hooks/` | `hooks.json` + scripts; Claude Code, Codex, and Cursor read this format |
 | `commands/` | Slash commands (currently empty) |
 | `.claude-plugin/plugin.json` | Claude Code plugin manifest |
 | `.claude-plugin/marketplace.json` | Marketplace manifest (this repo hosts itself) |
 | `.codex-plugin/plugin.json` | Codex plugin manifest, same `skills/` tree |
+| `.cursor-plugin/plugin.json` | Cursor plugin manifest, same `skills/` tree |
 | `bin/docs-list` | Docs indexer — lists `./docs` for whatever repo you run it in |
 | `.agents/skills/` | Internal skills — loaded only in this checkout, never shipped |
 | `.claude/skills` | Symlink to `.agents/skills` so Claude Code sees the same tier |
@@ -98,7 +141,8 @@ refreshed, is in [`docs/plugin-workflow.md`](docs/plugin-workflow.md).
   `name` matching the directory.
 - Every skill needs a `skills/sources.json` entry; vendored ones also get a
   `README.md` carrying the refresh one-liner.
-- Bump `version` in all three manifests together — `bun run validate` enforces it.
+- The native manifests intentionally omit `version`; the git commit is the release
+  identifier, and Cursor treats its manifest version as optional.
 - Skills are self-contained: never reference a file outside the skill's own directory.
 - Skills that only make sense while working *on this repo* go in `.agents/skills/`,
   not `skills/`. They ship with nothing and need no `sources.json` entry.
@@ -108,9 +152,9 @@ refreshed, is in [`docs/plugin-workflow.md`](docs/plugin-workflow.md).
 
 ## Limitations
 
-- **Claude Code and Codex only.** Every other runtime (Cursor, Gemini CLI, Copilot,
-  Windsurf, Antigravity) reads a global skills directory and has no plugin story —
-  see [`docs/supported-agents.md`](docs/supported-agents.md).
+- **Native plugin hosts.** Claude Code, Codex, and Cursor have native plugin
+  manifests. Gemini CLI, Copilot, Windsurf, and Antigravity consume the shared
+  skill directories instead — see [`docs/supported-agents.md`](docs/supported-agents.md).
 - **Internal skills are checkout-local.** They load for any runtime that opens this
   repo and reach no one else.
 - **Vendored skills are not polled.** They drift until `bun run check:upstream`
