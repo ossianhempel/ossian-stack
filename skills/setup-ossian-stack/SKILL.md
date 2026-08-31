@@ -1,13 +1,17 @@
 ---
 name: setup-ossian-stack
-description: "Install this plugin on a machine and migrate off whatever preceded it: register the marketplace, install for each runtime present, retire superseded plugins and stale skill symlinks, approve the session-start hook where a runtime gates it, and report which optional CLIs are missing and which skills degrade without them. Use for /setup-ossian-stack, set up my skills, or migrate to ossian-stack."
+description: "Configure a machine and project after this plugin is installed: retire superseded plugins and stale skill symlinks, approve the session-start hook where a runtime gates it, check the project-owned documents and structure the skills use, configure the issue tracker and triage labels the triage skills read, and report which optional CLIs are missing and which skills degrade without them. Use for /setup-ossian-stack, configure the plugin's prerequisites, or migrate an existing installation."
 disable-model-invocation: true
 ---
 
-# Setup ossian-stack
+# Set up ossian-stack
 
-Get this plugin installed, get what it replaces out of the way, and say plainly
-what still will not work.
+This skill assumes `ossian-stack` is already installed and loaded. Configure the
+runtimes and current project for the plugin's skills, get what it replaces out of
+the way, and say plainly what still will not work.
+
+If the plugin is not installed, stop and use the repository's harness-specific
+installation instructions first. This skill cannot bootstrap itself.
 
 Prompt-driven, not a script: explore first, show the user what you found, confirm,
 then act. **Every step that removes something waits for a yes.**
@@ -18,7 +22,8 @@ Report what is actually there. Do not assume any of it.
 
 - **Which runtimes are on this machine**, and where each keeps plugin state.
 - **Which plugins are registered and enabled** in each, and their versions.
-- **Whether this plugin is already installed**, and at which version.
+- **Whether this plugin is loaded and enabled** in each detected runtime, and at
+  which version.
 - **Skill directories the user maintains by hand** — a global skills folder full
   of symlinks into another checkout is the pattern this plugin exists to replace,
   and it will keep shadowing the installed copy until it is cleared.
@@ -29,30 +34,13 @@ Report what is actually there. Do not assume any of it.
 
 Present this as a short table before proposing anything.
 
-## 2. Install
+## 2. Confirm plugin readiness
 
-Detect the current runtime before installing. Prefer the native plugin route when
-one exists, and use the GitHub repository rather than a local directory for normal
-user installs so the runtime can refresh it.
-
-- **Claude Code:** add `ossianhempel/ossian-stack` as a Git marketplace and install
-  `ossian-stack@ossian-stack`.
-- **Codex:** add `ossianhempel/ossian-stack` as a Git marketplace and install
-  `ossian-stack@ossian-stack`.
-- **Cursor:** add this repository as a Git marketplace with
-  `cursor-agent plugin marketplace add <repo-url>`, then use Cursor's `/plugin`
-  Marketplace UI to install `ossian-stack` at user scope. The CLI can refresh the
-  catalog with `cursor-agent plugin marketplace update ossian-stack`, but current
-  Cursor builds do not expose a non-interactive plugin-install subcommand. Do not
-  substitute `/add-plugin <repo-url>`: that direct GitHub import is pinned. Local
-  plugin copies are for testing only.
-- **Gemini CLI, Copilot, Windsurf, and Antigravity:** use the shared skills
-  installer against this repository, targeting the current runtime's global skill
-  scope. Install directories under `skills/` only; `.agents/skills/` is internal
-  checkout content. Tell the user that these runtimes refresh through the skills
-  installer rather than a native plugin marketplace.
-
-Install for every runtime found, not just the one you are running in.
+Do not install the plugin in this step. If this skill is loaded, the current
+runtime already has it. Confirm that it is enabled and identify the loaded copy.
+For other runtimes, report whether a usable copy is present. If one is missing,
+point the user to the repository's harness-specific installation instructions;
+do not bootstrap that runtime from this skill.
 
 ## 3. Retire what it replaces
 
