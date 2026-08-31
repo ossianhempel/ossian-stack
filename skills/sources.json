@@ -117,6 +117,10 @@
       "upstreamRev": "034471e2ce1c72f5884890befa8afc2b2a961c2f",
       "upstreamCheckedAt": "2026-08-27"
     },
+    "codify-conventions": {
+      "origin": "local",
+      "notes": "Authored 2026-08-31 via the skill-creator eval loop (iteration-1: with-skill 100% vs baseline 73.3%). Two modes — audit de-facto conventions or grill for declared ones — converging on a lazily-created CONVENTIONS.md with enforced-by-tooling and judgment-call rule classes; wires enforcement itself (no dependency on setup-pre-commit)."
+    },
     "continual-learning": {
       "origin": "adapted",
       "repo": "https://github.com/cursor/plugins",
@@ -364,6 +368,16 @@
       "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
       "upstreamCheckedAt": "2026-08-29"
     },
+    "resolve-pr-feedback": {
+      "origin": "adapted",
+      "repo": "https://github.com/EveryInc/compound-engineering-plugin",
+      "path": "skills/ce-resolve-pr-feedback",
+      "refresh": "npx skills add EveryInc/compound-engineering-plugin -y --skill ce-resolve-pr-feedback && echo 'hand-merge into skills/resolve-pr-feedback/; this copy is renamed and adapted'",
+      "notes": "Adapted from EveryInc's GitHub PR feedback resolver at upstream commit 0e758b60b35cec165470443fde5acf60db8bdae9. Renamed the skill and genericized references to the upstream orchestrator names and temporary-file prefixes. Bundles the referenced scripts and documents so the shipped skill is self-contained; merge by hand on refresh.",
+      "upstreamPath": "skills/ce-resolve-pr-feedback",
+      "upstreamRev": "0e758b60b35cec165470443fde5acf60db8bdae9",
+      "upstreamCheckedAt": "2026-08-30"
+    },
     "revenuecat-api": {
       "origin": "companion",
       "repo": "https://github.com/RevenueCat/docs",
@@ -403,6 +417,36 @@
       "origin": "companion",
       "repo": "https://github.com/ossianhempel/things3-cli",
       "notes": "Documents things3-cli; lives in ~/Developer/things3-cli."
+    },
+    "to-spec": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/to-spec",
+      "refresh": "npx skills add mattpocock/skills -y --skill to-spec && cp -R .agents/skills/to-spec/* skills/to-spec/ && trash .agents/skills/to-spec && echo 'adapted: re-point /setup-matt-pocock-skills at /setup-ossian-stack — diff by hand'",
+      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: the setup-skill pointer rewritten to /setup-ossian-stack. Everything else is upstream verbatim.",
+      "upstreamPath": "skills/engineering/to-spec",
+      "upstreamRev": "v1.2.3",
+      "upstreamCheckedAt": "2026-08-31"
+    },
+    "to-tickets": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/to-tickets",
+      "refresh": "npx skills add mattpocock/skills -y --skill to-tickets && cp -R .agents/skills/to-tickets/* skills/to-tickets/ && trash .agents/skills/to-tickets && echo 'adapted: re-point both /setup-matt-pocock-skills mentions at /setup-ossian-stack — diff by hand'",
+      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: both setup-skill pointers rewritten to /setup-ossian-stack. Everything else is upstream verbatim.",
+      "upstreamPath": "skills/engineering/to-tickets",
+      "upstreamRev": "v1.2.3",
+      "upstreamCheckedAt": "2026-08-31"
+    },
+    "triage": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/triage",
+      "refresh": "npx skills add mattpocock/skills -y --skill triage && cp -R .agents/skills/triage/* skills/triage/ && trash .agents/skills/triage && echo 'adapted: re-point /setup-matt-pocock-skills at /setup-ossian-stack, grill step described inline (no /grilling sibling), CONTEXT.md converted to GLOSSARY.md — diff by hand'",
+      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: setup pointer rewritten to /setup-ossian-stack; the grilling reference (a sibling this plugin does not ship) replaced with an inline description of the grill loop; CONTEXT.md converted to GLOSSARY.md per this repo's vocabulary convention.",
+      "upstreamPath": "skills/engineering/triage",
+      "upstreamRev": "v1.2.3",
+      "upstreamCheckedAt": "2026-08-31"
     },
     "unslop": {
       "origin": "adapted",

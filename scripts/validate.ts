@@ -272,6 +272,7 @@ const NON_SKILL_TOKENS = new Set([
   "watch-pr", "convex-test",
   // issue-tracker labels
   "incident-followup", "perf-regression",
+  "needs-triage", "needs-info", "ready-for-agent", "ready-for-human", "wontfix",
   // named in order to forbid it, not to route to it
   "skill-test",
   // named things that are not skills

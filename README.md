@@ -2,7 +2,7 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code, Codex, and Cursor.
 
-![skills](https://img.shields.io/badge/skills-51-blue)
+![skills](https://img.shields.io/badge/skills-56-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-8957e5)
 
@@ -87,7 +87,7 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-51 skills, grouped by what they are for.
+56 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
@@ -115,6 +115,7 @@ conditions — that is the one place a description is maintained.
 | `.claude-plugin/marketplace.json` | Marketplace manifest (this repo hosts itself) |
 | `.codex-plugin/plugin.json` | Codex plugin manifest, same `skills/` tree |
 | `.cursor-plugin/plugin.json` | Cursor plugin manifest, same `skills/` tree |
+| `.cursor-plugin/marketplace.json` | Cursor Git marketplace catalog |
 | `bin/docs-list` | Docs indexer — lists `./docs` for whatever repo you run it in |
 | `.agents/skills/` | Internal skills — loaded only in this checkout, never shipped |
 | `.claude/skills` | Symlink to `.agents/skills` so Claude Code sees the same tier |

@@ -111,7 +111,30 @@ created lazily on purpose; pre-creating them is a mistake**, because an empty
 
 Report what is missing and who creates it. Create nothing in this step.
 
-## 7. Verify
+## 7. Issue tracker and triage labels
+
+`triage`, `to-tickets`, and `to-spec` read per-project config that, unlike the
+files above, is **not created lazily** — an unconfigured tracker fails on first
+use with no hint where the setting lives. Check for:
+
+- `docs/agents/issue-tracker.md` — where issues live: GitHub (via `gh`), GitLab
+  (via `glab`), local markdown under `.scratch/`, or a described workflow
+  (Linear, Jira, …). Also records whether external PRs are a request surface.
+- `docs/agents/triage-labels.md` — the mapping from the five canonical triage
+  roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
+  `wontfix`) to the actual label strings the tracker uses.
+
+If both exist, sanity-check them against the repo: a `git remote` pointing at
+GitHub with a GitLab tracker config is a mismatch worth surfacing. If either is
+missing, ask where issues actually live — one question, recommended answer
+first — and write the file after they confirm. Keep both short; they are
+configuration the skills parse, not prose. Labels default to the canonical role
+names unless the tracker already uses different strings.
+
+Domain docs (`GLOSSARY.md`, `docs/adr/`) stay lazy — that is the section above,
+not this one.
+
+## 8. Verify
 
 Confirm the installed copy is the one that answers. A skill list that still shows
 the old source means step 3 did not finish, or the runtime needs a restart —

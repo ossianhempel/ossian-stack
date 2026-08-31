@@ -1,0 +1,48 @@
+{
+  "skill_name": "codify-conventions",
+  "evals": [
+    {
+      "id": 1,
+      "name": "hook-formatter",
+      "prompt": "Our team keeps forgetting to run the formatter before pushing — set something up so it's impossible to forget",
+      "expected_output": "The existing Prettier setup gets wired into a commit-time hook (not replaced by a different formatter), the repo is left in a state where an unformatted commit is actually blocked or auto-fixed, and the user's existing format config is respected. No empty conventions file invented.",
+      "files": ["fixtures/eval1"],
+      "assertions": [
+        { "id": "prettier-not-replaced", "text": "The existing Prettier setup (.prettierrc, format script) is respected; no alternative formatter was introduced." },
+        { "id": "commit-time-enforcement-wired", "text": "Commit-time (or push-time backstop) enforcement exists: a git hook checks formatting on staged files and core.hooksPath (or equivalent wiring) is enabled/documented." },
+        { "id": "blocking-verified-with-evidence", "text": "summary.md documents a verification where unformatted content was actually blocked or auto-fixed, with commands and exit status." },
+        { "id": "degradation-documented", "text": "Behavior when prettier is missing or the hook is bypassed (--no-verify) is stated somewhere visible, not silently ignored." },
+        { "id": "no-empty-conventions-artifact", "text": "When any rule is codified, a CONVENTIONS.md exists and contains at least one concrete, checkable rule — never an empty or placeholder file." },
+        { "id": "output-integrity", "text": "Every file the run created or modified is valid (parses as JSON/YAML where applicable); committing corrupted config files fails this assertion." }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "audit-conventions",
+      "prompt": "Audit this repo and tell me what conventions we already follow, then enforce them",
+      "expected_output": "A short audit table naming the planted de-facto conventions (kebab-case files, colocated *.test.ts, named exports, SyncError/error-message pattern, conventional commits), each labeled enforceable vs judgment call, followed by wiring for the enforceable subset only after presenting findings — not a generic style-guide dump of rules the code does not follow.",
+      "files": ["fixtures/eval2"],
+      "assertions": [
+        { "id": "audit-table-with-evidence", "text": "Findings are presented as a table or structured list with evidence (files/commits) per pattern." },
+        { "id": "planted-conventions-found", "text": "At least 3 of the 5 planted conventions identified: (a) 'failed to <operation>' error-message pattern / SyncError, (b) kebab-case file naming, (c) colocated *.test.ts tests, (d) named exports / node:test imports, (e) Conventional Commits." },
+        { "id": "no-false-conventions", "text": "No pattern the code does NOT follow is presented as an existing convention; new rules are explicitly marked as new." },
+        { "id": "enforcement-verified", "text": "Enforcement is verified to block a deliberate violation, with commands and exit status in summary.md." },
+        { "id": "judgment-rules-kept-visible", "text": "At least one unenforceable or deliberately-unwired convention is recorded somewhere user-visible (artifact or summary), not dropped silently." }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "add-rule-any",
+      "prompt": "Add a rule: no `any` in TypeScript files, catch it at commit time",
+      "expected_output": "Extends the existing setup rather than rebuilding it: one new line in CONVENTIONS.md under 'Enforced by tooling', the `: any` check added to the existing .githooks/pre-commit pipeline, and verification that the hook actually blocks a commit containing `: any` (src/app.ts has one waiting). Existing todo-guard check still works.",
+      "files": ["fixtures/eval3"],
+      "assertions": [
+        { "id": "extends-not-replaces", "text": "The existing .githooks/pre-commit and its TODO check remain present and functional; the new check is added alongside." },
+        { "id": "artifact-rule-added", "text": "CONVENTIONS.md gains the no-`any` rule under the enforced-by-tooling section." },
+        { "id": "hook-blocks-any-verified", "text": "summary.md documents a real test where staging a file containing `: any` (or `as any`) was blocked with exit 1." },
+        { "id": "existing-guard-still-fires", "text": "Verification shows the TODO check still blocks (or passes clean) after the change." },
+        { "id": "grandfathering-decision", "text": "The pre-existing `: any` in src/app.ts is addressed explicitly (grandfathered, fixed, or flagged), not ignored." }
+      ]
+    }
+  ]
+}
