@@ -162,10 +162,13 @@ Layout is identical in both tiers, so promoting a skill is a `git mv` plus a
   the entry's `refresh` command, diff (adapted skills are merge-by-hand), then
   `scripts/check-upstream.sh --record <name>` to pin the new rev. Vendored skills
   also get a `skills/<name>/README.md` with the refresh one-liner.
-- **Adding a skill:** create `skills/<name>/SKILL.md`, add the `sources.json` entry,
-  add the name to the right group row in `README.md` and update the two skill
-  counts (badge + "Skills at a glance" lead). The manifests discover `skills/`
-  automatically; keep their metadata aligned.
+- **Adding a skill:** create `skills/<name>/SKILL.md`, add `agents/openai.yaml`
+  with `interface.display_name` (Title Case, acronyms restored) and
+  `short_description` (25–64 chars — Codex/ChatGPT UI metadata; see
+  `skills/skill-creator/references/openai-yaml.md`), add the `sources.json`
+  entry, add the name to the right group row in `README.md` and update the two
+  skill counts (badge + "Skills at a glance" lead). The manifests discover
+  `skills/` automatically; keep their metadata aligned.
   `bun run validate` enforces the README inventory: every skill name appears in it
   exactly once, no unknown names, counts match `skills/`. Choosing the right group
   is a judgment call it will not make for you.

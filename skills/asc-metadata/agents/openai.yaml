@@ -1,0 +1,3 @@
+interface:
+  display_name: "ASC Metadata"
+  short_description: "Audit, localize, and write App Store listing metadata"

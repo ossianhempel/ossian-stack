@@ -11,7 +11,7 @@
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
       "path": "asc-aso-audit, asc-localize-metadata, asc-whats-new-writer",
-      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh \u2014 diff reference/ against upstream skills manually.",
+      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh \u2014 diff reference/ against upstream skills manually. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
       "upstreamCheckedAt": "2026-08-27"
@@ -20,7 +20,7 @@
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
       "path": "asc-ppp-pricing, asc-revenuecat-catalog-sync",
-      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh.",
+      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
       "upstreamCheckedAt": "2026-08-27"
@@ -29,7 +29,7 @@
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
       "path": "asc-cli-usage, asc-xcode-build, asc-release-flow, asc-workflow",
-      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh.",
+      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
       "upstreamCheckedAt": "2026-08-27"
@@ -43,7 +43,7 @@
       "repo": "https://github.com/openclaw/agent-skills",
       "path": "skills/autoreview",
       "refresh": "npx skills add openclaw/agent-skills -y --skill autoreview && cp -R .agents/skills/autoreview/* skills/autoreview/ && trash .agents/skills/autoreview",
-      "notes": "Local overrides possible. Diff before overwriting customizations.",
+      "notes": "Local overrides possible. Diff before overwriting customizations. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "skills/autoreview",
       "upstreamRev": "1b52afd0954511b8bfdf680361b1f4bed69f1355",
       "upstreamCheckedAt": "2026-08-27"
@@ -53,7 +53,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/poteto-mode",
       "refresh": "npx skills add cursor/plugins -y --skill poteto-mode && echo 'hand-merge playbooks/babysit.md, references/bugbot-triage.md, scripts/ from .agents/skills/poteto-mode/ then: trash .agents/skills/poteto-mode'",
-      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/babysit.md into a standalone skill, with references/bugbot-triage.md and the scripts/watch-pr toolchain vendored alongside. Adapted: sibling paths rewritten to this directory, the three playbooks/shipping.md routes replaced with stop-and-hand-back, the watcher invocation anchored via SKILL_DIR, and /loop described as a host capability. Ships Bun-only TypeScript (scripts/watch-pr), the sole exception to the runtime rule in AGENTS.md. Merge by hand on refresh; never overwrite.",
+      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/babysit.md into a standalone skill, with references/bugbot-triage.md and the scripts/watch-pr toolchain vendored alongside. Adapted: sibling paths rewritten to this directory, the three playbooks/shipping.md routes replaced with stop-and-hand-back, the watcher invocation anchored via SKILL_DIR, and /loop described as a host capability. Ships Bun-only TypeScript (scripts/watch-pr), the sole exception to the runtime rule in AGENTS.md. Merge by hand on refresh; never overwrite. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "pstack/skills/poteto-mode",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
@@ -83,7 +83,7 @@
       "path": "skills/core/clerk-cli",
       "refresh": "npx skills add clerk/skills -y --skill clerk-cli && cp -R .agents/skills/clerk-cli/* skills/clerk-cli/ && trash .agents/skills/clerk-cli",
       "lastSynced": "2026-07-26",
-      "notes": "Also upgrade global CLI: npm i -g clerk@latest. Adapted 2026-09-01 so package-runner fallback remains the bound invocation for prerequisites and later commands instead of reverting to a missing bare clerk binary; merge by hand on refresh.",
+      "notes": "Also upgrade global CLI: npm i -g clerk@latest. Adapted 2026-09-01 so package-runner fallback remains the bound invocation for prerequisites and later commands instead of reverting to a missing bare clerk binary; merge by hand on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
@@ -119,7 +119,7 @@
     },
     "codify-conventions": {
       "origin": "local",
-      "notes": "Authored 2026-08-31 via the skill-creator eval loop (iteration-1: with-skill 100% vs baseline 73.3%). Two modes — audit de-facto conventions or grill for declared ones — converging on a lazily-created CONVENTIONS.md with enforced-by-tooling and judgment-call rule classes; wires enforcement itself (no dependency on setup-pre-commit)."
+      "notes": "Authored 2026-08-31 via the skill-creator eval loop (iteration-1: with-skill 100% vs baseline 73.3%). Two modes — audit de-facto conventions or grill for declared ones — converging on a lazily-created CONVENTIONS.md with enforced-by-tooling and judgment-call rule classes; wires enforcement itself (no dependency on setup-pre-commit). Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
     },
     "continual-learning": {
       "origin": "adapted",
@@ -173,7 +173,7 @@
       "origin": "vendored",
       "repo": "https://github.com/zarazhangrui/frontend-slides",
       "path": "SKILL.md, STYLE_PRESETS.md, animation-patterns.md, html-template.md, viewport-base.css, scripts/, bold-template-pack/",
-      "notes": "Repo ships the same skill twice (root and plugins/frontend-slides/skills/frontend-slides/) \u2014 vendored from the root copy. No refresh script; diff upstream root manually.",
+      "notes": "Repo ships the same skill twice (root and plugins/frontend-slides/skills/frontend-slides/) \u2014 vendored from the root copy. No refresh script; diff upstream root manually. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "9906a34d640d2111f724544cbc50f7f130569ae1",
       "upstreamCheckedAt": "2026-08-27"
@@ -218,7 +218,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/how",
       "refresh": "npx skills add cursor/plugins -y --skill how && cp -R .agents/skills/how/. skills/how/ && trash .agents/skills/how",
-      "notes": "From Cursor's pstack plugin. Explains how a subsystem works via parallel explorers plus an explainer; can critique architecture. Companion to `why`; both are invoked by `teach`.",
+      "notes": "From Cursor's pstack plugin. Explains how a subsystem works via parallel explorers plus an explainer; can critique architecture. Companion to `why`; both are invoked by `teach`. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "pstack/skills/how",
       "upstreamRev": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
       "upstreamCheckedAt": "2026-08-28",
@@ -229,7 +229,7 @@
       "repo": "https://github.com/ParthJadhav/ios-marketing-capture",
       "path": "skills/ios-marketing-capture",
       "refresh": "npx skills add ParthJadhav/ios-marketing-capture -y --skill ios-marketing-capture && cp -R .agents/skills/ios-marketing-capture/* skills/ios-marketing-capture/ && trash .agents/skills/ios-marketing-capture",
-      "notes": "Added bc43428 from ParthJadhav; local customizations may differ.",
+      "notes": "Added bc43428 from ParthJadhav; local customizations may differ. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "00ae3cbe2250f6350b66aa23e24ba5883221836c",
       "upstreamCheckedAt": "2026-08-27"
@@ -241,7 +241,7 @@
     "onboarding-flow": {
       "origin": "adapted",
       "repo": "https://github.com/adamlyttleapps/claude-skill-app-onboarding-questionnaire",
-      "notes": "MIT-adapted (SKILL.md:518); heavily customized for Ossian's stack.",
+      "notes": "MIT-adapted (SKILL.md:518); heavily customized for Ossian's stack. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "5bc4786d80f2c23de60b3ba02773e919ed8fd091",
       "upstreamCheckedAt": "2026-08-27"
@@ -249,7 +249,7 @@
     "one-password": {
       "origin": "companion",
       "repo": "https://developer.1password.com/docs/cli",
-      "notes": "Documents op CLI usage patterns for this environment."
+      "notes": "Documents op CLI usage patterns for this environment. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
     },
     "online-writing": {
       "origin": "local",
@@ -258,7 +258,7 @@
     "post-queue-cli": {
       "origin": "companion",
       "repo": "https://github.com/ossianhempel/post-queue",
-      "notes": "Documents post-queue package.json scripts; track repo when commands change."
+      "notes": "Documents post-queue package.json scripts; track repo when commands change. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
     },
     "principle-encode-lessons-in-structure": {
       "origin": "vendored",
@@ -349,7 +349,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/poteto-mode",
       "refresh": "npx skills add cursor/plugins -y --skill poteto-mode && echo 'hand-merge playbooks/refactoring.md from .agents/skills/poteto-mode/ then: trash .agents/skills/poteto-mode'",
-      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/refactoring.md into a standalone skill. Adapted: the playbook cites twelve sibling skills this plugin does not ship, so each citation was replaced with the principle it stood for, stated inline. Three were restored on 2026-08-29 once we vendored them (principle-prove-it-works, principle-redesign-from-first-principles, principle-exhaust-the-design-space); the 'how' reference is kept since we ship it; a hardcoded default refactoring model was dropped. Boundary with simplify-code: that one makes settled code readable in place, this one moves modules, APIs, and call graphs. Merge by hand on refresh; never overwrite.",
+      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/refactoring.md into a standalone skill. Adapted: the playbook cites twelve sibling skills this plugin does not ship, so each citation was replaced with the principle it stood for, stated inline. Three were restored on 2026-08-29 once we vendored them (principle-prove-it-works, principle-redesign-from-first-principles, principle-exhaust-the-design-space); the 'how' reference is kept since we ship it; a hardcoded default refactoring model was dropped. Boundary with simplify-code: that one makes settled code readable in place, this one moves modules, APIs, and call graphs. Merge by hand on refresh; never overwrite. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "pstack/skills/poteto-mode",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
@@ -373,7 +373,7 @@
       "repo": "https://github.com/EveryInc/compound-engineering-plugin",
       "path": "skills/ce-resolve-pr-feedback",
       "refresh": "npx skills add EveryInc/compound-engineering-plugin -y --skill ce-resolve-pr-feedback && echo 'hand-merge into skills/resolve-pr-feedback/; this copy is renamed and adapted'",
-      "notes": "Adapted from EveryInc's GitHub PR feedback resolver at upstream commit 0e758b60b35cec165470443fde5acf60db8bdae9. Renamed the skill and genericized references to the upstream orchestrator names and temporary-file prefixes. Bundles the referenced scripts and documents so the shipped skill is self-contained; merge by hand on refresh.",
+      "notes": "Adapted from EveryInc's GitHub PR feedback resolver at upstream commit 0e758b60b35cec165470443fde5acf60db8bdae9. Renamed the skill and genericized references to the upstream orchestrator names and temporary-file prefixes. Bundles the referenced scripts and documents so the shipped skill is self-contained; merge by hand on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "skills/ce-resolve-pr-feedback",
       "upstreamRev": "0e758b60b35cec165470443fde5acf60db8bdae9",
       "upstreamCheckedAt": "2026-08-30"
@@ -397,7 +397,7 @@
       "repo": "https://github.com/anthropics/skills",
       "path": "skills/skill-creator",
       "refresh": "npx skills add anthropics/skills -y --skill skill-creator && cp -R .agents/skills/skill-creator/* skills/skill-creator/ && trash .agents/skills/skill-creator",
-      "notes": "Updated from Anthropic upstream (dd63a74); local eval harness may differ.",
+      "notes": "Updated from Anthropic upstream (dd63a74); local eval harness may differ. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "skills/skill-creator",
       "upstreamRev": "b9e19e6f44773509fbdd7001d77ff41a49a486c1",
       "upstreamCheckedAt": "2026-08-27"
@@ -416,7 +416,7 @@
     "things": {
       "origin": "companion",
       "repo": "https://github.com/ossianhempel/things3-cli",
-      "notes": "Documents things3-cli; lives in ~/Developer/things3-cli."
+      "notes": "Documents things3-cli; lives in ~/Developer/things3-cli. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
     },
     "to-spec": {
       "origin": "adapted",
@@ -453,7 +453,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/unslop",
       "refresh": "npx skills add cursor/plugins -y --skill unslop && cp -R .agents/skills/unslop/. skills/unslop/ && trash .agents/skills/unslop",
-      "notes": "From Cursor's pstack plugin. Adapted 2026-08-28 by merging in the former local ai-slop-reviewer (bundled linter + checklist). Upstream rules 1-31 kept verbatim; local additions continue at 32. Merge by hand on refresh.",
+      "notes": "From Cursor's pstack plugin. Adapted 2026-08-28 by merging in the former local ai-slop-reviewer (bundled linter + checklist). Upstream rules 1-31 kept verbatim; local additions continue at 32. Merge by hand on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "pstack/skills/unslop",
       "upstreamRev": "99559f2f52047978602ef365589275831e76af07",
       "upstreamCheckedAt": "2026-08-28",
@@ -475,7 +475,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/why",
       "refresh": "npx skills add cursor/plugins -y --skill why && cp -R .agents/skills/why/. skills/why/ && trash .agents/skills/why",
-      "notes": "From Cursor's pstack plugin. Investigates design rationale by discovering available MCPs and querying seven evidence categories in parallel. Companion to `how`; both are invoked by `teach`.",
+      "notes": "From Cursor's pstack plugin. Investigates design rationale by discovering available MCPs and querying seven evidence categories in parallel. Companion to `how`; both are invoked by `teach`. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": "pstack/skills/why",
       "upstreamRev": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
       "upstreamCheckedAt": "2026-08-28",

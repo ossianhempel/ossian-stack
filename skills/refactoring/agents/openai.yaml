@@ -1,0 +1,3 @@
+interface:
+  display_name: "Refactoring"
+  short_description: "Refactor safely in small verified, behavior-preserving steps"

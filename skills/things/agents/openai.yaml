@@ -1,0 +1,3 @@
+interface:
+  display_name: "Things"
+  short_description: "Work with Things 3 tasks, projects, and areas"

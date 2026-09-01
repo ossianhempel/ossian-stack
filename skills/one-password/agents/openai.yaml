@@ -1,0 +1,3 @@
+interface:
+  display_name: "1Password"
+  short_description: "Read and manage secrets through the 1Password CLI"

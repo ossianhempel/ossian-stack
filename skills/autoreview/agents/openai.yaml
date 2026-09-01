@@ -1,0 +1,3 @@
+interface:
+  display_name: "Autoreview"
+  short_description: "Pre-commit and pre-ship code review with a verdict"

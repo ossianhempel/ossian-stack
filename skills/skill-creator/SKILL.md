@@ -68,6 +68,34 @@ Based on the user interview, fill in these components:
 - **compatibility**: Required tools, dependencies (optional, rarely needed)
 - **the rest of the skill :)**
 
+### Create agents/openai.yaml
+
+Every skill ships an `agents/openai.yaml`. Codex and the ChatGPT desktop app read
+it for how the skill is displayed and when it may auto-invoke; Claude Code and
+Cursor ignore the file. Create it alongside the SKILL.md draft (not at the end of
+the project), and keep it in sync whenever you later rename the skill or rewrite
+its description:
+
+```yaml
+interface:
+  display_name: "Resolve PR Feedback"
+  short_description: "Address reviewer feedback on a PR commit by commit"
+```
+
+Rules (full reference: `references/openai-yaml.md`):
+
+- `display_name`: Title Case of the skill name, with real acronyms preserved
+  (`clerk-cli` → "Clerk CLI", `ios-marketing-capture` → "iOS Marketing Capture").
+- `short_description`: hand-write it, 25–64 characters (both ends are enforced).
+  Distill the SKILL.md description, do not copy it verbatim and do not fall back
+  to generic filler like "Help with X tasks".
+- If the file already exists, keep its `policy:` and `dependencies:` blocks
+  untouched and update only `interface` fields. Never regenerate the whole file
+  over an existing one.
+- If SKILL.md sets `disable-model-invocation: true`, the yaml must carry
+  `policy.allow_implicit_invocation: false` — the repo validator enforces the
+  pairing, and the two runtimes read different files.
+
 ### Skill Writing Guide
 
 #### Anatomy of a Skill
@@ -77,6 +105,8 @@ skill-name/
 ├── SKILL.md (required)
 │   ├── YAML frontmatter (name, description required)
 │   └── Markdown instructions
+├── agents/
+│   └── openai.yaml - UI metadata + invocation policy (Codex/ChatGPT; see below)
 └── Bundled Resources (optional)
     ├── scripts/    - Executable code for deterministic/repetitive tasks
     ├── references/ - Docs loaded into context as needed

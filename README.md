@@ -156,6 +156,9 @@ refreshed, is in [`docs/plugin-workflow.md`](docs/plugin-workflow.md).
 
 - Skills go in `skills/<name>/` with a `SKILL.md`. Kebab-case names, frontmatter
   `name` matching the directory.
+- Every skill also ships `agents/openai.yaml` with `interface.display_name` and
+  `interface.short_description` (25–64 chars) — Codex/ChatGPT UI metadata, ignored
+  by the other runtimes. Preserve its `policy:`/`dependencies:` blocks on edit.
 - Every skill needs a `skills/sources.json` entry; vendored ones also get a
   `README.md` carrying the refresh one-liner.
 - The native manifests intentionally omit `version`; the git commit is the release

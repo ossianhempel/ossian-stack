@@ -1,0 +1,3 @@
+interface:
+  display_name: "Convex CLI"
+  short_description: "Deploy, inspect, and debug Convex backends via CLI"

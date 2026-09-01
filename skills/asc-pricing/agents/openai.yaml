@@ -1,0 +1,3 @@
+interface:
+  display_name: "ASC Pricing"
+  short_description: "Manage App Store pricing, IAP, and RevenueCat catalog sync"

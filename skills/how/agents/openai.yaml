@@ -1,0 +1,3 @@
+interface:
+  display_name: "How"
+  short_description: "Walk through how a codebase or change works, step by step"

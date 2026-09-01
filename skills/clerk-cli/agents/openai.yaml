@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clerk CLI"
+  short_description: "Manage Clerk authentication, users, and orgs via CLI"

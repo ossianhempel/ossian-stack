@@ -1,0 +1,3 @@
+interface:
+  display_name: "Babysit"
+  short_description: "Watch a PR through review, CI, and merge to done"

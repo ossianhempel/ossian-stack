@@ -1,0 +1,3 @@
+interface:
+  display_name: "ASC Version Guard"
+  short_description: "Diagnose App Store version and build number collisions"

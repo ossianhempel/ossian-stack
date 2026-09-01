@@ -1,0 +1,3 @@
+interface:
+  display_name: "Release iOS App"
+  short_description: "Run the full iOS release train from tag to App Store"
