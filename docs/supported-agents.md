@@ -9,10 +9,10 @@ read_when:
 # Supported Agents
 
 Canonical list of the agent runtimes this repo targets. `ossian-stack` reaches
-Claude Code, Codex, and Cursor through their plugin systems; the other runtimes
-read one of the global skill roots below. Any skill that scans skill installs or
-agent session logs (`skill-cleaner`, `agent-transcript`) should align with this
-table.
+Claude Code, Codex, Cursor, and Copilot through their plugin systems; the other
+runtimes read one of the global skill roots below. Any skill that scans skill
+installs or agent session logs (`skill-cleaner`, `agent-transcript`) should align
+with this table.
 
 ## Native plugin manifests
 
@@ -21,6 +21,7 @@ table.
 | Claude Code | `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` |
 | Codex | `.codex-plugin/plugin.json` |
 | Cursor | `.cursor-plugin/plugin.json` and `.cursor-plugin/marketplace.json` |
+| Copilot | `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` (Copilot checks `.claude-plugin/` in its manifest search order) |
 
 ## Installation routing
 
@@ -32,8 +33,8 @@ its skills, it should detect the current harness and use this order:
 | Claude Code | Git marketplace, then `ossian-stack@ossian-stack` | Claude marketplace update |
 | Codex | Git marketplace, then `ossian-stack@ossian-stack` | `codex plugin marketplace upgrade` |
 | Cursor | Git marketplace, then `ossian-stack` at User scope | `cursor-agent plugin marketplace update ossian-stack` |
+| Copilot CLI / app | Git marketplace, then `ossian-stack@ossian-stack`; opt in via `autoUpdate: true` on the marketplace's `extraKnownMarketplaces` entry in `~/.copilot/settings.json` | auto-updates at session start once opted in; otherwise `copilot plugin update ossian-stack` |
 | Gemini CLI | Shared skills installer, global Gemini scope | `npx skills update` |
-| Copilot CLI / app | Shared skills installer, global Copilot scope | `npx skills update` |
 | Windsurf | Shared skills installer, global Windsurf scope | `npx skills update` |
 | Antigravity CLI | Shared skills installer, global Antigravity scope | `npx skills update` |
 
@@ -52,6 +53,7 @@ get it as a plugin — each runtime manages its own installed copy:
 | Claude Code | `~/.claude/plugins/cache/ossian-stack/ossian-stack/<version>/skills` |
 | Codex | `~/.codex/plugins/cache/…` |
 | Cursor | Cursor-managed plugin copy (local testing: `~/.cursor/plugins/local/ossian-stack`) |
+| Copilot | `~/.copilot/installed-plugins/ossian-stack/ossian-stack` (marketplace-managed) |
 
 These are direct skill roots outside the native plugin installs. They are listed
 because auditing skills scan them, not because this repo installs into them:
@@ -62,7 +64,7 @@ because auditing skills scan them, not because this repo installs into them:
 | Codex | `~/.agents/skills` (also reads `~/.codex/skills`) | cross-tool standard |
 | Gemini CLI | `~/.agents/skills` | cross-tool standard |
 | Cursor | `~/.agents/skills` | standalone skills; native plugin support is listed above |
-| Copilot CLI / app | `~/.copilot/skills` (native), `~/.agents/skills` (cross-tool) | Mac app global skills UI reads `~/.copilot/skills` |
+| Copilot CLI / app | `~/.copilot/skills` (legacy skills-installer copies), `~/.agents/skills` (cross-tool) | plugin installs are marketplace-managed; this root only holds leftovers from the old `npx skills add` route |
 | Windsurf | `~/.agents/skills` | cross-tool standard |
 | Antigravity CLI | `~/.gemini/antigravity-cli/skills` | separate root |
 

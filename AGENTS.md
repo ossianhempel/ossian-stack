@@ -58,12 +58,17 @@ runtime, which is also why `bun run check` runs as a pre-commit hook.
 
 When an agent is handed this repository URL and asked to install the plugin or its
 skills, it must detect the current harness and prefer the native plugin route:
-Claude Code and Codex use their Git marketplace commands. Cursor adds the Git
+Claude Code and Codex use their Git marketplace commands. Copilot uses
+`copilot plugin marketplace add ossianhempel/ossian-stack` then
+`copilot plugin install ossian-stack@ossian-stack` — it reads the `.claude-plugin/`
+manifests natively; set `"autoUpdate": true` on the marketplace's
+`extraKnownMarketplaces` entry in `~/.copilot/settings.json` so session starts
+refresh it. Cursor adds the Git
 marketplace with `cursor-agent plugin marketplace add <repo-url>`, then completes a
 user-scope install from its `/plugin` Marketplace UI; refreshes use
 `cursor-agent plugin marketplace update ossian-stack`. Cursor's official public
 Marketplace is a separate distribution channel, and `/add-plugin <repo-url>` is a
-direct GitHub import that is currently pinned. Gemini CLI, Copilot, Windsurf, and
+direct GitHub import that is currently pinned. Gemini CLI, Windsurf, and
 Antigravity use the shared skills installer against `skills/`; never install the
 checkout-local `.agents/skills/` tree as the public package.
 

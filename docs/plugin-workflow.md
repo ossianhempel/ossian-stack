@@ -69,10 +69,10 @@ that direct GitHub import is currently pinned.
 
 When a user gives an agent this repository URL and asks it to install the plugin or
 skills, the agent should detect the harness and use the native plugin route first.
-For Gemini CLI, Copilot, Windsurf, and Antigravity, which do not use this repo's
-native plugin manifests, install only the public `skills/` tree through the shared
-skills installer and target the current harness's global skill scope. Never install
-the checkout-local `.agents/skills/` tree.
+For Gemini CLI, Windsurf, and Antigravity, which do not use this repo's native
+plugin manifests, install only the public `skills/` tree through the shared skills
+installer and target the current harness's global skill scope. Never install the
+checkout-local `.agents/skills/` tree.
 
 ### Directory source — avoid, including on the Mac you author on
 

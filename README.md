@@ -46,9 +46,23 @@ Do not substitute `/add-plugin https://github.com/ossianhempel/ossian-stack` for
 marketplace flow: direct GitHub imports are pinned. Cursor's public Marketplace and
 Team Marketplaces are separate distribution channels.
 
-For Gemini CLI, Copilot, Windsurf, and Antigravity, there is no native plugin
-manifest in this repository. Install the public `skills/` tree with the shared
-skills installer, targeting the current harness and global scope:
+**GitHub Copilot** (CLI, app, VS Code) — register the GitHub marketplace, install
+the plugin, and opt its marketplace into auto-update:
+
+```
+copilot plugin marketplace add ossianhempel/ossian-stack
+copilot plugin install ossian-stack@ossian-stack
+```
+
+Then set `"autoUpdate": true` on the `ossian-stack` entry under
+`extraKnownMarketplaces` in `~/.copilot/settings.json` — Copilot re-reads the
+`.claude-plugin/` manifests natively, but only first-party marketplaces
+auto-update unless the user opts in this way. The opt-in is honored from user
+settings only (repository-level `autoUpdate` is accepted and ignored).
+
+For Gemini CLI, Windsurf, and Antigravity, there is no native plugin manifest in
+this repository. Install the public `skills/` tree with the shared skills
+installer, targeting the current harness and global scope:
 
 ```
 npx skills add https://github.com/ossianhempel/ossian-stack \
@@ -155,9 +169,10 @@ refreshed, is in [`docs/plugin-workflow.md`](docs/plugin-workflow.md).
 
 ## Limitations
 
-- **Native plugin hosts.** Claude Code, Codex, and Cursor have native plugin
-  manifests. Gemini CLI, Copilot, Windsurf, and Antigravity consume the shared
-  skill directories instead — see [`docs/supported-agents.md`](docs/supported-agents.md).
+- **Native plugin hosts.** Claude Code, Codex, Cursor, and Copilot have native
+  plugin manifests — Copilot reads this repo's `.claude-plugin/` manifests
+  directly. Gemini CLI, Windsurf, and Antigravity consume the shared skill
+  directories instead — see [`docs/supported-agents.md`](docs/supported-agents.md).
 - **Internal skills are checkout-local.** They load for any runtime that opens this
   repo and reach no one else.
 - **Vendored skills are not polled.** They drift until `bun run check:upstream`
