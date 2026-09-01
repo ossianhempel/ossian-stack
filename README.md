@@ -2,7 +2,7 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code, Codex, and Cursor.
 
-![skills](https://img.shields.io/badge/skills-55-blue)
+![skills](https://img.shields.io/badge/skills-56-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-8957e5)
 
@@ -87,7 +87,7 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-55 skills, grouped by what they are for.
+56 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
@@ -95,7 +95,7 @@ refreshed instead of quietly rotting.
 | **Design & frontend** | Accessibility, UI craft and motion, decks, onboarding, throwaway prototypes | `better-accessibility` · `emil-design-eng` · `grill-design` · `frontend-slides` · `onboarding-flow` · `prototype` |
 | **Words** | Marketing copy, editorial, slop removal | `copywriter` · `online-writing` · `unslop` |
 | **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` |
-| **Agent workflow** | Review, routing, simplification, refactoring, debugging, verification, conventions enforcement, issue triage and ticketing, PR babysitting, git hygiene, install and skill maintenance | `autoreview` · `babysit` · `continual-learning` · `codify-conventions` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `resolve-pr-feedback` · `simplify-code` · `triage` · `to-spec` · `to-tickets` · `bro` · `skill-creator` |
+| **Agent workflow** | Review, routing, large-effort planning, simplification, refactoring, debugging, verification, conventions enforcement, issue triage and ticketing, PR babysitting, git hygiene, install and skill maintenance | `autoreview` · `babysit` · `continual-learning` · `codify-conventions` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `resolve-pr-feedback` · `simplify-code` · `triage` · `to-spec` · `to-tickets` · `wayfinder` · `bro` · `skill-creator` |
 | **Principles** | Short, explicitly-invoked rules for how to work — verification, design exploration, debugging posture, domain modeling | `principle-encode-lessons-in-structure` · `principle-exhaust-the-design-space` · `principle-fix-root-causes` · `principle-model-the-domain` · `principle-prove-it-works` · `principle-redesign-from-first-principles` · `principle-subtract-before-you-add` |
 | **Understand code** | Codebase walkthroughs, design rationale, explaining a change | `how` · `why` · `teach` |
 | **Personal tooling** | Notes and tasks | `obsidian` · `things` |

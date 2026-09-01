@@ -162,13 +162,14 @@ Report what is missing and who creates it. Create nothing in this step.
 
 ## 7. Issue tracker and triage labels
 
-`triage`, `to-tickets`, and `to-spec` read per-project config that, unlike the
+`triage`, `to-tickets`, `to-spec`, and `wayfinder` read per-project config that, unlike the
 files above, is **not created lazily** — an unconfigured tracker fails on first
 use with no hint where the setting lives. Check for:
 
 - `docs/agents/issue-tracker.md` — where issues live: GitHub (via `gh`), GitLab
   (via `glab`), local markdown under `.scratch/`, or a described workflow
-  (Linear, Jira, …). Also records whether external PRs are a request surface.
+  (Linear, Jira, …). Also records whether external PRs are a request surface and
+  which native hierarchy, blocking, assignment, and label operations are available.
 - `docs/agents/triage-labels.md` — the mapping from the five canonical triage
   roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
   `wontfix`) to the actual label strings the tracker uses.

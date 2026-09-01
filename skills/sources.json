@@ -455,6 +455,17 @@
       "upstreamCheckedAt": "2026-08-28",
       "lastSynced": "2026-08-28"
     },
+    "wayfinder": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/wayfinder",
+      "refresh": "npx skills add mattpocock/skills -y --skill wayfinder && echo 'hand-merge into skills/wayfinder/ then: trash .agents/skills/wayfinder'",
+      "notes": "Vendored 2026-09-01. Preserves upstream's destination, shared map, decision-ticket frontier, fog-of-war, and one-ticket-per-session model. Adapted for this plugin: setup points to setup-ossian-stack; tracker hierarchy, type, claim, and blocking fallbacks are self-contained and capability-based; the unshipped research and grilling siblings are replaced with delegated authoritative research and an inline breadth-first interview; prototype and domain-modeling point to shipped siblings. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "skills/engineering/wayfinder",
+      "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
+      "upstreamCheckedAt": "2026-09-01",
+      "lastSynced": "2026-09-01"
+    },
     "why": {
       "origin": "vendored",
       "repo": "https://github.com/cursor/plugins",
