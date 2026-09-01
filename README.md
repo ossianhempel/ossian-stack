@@ -2,7 +2,7 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code, Codex, and Cursor.
 
-![skills](https://img.shields.io/badge/skills-56-blue)
+![skills](https://img.shields.io/badge/skills-57-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-8957e5)
 
@@ -87,11 +87,11 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-56 skills, grouped by what they are for.
+57 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
-| **Ship an app** | App Store Connect, iOS releases, store metadata, legal | `asc-metadata` · `asc-pricing` · `asc-release` · `asc-version-guard` · `ios-marketing-capture` · `release-ios-app` · `privacy-policy` |
+| **Ship an app** | App Store Connect, iOS releases, store metadata, legal | `app-store-optimization` · `asc-metadata` · `asc-pricing` · `asc-release` · `asc-version-guard` · `ios-marketing-capture` · `release-ios-app` · `privacy-policy` |
 | **Design & frontend** | Accessibility, UI craft and motion, decks, onboarding, throwaway prototypes | `better-accessibility` · `emil-design-eng` · `grill-design` · `frontend-slides` · `onboarding-flow` · `prototype` |
 | **Words** | Marketing copy, editorial, slop removal | `copywriter` · `online-writing` · `unslop` |
 | **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` |

@@ -3,6 +3,10 @@
   "updated": "2026-09-01",
   "description": "Upstream map for skills/ \u2014 the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
+    "app-store-optimization": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (commit 3b1f581). Bespoke ASO workflow."
+    },
     "asc-metadata": {
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
