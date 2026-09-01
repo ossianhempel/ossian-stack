@@ -31,7 +31,9 @@ itself. Two consequences worth knowing:
   that is the versioned cache directory, which is replaced on every update, so
   the install repeats after each one.
 
-It also assumes `gh`, and Graphite (`gt`) for stack topology.
+It also needs `gh`. Stack mode discovers the connected open chain directly from
+GitHub by matching each pull request's base branch to another pull request's head
+branch; it does not require a separate stack service or CLI.
 
 To update:
 

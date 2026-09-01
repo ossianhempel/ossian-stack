@@ -78,12 +78,12 @@
       "notes": " Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh."
     },
     "clerk-cli": {
-      "origin": "vendored",
+      "origin": "adapted",
       "repo": "https://github.com/clerk/skills",
       "path": "skills/core/clerk-cli",
       "refresh": "npx skills add clerk/skills -y --skill clerk-cli && cp -R .agents/skills/clerk-cli/* skills/clerk-cli/ && trash .agents/skills/clerk-cli",
       "lastSynced": "2026-07-26",
-      "notes": "Also upgrade global CLI: npm i -g clerk@latest",
+      "notes": "Also upgrade global CLI: npm i -g clerk@latest. Adapted 2026-09-01 so package-runner fallback remains the bound invocation for prerequisites and later commands instead of reverting to a missing bare clerk binary; merge by hand on refresh.",
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
@@ -381,11 +381,11 @@
     "revenuecat-api": {
       "origin": "companion",
       "repo": "https://github.com/RevenueCat/docs",
-      "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured. Added disable-model-invocation: true on 2026-08-29 to match the author's own allow_implicit_invocation: false in agents/openai.yaml \u2014 the skill makes live RevenueCat writes, so explicit invocation only. Remove that one frontmatter line (and the policy block) to restore auto-triggering."
+      "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured. Added disable-model-invocation: true on 2026-08-29 to match the author's own allow_implicit_invocation: false in agents/openai.yaml \u2014 the skill makes live RevenueCat writes, so explicit invocation only. Remove that one frontmatter line (and the policy block) to restore auto-triggering. Adapted 2026-09-01 to anchor the bundled helper portably for Codex, require python3 plus RC_API_KEY, and reject the unrelated npm rc command as RevenueCat CLI proof."
     },
     "setup-ossian-stack": {
       "origin": "local",
-      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored: setup-pstack configures per-role models this plugin does not have, and mattpocock's scaffolds per-repo config that our skills do not yet read. This one installs the plugin and migrates off what it replaces -- superseded plugins, hand-maintained skill symlinks -- and covers the runtime hook-approval gate, since Codex ships plugin hooks disabled and hash-pinned."
+      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence."
     },
     "simplify-code": {
       "origin": "derived",

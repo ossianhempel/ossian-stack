@@ -1,6 +1,6 @@
 ---
 name: setup-ossian-stack
-description: "Configure a machine and project after this plugin is installed: retire superseded plugins and stale skill symlinks, approve the session-start hook where a runtime gates it, check the project-owned documents and structure the skills use, configure the issue tracker and triage labels the triage skills read, and report which optional CLIs are missing and which skills degrade without them. Use for /setup-ossian-stack, configure the plugin's prerequisites, or migrate an existing installation."
+description: "Configure a machine and project after this plugin is installed: retire superseded plugins and stale skill symlinks, approve the session-start hook where a runtime gates it, check project-owned prerequisites and issue-tracker config, and audit each skill's real execution paths without mistaking a non-global CLI for a missing capability. Use for /setup-ossian-stack, configure the plugin's prerequisites, or migrate an existing installation."
 disable-model-invocation: true
 ---
 
@@ -30,7 +30,9 @@ Report what is actually there. Do not assume any of it.
 - **Superseded plugins.** Anything shipping a skill name this plugin also ships is
   a collision: whichever the runtime resolves first wins, and it will not be
   obvious which.
-- **Optional CLIs**, checked by asking the shell, never assumed from a config file.
+- **Skill execution paths**: global commands, current-project commands, package
+  runners, active runtime tools/MCPs, and bundled fallbacks. A command absent from
+  the current `PATH` is one observation, not proof that the capability is missing.
 
 Present this as a short table before proposing anything.
 
@@ -41,6 +43,15 @@ runtime already has it. Confirm that it is enabled and identify the loaded copy.
 For other runtimes, report whether a usable copy is present. If one is missing,
 point the user to the repository's harness-specific installation instructions;
 do not bootstrap that runtime from this skill.
+
+Record the registered marketplace source separately from the loaded cache. A
+native runtime copies plugins; a marketplace pointing at a checkout does not make
+that checkout live. Treat a local-directory marketplace as an unmanaged testing
+source, not a ready normal install. Unless the user explicitly chose local testing,
+offer one confirmed migration through the runtime's own interface: remove that
+marketplace registration, register `ossianhempel/ossian-stack` as a Git marketplace,
+install or refresh the named plugin, then start a new session. Never edit or delete
+the runtime's cache by hand.
 
 ## 3. Retire what it replaces
 
@@ -60,36 +71,74 @@ One confirmation per item, each naming exactly what disappears.
 This plugin ships one hook: a session-start nudge for `continual-learning`. It
 reads transcript counts and writes nothing the user owns.
 
-Some runtimes ship plugin hooks **disabled** and pin them to a content hash,
-requiring explicit approval before they run. Where that is the case, the hook is
-silently inert until approved — say so, show the user what it does, and point them
-at the runtime's own approval flow. Do not edit trust state by hand.
+Check the two independent runtime gates in order:
+
+1. **Hooks feature enabled.** Some runtimes disable plugin hooks globally. When
+   disabled, no trust prompt can appear. Point the user at the runtime's supported
+   feature/configuration flow, enable it only with their approval, then restart.
+2. **Hook approved.** Some runtimes pin hooks to a content hash and require explicit
+   trust approval. Show the user what the hook does and use the runtime's approval
+   flow. Do not edit trust state by hand.
+
+Report these separately. “Hook valid” does not mean active when the feature is
+disabled, and “feature enabled” does not mean the shipped hash is trusted.
 
 The hook needs `jq`. Without it, it exits silently and nothing else breaks.
 
 ## 5. Report what will not work
 
-Check each of these by asking the shell, and name the ones that are missing
-alongside what stops working. Degradation is per-skill, not global — a missing
-tool disables a few skills, not the plugin.
+Run the bundled read-only probe from the current project. Resolve its path from
+the `SKILL.md` you just read; the runtime executes commands from the user's cwd:
 
-| Binary | Needed by | Missing means |
+```sh
+SKILL_DIR="<absolute path of the directory containing this SKILL.md>";
+python3 "$SKILL_DIR/scripts/check-capabilities.py"
+```
+
+The probe checks bare commands on this process's `PATH`, current-project
+`node_modules/.bin` entries, and installed package runners. It does not download,
+install, authenticate, or scan unrelated repositories. Combine that output with
+the active runtime tools already available to you; a shell script cannot see MCPs
+or other host-provided interfaces.
+
+Classify each capability by the best execution path that actually exists:
+
+- **Ready** — a global command, current-project command, active runtime tool/MCP,
+  or bundled fallback can perform the work now.
+- **On demand** — the owning skill supports an installed package runner, but its
+  package is neither global nor current-project-local. Say which runner will fetch
+  it on first use and that network access may be required. Do not call it missing.
+- **Degraded** — the preferred path is absent but a narrower fallback works. Name
+  only the lost surface.
+- **Blocked** — no supported execution path remains. Only this state belongs in a
+  “missing” list.
+
+“Installed somewhere on the computer” is not the same as ready in the current
+project. If an unrelated project owns a local binary, report it as **present
+elsewhere**, not global, current-project-ready, or missing from the machine.
+
+Use the owning skill's invocation contract instead of assuming every capability
+is a bare binary:
+
+| Capability | Supported paths | What absence actually means |
 | --- | --- | --- |
-| `asc` | `asc-metadata`, `asc-pricing`, `asc-release`, `asc-version-guard`, `release-ios-app` | No App Store Connect work at all |
-| `gh` | `autoreview`, `babysit`, `why`, `release-ios-app` | No PR, CI, or issue-history access |
-| `jq` | `clerk-cli`, **and the session-start hook** | The hook exits silently — continual learning never nudges |
-| `op` | `one-password`, `post-queue-cli` | No secret retrieval |
-| `xcodebuild` | `ios-marketing-capture`, `release-ios-app` | No native builds or simulator captures |
-| `gt`, `bun` | `babysit` | `watch-pr` cannot run; PR status falls back to plain reporting |
-| `clerk` / `convex` / `rc` | `clerk-cli` / `convex-cli` / `revenuecat-api` | That backend's skill is unusable |
-| `trash` | `git-cleanup` | Deletions have no recoverable path |
-| `npx` | `clerk-cli`, `convex-cli`, `frontend-slides` | Skill-vendoring and scaffolding commands fail |
+| App Store Connect | `asc` | Without it, App Store Connect CLI work is blocked. |
+| GitHub | `gh`, or a host-provided GitHub interface where the owning skill permits one | Missing `gh` blocks commands and bundled scripts that specifically require it; do not erase host-tool coverage. |
+| Session-start hook | `jq` | Without it, the hook exits silently and continual learning never nudges. |
+| Secret retrieval | `op` | Without it, `one-password` cannot retrieve secrets; already-materialized environment values are separate. |
+| Native Apple tooling | `xcodebuild` | Without it, native builds and Simulator captures are blocked. |
+| PR watcher | `bun` | Without it, `babysit` cannot run `watch-pr` and falls back to plain status reporting. |
+| Clerk | global/project-local `clerk`, or `bunx`, `npx`, `pnpm dlx`, or `yarn dlx` | A package runner makes Clerk available on demand; lack of a global binary alone is not a failure. |
+| Convex | current-project `convex` through `npx`/`bunx`, or a latest-package runner fallback | A package runner makes Convex available on demand; prefer the project's pinned package when present. |
+| RevenueCat | active RevenueCat MCP, optional verified RevenueCat `rc`, or the bundled Python API helper with `python3` and `RC_API_KEY` | Missing `rc` alone is not degradation and never makes `revenuecat-api` unusable. A command named `rc` is only a candidate until its help identifies the RevenueCat CLI; the unrelated npm configuration package uses the same name. |
+| Recoverable deletion | `trash` | Without it, `git-cleanup` must not delete. |
+| Node package execution | `npx`, `bunx`, `pnpm dlx`, or `yarn dlx`, according to the owning skill | Report the runners that exist. Do not treat `npx` as universally required when a supported alternative is ready. |
 
 `jq` deserves its own line in the report: without it the hook fails **silently and
 by design**, so nothing looks broken and continual learning simply never happens.
 
-Say all of this plainly rather than burying it. A skill that fails on first use
-because a binary was never installed reads as a broken plugin.
+Say all of this plainly rather than burying it. Report the evidence and the
+execution path selected, not a guessed machine-wide installation state.
 
 ## 6. Project prerequisites — check, do not scaffold
 
@@ -145,5 +194,13 @@ Say which runtime you verified in, and which you could not.
 
 ## Reply
 
-What you found, what you installed, what you retired, what needs the user's
-approval, and what still will not work and why.
+Lead with the runtime invoking this skill. If it is not fully ready, its first
+unresolved prerequisite is the single **Next action**. Put actions for other
+runtimes in a separate secondary list; never make another runtime's restart the
+primary action while the invoking runtime remains blocked.
+
+Report what you found, what you installed, what you retired, what needs the
+user's approval, and what is ready, on demand, degraded, or blocked and why. Name
+the exact probe behind every blocked claim. Never describe a plugin as live from
+a checkout merely because its marketplace points there: native runtimes copy
+plugins into caches, so identify the loaded cached copy and the source separately.

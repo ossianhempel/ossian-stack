@@ -86,20 +86,25 @@ Yarn Classic (v1) has no `dlx`; treat those projects as "no preferred runner" an
 
 The published npm package is **`clerk`**, not `@clerk/cli`. Never teach `npm install -g clerk` as the primary path. If the global CLI is stale or behaves differently from this skill, either upgrade the global install or fall back to the `latest` runner form above.
 
+Keep the selected invocation for the rest of the session. Every later example that
+starts with bare `clerk` means that exact bound invocation; do not silently switch
+back to a missing global binary.
+
 ## Prerequisites (run at session start)
 
 Before running any other Clerk command in a session, verify the CLI is authenticated, linked, and healthy:
 
 ```sh
-clerk --version               # confirm the binary is on PATH
-clerk doctor --json           # structured health check; exit 1 if anything failed
+<selected-clerk-invocation> --version
+<selected-clerk-invocation> doctor --json
 ```
 
-**Always run `clerk doctor --json` first.** It catches the common setup failures (not logged in, project not linked, missing keys, stale CLI version) up front, so later commands don't fail with confusing errors. In agent mode it also includes a `Host execution` check that warns when Clerk's host-side config / credential directories are not writable, which is the canonical signal that the current invocation is likely sandboxed.
+**Always run `doctor --json` through the selected invocation first.** It catches the common setup failures (not logged in, project not linked, missing keys, stale CLI version) up front, so later commands don't fail with confusing errors. In agent mode it also includes a `Host execution` check that warns when Clerk's host-side config / credential directories are not writable, which is the canonical signal that the current invocation is likely sandboxed.
 
 Each result has `name`, `status` (`pass`/`warn`/`fail`), `message`, optional `detail`, optional `remedy` (how to fix it), and optional `fix` (label for auto-fixable issues). Parse that and act on it, or surface it to the user. If `Host execution` warns, rerun the command on the host before trusting any auth/link/env/API failures from the same sandboxed run. Rerun `clerk doctor --json` whenever a later command starts misbehaving.
 
-If `clerk --version` reports a newer CLI than this skill covers, trust `clerk <command> --help` first and refresh this skill bundle from its source.
+If the selected invocation reports a newer CLI than this skill covers, trust its
+`<command> --help` first and refresh this skill bundle from its source.
 
 ## The mental model
 

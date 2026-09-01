@@ -98,9 +98,14 @@ Supported patterns include:
 If the RevenueCat MCP server is available, prefer it for both reads and writes. Use resource-specific tools instead of raw HTTP whenever they cover the request.
 
 ### `rc` CLI
-Detect it with:
+Treat a command named `rc` as a candidate, not proof: the unrelated npm
+configuration package installs the same command name. Inspect its help and use it
+only when the output identifies RevenueCat and exposes the expected resource
+commands.
+
 ```bash
 command -v rc
+rc --help
 ```
 
 Examples:
@@ -112,19 +117,27 @@ rc customers get --id "$CUSTOMER_ID" --project-id "$RC_PROJECT_ID"
 ```
 
 ### Bundled API helper
+Resolve the helper from this skill's directory; runtime shell commands start in
+the user's project, and Claude-only skill-directory variables are empty in Codex.
+Before calling the helper, require `python3` and a non-empty `RC_API_KEY` without
+printing the key. Without the key, this path is not ready.
+
 Read example:
 ```bash
-python "${CLAUDE_SKILL_DIR:-.}/scripts/revenuecat_request.py" GET "/projects/{project_id}/products" --all-pages
+SKILL_DIR="<absolute path of the directory containing this SKILL.md>";
+test -n "${RC_API_KEY:-}" && python3 "$SKILL_DIR/scripts/revenuecat_request.py" GET "/projects/{project_id}/products" --all-pages
 ```
 
 Write example:
 ```bash
-python "${CLAUDE_SKILL_DIR:-.}/scripts/revenuecat_request.py" POST "/projects/{project_id}/entitlements" --json @assets/payloads/create-entitlement.json
+SKILL_DIR="<absolute path of the directory containing this SKILL.md>";
+test -n "${RC_API_KEY:-}" && python3 "$SKILL_DIR/scripts/revenuecat_request.py" POST "/projects/{project_id}/entitlements" --json "@$SKILL_DIR/assets/payloads/create-entitlement.json"
 ```
 
 Search example:
 ```bash
-python "${CLAUDE_SKILL_DIR:-.}/scripts/revenuecat_request.py" GET "/projects/{project_id}/subscriptions" --query store_subscription_identifier=STORE_SUBSCRIPTION_ID
+SKILL_DIR="<absolute path of the directory containing this SKILL.md>";
+test -n "${RC_API_KEY:-}" && python3 "$SKILL_DIR/scripts/revenuecat_request.py" GET "/projects/{project_id}/subscriptions" --query store_subscription_identifier=STORE_SUBSCRIPTION_ID
 ```
 
 ## Notes that matter
