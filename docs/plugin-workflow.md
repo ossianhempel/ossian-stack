@@ -46,13 +46,27 @@ after that each runtime refreshes on its own, or immediately with
 The native manifests declare **no version**, so the commit SHA is the release —
 there is nothing to bump. Cursor's plugin version field is optional.
 
-The same repo exposes native plugin manifests to all three supported hosts:
+The same repo exposes native plugin manifests to all four supported hosts:
 
 ```
 claude plugin marketplace add ossianhempel/ossian-stack
 codex  plugin marketplace add ossianhempel/ossian-stack
+copilot plugin marketplace add ossianhempel/ossian-stack
 cursor-agent plugin marketplace add https://github.com/ossianhempel/ossian-stack
 ```
+
+In Copilot, finish with the auto-update opt-in — it is part of the default
+install, not an optional extra, because only first-party marketplaces auto-update
+without it:
+
+```
+copilot plugin install ossian-stack@ossian-stack
+```
+
+Then set `"autoUpdate": true` on the `ossian-stack` entry under
+`extraKnownMarketplaces` in `~/.copilot/settings.json`. The opt-in is honored from
+user settings only (repository-level `autoUpdate` is accepted and ignored).
+`setup-ossian-stack` treats a missing opt-in as a finding and offers to add it.
 
 In Cursor, finish the install from the plugin UI at user scope:
 

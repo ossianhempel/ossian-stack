@@ -47,17 +47,17 @@ marketplace flow: direct GitHub imports are pinned. Cursor's public Marketplace 
 Team Marketplaces are separate distribution channels.
 
 **GitHub Copilot** (CLI, app, VS Code) — register the GitHub marketplace, install
-the plugin, and opt its marketplace into auto-update:
+the plugin, and turn on auto-update (the default posture; Copilot re-reads the
+`.claude-plugin/` manifests natively, but only first-party marketplaces
+auto-update unless the marketplace is opted in this way):
 
 ```
 copilot plugin marketplace add ossianhempel/ossian-stack
 copilot plugin install ossian-stack@ossian-stack
 ```
 
-Then set `"autoUpdate": true` on the `ossian-stack` entry under
-`extraKnownMarketplaces` in `~/.copilot/settings.json` — Copilot re-reads the
-`.claude-plugin/` manifests natively, but only first-party marketplaces
-auto-update unless the user opts in this way. The opt-in is honored from user
+The opt-in is `"autoUpdate": true` on the `ossian-stack` entry under
+`extraKnownMarketplaces` in `~/.copilot/settings.json`. It is honored from user
 settings only (repository-level `autoUpdate` is accepted and ignored).
 
 For Gemini CLI, Windsurf, and Antigravity, there is no native plugin manifest in
