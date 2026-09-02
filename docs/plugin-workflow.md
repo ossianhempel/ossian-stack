@@ -68,6 +68,11 @@ Then set `"autoUpdate": true` on the `ossian-stack` entry under
 user settings only (repository-level `autoUpdate` is accepted and ignored).
 `setup-ossian-stack` treats a missing opt-in as a finding and offers to add it.
 
+A repository can also enable the plugin declaratively, with no install command,
+by committing `.github/copilot/settings.json` with the same
+`extraKnownMarketplaces` and `enabledPlugins` shape — the only way the Copilot
+cloud agent picks up a plugin, since it cannot run install commands.
+
 In Cursor, finish the install from the plugin UI at user scope:
 
 ```

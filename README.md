@@ -60,6 +60,25 @@ The opt-in is `"autoUpdate": true` on the `ossian-stack` entry under
 `extraKnownMarketplaces` in `~/.copilot/settings.json`. It is honored from user
 settings only (repository-level `autoUpdate` is accepted and ignored).
 
+**Per-repo declarative install.** A repository can also enable the plugin
+without any install command: commit a `.github/copilot/settings.json` declaring
+the marketplace and enabling the plugin —
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "ossian-stack": {
+      "source": { "source": "github", "repo": "ossianhempel/ossian-stack" }
+    }
+  },
+  "enabledPlugins": { "ossian-stack@ossian-stack": true }
+}
+```
+
+This is the only way the Copilot **cloud agent** picks up a plugin (it cannot
+run install commands; it reads the repo's declarative config). Copilot CLI
+honors the same file as an alternative to `copilot plugin install`.
+
 For OpenCode, Gemini CLI, Windsurf, and Antigravity, there is no native plugin
 manifest in this repository (OpenCode's npm "plugins" are JS hook modules and
 cannot ship a skills tree). Install the public `skills/` tree with the shared
