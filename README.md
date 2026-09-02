@@ -60,19 +60,21 @@ The opt-in is `"autoUpdate": true` on the `ossian-stack` entry under
 `extraKnownMarketplaces` in `~/.copilot/settings.json`. It is honored from user
 settings only (repository-level `autoUpdate` is accepted and ignored).
 
-For Gemini CLI, Windsurf, and Antigravity, there is no native plugin manifest in
-this repository. Install the public `skills/` tree with the shared skills
-installer, targeting the current harness and global scope:
+For OpenCode, Gemini CLI, Windsurf, and Antigravity, there is no native plugin
+manifest in this repository (OpenCode's npm "plugins" are JS hook modules and
+cannot ship a skills tree). Install the public `skills/` tree with the shared
+skills installer, targeting the current harness and global scope:
 
 ```
 npx skills add https://github.com/ossianhempel/ossian-stack \
   --global --agent <current-harness> --skill '*' --yes
 ```
 
-Use `npx skills update` for later skill refreshes. Do not install `.agents/skills/`;
-that directory is checkout-local maintenance content. If the shared installer does
-not know the current harness, follow that harness's documented global skill root
-and install only the directories under `skills/`.
+Use `npx skills update` for later skill refreshes — this tier has no auto-update,
+so re-run it after pulling notable changes. Do not install `.agents/skills/`;
+that directory is checkout-local maintenance content. If the shared installer
+does not know the current harness, follow that harness's documented global skill
+root and install only the directories under `skills/`.
 
 For local Cursor testing, copy the repository to
 `~/.cursor/plugins/local/ossian-stack`, reload Cursor, and open Customize → Plugins.

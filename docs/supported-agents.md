@@ -34,6 +34,7 @@ its skills, it should detect the current harness and use this order:
 | Codex | Git marketplace, then `ossian-stack@ossian-stack` | `codex plugin marketplace upgrade` |
 | Cursor | Git marketplace, then `ossian-stack` at User scope | `cursor-agent plugin marketplace update ossian-stack` |
 | Copilot CLI / app | Git marketplace, then `ossian-stack@ossian-stack`; opt in via `autoUpdate: true` on the marketplace's `extraKnownMarketplaces` entry in `~/.copilot/settings.json` | auto-updates at session start once opted in; otherwise `copilot plugin update ossian-stack` |
+| OpenCode | Shared skills installer, global opencode scope (`~/.config/opencode/skills`) | `npx skills update` |
 | Gemini CLI | Shared skills installer, global Gemini scope | `npx skills update` |
 | Windsurf | Shared skills installer, global Windsurf scope | `npx skills update` |
 | Antigravity CLI | Shared skills installer, global Antigravity scope | `npx skills update` |
@@ -64,6 +65,7 @@ because auditing skills scan them, not because this repo installs into them:
 | Codex | `~/.agents/skills` (also reads `~/.codex/skills`) | cross-tool standard |
 | Gemini CLI | `~/.agents/skills` | cross-tool standard |
 | Cursor | `~/.agents/skills` | standalone skills; native plugin support is listed above |
+| OpenCode | `~/.config/opencode/skills` (also reads `~/.claude/skills` and `~/.agents/skills` globally) | the cross-tool roots are listed for completeness; native plugin installs of other runtimes live in versioned caches those roots never see, so OpenCode needs its own `npx skills add` copy |
 | Copilot CLI / app | `~/.copilot/skills` (legacy skills-installer copies), `~/.agents/skills` (cross-tool) | plugin installs are marketplace-managed; this root only holds leftovers from the old `npx skills add` route |
 | Windsurf | `~/.agents/skills` | cross-tool standard |
 | Antigravity CLI | `~/.gemini/antigravity-cli/skills` | separate root |
