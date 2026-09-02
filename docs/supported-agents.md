@@ -31,7 +31,7 @@ its skills, it should detect the current harness and use this order:
 | Runtime | Primary route | Update path |
 | --- | --- | --- |
 | Claude Code | Git marketplace, then `ossian-stack@ossian-stack` | Claude marketplace update |
-| Codex | Git marketplace, then `ossian-stack@ossian-stack` | `codex plugin marketplace upgrade` |
+| Codex | Git marketplace, then `ossian-stack@ossian-stack` | auto-upgrades the Git marketplace at plugin startup and `plugin/list`; `codex plugin marketplace upgrade` forces a refresh |
 | Cursor | Git marketplace, then `ossian-stack` at User scope | `cursor-agent plugin marketplace update ossian-stack` |
 | Copilot CLI / app | Git marketplace, then `ossian-stack@ossian-stack`; opt in via `autoUpdate: true` on the marketplace's `extraKnownMarketplaces` entry in `~/.copilot/settings.json` | auto-updates at session start once opted in; otherwise `copilot plugin update ossian-stack` |
 | OpenCode | Shared skills installer, global opencode scope (`~/.config/opencode/skills`) | `npx skills update` |

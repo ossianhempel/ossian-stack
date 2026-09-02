@@ -100,7 +100,7 @@ This re-copies straight off local disk, so the edit loop needs no commit or push
 | Runtime | Local directory source | Git source |
 | --- | --- | --- |
 | Claude Code 2.1.250 | refuses to update when the version is unchanged; no `--force` in this build | auto-updates on version change; commit SHA if `version` is omitted |
-| Codex 0.151.0-alpha | `plugin marketplace upgrade` reports "No configured Git marketplaces to upgrade" | `plugin marketplace upgrade` refreshes it |
+| Codex 0.151.0-alpha | `plugin marketplace upgrade` reports "No configured Git marketplaces to upgrade" | auto-upgrades at plugin startup and `plugin/list` (openai/codex#17425); `plugin marketplace upgrade` forces it |
 
 Use it only to test something you genuinely cannot push.
 
