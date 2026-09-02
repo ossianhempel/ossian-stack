@@ -44,6 +44,21 @@ route and is currently pinned. The public Cursor Marketplace and Team Marketplac
 are separate channels. For skill-only runtimes, install the directories under
 `skills/`, never the checkout-local `.agents/skills/` directory.
 
+## Install scopes and auto-update
+
+Verified 2026-09-02 against each runtime's official docs and local behavior:
+
+| Runtime | Global install | Auto-update | Project-scoped install |
+| --- | --- | --- | --- |
+| Claude Code | Git marketplace | session start (SHA-keyed version-less manifests) | per-project enable/disable via project `.claude/settings.json` |
+| Codex | Git marketplace | plugin startup and `plugin/list` (openai/codex#17425); `codex plugin marketplace upgrade` forces it | none — installs are account/workspace-level; a trusted project's `.codex/config.toml` plugin override was tested and does not change plugin status |
+| Cursor | Git marketplace, User scope via the Customize UI | manual on personal plans (`cursor-agent plugin marketplace update` or Refresh); Auto Refresh requires a Teams/Enterprise marketplace imported from GitHub with the Cursor GitHub App on the repository | project scope is a native install choice in Customize |
+| Copilot | Git marketplace + user-level `autoUpdate: true` opt-in on the marketplace's `extraKnownMarketplaces` entry in `~/.copilot/settings.json` | session start once opted in; otherwise `copilot plugin update ossian-stack` | repo-level declarative `.github/copilot/settings.json` — the only route for the Copilot cloud agent |
+
+A ChatGPT/Codex **workspace** is an account or organization, not a repository:
+its installation policies apply to a member everywhere, in every repo. Only
+Copilot has a true repo-scoped install surface.
+
 ## Skill install roots
 
 The repo's `skills/` is the single source of truth. Claude Code, Codex, and Cursor
