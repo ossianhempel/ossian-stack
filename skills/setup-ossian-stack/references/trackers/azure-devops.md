@@ -1,9 +1,8 @@
 # Template: Azure DevOps Boards (via `az`)
 
 Copy this body into the project's `docs/agents/issue-tracker.md`, fill in the
-organization/project, and delete this line. Adapted from the raid-plugin
-`az-cli` skill's boards reference — verify command shapes against the installed
-`azure-devops` extension version before scripting against them.
+organization/project, and delete this line. Verify command shapes against the
+installed `azure-devops` extension version before scripting against them.
 
 ---
 

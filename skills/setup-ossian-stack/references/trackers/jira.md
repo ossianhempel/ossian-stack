@@ -1,8 +1,7 @@
 # Template: Jira (via REST API or a repo-shipped CLI)
 
 Copy this body into the project's `docs/agents/issue-tracker.md`, fill in the
-site URL and project key, and delete this line. Patterned on the hm
-`ninja-bq` `jira-ticket-manager` integration — if the repo ships its own Jira
+site URL and project key, and delete this line. If the repo ships its own Jira
 CLI, prefer it and record its commands here instead of the REST recipes.
 
 ---
