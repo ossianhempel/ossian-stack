@@ -13,6 +13,9 @@ from pathlib import Path
 COMMANDS = (
     "asc",
     "gh",
+    "glab",
+    "az",
+    "curl",
     "jq",
     "op",
     "xcodebuild",

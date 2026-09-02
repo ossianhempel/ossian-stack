@@ -267,6 +267,8 @@ const NON_SKILL_TOKENS = new Set([
   "merge-queue", "read-only", "threads-only", "verified-unreachable",
   "pre-push", "allow-implicit-invocation", "disable-model-invocation",
   "user-invoke-only", "red-capable", "well-known",
+  // tracker names used in setup-ossian-stack's references
+  "azure-devops",
   // CLI subcommands and flags
   "sign-in", "sign-out", "user-id", "update-project", "function-spec",
   "watch-pr", "convex-test",

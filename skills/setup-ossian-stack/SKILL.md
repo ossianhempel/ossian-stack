@@ -53,6 +53,11 @@ marketplace registration, register `ossianhempel/ossian-stack` as a Git marketpl
 install or refresh the named plugin, then start a new session. Never edit or delete
 the runtime's cache by hand.
 
+Auto-update is the default posture on every runtime. On Copilot this needs an
+explicit opt-in: confirm the `ossian-stack` entry under `extraKnownMarketplaces`
+in the user's `~/.copilot/settings.json` carries `"autoUpdate": true`, and add it
+when it is missing. Only leave it off when the user explicitly declines.
+
 ## 3. Retire what it replaces
 
 One confirmation per item, each naming exactly what disappears.
@@ -124,6 +129,10 @@ is a bare binary:
 | --- | --- | --- |
 | App Store Connect | `asc` | Without it, App Store Connect CLI work is blocked. |
 | GitHub | `gh`, or a host-provided GitHub interface where the owning skill permits one | Missing `gh` blocks commands and bundled scripts that specifically require it; do not erase host-tool coverage. |
+| GitLab | `glab`, or a host-provided interface where the owning skill permits one | Missing `glab` matters only where the tracker config names GitLab. |
+| Jira | `curl`/`python3` against the REST API with `JIRA_*` credentials, or a repo-shipped Jira CLI | Missing credentials env vars is a configuration gap, not a missing capability — point at the tracker config's credentials section. |
+| Linear | `curl` against the GraphQL API with `LINEAR_API_KEY`, plus `jq` for response shaping | A missing key is a configuration gap, not a missing capability. |
+| Azure DevOps Boards | `az` with the `azure-devops` extension (`az extension add --name azure-devops`) | `az` without the extension covers nothing here; the extension is a one-time add. |
 | Session-start hook | `jq` | Without it, the hook exits silently and continual learning never nudges. |
 | Secret retrieval | `op` | Without it, `one-password` cannot retrieve secrets; already-materialized environment values are separate. |
 | Native Apple tooling | `xcodebuild` | Without it, native builds and Simulator captures are blocked. |
@@ -166,18 +175,30 @@ Report what is missing and who creates it. Create nothing in this step.
 files above, is **not created lazily** — an unconfigured tracker fails on first
 use with no hint where the setting lives. Check for:
 
-- `docs/agents/issue-tracker.md` — where issues live: GitHub (via `gh`), GitLab
-  (via `glab`), local markdown under `.scratch/`, or a described workflow
-  (Linear, Jira, …). Also records whether external PRs are a request surface and
-  which native hierarchy, blocking, assignment, and label operations are available.
+- `docs/agents/issue-tracker.md` — where issues live, which native hierarchy,
+  blocking, assignment, and label operations are available, and whether external
+  PRs are a request surface.
 - `docs/agents/triage-labels.md` — the mapping from the five canonical triage
   roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
   `wontfix`) to the actual label strings the tracker uses.
 
-If both exist, sanity-check them against the repo: a `git remote` pointing at
+Supported trackers, each with a ready-to-adapt template bundled with this skill:
+
+| Tracker | Interface | Template (under `references/trackers/`) |
+| --- | --- | --- |
+| GitHub Issues | `gh` | `github.md` |
+| GitLab Issues | `glab` | hand-write, mirroring the `github.md` shape |
+| Local markdown | files under `.scratch/<feature-slug>/issues/` | hand-write, mirroring the `github.md` shape |
+| Linear | GraphQL API via `curl` with `LINEAR_API_KEY` | `linear.md` |
+| Jira | REST API via `curl`, or a repo-shipped CLI | `jira.md` |
+| Azure DevOps Boards | `az` + `azure-devops` extension | `azure-devops.md` |
+
+If both files exist, sanity-check them against the repo: a `git remote` pointing at
 GitHub with a GitLab tracker config is a mismatch worth surfacing. If either is
 missing, ask where issues actually live — one question, recommended answer
-first — and write the file after they confirm. Keep both short; they are
+first (GitHub for a GitHub-hosted repo) — and write the file after they confirm.
+For a supported tracker, start from the template and fill in the project
+specifics; do not improvise the command recipes. Keep both short; they are
 configuration the skills parse, not prose. Labels default to the canonical role
 names unless the tracker already uses different strings.
 
