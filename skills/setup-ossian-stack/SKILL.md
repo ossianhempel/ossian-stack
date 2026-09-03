@@ -181,6 +181,20 @@ use with no hint where the setting lives. Check for:
 - `docs/agents/triage-labels.md` — the mapping from the five canonical triage
   roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
   `wontfix`) to the actual label strings the tracker uses.
+- `docs/agents/ticket-brief.md` — the shape of every ticket body. Copy
+  `references/ticket-brief.md`, dropping its leading copy-me line; `to-tickets`, `to-spec`, and `triage`
+  write it and a cold pickup agent reads it.
+- `docs/agents/handoff-comment.md` — the shape of every progress, blocked, and
+  done comment. Copy `references/handoff-comment.md`, dropping its leading
+  copy-me line; the comment
+  thread is the ticket's working log, so another agent can resume and the
+  human can review without a transcript.
+- `docs/agents/pickup-loop.md` — the prompt the user pastes into the host's
+  `/loop` or a scheduled routine to have agents take `ready-for-agent` tickets
+  autonomously. Copy `references/pickup-loop.md`, dropping its leading
+  copy-me paragraph. There is no pickup
+  skill: the runner is a host capability, the operations live in the tracker
+  config's "Pickup operations" section.
 
 Supported trackers, each with a ready-to-adapt template bundled with this skill:
 
@@ -192,13 +206,21 @@ Supported trackers, each with a ready-to-adapt template bundled with this skill:
 | Linear | GraphQL API via `curl` with `LINEAR_API_KEY` | `linear.md` |
 | Jira | REST API via `curl`, or a repo-shipped CLI | `jira.md` |
 | Azure DevOps Boards | `az` + `azure-devops` extension | `azure-devops.md` |
+| Notion | the Notion MCP server (must be connected in the runtime) | `notion.md` |
 
 If both files exist, sanity-check them against the repo: a `git remote` pointing at
 GitHub with a GitLab tracker config is a mismatch worth surfacing. If either is
 missing, ask where issues actually live — one question, recommended answer
 first (GitHub for a GitHub-hosted repo) — and write the file after they confirm.
 For a supported tracker, start from the template and fill in the project
-specifics; do not improvise the command recipes. Keep both short; they are
+specifics; do not improvise the command recipes. For Notion, discover existing task or issue databases with the MCP first
+(fetch each hit and dedupe by data source id, since one shared Tasks database
+appears as a linked view under every project page), present them, and ask whether to use one of them (shared, scoped by a `Project`
+property, or dedicated) or create a new dedicated one; then map the chosen
+database's actual property names in the template's table. Notion has no CLI: before
+writing its config, confirm the session exposes `notion-*` MCP tools, and if not
+tell the user to connect the Notion MCP in every runtime they use — the tracker
+skills stop rather than fall back when the tools are absent. Keep both short; they are
 configuration the skills parse, not prose. Labels default to the canonical role
 names unless the tracker already uses different strings.
 

@@ -40,6 +40,20 @@ Create a GitHub issue.
 
 Run `gh issue view <number> --comments`.
 
+## Pickup operations
+
+Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
+"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+Resolve every triage role through `docs/agents/triage-labels.md`; the role names
+below are the canonical defaults for a fresh setup.
+
+- **Frontier query**: `gh issue list --state open --label <agent-ready label (default ready-for-agent)> --json number,title,body,assignees,createdAt` then drop any with an assignee or an open issue in the body's `Blocked by` line; for each survivor, `gh api repos/<owner>/<repo>/issues/<n> --jq .issue_dependencies_summary.blocked_by` and drop it when the count is above zero; oldest first.
+- **Claim**: post the claim handoff comment stating `<runtime>:<session-id>` first, then `gh issue edit <n> --add-assignee @me`; the comment is the session's first write. Assignees are a set and the field alone cannot serialize overlapping runs, so re-read with `gh issue view <n> --json assignees,comments`: the winner is the earliest claim comment, not the field value. On loss, remove the assignee and take the next ticket.
+- **Blocked**: swap the agent-ready label for the mapped `needs-info` or `ready-for-human` label, post a blocked handoff comment, `gh issue edit <n> --remove-assignee @me`.
+- **Paused**: a paused handoff comment, remove the assignee, keep the label. The ticket re-enters the frontier (open, mapped label, unclaimed).
+- **Done**: open the PR with `Closes #<n>` in the body, post a done handoff comment. The merge closes the issue.
+- **Abandoned claim**: an assignee whose last handoff comment is older than one working day. Report it; never silently reclaim.
+
 ## Wayfinding operations
 
 Used by `/wayfinder`. The **map** is a single issue with **child** issues as tickets.

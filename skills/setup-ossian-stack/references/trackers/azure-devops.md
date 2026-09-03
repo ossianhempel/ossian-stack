@@ -63,6 +63,20 @@ Create a work item (`az boards work-item create`).
 
 `az boards work-item show --id <id> --expand all` plus the comments REST call above.
 
+## Pickup operations
+
+Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
+"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+Resolve every triage role through `docs/agents/triage-labels.md`; the tag names
+below are the canonical defaults for a fresh setup.
+
+- **Frontier query**: `az boards query --wiql "SELECT [System.Id] FROM WorkItems WHERE [System.TeamProject] = @project AND [System.Tags] CONTAINS '<agent-ready tag (default ready-for-agent)>' AND [System.AssignedTo] = '' AND [System.State] IN ('New','To Do','Active') ORDER BY [System.CreatedDate] ASC"`, then drop any with an open predecessor (relations from `work-item show --expand all`). The frontier includes unclaimed `Active` work so a paused ticket (assignee cleared, state kept) resurfaces.
+- **Claim**: post the claim `--discussion` handoff comment stating `<runtime>:<session-id>` first, then `az boards work-item update --id <id> --assigned-to <me> --state "Active"`; the comment is the session's first write. The assignee field alone is last-writer-wins, so re-read discussion and `AssignedTo`: the winner is the earliest claim comment. On loss, clear the assignee and take the next ticket.
+- **Blocked**: replace the agent-ready tag with the mapped `needs-info` or `ready-for-human` tag (tags are read-merge-write on `System.Tags`), a blocked `--discussion` comment, clear `--assigned-to ""`.
+- **Paused**: a paused `--discussion` comment, clear the assignee, keep the state. The ticket re-enters the frontier (unclaimed `Active` work is eligible).
+- **Done**: link the PR (`relation add --relation-type "ArtifactLink"` or the PR's work-item link), a done `--discussion` comment, `--state "Resolved"`. The human closes it.
+- **Abandoned claim**: an assignee with `System.ChangedDate` older than one working day. Report it; never silently reclaim.
+
 ## Wayfinding operations
 
 Used by `/wayfinder`. The **map** is a single work item (type `Epic` or `Feature`)
