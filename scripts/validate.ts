@@ -281,6 +281,10 @@ const NON_SKILL_TOKENS = new Set([
   "mac-mini-agents", "mac-mini-agents-multi", "service-account",
   "ossian-stack", "ossians-second-brain-sync", "readwise-claim",
   "xcodegen-xcodecloud",
+  // ssh aliases for the Hetzner VM (hetzner-vm skill)
+  "hetzner-agent",
+  // the forced-command script shipped with hetzner-vm
+  "agent-shell",
 ]);
 // Model ids and HTML attributes are open-ended families; match them by shape.
 const NON_SKILL_PATTERNS = [

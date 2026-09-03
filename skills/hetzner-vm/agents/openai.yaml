@@ -1,0 +1,3 @@
+interface:
+  display_name: "Hetzner VM"
+  short_description: "Read-only container diagnostics on the VM that runs Coolify"

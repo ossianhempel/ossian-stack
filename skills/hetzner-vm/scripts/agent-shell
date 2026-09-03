@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+# agent-shell — the only command an agent SSH key may execute on this host.
+#
+# The agent key in ~agent/.ssh/authorized_keys is pinned with
+# command="/usr/local/bin/agent-shell", so sshd runs THIS script no matter what
+# the client asks for. The client's request arrives as $SSH_ORIGINAL_COMMAND and
+# is data, never code: it is matched against a fixed verb list and executed via
+# argv arrays. No shell is ever invoked on it, so `rm -rf /`, `docker rm`,
+# `shutdown`, pipelines and substitutions cannot run — they are simply denied.
+#
+# Every verb is READ-ONLY. There is deliberately no verb that starts, stops,
+# removes, or writes anything. Adding one is a conscious decision, not a default.
+set -euo pipefail
+IFS=$' \t\n'
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+LOG="${AGENT_SHELL_LOG:-/var/log/agent-shell.log}"
+readonly MAX_LINES=2000
+DOCKER="$(command -v docker || echo /usr/bin/docker)"
+readonly DOCKER
+CMD="${SSH_ORIGINAL_COMMAND-}"
+
+log() {
+  # %FT%TZ rather than GNU-only `date -Is`, so this stays portable.
+  local client="${SSH_CLIENT-}"
+  # Braces so a failed redirect (unwritable log) is swallowed too — auditing
+  # must never be able to take the diagnostics offline.
+  { printf '%s\t%s\t%s\n' "$(date -u +%FT%TZ)" "${client%% *}" "$*" >>"$LOG"; } 2>/dev/null || true
+}
+
+deny() {
+  log "DENY [$CMD] :: $1"
+  printf 'agent-shell: denied — %s\n' "$1" >&2
+  printf "Run 'help' to list allowed commands.\n" >&2
+  exit 1
+}
+
+usage() {
+  cat <<'EOF'
+agent-shell — read-only diagnostics. All verbs are non-mutating.
+
+  help                     this text
+  ps                       all containers: name, status, image
+  logs <container> [n]     last n log lines (default 100, max 2000)
+  state <container>        status, restart count, health, image, mounts
+  stats                    one-shot CPU/memory snapshot per container
+  images                   local images with repo digests (for pinning)
+  disk                     filesystem usage
+  uptime                   load average and uptime
+
+Container names must match [A-Za-z0-9][A-Za-z0-9_.-]*
+EOF
+}
+
+# Reject shell metacharacters up front. Nothing here is passed to a shell, so
+# this is not what makes the script safe — it keeps the parser trivial and the
+# audit log honest about what was attempted.
+case "$CMD" in
+  *[\;\&\|\`\$\(\)\<\>\\\'\"\!]*) deny "shell metacharacters are not permitted" ;;
+  *$'\n'*)                        deny "newlines are not permitted" ;;
+esac
+
+set -f                       # disable globbing before word-splitting
+read -ra ARGV <<<"$CMD" || true
+set +f
+
+verb="${ARGV[0]-help}"
+arg1="${ARGV[1]-}"
+arg2="${ARGV[2]-}"
+[ "${#ARGV[@]}" -le 3 ] || deny "too many arguments"
+
+valid_name() { [[ "$1" =~ ^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$ ]]; }
+valid_count() { [[ "$1" =~ ^[0-9]{1,4}$ ]] && [ "$1" -ge 1 ] && [ "$1" -le "$MAX_LINES" ]; }
+
+need_container() {
+  [ -n "$arg1" ] || deny "$verb requires a container name"
+  valid_name "$arg1" || deny "invalid container name"
+  # Confirm it exists, so a typo reports clearly instead of leaking docker errors.
+  sudo -n "$DOCKER" ps -a --format '{{.Names}}' | grep -qxF "$arg1" \
+    || deny "no such container: $arg1"
+}
+
+log "ALLOW [$CMD]"
+
+case "$verb" in
+  help|"")
+    usage
+    ;;
+  ps)
+    exec sudo -n "$DOCKER" ps -a \
+      --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
+    ;;
+  logs)
+    need_container
+    lines="${arg2:-100}"
+    valid_count "$lines" || deny "line count must be 1-$MAX_LINES"
+    exec sudo -n "$DOCKER" logs --tail "$lines" --timestamps "$arg1"
+    ;;
+  state)
+    need_container
+    # Curated fields only. Never `docker inspect` wholesale: .Config.Env carries
+    # container secrets (API tokens, deploy keys) that agents must not receive.
+    exec sudo -n "$DOCKER" inspect "$arg1" --format \
+'name:      {{.Name}}
+image:     {{.Config.Image}}
+status:    {{.State.Status}}
+exit code: {{.State.ExitCode}}
+restarts:  {{.RestartCount}}
+started:   {{.State.StartedAt}}
+health:    {{if .State.Health}}{{.State.Health.Status}}{{else}}none{{end}}
+mounts:{{range .Mounts}}
+  {{.Name}} -> {{.Destination}}{{end}}'
+    ;;
+  stats)
+    exec sudo -n "$DOCKER" stats --no-stream \
+      --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}'
+    ;;
+  images)
+    # Repo digests let a broken :latest be pinned back to a known-good build.
+    exec sudo -n "$DOCKER" images --digests \
+      --format 'table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.Digest}}'
+    ;;
+  disk)
+    exec df -h
+    ;;
+  uptime)
+    exec uptime
+    ;;
+  *)
+    deny "unknown command: $verb"
+    ;;
+esac

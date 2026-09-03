@@ -1,0 +1,3 @@
+interface:
+  display_name: "Coolify"
+  short_description: "Manage Coolify apps, databases, and deploys via its CLI"

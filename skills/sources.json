@@ -136,6 +136,11 @@
       "repo": "https://github.com/get-convex/convex-js",
       "notes": "Documents npx convex CLI; no vendored copy. Track Convex CLI release notes."
     },
+    "coolify": {
+      "origin": "companion",
+      "repo": "https://github.com/coollabsio/coolify-cli",
+      "notes": "Documents coolify CLI install/usage (see SKILL.md install script). Not a skill copy. Restored 2026-09-03 from agent-scripts after the 1ee0d9f prune; verified free of instance URLs, tokens, and keys before publishing."
+    },
     "copywriter": {
       "origin": "local",
       "notes": "Authored in agent-scripts (1a3cfa4). Hooks and shared conversion principles remain here; AI-slop review and complete slideshow production were extracted into focused sibling skills on 2026-08-02."
@@ -231,6 +236,10 @@
       "upstreamPath": "skills/productivity/handoff",
       "upstreamRev": "d28dfdc39beadc3142a33359b5cfa4765dcbd0bc",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "hetzner-vm": {
+      "origin": "local",
+      "notes": "Authored in agent-scripts (235e6f0) and copied 2026-09-03. Ossian-specific Hetzner VM/SSH access patterns. Sanitized for the open-source release: the VM IP moved to 1Password (op://Development/Hetzner VM/ip) and the list of deployed apps was genericized."
     },
     "how": {
       "origin": "vendored",

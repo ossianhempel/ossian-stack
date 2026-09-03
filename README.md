@@ -2,9 +2,15 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code, Codex, and Cursor.
 
-![skills](https://img.shields.io/badge/skills-57-blue)
+![skills](https://img.shields.io/badge/skills-61-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-8957e5)
+
+[![Map of the plugin: one entry point, lanes per outcome, platform tiles, side doors](docs/plugin-map/map.png)](https://htmlpreview.github.io/?https://github.com/ossianhempel/ossian-stack/blob/main/docs/plugin-map/index.html)
+
+Interactive version: [`docs/plugin-map/index.html`](docs/plugin-map/index.html)
+(open the file locally, or use the link on the image). Generated — see
+[`docs/plugin-map/README.md`](docs/plugin-map/README.md).
 
 ## Install
 
@@ -122,14 +128,14 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-57 skills, grouped by what they are for.
+61 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
 | **Ship an app** | App Store Connect, iOS releases, store metadata, legal | `app-store-optimization` · `asc-metadata` · `asc-pricing` · `asc-release` · `asc-version-guard` · `ios-marketing-capture` · `release-ios-app` · `privacy-policy` |
 | **Design & frontend** | Accessibility, UI craft and motion, decks, onboarding, throwaway prototypes | `better-accessibility` · `emil-design-eng` · `grill-design` · `frontend-slides` · `onboarding-flow` · `prototype` |
 | **Words** | Marketing copy, editorial, slop removal | `copywriter` · `online-writing` · `unslop` |
-| **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` |
+| **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue, Coolify deploys, Hetzner VM | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` · `coolify` · `hetzner-vm` |
 | **Agent workflow** | Review, routing, large-effort planning, simplification, refactoring, debugging, verification, conventions enforcement, issue triage and ticketing, PR babysitting, git hygiene, install and skill maintenance | `autoreview` · `babysit` · `continual-learning` · `codify-conventions` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `close-the-loop` · `close-the-loop-audit` · `codex-first` · `git-cleanup` · `grill-me` · `grill-with-docs` · `grilling` · `handoff` · `refactoring` · `resolving-merge-conflicts` · `resolve-pr-feedback` · `simplify-code` · `triage` · `to-spec` · `to-tickets` · `wayfinder` · `bro` · `skill-creator` |
 | **Principles** | Short, explicitly-invoked rules for how to work — verification, design exploration, debugging posture, domain modeling | `principle-encode-lessons-in-structure` · `principle-exhaust-the-design-space` · `principle-fix-root-causes` · `principle-model-the-domain` · `principle-prove-it-works` · `principle-redesign-from-first-principles` · `principle-subtract-before-you-add` |
 | **Understand code** | Codebase walkthroughs, design rationale, explaining a change | `how` · `why` · `teach` |
