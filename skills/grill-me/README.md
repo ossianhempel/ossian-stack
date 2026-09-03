@@ -1,15 +1,17 @@
 # grill-me
 
-Vendored from [mattpocock/skills](https://github.com/mattpocock/skills) (`skills/productivity/grilling`).
+Vendored from [mattpocock/skills](https://github.com/mattpocock/skills)
+(`skills/productivity/grill-me`).
 
-Upstream splits a thin `grill-me` router and a `grilling` body skill. This install merges both into one skill so `/grill-me` works without a second dependency.
+Thin user-invoke router over the `grilling` body skill, which this plugin ships
+as `skills/grilling` alongside the `grill-with-docs` router (grilling +
+domain-modeling).
 
-Pairs with compound-engineering's `ce-brainstorm` (shape the WHAT) and `ce-plan` (implementation plan after grilling).
+Pairs with compound-engineering's `ce-brainstorm` (shape the WHAT) and
+`ce-plan` (implementation plan after grilling).
 
 To update:
 
 ```bash
-npx skills add mattpocock/skills -y --skill grilling
-cp .agents/skills/grilling/SKILL.md /tmp/grilling-upstream.md
-# Merge grilling body into skills/grill-me/SKILL.md (keep name grill-me, disable-model-invocation)
+npx skills add mattpocock/skills -y --skill grill-me
 ```

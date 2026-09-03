@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-01",
+  "updated": "2026-09-03",
   "description": "Upstream map for skills/ \u2014 the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -195,13 +195,32 @@
     "grill-me": {
       "origin": "vendored",
       "repo": "https://github.com/mattpocock/skills",
-      "path": "skills/productivity/grilling",
-      "refresh": "npx skills add mattpocock/skills -y --skill grilling && cp .agents/skills/grilling/SKILL.md /tmp/grilling-upstream.md && trash .agents/skills/grill-me",
-      "lastSynced": "2026-08-11",
-      "notes": "Merged grilling body into grill-me (upstream also has a thin grill-me router). Pairs with ce-brainstorm / ce-plan. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "path": "skills/grill-me",
+      "refresh": "npx skills add mattpocock/skills -y --skill grill-me && cp -R .agents/skills/grill-me/* skills/grill-me/ && trash .agents/skills/grill-me",
+      "notes": "Thin user-invoke router over the grilling body skill (2026-09-03: reverted the earlier body-merge into grill-me; the split matches upstream and makes grilling a real shipped sibling for triage, codify-conventions, and grill-design). Pairs with ce-brainstorm / ce-plan.",
+      "upstreamPath": "skills/productivity/grill-me",
+      "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
+      "upstreamCheckedAt": "2026-09-03"
+    },
+    "grill-with-docs": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/grill-with-docs",
+      "refresh": "npx skills add mattpocock/skills -y --skill grill-with-docs && cp -R .agents/skills/grill-with-docs/* skills/grill-with-docs/ && trash .agents/skills/grill-with-docs",
+      "notes": "Thin user-invoke router that composes grilling + domain-modeling (shipped here, adapted to GLOSSARY.md). Vendored 2026-09-03.",
+      "upstreamPath": "skills/engineering/grill-with-docs",
+      "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
+      "upstreamCheckedAt": "2026-09-03"
+    },
+    "grilling": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/grilling",
+      "refresh": "npx skills add mattpocock/skills -y --skill grilling && cp -R .agents/skills/grilling/* skills/grilling/ && trash .agents/skills/grilling",
+      "notes": "Grilling body skill, model-invocable; grill-me and grill-with-docs are the user-facing routers. Vendored verbatim 2026-09-03 (previously hand-merged into grill-me).",
       "upstreamPath": "skills/productivity/grilling",
-      "upstreamRev": "85f83d3fde1d3a90d5c9a657f6998c79a6c37308",
-      "upstreamCheckedAt": "2026-08-27"
+      "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
+      "upstreamCheckedAt": "2026-09-03"
     },
     "handoff": {
       "origin": "vendored",
@@ -442,8 +461,8 @@
       "origin": "adapted",
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/engineering/triage",
-      "refresh": "npx skills add mattpocock/skills -y --skill triage && cp -R .agents/skills/triage/* skills/triage/ && trash .agents/skills/triage && echo 'adapted: re-point /setup-matt-pocock-skills at /setup-ossian-stack, grill step described inline (no /grilling sibling), CONTEXT.md converted to GLOSSARY.md — diff by hand'",
-      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: setup pointer rewritten to /setup-ossian-stack; the grilling reference (a sibling this plugin does not ship) replaced with an inline description of the grill loop; CONTEXT.md converted to GLOSSARY.md per this repo's vocabulary convention.",
+      "refresh": "npx skills add mattpocock/skills -y --skill triage && cp -R .agents/skills/triage/* skills/triage/ && trash .agents/skills/triage && echo 'adapted: re-point /setup-matt-pocock-skills at /setup-ossian-stack, CONTEXT.md converted to GLOSSARY.md — diff by hand'",
+      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: setup pointer rewritten to /setup-ossian-stack; CONTEXT.md converted to GLOSSARY.md per this repo's vocabulary convention. 2026-09-03: the inline grill-loop description was replaced with a `grilling` sibling reference — the plugin now ships grilling.",
       "upstreamPath": "skills/engineering/triage",
       "upstreamRev": "v1.2.3",
       "upstreamCheckedAt": "2026-08-31"
