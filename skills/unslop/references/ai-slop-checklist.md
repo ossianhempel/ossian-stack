@@ -1,39 +1,18 @@
 # AI-Slop Checklist
 
 The single source of truth for what counts as AI-generated writing in reviewed
-output. This file is the operational rubric. The lint script
-(`scripts/ai_slop_lint.py`) parses its machine-readable word lists directly
-from this file, so edit the lists **here** and the linter stays in sync
-automatically.
+output. This file is the operational rubric. There is no linter: every rule
+here is read for by hand (or by the reviewing agent) against the draft.
 
-Two kinds of rules live here:
+## Hard bans
 
-- **Mechanical** — exact strings the linter catches deterministically. Listed
-  in the marked blocks below. Fix every one; there are no false positives worth
-  keeping.
-- **Judgment** — patterns a human (or a reviewing agent) has to read for. The
-  linter can't see these. Read this file before declaring copy done.
-
-Run the linter as the cheap first gate, then read the judgment section yourself:
-
-```bash
-python3 skills/unslop/scripts/ai_slop_lint.py path/to/draft.md
-# or pipe a draft straight in:
-pbpaste | python3 skills/unslop/scripts/ai_slop_lint.py -
-```
-
-Exit code is non-zero when anything is flagged.
-
----
-
-## Mechanical rules (the linter enforces these)
+Fix every one; there are no false positives worth keeping.
 
 ### Banned vocabulary
 
 Never use these words. They are the most common AI writing tells. If you reach
 for one, find the concrete word that actually says what you mean.
 
-<!-- lint:banned-vocab -->
 delve, intricate, tapestry, pivotal, underscore, landscape, foster, testament,
 enhance, crucial, vital, significant, profound, steadfast, breathtaking,
 captivate, watershed, solidify, multifaceted, nuanced, robust, leverage,
@@ -42,55 +21,47 @@ innovative, cutting-edge, game-changing, revolutionary, seamless, intuitive,
 best-in-class, empower, transformative, supercharge, ever-evolving, realm,
 beacon, meticulous, paramount, game changer, enduring, garner,
 interplay, showcasing, vibrant
-<!-- /lint:banned-vocab -->
 
 ### Conjunctive filler
 
 Cut these or replace with a real transition.
 
-<!-- lint:filler -->
 moreover, furthermore, additionally
-<!-- /lint:filler -->
 
 ### Banned openers
 
 Don't start a piece, section, or paragraph with these. Includes throat-clearing
 openers — warm-up phrases that delay the actual point.
 
-<!-- lint:openers -->
 welcome to, introducing, here's the thing, let me be clear, i'll be honest,
 the uncomfortable truth, what nobody tells you, what most people get wrong
-<!-- /lint:openers -->
 
 ### Often-empty phrases
 
-Filler that pads a sentence without adding information. Matched anywhere in a
-line, not just at the start. Cut the phrase; usually the sentence is stronger
-without it (`in order to` → `to`).
+Filler that pads a sentence without adding information. Cut the phrase;
+usually the sentence is stronger without it (`in order to` → `to`).
 
-<!-- lint:phrases -->
 it's worth noting, it's important to note, at the end of the day, at its core,
 in today's world, in the age of, in the world of, the reality is, the truth is,
 going forward, let's dive in
-<!-- /lint:phrases -->
 
 ### Em dashes and double hyphens
 
 Never use em dashes (—) in any output. Don't substitute the literal double
 hyphen (`--`) either. Restructure with commas, periods, or parentheses, or
 split into two sentences. (A normal hyphen inside a compound word like
-`best-in-class` or `two-tap` is fine — the linter ignores those.)
+`best-in-class` or `two-tap` is fine.)
 
 ### Emoji piling
 
 One emoji per section, max, and only if it earns its place. Two or more emoji on
-the same line reads as AI exuberance. The linter flags lines with 2+ emoji.
+the same line reads as AI exuberance.
 
 ---
 
-## Judgment rules (read these yourself — the linter can't)
+## Judgment rules (read these yourself)
 
-These are the tells that need a reader, not a regex. Check them by hand before
+These are the tells that need a reader, not a list. Check them by hand before
 declaring copy done.
 
 ### Structural tells
@@ -156,21 +127,19 @@ declaring copy done.
 Words like `just`, `simply`, `actually`, `literally`, `honestly`, `truly`,
 `fundamentally`, `importantly`, `crucially`, `inherently`, `inevitably` are
 usually filler ("this is *just* a simpler way" → "this is a simpler way").
-Not linted, because a few are legitimate in casual/spoken copy and the false-
-positive rate would be high — read for them by hand and cut the ones that add
-nothing.
+A few are legitimate in casual/spoken copy — read for them by hand and cut the
+ones that add nothing.
 
 ### Context-dependent words and phrases (judgment, not a hard ban)
 
-Strong AI tells that also have legitimate literal uses, so they're read for by
-hand rather than linted:
+Strong AI tells that also have legitimate literal uses:
 
 - **`harness`, `elevate`, `embark`.** Usually puffery ("harness the power of…",
   "elevate your workflow"), but fine when literal ("harness" the gym equipment,
   "embark" on a trip). Cut when they're inflating; keep when they're the plain word.
 - **`in order to` → `to`.** Almost always removable padding.
 - **`when it comes to`.** Usually cuttable ("when it comes to logging, it's fast"
-  → "logging is fast"). Common enough that linting it is noisy.
+  → "logging is fast").
 
 ### Abstract metaphor nouns (judgment, not a hard ban)
 

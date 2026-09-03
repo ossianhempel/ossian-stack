@@ -18,15 +18,14 @@ Edit text to remove AI patterns and add human voice.
   as the final quality gate on generated copy, but it does not invent
   positioning, argument, or campaign.
 - For short write-through passes on conversational output, apply the process
-  inline, without the file and linter steps.
+  inline, without the file-audit steps.
 
 ## Process
 
 1. Scan for the patterns below.
 2. Rewrite. Preserve meaning, match intended tone.
 3. Add soul (see next section).
-4. Run the mechanical gate (below) when the draft is a file or pasted text.
-5. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
+4. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
 
 ## Adding soul
 
@@ -38,24 +37,6 @@ Removing patterns is half the job. Sterile, voiceless writing is just as obvious
 - **Use "I" when it fits.** First person isn't unprofessional.
 - **Let some mess in.** Perfect structure looks machine-made.
 - **Be specific.** Not "this is concerning" but "there's something unsettling about agents churning away at 3am."
-
-## Mechanical gate
-
-When auditing a draft, run the bundled linter first. It catches the
-deterministic tells — banned vocabulary, conjunctive filler, banned openers,
-empty phrases, em dashes, emoji piling. Its word lists are parsed from
-`references/ai-slop-checklist.md`; edit the lists there, not in the script.
-
-```bash
-SKILL_DIR="<absolute path of the directory containing the SKILL.md you just read>";
-python3 "$SKILL_DIR/scripts/ai_slop_lint.py" path/to/draft.md
-# or pipe text through stdin
-pbpaste | python3 "$SKILL_DIR/scripts/ai_slop_lint.py" -
-```
-
-Fix every hit unless the term is a required proper noun or an exact quotation;
-state any justified exception. A clean result is necessary but not sufficient —
-the judgment rules below still decide whether it sounds human.
 
 ## Patterns to detect and fix
 
@@ -134,7 +115,7 @@ the judgment rules below still decide whether it sounds human.
 
 These have legitimate uses, so read for them by hand instead of blanket-banning.
 
-- **Empty-phrase padding.** "It's worth noting", "at the end of the day", "at its core", "in today's world", "the reality is", "going forward", "let's dive in". Cut; the linter bans them outright.
+- **Empty-phrase padding.** "It's worth noting", "at the end of the day", "at its core", "in today's world", "the reality is", "going forward", "let's dive in". Cut.
 - **Empty adverbs.** "just", "simply", "actually", "literally", "honestly", "truly", "fundamentally". A few are fine in casual copy; cut the ones adding nothing.
 - **Context-dependent words.** "harness", "elevate", "embark", "when it comes to". Cut when inflating ("harness the power of…"); keep when literal.
 - **Read-aloud test.** AI slop is smooth, even, and frictionless — every sentence the same length, every clause balanced. Real copy has uneven rhythm: a three-word line next to a long one, a fragment, a hard stop. If it sounds like it was written to be inoffensive, it was.
@@ -144,7 +125,6 @@ These have legitimate uses, so read for them by hand instead of blanket-banning.
 1. **Verdict:** one sentence naming the dominant problem, or "already clean".
 2. **Findings:** meaningful issues only — the smallest useful fragment plus the tell name.
 3. **Revised draft:** the full cleaned version when changes are needed.
-4. **Mechanical gate:** `clean`, or the remaining justified exceptions.
 
 Lead with the revised draft when the ask is a rewrite rather than an audit, and
 skip the checklist recital when the user only needs the cleaned copy.

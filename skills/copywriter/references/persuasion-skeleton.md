@@ -215,8 +215,8 @@ Before calling long-form copy done, verify each beat:
 5. **Payoff** — Read only the last paragraph. Is it a recap or a life?
    If it summarizes earlier points, rewrite as after-state.
 
-Then run `../../unslop/scripts/ai_slop_lint.py` and apply
-`../../unslop/references/ai-slop-checklist.md` as usual.
+Then run the `unslop` skill's judgment checklist (`references/ai-slop-checklist.md`)
+as usual.
 
 ---
 

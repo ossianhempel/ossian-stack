@@ -381,8 +381,8 @@ describing features, show what changes for the user.
    Rewrite before moving on.
 7. **Cut.** Remove every word that isn't earning its place.
 8. **Run the AI-slop gate.** Use the sibling `unslop` skill as the
-   final review. Resolve its installed path, run `scripts/ai_slop_lint.py` on
-   the draft, fix every mechanical hit, then apply its judgment checklist.
+   final review: apply its judgment checklist (`references/ai-slop-checklist.md`)
+   and fix every hit.
 9. **Offer 2–3 variants** when there's a clear creative choice (tone, angle,
    length). Don't drown Ossian in 10 options - give the strongest 2–3 with a
    one-line note on what each is optimizing for.
