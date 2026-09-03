@@ -1,0 +1,1840 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ossian-stack · plugin map</title>
+<style>
+  /* ---- tokens: one deliberate light theme, painted explicitly ---- */
+  :root {
+    --bg: #faf9f6;
+    --board: #ffffff;
+    --ink: #1c1c21;
+    --ink-2: #5b5f6a;
+    --ink-3: #8a8f98;
+    --line: #dcdad3;
+    --line-2: #ebe9e3;
+    --accent: #2f6fed;        /* brand: "you run it" */
+    --accent-soft: #e6eefc;
+    --auto: #0e8a7a;          /* semantic: "runs for you" */
+    --auto-soft: #e0f3f0;
+    --agent: #8957e5;         /* semantic: subagent */
+    --agent-soft: #efe8fb;
+    --ref: #8a8f98;           /* semantic: reference */
+    --track: #c9c5bb;
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); color-scheme: light; }
+  body { padding: 24px; }
+  body.shot { padding: 0; width: 2000px; }
+  .bar { display: flex; align-items: center; gap: 12px; max-width: 2000px; margin: 0 auto 14px; }
+  .bar h1 { font-size: 16px; font-weight: 600; margin: 0; }
+  .bar .sp { flex: 1; }
+  .bar button, .bar a { font: inherit; font-size: 13px; color: var(--ink); background: var(--board); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; cursor: pointer; text-decoration: none; }
+  .bar button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  body.shot .bar { display: none; }
+  #wrap { max-width: 2000px; margin: 0 auto; overflow-x: auto; }
+  svg { display: block; width: 100%; height: auto; background: var(--board); border: 1px solid var(--line); border-radius: 16px; }
+  body.shot svg { border: 0; border-radius: 0; }
+
+  /* ---- svg text + shapes ---- */
+  svg text { font-family: var(--font); fill: var(--ink); }
+  .t-title { font-size: 26px; font-weight: 700; }
+  .t-sub { font-size: 14px; fill: var(--ink-2); }
+  .t-h { font-size: 15px; font-weight: 600; }
+  .t-cap { font-size: 11px; fill: var(--ink-2); }
+  .t-tiny { font-size: 10.5px; fill: var(--ink-3); letter-spacing: .02em; text-transform: uppercase; }
+  .t-mono { font-family: var(--mono); font-size: 11px; fill: var(--ink-3); }
+  .region { fill: var(--bg); stroke: var(--line); rx: 14; }
+  .tile { fill: var(--board); stroke: var(--line); rx: 10; }
+  .chip { fill: var(--board); stroke: var(--line); rx: 6; }
+  .chipg text { font-size: 11.5px; fill: var(--ink-2); }
+  .track { fill: none; stroke: var(--track); stroke-width: 2.5; }
+  .arrow { stroke: var(--ink-3); stroke-width: 1.5; fill: none; }
+  .link { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 4; pointer-events: none; }
+
+  /* ---- node pills: role is in the shape, not in words ---- */
+  .node { cursor: pointer; outline: none; }
+  .node text.lbl { font-size: 13px; font-weight: 500; }
+  .node .pill { stroke-width: 1.5; }
+  .node.r-human .pill { fill: var(--accent); stroke: var(--accent); }
+  .node.r-human text.lbl { fill: #fff; }
+  .node.r-both .pill { fill: var(--board); stroke: var(--accent); }
+  .node.r-both text.lbl { fill: var(--accent); }
+  .node.r-auto .pill { fill: var(--auto); stroke: var(--auto); }
+  .node.r-auto text.lbl { fill: #fff; }
+  .node.r-knowledge .pill { fill: var(--board); stroke: var(--ref); stroke-dasharray: 5 3; }
+  .node.r-knowledge text.lbl { fill: var(--ink-2); }
+  .node.agent .pill { fill: var(--agent); stroke: var(--agent); }
+  .node.agent text.lbl { fill: #fff; }
+  .node.optional { opacity: .78; }
+  .node .badge { fill: var(--agent-soft); stroke: var(--agent); stroke-width: 1; }
+  .node .badge-t { font-size: 10px; font-weight: 600; fill: var(--agent); }
+  .node .badge-t.k { fill: var(--ink-2); }
+  .node .badge.k { fill: #f1f1ee; stroke: var(--ref); }
+  .node .badge-t.k { fill: var(--ink-2); }
+  .node:focus-visible .pill { stroke: var(--ink); stroke-width: 2.5; }
+  svg.lit .node { opacity: .25; }
+  svg.lit .node.on { opacity: 1; }
+  svg.lit .node.on .pill { filter: drop-shadow(0 2px 6px rgba(47,111,237,.35)); }
+  .entry .pill { fill: var(--ink); stroke: var(--ink); }
+  .entry text { fill: #fff; }
+  .entry .pill { rx: 18; }
+
+  /* ---- drawer ---- */
+  #drawer { position: fixed; top: 0; right: 0; height: 100vh; width: min(420px, 100vw); background: var(--board); border-left: 1px solid var(--line); box-shadow: -12px 0 32px rgba(0,0,0,.08); transform: translateX(105%); transition: transform .18s ease; overflow-y: auto; padding: 22px 24px 40px; box-sizing: border-box; z-index: 10; }
+  #drawer.open { transform: none; }
+  #drawer h2 { margin: 0 0 4px; font-size: 20px; }
+  #drawer .id { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  #drawer .meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0; }
+  #drawer .meta span { font-size: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; color: var(--ink-2); }
+  #drawer .meta span.role { border-color: var(--accent); color: var(--accent); }
+  #drawer p { font-size: 14px; line-height: 1.5; color: var(--ink); }
+  #drawer h3 { font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); margin: 22px 0 8px; }
+  #drawer .hint { font-family: var(--mono); font-size: 12px; background: var(--bg); border: 1px solid var(--line); padding: 8px 10px; border-radius: 8px; }
+  #drawer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  #drawer li button { font: inherit; font-size: 12.5px; font-family: var(--mono); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; cursor: pointer; color: var(--ink); }
+  #drawer li button:hover { border-color: var(--accent); color: var(--accent); }
+  #drawer .none { color: var(--ink-3); font-size: 13px; }
+  #drawer .close { position: absolute; top: 14px; right: 14px; font: inherit; background: none; border: 1px solid var(--line); border-radius: 8px; width: 32px; height: 32px; cursor: pointer; color: var(--ink-2); }
+  #drawer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>ossian-stack · plugin map</h1>
+  <span class="sp"></span>
+  <button id="toggle" type="button" aria-pressed="false">Expand collapsed groups</button>
+  <a href="https://github.com/ossianhempel/ossian-stack">Repository</a>
+</div>
+<div id="wrap"><svg id="board" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of the ossian-stack plugin"></svg></div>
+<aside id="drawer" aria-hidden="true" aria-label="Skill details">
+  <button class="close" type="button" aria-label="Close">×</button>
+  <div id="drawer-body"></div>
+</aside>
+
+<!-- plugin-map:begin -->
+<script type="application/json" id="plugin-map-data">
+{
+ "generated": "scripts/build-plugin-map.js",
+ "plugins": {
+  "ossian-stack": {
+   "label": "ossian-stack",
+   "install": "always"
+  }
+ },
+ "runtimes": [
+  {
+   "label": "Claude Code",
+   "how": "native plugin"
+  },
+  {
+   "label": "Codex",
+   "how": "native plugin"
+  },
+  {
+   "label": "Cursor",
+   "how": "native plugin"
+  },
+  {
+   "label": "Copilot",
+   "how": "native plugin"
+  },
+  {
+   "label": "Gemini · Windsurf · Antigravity",
+   "how": "skills installer"
+  }
+ ],
+ "entry": {
+  "label": "Your task",
+  "sub": "describe it, or name a skill"
+ },
+ "sections": {
+  "lanes": [
+   {
+    "id": "plan",
+    "title": "Plan big work",
+    "outcome": "too big for one session",
+    "tag": "Agent workflow",
+    "steps": [
+     {
+      "id": "wayfinder",
+      "writes": "decision tickets"
+     },
+     {
+      "id": "domain-modeling",
+      "writes": "GLOSSARY.md"
+     },
+     {
+      "id": "grilling"
+     },
+     {
+      "id": "to-spec",
+      "writes": "spec doc"
+     },
+     {
+      "id": "to-tickets",
+      "writes": "tracker tickets"
+     },
+     {
+      "id": "prototype",
+      "optional": true,
+      "writes": "throwaway branch"
+     }
+    ],
+    "extras": [
+     {
+      "id": "triage",
+      "note": "from open issues"
+     },
+     {
+      "id": "grill-me",
+      "note": "any plan"
+     },
+     {
+      "id": "grill-with-docs",
+      "note": "plan vs docs"
+     }
+    ]
+   },
+   {
+    "id": "build",
+    "title": "Build, review, ship a PR",
+    "outcome": "change the code",
+    "tag": "Agent workflow",
+    "steps": [
+     {
+      "id": "diagnosing-bugs"
+     },
+     {
+      "id": "refactoring"
+     },
+     {
+      "id": "simplify-code",
+      "optional": true
+     },
+     {
+      "id": "autoreview",
+      "writes": "review findings"
+     },
+     {
+      "id": "close-the-loop",
+      "writes": "proof it works"
+     },
+     {
+      "id": "babysit",
+      "writes": "merged PR"
+     },
+     {
+      "id": "resolve-pr-feedback",
+      "optional": true
+     },
+     {
+      "id": "handoff",
+      "optional": true,
+      "writes": "handoff note"
+     }
+    ],
+    "extras": []
+   },
+   {
+    "id": "ship-ios",
+    "title": "Ship an iOS app",
+    "outcome": "App Store release",
+    "tag": "Ship an app",
+    "steps": [
+     {
+      "id": "asc-version-guard"
+     },
+     {
+      "id": "ios-marketing-capture",
+      "writes": "screenshots"
+     },
+     {
+      "id": "asc-metadata",
+      "writes": "store listing"
+     },
+     {
+      "id": "app-store-optimization",
+      "optional": true
+     },
+     {
+      "id": "release-ios-app",
+      "writes": "build + submission"
+     },
+     {
+      "id": "asc-release"
+     }
+    ],
+    "extras": [
+     {
+      "id": "asc-pricing",
+      "note": "price tiers"
+     },
+     {
+      "id": "privacy-policy",
+      "note": "policy page"
+     }
+    ]
+   },
+   {
+    "id": "design",
+    "title": "Design & frontend",
+    "outcome": "UI work",
+    "tag": "Design & frontend",
+    "steps": [
+     {
+      "id": "grill-design"
+     },
+     {
+      "id": "emil-design-eng"
+     },
+     {
+      "id": "better-accessibility"
+     },
+     {
+      "id": "onboarding-flow",
+      "optional": true,
+      "writes": "onboarding screens"
+     },
+     {
+      "id": "frontend-slides",
+      "optional": true,
+      "writes": "HTML deck"
+     }
+    ],
+    "extras": []
+   },
+   {
+    "id": "words",
+    "title": "Words",
+    "outcome": "copy or an article",
+    "tag": "Words",
+    "steps": [
+     {
+      "id": "copywriter"
+     },
+     {
+      "id": "unslop"
+     },
+     {
+      "id": "online-writing",
+      "optional": true,
+      "writes": "draft in vault"
+     }
+    ],
+    "extras": []
+   },
+   {
+    "id": "understand",
+    "title": "Understand code",
+    "outcome": "explain, not change",
+    "tag": "Understand code",
+    "steps": [
+     {
+      "id": "how"
+     },
+     {
+      "id": "why"
+     },
+     {
+      "id": "teach",
+      "optional": true
+     }
+    ],
+    "extras": []
+   }
+  ],
+  "platforms": [
+   {
+    "id": "convex",
+    "title": "Convex",
+    "skills": [
+     {
+      "id": "convex-cli",
+      "phase": "building"
+     }
+    ]
+   },
+   {
+    "id": "clerk",
+    "title": "Clerk",
+    "skills": [
+     {
+      "id": "clerk-cli",
+      "phase": "setup"
+     }
+    ]
+   },
+   {
+    "id": "revenuecat",
+    "title": "RevenueCat",
+    "skills": [
+     {
+      "id": "revenuecat-api",
+      "phase": "setup"
+     }
+    ]
+   },
+   {
+    "id": "coolify",
+    "title": "Coolify",
+    "skills": [
+     {
+      "id": "coolify",
+      "phase": "building"
+     }
+    ]
+   },
+   {
+    "id": "hetzner",
+    "title": "Hetzner VM",
+    "skills": [
+     {
+      "id": "hetzner-vm",
+      "phase": "setup"
+     }
+    ]
+   },
+   {
+    "id": "one-password",
+    "title": "1Password",
+    "skills": [
+     {
+      "id": "one-password",
+      "phase": "reference"
+     }
+    ]
+   },
+   {
+    "id": "post-queue",
+    "title": "Post Queue",
+    "skills": [
+     {
+      "id": "post-queue-cli",
+      "phase": "building"
+     }
+    ]
+   },
+   {
+    "id": "obsidian",
+    "title": "Obsidian",
+    "skills": [
+     {
+      "id": "obsidian",
+      "phase": "reference"
+     }
+    ]
+   },
+   {
+    "id": "things",
+    "title": "Things 3",
+    "skills": [
+     {
+      "id": "things",
+      "phase": "reference"
+     }
+    ]
+   }
+  ],
+  "sideDoors": [
+   "setup-ossian-stack",
+   "git-cleanup",
+   "resolving-merge-conflicts",
+   "codex-first",
+   "bro",
+   "continual-learning",
+   "codify-conventions",
+   "close-the-loop-audit",
+   "skill-creator"
+  ],
+  "knowledge": {
+   "title": "Principles",
+   "ids": [
+    "principle-encode-lessons-in-structure",
+    "principle-exhaust-the-design-space",
+    "principle-fix-root-causes",
+    "principle-model-the-domain",
+    "principle-prove-it-works",
+    "principle-redesign-from-first-principles",
+    "principle-subtract-before-you-add"
+   ]
+  }
+ },
+ "nodes": {
+  "app-store-optimization": {
+   "id": "app-store-optimization",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "App Store Optimization",
+   "description": "App Store Optimization (ASO) toolkit for researching keywords, analyzing competitor rankings, generating metadata suggestions, and improving app visibility on Apple App Store and Google Play Store. Use when the user asks about ASO, app store rankings, app metadata, app titles and descriptions, app store listings, app visibility, or mobile app marketing on iOS or Android. Supports keyword research and scoring, competitor keyword analysis, metadata optimization, A/B test planning, launch checklists, and tracking ranking changes.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "calledBy": []
+  },
+  "asc-metadata": {
+   "id": "asc-metadata",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "ASC Metadata",
+   "description": "Audit, write, translate, and sync App Store listing metadata with the `asc` CLI on canonical files under `./metadata`. Use to run an ASO/keyword audit, localize descriptions/keywords/subtitle/name to multiple languages, or write engaging localized \"What's New\" release notes (from git log, bullets, or free text) plus promotional text.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
+   "calls": [],
+   "calledBy": [
+    "release-ios-app"
+   ]
+  },
+  "asc-pricing": {
+   "id": "asc-pricing",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "ASC Pricing",
+   "description": "Manage App Store subscription and in-app purchase pricing and catalog with the `asc` CLI. Use to set territory-specific / purchasing-power-parity (PPP) prices via setup, pricing summary, CSV import, and schedules, or to reconcile ASC subscriptions and IAPs with RevenueCat products, entitlements, offerings, and packages (RevenueCat MCP).",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "asc-release": {
+   "id": "asc-release",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "ASC Release",
+   "description": "Build, version, upload, and submit iOS/macOS apps to App Store Connect with the `asc` CLI. Use to create an IPA/PKG, bump Xcode version/build numbers, run asc commands, drive the release/submission flow (including first-time fixes for availability, IAP, subscriptions, Game Center, App Privacy), or wire repeatable `asc workflow` automations into CI.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
+   "calls": [],
+   "calledBy": [
+    "release-ios-app"
+   ]
+  },
+  "asc-version-guard": {
+   "id": "asc-version-guard",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "ASC Version Guard",
+   "description": "Install, repair, or diagnose App Store Connect version/build-number guards for Xcode Cloud iOS apps. Triggers: version guard, release hooks, Xcode Cloud rejection, MARKETING_VERSION, build number collision.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "calledBy": []
+  },
+  "autoreview": {
+   "id": "autoreview",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Autoreview",
+   "description": "Pre-commit/ship code review: Codex default; optional Claude or Pi.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/openclaw/agent-skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "babysit": {
+   "id": "babysit",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Babysit",
+   "description": "Drive a pull request or a stacked chain to merge-ready: watch CI, classify failures, triage review-bot comments, and work the lowest unmerged PR first. Stops at merge-ready and never merges. Use for babysit this, get it green, all green, merge-ready, watch CI, address the bugbot comments, or check on PR X.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "release-ios-app",
+    "resolve-pr-feedback",
+    "setup-ossian-stack"
+   ]
+  },
+  "better-accessibility": {
+   "id": "better-accessibility",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Better Accessibility",
+   "description": "Accessibility engineering for UI components, modals, menus, forms, and widgets. Use for accessibility/a11y/WCAG, ARIA, focus, keyboard navigation, screen readers, alt text, touch targets, reduced motion, semantic HTML, form errors, or 'not keyboard accessible'.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/jakubkrehel/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "bro": {
+   "id": "bro",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Bro",
+   "description": "Restate the last message in plain human language, with no jargon.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/dmmulroy/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "clerk-cli": {
+   "id": "clerk-cli",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Clerk CLI",
+   "description": "Operate the Clerk CLI (`clerk` binary) for authentication, user/org/session management, impersonation, local webhook testing, deploy verification, instance config, env keys, feature toggles, and any Clerk Backend, Platform, or Frontend API call. Use when the user mentions Clerk management tasks, \"list clerk users\", \"impersonate a user\", \"test webhooks locally\", \"enable orgs\", \"enable billing\", \"clerk env pull\", \"clerk doctor\", \"clerk deploy\", \"clerk api\", or any ad-hoc Clerk API request. Prefer the CLI over raw HTTP: it handles auth, key resolution, app/instance targeting, and formatting automatically.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/clerk/skills",
+   "calls": [],
+   "calledBy": [
+    "skill-creator"
+   ]
+  },
+  "close-the-loop": {
+   "id": "close-the-loop",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Close the Loop",
+   "description": "Close the loop on a repo: generate a project-local verification skill that drives the real app the way a user does, on any language, framework, or platform, so an agent can prove its work instead of asserting it. Use for /close-the-loop, \\\"create a verification skill\\\", \\\"make a control skill for this repo\\\", or when a project has no scripted way to prove UI/CLI/service behavior.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "diagnosing-bugs",
+    "prototype",
+    "setup-ossian-stack"
+   ]
+  },
+  "close-the-loop-audit": {
+   "id": "close-the-loop-audit",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Close the Loop — Audit",
+   "description": "Periodic pass that keeps a project's verification skill and feature map honest, so the loop stays closed as the app changes: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /close-the-loop-audit, \\\"audit the verify skill\\\", or \\\"maintain the verification skill\\\".",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": []
+  },
+  "codex-first": {
+   "id": "codex-first",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Codex First",
+   "description": "Route implementation work to Codex CLI; Claude specs, reviews, verifies.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/steipete/agent-scripts",
+   "calls": [],
+   "calledBy": []
+  },
+  "codify-conventions": {
+   "id": "codify-conventions",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Codify Conventions",
+   "description": "Codify a repo's conventions and enforce them with lint config and pre-commit hooks. Two modes: audit the codebase for de-facto patterns worth codifying, or grill the user on rules they want declared. Creates and maintains a CONVENTIONS.md of rules, wires the enforceable subset into linters and hooks, and makes adding a new rule a one-step affair. Use when the user mentions conventions, code style, lint setup, pre-commit hooks, 'how do we do X in this repo', 'make the linter catch this', or 'stop people from committing Y' — even if they don't name a linter or hook manager.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "grilling"
+   ],
+   "calledBy": []
+  },
+  "continual-learning": {
+   "id": "continual-learning",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Continual Learning",
+   "description": "Mine this project's past session transcripts for durable lessons and fold them into the project's agent instructions, so the same correction is not needed twice. Use for mine my transcripts, run continual learning, update AGENTS.md from past sessions, or when a session-start notice says transcripts are unmined.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "principle-subtract-before-you-add"
+   ],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "convex-cli": {
+   "id": "convex-cli",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Convex CLI",
+   "description": "Operate the Convex CLI (`npx convex`) for dev sync, deploy, codegen, run/query functions, inspect tables, env vars, logs, export/import, insights, and deployment management. Use this skill whenever the user touches Convex backend operations from the terminal — even if they never say \"CLI\" — including deploy to prod or preview, `convex dev` / one-shot sync, push schema or function changes, run a mutation or query from shell, list or dump table data, set Convex env vars, tail logs, check OCC/insights, seed data via `convex run`, or debug \"Convex not syncing\" / types out of date. Also trigger on npx convex, CONVEX_DEPLOYMENT, deploy key, preview deployment, or requests to inspect or fix production Convex data. Prefer `npx convex` over raw HTTP or dashboard-only workflows; it handles auth, deployment targeting, and codegen. Do not use for authoring new Convex functions in code.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "companion",
+   "repo": "https://github.com/get-convex/convex-js",
+   "calls": [],
+   "calledBy": []
+  },
+  "coolify": {
+   "id": "coolify",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Coolify",
+   "description": "Manage Coolify self-hosted PaaS instances via the coolify CLI and REST API. Deploy applications, databases, and one-click services; sync env vars; manage backups, domains, storage, servers, GitHub apps, teams, and deployments. Use when working with Coolify infrastructure, CI/CD, or the Coolify API. Triggers: deploy to coolify, coolify app, manage my coolify server, sync env vars to coolify, create a database on coolify, coolify backup, coolify MCP.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "companion",
+   "repo": "https://github.com/coollabsio/coolify-cli",
+   "calls": [],
+   "calledBy": [
+    "hetzner-vm"
+   ]
+  },
+  "copywriter": {
+   "id": "copywriter",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Copywriter",
+   "description": "Write and improve marketing and product copy that converts - App Store descriptions, screenshot headlines, in-app strings, marketing landing pages, ad copy, and onboarding text. Uses research-backed principles (specificity, outcome-first, user language, hand test). Triggers: \"write copy\", \"improve this copy\", \"rewrite this\", \"screenshot headlines\", \"landing page copy\", \"ad copy\", \"marketing text\", \"app description\", \"what should this button say\", \"empty state copy\", \"push notification copy\", \"what should I write\", \"Reels script\", \"TikTok video\", \"UGC video\", \"short-form video\", \"video hook\", \"persuasion skeleton\", \"long form copy\", \"hook agitate solve\". Covers copy that sells; editorial long-form that teaches, argues, or tells - blog posts, essays, newsletters, non-promotional threads - belongs to online-writing.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "online-writing",
+    "unslop"
+   ],
+   "calledBy": [
+    "onboarding-flow",
+    "online-writing"
+   ]
+  },
+  "diagnosing-bugs": {
+   "id": "diagnosing-bugs",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Diagnosing Bugs",
+   "description": "Diagnosis loop for hard bugs and performance regressions, run as a task you own: build a red-capable feedback loop before theorising, reproduce it yourself, trace every shipped line to runtime evidence, and stage the failing repro before the fix. Use when the user says diagnose or debug this, asks you to fix a bug or track down a regression, or reports something broken, throwing, failing, or slow.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [
+    "close-the-loop",
+    "how",
+    "why",
+    "principle-exhaust-the-design-space",
+    "principle-fix-root-causes",
+    "principle-prove-it-works"
+   ],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "domain-modeling": {
+   "id": "domain-modeling",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Domain Modeling",
+   "description": "Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": [
+    "setup-ossian-stack",
+    "triage",
+    "wayfinder"
+   ]
+  },
+  "emil-design-eng": {
+   "id": "emil-design-eng",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Emil Design Eng",
+   "description": "This skill encodes Emil Kowalski's philosophy on UI polish, component design, animation decisions, and the invisible details that make software feel great.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/emilkowalski/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "frontend-slides": {
+   "id": "frontend-slides",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Frontend Slides",
+   "description": "Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discover their aesthetic through visual exploration rather than abstract choices.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/zarazhangrui/frontend-slides",
+   "calls": [],
+   "calledBy": []
+  },
+  "git-cleanup": {
+   "id": "git-cleanup",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Git Cleanup",
+   "description": "Clean local Git branches/worktrees: merged, stale, gone remote, abandoned. Triggers: clean branches, gone branches, prune worktrees, delete abandoned work, local git clutter.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": "[optional: --dry-run | --force-abandoned | branch/worktree names]",
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "grill-design": {
+   "id": "grill-design",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Grill Design",
+   "description": "Converge on a frontend look through rounds of prototypes and grilling verdicts. Use when the user wants to iterate on UI/visual taste against concrete variants, or a wayfinder prototype ticket names this skill.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/will-ness-ai/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "grill-me": {
+   "id": "grill-me",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Grill Me",
+   "description": "A relentless interview to sharpen a plan or design.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "grill-with-docs": {
+   "id": "grill-with-docs",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Grill with Docs",
+   "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "grilling": {
+   "id": "grilling",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Grilling",
+   "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": [
+    "codify-conventions",
+    "triage",
+    "wayfinder"
+   ]
+  },
+  "handoff": {
+   "id": "handoff",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Handoff",
+   "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": "What will the next session be used for?",
+   "origin": "vendored",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "hetzner-vm": {
+   "id": "hetzner-vm",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Hetzner VM",
+   "description": "Read container logs, status, and resource usage on the Hetzner VM that hosts Coolify and its deployed apps. Use when diagnosing a deployed service — a container that is restarting, unhealthy, exited, or failing to start; a self-hosted GitHub Actions runner that will not register; disk or memory pressure on the host. Access is deliberately read-only. Triggers: hetzner, the VM, the server, container logs, docker logs, why is X restarting, is the runner up, coolify container, deployed app logs.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "one-password",
+    "coolify"
+   ],
+   "calledBy": []
+  },
+  "how": {
+   "id": "how",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "How",
+   "description": "Use for \\\"how does X work\\\", code walkthroughs before changing something, and placement / ownership / layering questions (\\\"where should this live\\\", \\\"which package owns this\\\", \\\"is this the right layer\\\"). Explains subsystem architecture, runtime flow, onboarding mental models. Can critique architecture. Use why for motivation.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "diagnosing-bugs",
+    "refactoring",
+    "teach",
+    "why"
+   ]
+  },
+  "ios-marketing-capture": {
+   "id": "ios-marketing-capture",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "iOS Marketing Capture",
+   "description": "Automate SwiftUI iOS marketing screenshots across locales, devices, and appearances. Triggers: App Store assets, locale screenshots, widget renders, simctl, fastlane alternative.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/ParthJadhav/ios-marketing-capture",
+   "calls": [],
+   "calledBy": [
+    "skill-creator"
+   ]
+  },
+  "obsidian": {
+   "id": "obsidian",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Obsidian",
+   "description": "Work directly in Ossian's Obsidian markdown vault. Triggers: check/read my notes, capture/find/edit a note, daily note, MOC, Zettelkasten, second brain.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "calledBy": [
+    "online-writing"
+   ]
+  },
+  "onboarding-flow": {
+   "id": "onboarding-flow",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Onboarding Flow",
+   "description": "Design and build a high-converting questionnaire-style onboarding flow for your app, modelled on proven conversion patterns from top subscription apps (Headspace, Duolingo, Noom, Mob). Multi-phase: discovery → transformation story → blueprint → screen content → implementation. Triggers: \"design onboarding\", \"onboarding flow\", \"build onboarding\", \"questionnaire onboarding\", \"improve my onboarding\", \"first-launch flow\", \"convert better on onboarding\", \"paywall flow\".",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/adamlyttleapps/claude-skill-app-onboarding-questionnaire",
+   "calls": [
+    "copywriter"
+   ],
+   "calledBy": []
+  },
+  "one-password": {
+   "id": "one-password",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "1Password",
+   "description": "Fetch secrets and env vars from 1Password with the `op` CLI, using a service account or Touch ID. Use whenever a command needs an API key, token, password, or `.env` value. Triggers: op read/run/inject, op://, 1Password, fetch secret, inject env vars.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "companion",
+   "repo": "https://developer.1password.com/docs/cli",
+   "calls": [],
+   "calledBy": [
+    "hetzner-vm",
+    "setup-ossian-stack"
+   ]
+  },
+  "online-writing": {
+   "id": "online-writing",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Online Writing",
+   "description": "Write, audit, or revise editorial long-form writing - blog posts, Medium and LinkedIn pieces, newsletter essays, Substack posts, X threads - using Nicolas Cole's Art and Business of Online Writing method: Form + Idea + Audience, headline first, 1/3/1 structures, Main Point skeletons, Rate of Revelation. Use this whenever the user asks to write an article or blog post from scratch, review or audit a draft, fix a headline or title, fix an introduction, restructure a piece, decide what to write about, or asks \"is this any good?\" about long-form prose. Intent decides against copywriter: editorial pieces that teach, argue, or tell belong here; a thread, newsletter, or post whose job is to sell, convert, or drive signups belongs to copywriter and its persuasion-skeleton. Not for UI microcopy, App Store metadata, or ad copy - use copywriter for those.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "copywriter",
+    "obsidian",
+    "unslop"
+   ],
+   "calledBy": [
+    "copywriter"
+   ]
+  },
+  "post-queue-cli": {
+   "id": "post-queue-cli",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Post Queue CLI",
+   "description": "Operate the Post Queue command surfaces effectively. Use for the postq CLI, local Next.js and Convex development, production-safe reads, Convex deployment inspection, tests, lint, typecheck, builds, and scheduler verification.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "companion",
+   "repo": "https://github.com/ossianhempel/post-queue",
+   "calls": [],
+   "calledBy": []
+  },
+  "principle-encode-lessons-in-structure": {
+   "id": "principle-encode-lessons-in-structure",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Encode Lessons in Structure",
+   "description": "Apply when you catch yourself writing the same instruction a second time, or notice a recurring correction. Encode the rule as a lint, metadata flag, runtime check, or script instead of more text.",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": []
+  },
+  "principle-exhaust-the-design-space": {
+   "id": "principle-exhaust-the-design-space",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Exhaust the Design Space",
+   "description": "Apply when facing a novel UI interaction or architectural decision with no precedent in the codebase. Build 2-3 competing prototypes and compare side by side before committing.",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "diagnosing-bugs",
+    "prototype",
+    "refactoring"
+   ]
+  },
+  "principle-fix-root-causes": {
+   "id": "principle-fix-root-causes",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Fix Root Causes",
+   "description": "Apply when debugging. Trace each symptom to its root cause and fix it there; reproduce first, ask why until you reach it, resist nil-check guards that silence crashes.",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "diagnosing-bugs"
+   ]
+  },
+  "principle-model-the-domain": {
+   "id": "principle-model-the-domain",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Model the Domain",
+   "description": "Apply when writing stateful logic, or when code branches a lot or repeats a shape assumption across files. Encode the domain in a structure instead of scattered conditionals.",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": []
+  },
+  "principle-prove-it-works": {
+   "id": "principle-prove-it-works",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Prove It Works",
+   "description": "Apply after completing a task, before declaring done. Verify against the real artifact (run the feature, read the actual value, inspect the diff), not a proxy, self-report, or 'it compiles.'",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "diagnosing-bugs",
+    "refactoring"
+   ]
+  },
+  "principle-redesign-from-first-principles": {
+   "id": "principle-redesign-from-first-principles",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Redesign From First Principles",
+   "description": "Apply when integrating a new requirement into an existing design. Redesign as if the requirement had been a foundational assumption from day one, instead of bolting it on.",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "refactoring"
+   ]
+  },
+  "principle-subtract-before-you-add": {
+   "id": "principle-subtract-before-you-add",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Subtract Before You Add",
+   "description": "Apply when sequencing an addition, refactor, or rewrite. Remove dead weight, redundant validators, and stub references first, then build on the simpler base.",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "continual-learning",
+    "simplify-code"
+   ]
+  },
+  "privacy-policy": {
+   "id": "privacy-policy",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Privacy Policy",
+   "description": "Generate app privacy policies, terms, EULAs, App Store data disclosures, Privacy Nutrition Label mapping, SDK/data collection checks, region-specific legal docs.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "calledBy": []
+  },
+  "prototype": {
+   "id": "prototype",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Prototype",
+   "description": "Build throwaway code that answers a design question — a UI you can flip between variants, or a state model you can click through — then hand back the decision, not the code. Use for prototype, mock it up, sketch this, try this layout, explore what this should look like, or sanity-check whether a state model feels right.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [
+    "close-the-loop",
+    "principle-exhaust-the-design-space"
+   ],
+   "calledBy": [
+    "wayfinder"
+   ]
+  },
+  "refactoring": {
+   "id": "refactoring",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Refactoring",
+   "description": "Change the shape of working code without changing what it does: rename, extract, inline, dedupe, restructure, move a module. Pins behavior with a characterization test before any structure moves, migrates every caller, and proves equivalence on the real artifact. Use for refactor this, restructure, extract, inline, dedupe, move this module, tidy up this area.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "how",
+    "simplify-code",
+    "principle-exhaust-the-design-space",
+    "principle-prove-it-works",
+    "principle-redesign-from-first-principles"
+   ],
+   "calledBy": []
+  },
+  "release-ios-app": {
+   "id": "release-ios-app",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Release iOS App",
+   "description": "Release iOS and Expo apps to TestFlight and the App Store. Triggers: iOS release, Expo release, version bump, TestFlight, App Store review, Xcode Cloud, EAS, .ios-release.env.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "asc-metadata",
+    "asc-release",
+    "babysit"
+   ],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "resolve-pr-feedback": {
+   "id": "resolve-pr-feedback",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Resolve PR Feedback",
+   "description": "Resolve PR review feedback. Use when addressing feedback already left on a PR. Not for reviewing the code before feedback exists; that is code-review.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": "[PR number, comment URL, or blank for current branch's PR]",
+   "origin": "adapted",
+   "repo": "https://github.com/EveryInc/compound-engineering-plugin",
+   "calls": [
+    "babysit"
+   ],
+   "calledBy": []
+  },
+  "resolving-merge-conflicts": {
+   "id": "resolving-merge-conflicts",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Resolving Merge Conflicts",
+   "description": "Use when you need to resolve an in-progress git merge/rebase conflict.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": []
+  },
+  "revenuecat-api": {
+   "id": "revenuecat-api",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "RevenueCat API",
+   "description": "Manage RevenueCat API v2 resources and the official RevenueCat MCP workflow for Claude Code and Codex. Use when inspecting or changing RevenueCat projects, apps, products, entitlements, offerings, packages, customers, subscriptions, purchases, webhooks, paywalls, invoices, or metrics.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "companion",
+   "repo": "https://github.com/RevenueCat/docs",
+   "calls": [],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "setup-ossian-stack": {
+   "id": "setup-ossian-stack",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Setup ossian-stack",
+   "description": "Configure a machine and project after this plugin is installed: retire superseded plugins and stale skill symlinks, approve the session-start hook where a runtime gates it, check project-owned prerequisites and issue-tracker config, and audit each skill's real execution paths without mistaking a non-global CLI for a missing capability. Use for /setup-ossian-stack, configure the plugin's prerequisites, or migrate an existing installation.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "babysit",
+    "close-the-loop",
+    "continual-learning",
+    "diagnosing-bugs",
+    "domain-modeling",
+    "git-cleanup",
+    "one-password",
+    "release-ios-app",
+    "revenuecat-api",
+    "to-spec",
+    "to-tickets",
+    "triage",
+    "wayfinder"
+   ],
+   "calledBy": [
+    "wayfinder"
+   ]
+  },
+  "simplify-code": {
+   "id": "simplify-code",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Simplify Code",
+   "description": "Rewrite code that already works so it is skimmable and hard to misuse: fewer states, fewer arguments, fewer lines, exhaustive type handling, asserts instead of defensive fallbacks. Use after a unit has settled and before review, commit, or handoff — on a branch diff, a named file, or code an agent just generated. Triggers on simplify this, clean this up, make this beautiful, this is too complex, reduce the state space.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "derived",
+   "repo": null,
+   "calls": [
+    "principle-subtract-before-you-add"
+   ],
+   "calledBy": [
+    "refactoring"
+   ]
+  },
+  "skill-creator": {
+   "id": "skill-creator",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Skill Creator",
+   "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, update or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/anthropics/skills",
+   "calls": [
+    "clerk-cli",
+    "ios-marketing-capture"
+   ],
+   "calledBy": []
+  },
+  "teach": {
+   "id": "teach",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Teach",
+   "description": "Explain a body of work plainly so a person actually understands it. Runs the `how` and `why` skills and weaves what they find into one clear explanation. Use for 'teach me this', 'help me really understand X', 'explain this change or subsystem to me'.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "how",
+    "why"
+   ],
+   "calledBy": []
+  },
+  "things": {
+   "id": "things",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Things",
+   "description": "Things 3 CLI for reading the local Things database and creating/updating tasks/projects via the Things URL scheme. Use when you need to list, search, or modify Things tasks, projects, areas, or tags from the terminal (deletes use AppleScript).",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "companion",
+   "repo": "https://github.com/ossianhempel/things3-cli",
+   "calls": [],
+   "calledBy": []
+  },
+  "to-spec": {
+   "id": "to-spec",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "To Spec",
+   "description": "Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "to-tickets": {
+   "id": "to-tickets",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "To Tickets",
+   "description": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker — edges as text in one file per ticket locally, or native blocking links on a real tracker.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "triage": {
+   "id": "triage",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Triage",
+   "description": "Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [
+    "domain-modeling",
+    "grilling"
+   ],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "unslop": {
+   "id": "unslop",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Unslop",
+   "description": "Cut AI tells from any writing and add human voice. Runs as a write-through style pass on everything you draft, and doubles as the audit gate: use when asked to check for AI slop, remove AI tells, make writing sound human, or review a draft for robotic language.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "copywriter",
+    "online-writing"
+   ]
+  },
+  "wayfinder": {
+   "id": "wayfinder",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Wayfinder",
+   "description": "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [
+    "domain-modeling",
+    "grilling",
+    "prototype",
+    "setup-ossian-stack"
+   ],
+   "calledBy": [
+    "setup-ossian-stack"
+   ]
+  },
+  "why": {
+   "id": "why",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Why",
+   "description": "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, long-form docs, real-time chat, infrastructure observability, error tracking, product analytics warehouse) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "how"
+   ],
+   "calledBy": [
+    "diagnosing-bugs",
+    "teach"
+   ]
+  }
+ },
+ "counts": {
+  "skills": 61,
+  "agents": 0,
+  "plugins": 1
+ }
+}
+</script>
+<!-- plugin-map:end -->
+
+<script>
+(() => {
+  const DATA = JSON.parse(document.getElementById("plugin-map-data").textContent);
+  const q = new URLSearchParams(location.search);
+  const SHOT = q.get("shot") === "1";
+  let expanded = q.get("expanded") === "1";
+  if (SHOT) document.body.classList.add("shot");
+
+  // ======================================================= geometry block
+  // Every absolute coordinate lives here; the rest is relative.
+  const G = {
+    W: 2000, PAD: 40,
+    headerH: 118,
+    entryX: 40, entryW: 200, entryH: 92,
+    laneX: 300, laneW: 1180, laneGap: 22, lanePad: 16,
+    titleH: 38, pillH: 34, pillPadX: 14, arrowW: 30, capH: 16, optH: 14,
+    extraH: 28, extraGap: 12,
+    platX: 1520, platW: 440, platCols: 2, platGap: 12,
+    sideGap: 30, legendH: 58, footerH: 36,
+    font: "500 13px Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif",
+    smallFont: "500 12px Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif",
+  };
+
+  // ======================================================= clusters
+  const SEC = DATA.sections;
+  const NODES = DATA.nodes;
+  const roleOf = (id) => NODES[id]?.type === "agent" ? "agent" : NODES[id]?.role;
+  const collapsedTargets = (id) => (NODES[id]?.calls ?? []).filter((t) => roleOf(t) === "knowledge" || roleOf(t) === "agent");
+
+  const NS = "http://www.w3.org/2000/svg";
+  const svg = document.getElementById("board");
+  const el = (tag, attrs = {}, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) if (v !== null && v !== undefined) n.setAttribute(k, v);
+    if (parent) parent.appendChild(n);
+    return n;
+  };
+  const text = (parent, x, y, s, cls, attrs = {}) => { const t = el("text", { x, y, class: cls, ...attrs }, parent); t.textContent = s; return t; };
+  const ctx = document.createElement("canvas").getContext("2d");
+  const measure = (s, font = G.font) => { ctx.font = font; return ctx.measureText(s).width; };
+  const pillW = (id) => Math.ceil(measure(id)) + G.pillPadX * 2;
+  const badgeInfo = (id) => {
+    const col = collapsedTargets(id);
+    if (!col.length || expanded) return null;
+    const agents = col.filter((t) => roleOf(t) === "agent").length;
+    const label = agents ? `${agents} agents` : `reads ${col.length}`;
+    const bw = Math.ceil(measure(label, "600 10px Inter, ui-sans-serif, system-ui, sans-serif")) + 12;
+    return { label, bw, k: agents ? "" : " k" };
+  };
+  const nodeW = (id) => { const b = badgeInfo(id); return pillW(id) + (b ? 4 + b.bw : 0); };
+  const rowH = () => G.optH + G.pillH + G.capH + 6;
+  function chainRows(lane) {
+    const maxW = G.laneW - 2 * G.lanePad; const rows = [[]]; let x = 0;
+    for (const st of lane.steps) { const w = nodeW(st.id); if (x > 0 && x + w > maxW) { rows.push([]); x = 0; } rows[rows.length - 1].push(st); x += w + G.arrowW; }
+    return rows;
+  }
+
+  const positions = {};   // id -> {x,y,w,h} for hover links
+  const nodeEls = {};
+
+  function drawNode(parent, id, x, y, opts = {}) {
+    const n = NODES[id];
+    const h = opts.h ?? G.pillH;
+    const w = opts.w ?? pillW(id);
+    const g = el("g", { class: `node r-${n.role}${n.type === "agent" ? " agent" : ""}${opts.optional ? " optional" : ""}`, "data-id": id, tabindex: 0, role: "button", "aria-label": `${id}: ${n.description.slice(0, 120)}`, transform: `translate(${x},${y})` }, parent);
+    el("rect", { class: "pill", width: w, height: h, rx: n.type === "agent" ? h / 2 : 8 }, g);
+    text(g, w / 2, h / 2 + 4.5, id, "lbl", { "text-anchor": "middle" });
+    let total = w;
+    const b = badgeInfo(id);
+    if (b) {
+      el("rect", { class: "badge" + b.k, x: w + 4, y: h / 2 - 8, width: b.bw, height: 16, rx: 8 }, g);
+      text(g, w + 4 + b.bw / 2, h / 2 + 3.5, b.label, "badge-t" + b.k, { "text-anchor": "middle" });
+      total = w + 4 + b.bw;
+    }
+    if (opts.optional) text(g, 0, -4, "optional", "t-tiny");
+    if (opts.writes) text(g, w / 2, h + G.capH - 2, "↳ " + opts.writes, "t-cap", { "text-anchor": "middle" });
+    if (opts.note) text(g, w / 2, h + G.capH - 2, opts.note, "t-cap", { "text-anchor": "middle" });
+    positions[id] = { x, y, w, h };
+    nodeEls[id] = g;
+    return { w: total, h };
+  }
+
+  function laneHeight(lane) {
+    let h = G.lanePad + G.titleH + chainRows(lane).length * rowH();
+    if (lane.extras?.length) h += G.extraGap + G.extraH + G.capH;
+    return h + G.lanePad;
+  }
+
+  // ======================================================= layout pass
+  const laneTops = [];
+  let y = G.headerH;
+  for (const lane of SEC.lanes) { laneTops.push(y); y += laneHeight(lane) + G.laneGap; }
+  const lanesBottom = y - G.laneGap;
+
+  // knowledge region (expanded only), below lanes in the lane column
+  let knowledgeTop = null, knowledgeH = 0;
+  if (expanded && SEC.knowledge.ids.length) {
+    knowledgeTop = lanesBottom + G.laneGap;
+    // wrap pills across laneW
+    let rows = 1, cx = G.lanePad;
+    for (const id of SEC.knowledge.ids) { const w = pillW(id); if (cx + w > G.laneW - G.lanePad) { rows++; cx = G.lanePad; } cx += w + 12; }
+    knowledgeH = G.lanePad + G.titleH + rows * (G.pillH + 12) + G.lanePad - 12;
+  }
+  const leftBottom = knowledgeTop === null ? lanesBottom : knowledgeTop + knowledgeH;
+
+  // platforms column
+  const platTileW = (G.platW - G.platGap * (G.platCols - 1)) / G.platCols;
+  const platTiles = [];
+  {
+    const colY = Array(G.platCols).fill(G.headerH);
+    SEC.platforms.forEach((p, i) => {
+      const c = i % G.platCols;
+      const groups = {};
+      for (const s of p.skills) (groups[s.phase] ??= []).push(s.id);
+      const h = 14 + 22 + Object.keys(groups).length * (14 + G.pillH + 8) + 8;
+      platTiles.push({ p, x: G.platX + c * (platTileW + G.platGap), y: colY[c], w: platTileW, h, groups });
+      colY[c] += h + G.platGap;
+    });
+    var platBottom = Math.max(...colY) - G.platGap;
+  }
+
+  const sideTop = Math.max(leftBottom, platBottom) + G.sideGap;
+  const sideH = G.lanePad + G.titleH + G.pillH + G.lanePad;
+  const legendTop = sideTop + sideH + 22;
+  const H = legendTop + G.legendH + G.footerH;
+  svg.setAttribute("viewBox", `0 0 ${G.W} ${H}`);
+  svg.setAttribute("width", G.W); svg.setAttribute("height", H);
+  if (SHOT) { const m = document.createElement("meta"); m.name = "board-height"; m.content = String(H); document.head.appendChild(m); }
+
+  // defs
+  const defs = el("defs", {}, svg);
+  const mk = el("marker", { id: "arr", viewBox: "0 0 10 10", refX: 9, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
+  el("path", { d: "M0 0 L10 5 L0 10 z", fill: "#8a8f98" }, mk);
+
+  // ======================================================= header + install strip
+  {
+    const g = el("g", {}, svg);
+    text(g, G.PAD, 44, DATA.plugins[Object.keys(DATA.plugins)[0]].label, "t-title");
+    text(g, G.PAD + measure(DATA.plugins[Object.keys(DATA.plugins)[0]].label, "700 26px Inter, system-ui, sans-serif") + 16, 44, "how the skills fit together", "t-sub");
+    // install strip
+    let x = G.PAD;
+    const y0 = 66;
+    text(g, x, y0 + 14, "INSTALLS AS", "t-tiny"); x += 84;
+    for (const [pid, p] of Object.entries(DATA.plugins)) {
+      const label = `${p.label} · ${p.install === "always" ? "always installed" : p.install}`;
+      const w = measure(label, G.smallFont) + 20;
+      el("rect", { x, y: y0, width: w, height: 24, rx: 6, fill: "#1c1c21" }, g);
+      text(g, x + w / 2, y0 + 16, label, "", { "text-anchor": "middle", style: "fill:#fff", "font-size": 12, "font-weight": 600 });
+      x += w + 10;
+    }
+    x += 6; text(g, x, y0 + 14, "INTO", "t-tiny"); x += 36;
+    for (const r of DATA.runtimes) {
+      const label = `${r.label} · ${r.how}`;
+      const w = measure(label, G.smallFont) + 20;
+      const c = el("g", { class: "chipg" }, g);
+      el("rect", { class: "chip", x, y: y0, width: w, height: 24 }, c);
+      text(c, x + w / 2, y0 + 16, label, "", { "text-anchor": "middle" });
+      x += w + 8;
+    }
+  }
+
+  // ======================================================= entry + tracks
+  const entryCy = (laneTops[0] + lanesBottom) / 2;
+  {
+    const g = el("g", { class: "entry" }, svg);
+    const ex = G.entryX, ey = entryCy - G.entryH / 2;
+    // "you" figure
+    const fx = ex + 30, fy = ey - 54;
+    el("circle", { cx: fx, cy: fy, r: 9, fill: "#1c1c21" }, g);
+    el("path", { d: `M${fx - 16} ${fy + 34} a16 16 0 0 1 32 0 z`, fill: "#1c1c21" }, g);
+    text(g, fx + 24, fy + 6, "you", "t-h");
+    el("path", { class: "arrow", d: `M${fx + 60} ${fy + 8} q 40 0 40 ${ey - fy - 12}`, "marker-end": "url(#arr)" }, g);
+    el("rect", { class: "pill", x: ex, y: ey, width: G.entryW, height: G.entryH }, g);
+    text(g, ex + G.entryW / 2, ey + 40, DATA.entry.label, "", { "text-anchor": "middle", "font-size": 20, "font-weight": 700 });
+    text(g, ex + G.entryW / 2, ey + 62, DATA.entry.sub, "", { "text-anchor": "middle", "font-size": 12, opacity: .8 });
+    // tracks to lanes
+    SEC.lanes.forEach((lane, i) => {
+      const ly = laneTops[i] + G.lanePad + G.titleH / 2 + 2;
+      const x0 = ex + G.entryW, x1 = G.laneX;
+      const mx = (x0 + x1) / 2;
+      el("path", { class: "track", d: `M${x0} ${entryCy} C ${mx} ${entryCy}, ${mx} ${ly}, ${x1} ${ly}` }, svg);
+    });
+  }
+
+  // ======================================================= lanes
+  SEC.lanes.forEach((lane, i) => {
+    const top = laneTops[i], h = laneHeight(lane);
+    const g = el("g", { class: "lane", "data-lane": lane.id }, svg);
+    el("rect", { class: "region", x: G.laneX, y: top, width: G.laneW, height: h }, g);
+    const ty = top + G.lanePad + 18;
+    text(g, G.laneX + G.lanePad, ty, lane.title, "t-h");
+    const tw = measure(lane.title, "600 15px Inter, system-ui, sans-serif");
+    text(g, G.laneX + G.lanePad + tw + 12, ty, "◂ " + lane.outcome, "t-cap");
+    // group tag, right
+    const tag = lane.tag, tagW = measure(tag, G.smallFont) + 18;
+    el("rect", { class: "chip", x: G.laneX + G.laneW - G.lanePad - tagW, y: top + G.lanePad, width: tagW, height: 22 }, g);
+    text(g, G.laneX + G.laneW - G.lanePad - tagW / 2, top + G.lanePad + 15, tag, "", { "text-anchor": "middle", "font-size": 11.5, fill: "#5b5f6a" });
+    // main chain, wrapped onto more rows when it outgrows the lane
+    const rows = chainRows(lane);
+    const x0 = G.laneX + G.lanePad;
+    let py = top + G.lanePad + G.titleH + G.optH;
+    rows.forEach((row, r) => {
+      let x = x0;
+      if (r > 0) el("path", { class: "arrow", d: `M${x0 - 24} ${py + G.pillH / 2} H${x0 - 3}`, "marker-end": "url(#arr)" }, g);
+      row.forEach((st, j) => {
+        const { w } = drawNode(g, st.id, x, py, { optional: st.optional, writes: st.writes });
+        const last = j === row.length - 1;
+        if (!last) el("path", { class: "arrow", d: `M${x + w + 3} ${py + G.pillH / 2} H${x + w + G.arrowW - 3}`, "marker-end": "url(#arr)" }, g);
+        else if (r < rows.length - 1) el("path", { class: "arrow", d: `M${x + w + 3} ${py + G.pillH / 2} H${x + w + 22}`, "marker-end": "url(#arr)" }, g);
+        x += w + G.arrowW;
+      });
+      py += rowH();
+    });
+    py -= rowH();
+    // extras row
+    if (lane.extras?.length) {
+      let ex = G.laneX + G.lanePad; const ey = py + G.pillH + G.capH + G.extraGap;
+      text(g, ex, ey + 18, "ALSO", "t-tiny"); ex += 44;
+      for (const st of lane.extras) {
+        const { w } = drawNode(g, st.id, ex, ey, { h: G.extraH, note: st.note });
+        ex += w + 14;
+      }
+    }
+  });
+
+  // ======================================================= knowledge (expanded)
+  if (knowledgeTop !== null) {
+    const g = el("g", {}, svg);
+    el("rect", { class: "region", x: G.laneX, y: knowledgeTop, width: G.laneW, height: knowledgeH }, g);
+    text(g, G.laneX + G.lanePad, knowledgeTop + G.lanePad + 18, SEC.knowledge.title, "t-h");
+    text(g, G.laneX + G.lanePad + measure(SEC.knowledge.title, "600 15px Inter, system-ui, sans-serif") + 12, knowledgeTop + G.lanePad + 18, "◂ reference the agent reads", "t-cap");
+    let x = G.laneX + G.lanePad, yy = knowledgeTop + G.lanePad + G.titleH;
+    for (const id of SEC.knowledge.ids) {
+      const w = pillW(id);
+      if (x + w > G.laneX + G.laneW - G.lanePad) { x = G.laneX + G.lanePad; yy += G.pillH + 12; }
+      drawNode(g, id, x, yy); x += w + 12;
+    }
+  }
+
+  // ======================================================= platforms
+  {
+    const g = el("g", {}, svg);
+    text(g, G.platX, G.headerH - 10, "PLATFORMS", "t-tiny");
+    const PH = { setup: "set up once", building: "while building", reference: "reference" };
+    for (const t of platTiles) {
+      el("rect", { class: "tile", x: t.x, y: t.y, width: t.w, height: t.h }, g);
+      text(g, t.x + 14, t.y + 26, t.p.title, "t-h");
+      let yy = t.y + 36;
+      for (const [phase, ids] of Object.entries(t.groups)) {
+        text(g, t.x + 14, yy + 12, (PH[phase] ?? phase).toUpperCase(), "t-tiny"); yy += 14 + 4;
+        let x = t.x + 14;
+        for (const id of ids) { const { w } = drawNode(g, id, x, yy); x += w + 8; }
+        yy += G.pillH + 8;
+      }
+    }
+  }
+
+  // ======================================================= side doors
+  {
+    const g = el("g", {}, svg);
+    el("rect", { class: "region", x: G.laneX, y: sideTop, width: G.platX + G.platW - G.laneX, height: sideH }, g);
+    text(g, G.laneX + G.lanePad, sideTop + G.lanePad + 18, "Side doors", "t-h");
+    text(g, G.laneX + G.lanePad + measure("Side doors", "600 15px Inter, system-ui, sans-serif") + 12, sideTop + G.lanePad + 18, "◂ utilities you run directly", "t-cap");
+    let x = G.laneX + G.lanePad, yy = sideTop + G.lanePad + G.titleH;
+    for (const id of SEC.sideDoors) { const { w } = drawNode(g, id, x, yy); x += w + 12; }
+  }
+
+  // ======================================================= legend + footer
+  {
+    const g = el("g", {}, svg);
+    let x = G.PAD, yy = legendTop + 8;
+    const lab = (s, dx) => { text(g, x + dx, yy + 11, s, "", { "font-size": 12, fill: "#5b5f6a" }); x += dx + measure(s, G.smallFont) + 26; };
+    text(g, x, yy + 11, "LEGEND", "t-tiny"); x += 64;
+    const swatches = [
+      [{ fill: "#2f6fed", stroke: "#2f6fed" }, "you run it"],
+      [{ fill: "#fff", stroke: "#2f6fed", "stroke-width": 1.5 }, "you or another skill"],
+      [{ fill: "#0e8a7a", stroke: "#0e8a7a" }, "runs for you"],
+      [{ fill: "#fff", stroke: "#8a8f98", "stroke-width": 1.5, "stroke-dasharray": "4 2" }, "reference the agent reads"],
+      [{ fill: "#8957e5", stroke: "#8957e5", rx: 7 }, "subagent"],
+    ];
+    for (const [attrs, label] of swatches) { el("rect", { x, y: yy, width: 22, height: 14, rx: 4, ...attrs }, g); lab(label, 30); }
+    el("path", { class: "arrow", d: `M${x} ${yy + 7} H${x + 22}`, "marker-end": "url(#arr)" }, g); lab("main path", 30);
+    text(g, x, yy + 11, "↳ caption", "t-cap"); lab("artifact it writes", 66);
+    el("rect", { class: "badge k", x, y: yy - 1, width: 48, height: 16, rx: 8, fill: "#f1f1ee", stroke: "#8a8f98" }, g);
+    text(g, x + 24, yy + 11, "reads 3", "", { "text-anchor": "middle", "font-size": 10, "font-weight": 600, fill: "#5b5f6a" }); lab("collapsed group — click to list, toggle to expand", 56);
+    const c = DATA.counts;
+    text(g, G.PAD, legendTop + G.legendH + 14, `Generated by ${DATA.generated} from skills/ frontmatter + docs/plugin-map/map.json · ${c.skills} skills · ${c.agents} agents · ${c.plugins} plugin${c.plugins === 1 ? "" : "s"}`, "t-mono");
+  }
+
+  // ======================================================= interaction
+  const links = el("g", { id: "links" }, svg);
+  const center = (id) => { const p = positions[id]; if (!p) return null; const t = nodeEls[id].getCTM(); return { x: p.w / 2, y: p.h / 2, w: p.w, h: p.h, g: nodeEls[id] }; };
+  const absCenter = (id) => {
+    const g = nodeEls[id]; if (!g) return null;
+    const m = g.transform.baseVal.consolidate()?.matrix; const p = positions[id];
+    return { x: (m?.e ?? 0) + p.w / 2, y: (m?.f ?? 0) + p.h / 2 };
+  };
+  function light(id) {
+    const n = NODES[id]; if (!n) return;
+    svg.classList.add("lit");
+    const on = new Set([id, ...n.calls, ...n.calledBy]);
+    for (const [k, g] of Object.entries(nodeEls)) g.classList.toggle("on", on.has(k));
+    links.innerHTML = "";
+    const a = absCenter(id);
+    for (const t of [...n.calls, ...n.calledBy]) {
+      const b = absCenter(t); if (!b) continue;
+      const mx = (a.x + b.x) / 2;
+      el("path", { class: "link", d: `M${a.x} ${a.y} C ${mx} ${a.y}, ${mx} ${b.y}, ${b.x} ${b.y}` }, links);
+    }
+  }
+  function unlight() { svg.classList.remove("lit"); for (const g of Object.values(nodeEls)) g.classList.remove("on"); links.innerHTML = ""; }
+
+  const drawer = document.getElementById("drawer"), body = document.getElementById("drawer-body");
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const ROLE_LABEL = { human: "you run it", both: "you or another skill", auto: "runs for you", knowledge: "reference the agent reads" };
+  function openDrawer(id) {
+    const n = NODES[id]; if (!n) return;
+    const list = (ids) => ids.length ? `<ul>${ids.map((t) => `<li><button type="button" data-go="${esc(t)}">${esc(t)}</button></li>`).join("")}</ul>` : `<div class="none">none</div>`;
+    body.innerHTML = `
+      <h2>${esc(n.display)}</h2>
+      <div class="id">${esc(n.id)}</div>
+      <div class="meta">
+        <span class="role">${n.type === "agent" ? "subagent" + (n.kind ? " · " + esc(n.kind) : "") : esc(ROLE_LABEL[n.role])}</span>
+        <span>${esc(n.plugin)}</span>
+        ${n.origin ? `<span>${esc(n.origin)}${n.repo ? ` · <a href="${esc(n.repo)}" target="_blank" rel="noopener">upstream</a>` : ""}</span>` : ""}
+        ${n.humanOnly ? `<span>explicit invocation only</span>` : ""}
+      </div>
+      ${n.argumentHint ? `<h3>Argument</h3><div class="hint">${esc(n.argumentHint)}</div>` : ""}
+      <h3>Description</h3><p>${esc(n.description)}</p>
+      <h3>Runs, dispatches or reads</h3>${list(n.calls)}
+      <h3>Run by</h3>${list(n.calledBy)}`;
+    drawer.classList.add("open"); drawer.setAttribute("aria-hidden", "false");
+    light(id);
+    body.querySelector("h2").setAttribute("tabindex", "-1"); body.querySelector("h2").focus();
+  }
+  function closeDrawer() { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); unlight(); }
+  drawer.querySelector(".close").addEventListener("click", closeDrawer);
+  body.addEventListener("click", (e) => { const b = e.target.closest("[data-go]"); if (b) { openDrawer(b.dataset.go); nodeEls[b.dataset.go]?.scrollIntoView({ block: "center", behavior: "smooth" }); } });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeDrawer(); });
+
+  for (const [id, g] of Object.entries(nodeEls)) {
+    g.addEventListener("mouseenter", () => light(id));
+    g.addEventListener("mouseleave", () => { if (!drawer.classList.contains("open")) unlight(); });
+    g.addEventListener("focus", () => light(id));
+    g.addEventListener("blur", () => { if (!drawer.classList.contains("open")) unlight(); });
+    g.addEventListener("click", () => openDrawer(id));
+    g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openDrawer(id); } });
+  }
+
+  const toggle = document.getElementById("toggle");
+  toggle.setAttribute("aria-pressed", String(expanded));
+  toggle.addEventListener("click", () => { q.set("expanded", expanded ? "0" : "1"); location.search = q.toString(); });
+})();
+</script>
+</body>
+</html>

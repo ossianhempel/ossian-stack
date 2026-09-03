@@ -5,10 +5,12 @@
   "description": "Repo-local tooling for the ossian-stack plugin. Not shipped, not published \u2014 the plugin itself is just skills/.",
   "scripts": {
     "check": "bun run validate && bun run plugin:validate",
-    "validate": "bun scripts/validate.ts",
+    "validate": "bun scripts/validate.ts && bun scripts/build-plugin-map.js --check",
     "plugin:validate": "claude plugin validate .claude-plugin/marketplace.json && claude plugin validate .claude-plugin/plugin.json",
     "check:upstream": "scripts/check-upstream.sh",
-    "docs:list": "bin/docs-list"
+    "docs:list": "bin/docs-list",
+    "map": "bun scripts/build-plugin-map.js",
+    "map:render": "scripts/render-plugin-map.sh"
   },
   "engines": {
     "bun": ">=1.0.0"

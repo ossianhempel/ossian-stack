@@ -1,0 +1,623 @@
+{
+  "$comment": "Hand-curated placement for docs/plugin-map. Descriptions are NOT stored here \u2014 they come from each SKILL.md frontmatter. scripts/build-plugin-map.js merges the two and fails when this file and skills/ disagree.",
+  "plugins": {
+    "ossian-stack": {
+      "label": "ossian-stack",
+      "install": "always"
+    }
+  },
+  "runtimes": [
+    {
+      "label": "Claude Code",
+      "how": "native plugin"
+    },
+    {
+      "label": "Codex",
+      "how": "native plugin"
+    },
+    {
+      "label": "Cursor",
+      "how": "native plugin"
+    },
+    {
+      "label": "Copilot",
+      "how": "native plugin"
+    },
+    {
+      "label": "Gemini \u00b7 Windsurf \u00b7 Antigravity",
+      "how": "skills installer"
+    }
+  ],
+  "entry": {
+    "label": "Your task",
+    "sub": "describe it, or name a skill"
+  },
+  "skills": {
+    "app-store-optimization": {
+      "role": "both"
+    },
+    "asc-metadata": {
+      "role": "both"
+    },
+    "asc-pricing": {
+      "role": "both"
+    },
+    "asc-release": {
+      "role": "both"
+    },
+    "asc-version-guard": {
+      "role": "both"
+    },
+    "autoreview": {
+      "role": "both"
+    },
+    "babysit": {
+      "role": "both"
+    },
+    "better-accessibility": {
+      "role": "both"
+    },
+    "bro": {
+      "role": "human"
+    },
+    "clerk-cli": {
+      "role": "both"
+    },
+    "close-the-loop": {
+      "role": "human"
+    },
+    "close-the-loop-audit": {
+      "role": "human"
+    },
+    "codex-first": {
+      "role": "both"
+    },
+    "codify-conventions": {
+      "role": "both"
+    },
+    "continual-learning": {
+      "role": "human"
+    },
+    "convex-cli": {
+      "role": "both"
+    },
+    "coolify": {
+      "role": "both"
+    },
+    "copywriter": {
+      "role": "both"
+    },
+    "diagnosing-bugs": {
+      "role": "both"
+    },
+    "domain-modeling": {
+      "role": "both"
+    },
+    "emil-design-eng": {
+      "role": "both"
+    },
+    "frontend-slides": {
+      "role": "both"
+    },
+    "git-cleanup": {
+      "role": "both"
+    },
+    "grill-design": {
+      "role": "both"
+    },
+    "grill-me": {
+      "role": "human"
+    },
+    "grill-with-docs": {
+      "role": "human"
+    },
+    "grilling": {
+      "role": "both"
+    },
+    "handoff": {
+      "role": "human"
+    },
+    "hetzner-vm": {
+      "role": "both"
+    },
+    "how": {
+      "role": "both"
+    },
+    "ios-marketing-capture": {
+      "role": "both"
+    },
+    "obsidian": {
+      "role": "both"
+    },
+    "onboarding-flow": {
+      "role": "both"
+    },
+    "one-password": {
+      "role": "both"
+    },
+    "online-writing": {
+      "role": "both"
+    },
+    "post-queue-cli": {
+      "role": "both"
+    },
+    "principle-encode-lessons-in-structure": {
+      "role": "knowledge"
+    },
+    "principle-exhaust-the-design-space": {
+      "role": "knowledge"
+    },
+    "principle-fix-root-causes": {
+      "role": "knowledge"
+    },
+    "principle-model-the-domain": {
+      "role": "knowledge"
+    },
+    "principle-prove-it-works": {
+      "role": "knowledge"
+    },
+    "principle-redesign-from-first-principles": {
+      "role": "knowledge"
+    },
+    "principle-subtract-before-you-add": {
+      "role": "knowledge"
+    },
+    "privacy-policy": {
+      "role": "both"
+    },
+    "prototype": {
+      "role": "both"
+    },
+    "refactoring": {
+      "role": "both"
+    },
+    "release-ios-app": {
+      "role": "both"
+    },
+    "resolve-pr-feedback": {
+      "role": "both"
+    },
+    "resolving-merge-conflicts": {
+      "role": "both"
+    },
+    "revenuecat-api": {
+      "role": "human"
+    },
+    "setup-ossian-stack": {
+      "role": "human"
+    },
+    "simplify-code": {
+      "role": "both"
+    },
+    "skill-creator": {
+      "role": "both"
+    },
+    "teach": {
+      "role": "human"
+    },
+    "things": {
+      "role": "both"
+    },
+    "to-spec": {
+      "role": "human"
+    },
+    "to-tickets": {
+      "role": "human"
+    },
+    "triage": {
+      "role": "human"
+    },
+    "unslop": {
+      "role": "both"
+    },
+    "wayfinder": {
+      "role": "human"
+    },
+    "why": {
+      "role": "both"
+    }
+  },
+  "agents": {},
+  "calls": {
+    "codify-conventions": [
+      "grilling"
+    ],
+    "continual-learning": [
+      "principle-subtract-before-you-add"
+    ],
+    "copywriter": [
+      "online-writing",
+      "unslop"
+    ],
+    "diagnosing-bugs": [
+      "close-the-loop",
+      "how",
+      "why",
+      "principle-exhaust-the-design-space",
+      "principle-fix-root-causes",
+      "principle-prove-it-works"
+    ],
+    "hetzner-vm": [
+      "one-password",
+      "coolify"
+    ],
+    "onboarding-flow": [
+      "copywriter"
+    ],
+    "online-writing": [
+      "copywriter",
+      "obsidian",
+      "unslop"
+    ],
+    "prototype": [
+      "close-the-loop",
+      "principle-exhaust-the-design-space"
+    ],
+    "refactoring": [
+      "how",
+      "simplify-code",
+      "principle-exhaust-the-design-space",
+      "principle-prove-it-works",
+      "principle-redesign-from-first-principles"
+    ],
+    "release-ios-app": [
+      "asc-metadata",
+      "asc-release",
+      "babysit"
+    ],
+    "resolve-pr-feedback": [
+      "babysit"
+    ],
+    "setup-ossian-stack": [
+      "babysit",
+      "close-the-loop",
+      "continual-learning",
+      "diagnosing-bugs",
+      "domain-modeling",
+      "git-cleanup",
+      "one-password",
+      "release-ios-app",
+      "revenuecat-api",
+      "to-spec",
+      "to-tickets",
+      "triage",
+      "wayfinder"
+    ],
+    "simplify-code": [
+      "principle-subtract-before-you-add"
+    ],
+    "skill-creator": [
+      "clerk-cli",
+      "ios-marketing-capture"
+    ],
+    "teach": [
+      "how",
+      "why"
+    ],
+    "triage": [
+      "domain-modeling",
+      "grilling"
+    ],
+    "wayfinder": [
+      "domain-modeling",
+      "grilling",
+      "prototype",
+      "setup-ossian-stack"
+    ],
+    "why": [
+      "how"
+    ]
+  },
+  "sections": {
+    "lanes": [
+      {
+        "id": "plan",
+        "title": "Plan big work",
+        "outcome": "too big for one session",
+        "tag": "Agent workflow",
+        "steps": [
+          {
+            "id": "wayfinder",
+            "writes": "decision tickets"
+          },
+          {
+            "id": "domain-modeling",
+            "writes": "GLOSSARY.md"
+          },
+          {
+            "id": "grilling"
+          },
+          {
+            "id": "to-spec",
+            "writes": "spec doc"
+          },
+          {
+            "id": "to-tickets",
+            "writes": "tracker tickets"
+          },
+          {
+            "id": "prototype",
+            "optional": true,
+            "writes": "throwaway branch"
+          }
+        ],
+        "extras": [
+          {
+            "id": "triage",
+            "note": "from open issues"
+          },
+          {
+            "id": "grill-me",
+            "note": "any plan"
+          },
+          {
+            "id": "grill-with-docs",
+            "note": "plan vs docs"
+          }
+        ]
+      },
+      {
+        "id": "build",
+        "title": "Build, review, ship a PR",
+        "outcome": "change the code",
+        "tag": "Agent workflow",
+        "steps": [
+          {
+            "id": "diagnosing-bugs"
+          },
+          {
+            "id": "refactoring"
+          },
+          {
+            "id": "simplify-code",
+            "optional": true
+          },
+          {
+            "id": "autoreview",
+            "writes": "review findings"
+          },
+          {
+            "id": "close-the-loop",
+            "writes": "proof it works"
+          },
+          {
+            "id": "babysit",
+            "writes": "merged PR"
+          },
+          {
+            "id": "resolve-pr-feedback",
+            "optional": true
+          },
+          {
+            "id": "handoff",
+            "optional": true,
+            "writes": "handoff note"
+          }
+        ],
+        "extras": []
+      },
+      {
+        "id": "ship-ios",
+        "title": "Ship an iOS app",
+        "outcome": "App Store release",
+        "tag": "Ship an app",
+        "steps": [
+          {
+            "id": "asc-version-guard"
+          },
+          {
+            "id": "ios-marketing-capture",
+            "writes": "screenshots"
+          },
+          {
+            "id": "asc-metadata",
+            "writes": "store listing"
+          },
+          {
+            "id": "app-store-optimization",
+            "optional": true
+          },
+          {
+            "id": "release-ios-app",
+            "writes": "build + submission"
+          },
+          {
+            "id": "asc-release"
+          }
+        ],
+        "extras": [
+          {
+            "id": "asc-pricing",
+            "note": "price tiers"
+          },
+          {
+            "id": "privacy-policy",
+            "note": "policy page"
+          }
+        ]
+      },
+      {
+        "id": "design",
+        "title": "Design & frontend",
+        "outcome": "UI work",
+        "tag": "Design & frontend",
+        "steps": [
+          {
+            "id": "grill-design"
+          },
+          {
+            "id": "emil-design-eng"
+          },
+          {
+            "id": "better-accessibility"
+          },
+          {
+            "id": "onboarding-flow",
+            "optional": true,
+            "writes": "onboarding screens"
+          },
+          {
+            "id": "frontend-slides",
+            "optional": true,
+            "writes": "HTML deck"
+          }
+        ],
+        "extras": []
+      },
+      {
+        "id": "words",
+        "title": "Words",
+        "outcome": "copy or an article",
+        "tag": "Words",
+        "steps": [
+          {
+            "id": "copywriter"
+          },
+          {
+            "id": "unslop"
+          },
+          {
+            "id": "online-writing",
+            "optional": true,
+            "writes": "draft in vault"
+          }
+        ],
+        "extras": []
+      },
+      {
+        "id": "understand",
+        "title": "Understand code",
+        "outcome": "explain, not change",
+        "tag": "Understand code",
+        "steps": [
+          {
+            "id": "how"
+          },
+          {
+            "id": "why"
+          },
+          {
+            "id": "teach",
+            "optional": true
+          }
+        ],
+        "extras": []
+      }
+    ],
+    "platforms": [
+      {
+        "id": "convex",
+        "title": "Convex",
+        "skills": [
+          {
+            "id": "convex-cli",
+            "phase": "building"
+          }
+        ]
+      },
+      {
+        "id": "clerk",
+        "title": "Clerk",
+        "skills": [
+          {
+            "id": "clerk-cli",
+            "phase": "setup"
+          }
+        ]
+      },
+      {
+        "id": "revenuecat",
+        "title": "RevenueCat",
+        "skills": [
+          {
+            "id": "revenuecat-api",
+            "phase": "setup"
+          }
+        ]
+      },
+      {
+        "id": "coolify",
+        "title": "Coolify",
+        "skills": [
+          {
+            "id": "coolify",
+            "phase": "building"
+          }
+        ]
+      },
+      {
+        "id": "hetzner",
+        "title": "Hetzner VM",
+        "skills": [
+          {
+            "id": "hetzner-vm",
+            "phase": "setup"
+          }
+        ]
+      },
+      {
+        "id": "one-password",
+        "title": "1Password",
+        "skills": [
+          {
+            "id": "one-password",
+            "phase": "reference"
+          }
+        ]
+      },
+      {
+        "id": "post-queue",
+        "title": "Post Queue",
+        "skills": [
+          {
+            "id": "post-queue-cli",
+            "phase": "building"
+          }
+        ]
+      },
+      {
+        "id": "obsidian",
+        "title": "Obsidian",
+        "skills": [
+          {
+            "id": "obsidian",
+            "phase": "reference"
+          }
+        ]
+      },
+      {
+        "id": "things",
+        "title": "Things 3",
+        "skills": [
+          {
+            "id": "things",
+            "phase": "reference"
+          }
+        ]
+      }
+    ],
+    "sideDoors": [
+      "setup-ossian-stack",
+      "git-cleanup",
+      "resolving-merge-conflicts",
+      "codex-first",
+      "bro",
+      "continual-learning",
+      "codify-conventions",
+      "close-the-loop-audit",
+      "skill-creator"
+    ],
+    "knowledge": {
+      "title": "Principles",
+      "ids": [
+        "principle-encode-lessons-in-structure",
+        "principle-exhaust-the-design-space",
+        "principle-fix-root-causes",
+        "principle-model-the-domain",
+        "principle-prove-it-works",
+        "principle-redesign-from-first-principles",
+        "principle-subtract-before-you-add"
+      ]
+    }
+  }
+}

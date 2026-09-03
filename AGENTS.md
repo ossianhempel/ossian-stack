@@ -1,5 +1,7 @@
 # Agent Instructions
 
+**When a skill or agent changes, place it in `docs/plugin-map/map.json` and run `bun run map:render` before committing.** `bun run validate` fails on a stale map.
+
 This repository is the root of the `ossian-stack` plugin and the marketplace
 metadata used to distribute it. It ships one thing: the skill tree under `skills/`.
 There is no CLI, no runtime code, and no `sync-agent-scripts.sh` — the agent runtime
