@@ -40,6 +40,18 @@ Create a GitHub issue.
 
 Run `gh issue view <number> --comments`.
 
+## Pickup operations
+
+Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
+"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+
+- **Frontier query**: `gh issue list --state open --label ready-for-agent --json number,title,body,assignees,createdAt` then drop any with an assignee or an open issue in the body's `Blocked by` line; for each survivor, `gh api repos/<owner>/<repo>/issues/<n> --jq .issue_dependencies_summary.blocked_by` and drop it when the count is above zero; oldest first.
+- **Claim**: `gh issue edit <n> --add-assignee @me` and a first handoff comment stating `<runtime>:<session-id>`; the session's first write. Assignees are a set, so a second session's add succeeds too: re-read with `gh issue view <n> --json assignees,comments` and back off if any other assignee is present, or if an earlier claim comment names a different session id.
+- **Blocked**: swap `ready-for-agent` for `needs-info` or `ready-for-human`, post a blocked handoff comment, `gh issue edit <n> --remove-assignee @me`.
+- **Paused**: a paused handoff comment, remove the assignee, keep the label.
+- **Done**: open the PR with `Closes #<n>` in the body, post a done handoff comment. The merge closes the issue.
+- **Abandoned claim**: an assignee whose last handoff comment is older than one working day. Report it; never silently reclaim.
+
 ## Wayfinding operations
 
 Used by `/wayfinder`. The **map** is a single issue with **child** issues as tickets.

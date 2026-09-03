@@ -16,7 +16,7 @@ The issue tracker and triage label vocabulary should have been provided to you â
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec using the template below, then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec using the template below (it covers every section of the project's ticket brief, provided at setup as `docs/agents/ticket-brief.md`, so a cold agent can pick it up), then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
 
 <spec-template>
 
@@ -63,6 +63,14 @@ A list of testing decisions that were made. Include:
 - A description of what makes a good test (only test external behavior, not implementation details)
 - Which modules will be tested
 - Prior art for the tests (i.e. similar types of tests in the codebase)
+
+## Verify
+
+The exact commands, or the project's verification skill, that prove the feature works, plus known gotchas. A pickup agent runs these before calling the work done.
+
+## Forbidden
+
+Actions the implementation may not take beyond the project's standing rules: no migrations, no dependency bumps, no changes outside the modules named above.
 
 ## Out of Scope
 

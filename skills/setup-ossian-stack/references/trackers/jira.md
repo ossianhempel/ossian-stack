@@ -73,6 +73,18 @@ Create a Jira issue in project `<KEY>`.
 Fetch the issue plus its comments (and attachments listing) as above, and
 summarise parent, children, and linked issues before coding.
 
+## Pickup operations
+
+Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
+"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+
+- **Frontier query**: JQL `project = <KEY> AND labels = ready-for-agent AND assignee IS EMPTY AND statusCategory = "To Do"`, then drop any with an inward `Blocks` link from an unresolved issue; `created ASC`.
+- **Claim**: `PUT /rest/api/3/issue/<KEY>-n` with the viewer's `accountId` as assignee, transition to the in-progress status, and a first handoff comment stating `<runtime>:<session-id>`; the session's first write. Re-read: if the assignee differs, take the next.
+- **Blocked**: read-merge-write labels replacing `ready-for-agent` with `needs-info` or `ready-for-human`, post a blocked handoff comment, set assignee to null.
+- **Paused**: a paused handoff comment, set assignee to null, keep the status.
+- **Done**: put the PR link in the done handoff comment (or the dev-status panel if the git integration is connected), transition to the review status. The human moves it to Done.
+- **Abandoned claim**: an assignee with `updated` older than one working day. Report it; never silently reclaim.
+
 ## Wayfinding operations
 
 Used by `/wayfinder`. The **map** is a single Jira issue (type `Epic` where the

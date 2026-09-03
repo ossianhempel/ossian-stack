@@ -71,6 +71,18 @@ Create a Linear issue on team `<TEAM>`.
 Run the single-issue query above (description, state, labels, children, relations)
 and summarise before coding.
 
+## Pickup operations
+
+Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
+"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+
+- **Frontier query**: team issues with label `ready-for-agent`, `assignee` null, state type `unstarted` or `backlog`, and no `blocked_by` relation to an issue in a non-done state; `createdAt` ascending.
+- **Claim**: `issueUpdate(id, input: { assigneeId: <viewer id>, stateId: <started state> })` and a first handoff comment (or description note) stating `<runtime>:<session-id>`; the session's first write. Re-read: if the assignee differs, take the next.
+- **Blocked**: replace `ready-for-agent` with `needs-info` or `ready-for-human` in the label set, post a blocked handoff comment, clear `assigneeId`.
+- **Paused**: a paused handoff comment, clear `assigneeId`, keep the state.
+- **Done**: attach the PR (Linear links it from the branch name, or `attachmentLinkGitHubPR`), post a done handoff comment, transition to the review state. The merge, or the human, completes it.
+- **Abandoned claim**: an assignee with `updatedAt` older than one working day. Report it; never silently reclaim.
+
 ## Wayfinding operations
 
 Used by `/wayfinder`. The **map** is a single Linear issue with sub-issues as tickets.
