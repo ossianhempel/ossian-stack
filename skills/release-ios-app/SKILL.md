@@ -43,7 +43,7 @@ If a release mixes both, the user-facing change wins → bump MINOR. **State the
 
 2. **Decide the version bump** (policy above) before opening the release PR. Continuing the current unreleased train → keep the version. Starting the next train → bump now, then for `xcodegen` repos run `xcodegen` in `IOS_RELEASE_XCODEGEN_DIR` and commit the regenerated `*.xcodeproj/project.pbxproj`.
 
-3. **Open the `develop` → `main` release PR, then stop.** Include the version bump and user-facing changes. Inspect CI/checks, code-review comments, and conflicts. If checks fail or review flags a risk, explain and fix before asking Ossian to merge. Ask Ossian to merge manually; continue only after he confirms.
+3. **Open the `develop` → `main` release PR, then babysit it to merge-ready.** Include the version bump and user-facing changes. Hand the PR to the `babysit` skill in `drive` mode: it watches CI, classifies failures, and triages review-bot comments on the release PR, stopping at merge-ready. Fix what it flags before asking Ossian to merge; the release PR is substantive, so `drive`, not `check`. `babysit` never merges — ask Ossian to merge manually and continue only after he confirms.
 
 4. **Validate readiness.** Run `IOS_RELEASE_VERSION_CHECK_CMD` (or `scripts/ios-release check-version`) — the selected version must be strictly greater than the live App Store version. Run `IOS_RELEASE_TEST_CMDS` for the changed surface when practical.
 
