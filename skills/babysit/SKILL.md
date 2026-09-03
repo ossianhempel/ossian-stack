@@ -7,7 +7,7 @@ description: "Drive a pull request or a stacked chain to merge-ready: watch CI, 
 
 **You own the merge frontier. Declare a mode, clear one PR at a time, stop where the human's call begins.** For "babysit this", "get it green", "all green", "merge-ready", "watch CI", "address the bugbot comments", or "check on PR X". Step 1 owns the request-to-mode mapping. Where the host ships its own babysit command, this skill takes these requests instead, even though the built-in description matches the same words. A request to land or ship is not this skill: stop at merge-ready and hand the merge decision back.
 
-Babysitting starts when the user asks for it, which is normally once a phase or a whole stack is built, not when a PR opens. Building and babysitting compete for the same agent, and interleaving them stalls the build while spending checks on commits a later wave will restart. Finish the stack, get it green here, then hand it back for landing.
+Babysitting starts when the user asks for it, which is normally once a phase or a whole stack is built, not when a PR opens. Building and babysitting compete for the same agent, and interleaving them stalls the build while spending checks on commits a later wave will restart. Finish the stack, get it green here, then hand it back for landing. Work that has not reached a PR yet goes through `commit-push-pr` first; babysit what it opens, when asked.
 
 Babysitting fails the same few ways every time. Each step below exists because that failure cost a night.
 

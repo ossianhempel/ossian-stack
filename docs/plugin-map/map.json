@@ -1,5 +1,5 @@
 {
-  "$comment": "Hand-curated placement for docs/plugin-map. Descriptions are NOT stored here \u2014 they come from each SKILL.md frontmatter. scripts/build-plugin-map.js merges the two and fails when this file and skills/ disagree.",
+  "$comment": "Hand-curated placement for docs/plugin-map. Descriptions are NOT stored here — they come from each SKILL.md frontmatter. scripts/build-plugin-map.js merges the two and fails when this file and skills/ disagree.",
   "plugins": {
     "ossian-stack": {
       "label": "ossian-stack",
@@ -24,7 +24,7 @@
       "how": "native plugin"
     },
     {
-      "label": "Gemini \u00b7 Windsurf \u00b7 Antigravity",
+      "label": "Gemini · Windsurf · Antigravity",
       "how": "skills installer"
     }
   ],
@@ -138,6 +138,9 @@
     "online-writing": {
       "role": "both"
     },
+    "orchestrate": {
+      "role": "human"
+    },
     "post-queue-cli": {
       "role": "both"
     },
@@ -215,6 +218,9 @@
     },
     "why": {
       "role": "both"
+    },
+    "commit-push-pr": {
+      "role": "both"
     }
   },
   "agents": {},
@@ -248,6 +254,17 @@
       "copywriter",
       "obsidian",
       "unslop"
+    ],
+    "orchestrate": [
+      "wayfinder",
+      "to-spec",
+      "to-tickets",
+      "triage",
+      "codex-first",
+      "babysit",
+      "diagnosing-bugs",
+      "handoff",
+      "setup-ossian-stack"
     ],
     "prototype": [
       "close-the-loop",
@@ -306,6 +323,16 @@
     ],
     "why": [
       "how"
+    ],
+    "commit-push-pr": [
+      "autoreview",
+      "babysit",
+      "git-cleanup",
+      "resolve-pr-feedback",
+      "unslop"
+    ],
+    "babysit": [
+      "commit-push-pr"
     ]
   },
   "sections": {
@@ -379,6 +406,10 @@
           {
             "id": "close-the-loop",
             "writes": "proof it works"
+          },
+          {
+            "id": "commit-push-pr",
+            "writes": "opened PR"
           },
           {
             "id": "babysit",
@@ -597,6 +628,7 @@
       }
     ],
     "sideDoors": [
+      "orchestrate",
       "setup-ossian-stack",
       "git-cleanup",
       "resolving-merge-conflicts",

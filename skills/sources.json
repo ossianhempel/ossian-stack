@@ -121,6 +121,11 @@
       "origin": "local",
       "notes": "Authored 2026-08-31 via the skill-creator eval loop (iteration-1: with-skill 100% vs baseline 73.3%). Two modes — audit de-facto conventions or grill for declared ones — converging on a lazily-created CONVENTIONS.md with enforced-by-tooling and judgment-call rule classes; wires enforcement itself (no dependency on setup-pre-commit). Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
     },
+    "commit-push-pr": {
+      "origin": "derived",
+      "lastSynced": "2026-09-04",
+      "notes": "Authored 2026-09-04 from three inputs merged into one skill. Mechanics and the description-writing spine are adapted from raid-core's commit-changes + open-pull-request (private rebtech Azure DevOps repo): survey/group/commit discipline, temp-file body sentinel, existing-PR preview-then-apply, no auto-merge, and references/pr-description.md's core principle (the diff is already visible; describe what it cannot show) with its sizing table. Modes and safety from hm-group/ninja-bq .agents/skills/commit-push-pr (private GitHub): --pr-only/--branch-only dispatch, branch/task alignment before pushing into an existing PR, base preservation on reruns, NO_OPEN_PR-vs-error discrimination. Body structure and the sibling wiring from cursor/plugins pstack poteto-mode playbooks/opening-a-pr.md: Why/Scope/Tradeoffs/Blast Radius/Verification section order, no Summary/Test-plan boilerplate, open ready not draft, and opening a PR does not start a babysit. RAID-specific bits dropped (attribution badges; plan-status gate genericized to any tracked plan/spec status; provider set reduced to gh-primary with glab/az/generic noted; no !cmd blocks per this repo's cross-runtime rule; trunk-direct projects commit and push without a PR). Both private upstreams are unrefreshable - nothing to pin; re-read them if they change."
+    },
     "continual-learning": {
       "origin": "adapted",
       "repo": "https://github.com/cursor/plugins",
@@ -282,6 +287,10 @@
     "online-writing": {
       "origin": "local",
       "notes": "Authored in agent-scripts. Method distilled from Nicolas Cole's 'The Art and Business of Online Writing' via Ossian's Obsidian vault notes (3. Resources/Notes/Online writing.md and linked notes; Readwise highlights). No upstream code vendored."
+    },
+    "orchestrate": {
+      "origin": "local",
+      "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice."
     },
     "post-queue-cli": {
       "origin": "companion",

@@ -222,6 +222,10 @@
       "writes": "proof it works"
      },
      {
+      "id": "commit-push-pr",
+      "writes": "opened PR"
+     },
+     {
       "id": "babysit",
       "writes": "merged PR"
      },
@@ -438,6 +442,7 @@
    }
   ],
   "sideDoors": [
+   "orchestrate",
    "setup-ossian-stack",
    "git-cleanup",
    "resolving-merge-conflicts",
@@ -548,7 +553,9 @@
    "origin": "vendored",
    "repo": "https://github.com/openclaw/agent-skills",
    "calls": [],
-   "calledBy": []
+   "calledBy": [
+    "commit-push-pr"
+   ]
   },
   "babysit": {
    "id": "babysit",
@@ -561,8 +568,12 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
-   "calls": [],
+   "calls": [
+    "commit-push-pr"
+   ],
    "calledBy": [
+    "commit-push-pr",
+    "orchestrate",
     "release-ios-app",
     "resolve-pr-feedback",
     "setup-ossian-stack"
@@ -656,7 +667,9 @@
    "origin": "vendored",
    "repo": "https://github.com/steipete/agent-scripts",
    "calls": [],
-   "calledBy": []
+   "calledBy": [
+    "orchestrate"
+   ]
   },
   "codify-conventions": {
    "id": "codify-conventions",
@@ -673,6 +686,28 @@
     "grilling"
    ],
    "calledBy": []
+  },
+  "commit-push-pr": {
+   "id": "commit-push-pr",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Commit Push PR",
+   "description": "Turn completed local work into a review-ready pull request: survey the changes, group them into clean conventional commits, push, and open the PR with a value-first description. Use when the user says \"commit this\", \"ship this\", \"open a PR\", \"push and PR\", or at the closeout of a unit of work. Commits locally before pushing; opening a PR never starts a babysit.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": "[optional: --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \\\"...\\\" | --work-items <id>]",
+   "origin": "derived",
+   "repo": null,
+   "calls": [
+    "autoreview",
+    "babysit",
+    "git-cleanup",
+    "resolve-pr-feedback",
+    "unslop"
+   ],
+   "calledBy": [
+    "babysit"
+   ]
   },
   "continual-learning": {
    "id": "continual-learning",
@@ -762,6 +797,7 @@
     "principle-prove-it-works"
    ],
    "calledBy": [
+    "orchestrate",
     "setup-ossian-stack"
    ]
   },
@@ -824,6 +860,7 @@
    "repo": null,
    "calls": [],
    "calledBy": [
+    "commit-push-pr",
     "setup-ossian-stack"
    ]
   },
@@ -899,7 +936,9 @@
    "origin": "vendored",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
-   "calledBy": []
+   "calledBy": [
+    "orchestrate"
+   ]
   },
   "hetzner-vm": {
    "id": "hetzner-vm",
@@ -1021,6 +1060,30 @@
    "calledBy": [
     "copywriter"
    ]
+  },
+  "orchestrate": {
+   "id": "orchestrate",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Orchestrate",
+   "description": "Turn this chat into the pinned, long-lived HQ thread for one project or workstream: it names itself, keeps a durable ledger, and delegates every piece of work to visible sub-threads or sessions primed with this plugin's skills. Invoke with /orchestrate in a fresh chat to bootstrap, and again at any time to re-orient after compaction or a break.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": "Project or workstream name, optionally what to work on first",
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "wayfinder",
+    "to-spec",
+    "to-tickets",
+    "triage",
+    "codex-first",
+    "babysit",
+    "diagnosing-bugs",
+    "handoff",
+    "setup-ossian-stack"
+   ],
+   "calledBy": []
   },
   "post-queue-cli": {
    "id": "post-queue-cli",
@@ -1235,7 +1298,9 @@
    "calls": [
     "babysit"
    ],
-   "calledBy": []
+   "calledBy": [
+    "commit-push-pr"
+   ]
   },
   "resolving-merge-conflicts": {
    "id": "resolving-merge-conflicts",
@@ -1294,6 +1359,7 @@
     "wayfinder"
    ],
    "calledBy": [
+    "orchestrate",
     "wayfinder"
    ]
   },
@@ -1376,6 +1442,7 @@
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "calledBy": [
+    "orchestrate",
     "setup-ossian-stack"
    ]
   },
@@ -1392,6 +1459,7 @@
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "calledBy": [
+    "orchestrate",
     "setup-ossian-stack"
    ]
   },
@@ -1411,6 +1479,7 @@
     "grilling"
    ],
    "calledBy": [
+    "orchestrate",
     "setup-ossian-stack"
    ]
   },
@@ -1427,6 +1496,7 @@
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
    "calledBy": [
+    "commit-push-pr",
     "copywriter",
     "online-writing"
    ]
@@ -1449,6 +1519,7 @@
     "setup-ossian-stack"
    ],
    "calledBy": [
+    "orchestrate",
     "setup-ossian-stack"
    ]
   },
@@ -1473,7 +1544,7 @@
   }
  },
  "counts": {
-  "skills": 61,
+  "skills": 63,
   "agents": 0,
   "plugins": 1
  }
