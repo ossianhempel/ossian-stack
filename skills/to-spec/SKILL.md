@@ -16,9 +16,21 @@ The issue tracker and triage label vocabulary should have been provided to you �
 
 Check with the user that these seams match their expectations.
 
-3. Write the spec using the template below (it covers every section of the project's ticket brief, provided at setup as `docs/agents/ticket-brief.md`, so a cold agent can pick it up), then publish it to the project issue tracker. Apply the `ready-for-agent` triage label - no need for additional triage.
+3. Write the spec using the template below, then publish it to the project issue tracker. The template emits the project's ticket brief sections directly (Goal, Scope, Context, Acceptance, Verify, Forbidden, Blocked by, in that order where the spec shape allows), so a cold pickup agent can start from the published body with no translation. Apply the `ready-for-agent` triage label only when every brief section is filled — a field you cannot fill is a spec that is not ready. Resolve the label through `docs/agents/triage-labels.md` when the project maps it to a different string.
 
 <spec-template>
+
+## Goal
+
+One or two sentences. The outcome from the user's perspective, executable by a stranger. Distills the Problem Statement and Solution below into the ticket-brief Goal.
+
+## Scope
+
+What the implementation may change and what it must not. Name modules, areas, or surfaces in the project's domain vocabulary, not file paths. State the branch or worktree convention if the project has one.
+
+## Context
+
+Pointers, not prose: the parent issue or conversation this spec came from, related ADRs, the prototype that settled a decision, prior tickets this builds on. Paste in anything a cold agent needs that lives only in this conversation.
 
 ## Problem Statement
 
@@ -38,7 +50,13 @@ A LONG, numbered list of user stories. Each user story should be in the format o
 1. As a mobile bank customer, I want to see balance on my accounts, so that I can make better informed decisions about my spending
 </user-story-example>
 
-This list of user stories should be extremely extensive and cover all aspects of the feature.
+This list of user stories should be extremely extensive and cover all aspects of the feature. Stories alone are not acceptance: every story must distill into at least one checkable box under Acceptance below, and dependency edges go under Blocked by, not in story prose.
+
+## Acceptance
+
+Checkable criteria, one per line, as a task list. The ticket is done when every box is ticked against the real artifact, not a self-report. Derive them from the user stories above; a story with no box is an untestable story.
+
+- [ ] …
 
 ## Implementation Decisions
 
@@ -71,6 +89,10 @@ The exact commands, or the project's verification skill, that prove the feature 
 ## Forbidden
 
 Actions the implementation may not take beyond the project's standing rules: no migrations, no dependency bumps, no changes outside the modules named above.
+
+## Blocked by
+
+References to the tickets that gate this spec, or `None — can start immediately`. Use the tracker's native blocking relation as well where it has one. Never leave a known dependency in prose only.
 
 ## Out of Scope
 

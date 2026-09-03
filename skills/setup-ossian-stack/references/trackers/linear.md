@@ -75,11 +75,13 @@ and summarise before coding.
 
 Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
 "take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+Resolve every triage role through `docs/agents/triage-labels.md`; the role names
+below are the canonical defaults for a fresh setup.
 
-- **Frontier query**: team issues with label `ready-for-agent`, `assignee` null, state type `unstarted` or `backlog`, and no `blocked_by` relation to an issue in a non-done state; `createdAt` ascending.
-- **Claim**: `issueUpdate(id, input: { assigneeId: <viewer id>, stateId: <started state> })` and a first handoff comment (or description note) stating `<runtime>:<session-id>`; the session's first write. Re-read: if the assignee differs, take the next.
-- **Blocked**: replace `ready-for-agent` with `needs-info` or `ready-for-human` in the label set, post a blocked handoff comment, clear `assigneeId`.
-- **Paused**: a paused handoff comment, clear `assigneeId`, keep the state.
+- **Frontier query**: team issues with the agent-ready label (default `ready-for-agent`), `assignee` null, state type `backlog`, `unstarted`, or `started`, and no `blocked_by` relation to an issue in a non-done state; `createdAt` ascending. The frontier includes unclaimed `started` work so a paused ticket (claim released, state kept) resurfaces.
+- **Claim**: post the claim handoff comment (or description note) stating `<runtime>:<session-id>` first, then `issueUpdate(id, input: { assigneeId: <viewer id>, stateId: <started state> })`; the comment is the session's first write. The assignee field alone is last-writer-wins, so re-read comments and assignee: the winner is the earliest claim comment. On loss, clear `assigneeId` and take the next ticket.
+- **Blocked**: replace the agent-ready label with the mapped `needs-info` or `ready-for-human` label in the label set, post a blocked handoff comment, clear `assigneeId`.
+- **Paused**: a paused handoff comment, clear `assigneeId`, keep the state. The ticket re-enters the frontier (unclaimed `started` work is eligible).
 - **Done**: attach the PR (Linear links it from the branch name, or `attachmentLinkGitHubPR`), post a done handoff comment, transition to the review state. The merge, or the human, completes it.
 - **Abandoned claim**: an assignee with `updatedAt` older than one working day. Report it; never silently reclaim.
 

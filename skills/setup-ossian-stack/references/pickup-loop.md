@@ -10,15 +10,23 @@ body, e.g. `/loop 30m <prompt>`. Adjust the interval to how often new
 ---
 
 Read the project's issue-tracker config, triage-label mapping, ticket brief, and
-handoff-comment shape from `docs/agents/`. Then run the tracker config's
-**Pickup operations** once:
+handoff-comment shape from `docs/agents/`. Resolve every triage role through
+the mapping (`docs/agents/triage-labels.md`); the names below are the canonical
+defaults. Then run the tracker config's **Pickup operations** once. Run only one
+loop per repo and project: overlapping runners serialize on claim-comment order,
+not on owner fields.
 
 1. Query the frontier: tickets in the agent-ready triage role, unclaimed, not
    blocked, oldest first. If it is empty, report "no work" and stop.
-2. Claim the first one exactly as the config says, then re-read it to confirm the
-   claim held. If another session won, take the next.
+2. Claim the first one exactly as the config says: post the claim handoff comment
+   stating `<runtime>:<session-id>` first, then set the owner field, then re-read
+   comments and owner. The owner field alone is last-writer-wins, so the winner is
+   the earliest claim comment, not the field value. If another session's claim
+   comment is earlier, release the claim and take the next ticket.
 3. Work the ticket from its brief. Verify against the real artifact using the
-   brief's Verify section. Commit on a branch named after the ticket.
+   brief's Verify section. Follow the project's branch and worktree convention
+   (the brief's Scope names it; project instructions in context win): only create
+   a ticket-named branch where the project does that.
 4. Post a handoff comment at each checkpoint. On a question only a human can
    answer, post a blocked comment with options and a default, release the claim,
    and stop. On completion, open the PR, post a done comment, move the ticket to

@@ -121,18 +121,25 @@ sub-items, `Blocked by`, and the last handoff comment before coding.
 ## Pickup operations
 
 Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
-"take the next ticket".
+"take the next ticket". Resolve every triage role through
+`docs/agents/triage-labels.md`; the role names below are the canonical defaults
+for a fresh setup (if this database already uses different triage strings, the
+mapping governs and the queries use the mapped values).
 
-- **Frontier query**: `Project = <PROJECT>`, `Triage = ready-for-agent`, `Agent`
-  empty, status = backlog, no `Blocked by` row that is not done; created
-  ascending.
-- **Claim**: `notion-update-page` setting `Agent` to `<runtime>:<session-id>` and
-  status to in progress; the session's first write. Re-fetch: if `Agent` now
-  holds a different id, another session won, take the next row.
-- **Blocked**: set the blocked marker, `Triage` to `needs-info` (the reporter can answer)
+- **Frontier query**: `Project = <PROJECT>`, `Triage = <agent-ready role (default ready-for-agent)>`, `Agent`
+  empty, status backlog or in progress, no `Blocked by` row that is not done; created
+  ascending. The frontier includes unclaimed in-progress work so a paused ticket
+  (claim released, status kept) resurfaces.
+- **Claim**: post the claim handoff comment stating `<runtime>:<session-id>` with
+  `notion-create-comment` first, then `notion-update-page` setting `Agent` to `<runtime>:<session-id>` and
+  status to in progress; the comment is the session's first write. The `Agent` field alone is
+  last-writer-wins, so re-fetch comments and `Agent`: the winner is the earliest claim comment,
+  not the field value. On loss, clear `Agent` and take the next row.
+- **Blocked**: set the blocked marker, `Triage` to the mapped `needs-info` role (the reporter can answer)
   or `ready-for-human` (judgment, access, or design), a blocked handoff comment
   with the question, options, and default, then clear `Agent`.
-- **Paused**: a paused handoff comment, clear `Agent`, leave status in progress.
+- **Paused**: a paused handoff comment, clear `Agent`, keep status in progress.
+  The ticket re-enters the frontier (unclaimed in-progress work is eligible).
 - **Done**: set `PR`, status in review, a done handoff comment. A human, or a
   merge-triggered hook, sets done.
 - **Abandoned claim**: `Agent` set and last edited older than one working day.

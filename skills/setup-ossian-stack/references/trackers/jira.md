@@ -77,11 +77,13 @@ summarise parent, children, and linked issues before coding.
 
 Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
 "take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+Resolve every triage role through `docs/agents/triage-labels.md`; the role names
+below are the canonical defaults for a fresh setup.
 
-- **Frontier query**: JQL `project = <KEY> AND labels = ready-for-agent AND assignee IS EMPTY AND statusCategory = "To Do"`, then drop any with an inward `Blocks` link from an unresolved issue; `created ASC`.
-- **Claim**: `PUT /rest/api/3/issue/<KEY>-n` with the viewer's `accountId` as assignee, transition to the in-progress status, and a first handoff comment stating `<runtime>:<session-id>`; the session's first write. Re-read: if the assignee differs, take the next.
-- **Blocked**: read-merge-write labels replacing `ready-for-agent` with `needs-info` or `ready-for-human`, post a blocked handoff comment, set assignee to null.
-- **Paused**: a paused handoff comment, set assignee to null, keep the status.
+- **Frontier query**: JQL `project = <KEY> AND labels = <agent-ready label (default ready-for-agent)> AND assignee IS EMPTY AND statusCategory IN ("To Do", "In Progress")`, then drop any with an inward `Blocks` link from an unresolved issue; `created ASC`. The frontier includes unclaimed `In Progress` work so a paused ticket (claim released, status kept) resurfaces.
+- **Claim**: post the claim handoff comment stating `<runtime>:<session-id>` first, then `PUT /rest/api/3/issue/<KEY>-n` with the viewer's `accountId` as assignee and a transition to the in-progress status; the comment is the session's first write. The assignee field alone is last-writer-wins, so re-read comments and assignee: the winner is the earliest claim comment. On loss, set assignee to null and take the next ticket.
+- **Blocked**: read-merge-write labels replacing the agent-ready label with the mapped `needs-info` or `ready-for-human` label, post a blocked handoff comment, set assignee to null.
+- **Paused**: a paused handoff comment, set assignee to null, keep the status. The ticket re-enters the frontier (unclaimed `In Progress` work is eligible).
 - **Done**: put the PR link in the done handoff comment (or the dev-status panel if the git integration is connected), transition to the review status. The human moves it to Done.
 - **Abandoned claim**: an assignee with `updated` older than one working day. Report it; never silently reclaim.
 
