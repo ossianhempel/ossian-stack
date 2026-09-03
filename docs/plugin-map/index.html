@@ -71,7 +71,6 @@
   .node.optional { opacity: .78; }
   .node .badge { fill: var(--agent-soft); stroke: var(--agent); stroke-width: 1; }
   .node .badge-t { font-size: 10px; font-weight: 600; fill: var(--agent); }
-  .node .badge-t.k { fill: var(--ink-2); }
   .node .badge.k { fill: #f1f1ee; stroke: var(--ref); }
   .node .badge-t.k { fill: var(--ink-2); }
   .node:focus-visible .pill { stroke: var(--ink); stroke-width: 2.5; }
@@ -1773,7 +1772,6 @@
 
   // ======================================================= interaction
   const links = el("g", { id: "links" }, svg);
-  const center = (id) => { const p = positions[id]; if (!p) return null; const t = nodeEls[id].getCTM(); return { x: p.w / 2, y: p.h / 2, w: p.w, h: p.h, g: nodeEls[id] }; };
   const absCenter = (id) => {
     const g = nodeEls[id]; if (!g) return null;
     const m = g.transform.baseVal.consolidate()?.matrix; const p = positions[id];

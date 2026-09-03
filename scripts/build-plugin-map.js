@@ -160,6 +160,7 @@ for (const id of diskSkills) {
   for (const r of refs) if (!(map.calls[id] ?? []).includes(r)) warn(`${id}: SKILL.md mentions \`${r}\` but map.json calls does not`);
 }
 for (const id of diskAgents) {
+  if (!map.agents[id]) continue; // already reported above
   const fm = frontmatter(read(path.join(agentsDir, id + ".md"))) ?? {};
   nodes[id] = {
     id,
