@@ -144,6 +144,9 @@
     "orchestrate-threads": {
       "role": "human"
     },
+    "ossian-mode": {
+      "role": "human"
+    },
     "post-queue-cli": {
       "role": "both"
     },
@@ -276,6 +279,23 @@
       "handoff",
       "setup-ossian-stack"
     ],
+    "ossian-mode": [
+      "one-password",
+      "setup-ossian-stack",
+      "how",
+      "why",
+      "diagnosing-bugs",
+      "grilling",
+      "prototype",
+      "to-spec",
+      "convex-cli",
+      "emil-design-eng",
+      "refactoring",
+      "simplify-code",
+      "commit-push-pr",
+      "babysit",
+      "release-ios-app"
+    ],
     "prototype": [
       "close-the-loop",
       "principle-exhaust-the-design-space"
@@ -337,6 +357,18 @@
   },
   "sections": {
     "lanes": [
+      {
+        "id": "current-request",
+        "title": "Work on this request",
+        "outcome": "verified answer or artifact",
+        "tag": "Explicit invocation",
+        "steps": [
+          {
+            "id": "ossian-mode"
+          }
+        ],
+        "extras": []
+      },
       {
         "id": "plan",
         "title": "Plan big work",

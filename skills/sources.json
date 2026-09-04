@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-03",
+  "updated": "2026-09-04",
   "description": "Upstream map for skills/ \u2014 the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -291,6 +291,10 @@
     "orchestrate-threads": {
       "origin": "local",
       "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice."
+    },
+    "ossian-mode": {
+      "origin": "local",
+      "notes": "Authored from the approved Ossian Mode scope: explicitly invoked working standards and routing into existing skills. Routes command credentials through one-password and tracker-dependent work through project conventions, with setup only when required configuration is missing. No upstream playbook copied. Includes matching Claude/Cursor and Codex explicit-invocation metadata."
     },
     "post-queue-cli": {
       "origin": "companion",

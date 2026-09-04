@@ -152,6 +152,18 @@
  "sections": {
   "lanes": [
    {
+    "id": "current-request",
+    "title": "Work on this request",
+    "outcome": "verified answer or artifact",
+    "tag": "Explicit invocation",
+    "steps": [
+     {
+      "id": "ossian-mode"
+     }
+    ],
+    "extras": []
+   },
+   {
     "id": "plan",
     "title": "Plan big work",
     "outcome": "too big for one session",
@@ -574,6 +586,7 @@
    "calledBy": [
     "commit-push-pr",
     "orchestrate-threads",
+    "ossian-mode",
     "release-ios-app",
     "resolve-pr-feedback",
     "setup-ossian-stack"
@@ -706,7 +719,8 @@
     "unslop"
    ],
    "calledBy": [
-    "babysit"
+    "babysit",
+    "ossian-mode"
    ]
   },
   "continual-learning": {
@@ -739,7 +753,9 @@
    "origin": "companion",
    "repo": "https://github.com/get-convex/convex-js",
    "calls": [],
-   "calledBy": []
+   "calledBy": [
+    "ossian-mode"
+   ]
   },
   "coolify": {
    "id": "coolify",
@@ -798,6 +814,7 @@
    ],
    "calledBy": [
     "orchestrate-threads",
+    "ossian-mode",
     "setup-ossian-stack"
    ]
   },
@@ -831,7 +848,9 @@
    "origin": "vendored",
    "repo": "https://github.com/emilkowalski/skills",
    "calls": [],
-   "calledBy": []
+   "calledBy": [
+    "ossian-mode"
+   ]
   },
   "frontend-slides": {
    "id": "frontend-slides",
@@ -920,6 +939,7 @@
    "calls": [],
    "calledBy": [
     "codify-conventions",
+    "ossian-mode",
     "triage",
     "wayfinder"
    ]
@@ -971,6 +991,7 @@
    "calls": [],
    "calledBy": [
     "diagnosing-bugs",
+    "ossian-mode",
     "refactoring",
     "teach",
     "why"
@@ -1038,6 +1059,7 @@
    "calls": [],
    "calledBy": [
     "hetzner-vm",
+    "ossian-mode",
     "setup-ossian-stack"
    ]
   },
@@ -1082,6 +1104,36 @@
     "diagnosing-bugs",
     "handoff",
     "setup-ossian-stack"
+   ],
+   "calledBy": []
+  },
+  "ossian-mode": {
+   "id": "ossian-mode",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Ossian Mode",
+   "description": "Apply Ossian Stack's working standards to the current request and choose the relevant workflow. Use only when the user explicitly invokes ossian-mode.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "one-password",
+    "setup-ossian-stack",
+    "how",
+    "why",
+    "diagnosing-bugs",
+    "grilling",
+    "prototype",
+    "to-spec",
+    "convex-cli",
+    "emil-design-eng",
+    "refactoring",
+    "simplify-code",
+    "commit-push-pr",
+    "babysit",
+    "release-ios-app"
    ],
    "calledBy": []
   },
@@ -1241,6 +1293,7 @@
     "principle-exhaust-the-design-space"
    ],
    "calledBy": [
+    "ossian-mode",
     "wayfinder"
    ]
   },
@@ -1262,7 +1315,9 @@
     "principle-prove-it-works",
     "principle-redesign-from-first-principles"
    ],
-   "calledBy": []
+   "calledBy": [
+    "ossian-mode"
+   ]
   },
   "release-ios-app": {
    "id": "release-ios-app",
@@ -1281,6 +1336,7 @@
     "babysit"
    ],
    "calledBy": [
+    "ossian-mode",
     "setup-ossian-stack"
    ]
   },
@@ -1360,6 +1416,7 @@
    ],
    "calledBy": [
     "orchestrate-threads",
+    "ossian-mode",
     "wayfinder"
    ]
   },
@@ -1378,6 +1435,7 @@
     "principle-subtract-before-you-add"
    ],
    "calledBy": [
+    "ossian-mode",
     "refactoring"
    ]
   },
@@ -1443,6 +1501,7 @@
    "calls": [],
    "calledBy": [
     "orchestrate-threads",
+    "ossian-mode",
     "setup-ossian-stack"
    ]
   },
@@ -1539,12 +1598,13 @@
    ],
    "calledBy": [
     "diagnosing-bugs",
+    "ossian-mode",
     "teach"
    ]
   }
  },
  "counts": {
-  "skills": 63,
+  "skills": 64,
   "agents": 0,
   "plugins": 1
  }

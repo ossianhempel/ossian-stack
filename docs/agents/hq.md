@@ -35,17 +35,19 @@ active branching instructions when choosing the task environment.
 
 ## Blocked on the human
 
-None. Awaiting the first workstream from the user.
+None.
 
 ## Done
 
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
+| 🧭 ossian-mode | [Entry skill](../../skills/ossian-mode/SKILL.md) | 2026-09-04: HQ reviewed skill, routing, metadata, and rendered map; repository checks passed. User authorized commit and push to main. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived (done: approved implementation) |
 
 ## Inline edits
 
+- 2026-09-04: Added one-password credential routing and conditional tracker/setup guidance to ossian-mode; updated map links and regenerated images. Repository checks passed. Generic skill validator does not support the existing disable-model-invocation field; preserved the required explicit-only metadata.
 - 2026-09-04: Created this ledger and named and pinned HQ. Ledger contains task names, IDs, and status; no secrets. Left uncommitted for the user to decide whether to track it.
 
 ## Next
 
-Brief and dispatch the first requested workstream to its own visible task.
+After publication, refresh the plugin and start a new session to use ossian-mode.
