@@ -16,6 +16,8 @@ Look through the tools available in this session for these capabilities:
 | Send a message to an existing thread or session | Follow-ups without new threads; reports can come back by message |
 | Set a thread's title, pin it | HQ can name itself and its threads |
 | Archive a thread | HQ can retire done, redundant, and dead-end threads itself; without it, it asks the user each time |
+| Read a thread's current state: its messages and whether it has an active turn | HQ can check in without messaging; the monitoring gate can run |
+| Wait on a thread with a timeout, be notified when a background run finishes, or schedule a wake for this thread | HQ can heartbeat unattended; without any of these the user's re-orient is the heartbeat |
 | Spawn a subagent that returns a result to this thread | Level 3 only |
 
 A runtime can have the subagent tool without any of the thread tools. That is the case the
@@ -26,13 +28,29 @@ If the runtime's own instructions or tool descriptions say thread creation needs
 an explicit user request, the `/orchestrate-threads` invocation plus the ledger row is
 that request; say so in the ledger and in the reply.
 
+## Return address
+
+Resolve HQ's return address during the bootstrap probe. Record the exact HQ name
+and, when the runtime exposes one, the task/thread/session id or messaging target
+accepted by its cross-thread tool. When no stable id is exposed, record the exact
+available addressing mechanism instead. Put that address and channel in every
+initial brief and every later assignment or follow-up sent to the workstream.
+
+Each kickoff, assignment, or follow-up tells the workstream to report proactively
+when it is done, blocked or stuck, needs human input or a decision, or reaches its
+authorized stop or delivery boundary. Use cross-thread messaging when the probe
+found it. Without that capability, require the structured report as the
+workstream's final message so the heartbeat can read it. Do not request routine
+progress chatter or another copy of an unchanged blocker.
+
 ## What each runtime looks like today
 
 Recorded so a probe result can be sanity-checked. Verify against the session,
 never assume from this table.
 
-- **Codex app.** Has thread creation, forking, titling, pinning, archiving, and
-  cross-thread messaging, plus a separate subagent tool. The subagent tool is
+- **Codex app.** Has thread creation, forking, titling, pinning, archiving,
+  reading a thread's state, waiting on a thread, and cross-thread messaging,
+  plus a separate subagent tool. Heartbeat by reading each open thread. The subagent tool is
   the one the model reaches for on the word "spawn"; do not. New threads appear
   in the sidebar as ordinary user threads. Some builds and remote-started
   threads withhold the thread tools; then fall to level 2.
@@ -41,11 +59,19 @@ never assume from this table.
   mutation or delivery. A new session name alone does not prove checkout isolation.
   Fleet mode and custom agents are hidden subagents: level 3; they do not replace
   the separate visible workstream required for Copilot repository changes.
+  No verified record exists here of reading another session's state or
+  scheduling a wake, so probe both every bootstrap and record the result. Until
+  a probe proves otherwise, the heartbeat is the user's re-orient, check-ins
+  read the artifact (PR, branch, doc) rather than the session, and a message to
+  a session is the last resort for a thread past its expected report time.
 - **Claude Code.** Cannot open a sibling session from inside a session. The
   desktop app can list other sessions and message them, and can offer the user
   a one-click chip that starts a new session from a suggestion; that chip is a
   level 2 spawn and the preferred one. Background agents, worktree agents, and
-  remote agents are level 3.
+  remote agents are level 3, and they notify HQ on completion. HQ cannot read
+  another session's transcript, so the heartbeat is a scheduled wake that
+  checks artifacts and anything messaged back; a status request to a level 2
+  thread is the last resort, not the routine check.
 - **Anything else.** Level 2 until proven otherwise.
 
 ## GitHub Copilot isolation and PR-link recovery
@@ -92,11 +118,12 @@ naming rules, and the kickoff brief. Tell them where to create it (new thread in
 the same project, worktree on). The row's `Thread` cell is `pending` until the
 user confirms the thread exists, then the exact title.
 
-Reports from a level 2 thread arrive only because the user pastes them. The
-brief's Report block is the paste-sized shape; say in the brief that it is the
-last message of the session so it is easy to copy. `handoff` is not a report
-channel: it writes a continuation document for the next session in that same
-thread, and the user runs it.
+When the runtime lets a level 2 thread message HQ, give it the exact HQ target and
+require proactive reports through that channel. Otherwise the brief's Report
+block is the final workstream message that HQ reads on its heartbeat. HQ still
+checks the artifact the row names. `handoff` is not a report channel: it writes a
+continuation document for the next session in that same thread, and the user runs
+it.
 
 ## Level 3, the subagent
 

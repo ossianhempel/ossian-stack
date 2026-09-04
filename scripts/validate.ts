@@ -44,6 +44,7 @@ const marketplace = readJson(".claude-plugin/marketplace.json");
 const codexPlugin = readJson(".codex-plugin/plugin.json");
 const cursorPlugin = readJson(".cursor-plugin/plugin.json");
 const cursorMarketplace = readJson(".cursor-plugin/marketplace.json");
+const geminiPlugin = readJson(".gemini-plugin/plugin.json");
 
 const marketplaceEntry = marketplace?.plugins?.find((p: any) => p.name === "ossian-stack");
 if (marketplace && !marketplaceEntry) fail(".claude-plugin/marketplace.json: no plugin entry named ossian-stack");
@@ -63,6 +64,7 @@ const versioned = Object.entries({
   ".codex-plugin/plugin.json": codexPlugin?.version,
   ".cursor-plugin/plugin.json": cursorPlugin?.version,
   ".cursor-plugin/marketplace.json": cursorMarketplaceEntry?.version,
+  ".gemini-plugin/plugin.json": geminiPlugin?.version,
 }).filter(([, v]) => v !== undefined);
 for (const [file, v] of versioned) {
   fail(
@@ -79,11 +81,15 @@ for (const [file, name] of [
   [".codex-plugin/plugin.json", codexPlugin?.name],
   [".cursor-plugin/plugin.json", cursorPlugin?.name],
   [".cursor-plugin/marketplace.json", cursorMarketplaceEntry?.name],
+  [".gemini-plugin/plugin.json", geminiPlugin?.name],
 ] as const) {
   if (name !== "ossian-stack") fail(`${file}: name is ${name ?? "(missing)"}, expected ossian-stack`);
 }
 if (cursorPlugin && cursorPlugin.skills !== "./skills/") {
   fail(`.cursor-plugin/plugin.json: skills is ${JSON.stringify(cursorPlugin.skills)}, expected ./skills/`);
+}
+if (geminiPlugin && geminiPlugin.skills !== "./skills/") {
+  fail(`.gemini-plugin/plugin.json: skills is ${JSON.stringify(geminiPlugin.skills)}, expected ./skills/`);
 }
 if (cursorMarketplaceEntry && cursorMarketplaceEntry.source !== ".") {
   fail(`.cursor-plugin/marketplace.json: source is ${JSON.stringify(cursorMarketplaceEntry.source)}, expected .`);

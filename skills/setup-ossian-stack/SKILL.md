@@ -191,6 +191,11 @@ use with no hint where the setting lives. Check for:
 - `docs/agents/triage-labels.md` — the mapping from the five canonical triage
   roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
   `wontfix`) to the actual label strings the tracker uses.
+- `docs/agents/jira-mapping.md` — optional sparse overrides for an existing Jira
+  project that represents an operation differently from this plugin. Do not
+  create it for a fresh setup. Copy the table from
+  `references/jira-mapping.md`; a missing row keeps the selected tracker
+  template's original behavior.
 - `docs/agents/ticket-brief.md` — the shape of every ticket body. Copy
   `references/ticket-brief.md`, dropping its leading copy-me line; `to-tickets`, `to-spec`, and `triage`
   write it and a cold pickup agent reads it.
@@ -233,12 +238,42 @@ skills stop rather than fall back when the tools are absent. Keep both short; th
 configuration the skills parse, not prose. Labels default to the canonical role
 names unless the tracker already uses different strings.
 
+### Adopt an existing Jira project
+
+The Jira template remains the default label-based setup. Before applying it to an
+existing Jira project, compare repository rules with live Jira data:
+
+1. Inspect repository instructions, existing `docs/agents/` files, contributing
+   docs, PR templates, hooks/scripts, and representative branch/commit/PR history
+   for Jira keys, lifecycle, hierarchy, labels, command recipes, permissions, and
+   reporting rules.
+2. Through the configured Jira interface, inspect project issue types and
+   hierarchy, create fields, statuses by issue type, transitions on representative
+   issues, link types, permissions, and representative issues for actual labels
+   and field use. Treat filtered or empty results as unknown.
+3. Preserve matching defaults. For each actual difference in a plugin operation,
+   add one exact row to `docs/agents/jira-mapping.md`; do not copy defaults into
+   the mapping. Preserve repository branch/commit/PR conventions, permissions,
+   credentials, API/CLI recipes, and reporting rules directly in
+   `issue-tracker.md`.
+
+Show the discovered differences and proposed local configuration diff before
+writing. A mapping records existing values and does not change Jira. Introducing
+a shared Jira label, issue type, custom field, status,
+transition, workflow/schema change, or other persistent Jira vocabulary or
+configuration requires explicit user authorization naming that change. Permission
+to configure the adapter or create ordinary tickets does not grant it. When no
+existing representation fits and no Jira change is authorized, map only that
+concept to a portable body fallback. If discovery is blocked, leave the mapping
+unknown rather than guessing.
+
 Existing project copies do not update when the plugin refreshes. During requested
-project setup or policy refresh, compare the handoff-comment, pickup-loop, and
-tracker configuration with these templates and merge the reporting policy into
-the selected project. Preserve its property/label mappings, API recipes, claim
-arbitration, permissions, and other customizations; do not overwrite whole files
-or edit live tickets. Apply the same policy to custom GitLab/local tracker recipes.
+project setup or policy refresh, compare the handoff-comment, pickup-loop, tracker
+configuration, and optional sparse mapping with these templates and merge the
+reporting policy into the selected project. Preserve its property/label mappings,
+API recipes, claim arbitration, permissions, and other customizations; do not
+overwrite whole files or edit live tickets. Apply the same policy to custom
+GitLab/local tracker recipes.
 
 Domain docs (`GLOSSARY.md`, `docs/adr/`) stay lazy — that is the section above,
 not this one.

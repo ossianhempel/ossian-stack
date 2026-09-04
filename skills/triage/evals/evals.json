@@ -1,0 +1,40 @@
+{
+  "skill_name": "triage",
+  "evals": [
+    {
+      "id": 0,
+      "name": "default-label-state-machine",
+      "prompt": "Source evaluation only; do not call the tracker. Triage issue 42 in a default Jira setup with no jira-mapping.md. It is ready for an agent.",
+      "expected_output": "Use the original category/state labels, default AI disclaimer, complete ticket-body brief, readiness comment, and original state machine.",
+      "files": [],
+      "assertions": [
+        "Uses exactly one category label and ready-for-agent state label through triage-labels.md.",
+        "Uses the original default disclaimer and complete ready brief behavior.",
+        "Does not look for or require a generalized adapter."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "one-sparse-triage-override",
+      "prompt": "Source evaluation only; do not call Jira. jira-mapping.md contains only triage.state.ready-for-agent mapped to existing status Verification. Category bug and every other role are absent from the sparse mapping. Describe triage of a verified bug to ready-for-agent.",
+      "expected_output": "Use Verification only for ready-for-agent, while keeping the default bug label, brief, comments, and all other label mappings unchanged.",
+      "files": [],
+      "assertions": [
+        "Consults only the exact ready-for-agent row and applies its existing status operation.",
+        "Keeps the default bug label and does not infer status mappings for other roles.",
+        "Preserves the original verification, brief, and comment semantics."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "unrelated-mapping-does-not-switch-triage",
+      "prompt": "Source evaluation only; do not call Jira. jira-mapping.md contains one wayfinder.blocking override and no triage rows. Show the needs-info triage operation.",
+      "expected_output": "Ignore the unrelated Wayfinder row and use the original needs-info label operation.",
+      "files": [],
+      "assertions": [
+        "Uses the default needs-info label.",
+        "Does not treat mapping-file presence as a tracker-wide mode switch."
+      ]
+    }
+  ]
+}

@@ -21,10 +21,9 @@ Do not require autoreview for a change whose entire diff is prose-only internal 
 
 ## Contract
 
-- Default output is P0 only: report issues worth blocking the current change
-  because they materially break the normal flow, outcome, or safety boundary.
-  Use `--max-priority P1`, `P2`, or `P3` only when the caller explicitly asks
-  for a wider review.
+- Default output includes P0 and P1 findings. Use `--max-priority P0` for a
+  narrower review, or `--max-priority P2` or `P3` when the caller explicitly
+  asks to include lower-priority findings.
 - Treat review output as advisory. Never blindly apply it.
 - Verify every finding by reading the real code path and adjacent files.
 - Read dependency docs/source/types when the finding depends on external behavior.

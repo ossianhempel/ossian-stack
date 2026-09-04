@@ -11,6 +11,39 @@ CLI, prefer it and record its commands here instead of the REST recipes.
 Issues and specs for this repo live in **Jira**, project `<KEY>`, at
 `<https://<SITE>.atlassian.net>`. Do not use `gh issue` for tracker work.
 
+This template defines the default Jira behavior. If
+`docs/agents/jira-mapping.md` exists, look up the exact concept before an
+operation and use that row. If the concept has no row, keep the default below.
+Do not infer other changes from the mapping file.
+
+## Existing-system evidence
+
+Omit this section for a fresh/default setup. For an adopted Jira project, record:
+
+- repository sources checked for keys, hierarchy, lifecycle, labels, branch,
+  commit, PR, permission, command, credential, and reporting conventions;
+- Jira project metadata checked, the account/integration identity, and the date;
+- unknown or permission-filtered facts; and
+- the path to the sparse mapping, when differences exist.
+
+Use the repo's existing Jira CLI or wrapper when it has read commands. With the
+REST interface, the read-only discovery set is:
+
+```bash
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/project/<KEY>" | jq
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/project/<KEY>/statuses" | jq
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/issue/createmeta/<KEY>/issuetypes" | jq
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/issue/createmeta/<KEY>/issuetypes/<TYPE_ID>" | jq
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/issueLinkType" | jq
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/mypermissions?projectKey=<KEY>&permissions=BROWSE_PROJECTS,CREATE_ISSUES,EDIT_ISSUES,ASSIGN_ISSUES,TRANSITION_ISSUES,LINK_ISSUES,ADD_COMMENTS" | jq
+curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/issue/<REPRESENTATIVE_KEY>/transitions?expand=transitions.fields" | jq
+```
+
+Also read representative recent issues to observe actual labels, custom fields,
+parent/child use, links, and workflow paths. Preserve the repository's documented
+interface and recipes. Do not create or change shared Jira vocabulary or schema
+without explicit user authorization naming the persistent change.
+
 ## Credentials
 
 `JIRA_BASE_URL` / `JIRA_EMAIL` / `JIRA_API_TOKEN` (API token from
@@ -49,8 +82,14 @@ Only when the user explicitly asked for a ticket to be created or mutated.
 - **Labels**: Jira replaces the whole label array on update — read the current
   labels, merge, write back. Labels are a shared project-wide vocabulary: a new
   string becomes permanent the moment a write succeeds. Check existing labels
-  before inventing one.
+  first and obtain explicit user authorization naming any new value before its
+  first write.
 - **Close**: transition to the project's Done-category status.
+
+Creating or changing a shared issue type, custom field, status, transition,
+workflow/schema element, or other persistent Jira configuration likewise requires
+explicit user authorization naming that change. Ordinary issue-write permission
+does not grant administrative vocabulary or schema changes.
 
 ## Pull requests as a triage surface
 

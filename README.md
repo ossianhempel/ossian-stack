@@ -169,6 +169,7 @@ conditions — that is the one place a description is maintained.
 | `.codex-plugin/plugin.json` | Codex plugin manifest, same `skills/` tree |
 | `.cursor-plugin/plugin.json` | Cursor plugin manifest, same `skills/` tree |
 | `.cursor-plugin/marketplace.json` | Cursor Git marketplace catalog |
+| `.gemini-plugin/plugin.json` | Antigravity plugin manifest, same `skills/` tree |
 | `bin/docs-list` | Docs indexer — lists `./docs` for whatever repo you run it in |
 | `.agents/skills/` | Internal skills — loaded only in this checkout, never shipped |
 | `.claude/skills` | Symlink to `.agents/skills` so Claude Code sees the same tier |

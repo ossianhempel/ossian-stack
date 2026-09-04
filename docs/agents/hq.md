@@ -31,7 +31,10 @@ the repository's active branching instructions when choosing the task environmen
 
 ## Open workstreams
 
-None.
+| Workstream | Task | Kind | State | Last report | Waiting on |
+| --- | --- | --- | --- | --- | --- |
+| PR follow-through | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local) | build | awaiting delivery | 2026-09-04: autoreview now defaults through P1 in its contract and CLI; all explicit P0-P3 overrides preserved. 36 targeted tests, repository checks, and whitespace checks passed. The completed iOS release babysit routing remains in the same delivery batch. | commit/push request |
+| orchestration workflows | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local) | build | awaiting delivery | 2026-09-05: every kickoff and follow-up assignment now names HQ and requires proactive return on completion, blockers, decisions, or stop boundaries; cross-thread message preferred, final workstream report fallback. 31 scenarios / 99 assertions and repository checks passed. | commit/push request |
 
 ## Blocked on the human
 
@@ -42,9 +45,16 @@ None.
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
 | ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/7bbeb08447c2e2d03c7579a61ae978df475019b3) | 2026-09-04: Copilot HQ isolation reviewed; 4 source scenarios / 11 assertions, map render and repository checks passed. HQ verified this SHA on origin/main. Live Copilot behavior remains unverified. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived after delivery verification |
-| PR follow-through | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f3ecb763b7eb0143b96a5ebd0728bb25b16942ed) | 2026-09-04: P3 autoreview clean; 17 Azure tests, 38 GitHub tests, map render and repository checks passed. HQ independently verified origin/main at this SHA. Live Azure behavior remains unverified. | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local), archived after delivery verification |
 
 ## Inline edits
+
+- 2026-09-05: Reused ossian-mode to make proactive report-back instructions part of every subthread assignment, not only initial priming.
+- 2026-09-04: Reused ossian-mode to align orchestrate-threads task priming and PR follow-through; the clean Jira adapter remains awaiting delivery.
+- 2026-09-04: Reused PR follow-through to align autoreview default reporting with P2; the completed iOS release babysit changes remain awaiting delivery.
+
+- 2026-09-04: Reopened ossian-mode to make tracker setup adopt ninja-bq and other existing Jira conventions without silently creating shared Jira schema.
+
+- 2026-09-04: Reopened PR follow-through for iOS release routing. Azure support previously delivered and verified in f3ecb76.
 
 - 2026-09-04: Reopened ossian-mode for Copilot HQ isolation. Concise tracker reporting delivered and verified in 60666b5.
 
@@ -58,4 +68,4 @@ None.
 
 ## Next
 
-No open workstreams. Refresh the plugin and start a new session to load the Copilot HQ isolation rule; live Copilot behavior remains unverified.
+Review existing-system Jira adoption changes and preserve unrelated Gemini/plugin work. Both open workstreams remain awaiting delivery until explicitly committed and pushed.

@@ -16,6 +16,13 @@ Everything for getting a build from Xcode into App Store Connect and submitted f
 | Deciding if the app is ready and driving the submission flow (first-time availability/IAP/subscription/Game Center/App Privacy blockers) | [`reference/release-flow.md`](reference/release-flow.md) |
 | Defining/validating/running `.asc/workflow.json` multi-step automations for local + CI | [`reference/workflow.md`](reference/workflow.md) |
 
+For a requested iOS release whose next action depends on a repository promotion PR,
+use `release-ios-app` to satisfy its release-PR gate first: create/reuse the manifest's
+PR, invoke or resume its babysit drive, then wait for the manual merge confirmation.
+If that gate was already satisfied by the caller, continue here without restarting
+it. Standalone ASC metadata, upload, readiness, or submission work with no required
+repository PR stays on its focused reference; do not invent or wait on an unrelated PR.
+
 ## Typical end-to-end order
 
 1. **Build** — archive + export the artifact and set a unique build number (`reference/xcode-build.md`).

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "updated": "2026-09-04",
-  "description": "Upstream map for skills/ \u2014 the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
+  "description": "Upstream map for skills/ — the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
       "origin": "local",
@@ -11,7 +11,7 @@
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
       "path": "asc-aso-audit, asc-localize-metadata, asc-whats-new-writer",
-      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh \u2014 diff reference/ against upstream skills manually. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
+      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh — diff reference/ against upstream skills manually. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
       "upstreamCheckedAt": "2026-08-27"
@@ -20,7 +20,7 @@
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
       "path": "asc-ppp-pricing, asc-revenuecat-catalog-sync",
-      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
+      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local conditional release-PR cross-route (2026-09-04): iOS release actions that depend on repository promotion use release-ios-app for its PR/babysit/manual-merge gate; already-satisfied gates and independent ASC-only commands do not start a PR or watcher.",
       "upstreamPath": null,
       "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
       "upstreamCheckedAt": "2026-08-27"
@@ -36,14 +36,14 @@
     },
     "asc-version-guard": {
       "origin": "local",
-      "notes": "Authored in agent-scripts (3a35eef). Runnable install/version guard infra \u2014 not from rudrank bundle."
+      "notes": "Authored in agent-scripts (3a35eef). Runnable install/version guard infra — not from rudrank bundle."
     },
     "autoreview": {
       "origin": "vendored",
       "repo": "https://github.com/openclaw/agent-skills",
       "path": "skills/autoreview",
       "refresh": "npx skills add openclaw/agent-skills -y --skill autoreview && cp -R .agents/skills/autoreview/* skills/autoreview/ && trash .agents/skills/autoreview",
-      "notes": "Local overrides possible. Diff before overwriting customizations. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
+      "notes": "Local overrides possible. Diff before overwriting customizations. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local default-priority override (2026-09-04): report through P1 by default across the skill contract, CLI help, filtering behavior, and tests; explicit P0-P3 limits still win.",
       "upstreamPath": "skills/autoreview",
       "upstreamRev": "1b52afd0954511b8bfdf680361b1f4bed69f1355",
       "upstreamCheckedAt": "2026-08-27"
@@ -93,7 +93,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/create-verification-skill",
       "refresh": "npx skills add cursor/plugins -y --skill create-verification-skill && echo 'hand-merge into skills/close-the-loop/ then: trash .agents/skills/create-verification-skill'",
-      "notes": "From Cursor's pstack plugin, upstream name create-verification-skill. Generates a project-local verification skill (launch/doctor/drive/evidence/cleanup) plus a feature map, and proves it end to end before handing over. Ships references/feature-map-example/ verbatim. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted \u2014 merge by hand on refresh, never overwrite.",
+      "notes": "From Cursor's pstack plugin, upstream name create-verification-skill. Generates a project-local verification skill (launch/doctor/drive/evidence/cleanup) plus a feature map, and proves it end to end before handing over. Ships references/feature-map-example/ verbatim. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted — merge by hand on refresh, never overwrite.",
       "upstreamPath": "pstack/skills/create-verification-skill",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
@@ -103,7 +103,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/maintain-verification-skill",
       "refresh": "npx skills add cursor/plugins -y --skill maintain-verification-skill && echo 'hand-merge into skills/close-the-loop-audit/ then: trash .agents/skills/maintain-verification-skill'",
-      "notes": "From Cursor's pstack plugin, upstream name maintain-verification-skill. Upkeep pass for the skill close-the-loop generates: parallel source readers per feature, one live driving pass, at most one PR of proven corrections. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted \u2014 merge by hand on refresh, never overwrite.",
+      "notes": "From Cursor's pstack plugin, upstream name maintain-verification-skill. Upkeep pass for the skill close-the-loop generates: parallel source readers per feature, one live driving pass, at most one PR of proven corrections. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted — merge by hand on refresh, never overwrite.",
       "upstreamPath": "pstack/skills/maintain-verification-skill",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
@@ -183,7 +183,7 @@
       "origin": "vendored",
       "repo": "https://github.com/zarazhangrui/frontend-slides",
       "path": "SKILL.md, STYLE_PRESETS.md, animation-patterns.md, html-template.md, viewport-base.css, scripts/, bold-template-pack/",
-      "notes": "Repo ships the same skill twice (root and plugins/frontend-slides/skills/frontend-slides/) \u2014 vendored from the root copy. No refresh script; diff upstream root manually. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
+      "notes": "Repo ships the same skill twice (root and plugins/frontend-slides/skills/frontend-slides/) — vendored from the root copy. No refresh script; diff upstream root manually. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh.",
       "upstreamPath": null,
       "upstreamRev": "9906a34d640d2111f724544cbc50f7f130569ae1",
       "upstreamCheckedAt": "2026-08-27"
@@ -290,7 +290,7 @@
     },
     "orchestrate-threads": {
       "origin": "local",
-      "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice. Tracker use is selected per workstream; bootstrap, direct planning/build briefs, and evidence reports work without tickets. Tracked work retains owned-ticket updates and downstream skill prerequisites. Tracker comments follow meaningful work events rather than every HQ report; ownership recovery remains required. Copilot-only HQ checkout isolation follows a user-reported PR-link/title-sync incident: keep local ledger coordination, delegate repository mutation/delivery to a verified separate visible session/worktree, and use supported detach or explicit replacement-HQ recovery without altering other runtimes."
+      "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice. Tracker use is selected per workstream; bootstrap, direct planning/build briefs, and evidence reports work without tickets. Tracked work retains owned-ticket updates and downstream skill prerequisites. Tracker comments follow meaningful work events rather than every HQ report; ownership recovery remains required. Copilot-only HQ checkout isolation follows a user-reported PR-link/title-sync incident: keep local ledger coordination, delegate repository mutation/delivery to a verified separate visible session/worktree, and use supported detach or explicit replacement-HQ recovery without altering other runtimes. Local child-routing contract (2026-09-04): normal visible workstream prompts start with the literal `/ossian-mode` command; research-only, human-in-the-loop planning/prototype/grilling, read-only/status, and explicit local-only work stay direct. Implementation briefs carry exact action, tracker, worktree, branch, and stop boundaries, then use commit-push-pr only for authorized delivery. Its default non-draft PR flow owns the babysit handoff; babysit owns feedback resolution. Trunk-direct and narrower outcomes stop at their stated boundary. Proactive return contract (2026-09-05): every initial kickoff and later assignment or follow-up carries the exact HQ return address and proactively reports completion, blockage, human-input needs, or an authorized stop boundary through cross-thread messaging, with a structured final-message fallback and no routine or unchanged-blocker chatter."
     },
     "ossian-mode": {
       "origin": "local",
@@ -346,7 +346,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/principle-prove-it-works",
       "refresh": "npx skills add cursor/plugins -y --skill principle-prove-it-works && cp -R .agents/skills/principle-prove-it-works/. skills/principle-prove-it-works/ && trash .agents/skills/principle-prove-it-works",
-      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Verify against the real artifact, never a proxy or a delegate's self-report. Cited by the refactoring skill's pin and equivalence steps. Note: mentions a show-me-your-work skill this plugin does not ship \u2014 a single parenthetical, not a route, left verbatim to keep the copy refreshable. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Verify against the real artifact, never a proxy or a delegate's self-report. Cited by the refactoring skill's pin and equivalence steps. Note: mentions a show-me-your-work skill this plugin does not ship — a single parenthetical, not a route, left verbatim to keep the copy refreshable. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
       "upstreamPath": "pstack/skills/principle-prove-it-works",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
@@ -397,7 +397,7 @@
     },
     "release-ios-app": {
       "origin": "local",
-      "notes": "Authored in agent-scripts (af475d9). Orchestrates asc-* + .ios-release.env; mirrors release-mac-app pattern."
+      "notes": "Authored in agent-scripts (af475d9). Orchestrates asc-* + .ios-release.env; mirrors release-mac-app pattern. Local release-PR routing correction (2026-09-04): create or reuse the manifest beta-to-release PR, explicitly invoke/resume babysit drive within inherited release scope through merge-ready or a genuine blocker, rearm after fixes, and retain manual merge/submission permissions. PR size does not change drive; narrower requests, TestFlight without a PR, and equal-branch promotion skips stay bounded. Babysit owns feedback resolution."
     },
     "resolving-merge-conflicts": {
       "origin": "vendored",
@@ -422,16 +422,16 @@
     "revenuecat-api": {
       "origin": "companion",
       "repo": "https://github.com/RevenueCat/docs",
-      "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured. Added disable-model-invocation: true on 2026-08-29 to match the author's own allow_implicit_invocation: false in agents/openai.yaml \u2014 the skill makes live RevenueCat writes, so explicit invocation only. Remove that one frontmatter line (and the policy block) to restore auto-triggering. Adapted 2026-09-01 to anchor the bundled helper portably for Codex, require python3 plus RC_API_KEY, and reject the unrelated npm rc command as RevenueCat CLI proof."
+      "notes": "Cross-agent RevenueCat API v2 skill; companion to RevenueCat MCP (mcp.revenuecat.ai) when configured. Added disable-model-invocation: true on 2026-08-29 to match the author's own allow_implicit_invocation: false in agents/openai.yaml — the skill makes live RevenueCat writes, so explicit invocation only. Remove that one frontmatter line (and the policy block) to restore auto-triggering. Adapted 2026-09-01 to anchor the bundled helper portably for Codex, require python3 plus RC_API_KEY, and reject the unrelated npm rc command as RevenueCat CLI proof."
     },
     "setup-ossian-stack": {
       "origin": "local",
-      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen. Concise tracker reporting policy: meaningful events only, no unchanged blocker/HQ mirroring, minimal ownership and cross-runtime recovery records. Applied to all five tracker templates and pickup instructions; project copies require a scoped merge preserving customizations."
+      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen. Concise tracker reporting policy: meaningful events only, no unchanged blocker/HQ mirroring, minimal ownership and cross-runtime recovery records. Applied to all five tracker templates and pickup instructions; project copies require a scoped merge preserving customizations. Existing Jira adoption starts with discovery: compare repository conventions with live project metadata, preserve the host scheme and recipes, and add one sparse jira-mapping row for each concept that differs. Missing rows retain the original label-based defaults. New shared Jira vocabulary or configuration requires explicit authorization."
     },
     "simplify-code": {
       "origin": "derived",
       "lastSynced": "2026-08-29",
-      "notes": "Authored 2026-08-29 from three inputs. The standard is Ossian's own 14 rules (skimmable code, minimal state space, discriminated unions, asserts over defensive fallbacks), supplied verbatim in conversation \u2014 that is the heart of the skill and has no upstream. Scope resolution, the behavior-preservation contract, and the verify step are structural borrows from EveryInc/compound-engineering-plugin docs/guides/ce-simplify-code.md. Three cursor/plugins principle skills are folded in rather than vendored separately: principle-subtract-before-you-add (the subtract-then-collapse-then-polish ordering), principle-laziness-protocol (rules 15-17 and the maintainer-fatigue directive closing the standard), and the transferable half of principle-fix-root-causes (guards are symptom fixes; fix the pattern not the instance). principle-fix-root-causes is ALSO vendored whole as its own skill, since the rest of it is debugging guidance that does not belong here. The adversarial re-read loop encodes Ossian's practice of pushing a model past its first simplification; it dispatches two bundled reviewer personas (references/reviewers/) written here, following the persona-file pattern used by EveryInc's ce-code-review references/personas/ and by our own skill-creator agents/, rather than a host-specific agent registry. No file is reproduced from either source, so there is nothing to pin; re-read both if they change."
+      "notes": "Authored 2026-08-29 from three inputs. The standard is Ossian's own 14 rules (skimmable code, minimal state space, discriminated unions, asserts over defensive fallbacks), supplied verbatim in conversation — that is the heart of the skill and has no upstream. Scope resolution, the behavior-preservation contract, and the verify step are structural borrows from EveryInc/compound-engineering-plugin docs/guides/ce-simplify-code.md. Three cursor/plugins principle skills are folded in rather than vendored separately: principle-subtract-before-you-add (the subtract-then-collapse-then-polish ordering), principle-laziness-protocol (rules 15-17 and the maintainer-fatigue directive closing the standard), and the transferable half of principle-fix-root-causes (guards are symptom fixes; fix the pattern not the instance). principle-fix-root-causes is ALSO vendored whole as its own skill, since the rest of it is debugging guidance that does not belong here. The adversarial re-read loop encodes Ossian's practice of pushing a model past its first simplification; it dispatches two bundled reviewer personas (references/reviewers/) written here, following the persona-file pattern used by EveryInc's ce-code-review references/personas/ and by our own skill-creator agents/, rather than a host-specific agent registry. No file is reproduced from either source, so there is nothing to pin; re-read both if they change."
     },
     "skill-creator": {
       "origin": "adapted",
@@ -448,7 +448,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/teach",
       "refresh": "npx skills add cursor/plugins -y --skill teach && cp -R .agents/skills/teach/. skills/teach/ && trash .agents/skills/teach",
-      "notes": "From Cursor's pstack plugin. Replaced the prior mattpocock/skills `teach` (a stateful multi-session learning workspace) on 2026-08-28. Delegates to `how` and `why` and writes through `unslop` \u2014 keep all three vendored together. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
+      "notes": "From Cursor's pstack plugin. Replaced the prior mattpocock/skills `teach` (a stateful multi-session learning workspace) on 2026-08-28. Delegates to `how` and `why` and writes through `unslop` — keep all three vendored together. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh.",
       "upstreamPath": "pstack/skills/teach",
       "upstreamRev": "8f008c41981dca484d5beaf688d3aa2ea4ecf89b",
       "upstreamCheckedAt": "2026-08-28",
@@ -484,7 +484,7 @@
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/engineering/triage",
       "refresh": "npx skills add mattpocock/skills -y --skill triage && cp -R .agents/skills/triage/* skills/triage/ && trash .agents/skills/triage && echo 'adapted: re-point /setup-matt-pocock-skills at /setup-ossian-stack, CONTEXT.md converted to GLOSSARY.md — diff by hand'",
-      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: setup pointer rewritten to /setup-ossian-stack; CONTEXT.md converted to GLOSSARY.md per this repo's vocabulary convention. 2026-09-03: the inline grill-loop description was replaced with a `grilling` sibling reference — the plugin now ships grilling. Comment-only adaptation: concise readiness/needs-info summaries link the durable ticket brief and evidence; suppress unchanged blockers and omit empty sections.",
+      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: setup pointer rewritten to /setup-ossian-stack; CONTEXT.md converted to GLOSSARY.md per this repo's vocabulary convention. 2026-09-03: the inline grill-loop description was replaced with a `grilling` sibling reference — the plugin now ships grilling. Comment-only adaptation: concise readiness/needs-info summaries link the durable ticket brief and evidence; suppress unchanged blockers and omit empty sections. For existing Jira, an exact optional `triage.*` mapping row replaces one label operation. Missing rows retain the original label-based state machine and brief behavior.",
       "upstreamPath": "skills/engineering/triage",
       "upstreamRev": "v1.2.3",
       "upstreamCheckedAt": "2026-08-31"
@@ -505,7 +505,7 @@
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/engineering/wayfinder",
       "refresh": "npx skills add mattpocock/skills -y --skill wayfinder && echo 'hand-merge into skills/wayfinder/ then: trash .agents/skills/wayfinder'",
-      "notes": "Vendored 2026-09-01. Preserves upstream's destination, shared map, decision-ticket frontier, fog-of-war, and one-ticket-per-session model. Adapted for this plugin: setup points to setup-ossian-stack; tracker hierarchy, type, claim, and blocking fallbacks are self-contained and capability-based; the unshipped research and grilling siblings are replaced with delegated authoritative research and an inline breadth-first interview; prototype and domain-modeling point to shipped siblings. Merge by hand on refresh; never overwrite. Resolution comments summarize and link the durable answer in the ticket/spec and its evidence; lifecycle resolution and claim operations remain unchanged.",
+      "notes": "Vendored 2026-09-01. Preserves upstream's destination, shared map, decision-ticket frontier, fog-of-war, and one-ticket-per-session model. Adapted for this plugin: setup points to setup-ossian-stack; tracker hierarchy, type, claim, and blocking fallbacks are self-contained and capability-based; the unshipped research and grilling siblings are replaced with delegated authoritative research and an inline breadth-first interview; prototype and domain-modeling point to shipped siblings. Merge by hand on refresh; never overwrite. Resolution comments summarize and link the durable answer in the ticket/spec and its evidence. For existing Jira, an exact optional `wayfinder.*` row replaces one representation. Missing rows retain the original label, native, or fallback behavior and the core map semantics.",
       "upstreamPath": "skills/engineering/wayfinder",
       "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
       "upstreamCheckedAt": "2026-09-01",

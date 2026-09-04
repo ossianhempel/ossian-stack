@@ -7,6 +7,16 @@ description: Determine whether an app is ready to submit, then drive the App Sto
 
 Use this skill when the real question is "Can my app be ready to submit?" and then guide the user through the shortest path to a clean App Store submission, especially for first-time releases.
 
+## Repository release gate (when required)
+
+If the requested iOS release depends on repository promotion, use `release-ios-app`
+before the dependent submission step. It owns the manifest branch pair, new/existing
+PR babysit drive, release-limited fixes and rearming, and manual merge handoff. Resume
+an existing drive; do not duplicate its feedback resolver. Return here after the
+required merge is confirmed. Equal manifest branches or no PR dependency need no
+promotion PR or babysitter. Independent ASC reads, metadata, and uploads retain
+their requested scope. PR readiness never grants App Store submission permission.
+
 ## Version bump policy
 Before staging a release, decide which part of `MARKETING_VERSION` (`MAJOR.MINOR.PATCH`) to bump based on what the release contains:
 

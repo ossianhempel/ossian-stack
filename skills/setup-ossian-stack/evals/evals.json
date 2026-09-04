@@ -1,0 +1,54 @@
+{
+  "skill_name": "setup-ossian-stack",
+  "evals": [
+    {
+      "id": 0,
+      "name": "fresh-jira-keeps-defaults",
+      "prompt": "Source evaluation only; do not call Jira or write files. Configure a fresh Jira project with no prior tracker conventions. Describe the project config produced.",
+      "expected_output": "Use the original Jira template and canonical triage/Wayfinder label defaults, without creating an existing-system mapping file or running an adoption audit.",
+      "files": [],
+      "assertions": [
+        "Uses the original label-based Jira, triage, pickup, and Wayfinder defaults.",
+        "Does not create or propose docs/agents/jira-mapping.md.",
+        "Keeps fresh setup concise and does not require existing-system reconciliation."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "adopt-mature-jira-sparse",
+      "prompt": "Source evaluation only; do not call Jira or write files. Adopt a mature Jira project. Repo and live metadata agree on the normal triage labels and assignee claims, but use Improvement instead of Story, Initiative parents instead of Epics, Depends on instead of Blocks, and REL-123 branch/commit/PR rules through a jira-wrapper CLI. Describe the configuration diff.",
+      "expected_output": "Preserve matching defaults and host conventions; add exact sparse rows only for the differing issue type/hierarchy/dependency concepts supported by stable paths, keeping default labels and claims implicit.",
+      "files": [],
+      "assertions": [
+        "Reconciles repository evidence with live Jira metadata before proposing configuration.",
+        "Preserves jira-wrapper, Improvement, Initiative, Depends on, REL-123 conventions, permissions, and reporting rules.",
+        "Does not copy matching label or assignee defaults into the sparse mapping.",
+        "Every unmapped concept explicitly retains its original default behavior."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "existing-jira-no-vocabulary-approval",
+      "prompt": "Source evaluation only; do not call Jira or write files. Existing Jira has no wayfinder labels and no suitable dependency link. The user authorizes local setup but does not authorize Jira labels, fields, types, or workflow/schema changes. Describe the proposed diff.",
+      "expected_output": "Propose sparse portable body overrides only for the differing Wayfinder concepts and no persistent Jira changes; leave unrelated defaults intact.",
+      "files": [],
+      "assertions": [
+        "Requires explicit named authorization before introducing persistent Jira vocabulary or schema.",
+        "Uses sparse body-fallback rows for only the unsupported concepts.",
+        "Does not turn the tracker into a generalized adapter mode or alter unmapped defaults."
+      ]
+    },
+    {
+      "id": 3,
+      "name": "partial-jira-read-access",
+      "prompt": "Source evaluation only; do not call Jira or write files. Issue reads work, but project metadata, permissions, and transitions return 403, and repo docs disagree about the project key. Describe setup's result.",
+      "expected_output": "Record known evidence and stop before guessed mapping or configuration writes, naming the exact missing fact needed next.",
+      "files": [],
+      "assertions": [
+        "Treats filtered metadata as unknown rather than absent.",
+        "Does not guess a project key or create sparse overrides from incomplete evidence.",
+        "Names the access or identity fact required to continue."
+      ]
+    }
+  ]
+}

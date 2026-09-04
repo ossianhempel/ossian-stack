@@ -1,0 +1,41 @@
+{
+  "skill_name": "wayfinder",
+  "evals": [
+    {
+      "id": 0,
+      "name": "default-wayfinder-unchanged",
+      "prompt": "Source evaluation only; do not call the tracker. Chart and work a map using a default Jira setup with no jira-mapping.md.",
+      "expected_output": "Use the original wayfinder:map and wayfinder:<type> labels, native child/blocking relations where available, assignee claim, close behavior, and unchanged map semantics.",
+      "files": [],
+      "assertions": [
+        "Uses the original map/type labels and native relationship defaults.",
+        "Uses original assignee claim and completion behavior.",
+        "Preserves destination, map, decision tickets, fog, frontier, and one-ticket-per-session."
+      ]
+    },
+    {
+      "id": 1,
+      "name": "one-sparse-blocking-override",
+      "prompt": "Source evaluation only; do not call Jira. jira-mapping.md contains only wayfinder.blocking mapped to the existing Depends on relationship. All other concepts are absent. Describe charting and frontier resolution.",
+      "expected_output": "Use Depends on only for blocking while retaining every original map label, ticket-kind label, child, claim, and close default.",
+      "files": [],
+      "assertions": [
+        "Applies only the exact wayfinder.blocking override.",
+        "Retains original defaults for map marker, ticket kind, membership, claim, and completion.",
+        "Computes the same unblocked and unclaimed decision frontier."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "sparse-body-fallbacks",
+      "prompt": "Source evaluation only; do not call Jira. Existing Jira lacks approved wayfinder labels and dependency links. Sparse rows map wayfinder.map, each wayfinder.kind.*, and wayfinder.blocking to documented body markers; membership and claim are absent. Describe the representation.",
+      "expected_output": "Use body markers only for mapped concepts, retaining the original child/sub-issue and assignee defaults for unmapped membership and claim.",
+      "files": [],
+      "assertions": [
+        "Uses body fallbacks only for the explicitly mapped map, kind, and blocking concepts.",
+        "Keeps default native membership and assignee claim behavior.",
+        "Does not propose Jira labels, schema changes, or a generalized adapter mode."
+      ]
+    }
+  ]
+}

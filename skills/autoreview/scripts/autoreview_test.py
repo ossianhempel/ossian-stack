@@ -104,10 +104,45 @@ class AutoreviewCursorTests(unittest.TestCase):
 
 
 class AutoreviewPriorityTests(unittest.TestCase):
-    def test_default_priority_is_p0(self) -> None:
-        with mock.patch.object(sys, "argv", ["autoreview"]):
+    def test_default_priority_is_p1(self) -> None:
+        with mock.patch.dict(os.environ, {}, clear=True), mock.patch.object(
+            sys, "argv", ["autoreview"]
+        ):
             args = AUTOREVIEW.parse_args()
-        self.assertEqual(args.max_priority, "P0")
+        self.assertEqual(args.max_priority, "P1")
+
+    def test_explicit_priority_overrides_default_and_environment(self) -> None:
+        for priority in ("P0", "P1", "P2", "P3"):
+            with self.subTest(priority=priority), mock.patch.dict(
+                os.environ, {"AUTOREVIEW_MAX_PRIORITY": "P3"}, clear=True
+            ), mock.patch.object(
+                sys, "argv", ["autoreview", "--max-priority", priority]
+            ):
+                args = AUTOREVIEW.parse_args()
+            self.assertEqual(args.max_priority, priority)
+
+    def test_help_reports_p1_default(self) -> None:
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT_PATH), "--help"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        self.assertIn("Widest finding priority to report. Default: P1.", result.stdout)
+
+    def test_default_priority_output_keeps_p0_and_p1(self) -> None:
+        report = copy.deepcopy(DRAFT_REPORT)
+        report["findings"] = [
+            {**copy.deepcopy(DRAFT_REPORT["findings"][0]), "priority": priority}
+            for priority in ("P0", "P1", "P2", "P3")
+        ]
+        AUTOREVIEW.filter_findings_by_priority(report, "P1")
+        self.assertEqual(
+            [finding["priority"] for finding in report["findings"]],
+            ["P0", "P1"],
+        )
+        self.assertIn("Omitted 2 finding(s)", report["overall_explanation"])
+        self.assertIn("below the requested P1", report["overall_explanation"])
 
     def test_priority_filter_omits_lower_findings_and_cleans_verdict(self) -> None:
         report = copy.deepcopy(DRAFT_REPORT)

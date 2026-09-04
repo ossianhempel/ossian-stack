@@ -118,8 +118,11 @@ retired, and this chat is taking over.
    and record in the ledger header that HQ now lives in this thread so the old
    one is explicitly retired. Then continue; every step below still applies.
 3. Probe delegation surfaces per `references/delegation.md` and record the level
-   available in this runtime. On GitHub Copilot, also record HQ's current checkout
-   path and branch and apply the Copilot boundary before any repository work.
+   available in this runtime, along with the check-in mechanism HQ will use
+   for its heartbeat. Record HQ's exact task/thread id or available messaging
+   address and the cross-thread report channel. On GitHub Copilot, also record
+   HQ's current checkout path and branch and apply the Copilot boundary before
+   any repository work.
 4. Record the tracker config at `docs/agents/issue-tracker.md` if present, or
    `none`; read it when a workstream uses tickets. Its absence does not block
    bootstrap, planning, or delegation. A chosen ticket-based workflow needs its
@@ -135,9 +138,10 @@ retired, and this chat is taking over.
 **Re-orient, bare `/orchestrate-threads` in the HQ thread:**
 
 1. Read the ledger. It is the truth, not your memory of this chat.
-2. For each open workstream, check for a report you have not folded in: the
-   thread's last message where the runtime lets you read it, a message the
-   sub-thread sent here, or something the user pasted.
+2. Run the check-in gate from "Monitoring workstreams" over every open row:
+   read each thread's current state where the runtime lets you, fold in any
+   report you have not seen (a message the sub-thread sent here, or something
+   the user pasted), and verify the artifact each row names.
 3. Reconcile the ledger, then report: open workstreams and their state, what
    came back since last time, what is blocked on the human, and what HQ will
    delegate next.
@@ -153,7 +157,28 @@ Every delegation is a kickoff brief written per `references/priming.md`. The
 brief is the contract; the sub-thread starts with nothing else. It carries the
 goal, the done condition, scope boundaries, the project facts the thread cannot
 derive, the skills it should invoke and when, and the exact shape of the report
-it owes HQ.
+it owes HQ. Copy the user's action scope into it: allowed edits, tracker choice,
+working environment, branching rule, delivery actions, and the first action the
+thread must not take. Delegation carries existing authorization; it does not add
+commit, push, PR, issue, publish, release, or merge permission.
+
+Every initial kickoff and every later assignment or follow-up sent to an existing
+workstream carries a return contract. This includes the next item sent to an idle
+thread, a correction, resumed work, review fixes, and delivery closeout. Name HQ
+exactly and include its task/thread id or the concrete addressing mechanism
+available in that runtime. Tell the workstream to report proactively when it:
+
+- finishes;
+- is blocked or stuck;
+- needs a human decision or input; or
+- reaches its authorized stop or delivery boundary.
+
+When cross-thread messaging is available, the workstream sends that structured
+report to HQ at the recorded address without waiting to be polled. Otherwise it
+posts the same report as its final workstream message so HQ's heartbeat can read
+it. Routine chatter is not required, and an unchanged blocker is not reported
+again. A later assignment repeats the compact return contract because the thread
+may have crossed sessions or lost earlier context.
 
 Before delegating, decide what kind of work it is and route it. The test is
 whether the design is already decided, not how large the diff will be:
@@ -169,10 +194,44 @@ whether the design is already decided, not how large the diff will be:
   Codex. A brief for a build thread carries decisions; a brief for a plan
   thread carries the question and the constraints, and leaves the decisions to
   the thread.
-- A PR that exists and needs to get green: `babysit`, in the thread that owns
-  the PR.
+- A PR that already exists and needs status or readiness work: `babysit`, in the
+  thread that owns the PR. Use its `check` mode for a read-only status request.
 - A bug nobody understands yet: `diagnosing-bugs`, and the report is the
   diagnosis, not a fix.
+
+### Start and delivery routes
+
+Normally, the first content line of every visible workstream prompt is the
+literal command `/ossian-mode`. Because the kickoff prompt is user-visible, that
+line explicitly invokes the skill for the brief that follows. It applies the
+project's working standards and chooses only the routes needed inside the
+inherited scope. Delete the command for research-only work, human-in-the-loop
+planning, `prototype` or `grilling` sessions, read-only/status tasks, and work
+the user explicitly bounded to local output with no delivery. Those direct
+routes keep their own stated goal and stop.
+
+Every implementation or delivery brief states its closeout route even when
+delivery is not yet authorized:
+
+- When the inherited action scope authorizes the required commit, push, and PR
+  actions, invoke `commit-push-pr` after the implementation and verification are
+  complete. Its default completed, non-draft PR flow invokes or resumes
+  `babysit` in `drive` mode and carries the same action scope through review and
+  CI to merge-ready. It never merges.
+- Do not also start `babysit` or a feedback resolver from the brief for that
+  default flow. `commit-push-pr` owns the handoff, and `babysit` owns resolver
+  invocation. Resume an existing drive instead of creating a second one.
+- Preserve narrower outcomes exactly: local diff only, commit only, push only,
+  draft PR, stop at PR, read-only status, or another explicit stop. If the next
+  delivery action is not authorized, stop with the concrete result and report
+  `awaiting delivery`; do not treat the route as permission.
+- In a trunk-direct repository, route authorized commit and push through
+  `commit-push-pr`; it stops after the push because the project has no PR or
+  babysit stage.
+
+An existing PR whose thread starts with status, feedback, or readiness as its
+goal routes directly to the matching `babysit` mode. That is existing-PR
+ownership, not a second closeout loop.
 
 Choose tracker-dependent skills only for a workstream using that workflow:
 `wayfinder` for large exploratory work managed through tickets, `to-spec` for a
@@ -186,9 +245,94 @@ change are cheaper to do here than to brief. Do them, note them in the ledger,
 move on. Copilot HQ delegates those edits too; its own ledger reconciliation
 remains coordination, with delivery handled in the separate worktree session.
 
-After spawning, add or update the ledger row in the same turn. A delegation that
-is not in the ledger did not happen as far as the next `/orchestrate-threads` is
-concerned.
+After spawning, add or update the ledger row in the same turn, with the time
+HQ expects to hear back, and arm the heartbeat if no row was open before. A
+delegation that is not in the ledger did not happen as far as the next
+`/orchestrate-threads` is concerned.
+
+## Monitoring workstreams
+
+HQ owns monitoring. Sub-threads report, and usually do, but a report that never
+arrives is HQ's problem to notice, never the user's. If the user has to ask HQ
+what a workstream is doing, HQ has already failed. So while any row is open,
+HQ checks in on a heartbeat of about fifteen minutes, using whatever the
+runtime gives it and recording the mechanism in the ledger header:
+
+- **Codex:** read each open thread's current state directly. Where a call can
+  wait on a thread with a timeout, use it for a thread HQ has nothing else to
+  do but wait for; otherwise read on the heartbeat.
+- **Claude Code:** background and worktree agents notify HQ when they finish;
+  that notification is the check-in for level 3 rows. For everything else,
+  schedule a wake for the next heartbeat and let it lapse when no rows are
+  open. No tight polling: one wake per heartbeat, never a loop of short ones.
+- **GitHub Copilot and anything else:** probe for reading a session's state and
+  for a scheduled wake per `references/delegation.md`. Without a wake, the
+  heartbeat is the user's next re-orient, and HQ says so once at delegation.
+- **A runtime that cannot read a thread's state** checks the artifact instead:
+  the PR, the branch, the doc. A status request to the thread itself is sent
+  only when the artifact has gone quiet past the row's expected report time.
+
+Assume someone, the user or another agent, may have steered any sub-thread
+since HQ last looked. So every check-in, and every message HQ sends a thread,
+passes this gate first:
+
+1. Read the thread's latest state: its newest messages from anyone, and whether
+   it has an active turn.
+2. Treat the newest instruction given inside that thread as authoritative over
+   HQ's older brief. HQ does not overrule the user's later words with its plan.
+3. Refresh the authoritative state of what the row names. For a PR that means
+   checks, mergeability, top-level comments, submitted reviews, and unresolved
+   inline review threads, read through the repository host's interface rather
+   than a single summary view that omits review threads.
+4. Classify the thread as progressing, blocked, completed, or idle.
+
+A progressing thread with a coherent plan gets nothing. HQ sends a message only
+when the evidence shows one of:
+
+- the thread asked HQ something, or reported a blocker;
+- the thread has completed or run out of work in its scope and needs its next
+  item or its closeout;
+- its PR has requested changes, unresolved review threads, or review feedback
+  the thread has not acknowledged;
+- repeated failures with no progress, and HQ has a concrete correction;
+- wrong repository, an unauthorized or destructive mutation, a security risk, a
+  release-gate violation, or a direct conflict with the user's latest
+  instruction;
+- gross divergence from the agreed outcome, not merely a different reasonable
+  design.
+
+Every message HQ sends to the workstream retains its exact return address,
+report triggers, and channel.
+
+Do not restate the task, add requirements, or raise the proof bar mid-flight.
+When the thread's intent is ambiguous, one concise question beats prescriptive
+steering. A check-in that changes nothing writes nothing to the ledger beyond
+the row's checked stamp, and produces no report line.
+
+Never interrupt, archive, rename, duplicate, or replace a thread without first
+reading its current state. For a suspected duplicate, read both; if either has
+unique progress, edits, or an active turn, leave both alone and ask the user.
+
+**Idle closeout.** A completed or idle thread is not left as a lane HQ polls
+forever. After reading its state and verifying its artifact, HQ does exactly
+one of:
+
+1. Send it the next item within the same workstream's scope, if one exists. The
+   assignment repeats the exact HQ address, report triggers, and return channel.
+2. Prepare its open question to decision-ready, with proof and a
+   recommendation, and put one concrete question to the user in the blocked
+   list.
+3. Have it finish delivery the user has already authorized. For repository
+   implementation, send it back through the brief's bounded `commit-push-pr`
+   route; if delivery is not authorized, that is the blocked-list entry.
+4. Verify delivery and move the row to Done per the archive rule below.
+
+**Before every status reply**, whether from a heartbeat or a re-orient: list
+every open row, run the gate over each, steer where the gate says to, and only
+then report. A report from memory or from what HQ spawned this turn is not a
+status. Heartbeat replies are delta-only: rows that changed state, threads
+created or archived, new blockers, decisions newly ready for the user. An
+unchanged row is not mentioned; a ready PR is one line with its link.
 
 ## When a workstream reports
 
@@ -243,7 +387,10 @@ thread with an unread report or an open question; read and record first, then ar
 - Create a second thread for a workstream that has one.
 - Let a subagent stand in for a thread on a runtime that has threads.
 - Leave a done, redundant, or dead-end thread sitting in the sidebar.
+- Message, rename, or archive a thread without reading its current state first.
+- Report status from memory, or wait for the user to ask how a thread is doing.
 
 **Reply shape, every turn:** what changed, per workstream by name; what
 was delegated and where it lives; what was archived and why; what is blocked on
-the human; the single next thing HQ will do.
+the human; the single next thing HQ will do. On a heartbeat, only the delta;
+nothing changed is one line.

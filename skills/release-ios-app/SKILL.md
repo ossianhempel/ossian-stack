@@ -21,7 +21,7 @@ shared profile skill plus a repo-owned manifest.
 - When retiring older repo-local release-flow skills or one-off release docs, use
   [`references/migration.md`](references/migration.md) as the consolidation map.
 - Keep app-specific build/sign/upload behavior in repo scripts / the relevant CLI (`xcodebuild`, `xcodegen`, `eas`, `asc`). This skill orchestrates; it does not re-implement them.
-- **Never auto-merge the `develop` → `main` release PR.** Open it, then stop and wait for Ossian to merge.
+- **Do not merge release PRs or arm auto-merge/auto-complete.** Drive the required PR to merge-ready through step 3, then hand merge to Ossian; PR creation alone is not that gate.
 - Never print secrets or key material.
 - Final App Store readiness and submission run through the `asc-release` skill. What's New copy goes through `asc-metadata`.
 
@@ -38,12 +38,12 @@ If a release mixes both, the user-facing change wins → bump MINOR. **State the
 ## Decision tree
 
 1. **Determine the target.**
-   - **TestFlight / beta** — normally from `IOS_RELEASE_BETA_BRANCH`. Keep the current release train unless intentionally starting the next one.
-   - **App Store / production** — first promote the candidate from `IOS_RELEASE_BETA_BRANCH` to `IOS_RELEASE_RELEASE_BRANCH` through a PR. Do **not** begin ASC submission while required release changes only exist on the beta branch. (If the manifest sets the two branches equal — e.g. Walkmon before it has `develop` — skip the promotion PR and treat the release branch as both.)
+   - **TestFlight / beta** — normally from `IOS_RELEASE_BETA_BRANCH`. Keep the current release train unless intentionally starting the next one. Without a release PR in scope, skip step 3; do not create one just for babysitting.
+   - **App Store / production** — first promote the candidate from `IOS_RELEASE_BETA_BRANCH` to `IOS_RELEASE_RELEASE_BRANCH` through a PR. Do **not** begin ASC submission while required release changes only exist on the beta branch. (If the manifest sets the two branches equal, skip the promotion PR and its babysit gate and treat the release branch as both.)
 
 2. **Decide the version bump** (policy above) before opening the release PR. Continuing the current unreleased train → keep the version. Starting the next train → bump now, then for `xcodegen` repos run `xcodegen` in `IOS_RELEASE_XCODEGEN_DIR` and commit the regenerated `*.xcodeproj/project.pbxproj`.
 
-3. **Open the `develop` → `main` release PR, then babysit it to merge-ready.** Include the version bump and user-facing changes. Hand the PR to the `babysit` skill in `drive` mode: it watches CI, classifies failures, and triages review-bot comments on the release PR, stopping at merge-ready. Fix what it flags before asking Ossian to merge; the release PR is substantive, so `drive`, not `check`. `babysit` never merges — ask Ossian to merge manually and continue only after he confirms.
+3. **Drive the required release PR before merge handoff.** Create or reuse the PR from `IOS_RELEASE_BETA_BRANCH` to `IOS_RELEASE_RELEASE_BRANCH`, including the intended version and release changes. Explicitly invoke `babysit` in `drive` mode with the full PR URL and inherited, release-limited fix/commit/push/reply/resolve scope. The release outcome selects drive regardless of PR size; preserve explicit narrower user limits. If `commit-push-pr` or another caller already started its drive, resume that owner instead of starting a second babysitter. `babysit` handles CI and invokes `resolve-pr-feedback`; do not start another feedback loop here. After an authorized release fix is validated and pushed, resume the watcher on the changed head. Continue to merge-ready or a genuine blocker with no remaining authorized work; report blockers without claiming readiness. At merge-ready, ask Ossian to merge manually and continue the dependent release steps only after he confirms. A narrower stop request ends at its requested boundary without authorizing merge or submission.
 
 4. **Validate readiness.** Run `IOS_RELEASE_VERSION_CHECK_CMD` (or `scripts/ios-release check-version`) — the selected version must be strictly greater than the live App Store version. Run `IOS_RELEASE_TEST_CMDS` for the changed surface when practical.
 
@@ -55,7 +55,7 @@ If a release mixes both, the user-facing change wins → bump MINOR. **State the
 
 ## Golden rule: promote the validated TestFlight build
 
-App Store submissions must **attach an already-uploaded, `VALID` TestFlight build** for the same version train — never a fresh direct App Store IPA upload. A second direct upload can reserve/consume the `CFBundleVersion` that Xcode Cloud / EAS is about to use, causing `PrepareBuildForAppStoreConnect` failures or `409` attach conflicts. Safe sequence: merge the release PR → let Xcode Cloud/EAS archive+upload the candidate → wait until the build is `VALID` in App Store Connect → distribute → attach that build to the App Store version → submit for review. Only upload a local IPA when intentionally bypassing CI for the TestFlight candidate, and then promote that same build.
+App Store submissions must **attach an already-uploaded, `VALID` TestFlight build** for the same version train — never a fresh direct App Store IPA upload. A second direct upload can reserve/consume the `CFBundleVersion` that Xcode Cloud / EAS is about to use, causing `PrepareBuildForAppStoreConnect` failures or `409` attach conflicts. Safe sequence: Ossian merges the release PR when required → let Xcode Cloud/EAS archive+upload the candidate → wait until the build is `VALID` in App Store Connect → distribute → attach that build to the App Store version → submit for review. Only upload a local IPA when intentionally bypassing CI for the TestFlight candidate, and then promote that same build.
 
 ## Submission
 
@@ -89,7 +89,7 @@ App Store submissions must **attach an already-uploaded, `VALID` TestFlight buil
 
 ## Done
 
-- Release PR merged by Ossian; release branch has the version bump and user-facing changes.
+- Required release PR, if any, reached merge-ready and was merged by Ossian; the release branch has the intended version and release changes.
 - Selected build is `VALID` in App Store Connect and attached to the target version.
 - `asc` readiness is clean (or only understood non-blocking warnings); What's New matches the shipped commits.
 - Backend production deploy (when applicable) completed before the binary shipped.

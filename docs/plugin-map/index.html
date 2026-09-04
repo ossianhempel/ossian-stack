@@ -141,7 +141,11 @@
    "how": "native plugin"
   },
   {
-   "label": "Gemini · Windsurf · Antigravity",
+   "label": "Antigravity",
+   "how": "native plugin"
+  },
+  {
+   "label": "Gemini · Windsurf",
    "how": "skills installer"
   }
  ],
@@ -534,7 +538,9 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
-   "calls": [],
+   "calls": [
+    "release-ios-app"
+   ],
    "calledBy": [
     "release-ios-app"
    ]
@@ -720,6 +726,7 @@
    ],
    "calledBy": [
     "babysit",
+    "orchestrate-threads",
     "ossian-mode"
    ]
   },
@@ -1096,6 +1103,7 @@
    "origin": "local",
    "repo": null,
    "calls": [
+    "ossian-mode",
     "grilling",
     "prototype",
     "wayfinder",
@@ -1103,6 +1111,7 @@
     "to-tickets",
     "triage",
     "codex-first",
+    "commit-push-pr",
     "babysit",
     "diagnosing-bugs",
     "handoff",
@@ -1138,7 +1147,9 @@
     "babysit",
     "release-ios-app"
    ],
-   "calledBy": []
+   "calledBy": [
+    "orchestrate-threads"
+   ]
   },
   "post-queue-cli": {
    "id": "post-queue-cli",
@@ -1340,6 +1351,7 @@
     "babysit"
    ],
    "calledBy": [
+    "asc-release",
     "ossian-mode",
     "setup-ossian-stack"
    ]

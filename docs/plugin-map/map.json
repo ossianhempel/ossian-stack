@@ -24,7 +24,11 @@
       "how": "native plugin"
     },
     {
-      "label": "Gemini · Windsurf · Antigravity",
+      "label": "Antigravity",
+      "how": "native plugin"
+    },
+    {
+      "label": "Gemini · Windsurf",
       "how": "skills installer"
     }
   ],
@@ -228,6 +232,9 @@
   },
   "agents": {},
   "calls": {
+    "asc-release": [
+      "release-ios-app"
+    ],
     "babysit": [
       "commit-push-pr",
       "resolve-pr-feedback"
@@ -269,6 +276,7 @@
       "unslop"
     ],
     "orchestrate-threads": [
+      "ossian-mode",
       "grilling",
       "prototype",
       "wayfinder",
@@ -276,6 +284,7 @@
       "to-tickets",
       "triage",
       "codex-first",
+      "commit-push-pr",
       "babysit",
       "diagnosing-bugs",
       "handoff",
