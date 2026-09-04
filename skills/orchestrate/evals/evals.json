@@ -1,0 +1,52 @@
+{
+  "skill_name": "orchestrate",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "/orchestrate gainslog — first task: add CSV export of a user's workouts (share sheet on iOS, one row per set).",
+      "expected_output": "HQ bootstraps: probes delegation surfaces, names itself `<project emoji> GainsLog` and asks the user to pin it, writes docs/agents/hq.md with a header and one open workstream row for csv-export with a fixed emoji, and hands the user a titled paste-ready kickoff brief that primes the sub-thread with plugin skills (codex-first/autoreview/babysit/handoff) and a report shape. It does not implement the export itself.",
+      "files": [
+        "evals/fixtures/eval0"
+      ],
+      "assertions": [
+        "Ledger created at docs/agents/hq.md with a header naming the HQ thread as `<project emoji> GainsLog` (proper casing, no 'HQ ·' prefix, no 📌) and the probed delegation level",
+        "Ledger has exactly one open workstream row for the CSV export, titled `<workstream emoji> GainsLog · <workstream>` with an emoji different from the project's",
+        "Reply hands the user a copyable kickoff brief plus a thread title (level 2), rather than spawning a hidden subagent or doing the work itself",
+        "Kickoff brief names plugin skills the sub-thread should invoke (at least autoreview or babysit, and handoff) and specifies the report shape back to HQ",
+        "No implementation of the CSV export exists in the project diff (no new source files, no edits to src/)",
+        "Reply tells the user to pin/rename the thread as HQ and states the operating contract briefly"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "/orchestrate\n\nThe csv-export thread just said:\n\n- Workstream: `🔩 gainslog · csv-export`\n- State: needs decision\n- Artifact: PR #212\n- What changed: babysit reports merge-ready, both bugbot threads resolved. Export currently includes soft-deleted sets because listWorkouts() returns them; bugbot flagged it.\n- What HQ must decide: should soft-deleted sets be excluded from the export? If yes I need one more commit.",
+      "expected_output": "HQ reads the existing ledger instead of relying on chat memory, updates the csv-export row (state merge-ready, last report today, waiting on: decision about soft-deleted sets), keeps the other two rows intact, lists the decision in Blocked on the human (or decides it if derivable and hands the user the answer to paste since Claude Code cannot message the thread), does not merge, and replies in the per-workstream shape with the single next thing.",
+      "files": [
+        "evals/fixtures/eval1"
+      ],
+      "assertions": [
+        "Ledger csv-export row updated: state reflects merge-ready and last report dated today; other two workstream rows preserved unchanged",
+        "The soft-deleted-sets question appears in the ledger's Blocked on the human list or is answered with a concrete decision handed to the user to paste into the thread",
+        "Reply does not merge PR #212 or instruct the agent to merge; landing is left to the user",
+        "Reply follows the per-workstream shape: what changed by emoji and name, what is blocked on the human, and a single next step",
+        "No attempt to rewrite the ledger from chat memory: hq.md still contains the sync-rewrite and duplicate-sets rows",
+        "Re-orient wrote only docs/agents/hq.md: the README typo the ledger claims fixed is reported as an inconsistency, not fixed"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "/orchestrate gainslog. Two things: the README says 'progresive', fix that. And src/sync/engine.ts needs a proper rewrite, it has three retry paths and shared cursor state — let's get going on that.",
+      "expected_output": "HQ bootstraps, fixes the one-word README typo inline and logs it under Inline edits in the ledger, and does NOT rewrite the sync engine: it opens a plan workstream (🧭-style emoji, kind plan) whose kickoff brief tells the thread to run wayfinder/to-spec first, then build threads later. Ledger has one open row, one inline edit, no engine.ts changes.",
+      "files": [
+        "evals/fixtures/eval2"
+      ],
+      "assertions": [
+        "README typo 'progresive' fixed inline and the edit is logged under Inline edits in docs/agents/hq.md",
+        "src/sync/engine.ts is unchanged; the sync rewrite is not implemented in this session",
+        "Ledger has one open workstream row for the sync rewrite with kind plan and an emoji-prefixed thread title",
+        "The kickoff brief for the sync workstream tells the thread to run wayfinder or to-spec first, not to start coding",
+        "Reply hands the user a titled, copyable kickoff brief (level 2) rather than spawning a hidden subagent"
+      ]
+    }
+  ]
+}

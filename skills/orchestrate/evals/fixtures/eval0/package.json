@@ -1,0 +1,1 @@
+{"name":"gainslog","scripts":{"test":"vitest","typecheck":"tsc --noEmit","docs:list":"echo no docs"}}
