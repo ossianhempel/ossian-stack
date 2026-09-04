@@ -1,5 +1,5 @@
 interface:
-  display_name: "Orchestrate"
+  display_name: "Orchestrate Threads"
   short_description: "Pin this chat as HQ and delegate to sub-threads"
 policy:
   allow_implicit_invocation: false

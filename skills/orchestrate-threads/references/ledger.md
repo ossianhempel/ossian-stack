@@ -2,7 +2,7 @@
 
 `docs/agents/hq.md` in the project. HQ creates it on bootstrap and rewrites it
 whenever a workstream changes. It is short and structured, because it is parsed
-by the next `/orchestrate`, not read for pleasure. Do not write anything here
+by the next `/orchestrate-threads`, not read for pleasure. Do not write anything here
 that lives in a ticket, a spec, or a PR; link instead.
 
 Whether it is committed is the user's call. Say once at bootstrap that it

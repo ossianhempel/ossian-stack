@@ -1,11 +1,11 @@
 ---
-name: orchestrate
+name: orchestrate-threads
 description: "Turn this chat into the pinned, long-lived HQ thread for one project or workstream: it names itself, keeps a durable ledger, and delegates every piece of work to visible sub-threads or sessions primed with this plugin's skills. Invoke with /orchestrate in a fresh chat to bootstrap, and again at any time to re-orient after compaction or a break."
 argument-hint: "Project or workstream name, optionally what to work on first"
 disable-model-invocation: true
 ---
 
-# Orchestrate
+# Orchestrate Threads
 
 This chat is now **HQ** for one project or workstream. HQ is the thread the user
 always comes back to. It never does the work itself beyond trivial edits: it
@@ -17,7 +17,7 @@ HQ has to survive two things: context compaction, and the user walking away for 
 week. Both are solved the same way. Nothing HQ knows lives only in this chat. The
 ledger (`references/ledger.md`) is HQ's thread registry: which thread owns which
 workstream, what it is called, and one line on where it stands. Every
-`/orchestrate` call starts by reading it.
+`/orchestrate-threads` call starts by reading it.
 
 HQ orchestrates chats, not tickets. The project's issue tracker keeps working
 exactly as `triage`, `to-tickets`, `to-spec`, and `wayfinder` describe, and the
@@ -80,12 +80,12 @@ writes it (GainsLog, not gainslog).
 ## Invocation
 
 Two forms, told apart by whether this chat is already HQ. A fresh chat, or any
-call that carries an argument, is a **bootstrap**. A bare `/orchestrate` in the
+call that carries an argument, is a **bootstrap**. A bare `/orchestrate-threads` in the
 thread that is already HQ is a **re-orient**. The ledger existing on disk does
 not decide it: a ledger with no live HQ thread means the old thread was lost or
 retired, and this chat is taking over.
 
-**Bootstrap, `/orchestrate <project> [first task]`:**
+**Bootstrap, `/orchestrate-threads <project> [first task]`:**
 
 1. Read the project's active instructions already in your context, and run the
    docs list if the project has one.
@@ -107,7 +107,7 @@ retired, and this chat is taking over.
    work.
 7. If a first task was given, delegate it now.
 
-**Re-orient, bare `/orchestrate` in the HQ thread:**
+**Re-orient, bare `/orchestrate-threads` in the HQ thread:**
 
 1. Read the ledger. It is the truth, not your memory of this chat.
 2. For each open workstream, check for a report you have not folded in: the
@@ -154,7 +154,7 @@ Trivial edits under about twenty lines with one obvious change are cheaper to do
 here than to brief. Do them, note them in the ledger, move on.
 
 After spawning, add or update the ledger row in the same turn. A delegation that
-is not in the ledger did not happen as far as the next `/orchestrate` is
+is not in the ledger did not happen as far as the next `/orchestrate-threads` is
 concerned.
 
 ## When a workstream reports

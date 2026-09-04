@@ -23,7 +23,7 @@ skill exists to catch: a subagent tool present while thread tools are absent
 means level 2, not level 3, unless the work is a bounded report.
 
 If the runtime's own instructions or tool descriptions say thread creation needs
-an explicit user request, the `/orchestrate` invocation plus the ledger row is
+an explicit user request, the `/orchestrate-threads` invocation plus the ledger row is
 that request; say so in the ledger and in the reply.
 
 ## What each runtime looks like today

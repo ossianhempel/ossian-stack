@@ -288,7 +288,7 @@
       "origin": "local",
       "notes": "Authored in agent-scripts. Method distilled from Nicolas Cole's 'The Art and Business of Online Writing' via Ossian's Obsidian vault notes (3. Resources/Notes/Online writing.md and linked notes; Readwise highlights). No upstream code vendored."
     },
-    "orchestrate": {
+    "orchestrate-threads": {
       "origin": "local",
       "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice."
     },

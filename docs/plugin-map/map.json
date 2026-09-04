@@ -75,6 +75,9 @@
     "codify-conventions": {
       "role": "both"
     },
+    "commit-push-pr": {
+      "role": "both"
+    },
     "continual-learning": {
       "role": "human"
     },
@@ -138,7 +141,7 @@
     "online-writing": {
       "role": "both"
     },
-    "orchestrate": {
+    "orchestrate-threads": {
       "role": "human"
     },
     "post-queue-cli": {
@@ -218,15 +221,22 @@
     },
     "why": {
       "role": "both"
-    },
-    "commit-push-pr": {
-      "role": "both"
     }
   },
   "agents": {},
   "calls": {
+    "babysit": [
+      "commit-push-pr"
+    ],
     "codify-conventions": [
       "grilling"
+    ],
+    "commit-push-pr": [
+      "autoreview",
+      "babysit",
+      "git-cleanup",
+      "resolve-pr-feedback",
+      "unslop"
     ],
     "continual-learning": [
       "principle-subtract-before-you-add"
@@ -255,7 +265,7 @@
       "obsidian",
       "unslop"
     ],
-    "orchestrate": [
+    "orchestrate-threads": [
       "wayfinder",
       "to-spec",
       "to-tickets",
@@ -323,16 +333,6 @@
     ],
     "why": [
       "how"
-    ],
-    "commit-push-pr": [
-      "autoreview",
-      "babysit",
-      "git-cleanup",
-      "resolve-pr-feedback",
-      "unslop"
-    ],
-    "babysit": [
-      "commit-push-pr"
     ]
   },
   "sections": {
@@ -628,7 +628,7 @@
       }
     ],
     "sideDoors": [
-      "orchestrate",
+      "orchestrate-threads",
       "setup-ossian-stack",
       "git-cleanup",
       "resolving-merge-conflicts",

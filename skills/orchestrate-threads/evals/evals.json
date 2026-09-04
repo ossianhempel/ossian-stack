@@ -1,9 +1,9 @@
 {
-  "skill_name": "orchestrate",
+  "skill_name": "orchestrate-threads",
   "evals": [
     {
       "id": 0,
-      "prompt": "/orchestrate gainslog — first task: add CSV export of a user's workouts (share sheet on iOS, one row per set).",
+      "prompt": "/orchestrate-threads gainslog — first task: add CSV export of a user's workouts (share sheet on iOS, one row per set).",
       "expected_output": "HQ bootstraps: probes delegation surfaces, names itself `<project emoji> GainsLog` and asks the user to pin it, writes docs/agents/hq.md with a header and one open workstream row for csv-export with a fixed emoji, and hands the user a titled paste-ready kickoff brief that primes the sub-thread with plugin skills (codex-first/autoreview/babysit/handoff) and a report shape. It does not implement the export itself.",
       "files": [
         "evals/fixtures/eval0"
@@ -19,7 +19,7 @@
     },
     {
       "id": 1,
-      "prompt": "/orchestrate\n\nThe csv-export thread just said:\n\n- Workstream: `🔩 gainslog · csv-export`\n- State: needs decision\n- Artifact: PR #212\n- What changed: babysit reports merge-ready, both bugbot threads resolved. Export currently includes soft-deleted sets because listWorkouts() returns them; bugbot flagged it.\n- What HQ must decide: should soft-deleted sets be excluded from the export? If yes I need one more commit.",
+      "prompt": "/orchestrate-threads\n\nThe csv-export thread just said:\n\n- Workstream: `🔩 gainslog · csv-export`\n- State: needs decision\n- Artifact: PR #212\n- What changed: babysit reports merge-ready, both bugbot threads resolved. Export currently includes soft-deleted sets because listWorkouts() returns them; bugbot flagged it.\n- What HQ must decide: should soft-deleted sets be excluded from the export? If yes I need one more commit.",
       "expected_output": "HQ reads the existing ledger instead of relying on chat memory, updates the csv-export row (state merge-ready, last report today, waiting on: decision about soft-deleted sets), keeps the other two rows intact, lists the decision in Blocked on the human (or decides it if derivable and hands the user the answer to paste since Claude Code cannot message the thread), does not merge, and replies in the per-workstream shape with the single next thing.",
       "files": [
         "evals/fixtures/eval1"
@@ -35,7 +35,7 @@
     },
     {
       "id": 2,
-      "prompt": "/orchestrate gainslog. Two things: the README says 'progresive', fix that. And src/sync/engine.ts needs a proper rewrite, it has three retry paths and shared cursor state — let's get going on that.",
+      "prompt": "/orchestrate-threads gainslog. Two things: the README says 'progresive', fix that. And src/sync/engine.ts needs a proper rewrite, it has three retry paths and shared cursor state — let's get going on that.",
       "expected_output": "HQ bootstraps, fixes the one-word README typo inline and logs it under Inline edits in the ledger, and does NOT rewrite the sync engine: it opens a plan workstream (🧭-style emoji, kind plan) whose kickoff brief tells the thread to run wayfinder/to-spec first, then build threads later. Ledger has one open row, one inline edit, no engine.ts changes.",
       "files": [
         "evals/fixtures/eval2"
