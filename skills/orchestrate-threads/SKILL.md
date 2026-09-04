@@ -1,6 +1,6 @@
 ---
 name: orchestrate-threads
-description: "Turn this chat into the pinned, long-lived HQ thread for one project or workstream: it names itself, keeps a durable ledger, and delegates every piece of work to visible sub-threads or sessions primed with this plugin's skills. Invoke with /orchestrate in a fresh chat to bootstrap, and again at any time to re-orient after compaction or a break."
+description: "Turn this chat into the pinned, long-lived HQ thread for one project or workstream: it names itself, keeps a durable ledger, and delegates every piece of work to visible sub-threads or sessions primed with this plugin's skills. Invoke with /orchestrate-threads in a fresh chat to bootstrap, and again at any time to re-orient after compaction or a break."
 argument-hint: "Project or workstream name, optionally what to work on first"
 disable-model-invocation: true
 ---
