@@ -31,9 +31,7 @@ the repository's active branching instructions when choosing the task environmen
 
 ## Open workstreams
 
-| Workstream | Task | Kind | State | Last report | Waiting on |
-| --- | --- | --- | --- | --- | --- |
-| ossian-mode | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local) | build | awaiting delivery | 2026-09-04: optional-tracker routing implemented and reviewed; 6 source simulations / 14 assertions, map render, and repository checks passed | commit/push; installed-session behavior unverified |
+None.
 
 ## Blocked on the human
 
@@ -43,6 +41,7 @@ None.
 
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
+| ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/663c306b74ed2acab7b3d8b7a863029bf920343e) | 2026-09-04: optional-tracker routing reviewed; 6 source simulations / 14 assertions, map render, and repository checks passed. HQ verified this SHA on origin/main. Installed-session behavior remains unverified. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived after delivery verification |
 | PR follow-through | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f3ecb763b7eb0143b96a5ebd0728bb25b16942ed) | 2026-09-04: P3 autoreview clean; 17 Azure tests, 38 GitHub tests, map render and repository checks passed. HQ independently verified origin/main at this SHA. Live Azure behavior remains unverified. | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local), archived after delivery verification |
 
 ## Inline edits
@@ -55,4 +54,4 @@ None.
 
 ## Next
 
-Deliver optional-tracker orchestration when requested; keep its task open until commit/push is verified. Installed sessions require a plugin refresh and new session to use the published change.
+No open workstreams. Installed sessions require a plugin refresh and new session to use the published tracker-routing fix.
