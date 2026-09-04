@@ -16,6 +16,11 @@ installation instructions first. This skill cannot bootstrap itself.
 Prompt-driven, not a script: explore first, show the user what you found, confirm,
 then act. **Every step that removes something waits for a yes.**
 
+Match the setup scope to the request. For tracker-only setup, go directly to
+section 7 and verify the resulting project configuration; skip machine, plugin,
+and hook audits. A missing tracker is only a prerequisite gap for a chosen
+ticket-based workflow, not a blocker for ordinary planning or delegation.
+
 ## 1. Explore before touching anything
 
 Report what is actually there. Do not assume any of it.
@@ -171,6 +176,11 @@ Report what is missing and who creates it. Create nothing in this step.
 
 ## 7. Issue tracker and triage labels
 
+Configure a tracker when the user chooses ticket-based work or the active project
+workflow requires tracked delivery. During general setup, an absent tracker is
+optional unless that workflow is chosen; report it without forcing configuration.
+Configuring a tracker does not authorize creating issues.
+
 `triage`, `to-tickets`, `to-spec`, and `wayfinder` read per-project config that, unlike the
 files above, is **not created lazily** — an unconfigured tracker fails on first
 use with no hint where the setting lives. Check for:
@@ -209,8 +219,8 @@ Supported trackers, each with a ready-to-adapt template bundled with this skill:
 | Notion | the Notion MCP server (must be connected in the runtime) | `notion.md` |
 
 If both files exist, sanity-check them against the repo: a `git remote` pointing at
-GitHub with a GitLab tracker config is a mismatch worth surfacing. If either is
-missing, ask where issues actually live — one question, recommended answer
+GitHub with a GitLab tracker config is a mismatch worth surfacing. For a chosen
+ticket workflow, if either is missing, ask where issues actually live — one question, recommended answer
 first (GitHub for a GitHub-hosted repo) — and write the file after they confirm.
 For a supported tracker, start from the template and fill in the project
 specifics; do not improvise the command recipes. For Notion, discover existing task or issue databases with the MCP first

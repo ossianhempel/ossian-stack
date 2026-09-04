@@ -25,12 +25,15 @@ workflow; each dispatch must have a ledger row in the same turn.
 
 Available capabilities: create, read, message, wait, title, pin, and archive tasks.
 No workstream was requested at bootstrap, so no task was created or archived.
-Before a planning dispatch, configure the project tracker. Follow the repository's
-active branching instructions when choosing the task environment.
+Planning and delegation can proceed without issues. Configure a tracker only for
+a chosen ticket-based workflow; delegation alone never creates an issue. Follow
+the repository's active branching instructions when choosing the task environment.
 
 ## Open workstreams
 
-None.
+| Workstream | Task | Kind | State | Last report | Waiting on |
+| --- | --- | --- | --- | --- | --- |
+| ossian-mode | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local) | build | awaiting delivery | 2026-09-04: optional-tracker routing implemented and reviewed; 6 source simulations / 14 assertions, map render, and repository checks passed | commit/push; installed-session behavior unverified |
 
 ## Blocked on the human
 
@@ -41,10 +44,10 @@ None.
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
 | PR follow-through | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f3ecb763b7eb0143b96a5ebd0728bb25b16942ed) | 2026-09-04: P3 autoreview clean; 17 Azure tests, 38 GitHub tests, map render and repository checks passed. HQ independently verified origin/main at this SHA. Live Azure behavior remains unverified. | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local), archived after delivery verification |
-| 🧭 ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f737a2e88d50325a5741641a455941e9407a961d) | 2026-09-04: HQ verified this commit on origin/main after push; repository checks passed. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived (implementation was archived early; delivery now verified) |
 
 ## Inline edits
 
+- 2026-09-04: Reopened ossian-mode for optional-tracker orchestration. Its initial entrypoint delivery remains verified in f737a2e.
 - 2026-09-04: Initial PR follow-through delivered in e3145f2 and archived after verified push; reopened the same task for Azure DevOps support.
 - 2026-09-04: Updated orchestrate-threads, ledger guidance, and report template to keep undelivered implementation open until the required commit/push/merge is verified. Delivered in e3145f2, verified on origin/main.
 - 2026-09-04: Added one-password credential routing and conditional tracker/setup guidance to ossian-mode; updated map links and regenerated images. Repository checks passed. Generic skill validator does not support the existing disable-model-invocation field; preserved the required explicit-only metadata.
@@ -52,4 +55,4 @@ None.
 
 ## Next
 
-No open workstreams. An exact Azure PR URL is needed if live verification is requested.
+Deliver optional-tracker orchestration when requested; keep its task open until commit/push is verified. Installed sessions require a plugin refresh and new session to use the published change.

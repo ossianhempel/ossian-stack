@@ -39,11 +39,12 @@ to implementation; its size alone does not require a planning detour.
 | Refactoring | `refactoring` for structural changes with behavior preserved; `simplify-code` for readability in place. |
 | Delivery | `commit-push-pr` for requested commits, pushes, and PRs; `babysit` for an existing PR's requested status or readiness work; `release-ios-app` for an authorized iOS release. |
 
-For work tied to an issue or a workflow that needs a tracker, use the project's
-configured tracker and ticket conventions. If required configuration is missing,
-point the user to explicitly invoke `setup-ossian-stack` before the dependent
-step; continue any authorized work that can proceed. Questions and untracked
-local work can proceed without tracker setup.
+Use the project's tracker and ticket conventions when the work calls for tracked
+delivery or the user requests tickets. Tracker availability and delegation alone
+do not authorize issue creation. Planning, research, and builds can proceed from
+an agreed brief without tickets. If a chosen ticket workflow lacks configuration,
+point the user to explicitly invoke `setup-ossian-stack` for tracker-only setup
+before that dependent step; continue independent work.
 
 Carry the original goal, scope, permissions, and explicit choices into each
 route. Routing does not widen them. Honor the host's invocation restrictions,

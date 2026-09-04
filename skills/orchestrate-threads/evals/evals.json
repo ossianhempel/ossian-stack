@@ -36,7 +36,7 @@
     {
       "id": 2,
       "prompt": "/orchestrate-threads gainslog. Two things: the README says 'progresive', fix that. And src/sync/engine.ts needs a proper rewrite, it has three retry paths and shared cursor state — let's get going on that.",
-      "expected_output": "HQ bootstraps, fixes the one-word README typo inline and logs it under Inline edits in the ledger, and does NOT rewrite the sync engine: it opens a plan workstream (kind plan) whose kickoff brief tells the thread to run wayfinder/to-spec first, then build threads later. Ledger has one open row, one inline edit, no engine.ts changes.",
+      "expected_output": "HQ bootstraps, fixes the one-word README typo inline and logs it under Inline edits in the ledger, and does NOT rewrite the sync engine: it opens a plan workstream (kind plan) whose direct kickoff brief asks it to settle the target design and report findings, with build threads later once decisions are settled; tracker availability does not select a ticket workflow. Ledger has one open row, one inline edit, no engine.ts changes.",
       "files": [
         "evals/fixtures/eval2"
       ],
@@ -44,8 +44,76 @@
         "README typo 'progresive' fixed inline and the edit is logged under Inline edits in docs/agents/hq.md",
         "src/sync/engine.ts is unchanged; the sync rewrite is not implemented in this session",
         "Ledger has one open workstream row for the sync rewrite with kind plan and a thread title `GainsLog · <workstream>` with no emoji",
-        "The kickoff brief for the sync workstream tells the thread to run wayfinder or to-spec first, not to start coding",
+        "The kickoff brief asks the sync workstream to investigate and settle the design before implementation, without requiring wayfinder, to-spec, tickets, or tracker setup",
         "Reply hands the user a titled, copyable kickoff brief (level 2) rather than spawning a hidden subagent"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "bootstrap-no-tracker",
+      "prompt": "/orchestrate-threads Personal research. Fresh project, no issue tracker configuration and no first work item. The runtime offers visible tasks. Describe the bootstrap actions without executing tools.",
+      "expected_output": "Create/name HQ and its ledger, record tracker none, and finish bootstrap without setup or tickets.",
+      "files": [],
+      "assertions": [
+        "Missing tracker does not block bootstrap or trigger setup.",
+        "No issue creation is proposed."
+      ]
+    },
+    {
+      "id": 4,
+      "name": "middagsro-small-feature",
+      "prompt": "HQ for Middagsro: delegate this request: \"I handlingslista där man bockar av, ska man kunna lägga till egna varor\" (add custom items to the existing checkable shopping list). Keep changes local for review. No tickets and no tracker config. Describe the brief and ledger state without executing tools.",
+      "expected_output": "Direct brief for adding custom shopping-list items, with verification and untracked reporting. Use direct build when scope is clear, or ordinary planning to settle material details; no tracker or formal-spec prerequisite. Completed local implementation stays awaiting delivery.",
+      "files": [],
+      "assertions": [
+        "Addresses adding custom items to the existing checkable shopping list, not implementing checkboxes.",
+        "Uses a direct build or planning brief without a tracker, formal-spec, or issue-creation gate.",
+        "Respects no tickets and local-only delivery; completed implementation stays open awaiting delivery."
+      ]
+    },
+    {
+      "id": 5,
+      "name": "general-planning",
+      "prompt": "HQ: delegate research on ways to organize our family meal planning, compare tradeoffs, and return a recommendation in this conversation. No software repo or tracker. Describe the brief without executing tools.",
+      "expected_output": "Direct research/plan brief defining the question, constraints, evidence and expected report; ledger tracks it without ticket skills.",
+      "files": [],
+      "assertions": [
+        "Research and planning proceed without a tracker or setup.",
+        "No mandatory wayfinder/to-spec/to-tickets chain."
+      ]
+    },
+    {
+      "id": 6,
+      "name": "tracker-available-not-selected",
+      "prompt": "HQ: our repo has a GitHub issue tracker configured. Delegate a small experiment comparing two onboarding layouts and report findings locally. No issue or tracked-delivery workflow was requested; active project instructions do not require one. Describe the brief without executing tools.",
+      "expected_output": "Direct untracked planning/prototype brief; existing configuration does not authorize creating an issue.",
+      "files": [],
+      "assertions": [
+        "Does not infer issue creation authority from delegation or tracker availability.",
+        "Keeps the experiment and report untracked."
+      ]
+    },
+    {
+      "id": 7,
+      "name": "explicit-tickets-missing-config",
+      "prompt": "HQ: I want this migration managed as tickets and explicitly choose to-tickets after we settle the spec. There is no tracker configuration yet. What can proceed, and what is needed before publishing tickets? Do not execute tools.",
+      "expected_output": "Continue independent planning; request only the chosen tracker setup and preserve to-tickets configuration/invocation requirements before ticket operations.",
+      "files": [],
+      "assertions": [
+        "The ticket-dependent step waits for required configuration.",
+        "Independent planning continues; no full machine/plugin/hook audit is required.",
+        "Does not silently replace the explicitly chosen ticket workflow with untracked delivery."
+      ]
+    },
+    {
+      "id": 8,
+      "name": "tracked-report-update",
+      "prompt": "HQ assigned work on existing ticket TEAM-42 with status and progress-comment updates explicitly authorized. A build report now says implementation and tests are complete, changes remain local, but the ticket still says not started. Describe HQ reconciliation without executing tools.",
+      "expected_output": "Inspect artifact evidence, have the owning task reconcile permitted ticket status/comment updates, retain the implementation in Open workstreams awaiting delivery.",
+      "files": [],
+      "assertions": [
+        "Keeps the owned ticket current and reconciles report mismatch within granted permissions.",
+        "Does not create replacement issues or archive before delivery."
       ]
     }
   ]

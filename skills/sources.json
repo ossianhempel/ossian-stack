@@ -290,11 +290,11 @@
     },
     "orchestrate-threads": {
       "origin": "local",
-      "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice."
+      "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice. Tracker use is selected per workstream; bootstrap, direct planning/build briefs, and evidence reports work without tickets. Tracked work retains owned-ticket updates and downstream skill prerequisites."
     },
     "ossian-mode": {
       "origin": "local",
-      "notes": "Authored from the approved Ossian Mode scope: explicitly invoked working standards and routing into existing skills. Routes command credentials through one-password and tracker-dependent work through project conventions, with setup only when required configuration is missing. No upstream playbook copied. Includes matching Claude/Cursor and Codex explicit-invocation metadata."
+      "notes": "Authored from the approved Ossian Mode scope: explicitly invoked working standards and routing into existing skills. Routes command credentials through one-password and tracker-dependent work through project conventions, with setup only when required configuration is missing. No upstream playbook copied. Includes matching Claude/Cursor and Codex explicit-invocation metadata. Tracker routing preserves untracked planning/build work and limits missing-configuration setup to a chosen ticket workflow."
     },
     "post-queue-cli": {
       "origin": "companion",
@@ -426,7 +426,7 @@
     },
     "setup-ossian-stack": {
       "origin": "local",
-      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence."
+      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen."
     },
     "simplify-code": {
       "origin": "derived",

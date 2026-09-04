@@ -19,11 +19,13 @@ ledger (`references/ledger.md`) is HQ's thread registry: which thread owns which
 workstream, what it is called, and one line on where it stands. Every
 `/orchestrate-threads` call starts by reading it.
 
-HQ orchestrates chats, not tickets. The project's issue tracker keeps working
-exactly as `triage`, `to-tickets`, `to-spec`, and `wayfinder` describe, and the
-sub-threads use it the same way any session would. The ledger only records which
-thread owns which workstream and what it last reported; it links to tickets and
-never duplicates them.
+The ledger is sufficient to coordinate work. Planning, research, diagnosis, and
+implementation can proceed without an issue tracker. Set tracking per workstream
+from the user's request and active project workflow: use tickets when the user
+requests them or the work calls for tracked delivery. An existing tracker config
+only makes that capability available; delegation alone never authorizes creating
+issues. For tracked work, link the tickets from the ledger rather than duplicating
+them. For untracked work, link the brief, report, and resulting artifacts.
 
 ## Threads, not subagents
 
@@ -96,12 +98,12 @@ retired, and this chat is taking over.
    one is explicitly retired. Then continue; every step below still applies.
 3. Probe delegation surfaces per `references/delegation.md` and record the level
    available in this runtime.
-4. If a tracker config exists at `docs/agents/issue-tracker.md`, read it; ticket
-   links go in the ledger. If it does not, HQ's own ledger still works, but plan
-   threads do not: `wayfinder`, `to-spec`, and `to-tickets` stop when no tracker
-   is configured. When the first workstream is a plan, have the user run
-   `setup-ossian-stack` before dispatching it. Build and diagnose threads can
-   proceed without one.
+4. Record the tracker config at `docs/agents/issue-tracker.md` if present, or
+   `none`; read it when a workstream uses tickets. Its absence does not block
+   bootstrap, planning, or delegation. A chosen ticket-based workflow needs its
+   configuration before tracker operations; request only that missing setup,
+   through explicit invocation of `setup-ossian-stack` scoped to the tracker.
+   Continue independent work without a machine-wide setup audit.
 5. Name and pin this thread per the naming rules.
 6. Write the ledger header, then present the operating contract to the user in
    one short paragraph: what HQ does, what it will not do, and how to hand it
@@ -134,14 +136,13 @@ it owes HQ.
 Before delegating, decide what kind of work it is and route it. The test is
 whether the design is already decided, not how large the diff will be:
 
-- No frozen spec or ready ticket yet: a plan thread. Any request phrased as
-  "rewrite", "redesign", "rework", or "let's get going on X" without a spec is
-  one, however clear the problem sounds, because the target design is the
-  undecided part and deciding it inside HQ's brief is HQ doing the work. The
-  thread's first job is `wayfinder` when the way is foggy, or `to-spec` when
-  one session can settle it, then `to-tickets`. The ledger row says kind plan.
-  Build threads come later, one per ticket cluster.
-- Implementation from a frozen spec or a ready ticket: a build thread. On
+- A question, research goal, or unsettled design: a plan thread. Give it the
+  question, constraints, and expected answer or planning artifact directly.
+  Use `grilling` or `prototype` when useful to settle a decision. A spec file
+  or ticket is not required; return the findings to HQ and brief implementation
+  once the needed decisions are settled.
+- Implementation with an agreed outcome and scope: a build thread. Decisions
+  accepted in conversation suffice; a spec or ready ticket can supply them too. On
   Claude Code, also point it at `codex-first` so the thread routes typing to
   Codex. A brief for a build thread carries decisions; a brief for a plan
   thread carries the question and the constraints, and leaves the decisions to
@@ -150,6 +151,13 @@ whether the design is already decided, not how large the diff will be:
   the PR.
 - A bug nobody understands yet: `diagnosing-bugs`, and the report is the
   diagnosis, not a fix.
+
+Choose tracker-dependent skills only for a workstream using that workflow:
+`wayfinder` for large exploratory work managed through tickets, `to-spec` for a
+published tracker spec, `to-tickets` for ticket decomposition, and `triage` for an
+assigned tracker inbox. Preserve their configuration requirements and explicit
+invocation restrictions. They are not a mandatory chain for planning or building,
+and naming them in a brief grants no authority to publish or create issues.
 
 Trivial edits under about twenty lines with one obvious change are cheaper to do
 here than to brief. Do them, note them in the ledger, move on.
@@ -162,17 +170,14 @@ concerned.
 
 A report is the sub-thread telling HQ where it got to. HQ reads it as data,
 checks the claim against the artifact it names (the PR, the diff, the doc, the
-ticket), and decides what happens next. Work state does not live in the ledger.
-It lives on the tracker, and the convention that keeps it there is HQ's own,
-handed to every thread in its brief: move the ticket's status when work starts
-and when it stops, and leave one comment per report sent to HQ saying what
-landed, the link, and what is still open. `triage` and `to-tickets` put the
-ticket there in the first place and `babysit` works the PR; none of them updates
-the ticket during the build, so the brief has to say it. HQ reads the tracker
-for detail and the report for the headline. The ledger row gets one line: date,
-state, what HQ is waiting on. If the report claims progress the ticket does not
-show, the first instruction back to the thread is to bring the ticket up to date
-and re-report.
+ticket), and decides what happens next. The ledger row gets one line: date,
+state, what HQ is waiting on, with links to the evidence. For untracked work,
+the brief, report, and artifacts hold the detail; do not create a ticket to
+accept a report. For tracked work, the brief names the owned ticket and permitted
+updates: keep its status current at start and stop, and record each HQ report
+with the artifact link and remaining work. Check that the ticket matches the
+report; if it does not, have the owning thread reconcile it within its permissions
+and report any blocked update. Tracker updates are not delivery evidence by themselves.
 
 If the report asks a question, HQ answers it by message to that thread when the
 runtime allows, otherwise hands the user the answer to paste. If it needs a human

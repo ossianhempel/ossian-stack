@@ -269,6 +269,8 @@
       "unslop"
     ],
     "orchestrate-threads": [
+      "grilling",
+      "prototype",
       "wayfinder",
       "to-spec",
       "to-tickets",
