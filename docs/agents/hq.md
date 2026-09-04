@@ -31,7 +31,9 @@ the repository's active branching instructions when choosing the task environmen
 
 ## Open workstreams
 
-None.
+| Workstream | Task | Kind | State | Last report | Waiting on |
+| --- | --- | --- | --- | --- | --- |
+| ossian-mode | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local) | build | awaiting delivery | 2026-09-04: Copilot-only HQ isolation and recovery reviewed; 4 source scenarios / 11 assertions, map render and repository checks passed | commit/push; live Copilot behavior unverified |
 
 ## Blocked on the human
 
@@ -41,10 +43,11 @@ None.
 
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
-| ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/60666b5b7d6efcb7ae33a27e906b61bcc481c1a1) | 2026-09-04: concise tracker reporting reviewed; 5 source simulations / 13 assertions, map render and repository checks passed. HQ verified this SHA on origin/main. Existing project copies and installed runtime were not updated. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived after delivery verification |
 | PR follow-through | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f3ecb763b7eb0143b96a5ebd0728bb25b16942ed) | 2026-09-04: P3 autoreview clean; 17 Azure tests, 38 GitHub tests, map render and repository checks passed. HQ independently verified origin/main at this SHA. Live Azure behavior remains unverified. | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local), archived after delivery verification |
 
 ## Inline edits
+
+- 2026-09-04: Reopened ossian-mode for Copilot HQ isolation. Concise tracker reporting delivered and verified in 60666b5.
 
 - 2026-09-04: Reopened ossian-mode for concise tracker comments. Prior optional-tracker fix delivered in 663c306 and verified on origin/main.
 
@@ -56,4 +59,4 @@ None.
 
 ## Next
 
-No open workstreams. Existing project template copies require a separate refresh to adopt concise tracker reporting.
+Deliver Copilot-specific HQ isolation when requested; keep the task open until commit/push is verified. Live Copilot behavior remains unverified.

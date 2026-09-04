@@ -162,6 +162,53 @@
         "Existing project copies are not claimed to update automatically.",
         "Only reporting policy is merged; custom APIs, labels, permissions and arbitration are preserved, with no live tracker mutation."
       ]
+    },
+    {
+      "id": 13,
+      "name": "copilot-hq-ship-and-trivial-ledger",
+      "prompt": "Source simulation only; execute no tools. You are GitHub Copilot HQ in /repos/app on main. The user says: fix the README typo, reconcile the ledger, then commit, push and open the PR; that delivery is authorized. HQ already has an unrelated dirty source file and uncommitted ledger edits. A visible child session can run in /worktrees/app-delivery with its own identity. Describe actions and brief, including what stays in HQ.",
+      "expected_output": "HQ reconciles its ledger on main but delegates even the README typo and all branch/commit/push/PR operations to the verified separate visible session/worktree. Transfer only authorized ledger changes explicitly, require receipt, preserve all HQ dirty files and existing auth.",
+      "files": [],
+      "assertions": [
+        "HQ neither switches/creates branches nor implements the typo or performs commit/push/PR delivery; ledger coordination remains allowed.",
+        "Verifies distinct child session and worktree, transfers scoped ledger changes with receipt, and forbids indirect writes to HQ checkout.",
+        "Carries user delivery authorization without asking again and preserves unrelated dirty files."
+      ]
+    },
+    {
+      "id": 14,
+      "name": "copilot-no-isolated-session",
+      "prompt": "Source simulation only; execute no tools. GitHub Copilot HQ is on main. The only available child/fork tool creates another session in the same /repos/app checkout; no separate worktree is available through supported tools. The user already authorized shipping a one-line change. What do you do?",
+      "expected_output": "Do not use the in-place child to mutate HQ indirectly. Provide a concrete brief for a user-created separate visible session/worktree and continue ledger/coordination, with existing delivery auth carried over.",
+      "files": [],
+      "assertions": [
+        "Same-checkout child is rejected despite a new session identity.",
+        "No local mutation or branch/delivery operation substitutes for missing isolation; provide separate-session brief and continue coordination.",
+        "Does not re-request already granted delivery permission."
+      ]
+    },
+    {
+      "id": 15,
+      "name": "copilot-pr-linked-recovery",
+      "prompt": "Source simulation only; execute no tools. User reports Copilot HQ moved to ft/jira-ticket-conventions, now has created_pr_number=802 and PR sync repeatedly replaces its title. PR802 is unmerged with undelivered work. Explain recovery for supported detach available versus no supported detach. No new HQ creation was requested.",
+      "expected_output": "Inspect supported unlink/session settings first without universal claims. Use detach only when authorized and verify it; if unavailable, explain current limitation and recommend explicitly creating replacement HQ. Preserve histories and ledger links, retain old PR workstream until delivery; no metadata editing, title loop, branch switch or automatic new HQ.",
+      "files": [],
+      "assertions": [
+        "Treats incident as user-reported and checks supported unlink/settings capability before concluding a limitation.",
+        "Does not edit private metadata/cache or loop title restores, and does not switch/reset the PR checkout.",
+        "Replacement HQ is a recommendation requiring explicit new-task request; transfer ledger/workstream references and retain old PR workstream until delivered."
+      ]
+    },
+    {
+      "id": 16,
+      "name": "codex-trunk-direct-unchanged",
+      "prompt": "Source simulation only; execute no tools. You are Codex HQ in a repo whose active instructions say work directly on main. The user asks for an obvious README typo correction and a ledger update. No Copilot surface is involved. Describe the route under orchestrate-threads.",
+      "expected_output": "Keep the established trivial-edit exception: make the obvious edit inline on main and reconcile the ledger, subject to existing scope/permissions; do not impose the Copilot separate-session/worktree restriction.",
+      "files": [],
+      "assertions": [
+        "Codex retains permitted trivial inline editing and project-directed work on main.",
+        "Does not add Copilot-only branch/worktree/delivery restrictions to other runtimes."
+      ]
     }
   ]
 }

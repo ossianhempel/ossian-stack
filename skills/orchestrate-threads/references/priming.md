@@ -56,6 +56,14 @@ session in this thread can continue.
 
 ## Skill routing
 
+For a repository workstream delegated by GitHub Copilot HQ, put the verified
+child session identity and separate worktree path in the brief, alongside HQ's
+checkout path as a do-not-mutate boundary. Carry existing scope and delivery
+permissions explicitly. If transferring dirty work or ledger changes, identify
+the scoped diff/snapshot and require receipt before applying it in the child's
+worktree; preserve HQ's files. Never direct a child to switch, commit, push, or
+create a PR from HQ's checkout. This constraint is Copilot-only.
+
 Tell the sub-thread which plugin skills to invoke and when. It has the plugin
 installed but no reason to reach for the right one unprompted. Include only the
 lines that apply to the thread's kind.

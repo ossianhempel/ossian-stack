@@ -9,6 +9,14 @@ without a tracker; record each workstream's tracking choice with its brief.
 Whether it is committed is the user's call. Say once at bootstrap that it
 contains thread names and nothing secret.
 
+On GitHub Copilot only, also record HQ's original checkout path and branch and
+each repository workstream's verified separate session/worktree. HQ still writes
+this ledger locally. Ship an authorized ledger diff/snapshot through the separate
+workstream with explicit transfer and receipt; preserve HQ's dirty files and do
+not switch branches or commit/push/create a PR in HQ to publish the ledger.
+For a replacement HQ, retain the old session and workstream references so their
+histories survive; the old PR-linked session remains open until delivery.
+
 ```markdown
 # HQ · <Project>
 

@@ -11,7 +11,8 @@ This chat is now **HQ** for one project or workstream. HQ is the thread the user
 always comes back to. It never does the work itself beyond trivial edits: it
 decides, writes briefs, delegates to a thread per workstream, tracks what came
 back, and tells the user what needs a human. One-off chats stop existing; every
-piece of work has a home thread that HQ knows about.
+piece of work has a home thread that HQ knows about. On GitHub Copilot, the
+checkout boundary below also excludes trivial implementation edits.
 
 HQ has to survive two things: context compaction, and the user walking away for a
 week. Both are solved the same way. Nothing HQ knows lives only in this chat. The
@@ -26,6 +27,26 @@ requests them or the work calls for tracked delivery. An existing tracker config
 only makes that capability available; delegation alone never authorizes creating
 issues. For tracked work, link the tickets from the ledger rather than duplicating
 them. For untracked work, link the brief, report, and resulting artifacts.
+
+## GitHub Copilot HQ checkout boundary
+
+On GitHub Copilot only, HQ stays on its original checkout branch (normally the
+project's default branch) and coordinates. Record that branch on bootstrap;
+do not switch to the default branch if HQ already starts elsewhere. HQ may write
+and reconcile its ledger, but does not create/switch branches, implement even
+trivial changes, commit, push, or create/deliver PRs in its session. A request to
+ship authorizes delivery in a separate workstream, not those operations in HQ.
+
+Delegate authorized repository changes and delivery, including ledger shipping,
+to a separate visible session with a verified separate worktree. Carry the user's
+scope and existing authorization into the brief without asking again. The child
+must not operate on HQ's checkout indirectly. If session/worktree separation is
+unavailable or unverified, provide a brief for a separate session and continue
+coordination; do not perform the mutation in HQ as a fallback.
+
+`references/delegation.md` covers the isolation checks and recovery when an HQ is
+already linked to a PR. Other runtimes retain their existing behavior, including
+the trivial-edit exception and project-approved direct work on trunk.
 
 ## Threads, not subagents
 
@@ -97,7 +118,8 @@ retired, and this chat is taking over.
    and record in the ledger header that HQ now lives in this thread so the old
    one is explicitly retired. Then continue; every step below still applies.
 3. Probe delegation surfaces per `references/delegation.md` and record the level
-   available in this runtime.
+   available in this runtime. On GitHub Copilot, also record HQ's current checkout
+   path and branch and apply the Copilot boundary before any repository work.
 4. Record the tracker config at `docs/agents/issue-tracker.md` if present, or
    `none`; read it when a workstream uses tickets. Its absence does not block
    bootstrap, planning, or delegation. A chosen ticket-based workflow needs its
@@ -159,8 +181,10 @@ assigned tracker inbox. Preserve their configuration requirements and explicit
 invocation restrictions. They are not a mandatory chain for planning or building,
 and naming them in a brief grants no authority to publish or create issues.
 
-Trivial edits under about twenty lines with one obvious change are cheaper to do
-here than to brief. Do them, note them in the ledger, move on.
+Outside GitHub Copilot, trivial edits under about twenty lines with one obvious
+change are cheaper to do here than to brief. Do them, note them in the ledger,
+move on. Copilot HQ delegates those edits too; its own ledger reconciliation
+remains coordination, with delivery handled in the separate worktree session.
 
 After spawning, add or update the ledger row in the same turn. A delegation that
 is not in the ledger did not happen as far as the next `/orchestrate-threads` is
