@@ -33,8 +33,6 @@ the repository's active branching instructions when choosing the task environmen
 
 | Workstream | Task | Kind | State | Last report | Waiting on |
 | --- | --- | --- | --- | --- | --- |
-| PR follow-through | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local) | build | awaiting delivery | 2026-09-04: autoreview now defaults through P1 in its contract and CLI; all explicit P0-P3 overrides preserved. 36 targeted tests, repository checks, and whitespace checks passed. The completed iOS release babysit routing remains in the same delivery batch. | commit/push request |
-| orchestration workflows | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local) | build | awaiting delivery | 2026-09-05: every kickoff and follow-up assignment now names HQ and requires proactive return on completion, blockers, decisions, or stop boundaries; cross-thread message preferred, final workstream report fallback. 31 scenarios / 99 assertions and repository checks passed. | commit/push request |
 
 ## Blocked on the human
 
@@ -44,6 +42,8 @@ None.
 
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
+| workflow delivery | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/c705a55f78ea94837fc589a8c043ac69c06aaeeb) | 2026-09-05: iOS release babysit routing and P1 autoreview default delivered; targeted tests and repository checks passed; remote SHA verified. | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local), archived after delivery verification |
+| orchestration workflows | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/c705a55f78ea94837fc589a8c043ac69c06aaeeb) | 2026-09-05: sparse Jira adaptation, literal /ossian-mode kickoff, single-owner commit-push-pr/babysit route, heartbeat monitoring, and proactive HQ reporting delivered; evals and repository checks passed; remote SHA verified. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived after delivery verification |
 | ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/7bbeb08447c2e2d03c7579a61ae978df475019b3) | 2026-09-04: Copilot HQ isolation reviewed; 4 source scenarios / 11 assertions, map render and repository checks passed. HQ verified this SHA on origin/main. Live Copilot behavior remains unverified. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived after delivery verification |
 
 ## Inline edits
@@ -68,4 +68,4 @@ None.
 
 ## Next
 
-Review existing-system Jira adoption changes and preserve unrelated Gemini/plugin work. Both open workstreams remain awaiting delivery until explicitly committed and pushed.
+No open workstreams. Start the next requested work in a new or reused owning task.
