@@ -30,9 +30,7 @@ active branching instructions when choosing the task environment.
 
 ## Open workstreams
 
-| Workstream | Task | Kind | State | Last report | Waiting on |
-| --- | --- | --- | --- | --- | --- |
-| PR follow-through | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local) | build | P3 review and delivery | 2026-09-04: Azure Services support passed 17 Azure tests, 38 GitHub tests, map render, and repository checks; user authorized P3 autoreview then commit/push | structured review, any scoped fixes, and verified push; live Azure behavior remains unverified |
+None.
 
 ## Blocked on the human
 
@@ -42,6 +40,7 @@ None.
 
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
+| PR follow-through | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f3ecb763b7eb0143b96a5ebd0728bb25b16942ed) | 2026-09-04: P3 autoreview clean; 17 Azure tests, 38 GitHub tests, map render and repository checks passed. HQ independently verified origin/main at this SHA. Live Azure behavior remains unverified. | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local), archived after delivery verification |
 | 🧭 ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f737a2e88d50325a5741641a455941e9407a961d) | 2026-09-04: HQ verified this commit on origin/main after push; repository checks passed. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived (implementation was archived early; delivery now verified) |
 
 ## Inline edits
@@ -53,4 +52,4 @@ None.
 
 ## Next
 
-Verify P3 review and delivery, then archive PR follow-through. An exact Azure PR URL is needed for live verification.
+No open workstreams. An exact Azure PR URL is needed if live verification is requested.
