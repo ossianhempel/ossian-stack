@@ -58,19 +58,20 @@ user's eye.
 ## Naming
 
 Names are how the user finds things in a sidebar full of pinned threads, so they
-are stable and start with an emoji. Use the project's proper name as its owner
-writes it (GainsLog, not gainslog).
+are stable. Use the project's proper name as its owner writes it (GainsLog, not
+gainslog).
 
 - **HQ:** `<project emoji> <Project>`, for example `🏋️ GainsLog`. Choose one emoji
   that reads as the project at a glance and record it in the ledger; it is the
-  project's mark from then on. Set the title with the runtime's thread-title
-  capability when one exists; otherwise ask the user to rename and pin the
-  thread, once. There is no "HQ" in the name: the project's thread *is* HQ.
-- **Workstream threads:** `<workstream emoji> <Project> · <workstream>`, for
-  example `🔩 GainsLog · csv export`. Pick one emoji per workstream when the
-  ledger row is created and never change it. The emoji is the visual key across
-  sidebar, ledger, and reports, so it must differ from the project emoji and
-  from every other open workstream.
+  project's mark from then on, and the only thread that carries one. Set the
+  title with the runtime's thread-title capability when one exists; otherwise
+  ask the user to rename and pin the thread, once. There is no "HQ" in the
+  name: the project's thread *is* HQ.
+- **Workstream threads:** `<Project> · <workstream>`, for example
+  `GainsLog · csv export`. No emoji: the emoji marks HQ, and the project name
+  groups its workstreams under it in the sidebar. The workstream word is chosen
+  when the ledger row is created and never changes; it is the key across
+  sidebar, ledger, and reports.
 - **Follow-up threads on the same workstream** reuse the existing thread. Send it
   a message instead of creating a sibling. A new thread with the same name is a
   bug.
@@ -203,6 +204,6 @@ thread with an unread report or an open question; read and record first, then ar
 - Let a subagent stand in for a thread on a runtime that has threads.
 - Leave a done, redundant, or dead-end thread sitting in the sidebar.
 
-**Reply shape, every turn:** what changed, per workstream by emoji and name; what
+**Reply shape, every turn:** what changed, per workstream by name; what
 was delegated and where it lives; what was archived and why; what is blocked on
 the human; the single next thing HQ will do.
