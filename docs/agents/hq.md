@@ -31,9 +31,7 @@ the repository's active branching instructions when choosing the task environmen
 
 ## Open workstreams
 
-| Workstream | Task | Kind | State | Last report | Waiting on |
-| --- | --- | --- | --- | --- | --- |
-| ossian-mode | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local) | build | awaiting delivery | 2026-09-04: concise reporting policy and tracker consumers reviewed; 5 source simulations / 13 assertions, map render and repository checks passed; claim arbitration preserved | commit/push; installed runtime and existing project copies not updated |
+None.
 
 ## Blocked on the human
 
@@ -43,6 +41,7 @@ None.
 
 | Workstream | Artifact | Closed | Task |
 | --- | --- | --- | --- |
+| ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/60666b5b7d6efcb7ae33a27e906b61bcc481c1a1) | 2026-09-04: concise tracker reporting reviewed; 5 source simulations / 13 assertions, map render and repository checks passed. HQ verified this SHA on origin/main. Existing project copies and installed runtime were not updated. | `🧭 Ossian Stack · ossian-mode` (`01a06b6d-630e-7893-b1de-bdf1f7393cfb`, local), archived after delivery verification |
 | PR follow-through | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/f3ecb763b7eb0143b96a5ebd0728bb25b16942ed) | 2026-09-04: P3 autoreview clean; 17 Azure tests, 38 GitHub tests, map render and repository checks passed. HQ independently verified origin/main at this SHA. Live Azure behavior remains unverified. | `Ossian Stack · PR follow-through` (`01a06be7-972f-7a81-bab7-69b449bbd836`, local), archived after delivery verification |
 
 ## Inline edits
@@ -57,4 +56,4 @@ None.
 
 ## Next
 
-Deliver concise tracker reporting when requested. Keep the task open until commit/push is verified; existing project template copies require a separate refresh.
+No open workstreams. Existing project template copies require a separate refresh to adopt concise tracker reporting.
