@@ -113,7 +113,54 @@
       "files": [],
       "assertions": [
         "Keeps the owned ticket current and reconciles report mismatch within granted permissions.",
-        "Does not create replacement issues or archive before delivery."
+        "Does not create replacement issues or archive before delivery.",
+        "Completion is reported concisely with evidence links, not by copying the full HQ report."
+      ]
+    },
+    {
+      "id": 9,
+      "name": "meaningful-comment-events",
+      "prompt": "Source simulation only; do not execute tools. A tracked task already says blocked on staging access, claim released. Poll twice: nothing changed. Access then works and migration verification reveals a choice: preserve imported aliases or normalize them. The owner chooses preserve; the spec is updated at https://example.test/spec#aliases. Later the work passes acceptance checks at https://example.test/checks/42 and PR https://example.test/pr/42 awaits merge. State which events warrant comments and draft them; all needed tracker comment permissions are granted.",
+      "expected_output": "No comment for either unchanged poll. Short comments only for the changed blocker/progress, actual decision request, and verified completion; decisions live in the spec, detailed evidence linked; completion distinguishes review from delivery.",
+      "files": [],
+      "assertions": [
+        "Both unchanged blocked polls add zero comments.",
+        "Changed blocker, decision and completion comments use a few sentences, links, and no empty sections or coordination transcript.",
+        "Durable decision goes in ticket/spec; PR pending merge is not called delivered."
+      ]
+    },
+    {
+      "id": 10,
+      "name": "ownership-recovery-across-runtimes",
+      "prompt": "Source simulation only; do not execute tools. The configured pickup protocol requires a claim comment before assignment; earliest claim wins. Codex session c1 claims ITEM-7, makes recoverable work on branch codex/item-7 at commit abc1234 with a shared PR https://example.test/pr/7 and checks https://example.test/checks/7, then pauses/releases. Next action is rerun migration verification after staging access is restored. Claude session s2 later resumes; access is still blocked. Draft only essential ownership records and describe what s2 reads. It has no access to private Codex task links.",
+      "expected_output": "Minimal claim-before-assignment records with session identity/order; release records recoverable work, state and next step; next runtime reads ticket/spec plus relevant history/evidence and makes its own required claim without copying the old blocker.",
+      "files": [],
+      "assertions": [
+        "Claim-before-assignment ordering and earliest-claim arbitration are preserved.",
+        "Release identifies session, claim disposition, recoverable branch/head/artifacts and next resume action.",
+        "Recovery works from ticket/spec plus relevant records and shared evidence, not the latest comment or a Codex-only link; no redundant blocker narrative."
+      ]
+    },
+    {
+      "id": 11,
+      "name": "hq-coordination-not-tracker-progress",
+      "prompt": "Source simulation only; do not execute tools. Existing tracked ITEM-9 is correctly in progress. Its evidence and current blocker are already recorded. HQ asks the agent for status, the agent repeats the same report, and HQ reorients/reconciles its ledger. No implementation, blocker, decision, completion, or ownership change occurred. Tracker writes are authorized if needed. What tracker comment should be posted?",
+      "expected_output": "None. HQ coordination and unchanged reporting do not create tracker progress; retain existing evidence and ownership records.",
+      "files": [],
+      "assertions": [
+        "No new tracker comment is posted or drafted for mirroring HQ coordination.",
+        "Necessary ownership/state records remain intact."
+      ]
+    },
+    {
+      "id": 12,
+      "name": "refresh-custom-project-policy",
+      "prompt": "Source simulation only; do not execute tools. User requests refreshing only reporting policy in an existing Jira project configuration copied from an older plugin. Its custom labels, API recipes, ownership arbitration and permissions differ from defaults; the old pickup loop says every checkpoint and the old handoff template requires empty Verified/Gotchas sections. The installed plugin was just refreshed. Describe the bounded update.",
+      "expected_output": "Merge reporting policy into the selected project handoff, pickup and tracker files only under the requested setup scope; preserve project customization, no automatic copied-file/live-ticket changes from plugin refresh.",
+      "files": [],
+      "assertions": [
+        "Existing project copies are not claimed to update automatically.",
+        "Only reporting policy is merged; custom APIs, labels, permissions and arbitration are preserved, with no live tracker mutation."
       ]
     }
   ]

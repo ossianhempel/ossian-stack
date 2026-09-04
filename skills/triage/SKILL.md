@@ -77,9 +77,9 @@ Show counts and a one-line summary per item. Let the maintainer pick.
 4. **Grill (if needed).** If the request needs fleshing out, run `grilling` with `domain-modeling`: a round of questions at a time, concrete examples over abstractions, sharpening domain terms and updating `GLOSSARY.md`/ADRs inline as decisions land.
 
 5. **Apply the outcome:**
-    - `ready-for-agent` — rewrite the ticket body into the ticket-brief shape (Goal, Scope, Context, Acceptance, Verify, Forbidden, Blocked by), using the agent-brief content ([AGENT-BRIEF.md](AGENT-BRIEF.md)) as the source, not a substitute: Current/Desired behavior becomes Goal, interfaces and scope boundaries become Scope, verification evidence becomes Verify with exact commands, out-of-scope becomes Forbidden plus Out of Scope, and known dependencies become an explicit Blocked by section (or `None — can start immediately`). A field you cannot fill is a ticket that is not ready — do not apply the role yet. Then post the agent brief as a comment pointing at the rewritten body. On a page-bodied tracker the body rewrite is the contract; never leave Verify or Blocked by in a comment only, because the pickup loop reads them from the body.
+    - `ready-for-agent` — rewrite the ticket body into the ticket-brief shape (Goal, Scope, Context, Acceptance, Verify, Forbidden, Blocked by), using the agent-brief content ([AGENT-BRIEF.md](AGENT-BRIEF.md)) as the source, not a substitute: Current/Desired behavior becomes Goal, interfaces and scope boundaries become Scope, verification evidence becomes Verify with exact commands, out-of-scope becomes Forbidden plus Out of Scope, and known dependencies become an explicit Blocked by section (or `None — can start immediately`). A field you cannot fill is a ticket that is not ready — do not apply the role yet. Then post a concise readiness summary pointing at the rewritten body and evidence. On a page-bodied tracker the body rewrite is the contract; never leave Verify or Blocked by in a comment only, because the pickup loop reads them from the body.
     - `ready-for-human` — same body rewrite as `ready-for-agent`, but the comment notes why it can't be delegated (judgment calls, external access, design decisions, manual testing).
-   - `needs-info` — post triage notes (template below).
+   - `needs-info` — post a concise question for a new or changed information gap (guidance below); do not repeat an unchanged blocker.
    - `wontfix` — close, with the comment depending on *why*:
      - **Already implemented** — the change already exists in the codebase. Point to where it lives; do **not** write to `.out-of-scope/` (that KB is for *rejected* requests, not built ones).
      - **Rejected (bug)** — polite explanation, then close.
@@ -90,23 +90,14 @@ Show counts and a one-line summary per item. Let the maintainer pick.
 
 If the maintainer says "move #42 to ready-for-agent", trust them and apply the role directly. Confirm what you're about to do (role changes, body rewrite, comment, close), then act. Skip grilling. If moving to `ready-for-agent` without a grilling session, ask whether they want the ticket body rewritten into the ticket-brief shape.
 
-## Needs-info template
+## Concise tracker comments
 
-```markdown
-## Triage Notes
-
-**What we've established so far:**
-
-- point 1
-- point 2
-
-**What we still need from you (@reporter):**
-
-- question 1
-- question 2
-```
-
-Capture everything resolved during grilling under "established so far" so the work isn't lost. Questions must be specific and actionable, not "please provide more info".
+Comment on meaningful progress, a new or changed blocker, a decision needed, or
+completion. Read prior notes first; unchanged findings and HQ/agent coordination
+do not need another comment. Default to a few sentences with evidence links and
+omit empty sections. For `needs-info`, ask specific, actionable questions with
+only the context needed to answer. Record accepted technical decisions in the
+ticket/spec and link detailed evidence; do not duplicate the full brief in comments.
 
 ## Resuming a previous session
 

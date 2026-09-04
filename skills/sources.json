@@ -290,7 +290,7 @@
     },
     "orchestrate-threads": {
       "origin": "local",
-      "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice. Tracker use is selected per workstream; bootstrap, direct planning/build briefs, and evidence reports work without tickets. Tracked work retains owned-ticket updates and downstream skill prerequisites."
+      "notes": "Authored 2026-09-03. Chat orchestration: pins the current chat as HQ for a project, names itself and its workstream threads, keeps a ledger at docs/agents/hq.md, and delegates to visible threads/sessions (Codex, Copilot app) before subagents (Claude Code fallback). Primes sub-threads with this plugin's skills. Inspired by Every's one-pinned-thread-per-workstream Codex practice. Tracker use is selected per workstream; bootstrap, direct planning/build briefs, and evidence reports work without tickets. Tracked work retains owned-ticket updates and downstream skill prerequisites. Tracker comments follow meaningful work events rather than every HQ report; ownership recovery remains required."
     },
     "ossian-mode": {
       "origin": "local",
@@ -426,7 +426,7 @@
     },
     "setup-ossian-stack": {
       "origin": "local",
-      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen."
+      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen. Concise tracker reporting policy: meaningful events only, no unchanged blocker/HQ mirroring, minimal ownership and cross-runtime recovery records. Applied to all five tracker templates and pickup instructions; project copies require a scoped merge preserving customizations."
     },
     "simplify-code": {
       "origin": "derived",
@@ -484,7 +484,7 @@
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/engineering/triage",
       "refresh": "npx skills add mattpocock/skills -y --skill triage && cp -R .agents/skills/triage/* skills/triage/ && trash .agents/skills/triage && echo 'adapted: re-point /setup-matt-pocock-skills at /setup-ossian-stack, CONTEXT.md converted to GLOSSARY.md — diff by hand'",
-      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: setup pointer rewritten to /setup-ossian-stack; CONTEXT.md converted to GLOSSARY.md per this repo's vocabulary convention. 2026-09-03: the inline grill-loop description was replaced with a `grilling` sibling reference — the plugin now ships grilling.",
+      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: setup pointer rewritten to /setup-ossian-stack; CONTEXT.md converted to GLOSSARY.md per this repo's vocabulary convention. 2026-09-03: the inline grill-loop description was replaced with a `grilling` sibling reference — the plugin now ships grilling. Comment-only adaptation: concise readiness/needs-info summaries link the durable ticket brief and evidence; suppress unchanged blockers and omit empty sections.",
       "upstreamPath": "skills/engineering/triage",
       "upstreamRev": "v1.2.3",
       "upstreamCheckedAt": "2026-08-31"
@@ -505,7 +505,7 @@
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/engineering/wayfinder",
       "refresh": "npx skills add mattpocock/skills -y --skill wayfinder && echo 'hand-merge into skills/wayfinder/ then: trash .agents/skills/wayfinder'",
-      "notes": "Vendored 2026-09-01. Preserves upstream's destination, shared map, decision-ticket frontier, fog-of-war, and one-ticket-per-session model. Adapted for this plugin: setup points to setup-ossian-stack; tracker hierarchy, type, claim, and blocking fallbacks are self-contained and capability-based; the unshipped research and grilling siblings are replaced with delegated authoritative research and an inline breadth-first interview; prototype and domain-modeling point to shipped siblings. Merge by hand on refresh; never overwrite.",
+      "notes": "Vendored 2026-09-01. Preserves upstream's destination, shared map, decision-ticket frontier, fog-of-war, and one-ticket-per-session model. Adapted for this plugin: setup points to setup-ossian-stack; tracker hierarchy, type, claim, and blocking fallbacks are self-contained and capability-based; the unshipped research and grilling siblings are replaced with delegated authoritative research and an inline breadth-first interview; prototype and domain-modeling point to shipped siblings. Merge by hand on refresh; never overwrite. Resolution comments summarize and link the durable answer in the ticket/spec and its evidence; lifecycle resolution and claim operations remain unchanged.",
       "upstreamPath": "skills/engineering/wayfinder",
       "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
       "upstreamCheckedAt": "2026-09-01",

@@ -73,10 +73,21 @@ Create a Jira issue in project `<KEY>`.
 Fetch the issue plus its comments (and attachments listing) as above, and
 summarise parent, children, and linked issues before coding.
 
+## Reporting
+
+Follow `docs/agents/handoff-comment.md`: comment only on meaningful progress,
+a new or changed blocker, a decision needed, or completion. Use a few sentences
+with evidence links and no empty sections. Do not repeat unchanged blockers or
+mirror HQ/agent coordination. Preserve the minimal claim/release/resume records
+required below; those ownership transitions still need their protocol evidence.
+The blocked/paused/done operations apply on state transitions, not on every poll.
+Keep durable technical decisions in the ticket body or linked spec, and link
+detailed evidence. Resolution comments summarize the outcome and point there.
+
 ## Pickup operations
 
 Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
-"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+"take the next ticket". Comments follow the policy in `docs/agents/handoff-comment.md`.
 Resolve every triage role through `docs/agents/triage-labels.md`; the role names
 below are the canonical defaults for a fresh setup.
 
@@ -111,5 +122,5 @@ project has one) with child issues as tickets.
 - **Claim**: `PUT /rest/api/3/issue/<KEY>-n` with
   `{"fields":{"assignee":{"accountId":"<account-id>"}}}` (the viewer's `accountId`
   from `GET /rest/api/3/myself`) — the session's first write.
-- **Resolve**: comment with the answer, transition to Done, then append a context
+- **Resolve**: comment with the concise outcome and durable-answer link, transition to Done, then append a context
   pointer to the map's Decisions-so-far.

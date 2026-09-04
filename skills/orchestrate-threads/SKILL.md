@@ -174,10 +174,13 @@ ticket), and decides what happens next. The ledger row gets one line: date,
 state, what HQ is waiting on, with links to the evidence. For untracked work,
 the brief, report, and artifacts hold the detail; do not create a ticket to
 accept a report. For tracked work, the brief names the owned ticket and permitted
-updates: keep its status current at start and stop, and record each HQ report
-with the artifact link and remaining work. Check that the ticket matches the
-report; if it does not, have the owning thread reconcile it within its permissions
-and report any blocked update. Tracker updates are not delivery evidence by themselves.
+updates: keep its status current and comment only on meaningful progress, a new
+or changed blocker, a decision needed, or completion. Use a few sentences with
+evidence links, omitting empty sections. Do not repeat unchanged blockers or
+mirror HQ/agent coordination. Preserve required claim/release/resume records;
+keep durable decisions in the ticket/spec and link detailed evidence. Reconcile
+material state differences within the thread's permissions; a new HQ report alone
+does not require a tracker comment. Tracker updates are not delivery evidence.
 
 If the report asks a question, HQ answers it by message to that thread when the
 runtime allows, otherwise hands the user the answer to paste. If it needs a human

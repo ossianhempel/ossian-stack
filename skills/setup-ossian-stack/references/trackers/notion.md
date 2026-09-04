@@ -73,8 +73,9 @@ body: `Blocked by: <URL>, <URL>`, `Part of: <URL>`, `PR: <URL>`. When `Type` or
 in the body's first line.
 
 The **page body** is the ticket brief (`docs/agents/ticket-brief.md`). Comments
-are handoff comments (`docs/agents/handoff-comment.md`). Never move working notes
-into the body; the body stays the durable brief.
+follow `docs/agents/handoff-comment.md`. Keep accepted technical decisions in
+the body or a linked spec; link detailed evidence and keep execution logs out of
+the durable brief.
 
 ## Reading
 
@@ -96,8 +97,8 @@ Only when the user explicitly asked, or a skill's contract says so.
   properties above including `Project`, and the brief as the body. New rows
   start at status backlog and `Triage: needs-triage` unless the skill says
   otherwise.
-- **Comment**: `notion-create-comment` on the page, in the handoff-comment shape,
-  starting with the AI disclaimer.
+- **Comment**: `notion-create-comment` on the page, following the handoff-comment policy,
+  with the project-required AI disclosure.
 - **Update state or roles**: `notion-update-page`. `Triage` is single-valued, so
   a write replaces it. `Labels` is read-merge-write.
 - **Close**: set status to the done value. Never delete or archive a row.
@@ -116,7 +117,19 @@ the body.
 ## When a skill says "fetch the relevant ticket"
 
 `notion-fetch` the page, `notion-get-comments` for the log, then summarise parent,
-sub-items, `Blocked by`, and the last handoff comment before coding.
+sub-items, `Blocked by`, relevant ownership/handoff history, and linked evidence
+before coding; the latest comment alone is not the complete context.
+
+## Reporting
+
+Follow `docs/agents/handoff-comment.md`: comment only on meaningful progress,
+a new or changed blocker, a decision needed, or completion. Use a few sentences
+with evidence links and no empty sections. Do not repeat unchanged blockers or
+mirror HQ/agent coordination. Preserve the minimal claim/release/resume records
+required below; those ownership transitions still need their protocol evidence.
+The blocked/paused/done operations apply on state transitions, not on every poll.
+Keep durable technical decisions in the ticket body or linked spec, and link
+detailed evidence. Resolution comments summarize the outcome and point there.
 
 ## Pickup operations
 
@@ -137,7 +150,7 @@ mapping governs and the queries use the mapped values).
   not the field value. On loss, clear `Agent` and take the next row.
 - **Blocked**: set the blocked marker, `Triage` to the mapped `needs-info` role (the reporter can answer)
   or `ready-for-human` (judgment, access, or design), a blocked handoff comment
-  with the question, options, and default, then clear `Agent`.
+  with the precise question and necessary context, then clear `Agent`.
 - **Paused**: a paused handoff comment, clear `Agent`, keep status in progress.
   The ticket re-enters the frontier (unclaimed in-progress work is eligible).
 - **Done**: set `PR`, status in review, a done handoff comment. A human, or a
@@ -160,5 +173,5 @@ Used by `/wayfinder`. The **map** is one row with sub-items as tickets.
   any with an unfinished `Blocked by` row or with `Agent` set; created ascending,
   first wins.
 - **Claim**: set `Agent`; the session's first write.
-- **Resolve**: comment with the answer, set status done, then append a context
+- **Resolve**: comment with the concise outcome and durable-answer link, set status done, then append a context
   pointer to the map's Decisions-so-far.

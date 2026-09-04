@@ -194,11 +194,10 @@ use with no hint where the setting lives. Check for:
 - `docs/agents/ticket-brief.md` — the shape of every ticket body. Copy
   `references/ticket-brief.md`, dropping its leading copy-me line; `to-tickets`, `to-spec`, and `triage`
   write it and a cold pickup agent reads it.
-- `docs/agents/handoff-comment.md` — the shape of every progress, blocked, and
-  done comment. Copy `references/handoff-comment.md`, dropping its leading
-  copy-me line; the comment
-  thread is the ticket's working log, so another agent can resume and the
-  human can review without a transcript.
+- `docs/agents/handoff-comment.md` — when to comment and the concise content
+  needed for meaningful updates and ownership recovery. Copy
+  `references/handoff-comment.md`, dropping its introductory copy paragraph.
+  Resume from the ticket/spec, relevant handoff records, and linked evidence.
 - `docs/agents/pickup-loop.md` — the prompt the user pastes into the host's
   `/loop` or a scheduled routine to have agents take `ready-for-agent` tickets
   autonomously. Copy `references/pickup-loop.md`, dropping its leading
@@ -233,6 +232,13 @@ tell the user to connect the Notion MCP in every runtime they use — the tracke
 skills stop rather than fall back when the tools are absent. Keep both short; they are
 configuration the skills parse, not prose. Labels default to the canonical role
 names unless the tracker already uses different strings.
+
+Existing project copies do not update when the plugin refreshes. During requested
+project setup or policy refresh, compare the handoff-comment, pickup-loop, and
+tracker configuration with these templates and merge the reporting policy into
+the selected project. Preserve its property/label mappings, API recipes, claim
+arbitration, permissions, and other customizations; do not overwrite whole files
+or edit live tickets. Apply the same policy to custom GitLab/local tracker recipes.
 
 Domain docs (`GLOSSARY.md`, `docs/adr/`) stay lazy — that is the section above,
 not this one.

@@ -25,8 +25,9 @@ For a plan thread: the question to settle and the constraints, not the answer>
 ## Tracking
 <Untracked: report findings and artifact links to HQ; create no issues.
 Or tracked: owned ticket links, selected workflow, and permitted status/comment
-updates. Include issue creation only when authorized. Tracker availability and
-delegation do not authorize it. Preserve the user's explicit tracking choice.>
+updates, following the project's concise handoff-comment policy. Include issue
+creation only when authorized. Tracker availability and delegation do not authorize
+it. Preserve the user's explicit tracking choice.>
 
 ## How to work here
 1. Read the project's active instructions already in your context, and run the
@@ -112,8 +113,12 @@ rest the agent invokes itself.
 
 - Follow the brief's tracking choice. For untracked work, send the report and
   evidence to HQ without creating issues. For an owned ticket, keep status current
-  at start and stop and record each HQ report with artifact links and remaining
-  work, within the granted permissions. Report a blocked tracker update honestly;
+  within the granted permissions. Comment only on meaningful progress, a new or
+  changed blocker, a decision needed, or completion, in a few sentences with
+  evidence links and no empty sections. Do not repeat unchanged blockers or copy
+  HQ/agent coordination into the tracker. Preserve necessary claim/release/resume
+  records; keep durable decisions in the ticket/spec and link detailed evidence.
+  Report a blocked tracker update honestly;
   it does not erase completed work or prevent reporting it to HQ.
 - `handoff` (user types) at the end of every session in the thread, so the next
   session continues instead of restarting.

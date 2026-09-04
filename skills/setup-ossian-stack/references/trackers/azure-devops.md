@@ -63,10 +63,21 @@ Create a work item (`az boards work-item create`).
 
 `az boards work-item show --id <id> --expand all` plus the comments REST call above.
 
+## Reporting
+
+Follow `docs/agents/handoff-comment.md`: comment only on meaningful progress,
+a new or changed blocker, a decision needed, or completion. Use a few sentences
+with evidence links and no empty sections. Do not repeat unchanged blockers or
+mirror HQ/agent coordination. Preserve the minimal claim/release/resume records
+required below; those ownership transitions still need their protocol evidence.
+The blocked/paused/done operations apply on state transitions, not on every poll.
+Keep durable technical decisions in the ticket body or linked spec, and link
+detailed evidence. Resolution comments summarize the outcome and point there.
+
 ## Pickup operations
 
 Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
-"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+"take the next ticket". Comments follow the policy in `docs/agents/handoff-comment.md`.
 Resolve every triage role through `docs/agents/triage-labels.md`; the tag names
 below are the canonical defaults for a fresh setup.
 
@@ -100,6 +111,6 @@ with child work items as tickets.
   relations from `work-item show --expand all`). First in map order wins.
 - **Claim**: `az boards work-item update --id <id> --assigned-to <me>` — the
   session's first write.
-- **Resolve**: `az boards work-item update --id <id> --discussion "<answer>"`, then
+- **Resolve**: `az boards work-item update --id <id> --discussion "<concise outcome + durable-answer link>"`, then
   `--state "Closed"`, then append a context pointer to the map's Decisions-so-far
   field.

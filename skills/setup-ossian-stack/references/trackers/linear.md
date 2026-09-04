@@ -71,10 +71,21 @@ Create a Linear issue on team `<TEAM>`.
 Run the single-issue query above (description, state, labels, children, relations)
 and summarise before coding.
 
+## Reporting
+
+Follow `docs/agents/handoff-comment.md`: comment only on meaningful progress,
+a new or changed blocker, a decision needed, or completion. Use a few sentences
+with evidence links and no empty sections. Do not repeat unchanged blockers or
+mirror HQ/agent coordination. Preserve the minimal claim/release/resume records
+required below; those ownership transitions still need their protocol evidence.
+The blocked/paused/done operations apply on state transitions, not on every poll.
+Keep durable technical decisions in the ticket body or linked spec, and link
+detailed evidence. Resolution comments summarize the outcome and point there.
+
 ## Pickup operations
 
 Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
-"take the next ticket". Comments follow `docs/agents/handoff-comment.md`.
+"take the next ticket". Comments follow the policy in `docs/agents/handoff-comment.md`.
 Resolve every triage role through `docs/agents/triage-labels.md`; the role names
 below are the canonical defaults for a fresh setup.
 
@@ -103,6 +114,7 @@ Used by `/wayfinder`. The **map** is a single Linear issue with sub-issues as ti
   have an assignee; first in map order wins.
 - **Claim**: `issueUpdate(id: "...", input: { assigneeId: <viewer id> })` — the
   session's first write.
-- **Resolve**: update the child description with the answer (or the comment
-  mutation if available), transition to a completed state, then append a context
+- **Resolve**: update the child description with the durable answer or a spec
+  link; any resolution comment summarizes and links it. Transition to a completed
+  state, then append a context
   pointer to the map's Decisions-so-far.
