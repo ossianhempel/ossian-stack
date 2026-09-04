@@ -1,3 +1,3 @@
 interface:
   display_name: "Resolve PR Feedback"
-  short_description: "Address reviewer feedback on a PR commit by commit"
+  short_description: "Resolve GitHub and Azure PR feedback within scope"

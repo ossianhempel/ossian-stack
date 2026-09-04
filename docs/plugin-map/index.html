@@ -235,7 +235,7 @@
      },
      {
       "id": "commit-push-pr",
-      "writes": "opened PR"
+      "writes": "GitHub / Azure PR"
      },
      {
       "id": "babysit",
@@ -574,7 +574,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Babysit",
-   "description": "Drive a pull request or a stacked chain to merge-ready: watch CI, classify failures, resolve review feedback, and work the lowest unmerged PR first. Stops at merge-ready and never merges. Use for babysit this, get it green, all green, merge-ready, watch CI, address review comments, or check on PR X.",
+   "description": "Drive a GitHub or Azure DevOps Services pull request to merge-ready: watch CI, classify failures, resolve review feedback, and work the lowest unmerged PR first. Stops at merge-ready and never merges. Use for babysit this, get it green, all green, merge-ready, watch CI, address review comments, or check on PR X.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1345,7 +1345,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Resolve PR Feedback",
-   "description": "Resolve PR review feedback. Use when addressing feedback already left on a PR. Not for reviewing the code before feedback exists; that is code-review.",
+   "description": "Resolve GitHub/GHE or Azure DevOps Services PR review feedback. Use when addressing feedback already left on a PR. Not for reviewing the code before feedback exists; that is code-review.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": "[PR number, comment URL, or blank for current branch's PR]",

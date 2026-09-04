@@ -18,9 +18,14 @@ push, PR creation, and that follow-through within the user's scope; it never
 authorizes merging. Preserve explicit stop-at-PR/no-babysit instructions and narrower
 modes. Handoff defines when to start or resume the drive.
 
-GitHub (`gh`) is the default forge. On GitLab use `glab` (merge requests); on Azure
-DevOps use `az repos`; if no forge CLI exists, push and print the remote's
-compare/create URL instead of failing silently. Never mix providers.
+Resolve the forge from the explicit URL or selected project remote/configuration
+before PR calls. GitHub/GHE uses the gh examples below with the actual host. Azure
+DevOps Services uses `references/azure-devops.md` for every forge operation in
+Steps 1, 5, and 6, then the same babysit follow-through. Read it first; gh commands
+below do not apply to Azure. On GitLab use glab; other unsupported follow-through
+providers get an explicit limitation. If no forge interface is available, push and
+report the compare/create URL instead of inventing a PR or readiness. Never mix
+providers or assume Azure DevOps Server support.
 
 ## Modes
 
@@ -63,7 +68,7 @@ git remote get-url origin
 
 Resolve the default branch from `git rev-parse --abbrev-ref origin/HEAD` (strip the
 `origin/` prefix, fall back to `main`). For any mode that touches the forge, check for
-an open PR on the current branch:
+an open PR on the current branch (GitHub command below; Azure uses its reference):
 
 ```bash
 gh pr list --head "$(git branch --show-current)" --state open --json number,title,state,isDraft,baseRefName
@@ -172,7 +177,7 @@ If `--title` was supplied, use it; otherwise compose. ASCII only.
 
 ## Step 6: Apply and report
 
-Write the body to a temp file and pass it by file reference — never inline
+For GitHub, write the body to a temp file and pass it by file reference — never inline
 `--body "$(cat ...)"`, which can silently produce an empty body while the CLI exits 0:
 
 ```bash

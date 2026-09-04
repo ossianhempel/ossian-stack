@@ -441,7 +441,7 @@
           },
           {
             "id": "commit-push-pr",
-            "writes": "opened PR"
+            "writes": "GitHub / Azure PR"
           },
           {
             "id": "babysit",

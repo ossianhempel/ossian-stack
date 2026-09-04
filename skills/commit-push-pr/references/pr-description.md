@@ -15,6 +15,11 @@ If the lead sentence describes what was moved, renamed, or added rather than wha
 now possible or fixed, rewrite it. This applies to every section, not just the
 opening — restating the diff is the failure mode this guide exists to prevent.
 
+## Provider scope
+
+GitHub commands below apply only to GitHub/GHE. For Azure DevOps Services, use
+`azure-devops.md` for PR metadata, preserving the same diff and writing principles.
+
 ## Resolve the range
 
 - **Current-branch mode** (default) — describe `HEAD` against the resolved base
