@@ -49,6 +49,9 @@ Rules:
 - `Thread` is the exact title, or `pending` for a level 2 thread the user has not
   yet created, or `subagent` for a level 3 run.
 - `Last report` is a date and one line, not the report.
+- Keep completed implementation in Open workstreams while awaiting commit,
+  push, or merge. Move it to Done only with verified delivery evidence (remote
+  commit, merged PR, or published artifact), or a recorded handoff/abandonment.
 - The blocked list names workstreams by name, never by ticket number.
 - `Thread` in the done table says whether the thread was archived and why
   (done, redundant, dead end), or `archive pending, user to do` when the

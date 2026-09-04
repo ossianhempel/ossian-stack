@@ -179,15 +179,23 @@ runtime allows, otherwise hands the user the answer to paste. If it needs a huma
 decision, that goes in the ledger's blocked list and in HQ's next reply, named by
 workstream.
 
-When a workstream is done, its row moves to the done list with the artifact link,
-and HQ archives its thread. A sidebar is only useful while it shows live work,
-so HQ actively retires threads that no longer are:
+Archive completed repository work only after HQ verifies delivery against the project's
+workflow: committed and pushed to the intended remote branch for direct commits,
+or merged for PR work. For reports, specs, or decisions delivered outside the repo,
+verify publication at the agreed destination. Link that evidence in the done row.
+A finished implementation, passing checks, a local commit, or a merge-ready PR
+still awaiting delivery stays in Open workstreams as awaiting commit, push, or
+merge. Keep its thread available for follow-up. If delivery needs authorization,
+record that blocker; the archive rule grants no permission to commit, push, or merge.
+
+Once delivery is verified, move the row to Done and archive its thread. Other
+retirement reasons require an explicit disposition of any undelivered changes:
 
 - **Done**: the artifact landed (PR merged, spec published, decision recorded).
-- **Redundant**: another thread now owns the same work, or the workstream was
-  folded into a bigger one.
-- **Dead end**: the work was abandoned, the question answered itself, or the
-  user said to drop it.
+- **Redundant**: another thread has accepted ownership of the remaining work
+  and its recoverable artifacts; record that handoff before archiving.
+- **Dead end**: the user abandoned the work or approved its disposition; record
+  what happens to any undelivered changes before archiving.
 
 Archive through the runtime's thread-archive capability when the probe found
 one, otherwise name the thread in the reply and ask the user to archive it.

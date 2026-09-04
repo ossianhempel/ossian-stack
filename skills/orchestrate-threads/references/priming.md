@@ -36,8 +36,9 @@ For a plan thread: the question to settle and the constraints, not the answer>
 ## Report
 When done, or when blocked, end with a message to HQ shaped as:
 - Workstream: `<Project> · <workstream>`
-- State: done | blocked | needs decision
+- State: awaiting delivery | done | blocked | needs decision
 - Artifact: <PR, commit, doc link>
+- Delivery: <remaining commit/push/merge step, or evidence it reached its destination>
 - What changed, in five lines or fewer
 - What HQ must decide or the user must do, if anything
 Make this the last message of the session so it can be copied to HQ as is.

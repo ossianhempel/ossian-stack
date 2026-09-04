@@ -5,17 +5,21 @@ Vendored from [cursor/plugins](https://github.com/cursor/plugins)
 `poteto-mode` skill as a standalone skill and adapted.
 
 Drives a PR or a stacked chain to merge-ready: declares a mode, works the lowest
-unmerged PR, classifies CI failures before retriggering, triages review-bot
-comments skeptically, and stops where the human's call begins.
+unmerged PR, routes all review feedback through `resolve-pr-feedback` in pipeline
+mode before CI work, and stops at merge-ready or a human blocker. Mode follows the
+requested outcome regardless of PR size; status checks stay read-only. Default
+`commit-push-pr` follow-through starts the drive once the agreed build phase is
+complete, or resumes its existing owner. Babysitting never merges.
 
 ## What changed from upstream
 
 | Upstream | Here |
 | --- | --- |
 | A playbook inside `poteto-mode` | A standalone skill with its own frontmatter |
-| `../references/bugbot-triage.md` | `references/bugbot-triage.md`, vendored alongside |
+| Bugbot-specific fixer pipeline | `resolve-pr-feedback` owns all feedback; `references/bugbot-triage.md` retains historical context |
 | `scripts/watch-pr/watch-pr` in the parent skill | Vendored into this skill, invoked through an anchored `SKILL_DIR` path |
 | Routes to `playbooks/shipping.md` (3×) | Stops at merge-ready and hands the merge decision back |
+| Small/docs-only PRs forced to check | Requested outcome selects the mode; drive remains drive |
 | `/loop` in dynamic mode | Described as a capability, since `/loop` is Claude Code only |
 
 ## Runtime dependency

@@ -1,16 +1,10 @@
 # Bugbot triage
 
-Use this reference when the Babysit playbook (`../playbooks/babysit.md`) handles Bugbot or review-automation comments. The goal is not to ignore Bugbot by default. The goal is to stop treating every comment as a required code change.
-
-## Decision rubric
-
-Classify each Bugbot thread before acting:
-
-- `fix`: The comment identifies a plausible correctness, security, privacy, data loss, auth, billing, migration, idempotency, race, or shipped-behavior issue. Fix it in the lowest owning PR, then reply with the commit SHA and resolve the thread.
-- `dismiss`: The comment matches a documented low-risk noisy pattern, and the current code/context proves the concern does not need a code change. Reply with a short reason and resolve the thread.
-- `ask`: The comment is novel, high-severity, security/privacy/data-related, or ambiguous. Ask the user instead of guessing.
-
-When in doubt, ask. Skipping a noisy code-quality comment is cheap; skipping a real data or security bug is not.
+Historical Bugbot patterns retained from the upstream playbook. These are context
+for evaluating evidence, not an independent assessment or fixer pipeline.
+`resolve-pr-feedback` owns all current feedback decisions, actions, and needs-human
+results under the caller's inherited scope. Neither a pattern match nor a repeated
+bot pass overrides that skill's evaluation rubric.
 
 ## Learned pattern format
 
@@ -72,7 +66,7 @@ Use `candidate` for one or two examples. Use `recurring` after multiple real dis
 - Do not skip when: The only evidence is a human saying "false positive" on a high-risk issue without explanation.
 - Example signal: A file-naming rule comment whose body says the file is already compliant.
 
-## Ask by default
+## Patterns requiring careful assessment
 
 Do not auto-skip these categories, even if a previous PR dismissed something similar:
 
@@ -81,7 +75,7 @@ Do not auto-skip these categories, even if a previous PR dismissed something sim
 - Migration, schema, idempotency, concurrency, and cross-system behavior findings.
 - Comments where the suggested fix is small and clearly reduces risk without changing product intent.
 
-Historical data showed humans sometimes dismiss security/data-flow comments. Treat those as owner judgment calls, not team-wide skip rules.
+Historical data showed humans sometimes dismiss security/data-flow comments. Route unresolved owner decisions through the resolver's needs-human result, not a blocking question during a pipeline run.
 
 ## Candidate learnings from recent babysits
 

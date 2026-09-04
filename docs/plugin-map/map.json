@@ -229,7 +229,8 @@
   "agents": {},
   "calls": {
     "babysit": [
-      "commit-push-pr"
+      "commit-push-pr",
+      "resolve-pr-feedback"
     ],
     "codify-conventions": [
       "grilling"
@@ -238,7 +239,6 @@
       "autoreview",
       "babysit",
       "git-cleanup",
-      "resolve-pr-feedback",
       "unslop"
     ],
     "continual-learning": [
@@ -445,7 +445,7 @@
           },
           {
             "id": "babysit",
-            "writes": "merged PR"
+            "writes": "merge-ready PR"
           },
           {
             "id": "resolve-pr-feedback",

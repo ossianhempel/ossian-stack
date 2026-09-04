@@ -239,7 +239,7 @@
      },
      {
       "id": "babysit",
-      "writes": "merged PR"
+      "writes": "merge-ready PR"
      },
      {
       "id": "resolve-pr-feedback",
@@ -574,14 +574,15 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Babysit",
-   "description": "Drive a pull request or a stacked chain to merge-ready: watch CI, classify failures, triage review-bot comments, and work the lowest unmerged PR first. Stops at merge-ready and never merges. Use for babysit this, get it green, all green, merge-ready, watch CI, address the bugbot comments, or check on PR X.",
+   "description": "Drive a pull request or a stacked chain to merge-ready: watch CI, classify failures, resolve review feedback, and work the lowest unmerged PR first. Stops at merge-ready and never merges. Use for babysit this, get it green, all green, merge-ready, watch CI, address review comments, or check on PR X.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [
-    "commit-push-pr"
+    "commit-push-pr",
+    "resolve-pr-feedback"
    ],
    "calledBy": [
     "commit-push-pr",
@@ -705,7 +706,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Commit Push PR",
-   "description": "Turn completed local work into a review-ready pull request: survey the changes, group them into clean conventional commits, push, and open the PR with a value-first description. Use when the user says \"commit this\", \"ship this\", \"open a PR\", \"push and PR\", or at the closeout of a unit of work. Commits locally before pushing; opening a PR never starts a babysit.",
+   "description": "Take completed local work through PR creation to merge-ready: survey the changes, group them into clean conventional commits, push, and open the PR with a value-first description, then drive CI and review follow-through with babysit. Use for \"commit this\", \"ship this\", \"open a PR\", \"push and PR\", or closing a unit of work. Commits locally before pushing; honor narrower requests, drafts, and explicit stop-at-PR instructions.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": "[optional: --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \\\"...\\\" | --work-items <id>]",
@@ -715,7 +716,6 @@
     "autoreview",
     "babysit",
     "git-cleanup",
-    "resolve-pr-feedback",
     "unslop"
    ],
    "calledBy": [
@@ -1355,7 +1355,7 @@
     "babysit"
    ],
    "calledBy": [
-    "commit-push-pr"
+    "babysit"
    ]
   },
   "resolving-merge-conflicts": {

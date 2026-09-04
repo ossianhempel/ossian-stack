@@ -1,20 +1,22 @@
 ---
 name: commit-push-pr
 description: >-
-  Turn completed local work into a review-ready pull request: survey the changes,
+  Take completed local work through PR creation to merge-ready: survey the changes,
   group them into clean conventional commits, push, and open the PR with a value-first
-  description. Use when the user says "commit this", "ship this", "open a PR",
-  "push and PR", or at the closeout of a unit of work. Commits locally before pushing;
-  opening a PR never starts a babysit.
+  description, then drive CI and review follow-through with babysit. Use for
+  "commit this", "ship this", "open a PR", "push and PR", or closing a unit of work.
+  Commits locally before pushing;
+  honor narrower requests, drafts, and explicit stop-at-PR instructions.
 argument-hint: "[optional: --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \"...\" | --work-items <id>]"
 ---
 
 # Commit, Push, PR
 
-Take completed local work to a review-ready pull request against the project's default
-branch. Local commits are safe; the push and PR are the outward-facing act — invoking
-this skill with ship intent authorizes them. Opening a PR does **not** start a babysit:
-post the URL and hand back (see Handoff).
+Take completed local work to a pull request, then continue to merge-ready through
+`babysit` in `drive` mode. Invoking this skill with ship intent authorizes commit,
+push, PR creation, and that follow-through within the user's scope; it never
+authorizes merging. Preserve explicit stop-at-PR/no-babysit instructions and narrower
+modes. Handoff defines when to start or resume the drive.
 
 GitHub (`gh`) is the default forge. On GitLab use `glab` (merge requests); on Azure
 DevOps use `az repos`; if no forge CLI exists, push and print the remote's
@@ -22,18 +24,25 @@ compare/create URL instead of failing silently. Never mix providers.
 
 ## Modes
 
-- **Default** — commit complete local changes (if needed), push, open a PR.
+- **Default** — commit complete local changes (if needed), push, open or update the
+  PR, then follow through to merge-ready (see Handoff).
 - `--update` — refresh an existing PR's title/body for the current branch. Requires an
-  open PR; if none, report and stop.
+  open PR; if none, report and stop. Metadata only; no commit, push, or new babysit.
 - `--description-only` (add `--body-only` to print just the body) — compose the title
   and body and print them. Read-only: no branch, commit, push, or PR mutation.
 - `--pr-only` — open or update the PR for already-committed work. Leave uncommitted
-  changes in the tree and out of the description.
+  changes in the tree and out of the description. No review fixes or new babysit
+  unless the enclosing request already includes drive follow-through.
 - `--branch-only` — establish branch safety, then stop. No commit, push, or PR.
 - `--draft` — open the PR as a draft. Default is ready for review; a draft is for
   deliberately early feedback.
 - `--base <branch>` — target a non-default base. Without it, preserve an existing
   open PR's base rather than retargeting.
+
+Dispatch only the steps needed by the mode; description-only and metadata-only
+requests do not enter branch, commit, or push steps. A helper's narrower mode limits
+that call, not an existing higher-level drive goal: return to its owner afterward.
+Every step inherits that owner's action limits, including bans on rebase or retarget.
 
 ## Asking the user
 
@@ -135,8 +144,9 @@ git push -u origin HEAD
 ```
 
 If the tree is clean and everything is already pushed, this is a no-op. Never
-force-push a shared branch; if the push is rejected because the remote moved, fetch
-and rebase rather than force.
+force-push a shared branch. If the remote moved, follow the enclosing action scope:
+a babysit helper reports the needed rebase to its owner and returns; outside that
+restriction, fetch and rebase rather than force.
 
 ## Step 5: Compose the title and body
 
@@ -176,7 +186,7 @@ expanding.
 
 - **New PR** (no open PR from Step 1): `gh pr create --base "$BASE" --title "<TITLE>"
   --body-file "$BODY_FILE"`. Add `--draft` only when requested.
-- **Existing PR** (default or `--update`): the commits are already pushed; preview
+- **Existing PR** (default, `--pr-only`, or `--update`): preview
   before overwriting — ask: new title, the first sentence or two of the body, total
   line count. On confirmation, `gh pr edit <number> --title "<TITLE>" --body-file
   "$BODY_FILE"`. In autonomous closeout, apply directly and report what changed. If
@@ -194,10 +204,20 @@ changes applied; in `--pr-only` note that uncommitted changes were left alone.
 
 ## Handoff
 
-- The PR is merge-ready only when the project's checks agree — green is not the same
-  as safe. When the user asks to get it green, watch CI, or address review bots, hand
-  to `babysit`. Do not start one because a PR now exists.
-- Reviewers comment → `resolve-pr-feedback`.
+- **Completed, non-draft PR delivered by the default flow:** invoke `babysit` in
+  `drive` mode with the full PR URL and inherited action scope. Continue until
+  merge-ready or a reported human/access blocker; PR creation alone is not the
+  completion condition. Include the final CI/review state in the report.
+- **Build phase still open:** finish the agreed stack or batch first, then drive its
+  lowest unmerged PR (the frontier). Do not block on each intermediate PR.
+- **An existing drive owns the work:** return the PR URL, changed head, and outcome
+  to that owner and resume its watcher. Never recursively start a second babysitter,
+  including after a follow-up PR or a narrow helper call.
+- **No drive requested by this call:** explicit stop-at-PR/no-babysit, drafts, and
+  standalone narrow modes end at their requested result. Do not mark a draft ready
+  to trigger follow-through. Trunk-direct projects end after commit/push.
+- On a forge unsupported by `babysit`, report the delivered PR and unverified
+  follow-through limitation; never claim merge-ready from creation alone.
 - The work has not had a review pass this session and the push is about to happen →
   suggest `autoreview` before Step 4, not after.
 - After a merge, branch cleanup is `git-cleanup`.
