@@ -1,0 +1,3 @@
+interface:
+  display_name: "Google Play CLI"
+  short_description: "Build, validate, and operate Google Play releases"

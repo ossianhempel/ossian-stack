@@ -184,6 +184,17 @@
       "origin": "local",
       "notes": "Authored in agent-scripts (25d65c8). Independent of trailofbits/skills git-cleanup."
     },
+    "gplay-cli": {
+      "origin": "adapted",
+      "repo": "https://github.com/tamtom/gplay-cli-skills",
+      "path": "skills/*",
+      "refresh": "git clone --depth 1 https://github.com/tamtom/gplay-cli-skills.git /tmp/gplay-cli-skills && echo 'hand-merge /tmp/gplay-cli-skills/skills/*/SKILL.md into skills/gplay-cli/references/; preserve the router and local conventions; then: trash /tmp/gplay-cli-skills'",
+      "notes": "Seventeen upstream gplay skills consolidated into one public router with focused internal reference playbooks. Adapted with Ossian Stack command discovery, 1Password credential handling, mutation authorization, edit lifecycle, release readback, and Expo Android routing. Merge by hand on refresh; never overwrite the router or local conventions.",
+      "upstreamPath": null,
+      "upstreamRev": "10301b24639e4f768d009b2edda9315cb2149712",
+      "upstreamCheckedAt": "2026-09-05",
+      "lastSynced": "2026-09-05"
+    },
     "grill-design": {
       "origin": "vendored",
       "repo": "https://github.com/will-ness-ai/skills",

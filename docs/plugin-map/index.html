@@ -455,6 +455,16 @@
       "phase": "reference"
      }
     ]
+   },
+   {
+    "id": "google-play",
+    "title": "Google Play",
+    "skills": [
+     {
+      "id": "gplay-cli",
+      "phase": "building"
+     }
+    ]
    }
   ],
   "sideDoors": [
@@ -879,6 +889,25 @@
     "setup-ossian-stack"
    ]
   },
+  "gplay-cli": {
+   "id": "gplay-cli",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Google Play CLI",
+   "description": "Operate Google Play Console with the `gplay` CLI across Android builds, releases and staged rollouts, store metadata and screenshots, subscriptions and in-app products, pricing, testers, reviews, vitals, reports, purchases, users, preflight checks, and Fastlane migration. Use this skill whenever work touches Google Play Console or publishing an Android app.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/tamtom/gplay-cli-skills",
+   "calls": [
+    "one-password"
+   ],
+   "calledBy": [
+    "ossian-mode",
+    "release-ios-app"
+   ]
+  },
   "grill-design": {
    "id": "grill-design",
    "type": "skill",
@@ -1069,6 +1098,7 @@
    "repo": "https://developer.1password.com/docs/cli",
    "calls": [],
    "calledBy": [
+    "gplay-cli",
     "hetzner-vm",
     "ossian-mode",
     "setup-ossian-stack"
@@ -1153,7 +1183,8 @@
     "close-the-loop",
     "principle-prove-it-works",
     "principle-fix-root-causes",
-    "principle-sequence-verifiable-units"
+    "principle-sequence-verifiable-units",
+    "gplay-cli"
    ],
    "calledBy": [
     "orchestrate-threads"
@@ -1374,7 +1405,8 @@
    "calls": [
     "asc-metadata",
     "asc-release",
-    "babysit"
+    "babysit",
+    "gplay-cli"
    ],
    "calledBy": [
     "asc-release",
@@ -1646,7 +1678,7 @@
   }
  },
  "counts": {
-  "skills": 65,
+  "skills": 66,
   "agents": 0,
   "plugins": 1
  }

@@ -106,6 +106,9 @@
     "git-cleanup": {
       "role": "both"
     },
+    "gplay-cli": {
+      "role": "both"
+    },
     "grill-design": {
       "role": "both"
     },
@@ -266,6 +269,9 @@
       "principle-fix-root-causes",
       "principle-prove-it-works"
     ],
+    "gplay-cli": [
+      "one-password"
+    ],
     "hetzner-vm": [
       "one-password",
       "coolify"
@@ -313,7 +319,8 @@
       "close-the-loop",
       "principle-prove-it-works",
       "principle-fix-root-causes",
-      "principle-sequence-verifiable-units"
+      "principle-sequence-verifiable-units",
+      "gplay-cli"
     ],
     "prototype": [
       "close-the-loop",
@@ -329,7 +336,8 @@
     "release-ios-app": [
       "asc-metadata",
       "asc-release",
-      "babysit"
+      "babysit",
+      "gplay-cli"
     ],
     "resolve-pr-feedback": [
       "babysit"
@@ -674,6 +682,16 @@
           {
             "id": "things",
             "phase": "reference"
+          }
+        ]
+      },
+      {
+        "id": "google-play",
+        "title": "Google Play",
+        "skills": [
+          {
+            "id": "gplay-cli",
+            "phase": "building"
           }
         ]
       }

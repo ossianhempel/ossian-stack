@@ -26,7 +26,7 @@ Android share a single `expo.version`.
 
 ## Android (when `IOS_RELEASE_ANDROID=true`)
 
-- Android is **not optional** in a production release. Build Android locally and upload the artifact manually in Google Play Console.
+- Android is **not optional** in a production release. Build Android locally, then use the `gplay-cli` release, preflight, and submission-check playbooks to upload and verify it in Google Play Console.
 - Do **not** queue an Android EAS production build unless the user explicitly asks.
 
 ## Post-submit bookkeeping
