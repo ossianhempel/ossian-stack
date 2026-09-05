@@ -466,7 +466,7 @@
    "bro",
    "continual-learning",
    "codify-conventions",
-   "close-the-loop-audit",
+   "maintain-close-the-loop",
    "skill-creator"
   ],
   "knowledge": {
@@ -478,6 +478,7 @@
     "principle-model-the-domain",
     "principle-prove-it-works",
     "principle-redesign-from-first-principles",
+    "principle-sequence-verifiable-units",
     "principle-subtract-before-you-add"
    ]
   }
@@ -572,7 +573,8 @@
    "repo": "https://github.com/openclaw/agent-skills",
    "calls": [],
    "calledBy": [
-    "commit-push-pr"
+    "commit-push-pr",
+    "ossian-mode"
    ]
   },
   "babysit": {
@@ -657,23 +659,10 @@
    "calls": [],
    "calledBy": [
     "diagnosing-bugs",
+    "ossian-mode",
     "prototype",
     "setup-ossian-stack"
    ]
-  },
-  "close-the-loop-audit": {
-   "id": "close-the-loop-audit",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Close the Loop — Audit",
-   "description": "Periodic pass that keeps a project's verification skill and feature map honest, so the loop stays closed as the app changes: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /close-the-loop-audit, \\\"audit the verify skill\\\", or \\\"maintain the verification skill\\\".",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/cursor/plugins",
-   "calls": [],
-   "calledBy": []
   },
   "codex-first": {
    "id": "codex-first",
@@ -1021,6 +1010,20 @@
     "skill-creator"
    ]
   },
+  "maintain-close-the-loop": {
+   "id": "maintain-close-the-loop",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Maintain Close the Loop",
+   "description": "Periodic pass that keeps a project's verification skill and feature map honest, so the loop stays closed as the app changes: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /maintain-close-the-loop, \\\"audit the verify skill\\\", or \\\"maintain the verification skill\\\".",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": []
+  },
   "obsidian": {
    "id": "obsidian",
    "type": "skill",
@@ -1145,7 +1148,12 @@
     "simplify-code",
     "commit-push-pr",
     "babysit",
-    "release-ios-app"
+    "release-ios-app",
+    "autoreview",
+    "close-the-loop",
+    "principle-prove-it-works",
+    "principle-fix-root-causes",
+    "principle-sequence-verifiable-units"
    ],
    "calledBy": [
     "orchestrate-threads"
@@ -1210,7 +1218,8 @@
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
    "calledBy": [
-    "diagnosing-bugs"
+    "diagnosing-bugs",
+    "ossian-mode"
    ]
   },
   "principle-model-the-domain": {
@@ -1241,6 +1250,7 @@
    "calls": [],
    "calledBy": [
     "diagnosing-bugs",
+    "ossian-mode",
     "refactoring"
    ]
   },
@@ -1258,6 +1268,22 @@
    "calls": [],
    "calledBy": [
     "refactoring"
+   ]
+  },
+  "principle-sequence-verifiable-units": {
+   "id": "principle-sequence-verifiable-units",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Sequence Verifiable Units",
+   "description": "Apply to multi-step work (sweeps, migrations, runs of similar edits) and to how you stack commits and PRs. Break work into small units that each end in a verifiable state, check each before the next, and order delivery so the sequence proves itself to a reviewer.",
+   "role": "knowledge",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "ossian-mode"
    ]
   },
   "principle-subtract-before-you-add": {
@@ -1620,7 +1646,7 @@
   }
  },
  "counts": {
-  "skills": 64,
+  "skills": 65,
   "agents": 0,
   "plugins": 1
  }

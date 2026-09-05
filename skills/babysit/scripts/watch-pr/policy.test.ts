@@ -9,6 +9,7 @@ import {
   planQueue,
   queryBackoffSeconds,
   readSnapshot,
+  runSimple,
   runQueued,
   selectTierMajorStackDecision,
 } from "./policy.ts";
@@ -40,6 +41,7 @@ const options = {
   timeout: 0,
   maxQueryErrors: 5,
   allowDraft: false,
+  reviewGrace: 0,
 } satisfies PollingOptions;
 
 describe("readiness truth table", () => {
@@ -107,6 +109,7 @@ describe("snapshot query planning", () => {
     expect(reader.calls).toEqual([
       "pullRequest",
       "reviewThreads",
+      "reviewAutomation",
       "checksFastPath",
     ]);
   });
@@ -148,6 +151,54 @@ describe("snapshot query planning", () => {
       ).kind
     ).toBe("merged");
     expect(reader.calls).toEqual(["pullRequest"]);
+  });
+});
+
+it("holds a clean PR through the review discovery window before READY", async () => {
+  let now = 0;
+  const emitted: ProgressVerdict[] = [];
+  const verdict = await runSimple({
+    dependencies: {
+      reader: fakeReader(),
+      clock: {
+        now: () => now,
+        observedAt: () => `t${now}`,
+        async sleep(seconds) {
+          now += seconds;
+        },
+      },
+      emit: (value) => emitted.push(value),
+    },
+    contexts: [context(6)],
+    mode: "single",
+    statusOnly: false,
+    options: { ...options, interval: 60, reviewGrace: 120 },
+  });
+  expect(verdict.kind).toBe("READY");
+  expect(now).toBe(120);
+  expect(
+    emitted.filter(
+      (event) =>
+        event.kind === "WAITING" &&
+        event.reason.kind === "pending-checks" &&
+        event.reason.pending[0].name === "Review discovery window"
+    )
+  ).toHaveLength(2);
+});
+
+it("turns visible AI review activity into a pending check", async () => {
+  const snapshot = await readSnapshot({
+    reader: fakeReader({ reviewAutomation: pendingCheck("AI code review") }),
+    context: context(7),
+    pendingHistory: "include",
+    allowDraft: false,
+  });
+  expect(snapshot.kind).toBe("open");
+  if (snapshot.kind !== "open") throw new Error("expected open snapshot");
+  expect(snapshot.reviewAutomationRunning).toBe(true);
+  expect(classifyPr(snapshot)).toMatchObject({
+    kind: "waiting",
+    pending: [{ name: "AI code review" }],
   });
 });
 

@@ -22,8 +22,36 @@ the current work.
   keep the user informed while work is in progress.
 - Prefer simple changes that address the underlying condition. Add only what
   the evidence and the requested outcome require.
-- Verify the actual behavior or artifact before claiming success. Use focused
-  checks that can expose the failure; report unavailable evidence as unverified.
+
+## Verification
+
+Apply these rules directly during the work. Their matching principle skills are
+explicit-only deeper references; the rules here do not depend on invoking them.
+
+- **Prove it works (`principle-prove-it-works`).** After implementation and
+  before declaring done, exercise the real artifact on the surface the user
+  touches. A build, typecheck, unit test, delegate report, or CI result is
+  supporting evidence, not a substitute for observable behavior when that
+  behavior can be driven.
+- **Fix root causes (`principle-fix-root-causes`).** For broken behavior,
+  reproduce the exact symptom first, trace it to the mechanism that produces it,
+  and fix that mechanism. Do not turn an unexpected state into an accepted state
+  merely by adding a guard.
+- **Sequence verifiable units (`principle-sequence-verifiable-units`).** In a
+  migration, sweep, repeated edit, or multi-commit delivery, choose the smallest
+  useful unit, change it, and run its check before advancing. Order commits and
+  PRs so each state is independently understandable and verifiable under the
+  project's branching conventions.
+
+If the project has a `verify-*` skill or equivalent control harness, use it for
+every user-facing feature this change touched. If it has none, use the strongest
+real surface available and report the reusable verification gap. Offer the user
+`/close-the-loop` once; do not generate it implicitly or make accepting the offer
+a condition of finishing work that can already be verified.
+
+Before delivery, complete this behavioral proof as well as the relevant focused
+checks and `autoreview`. In the final response, name the artifact exercised, the
+behavior observed, and anything that remains unverified.
 
 ## Choose the relevant workflow
 

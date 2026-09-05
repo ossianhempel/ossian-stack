@@ -174,6 +174,12 @@ created lazily on purpose; pre-creating them is a mistake**, because an empty
 
 Report what is missing and who creates it. Create nothing in this step.
 
+If the project has no `verify-*` skill or equivalent harness that can drive the
+real product surface, offer once: "Want a project-local verification skill so
+agents can exercise the app like a user and prove changes work? Invoke
+`/close-the-loop` and I will generate one." This is optional setup. On no, move
+on without asking again or treating the missing verifier as a general blocker.
+
 ## 7. Issue tracker and triage labels
 
 Configure a tracker when the user chooses ticket-based work or the active project

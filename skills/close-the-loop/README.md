@@ -9,7 +9,7 @@ feature map so later runs know what else needs proving. It runs its own output
 end to end once before handing it over — an unexecuted generated skill is a
 draft, not a deliverable.
 
-Paired with `close-the-loop-audit`, which keeps the map honest as the app changes.
+Paired with `maintain-close-the-loop`, which keeps the map honest as the app changes.
 
 ## Why the rename
 
@@ -29,7 +29,7 @@ project's own skills directory instead — first existing of `.agents/skills/`,
 `.claude/skills/`, `.cursor/skills/`, else create `.agents/skills/` and symlink
 `.claude/skills` to it, since Claude Code does not read `.agents/skills`. The
 cross-reference to `/maintain-verification-skill` now points at
-`/close-the-loop-audit`.
+`/maintain-close-the-loop`.
 
 `agents/openai.yaml` is a local addition so Codex honors the same user-invoke-only
 policy as `disable-model-invocation`.

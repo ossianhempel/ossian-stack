@@ -3,6 +3,8 @@ import type * as T from "./types.ts";
 import { nonEmpty, parsePrNumber } from "./types.ts";
 export const REVIEW_THREADS_QUERY =
   "\nquery ReviewThreads($owner: String!, $repo: String!, $pr: Int!) {\n  repository(owner: $owner, name: $repo) {\n    pullRequest(number: $pr) {\n      reviewThreads(first: 100) {\n        nodes {\n          id\n          isResolved\n          comments(first: 10) {\n            nodes {\n              body\n              createdAt\n              path\n              line\n              author { login }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n";
+export const REVIEW_AUTOMATION_QUERY =
+  "\nquery ReviewAutomation($owner: String!, $repo: String!, $pr: Int!) {\n  repository(owner: $owner, name: $repo) {\n    pullRequest(number: $pr) {\n      reviewRequests(first: 100) {\n        nodes {\n          requestedReviewer {\n            __typename\n            ... on User { login }\n            ... on Bot { login }\n          }\n        }\n      }\n      reactions(last: 100) {\n        nodes { content createdAt user { login } }\n      }\n      reviews(last: 100) {\n        nodes { state submittedAt author { login } }\n      }\n      comments(last: 100) {\n        nodes { createdAt author { login } }\n      }\n    }\n  }\n}\n";
 export const PR_COMMIT_STATUS_QUERY =
   "\nquery PrCommitStatuses($owner: String!, $repo: String!, $pr: Int!) {\n  repository(owner: $owner, name: $repo) {\n    pullRequest(number: $pr) {\n      commits(last: 50) {\n        nodes {\n          commit {\n            oid\n            statusCheckRollup {\n              state\n            }\n          }\n        }\n      }\n    }\n  }\n}\n";
 export const PR_CHECK_ROLLUP_QUERY =
@@ -399,6 +401,86 @@ export function parseReviewThreads(value: unknown): readonly T.ReviewThread[] {
       bugbotReviewPasses: passes,
     }));
 }
+const REVIEW_AUTOMATION_ACTORS = ["codex", "chatgpt", "copilot"] as const;
+const isReviewAutomationActor = (login: string): boolean =>
+  REVIEW_AUTOMATION_ACTORS.some((token) => login.toLowerCase().includes(token));
+function actorLogin(value: unknown, path: string): string | null {
+  if (value === null) return null;
+  const actor = record(value, path);
+  return typeof actor.login === "string" ? actor.login : null;
+}
+export function parseReviewAutomation(value: unknown): T.PendingCheck | null {
+  const pull = record(
+    at(value, ["data", "repository", "pullRequest"]),
+    "pullRequest"
+  );
+  const requests = list(
+    at(pull, ["reviewRequests", "nodes"]),
+    "reviewRequests.nodes"
+  );
+  const requested = requests.flatMap((item, index) => {
+    const request = record(item, `reviewRequests.nodes[${index}]`);
+    const login = actorLogin(
+      request.requestedReviewer,
+      `reviewRequests.nodes[${index}].requestedReviewer`
+    );
+    return login !== null && isReviewAutomationActor(login) ? [login] : [];
+  });
+  const terminalByActor = new Map<string, number>();
+  const pendingReviewActors: string[] = [];
+  for (const [key, timeKey] of [
+    ["reviews", "submittedAt"],
+    ["comments", "createdAt"],
+  ] as const) {
+    const nodes = list(at(pull, [key, "nodes"]), `${key}.nodes`);
+    for (const [index, item] of nodes.entries()) {
+      const event = record(item, `${key}.nodes[${index}]`);
+      const login = actorLogin(event.author, `${key}.nodes[${index}].author`);
+      if (login === null || !isReviewAutomationActor(login)) continue;
+      const rawTime = event[timeKey];
+      if (key === "reviews" && rawTime === null) {
+        if (event.state === "PENDING") pendingReviewActors.push(login);
+        continue;
+      }
+      const time = Date.parse(string(rawTime, `${key}.nodes[${index}].${timeKey}`));
+      if (Number.isFinite(time))
+        terminalByActor.set(
+          login,
+          Math.max(terminalByActor.get(login) ?? 0, time)
+        );
+    }
+  }
+  const reactions = list(at(pull, ["reactions", "nodes"]), "reactions.nodes");
+  for (const [index, item] of reactions.entries()) {
+    const reaction = record(item, `reactions.nodes[${index}]`);
+    if (reaction.content !== "THUMBS_UP") continue;
+    const login = actorLogin(reaction.user, `reactions.nodes[${index}].user`);
+    if (login === null || !isReviewAutomationActor(login)) continue;
+    const created = Date.parse(string(reaction.createdAt, `reactions.nodes[${index}].createdAt`));
+    if (Number.isFinite(created)) terminalByActor.set(login, Math.max(terminalByActor.get(login) ?? 0, created));
+  }
+  const looking: string[] = [];
+  for (const [index, item] of reactions.entries()) {
+    const reaction = record(item, `reactions.nodes[${index}]`);
+    if (reaction.content !== "EYES") continue;
+    const login = actorLogin(reaction.user, `reactions.nodes[${index}].user`);
+    if (login === null || !isReviewAutomationActor(login)) continue;
+    const created = Date.parse(string(reaction.createdAt, `reactions.nodes[${index}].createdAt`));
+    if (!Number.isFinite(created) || created > (terminalByActor.get(login) ?? 0))
+      looking.push(login);
+  }
+  const actors = [...new Set([...requested, ...pendingReviewActors, ...looking])];
+  return actors.length === 0
+    ? null
+    : {
+        kind: "pending",
+        name: "AI code review",
+        reportedState: "PENDING",
+        description: `Waiting for ${actors.join(", ")}`,
+        link: "",
+        workflow: "review",
+      };
+}
 export function parsePullRequest(
   value: unknown,
   context: T.PrContext
@@ -573,6 +655,11 @@ export class GhGitHubReader implements T.GitHubReader {
   ): Promise<readonly T.ReviewThread[]> {
     return parseReviewThreads(
       await runJson(graphqlArgs(REVIEW_THREADS_QUERY, context))
+    );
+  }
+  async reviewAutomation(context: T.PrContext): Promise<T.PendingCheck | null> {
+    return parseReviewAutomation(
+      await runJson(graphqlArgs(REVIEW_AUTOMATION_QUERY, context))
     );
   }
   async commitRollups(

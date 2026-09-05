@@ -212,7 +212,10 @@ changes applied; in `--pr-only` note that uncommitted changes were left alone.
 - **Completed, non-draft PR delivered by the default flow:** invoke `babysit` in
   `drive` mode with the full PR URL and inherited action scope. Continue until
   merge-ready or a reported human/access blocker; PR creation alone is not the
-  completion condition. Include the final CI/review state in the report.
+  completion condition. A green CI snapshot is not the handoff: let the watcher
+  complete its review-discovery window and any detected Codex, Copilot, or other
+  review automation before accepting `READY`. Include the final CI/review state
+  in the report.
 - **Build phase still open:** finish the agreed stack or batch first, then drive its
   lowest unmerged PR (the frontier). Do not block on each intermediate PR.
 - **An existing drive owns the work:** return the PR URL, changed head, and outcome

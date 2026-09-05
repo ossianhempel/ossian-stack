@@ -390,6 +390,7 @@ export interface GitHubReader {
     after: string | null
   ): Promise<RollupPage>;
   reviewThreads(context: PrContext): Promise<readonly ReviewThread[]>;
+  reviewAutomation(context: PrContext): Promise<PendingCheck | null>;
   commitRollups(context: PrContext): Promise<readonly CommitRollup[]>;
 }
 export interface PollingOptions {
@@ -398,4 +399,5 @@ export interface PollingOptions {
   readonly timeout: number;
   readonly maxQueryErrors: number;
   readonly allowDraft: boolean;
+  readonly reviewGrace: number;
 }

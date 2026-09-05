@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-04",
+  "updated": "2026-09-05",
   "description": "Upstream map for skills/ — the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -53,10 +53,11 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/poteto-mode",
       "refresh": "npx skills add cursor/plugins -y --skill poteto-mode && echo 'hand-merge playbooks/babysit.md, references/bugbot-triage.md, scripts/ from .agents/skills/poteto-mode/ then: trash .agents/skills/poteto-mode'",
-      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/babysit.md into a standalone skill, with references/bugbot-triage.md and the scripts/watch-pr toolchain vendored alongside. Adapted: sibling paths rewritten to this directory, the three playbooks/shipping.md routes replaced with stop-and-hand-back, the watcher invocation anchored via SKILL_DIR, and /loop described as a host capability. Ships Bun-only TypeScript (scripts/watch-pr), the sole exception to the runtime rule in AGENTS.md. Merge by hand on refresh; never overwrite. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local routing contract (2026-09-04): completed non-draft PRs enter default drive after the agreed build phase; requested outcome selects mode regardless of size; existing drive ownership survives helper calls. All feedback routes to resolve-pr-feedback mode:pipeline with the full frontier URL and inherited action scope, before CI; the former Bugbot fixer pipeline is replaced, with historical patterns retained only as context. Watcher runtime unchanged. Local Azure DevOps Services adapter (2026-09-04): Python 3 REST watcher with explicit identity, current refs/merge/iteration, paginated applicable policies and evaluations (7.1-preview.1), current build binding, reviewer and discussion checks. Kept separate from GitHub-specific Bun models; no second runtime exception. Services single-frontier only; no Server, fork, or automated Azure queue parity. Shared REST/identity primitives are duplicated in resolve-pr-feedback for self-contained skills; keep copies identical. Official Microsoft contracts linked in references/azure-devops.md; live Azure behavior unverified.",
+      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/babysit.md into a standalone skill, with references/bugbot-triage.md and the scripts/watch-pr toolchain vendored alongside. Adapted: sibling paths rewritten to this directory, the three playbooks/shipping.md routes replaced with stop-and-hand-back, the watcher invocation anchored via SKILL_DIR, and /loop described as a host capability. Ships Bun-only TypeScript (scripts/watch-pr), the sole exception to the runtime rule in AGENTS.md. Merge by hand on refresh; never overwrite. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local routing contract (2026-09-04): completed non-draft PRs enter default drive after the agreed build phase; requested outcome selects mode regardless of size; existing drive ownership survives helper calls. All feedback routes to resolve-pr-feedback mode:pipeline with the full frontier URL and inherited action scope, before CI; the former Bugbot fixer pipeline is replaced, with historical patterns retained only as context. Watcher runtime unchanged. Local Azure DevOps Services adapter (2026-09-04): Python 3 REST watcher with explicit identity, current refs/merge/iteration, paginated applicable policies and evaluations (7.1-preview.1), current build binding, reviewer and discussion checks. Kept separate from GitHub-specific Bun models; no second runtime exception. Services single-frontier only; no Server, fork, or automated Azure queue parity. Shared REST/identity primitives are duplicated in resolve-pr-feedback for self-contained skills; keep copies identical. Official Microsoft contracts linked in references/azure-devops.md; live Azure behavior unverified. Local GitHub readiness correction (2026-09-05): READY now requires a 180-second quiet discovery window and no active AI review signal. The watcher reads requested Codex/Copilot reviewers and automation reactions; a newer eyes reaction remains pending until a later submitted review, comment, or thumbs-up signal. This closes the race where CI became green before an asynchronous code review appeared.",
       "upstreamPath": "pstack/skills/poteto-mode",
-      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
-      "upstreamCheckedAt": "2026-08-29"
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-05",
+      "lastSynced": "2026-09-05"
     },
     "better-accessibility": {
       "origin": "vendored",
@@ -95,18 +96,9 @@
       "refresh": "npx skills add cursor/plugins -y --skill create-verification-skill && echo 'hand-merge into skills/close-the-loop/ then: trash .agents/skills/create-verification-skill'",
       "notes": "From Cursor's pstack plugin, upstream name create-verification-skill. Generates a project-local verification skill (launch/doctor/drive/evidence/cleanup) plus a feature map, and proves it end to end before handing over. Ships references/feature-map-example/ verbatim. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted — merge by hand on refresh, never overwrite.",
       "upstreamPath": "pstack/skills/create-verification-skill",
-      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
-      "upstreamCheckedAt": "2026-08-29"
-    },
-    "close-the-loop-audit": {
-      "origin": "adapted",
-      "repo": "https://github.com/cursor/plugins",
-      "path": "pstack/skills/maintain-verification-skill",
-      "refresh": "npx skills add cursor/plugins -y --skill maintain-verification-skill && echo 'hand-merge into skills/close-the-loop-audit/ then: trash .agents/skills/maintain-verification-skill'",
-      "notes": "From Cursor's pstack plugin, upstream name maintain-verification-skill. Upkeep pass for the skill close-the-loop generates: parallel source readers per feature, one live driving pass, at most one PR of proven corrections. Renamed to Ossian's own vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted — merge by hand on refresh, never overwrite.",
-      "upstreamPath": "pstack/skills/maintain-verification-skill",
-      "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
-      "upstreamCheckedAt": "2026-08-29"
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-05",
+      "lastSynced": "2026-09-05"
     },
     "codex-first": {
       "origin": "vendored",
@@ -267,6 +259,17 @@
       "upstreamRev": "00ae3cbe2250f6350b66aa23e24ba5883221836c",
       "upstreamCheckedAt": "2026-08-27"
     },
+    "maintain-close-the-loop": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/maintain-verification-skill",
+      "refresh": "npx skills add cursor/plugins -y --skill maintain-verification-skill && echo 'hand-merge into skills/maintain-close-the-loop/ then: trash .agents/skills/maintain-verification-skill'",
+      "notes": "From Cursor's pstack plugin, upstream name maintain-verification-skill. Upkeep pass for the skill close-the-loop generates: parallel source readers per feature, one live driving pass, at most one PR of proven corrections. Renamed to `maintain-close-the-loop` as the recurring companion to Ossian's `close-the-loop` vocabulary from his vault note 'Close the loop' (3. Resources/Notes), which his own agent-added connections already identify as the concrete form of these skills. Upstream wording kept in the description so both vocabularies trigger. Also adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Renamed and adapted — merge by hand on refresh, never overwrite.",
+      "upstreamPath": "pstack/skills/maintain-verification-skill",
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-05",
+      "lastSynced": "2026-09-05"
+    },
     "obsidian": {
       "origin": "local",
       "notes": "Authored in agent-scripts (848085c). Vault-specific Obsidian workflows."
@@ -361,6 +364,17 @@
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
     },
+    "principle-sequence-verifiable-units": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-sequence-verifiable-units",
+      "refresh": "npx skills add cursor/plugins -y --skill principle-sequence-verifiable-units && echo 'hand-merge into skills/principle-sequence-verifiable-units/ then: trash .agents/skills/principle-sequence-verifiable-units'",
+      "notes": "From Cursor's pstack plugin. Break multi-step work and delivery into units that each end in a checked state. Adapted so the baseline follows the project's branching conventions rather than requiring an unconditional rebase onto trunk. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "pstack/skills/principle-sequence-verifiable-units",
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-05",
+      "lastSynced": "2026-09-05"
+    },
     "principle-subtract-before-you-add": {
       "origin": "vendored",
       "repo": "https://github.com/cursor/plugins",
@@ -399,16 +413,6 @@
       "origin": "local",
       "notes": "Authored in agent-scripts (af475d9). Orchestrates asc-* + .ios-release.env; mirrors release-mac-app pattern. Local release-PR routing correction (2026-09-04): create or reuse the manifest beta-to-release PR, explicitly invoke/resume babysit drive within inherited release scope through merge-ready or a genuine blocker, rearm after fixes, and retain manual merge/submission permissions. PR size does not change drive; narrower requests, TestFlight without a PR, and equal-branch promotion skips stay bounded. Babysit owns feedback resolution."
     },
-    "resolving-merge-conflicts": {
-      "origin": "vendored",
-      "repo": "https://github.com/mattpocock/skills",
-      "path": "skills/engineering/resolving-merge-conflicts",
-      "refresh": "npx skills add mattpocock/skills -y --skill resolving-merge-conflicts && cp -R .agents/skills/resolving-merge-conflicts/. skills/resolving-merge-conflicts/ && trash .agents/skills/resolving-merge-conflicts",
-      "notes": "Vendored verbatim 2026-08-29, including agents/openai.yaml (Codex display metadata only). Part of migrating off the installed mattpocock-skills plugin: vendor the wanted skills here, then uninstall the plugin.",
-      "upstreamPath": "skills/engineering/resolving-merge-conflicts",
-      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
-      "upstreamCheckedAt": "2026-08-29"
-    },
     "resolve-pr-feedback": {
       "origin": "adapted",
       "repo": "https://github.com/EveryInc/compound-engineering-plugin",
@@ -418,6 +422,16 @@
       "upstreamPath": "skills/ce-resolve-pr-feedback",
       "upstreamRev": "0e758b60b35cec165470443fde5acf60db8bdae9",
       "upstreamCheckedAt": "2026-08-30"
+    },
+    "resolving-merge-conflicts": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/resolving-merge-conflicts",
+      "refresh": "npx skills add mattpocock/skills -y --skill resolving-merge-conflicts && cp -R .agents/skills/resolving-merge-conflicts/. skills/resolving-merge-conflicts/ && trash .agents/skills/resolving-merge-conflicts",
+      "notes": "Vendored verbatim 2026-08-29, including agents/openai.yaml (Codex display metadata only). Part of migrating off the installed mattpocock-skills plugin: vendor the wanted skills here, then uninstall the plugin.",
+      "upstreamPath": "skills/engineering/resolving-merge-conflicts",
+      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
+      "upstreamCheckedAt": "2026-08-29"
     },
     "revenuecat-api": {
       "origin": "companion",

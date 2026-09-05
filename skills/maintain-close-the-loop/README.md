@@ -1,4 +1,4 @@
-# close-the-loop-audit
+# maintain-close-the-loop
 
 Adapted from [cursor/plugins](https://github.com/cursor/plugins)
 (`pstack/skills/maintain-verification-skill`).
@@ -17,7 +17,7 @@ Paired with `close-the-loop`, which generates the skill this one maintains.
 
 ## What changed
 
-Renamed from `maintain-verification-skill` to match `close-the-loop`; see that
+Renamed from `maintain-verification-skill` as an action-oriented companion to `close-the-loop`; see that
 skill's README for the reasoning. Target discovery no longer assumes
 `.cursor/skills/verify-*/` — it looks under whichever skills directory the repo
 actually uses. Cross-references now point at `/close-the-loop`.

@@ -70,9 +70,6 @@
     "close-the-loop": {
       "role": "human"
     },
-    "close-the-loop-audit": {
-      "role": "human"
-    },
     "codex-first": {
       "role": "both"
     },
@@ -133,6 +130,9 @@
     "ios-marketing-capture": {
       "role": "both"
     },
+    "maintain-close-the-loop": {
+      "role": "human"
+    },
     "obsidian": {
       "role": "both"
     },
@@ -170,6 +170,9 @@
       "role": "knowledge"
     },
     "principle-redesign-from-first-principles": {
+      "role": "knowledge"
+    },
+    "principle-sequence-verifiable-units": {
       "role": "knowledge"
     },
     "principle-subtract-before-you-add": {
@@ -305,7 +308,12 @@
       "simplify-code",
       "commit-push-pr",
       "babysit",
-      "release-ios-app"
+      "release-ios-app",
+      "autoreview",
+      "close-the-loop",
+      "principle-prove-it-works",
+      "principle-fix-root-causes",
+      "principle-sequence-verifiable-units"
     ],
     "prototype": [
       "close-the-loop",
@@ -679,7 +687,7 @@
       "bro",
       "continual-learning",
       "codify-conventions",
-      "close-the-loop-audit",
+      "maintain-close-the-loop",
       "skill-creator"
     ],
     "knowledge": {
@@ -691,6 +699,7 @@
         "principle-model-the-domain",
         "principle-prove-it-works",
         "principle-redesign-from-first-principles",
+        "principle-sequence-verifiable-units",
         "principle-subtract-before-you-add"
       ]
     }

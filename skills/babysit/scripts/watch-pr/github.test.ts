@@ -1,10 +1,12 @@
 import { describe, expect, it } from "bun:test";
 import {
   ChecksUnavailable,
+  REVIEW_AUTOMATION_QUERY,
   WatcherQueryError,
   mapRollupNode,
   orderStack,
   parsePullRequest,
+  parseReviewAutomation,
   parseReviewThreads,
   resolveChecks,
   resolveContext,
@@ -254,6 +256,132 @@ it("annotates Bugbot threads with distinct review-pass counts", () => {
   expect(threads).toHaveLength(2);
   expect(threads.map((thread) => thread.isBugbot)).toEqual([true, true]);
   expect(threads.map((thread) => thread.bugbotReviewPasses)).toEqual([3, 3]);
+});
+
+describe("review automation", () => {
+  it("queries login for Bot review requests", () => {
+    expect(REVIEW_AUTOMATION_QUERY).toContain("... on Bot { login }");
+  });
+
+  const response = (pullRequest: Record<string, unknown>) => ({
+    data: { repository: { pullRequest } },
+  });
+  const empty = {
+    reviewRequests: { nodes: [] },
+    reactions: { nodes: [] },
+    reviews: { nodes: [] },
+    comments: { nodes: [] },
+  };
+
+  it("waits for a requested Copilot reviewer", () => {
+    expect(
+      parseReviewAutomation(
+        response({
+          ...empty,
+          reviewRequests: {
+            nodes: [
+              {
+                requestedReviewer: {
+                  __typename: "Bot",
+                  login: "copilot-pull-request-reviewer[bot]",
+                },
+              },
+            ],
+          },
+        })
+      )
+    ).toMatchObject({ kind: "pending", name: "AI code review" });
+  });
+
+  it("waits while Codex has a newer eyes reaction", () => {
+    expect(
+      parseReviewAutomation(
+        response({
+          ...empty,
+          reactions: {
+            nodes: [
+              {
+                content: "EYES",
+                createdAt: "2026-09-05T08:00:00Z",
+                user: { login: "chatgpt-codex-connector[bot]" },
+              },
+            ],
+          },
+        })
+      )
+    ).toMatchObject({ kind: "pending", name: "AI code review" });
+  });
+
+  it("settles Codex eyes after a later submitted review", () => {
+    expect(
+      parseReviewAutomation(
+        response({
+          ...empty,
+          reactions: {
+            nodes: [
+              {
+                content: "EYES",
+                createdAt: "2026-09-05T08:00:00Z",
+                user: { login: "chatgpt-codex-connector[bot]" },
+              },
+            ],
+          },
+          reviews: {
+            nodes: [
+              {
+                state: "COMMENTED",
+                submittedAt: "2026-09-05T08:01:00Z",
+                author: { login: "chatgpt-codex-connector[bot]" },
+              },
+            ],
+          },
+        })
+      )
+    ).toBeNull();
+  });
+
+  it("waits for an AI-authored pending review with no submission time", () => {
+    expect(
+      parseReviewAutomation(
+        response({
+          ...empty,
+          reviews: {
+            nodes: [
+              {
+                state: "PENDING",
+                submittedAt: null,
+                author: { login: "chatgpt-codex-connector[bot]" },
+              },
+            ],
+          },
+        })
+      )
+    ).toMatchObject({ kind: "pending", name: "AI code review" });
+  });
+
+  it("settles Codex eyes after a later thumbs-up reaction", () => {
+    expect(
+      parseReviewAutomation(
+        response({
+          ...empty,
+          reactions: {
+            nodes: [
+              {
+                content: "EYES",
+                createdAt: "2026-09-05T08:00:00Z",
+                user: { login: "chatgpt-codex-connector[bot]" },
+              },
+              {
+                content: "THUMBS_UP",
+                createdAt: "2026-09-05T08:01:00Z",
+                user: { login: "chatgpt-codex-connector[bot]" },
+              },
+            ],
+          },
+        })
+      )
+    ).toBeNull();
+  });
 });
 
 describe("context and stack discovery", () => {

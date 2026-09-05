@@ -17,6 +17,7 @@ export interface FakeReaderOptions {
   readonly fastPath?: ChecksFastPath;
   readonly rollupPages?: readonly RollupPage[];
   readonly threads?: readonly ReviewThread[];
+  readonly reviewAutomation?: Check | null;
   readonly commitRollups?: readonly CommitRollup[];
   readonly openPullRequests?: readonly OpenPullRequest[];
   readonly origin?: Repository | null;
@@ -109,6 +110,11 @@ export function fakeReader(
     async reviewThreads() {
       calls.push("reviewThreads");
       return options.threads ?? [];
+    },
+    async reviewAutomation() {
+      calls.push("reviewAutomation");
+      const check = options.reviewAutomation ?? null;
+      return check?.kind === "pending" ? check : null;
     },
     async commitRollups() {
       calls.push("commitRollups");

@@ -48,6 +48,9 @@ async function mergeAssessment(
 }
 const AUTOMATION_TOKENS = [
   "bugbot",
+  "ai code review",
+  "codex",
+  "copilot",
   "security review",
   "pr review automation",
   "review automation",
@@ -64,14 +67,20 @@ export async function readSnapshot(args: {
   if (facts.state === "CLOSED")
     return { kind: "closed", context: args.context, facts };
   const threads = await args.reader.reviewThreads(args.context);
+  const reviewAutomation = await args.reader.reviewAutomation(args.context);
   const checks = await resolveChecks(args.reader, args.context);
+  const observedChecks =
+    reviewAutomation === null
+      ? checks.checks
+      : nonEmpty([...checks.checks, reviewAutomation]);
+  if (observedChecks === null) throw new Error("checks cannot become empty");
   const failed = nonEmpty(
-    checks.checks.filter(
+    observedChecks.filter(
       (check): check is T.FailedCheck => check.kind === "failed"
     )
   );
   const pending = nonEmpty(
-    checks.checks.filter(
+    observedChecks.filter(
       (check): check is T.PendingCheck => check.kind === "pending"
     )
   );
@@ -80,7 +89,7 @@ export async function readSnapshot(args: {
     ci = {
       kind: "ci-pending",
       source: checks.source,
-      all: checks.checks,
+      all: observedChecks,
       failed: [],
       pending,
       hadPreviousPassingCi: false,
@@ -89,7 +98,7 @@ export async function readSnapshot(args: {
     const merge = await mergeAssessment(args.reader, facts);
     const base = {
       source: checks.source,
-      all: checks.checks,
+      all: observedChecks,
       hadPreviousPassingCi: merge.hadPreviousPassingCi,
     };
     if (failed !== null)
@@ -125,7 +134,7 @@ export async function readSnapshot(args: {
     facts,
     threads,
     ci,
-    reviewAutomationRunning: checks.checks.some(
+    reviewAutomationRunning: observedChecks.some(
       (check) =>
         check.kind === "pending" &&
         AUTOMATION_TOKENS.some((token) =>
@@ -418,6 +427,7 @@ export async function runSimple(args: {
   readonly options: T.PollingOptions;
 }): Promise<T.TerminalVerdict> {
   const stamp = verdictFactory(args.dependencies.clock, args.mode);
+  let readySince: number | null = null;
   const step = async (): Promise<StepResult<T.TerminalVerdict>> => {
     const rows: T.PrSnapshot[] = [];
     for (const context of args.contexts)
@@ -455,11 +465,52 @@ export async function runSimple(args: {
       args.mode === "single"
         ? classifyPr(complete[0], args.options.allowDraft)
         : selectTierMajorStackDecision(complete, args.options.allowDraft);
-    if (decision.kind === "blocker")
+    if (decision.kind === "blocker") {
+      readySince = null;
       return {
         kind: "terminal",
         verdict: blockerVerdict(stamp, decision.blocker),
       };
+    }
+    const readyDecision =
+      decision.kind === "ready" || decision.kind === "merged" || decision.kind === "clear";
+    if (readyDecision && decision.kind !== "merged" && args.options.reviewGrace > 0) {
+      const now = args.dependencies.clock.now();
+      readySince ??= now;
+      const elapsed = now - readySince;
+      if (elapsed < args.options.reviewGrace) {
+        const pending: T.PendingCheck = {
+          kind: "pending",
+          name: "Review discovery window",
+          reportedState: "PENDING",
+          description: "Waiting for late GitHub review automation to appear",
+          link: "",
+          workflow: "review",
+        };
+        args.dependencies.emit(
+          stamp({
+            kind: "WAITING",
+            terminal: false,
+            frontier: complete[0].context,
+            reason: { kind: "pending-checks", pending: [pending] },
+          })
+        );
+        return {
+          kind: "sleep",
+          seconds: Math.min(
+            args.options.interval,
+            args.options.reviewGrace - elapsed
+          ),
+          onDeadline: () =>
+            stamp({
+              kind: "TIMEOUT",
+              terminal: true,
+              exitCode: 5,
+              reason: { kind: "pending-checks", pending: [pending] },
+            }),
+        };
+      }
+    } else if (!readyDecision) readySince = null;
     if (decision.kind === "ready" || decision.kind === "merged")
       return {
         kind: "terminal",
