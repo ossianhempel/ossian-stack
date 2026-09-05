@@ -68,14 +68,14 @@ CLI flags and environment variables override these defaults. Pi does not get a b
 
 Claude also supports `--fallback-model a,b` for availability-based fallback chains ([model-config](https://code.claude.com/docs/en/model-config)). Current Claude docs note that auth, billing, rate-limit, request-size, and transport errors do not trigger fallback, and the changelog documents interactive-session support in `v2.1.166`.
 
-[OpenAI's model guidance](https://developers.openai.com/api/docs/guides/latest-model) identifies Sol as the GPT-5.6 frontier-capability route and documents `max` support. Autoreview keeps `medium` as its default reasoning level to balance quality and usage; use `high` or `max` for the hardest quality-first reviews when the extra cost is worth it.
+[OpenAI's model guidance](https://developers.openai.com/api/docs/guides/latest-model) identifies Sol as the GPT-5.6 frontier-capability route and documents `max` support. Autoreview uses `high` by default; use `max` only for unusually difficult reviews.
 
 Examples matching current `main` behavior:
 
 ```bash
-# Codex with explicit model and reasoning (defaults to medium)
+# Codex with explicit model and reasoning (defaults to high)
 SKILL_DIR="<absolute directory containing the loaded SKILL.md>";
-"$SKILL_DIR/scripts/autoreview" --engine codex --model gpt-5.6-sol --thinking medium
+"$SKILL_DIR/scripts/autoreview" --engine codex --model gpt-5.6-sol --thinking high
 
 # Codex fast mode (priority service tier); needs a model whose catalog lists the tier, silently standard otherwise
 SKILL_DIR="<absolute directory containing the loaded SKILL.md>";

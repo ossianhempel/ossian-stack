@@ -21,7 +21,5 @@ Hold the anti-cry-wolf line: this fires only on a *demonstrated* shared root or 
 ## 4. Do not request another automated review
 
 Resolve feedback that already exists. After pushing a fix, return control to the
-caller's passive watcher. Never post a bot trigger such as `@codex review`, request
-or re-request an automated reviewer, or treat an unreviewed new head as permission
-to start another review. If repository automation reviews the new head on its own,
-the caller may send its newly published feedback back through this pipeline.
+passive watcher. Never trigger or re-request an automated review after a fix; only
+handle another review when automation starts it independently.

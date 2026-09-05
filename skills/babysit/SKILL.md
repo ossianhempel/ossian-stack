@@ -49,15 +49,10 @@ Babysitting fails the same few ways every time. Each step below exists because t
    against the newly published feedback before accepting the next `READY`, then
    rearm after any resulting push.
 
-   Review automation is observation-only. A babysit run may wait for the automated
-   review that was already requested or triggered when the PR opened, then resolve
-   its feedback. After a fix push, **never request or re-request Codex, Copilot, or
-   another automated reviewer**, including by posting trigger comments such as
-   `@codex review`, assigning the reviewer again, or calling a review-request API.
-   A newer head than the last reviewed commit does not authorize another review.
-   Continue with CI and the quiet discovery window; handle a new review only when
-   the repository's own automation publishes it without prompting. Retrigger only
-   when the user explicitly asks for another review, separate from babysitting.
+   Review automation is observation-only. After resolving an already-triggered
+   automated review, never trigger or re-request one after a fix push. A newer head
+   is not permission. Handle reviews started independently; retrigger only when the
+   user explicitly asks for another review.
 
    Stop at `READY` for one PR (single or stack mode). Queued mode never emits `READY`; a blocker-free frontier is a non-terminal `WAITING` with reason `merge-queue`. Report that frontier merge-ready and stop the watcher. Do not leave it running until merges happen — that is Shipping's job. If another actor merges the frontier and the watcher reports `ADVANCE`, continue with the new frontier. `COMPLETE` is also terminal if another actor finishes the queue.
 

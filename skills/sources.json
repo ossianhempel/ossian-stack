@@ -43,7 +43,7 @@
       "repo": "https://github.com/openclaw/agent-skills",
       "path": "skills/autoreview",
       "refresh": "npx skills add openclaw/agent-skills -y --skill autoreview && echo 'Hand-merge the upstream scratch copy .agents/skills/autoreview/ with skills/autoreview/; preserve local adaptations and reference routing, then: trash .agents/skills/autoreview'",
-      "notes": "Local overrides possible. Diff before overwriting customizations. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local default-priority override (2026-09-04): report through P1 by default across the skill contract, CLI help, filtering behavior, and tests; explicit P0-P3 limits still win. Local audit (2026-09-05): task-specific reference routing; loaded-helper anchors and local authoring authority. Preserve on refresh.",
+      "notes": "Local overrides possible. Diff before overwriting customizations. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local default-priority override (2026-09-04): report through P1 by default across the skill contract, CLI help, filtering behavior, and tests; explicit P0-P3 limits still win. Local audit (2026-09-05): task-specific reference routing; loaded-helper anchors and local authoring authority. Preserve on refresh. Local default-effort override (2026-09-05): Codex reviews use high reasoning unless the caller explicitly overrides it.",
       "upstreamPath": "skills/autoreview",
       "upstreamRev": "1b52afd0954511b8bfdf680361b1f4bed69f1355",
       "upstreamCheckedAt": "2026-08-27"
