@@ -235,7 +235,8 @@
       "assertions": [
         "HQ verifies the branch rather than messaging the thread for status, and classifies it as progressing from the fresh commits.",
         "HQ sends no message to the thread and does not hand the user anything to paste.",
-        "HQ rearms exactly one wake for the next heartbeat and its reply is one line saying nothing changed."
+        "HQ rearms exactly one wake for the next heartbeat, with no loop of shorter polls.",
+        "HQ's reply is one line saying nothing changed."
       ]
     },
     {

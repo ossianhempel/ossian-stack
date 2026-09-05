@@ -50,7 +50,9 @@ never assume from this table.
 
 - **Codex app.** Has thread creation, forking, titling, pinning, archiving,
   reading a thread's state, waiting on a thread, and cross-thread messaging,
-  plus a separate subagent tool. Heartbeat by reading each open thread. The subagent tool is
+  plus a separate subagent tool. Heartbeat by waiting on a thread with a
+  timeout when HQ has nothing else to do; otherwise read only the rows due a
+  check, not every open thread. The subagent tool is
   the one the model reaches for on the word "spawn"; do not. New threads appear
   in the sidebar as ordinary user threads. Some builds and remote-started
   threads withhold the thread tools; then fall to level 2.
