@@ -27,7 +27,7 @@ In-app copy serves two jobs. Don't mix them on the same string.
 
 **The split in one line:** craft copy helps users succeed; hype copy helps them feel the win was worth keeping. Never apply psychological levers, scarcity, or playful tone to errors.
 
-For deep interface-copy reviews (audit existing strings in code), use the **Review output format** at the bottom of this file. The standalone `better-writing` skill covers the same craft bar if you want a dedicated review pass.
+For deep interface-copy reviews (audit existing strings in code), use the **Review output format** at the bottom of this file.
 
 ## The Three Foundational Rules (consumer mobile)
 

@@ -7,7 +7,7 @@ description: "Route implementation work to Codex CLI; Claude specs, reviews, ver
 
 Claude Code sessions only. Codex/other harnesses: skip; never self-delegate.
 
-Rationale: Claude (Fable/Opus) tokens metered + expensive; Codex flat-rate. GPT-5.5+ is usually the better and faster model at writing/implementing code; Claude wins at ergonomics — judgment, design, spec-writing, review, orchestration. So Codex types, Claude thinks and verifies.
+Use this routing when the user's configured access and preference favor Codex implementation. Claude owns specification, judgment, review, and verification; Codex implements the agreed work. This is a routing preference, not a universal model ranking or pricing claim.
 
 ## Route
 
@@ -29,7 +29,7 @@ Keep in Claude:
 
 Mixed task: Claude designs first, freezes spec, delegates build-out.
 Heuristic: prompt reads as a work order → delegate; writing it forces decisions → design, Claude.
-Portfolio/multi-repo work: `$maintainer-orchestrator` instead.
+For portfolio or multi-repo work, establish each repository's scope and coordination before delegating implementation.
 
 ## Invoke
 

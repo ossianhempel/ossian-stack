@@ -1,18 +1,6 @@
 ---
 name: convex-cli
-description: >-
-  Operate the Convex CLI (`npx convex`) for dev sync, deploy, codegen, run/query
-  functions, inspect tables, env vars, logs, export/import, insights, and
-  deployment management. Use this skill whenever the user touches Convex backend
-  operations from the terminal — even if they never say "CLI" — including deploy
-  to prod or preview, `convex dev` / one-shot sync, push schema or function
-  changes, run a mutation or query from shell, list or dump table data, set
-  Convex env vars, tail logs, check OCC/insights, seed data via `convex run`, or
-  debug "Convex not syncing" / types out of date. Also trigger on npx convex,
-  CONVEX_DEPLOYMENT, deploy key, preview deployment, or requests to inspect or
-  fix production Convex data. Prefer `npx convex` over raw HTTP or dashboard-only
-  workflows; it handles auth, deployment targeting, and codegen. Do not use for
-  authoring new Convex functions in code.
+description: "Operate Convex deployments, functions, data, environment variables, logs, and codegen from the CLI. Not for authoring backend functions."
 ---
 
 # Convex CLI

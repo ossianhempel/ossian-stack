@@ -1,6 +1,6 @@
 ---
 name: codify-conventions
-description: "Codify a repo's conventions and enforce them with lint config and pre-commit hooks. Two modes: audit the codebase for de-facto patterns worth codifying, or grill the user on rules they want declared. Creates and maintains a CONVENTIONS.md of rules, wires the enforceable subset into linters and hooks, and makes adding a new rule a one-step affair. Use when the user mentions conventions, code style, lint setup, pre-commit hooks, 'how do we do X in this repo', 'make the linter catch this', or 'stop people from committing Y' — even if they don't name a linter or hook manager."
+description: "Audit or define repository conventions and connect approved rules to linters, hooks, or review guidance."
 ---
 
 # Codify conventions

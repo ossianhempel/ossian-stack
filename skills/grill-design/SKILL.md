@@ -6,8 +6,8 @@ description: Converge on a frontend look through rounds of prototypes and grilli
 Run a `/grilling` session, using the `/prototype` skill — each question is asked with prototypes, not words:
 
 - Each round, build 5 radically different prototypes of the current design
-  question into one live mocked app: one standalone HTML file (Artifact
-  tool), updated in place each round.
+  question into one live mocked app: one standalone HTML file, opened in a live browser or the host's
+  interactive artifact surface and updated in place each round.
 - A floating bottom-right draggable picker names each design; ←/→ arrows
   switch between them, restyling the mocked app live. When the design has
   meaningful states (an inbox: full vs empty), add picker buttons that toggle

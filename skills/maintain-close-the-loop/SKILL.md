@@ -1,6 +1,6 @@
 ---
 name: maintain-close-the-loop
-description: "Periodic pass that keeps a project's verification skill and feature map honest, so the loop stays closed as the app changes: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /maintain-close-the-loop, \"audit the verify skill\", or \"maintain the verification skill\"."
+description: "Audit and repair a project's verification skill and feature map against source and live behavior. Explicit invocation only."
 disable-model-invocation: true
 ---
 
@@ -20,13 +20,15 @@ Pick one, and say which:
 
 Only edit the verification skill's own directory (its SKILL.md, features/, and any harness scripts it owns). Never edit product code during a run: a behavior the map describes that the app no longer does is either doc drift (fix the map) or a product regression (report it, don't paper over it in docs).
 
+Honor inherited scope: audit-only runs report proposed corrections without edits or PRs; an explicit no-commit boundary leaves approved repairs uncommitted. Missing subagents alone does not block source or live coverage. Report a concrete missing capability only when the task contract cannot be preserved.
+
 ## Pass
 
 0. **Locate the target.** Find the verification skill to maintain: the project-local skill whose body has launch/drive sections and a feature map (usually `verify-*/` under whichever of `.agents/skills/`, `.claude/skills/`, or `.cursor/skills/` the repo uses). Several candidates → ask which one; none → stop and point at `/close-the-loop` instead of inventing a target.
 
 1. **Index hygiene.** Read the feature map README and glob its sibling files. Fix missing, extra, duplicate, or dead entries. Lightweight; no generated inventory.
 
-2. **Source wave.** One read-only subagent per feature file, launched concurrently. Each explains "how does this user-facing feature work?" from source, flags likely doc drift with citations, and returns one concise live-verification recipe. Children never drive the app and never edit files. Return shape: feature summary / source entry points / likely drift or none / one recipe.
+2. **Source wave.** When supported, use one read-only subagent per feature file, launched concurrently within host limits. Otherwise inspect each feature sequentially inline and identify that fallback; do not claim independent review. Each explains "how does this user-facing feature work?" from source, flags likely doc drift with citations, and returns one concise live-verification recipe. Children never drive the app and never edit files. Return shape: feature summary / source entry points / likely drift or none / one recipe.
 
 3. **Reconcile.** Every feature file has a returned summary. Merge overlapping recipes into as few app states as practical. Spot-check cited drift; don't re-prove clean claims. Sweep recent churn for user-facing surfaces missing from the map — require a concrete source path before calling one missing.
 

@@ -208,6 +208,9 @@
     "simplify-code": {
       "role": "both"
     },
+    "skill-cleaner": {
+      "role": "human"
+    },
     "skill-creator": {
       "role": "both"
     },
@@ -337,7 +340,9 @@
       "asc-metadata",
       "asc-release",
       "babysit",
-      "gplay-cli"
+      "gplay-cli",
+      "commit-push-pr",
+      "resolve-pr-feedback"
     ],
     "resolve-pr-feedback": [
       "babysit"
@@ -380,6 +385,23 @@
     ],
     "why": [
       "how"
+    ],
+    "how": [
+      "why"
+    ],
+    "app-store-optimization": [
+      "asc-metadata",
+      "gplay-cli"
+    ],
+    "grill-me": [
+      "grilling"
+    ],
+    "grill-with-docs": [
+      "grilling",
+      "domain-modeling"
+    ],
+    "principle-sequence-verifiable-units": [
+      "principle-prove-it-works"
     ]
   },
   "sections": {
@@ -706,7 +728,8 @@
       "continual-learning",
       "codify-conventions",
       "maintain-close-the-loop",
-      "skill-creator"
+      "skill-creator",
+      "skill-cleaner"
     ],
     "knowledge": {
       "title": "Principles",

@@ -43,7 +43,8 @@ The version gate (local + CI) reads the live App Store version from the public i
    - `protectedBranches` — branches that get the strict gate (usually `["develop","main"]`).
    - `lookupCountry` — iTunes lookup storefront (`us`).
    - `buildNumberOffset` — `0` for new apps; for an app that had builds uploaded before Xcode Cloud, set it to the highest such build number so `CI_BUILD_NUMBER + offset` clears them.
-2. Run `bash assets/install.sh <repo_root> [ci_scripts_dir]` (ci dir defaults to `ci_scripts`; pass `ios/ci_scripts` for repos that nest it).
+2. Run `SKILL_DIR="<absolute path of the directory containing the SKILL.md you just read>";
+bash "$SKILL_DIR/assets/install.sh" <repo_root> [ci_scripts_dir]` (ci dir defaults to `ci_scripts`; pass `ios/ci_scripts` for repos that nest it).
 3. Add the package.json convenience script: `"version:check": "bash scripts/check-marketing-version.sh"`.
 4. Point the Xcode Cloud post-clone at `<ci_scripts_dir>/ci_post_clone.sh`. No CI secrets needed — the build number comes from `CI_BUILD_NUMBER` and the version gate uses the public iTunes lookup.
 

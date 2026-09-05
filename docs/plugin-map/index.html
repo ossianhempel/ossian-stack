@@ -477,7 +477,8 @@
    "continual-learning",
    "codify-conventions",
    "maintain-close-the-loop",
-   "skill-creator"
+   "skill-creator",
+   "skill-cleaner"
   ],
   "knowledge": {
    "title": "Principles",
@@ -499,13 +500,16 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "App Store Optimization",
-   "description": "App Store Optimization (ASO) toolkit for researching keywords, analyzing competitor rankings, generating metadata suggestions, and improving app visibility on Apple App Store and Google Play Store. Use when the user asks about ASO, app store rankings, app metadata, app titles and descriptions, app store listings, app visibility, or mobile app marketing on iOS or Android. Supports keyword research and scoring, competitor keyword analysis, metadata optimization, A/B test planning, launch checklists, and tracking ranking changes.",
+   "description": "Research App Store and Google Play keywords, competitors, listing performance, and ASO experiments. Use for discovery and strategy; use asc-metadata for ASC listing edits.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
    "origin": "local",
    "repo": null,
-   "calls": [],
+   "calls": [
+    "asc-metadata",
+    "gplay-cli"
+   ],
    "calledBy": []
   },
   "asc-metadata": {
@@ -513,7 +517,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "ASC Metadata",
-   "description": "Audit, write, translate, and sync App Store listing metadata with the `asc` CLI on canonical files under `./metadata`. Use to run an ASO/keyword audit, localize descriptions/keywords/subtitle/name to multiple languages, or write engaging localized \"What's New\" release notes (from git log, bullets, or free text) plus promotional text.",
+   "description": "Audit, localize, and sync App Store listing metadata, promotional text, and What's New with asc.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -521,6 +525,7 @@
    "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
    "calls": [],
    "calledBy": [
+    "app-store-optimization",
     "release-ios-app"
    ]
   },
@@ -529,7 +534,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "ASC Pricing",
-   "description": "Manage App Store subscription and in-app purchase pricing and catalog with the `asc` CLI. Use to set territory-specific / purchasing-power-parity (PPP) prices via setup, pricing summary, CSV import, and schedules, or to reconcile ASC subscriptions and IAPs with RevenueCat products, entitlements, offerings, and packages (RevenueCat MCP).",
+   "description": "Set App Store subscription and IAP prices by territory, or reconcile the ASC catalog with RevenueCat.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -543,7 +548,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "ASC Release",
-   "description": "Build, version, upload, and submit iOS/macOS apps to App Store Connect with the `asc` CLI. Use to create an IPA/PKG, bump Xcode version/build numbers, run asc commands, drive the release/submission flow (including first-time fixes for availability, IAP, subscriptions, Game Center, App Privacy), or wire repeatable `asc workflow` automations into CI.",
+   "description": "Build and upload iOS/macOS artifacts, check ASC readiness, submit releases, and define asc workflows.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -579,7 +584,7 @@
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/openclaw/agent-skills",
    "calls": [],
    "calledBy": [
@@ -592,7 +597,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Babysit",
-   "description": "Drive a GitHub or Azure DevOps Services pull request to merge-ready: watch CI, classify failures, resolve review feedback, and work the lowest unmerged PR first. Stops at merge-ready and never merges. Use for babysit this, get it green, all green, merge-ready, watch CI, address review comments, or check on PR X.",
+   "description": "Drive a GitHub or Azure DevOps PR to merge-ready, resolve feedback, or report status. Preserve the requested mode; never merge.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -644,7 +649,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Clerk CLI",
-   "description": "Operate the Clerk CLI (`clerk` binary) for authentication, user/org/session management, impersonation, local webhook testing, deploy verification, instance config, env keys, feature toggles, and any Clerk Backend, Platform, or Frontend API call. Use when the user mentions Clerk management tasks, \"list clerk users\", \"impersonate a user\", \"test webhooks locally\", \"enable orgs\", \"enable billing\", \"clerk env pull\", \"clerk doctor\", \"clerk deploy\", \"clerk api\", or any ad-hoc Clerk API request. Prefer the CLI over raw HTTP: it handles auth, key resolution, app/instance targeting, and formatting automatically.",
+   "description": "Manage Clerk auth, users, organizations, sessions, configuration, impersonation, webhooks, and API requests with the Clerk CLI.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -660,7 +665,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Close the Loop",
-   "description": "Close the loop on a repo: generate a project-local verification skill that drives the real app the way a user does, on any language, framework, or platform, so an agent can prove its work instead of asserting it. Use for /close-the-loop, \\\"create a verification skill\\\", \\\"make a control skill for this repo\\\", or when a project has no scripted way to prove UI/CLI/service behavior.",
+   "description": "Create and prove a project-local verification skill that launches and drives the real app, CLI, or service.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
@@ -683,7 +688,7 @@
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/steipete/agent-scripts",
    "calls": [],
    "calledBy": [
@@ -695,7 +700,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Codify Conventions",
-   "description": "Codify a repo's conventions and enforce them with lint config and pre-commit hooks. Two modes: audit the codebase for de-facto patterns worth codifying, or grill the user on rules they want declared. Creates and maintains a CONVENTIONS.md of rules, wires the enforceable subset into linters and hooks, and makes adding a new rule a one-step affair. Use when the user mentions conventions, code style, lint setup, pre-commit hooks, 'how do we do X in this repo', 'make the linter catch this', or 'stop people from committing Y' — even if they don't name a linter or hook manager.",
+   "description": "Audit or define repository conventions and connect approved rules to linters, hooks, or review guidance.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -711,7 +716,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Commit Push PR",
-   "description": "Take completed local work through PR creation to merge-ready: survey the changes, group them into clean conventional commits, push, and open the PR with a value-first description, then drive CI and review follow-through with babysit. Use for \"commit this\", \"ship this\", \"open a PR\", \"push and PR\", or closing a unit of work. Commits locally before pushing; honor narrower requests, drafts, and explicit stop-at-PR instructions.",
+   "description": "Commit, push, create or update PRs, and follow requested delivery to merge-ready. Honor commit-only, drafts, and explicit stop boundaries.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": "[optional: --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \\\"...\\\" | --work-items <id>]",
@@ -726,7 +731,8 @@
    "calledBy": [
     "babysit",
     "orchestrate-threads",
-    "ossian-mode"
+    "ossian-mode",
+    "release-ios-app"
    ]
   },
   "continual-learning": {
@@ -734,7 +740,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Continual Learning",
-   "description": "Mine this project's past session transcripts for durable lessons and fold them into the project's agent instructions, so the same correction is not needed twice. Use for mine my transcripts, run continual learning, update AGENTS.md from past sessions, or when a session-start notice says transcripts are unmined.",
+   "description": "Mine project session transcripts for recurring lessons and improve project instructions. Use only when explicitly requested.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
@@ -752,7 +758,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Convex CLI",
-   "description": "Operate the Convex CLI (`npx convex`) for dev sync, deploy, codegen, run/query functions, inspect tables, env vars, logs, export/import, insights, and deployment management. Use this skill whenever the user touches Convex backend operations from the terminal — even if they never say \"CLI\" — including deploy to prod or preview, `convex dev` / one-shot sync, push schema or function changes, run a mutation or query from shell, list or dump table data, set Convex env vars, tail logs, check OCC/insights, seed data via `convex run`, or debug \"Convex not syncing\" / types out of date. Also trigger on npx convex, CONVEX_DEPLOYMENT, deploy key, preview deployment, or requests to inspect or fix production Convex data. Prefer `npx convex` over raw HTTP or dashboard-only workflows; it handles auth, deployment targeting, and codegen. Do not use for authoring new Convex functions in code.",
+   "description": "Operate Convex deployments, functions, data, environment variables, logs, and codegen from the CLI. Not for authoring backend functions.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -768,7 +774,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Coolify",
-   "description": "Manage Coolify self-hosted PaaS instances via the coolify CLI and REST API. Deploy applications, databases, and one-click services; sync env vars; manage backups, domains, storage, servers, GitHub apps, teams, and deployments. Use when working with Coolify infrastructure, CI/CD, or the Coolify API. Triggers: deploy to coolify, coolify app, manage my coolify server, sync env vars to coolify, create a database on coolify, coolify backup, coolify MCP.",
+   "description": "Inspect and manage Coolify applications, databases, services, deployments, domains, environment variables, and infrastructure.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -784,7 +790,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Copywriter",
-   "description": "Write and improve marketing and product copy that converts - App Store descriptions, screenshot headlines, in-app strings, marketing landing pages, ad copy, and onboarding text. Uses research-backed principles (specificity, outcome-first, user language, hand test). Triggers: \"write copy\", \"improve this copy\", \"rewrite this\", \"screenshot headlines\", \"landing page copy\", \"ad copy\", \"marketing text\", \"app description\", \"what should this button say\", \"empty state copy\", \"push notification copy\", \"what should I write\", \"Reels script\", \"TikTok video\", \"UGC video\", \"short-form video\", \"video hook\", \"persuasion skeleton\", \"long form copy\", \"hook agitate solve\". Covers copy that sells; editorial long-form that teaches, argues, or tells - blog posts, essays, newsletters, non-promotional threads - belongs to online-writing.",
+   "description": "Write or improve marketing copy and product UI text: listings, landing pages, ads, social scripts, onboarding, and microcopy. Editorial long-form belongs to online-writing.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -804,7 +810,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Diagnosing Bugs",
-   "description": "Diagnosis loop for hard bugs and performance regressions, run as a task you own: build a red-capable feedback loop before theorising, reproduce it yourself, trace every shipped line to runtime evidence, and stage the failing repro before the fix. Use when the user says diagnose or debug this, asks you to fix a bug or track down a regression, or reports something broken, throwing, failing, or slow.",
+   "description": "Diagnose and fix bugs or performance regressions using a reproducible signal and verified root cause. Preserve diagnosis-only scope.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -837,6 +843,7 @@
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "calledBy": [
+    "grill-with-docs",
     "setup-ossian-stack",
     "triage",
     "wayfinder"
@@ -851,7 +858,7 @@
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/emilkowalski/skills",
    "calls": [],
    "calledBy": [
@@ -863,11 +870,11 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Frontend Slides",
-   "description": "Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discover their aesthetic through visual exploration rather than abstract choices.",
+   "description": "Create, revise, or convert HTML presentations and PPTX decks, including visual style exploration and export.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/zarazhangrui/frontend-slides",
    "calls": [],
    "calledBy": []
@@ -894,7 +901,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Google Play CLI",
-   "description": "Operate Google Play Console with the `gplay` CLI across Android builds, releases and staged rollouts, store metadata and screenshots, subscriptions and in-app products, pricing, testers, reviews, vitals, reports, purchases, users, preflight checks, and Fastlane migration. Use this skill whenever work touches Google Play Console or publishing an Android app.",
+   "description": "Manage Google Play Console builds, releases, rollouts, listings, products, pricing, testers, reviews, and app access with gplay.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -904,6 +911,7 @@
     "one-password"
    ],
    "calledBy": [
+    "app-store-optimization",
     "ossian-mode",
     "release-ios-app"
    ]
@@ -917,7 +925,7 @@
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/will-ness-ai/skills",
    "calls": [],
    "calledBy": []
@@ -931,9 +939,11 @@
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
-   "calls": [],
+   "calls": [
+    "grilling"
+   ],
    "calledBy": []
   },
   "grill-with-docs": {
@@ -945,9 +955,12 @@
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
-   "calls": [],
+   "calls": [
+    "grilling",
+    "domain-modeling"
+   ],
    "calledBy": []
   },
   "grilling": {
@@ -959,11 +972,13 @@
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "calledBy": [
     "codify-conventions",
+    "grill-me",
+    "grill-with-docs",
     "orchestrate-threads",
     "ossian-mode",
     "triage",
@@ -991,7 +1006,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Hetzner VM",
-   "description": "Read container logs, status, and resource usage on the Hetzner VM that hosts Coolify and its deployed apps. Use when diagnosing a deployed service — a container that is restarting, unhealthy, exited, or failing to start; a self-hosted GitHub Actions runner that will not register; disk or memory pressure on the host. Access is deliberately read-only. Triggers: hetzner, the VM, the server, container logs, docker logs, why is X restarting, is the runner up, coolify container, deployed app logs.",
+   "description": "Read logs, container status, and resource usage on Ossian's Hetzner/Coolify VM through its restricted SSH interface. Read-only.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1008,13 +1023,15 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "How",
-   "description": "Use for \\\"how does X work\\\", code walkthroughs before changing something, and placement / ownership / layering questions (\\\"where should this live\\\", \\\"which package owns this\\\", \\\"is this the right layer\\\"). Explains subsystem architecture, runtime flow, onboarding mental models. Can critique architecture. Use why for motivation.",
+   "description": "Explain code behavior, runtime flow, architecture, or ownership. Use for how/where questions; use why for historical rationale.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
-   "calls": [],
+   "calls": [
+    "why"
+   ],
    "calledBy": [
     "diagnosing-bugs",
     "ossian-mode",
@@ -1044,7 +1061,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Maintain Close the Loop",
-   "description": "Periodic pass that keeps a project's verification skill and feature map honest, so the loop stays closed as the app changes: parallel source readers per feature, one live session driving every feature, at most one PR of proven corrections. Use for /maintain-close-the-loop, \\\"audit the verify skill\\\", or \\\"maintain the verification skill\\\".",
+   "description": "Audit and repair a project's verification skill and feature map against source and live behavior. Explicit invocation only.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
@@ -1074,7 +1091,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Onboarding Flow",
-   "description": "Design and build a high-converting questionnaire-style onboarding flow for your app, modelled on proven conversion patterns from top subscription apps (Headspace, Duolingo, Noom, Mob). Multi-phase: discovery → transformation story → blueprint → screen content → implementation. Triggers: \"design onboarding\", \"onboarding flow\", \"build onboarding\", \"questionnaire onboarding\", \"improve my onboarding\", \"first-launch flow\", \"convert better on onboarding\", \"paywall flow\".",
+   "description": "Design or audit mobile onboarding. Use for activation, questionnaire flows, first-session handoff, permission timing, and paywall placement.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1090,7 +1107,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "1Password",
-   "description": "Fetch secrets and env vars from 1Password with the `op` CLI, using a service account or Touch ID. Use whenever a command needs an API key, token, password, or `.env` value. Triggers: op read/run/inject, op://, 1Password, fetch secret, inject env vars.",
+   "description": "Retrieve missing secrets and environment values securely with the 1Password op CLI. Use existing secure authentication when it already meets the task.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1109,7 +1126,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Online Writing",
-   "description": "Write, audit, or revise editorial long-form writing - blog posts, Medium and LinkedIn pieces, newsletter essays, Substack posts, X threads - using Nicolas Cole's Art and Business of Online Writing method: Form + Idea + Audience, headline first, 1/3/1 structures, Main Point skeletons, Rate of Revelation. Use this whenever the user asks to write an article or blog post from scratch, review or audit a draft, fix a headline or title, fix an introduction, restructure a piece, decide what to write about, or asks \"is this any good?\" about long-form prose. Intent decides against copywriter: editorial pieces that teach, argue, or tell belong here; a thread, newsletter, or post whose job is to sell, convert, or drive signups belongs to copywriter and its persuasion-skeleton. Not for UI microcopy, App Store metadata, or ad copy - use copywriter for those.",
+   "description": "Write, audit, or revise editorial articles, essays, newsletters, and threads, including headlines and structure. Sales copy belongs to copywriter.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1129,7 +1146,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Orchestrate Threads",
-   "description": "Turn this chat into the pinned, long-lived HQ thread for one project or workstream: it names itself, keeps a durable ledger, and delegates every piece of work to visible sub-threads or sessions primed with this plugin's skills. Invoke with /orchestrate-threads in a fresh chat to bootstrap, and again at any time to re-orient after compaction or a break.",
+   "description": "Establish or resume a persistent project HQ that coordinates visible workstream tasks and a durable ledger. Explicit invocation only.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": "Project or workstream name, optionally what to work on first",
@@ -1276,12 +1293,13 @@
    "role": "knowledge",
    "humanOnly": true,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
    "calledBy": [
     "diagnosing-bugs",
     "ossian-mode",
+    "principle-sequence-verifiable-units",
     "refactoring"
    ]
   },
@@ -1312,7 +1330,9 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
-   "calls": [],
+   "calls": [
+    "principle-prove-it-works"
+   ],
    "calledBy": [
     "ossian-mode"
    ]
@@ -1353,7 +1373,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Prototype",
-   "description": "Build throwaway code that answers a design question — a UI you can flip between variants, or a state model you can click through — then hand back the decision, not the code. Use for prototype, mock it up, sketch this, try this layout, explore what this should look like, or sanity-check whether a state model feels right.",
+   "description": "Build a disposable UI or logic prototype to compare alternatives and answer a design question.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1374,7 +1394,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Refactoring",
-   "description": "Change the shape of working code without changing what it does: rename, extract, inline, dedupe, restructure, move a module. Pins behavior with a characterization test before any structure moves, migrates every caller, and proves equivalence on the real artifact. Use for refactor this, restructure, extract, inline, dedupe, move this module, tidy up this area.",
+   "description": "Restructure working code while preserving behavior: rename, extract, move, deduplicate, or reshape modules and APIs.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1406,7 +1426,9 @@
     "asc-metadata",
     "asc-release",
     "babysit",
-    "gplay-cli"
+    "gplay-cli",
+    "commit-push-pr",
+    "resolve-pr-feedback"
    ],
    "calledBy": [
     "asc-release",
@@ -1429,7 +1451,8 @@
     "babysit"
    ],
    "calledBy": [
-    "babysit"
+    "babysit",
+    "release-ios-app"
    ]
   },
   "resolving-merge-conflicts": {
@@ -1441,7 +1464,7 @@
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "calledBy": []
@@ -1467,7 +1490,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Setup ossian-stack",
-   "description": "Configure a machine and project after this plugin is installed: retire superseded plugins and stale skill symlinks, approve the session-start hook where a runtime gates it, check project-owned prerequisites and issue-tracker config, and audit each skill's real execution paths without mistaking a non-global CLI for a missing capability. Use for /setup-ossian-stack, configure the plugin's prerequisites, or migrate an existing installation.",
+   "description": "Verify plugin installation and configure approved machine or project prerequisites, hooks, migrations, and issue-tracker integration.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
@@ -1499,7 +1522,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Simplify Code",
-   "description": "Rewrite code that already works so it is skimmable and hard to misuse: fewer states, fewer arguments, fewer lines, exhaustive type handling, asserts instead of defensive fallbacks. Use after a unit has settled and before review, commit, or handoff — on a branch diff, a named file, or code an agent just generated. Triggers on simplify this, clean this up, make this beautiful, this is too complex, reduce the state space.",
+   "description": "Simplify working code within the named scope while preserving behavior. Use for readability, unnecessary complexity, and excessive state.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1513,12 +1536,26 @@
     "refactoring"
    ]
   },
+  "skill-cleaner": {
+   "id": "skill-cleaner",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Skill Cleaner",
+   "description": "Audit skills and AGENTS.md/CLAUDE.md for clarity, scope, portability, duplication, and context cost. Explicit invocation only.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "calledBy": []
+  },
   "skill-creator": {
    "id": "skill-creator",
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Skill Creator",
-   "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, update or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+   "description": "Create, revise, and evaluate skills, including descriptions, supporting resources, triggering, and output quality.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1539,7 +1576,7 @@
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [
     "how",
@@ -1621,7 +1658,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Unslop",
-   "description": "Cut AI tells from any writing and add human voice. Runs as a write-through style pass on everything you draft, and doubles as the audit gate: use when asked to check for AI slop, remove AI tells, make writing sound human, or review a draft for robotic language.",
+   "description": "Remove AI writing tells and improve human voice. Use for a requested writing pass or a workflow that needs the full style rubric.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1661,24 +1698,25 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Why",
-   "description": "Use for 'why does X work this way', 'why we picked Y', design rationale, regressions, postmortems, or data-backed thresholds. Discovers available MCPs and queries each evidence category (source control, issue tracker, long-form docs, real-time chat, infrastructure observability, error tracking, product analytics warehouse) in parallel, then returns a cited read on decisions and tradeoffs. Use how for runtime behavior.",
+   "description": "Use when asked 'why X works this way' kind of questions. Investigate design rationale, historical decisions, regressions, and thresholds using cited evidence. Use how for runtime behavior.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [
     "how"
    ],
    "calledBy": [
     "diagnosing-bugs",
+    "how",
     "ossian-mode",
     "teach"
    ]
   }
  },
  "counts": {
-  "skills": 66,
+  "skills": 67,
   "agents": 0,
   "plugins": 1
  }

@@ -6,14 +6,17 @@ Skills that help you *work on this repo* but must not ship in the plugin.
 so Claude Code, Codex, and Cursor all load the same directory from one copy — add a
 skill once and every runtime that opens this repo sees it.
 
-| Tier | Loaded when | Ships | `sources.json` entry | Version bump |
+| Tier | Loaded when | Ships | `sources.json` entry | Release identity |
 | --- | --- | --- | --- | --- |
-| `skills/<name>/` | wherever the plugin is installed | yes | required | yes |
-| `.agents/skills/<name>/` | cwd is this repo | no | no | no |
+| `skills/<name>/` | wherever the plugin is installed | yes | required | Git commit; no manifest version |
+| `.agents/skills/<name>/` | cwd is this repo | no | no | No public release |
 
 Same layout either way: one directory per skill, `SKILL.md` as the entry point,
 kebab-case name matching the directory. `bun run validate` checks both tiers and
 fails if a name exists in both.
+
+This checkout currently has no internal skills. The reusable skill and
+instruction auditor now lives in the public plugin tree.
 
 Good candidates for this tier: maintenance work on the skill collection itself —
 vendoring, drift triage, manifest bumps, changelog hygiene, install auditing. Work
@@ -21,7 +24,8 @@ that is meaningless outside this checkout.
 
 To promote one to the plugin: `git mv` it into `skills/`, add a `sources.json` entry
 with `"origin": "local"`, add its name to the README group table and bump the counts,
-and bump the three manifests.
+and update the plugin map. Native manifests discover skills automatically and
+intentionally omit versions; no version bump is needed.
 
 ## Careful: this is also the vendoring scratch path
 

@@ -1,6 +1,6 @@
 ---
 name: close-the-loop
-description: "Close the loop on a repo: generate a project-local verification skill that drives the real app the way a user does, on any language, framework, or platform, so an agent can prove its work instead of asserting it. Use for /close-the-loop, \"create a verification skill\", \"make a control skill for this repo\", or when a project has no scripted way to prove UI/CLI/service behavior."
+description: "Create and prove a project-local verification skill that launches and drives the real app, CLI, or service."
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: refactoring
-description: "Change the shape of working code without changing what it does: rename, extract, inline, dedupe, restructure, move a module. Pins behavior with a characterization test before any structure moves, migrates every caller, and proves equivalence on the real artifact. Use for refactor this, restructure, extract, inline, dedupe, move this module, tidy up this area."
+description: "Restructure working code while preserving behavior: rename, extract, move, deduplicate, or reshape modules and APIs."
 ---
 
 # Refactoring
@@ -15,24 +15,22 @@ call graphs.
 A refactor that smuggles in a behavior change loses its safety net. If the
 cleanup reveals a missing feature or a real bug, split it out and ship the
 structural change first against the pinned contract. A redesign is allowed, but
-name it as one and stop — that is a different conversation.
+name it as one and obtain agreement if it exceeds the authorized scope.
 
-Large cross-cutting structural work — a migration across hundreds of call sites,
-a coordinated reshape of several subsystems — is a different job with a different
-failure mode. This skill is the focused-to-medium change. Say so and stop if the
-work turns out to be the larger kind.
+Split an authorized large refactor into verifiable units. Stop only at an
+unresolved decision, access limit, or scope boundary; continue independent
+authorized work. Size alone is not a reason to abandon the requested refactor.
 
 ## 1. Pin the behavior first
 
-Before any structure moves, capture current behavior in something that fails when
-behavior changes: a characterization test, a snapshot, or an equivalence harness.
-The pin is what makes "this is just a refactor" a checkable claim rather than an
-intention.
+Before moving structure, identify evidence that establishes unchanged behavior.
+Reuse existing characterization tests, snapshots, or an equivalence harness when
+they cover the contract. Add a meaningful behavioral pin where coverage is missing.
 
-If the area has no coverage, write the pin before touching structure. **Type
-check and lint are not a pin** — they prove the code still compiles, not that it
-still does the same thing. The pin is what the `principle-prove-it-works` skill
-asks for: proof against the real artifact rather than a proxy.
+For a mechanical transformation, a structural/type proof is sufficient only when
+it actually establishes equivalence across all affected uses. Compilation alone
+cannot prove runtime behavior, persisted formats, or external callers unchanged.
+Keep real-artifact proof for user-visible behavior; see `principle-prove-it-works`.
 
 Use the `how` skill first when you do not already know the contract of the
 subsystem you are about to reshape.
@@ -69,10 +67,10 @@ that "might help" gets reverted, not left to ride.
 
 ## 5. Move in small behavior-preserving steps
 
-Each step keeps the pin green. For an API reshape, migrate every caller and
-delete the old API in the same wave — no compatibility shims, no parallel
-old-and-new paths, since both leave you maintaining two things and neither gets
-finished.
+Each step keeps the pin green. Migrate all callers controlled by this change.
+Retain compatibility required by deployed clients, persisted data, public APIs,
+or callers outside scope. Remove the old path only when evidence shows it is
+unused; record the remaining migration boundary when compatibility must stay.
 
 Spot-check every rename against the actual files. Renames silently miss usages
 in strings, prose, comments, and back-references, and a type checker will not
@@ -102,7 +100,7 @@ leaves the code equally hard to read has spent risk for nothing.
 
 ## 8. Commit in ordered slices
 
-Rebase into small commits that tell the story: the subtraction, then the
+When commits and history edits are authorized, arrange small commits that tell the story: the subtraction, then the
 reshape, then any follow-on cleanup — so a single revert undoes one slice. Each
 slice is behavior-preserving and green before the next begins.
 

@@ -1,6 +1,6 @@
 ---
 name: simplify-code
-description: "Rewrite code that already works so it is skimmable and hard to misuse: fewer states, fewer arguments, fewer lines, exhaustive type handling, asserts instead of defensive fallbacks. Use after a unit has settled and before review, commit, or handoff — on a branch diff, a named file, or code an agent just generated. Triggers on simplify this, clean this up, make this beautiful, this is too complex, reduce the state space."
+description: "Simplify working code within the named scope while preserving behavior. Use for readability, unnecessary complexity, and excessive state."
 ---
 
 # Simplify Code
@@ -108,16 +108,10 @@ correct it is. Be lazy. Stay simple.
 
 ## The adversarial pass
 
-One pass finds the obvious reductions and stops. Do not stop.
-
-The reader you need has never seen this code, does not know why any of it is
-there, and does not accept "it was already like that." You cannot be that reader
-about code you just wrote. You know every reason, and the reasons are what keep
-the shape alive. So delegate it.
-
-After each pass, dispatch two reviewers against the current state of the scope,
-using whatever mechanism the host has for running an agent with its own context.
-Run them concurrently; they do not depend on each other.
+Use an adversarial pass when substantive complexity remains or independent review
+would resolve uncertainty. A clean reduction with sufficient relevant checks does
+not require another review cycle. When needed, dispatch the following independent
+lenses through the host's supported agent mechanism, concurrently where available.
 
 | Reviewer | Reads | Rules |
 | --- | --- | --- |
@@ -143,8 +137,9 @@ Where the host cannot run a subagent, read the persona files and apply them
 inline as two separate passes — but re-read the files from disk first and judge
 only what is on the page, not what you remember writing.
 
-Repeat until a pass produces no further reduction, or three passes have run. Say
-how many passes ran and what the last one found.
+Repeat only for substantive unresolved findings, at most three passes. Stop when
+relevant checks and review are clean; repeat verification only when new edits or
+evidence invalidate it. Report any remaining material uncertainty.
 
 Neither reviewer can tell you whether behavior changed; they have no baseline.
 That is what the tests are for.

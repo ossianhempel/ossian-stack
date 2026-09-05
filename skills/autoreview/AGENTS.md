@@ -1,6 +1,6 @@
 # Autoreview Skill
 
-- Canonical source: `openclaw/agent-skills`, under `skills/autoreview`.
-- Before editing any copy, fast-forward a checkout of `openclaw/agent-skills` from `origin/main`.
-- Make and validate shared changes in canonical `skills/autoreview` first, then sync the complete directory into downstream repos.
-- Never create repo-local behavior variants; downstream differences belong in repo-level validation, not the skill.
+Upstream provenance is recorded in this repository's sources map. For this
+checkout, edit and validate the local skill under the root project's authoring
+rules. Preserve documented local adaptations when comparing or refreshing
+upstream. Updating another checkout requires a separate request.

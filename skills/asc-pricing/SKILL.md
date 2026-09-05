@@ -1,6 +1,6 @@
 ---
 name: asc-pricing
-description: Manage App Store subscription and in-app purchase pricing and catalog with the `asc` CLI. Use to set territory-specific / purchasing-power-parity (PPP) prices via setup, pricing summary, CSV import, and schedules, or to reconcile ASC subscriptions and IAPs with RevenueCat products, entitlements, offerings, and packages (RevenueCat MCP).
+description: "Set App Store subscription and IAP prices by territory, or reconcile the ASC catalog with RevenueCat."
 ---
 
 # asc pricing

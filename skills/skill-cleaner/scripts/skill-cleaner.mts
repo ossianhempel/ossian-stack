@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { createHash } from "node:crypto";
 
 type Skill = {
   name: string;
@@ -13,7 +14,13 @@ type Skill = {
   root: string;
   realRoot: string;
   scope: string;
-  enabled: boolean;
+  enabled: boolean | null;
+  explicitOnly: boolean;
+  codexImplicit: boolean | null;
+  aliases: string[];
+  contentHash: string;
+  bodyLines: number;
+  bodyBytes: number;
   descChars: number;
   lineChars: number;
   lineBytes: number;
@@ -66,11 +73,13 @@ function argValue(name: string, fallback: string): string {
 }
 
 const months = Number(argValue("--months", "3"));
-const noLogs = args.has("--no-logs");
+const noLogs = !args.has("--logs") || args.has("--no-logs");
+const globalScan = args.has("--global");
+const scanWarnings: string[] = [];
 const deepLogs = args.has("--deep-logs");
 const json = args.has("--json");
 const includeAll = args.has("--all");
-const model = argValue("--model", "gpt-5.5");
+const model = argValue("--model", "unspecified");
 const budgetPercent = Number(argValue("--budget-percent", "2"));
 const contextTokensOverride = argValue("--context-tokens", "");
 const charsPerToken = Number(argValue("--chars-per-token", "4"));
@@ -79,6 +88,45 @@ const cutoffMs = Date.now() - Math.max(0, months) * 31 * 24 * 60 * 60 * 1000;
 const extraRoots = process.argv
   .slice(2)
   .flatMap((arg, index, all) => (arg === "--root" && all[index + 1] ? [all[index + 1]] : []));
+
+if (args.has("--help") || args.has("-h")) {
+  console.log(`Usage: node --experimental-strip-types skill-cleaner.mts [options]
+  --root PATH              Audit only this root (repeatable); default: current directory
+  --root-only              Explicit scoped mode; incompatible with --global
+  --global                 Add known installed-skill roots and global instruction files
+  --logs                   Opt in to bounded recent transcript usage heuristics
+  --no-logs                Disable transcript reads (default)
+  --log-root PATH          Transcript root (repeatable, requires --logs)
+  --months N               Usage lookback, default 3
+  --max-log-mb N            Maximum transcript bytes, default 300
+  --deep-logs              Include archive roots with --global --logs
+  --model ID               Model-cache lookup for illustrative Codex budget simulation
+  --context-tokens N       Explicit context estimate; avoids model-cache lookup
+  --budget-percent N       Illustrative metadata budget, default 2
+  --chars-per-token N      UTF-8 bytes per estimated token, default 4
+  --codex-config PATH      Optional Codex config for known disabled entries
+  --all                    Include known-disabled skills in budget candidates
+  --json                   Structured inventory; never edits files
+Global/config/log scans are opt-in. Inventory is not proof a host loads a file.
+Budget simulation is not measured usage and does not describe every host.`);
+  process.exit(0);
+}
+const valueFlags = new Set(["--root", "--log-root", "--months", "--max-log-mb", "--model", "--context-tokens", "--budget-percent", "--chars-per-token", "--codex-config"]);
+const boolFlags = new Set(["--root-only", "--global", "--logs", "--no-logs", "--deep-logs", "--all", "--json"]);
+for (let i = 2; i < process.argv.length; i++) {
+  const flag = process.argv[i];
+  if (valueFlags.has(flag)) {
+    if (!process.argv[i + 1] || process.argv[i + 1].startsWith("--")) throw new Error(`Missing value for ${flag}`);
+    i++;
+  } else if (!boolFlags.has(flag)) throw new Error(`Unknown argument: ${flag}`);
+}
+if (globalScan && args.has("--root-only")) throw new Error("--root-only cannot be combined with --global");
+for (const [flag, value] of [["--months", months], ["--max-log-mb", maxLogBytes], ["--budget-percent", budgetPercent], ["--chars-per-token", charsPerToken]] as const) {
+  if (!Number.isFinite(value) || value <= 0) throw new Error(`${flag} must be positive`);
+}
+if (contextTokensOverride && (!Number.isFinite(Number(contextTokensOverride)) || Number(contextTokensOverride) <= 0)) throw new Error("--context-tokens must be positive");
+const logRoots = process.argv.slice(2).flatMap((arg, i, all) => arg === "--log-root" ? [all[i + 1]] : []);
+if (!noLogs && !globalScan && logRoots.length === 0) throw new Error("Scoped --logs needs --log-root; global logs require --global --logs");
 
 function expandHome(input: string): string {
   return input.replace(/^~(?=$|\/)/, home);
@@ -128,7 +176,7 @@ function codexModelContext(modelName: string): {
   if (override > 0) return { tokens: override, source: "--context-tokens", effectivePercent: null };
 
   const cache = path.join(home, ".codex/models_cache.json");
-  if (exists(cache)) {
+  if ((globalScan || modelName !== "unspecified") && exists(cache)) {
     try {
       const record = findModelRecord(JSON.parse(fs.readFileSync(cache, "utf8")), modelName);
       const tokens = Number(record?.context_window);
@@ -143,45 +191,35 @@ function codexModelContext(modelName: string): {
     } catch {}
   }
 
-  return { tokens: 272_000, source: "fallback:gpt-5.5", effectivePercent: 95 };
+  return { tokens: 272_000, source: "illustrative fallback; no model context verified", effectivePercent: null };
 }
 
-function walkFiles(root: string, predicate: (file: string) => boolean, maxDepth = 8): string[] {
+function walkFiles(root: string, predicate: (file: string) => boolean, maxDepth = 10): string[] {
   const out: string[] = [];
-  const seen = new Set<string>();
-  function walk(dir: string, depth: number) {
-    if (depth > maxDepth) return;
-    let real = dir;
+  const ancestors = new Set<string>();
+  const absolute = exists(root) ? fs.realpathSync(root) : path.resolve(root);
+  const within = (target: string) => target === absolute || target.startsWith(absolute + path.sep);
+  function walk(file: string, depth: number) {
     try {
-      real = fs.realpathSync(dir);
-    } catch {
-      return;
-    }
-    if (seen.has(real)) return;
-    seen.add(real);
-    let entries: fs.Dirent[];
-    try {
-      entries = fs.readdirSync(dir, { withFileTypes: true });
-    } catch {
-      return;
-    }
-    for (const entry of entries) {
-      if (entry.name === "node_modules" || entry.name === ".git") continue;
-      const file = path.join(dir, entry.name);
-      if (entry.isDirectory() || entry.isSymbolicLink()) {
-        let stat: fs.Stats;
-        try {
-          stat = fs.statSync(file);
-        } catch {
-          continue;
-        }
-        if (stat.isDirectory()) walk(file, depth + 1);
-      } else if (entry.isFile() && predicate(file)) {
-        out.push(file);
+      const real = fs.realpathSync(file);
+      if (!within(real)) {
+        scanWarnings.push(`Skipped symlink outside root: ${file}; add its target as --root to inspect it`);
+        return;
       }
-    }
+      const stat = fs.statSync(file);
+      if (stat.isFile()) { if (predicate(file)) out.push(file); return; }
+      if (!stat.isDirectory()) return;
+      if (ancestors.has(real)) { scanWarnings.push(`Directory cycle skipped: ${file}`); return; }
+      if (depth > maxDepth) { scanWarnings.push(`Depth limit: ${file}`); return; }
+      ancestors.add(real);
+      for (const entry of fs.readdirSync(file, { withFileTypes: true })) {
+        if (["node_modules", ".git", ".venv", "venv", "__pycache__", ".build", "DerivedData"].includes(entry.name)) continue;
+        walk(path.join(file, entry.name), depth + 1);
+      }
+      ancestors.delete(real);
+    } catch { scanWarnings.push(`Unreadable or broken link: ${file}`); }
   }
-  if (exists(root)) walk(root, 0);
+  walk(absolute, 0);
   return out;
 }
 
@@ -195,12 +233,13 @@ function parseYamlScalar(raw: string): string {
     (value.startsWith('"') && value.endsWith('"')) ||
     (value.startsWith("'") && value.endsWith("'"))
   ) {
-    return value.slice(1, -1);
+    if (value.startsWith('"')) { try { return JSON.parse(value); } catch {} }
+    return value.slice(1, -1).replace(/''/g, "'");
   }
   return value;
 }
 
-function parseFrontmatter(file: string): { name?: string; description?: string; body: string } | null {
+function parseFrontmatter(file: string): { name?: string; description?: string; body: string; explicitOnly: boolean } | null {
   const text = fs.readFileSync(file, "utf8");
   const lines = text.split(/\r?\n/);
   if (lines[0]?.trim() !== "---") return null;
@@ -224,7 +263,7 @@ function parseFrontmatter(file: string): { name?: string; description?: string; 
     const raw = match[2] ?? "";
     if (key === "name") name = sanitizeSingleLine(parseYamlScalar(raw));
     if (key === "description") {
-      if (raw.trim() === "|" || raw.trim() === ">") {
+      if (/^[|>][-+]?$/.test(raw.trim())) {
         const block: string[] = [];
         for (let j = i + 1; j < fm.length; j++) {
           if (/^[A-Za-z0-9_-]+:\s*/.test(fm[j] ?? "")) break;
@@ -236,7 +275,7 @@ function parseFrontmatter(file: string): { name?: string; description?: string; 
       }
     }
   }
-  return { name, description, body: lines.slice(end + 1).join("\n") };
+  return { name, description, body: lines.slice(end + 1).join("\n"), explicitOnly: fm.some((line) => /^disable-model-invocation:\s*true\s*(?:#.*)?$/.test(line)) };
 }
 
 function fnv1a(input: string): string {
@@ -269,19 +308,24 @@ function jaccard(a: Set<string>, b: Set<string>): number {
   return intersection / (a.size + b.size - intersection);
 }
 
-// A path is the repo source of truth if it lives in an agent-scripts checkout, either
-// under skills/ (global) or profiles/.../skills/ (project-scoped).
-// Matches both a root (".../agent-scripts/skills", no trailing slash) and a file path
-// (".../agent-scripts/skills/foo/SKILL.md").
+// Prefer a source checkout over a managed install for display only. This never
+// authorizes deletion and does not imply any host actually loads that checkout.
 function isRepoSource(p: string): boolean {
-  const n = p.split(path.sep).join("/");
-  return /\/agent-scripts\/skills(\/|$)/.test(n) || n.includes("/agent-scripts/profiles/");
+  if (p.includes(`${path.sep}plugins${path.sep}cache${path.sep}`)) return false;
+  let dir = path.dirname(p);
+  while (dir !== path.dirname(dir)) {
+    if (exists(path.join(dir, "skills/sources.json")) &&
+        [".codex-plugin/plugin.json", ".claude-plugin/plugin.json", ".cursor-plugin/plugin.json", ".gemini-plugin/plugin.json"].some((f) => exists(path.join(dir, f)))) return true;
+    dir = path.dirname(dir);
+  }
+  return false;
 }
 
 function skillRootScope(root: string): string {
   const normalized = root.split(path.sep).join("/");
   if (normalized.includes("/.codex/plugins/cache")) return "codex-plugin";
-  if (isRepoSource(normalized)) return "agent-scripts"; // repo source of truth (skills/ or profiles/)
+  if (/\/\.(claude|cursor|copilot)\/plugins\/(cache|marketplaces)/.test(normalized)) return "managed-plugin";
+  if (isRepoSource(path.join(normalized, "SKILL.md"))) return "repo";
   if (normalized.includes("/.claude/skills")) return "claude";
   if (normalized.includes("/.gemini/antigravity-cli/skills")) return "antigravity";
   if (normalized.includes("/.agents/skills")) return "agents"; // cross-tool fan-out (Codex/Gemini/Cursor/Copilot/Windsurf)
@@ -290,18 +334,10 @@ function skillRootScope(root: string): string {
   return "extra";
 }
 
-// Lower = keep over a near-identical sibling. The repo source of truth ranks above
-// every fanned-out agent copy so duplicate suggestions never propose deleting the source.
+// Display preference only; source ownership must be verified before any edit.
 function deletePriority(skill: Skill): number {
-  if (skill.path.includes("/.codex/skills/.system/")) return 0;
-  if (isRepoSource(skill.realPath)) return 1; // repo source of truth (skills/ or profiles/)
-  if (skill.path.includes("/.codex/plugins/cache/") && !skill.path.includes("/plugin-install-")) return 2;
-  if (skill.path.includes("/.codex/plugins/cache/")) return 3;
-  // Fanned-out agent copies (managed by sync) — deletable in favor of the repo source.
-  if (skill.scope === "claude" || skill.scope === "agents" || skill.scope === "antigravity" || skill.scope === "codex") {
-    return 5;
-  }
-  return 6;
+  if (isRepoSource(skill.realPath)) return 0;
+  return ["codex-plugin", "managed-plugin"].includes(skill.scope) ? 2 : 1;
 }
 
 function preferredKeepSkill(list: Skill[]): Skill {
@@ -326,6 +362,7 @@ function preferredDisplaySkill(a: Skill, b: Skill): Skill {
 }
 
 function pluginPrefixFor(file: string): string | null {
+  if (!/\/\.(codex|claude|cursor|copilot)\/plugins\/cache\//.test(file.split(path.sep).join("/"))) return null;
   const parts = file.split(path.sep);
   const cache = parts.indexOf("cache");
   const skills = parts.lastIndexOf("skills");
@@ -344,103 +381,69 @@ function disabledPluginMatches(disabledPlugin: string, pluginPrefix: string): bo
 function configState(): { disabledPaths: Set<string>; disabledPlugins: Set<string> } {
   const disabledPaths = new Set<string>();
   const disabledPlugins = new Set<string>();
-  const config = path.join(home, ".codex/config.toml");
+  const config = argValue("--codex-config", globalScan ? path.join(home, ".codex/config.toml") : "");
+  if (!config) return { disabledPaths, disabledPlugins };
   if (!exists(config)) return { disabledPaths, disabledPlugins };
-  const lines = fs.readFileSync(config, "utf8").split(/\r?\n/);
-  let block = "";
-  let currentPath = "";
-  for (const line of lines) {
-    const skillBlock = /^\[\[skills\.config\]\]/.test(line);
-    const pluginBlock = /^\[plugins\."([^"]+)"\]/.exec(line);
-    if (skillBlock) {
-      block = "skill";
-      currentPath = "";
-      continue;
-    }
-    if (pluginBlock) {
-      block = `plugin:${pluginBlock[1]}`;
-      continue;
-    }
-    if (/^\[/.test(line)) {
-      block = "";
-      currentPath = "";
-      continue;
-    }
-    if (block === "skill") {
-      const pathMatch = /^path\s*=\s*"([^"]+)"/.exec(line);
-      if (pathMatch) currentPath = expandHome(pathMatch[1] ?? "");
-      if (/^enabled\s*=\s*false/.test(line) && currentPath) disabledPaths.add(currentPath);
-    } else if (block.startsWith("plugin:") && /^enabled\s*=\s*false/.test(line)) {
-      disabledPlugins.add(block.slice("plugin:".length));
+  const text = fs.readFileSync(config, "utf8");
+  // Match settings within each table independently; TOML key order is irrelevant.
+  for (const block of text.split(/(?=^\[)/m)) {
+    if (!/^enabled\s*=\s*false\s*(?:#.*)?$/m.test(block)) continue;
+    if (/^\[\[skills\.config\]\]/.test(block)) {
+      const match = /^path\s*=\s*("(?:[^"\\]|\\.)*"|'[^']*')/m.exec(block);
+      if (match) {
+        const configured = path.resolve(expandHome(parseYamlScalar(match[1])));
+        disabledPaths.add(exists(configured) ? fs.realpathSync(configured) : configured);
+      }
+    } else {
+      const match = /^\[plugins\."([^"\n]+)"\]/.exec(block);
+      if (match) disabledPlugins.add(match[1]);
     }
   }
   return { disabledPaths, disabledPlugins };
 }
 
-// Where agent-scripts checkouts and projects live. Varies by machine (see AGENTS.md);
-// we probe both rather than assume one.
-const workspaceDirs = ["Developer", "repos", "Projects"];
-
-// Profile sources inside an agent-scripts checkout: profiles/<name>/skills and
-// profiles/_shared/skills. Symlinked shared skills are realpath-deduped downstream.
-function profileSkillRoots(repo: string): string[] {
-  const profiles = path.join(repo, "profiles");
-  if (!exists(profiles)) return [];
-  try {
-    return fs
-      .readdirSync(profiles, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory() || entry.isSymbolicLink())
-      .map((entry) => path.join(profiles, entry.name, "skills"))
-      .filter(exists);
-  } catch {
-    return [];
+function discoverRoots(): string[] {
+  const requested = extraRoots.length ? extraRoots.map(expandHome) : [process.cwd()];
+  const roots = [...requested];
+  if (globalScan) roots.push(...[
+    ".claude/skills", ".agents/skills", ".codex/skills", ".copilot/skills",
+    ".cursor/skills", ".gemini/antigravity-cli/skills", ".gemini/config/plugins",
+    ".codex/plugins/cache", ".claude/plugins/cache", ".cursor/plugins/cache", ".copilot/plugins",
+    ".codex/AGENTS.md", ".claude/CLAUDE.md",
+  ].map((relative) => path.join(home, relative)));
+  const found = new Set<string>();
+  for (const root of roots) {
+    try { found.add(fs.realpathSync(root)); }
+    catch { if (requested.includes(root)) scanWarnings.push(`Requested root missing: ${root}`); }
   }
+  return [...found].sort();
 }
 
-function discoverRoots(): string[] {
-  const rootsByRealPath = new Map<string, string>();
-  const addRoot = (root: string) => {
-    if (!exists(root)) return;
-    const real = fs.realpathSync(root);
-    const current = rootsByRealPath.get(real);
-    if (!current || root.length < current.length) rootsByRealPath.set(real, root);
-  };
+const roots = discoverRoots();
+const inventoryFiles = roots.flatMap((root) => walkFiles(root, (f) => /^(SKILL|AGENTS|CLAUDE)\.md$/i.test(path.basename(f))));
 
-  [
-    // Repo source of truth — the only place to actually edit skills. `skills/` is global;
-    // `profiles/.../skills/` are project-scoped sources (see Profiles in AGENTS.md).
-    ...workspaceDirs.flatMap((dir) => {
-      const repo = path.join(home, dir, "agent-scripts");
-      return [path.join(repo, "skills"), ...profileSkillRoots(repo)];
-    }),
-    // Supported-agent skill roots the sync script fans out to (docs/supported-agents.md).
-    path.join(home, ".claude/skills"), // Claude Code
-    path.join(home, ".agents/skills"), // Codex, Gemini, Cursor, Copilot, Windsurf
-    path.join(home, ".gemini/antigravity-cli/skills"), // Antigravity CLI
-    path.join(home, ".codex/skills"), // Codex (legacy/local root)
-    path.join(home, ".codex/plugins/cache"),
-    ...extraRoots.map(expandHome),
-  ].forEach(addRoot);
-
-  // Project-scoped profile installs: <workspace>/<project>/.agents/skills.
-  for (const dir of workspaceDirs) {
-    const workspace = path.join(home, dir);
-    if (!exists(workspace)) continue;
-    for (const entry of fs.readdirSync(workspace, { withFileTypes: true })) {
-      if (!entry.isDirectory() && !entry.isSymbolicLink()) continue;
-      addRoot(path.join(workspace, entry.name, ".agents/skills"));
-    }
+type InstructionFile = { path: string; aliases: string[]; kind: string; bytes: number; lines: number; estimatedTokens: number; contentHash: string };
+function discoverInstructions(): InstructionFile[] {
+  const found = new Map<string, InstructionFile>();
+  for (const file of inventoryFiles.filter((f) => /^(AGENTS|CLAUDE)\.md$/i.test(path.basename(f)))) {
+    try {
+      const real = fs.realpathSync(file);
+      const existing = found.get(real);
+      if (existing) { if (file !== real && !existing.aliases.includes(file)) existing.aliases.push(file); continue; }
+      const text = fs.readFileSync(file, "utf8");
+      found.set(real, { path: real, aliases: file === real ? [] : [file], kind: path.basename(file), bytes: Buffer.byteLength(text), lines: text.split(/\r?\n/).length, estimatedTokens: tokenCost(text), contentHash: createHash("sha256").update(text).digest("hex") });
+    } catch { scanWarnings.push(`Could not read instruction file: ${file}`); }
   }
-  return [...rootsByRealPath.values()].sort();
+  return [...found.values()].sort((a,b) => a.path.localeCompare(b.path));
 }
 
 function discoverSkills(): Skill[] {
   const { disabledPaths, disabledPlugins } = configState();
   const skillsByRealPath = new Map<string, Skill>();
-  for (const root of discoverRoots()) {
-    for (const file of walkFiles(root, (candidate) => path.basename(candidate) === "SKILL.md", 10)) {
+  for (const root of roots) {
+    for (const file of inventoryFiles.filter((candidate) => path.basename(candidate) === "SKILL.md" && (candidate === root || candidate.startsWith(root + path.sep)))) {
       const parsed = parseFrontmatter(file);
-      if (!parsed) continue;
+      if (!parsed) { scanWarnings.push(`Missing or invalid frontmatter: ${file}`); continue; }
       const baseName = parsed.name || path.basename(path.dirname(file));
       const pluginPrefix = pluginPrefixFor(file);
       const name = pluginPrefix ? `${pluginPrefix}:${baseName}` : baseName;
@@ -448,7 +451,7 @@ function discoverSkills(): Skill[] {
       const rendered = description
         ? `- ${name}: ${description} (file: ${file})`
         : `- ${name}: (file: ${file})`;
-      const disabledByPath = disabledPaths.has(file);
+      const disabledByPath = disabledPaths.has(file) || disabledPaths.has(path.dirname(file));
       const disabledByPlugin =
         pluginPrefix != null && [...disabledPlugins].some((plugin) => disabledPluginMatches(plugin, pluginPrefix));
       const bodyKey = normalizeWords(parsed.body);
@@ -461,8 +464,24 @@ function discoverSkills(): Skill[] {
         dir: path.dirname(file),
         root,
         realRoot: fs.realpathSync(root),
-        scope: skillRootScope(root),
-        enabled: !disabledByPath && !disabledByPlugin,
+        scope: skillRootScope(file),
+        enabled: disabledByPath || disabledByPlugin ? false : null,
+        explicitOnly: parsed.explicitOnly,
+        codexImplicit: (() => {
+          const yaml = path.join(path.dirname(file), "agents/openai.yaml");
+          if (!exists(yaml)) return null;
+          const real = fs.realpathSync(yaml);
+          if (!roots.some((root) => real === root || real.startsWith(root + path.sep))) {
+            scanWarnings.push(`Skipped metadata outside selected roots: ${yaml}`);
+            return null;
+          }
+          const match = /^\s+allow_implicit_invocation:\s*(true|false)\s*(?:#.*)?$/m.exec(fs.readFileSync(yaml, "utf8"));
+          return match ? match[1] === "true" : null;
+        })(),
+        aliases: [],
+        contentHash: createHash("sha256").update(fs.readFileSync(file)).digest("hex"),
+        bodyLines: parsed.body.split(/\r?\n/).length,
+        bodyBytes: Buffer.byteLength(parsed.body),
         descChars: [...description].length,
         lineChars: [...`${rendered}\n`].length,
         lineBytes: Buffer.byteLength(`${rendered}\n`, "utf8"),
@@ -471,33 +490,58 @@ function discoverSkills(): Skill[] {
         descKey: normalizeWords(description),
       };
       const existing = skillsByRealPath.get(skill.realPath);
-      skillsByRealPath.set(skill.realPath, existing ? preferredDisplaySkill(existing, skill) : skill);
+      if (existing) {
+        const chosen = preferredDisplaySkill(existing, skill);
+        chosen.aliases = [...new Set([...existing.aliases, existing.path, skill.path])].filter((p) => p !== chosen.path);
+        skillsByRealPath.set(skill.realPath, chosen);
+      } else skillsByRealPath.set(skill.realPath, skill);
     }
   }
   return collapseManagedFanout([...skillsByRealPath.values()]);
 }
 
-// Sync fans the repo's skills/ out as identical copies into each agent root
-// (docs/supported-agents.md). Those copies are not real duplicates to clean up, so
-// collapse byte-identical same-name copies across managed roots into one logical skill,
-// keeping the repo source. Genuine duplicates (different bodies, or foreign roots) survive.
-const MANAGED_SCOPES = new Set(["agent-scripts", "claude", "agents", "antigravity", "codex"]);
+// Fingerprint only when entrypoint matches suggest fan-out. Missing, external,
+// unreadable or oversized resources mean identity is unproven; keep both copies.
+function bundleFingerprint(skill: Skill): string | null {
+  const root = fs.realpathSync(skill.dir);
+  const warningsBefore = scanWarnings.length;
+  const files = walkFiles(root, () => true).sort();
+  if (scanWarnings.length !== warningsBefore) return null;
+  const hash = createHash("sha256");
+  let bytes = 0;
+  try {
+    for (const file of files) {
+      const stat = fs.statSync(file);
+      const size = stat.size;
+      bytes += size;
+      if (size > 20 * 1024 * 1024 || bytes > 50 * 1024 * 1024) {
+        scanWarnings.push(`Bundle comparison size limit: ${root}; identity unproven`);
+        return null;
+      }
+      hash.update(path.relative(root, file));
+      hash.update(String(stat.mode & 0o111));
+      hash.update("\0");
+      hash.update(fs.readFileSync(file));
+      hash.update("\0");
+    }
+    return hash.digest("hex");
+  } catch { scanWarnings.push(`Incomplete bundle comparison: ${root}`); return null; }
+}
 
 function collapseManagedFanout(skills: Skill[]): Skill[] {
-  const byKey = new Map<string, Skill[]>();
-  const passthrough: Skill[] = [];
-  for (const skill of skills) {
-    if (!MANAGED_SCOPES.has(skill.scope)) {
-      passthrough.push(skill);
-      continue;
-    }
-    const key = `${skill.baseName} ${skill.bodyHash}`;
-    const group = byKey.get(key);
-    if (group) group.push(skill);
-    else byKey.set(key, [skill]);
-  }
-  const collapsed = [...byKey.values()].map((group) => preferredKeepSkill(group));
-  return [...collapsed, ...passthrough];
+  const groups = groupBy(skills, (s) => `${s.baseName}\0${s.contentHash}`);
+  return [...groups.values()].flatMap((group) => {
+    if (group.length < 2 || !group.some((s) => ["codex-plugin", "managed-plugin"].includes(s.scope))) return group;
+    const bundles = groupBy(group, (skill) => {
+      const hash = bundleFingerprint(skill);
+      return hash ? `${hash}:${skill.enabled}:${skill.codexImplicit}` : skill.realPath;
+    });
+    return [...bundles.values()].map((copies) => {
+      const keep = preferredKeepSkill(copies);
+      keep.aliases = [...new Set(copies.flatMap((s) => [s.path, ...s.aliases]))].filter((p) => p !== keep.path);
+      return keep;
+    });
+  });
 }
 
 function recentLogFiles(): string[] {
@@ -506,11 +550,8 @@ function recentLogFiles(): string[] {
   // Usage evidence comes from supported-agent session logs (docs/supported-agents.md).
   // Claude Code and Codex keep full-turn JSONL; the other runtimes log only user prompts
   // or binary/SQLite, so they can't show skill-use traces.
-  const roots = [
-    path.join(home, ".codex/sessions"),
-    path.join(home, ".claude/projects"),
-  ];
-  if (deepLogs) {
+  const roots = [...logRoots.map(expandHome), ...(globalScan ? [path.join(home, ".codex/sessions"), path.join(home, ".claude/projects")] : [])];
+  if (deepLogs && globalScan) {
     roots.push(
       path.join(home, ".codex/archived_sessions"),
       path.join(home, ".openclaw"),
@@ -518,7 +559,7 @@ function recentLogFiles(): string[] {
     );
   }
   const history = path.join(home, ".codex/history.jsonl");
-  if (exists(history)) files.add(history);
+  if (globalScan && exists(history) && fs.statSync(history).mtimeMs >= cutoffMs) files.add(history);
   for (const root of roots) {
     for (const file of walkRecentFiles(root, (candidate) => candidate.endsWith(".jsonl") || candidate.endsWith(".log"), 8)) {
       try {
@@ -530,34 +571,12 @@ function recentLogFiles(): string[] {
 }
 
 function walkRecentFiles(root: string, predicate: (file: string) => boolean, maxDepth = 8): string[] {
-  const out: string[] = [];
-  function walk(dir: string, depth: number) {
-    if (depth > maxDepth) return;
-    let entries: fs.Dirent[];
-    try {
-      entries = fs.readdirSync(dir, { withFileTypes: true });
-    } catch {
-      return;
-    }
-    for (const entry of entries) {
-      const file = path.join(dir, entry.name);
-      let stat: fs.Stats;
-      try {
-        stat = fs.statSync(file);
-      } catch {
-        continue;
-      }
-      if (entry.isDirectory()) {
-        if (depth > 0 && stat.mtimeMs < cutoffMs) continue;
-        walk(file, depth + 1);
-      } else if (entry.isFile() && stat.mtimeMs >= cutoffMs && predicate(file)) {
-        out.push(file);
-      }
-    }
-  }
-  if (exists(root)) walk(root, 0);
-  return out;
+  return walkFiles(root, predicate, maxDepth).filter((file) => {
+    try { return fs.statSync(file).mtimeMs >= cutoffMs; } catch { return false; }
+  });
 }
+
+const scannedLogFiles: string[] = [];
 
 function scanUsage(skills: Skill[], logFiles: string[]): Map<string, Usage> {
   const aliases = new Map<string, string[]>();
@@ -572,11 +591,13 @@ function scanUsage(skills: Skill[], logFiles: string[]): Map<string, Usage> {
     let text = "";
     try {
       const stat = fs.statSync(file);
-      if (stat.size > 150 * 1024 * 1024) continue;
-      if (consumedBytes + stat.size > maxLogBytes) break;
+      if (stat.size > 150 * 1024 * 1024) { scanWarnings.push(`Oversized transcript skipped: ${file}`); continue; }
+      if (consumedBytes + stat.size > maxLogBytes) { scanWarnings.push("Transcript byte limit reached; usage coverage is partial"); break; }
       consumedBytes += stat.size;
       text = fs.readFileSync(file, "utf8");
+      scannedLogFiles.push(file);
     } catch {
+      scanWarnings.push(`Unreadable transcript: ${file}`);
       continue;
     }
     const dollarCounts = countTokens(
@@ -611,36 +632,7 @@ function countTokens(values: string[]): Map<string, number> {
   return map;
 }
 
-function suggestDescription(skill: Skill): string {
-  const source = normalizeWords(`${skill.baseName} ${skill.description}`);
-  const cues: string[] = [];
-  const add = (label: string, pattern: RegExp) => {
-    if (pattern.test(source) && !cues.includes(label)) cues.push(label);
-  };
-  add("OpenClaw", /\bopenclaw|claw|clawd\b/);
-  add("GitHub", /\b(github|issue|pr|ci)\b|pull request/);
-  add("Slack", /\bslack\b/);
-  add("Discord", /\bdiscord\b/);
-  add("Gmail", /\bgmail|email\b/);
-  add("Google", /\b(google|drive|calendar|docs|sheets|slides)\b/);
-  add("Cloudflare", /\b(cloudflare|worker|wrangler)\b|durable object/);
-  add("release", /\b(release|publish|ship|notar)/);
-  add("debug", /\b(debug|trace|inspect|profile|diagnos)/);
-  add("search", /\b(search|archive|crawl|sync|history)\b/);
-  add("deploy", /\b(deploy|ops|server|ssh|vm)\b/);
-  add("docs", /\b(doc|docs|markdown|write|review)\b/);
-  const verbs = cues.length ? cues.slice(0, 5).join(", ") : skill.baseName.replace(/-/g, " ");
-  return `${verbs}: ${shortAction(source)}.`;
-}
 
-function shortAction(source: string): string {
-  if (/\btriage|review\b/.test(source)) return "triage, review, proof";
-  if (/\bdebug|diagnos|inspect\b/.test(source)) return "debug, inspect, fix";
-  if (/\bsearch|sync|archive\b/.test(source)) return "search, sync, summarize";
-  if (/\bdeploy|release|publish|ship\b/.test(source)) return "deploy, release, verify";
-  if (/\bcreate|scaffold|build\b/.test(source)) return "create, build, validate";
-  return "audit, clean, verify";
-}
 
 function groupBy<T>(items: T[], key: (item: T) => string): Map<string, T[]> {
   const map = new Map<string, T[]>();
@@ -674,7 +666,7 @@ function formatNumber(value: number): string {
 }
 
 function tokenCost(text: string): number {
-  return Math.ceil(Buffer.byteLength(text, "utf8") / 4);
+  return Math.ceil(Buffer.byteLength(text, "utf8") / charsPerToken);
 }
 
 function skillOrderRank(skill: Skill): number {
@@ -718,13 +710,13 @@ function fullLineTokenCost(skill: Skill): number {
 function extraDescriptionCosts(skill: Skill): number[] {
   const minimumLine = renderSkillLine(skill, "");
   const minimumBytes = Buffer.byteLength(`${minimumLine}\n`, "utf8");
-  const minimumCost = Math.ceil(minimumBytes / 4);
+  const minimumCost = Math.ceil(minimumBytes / charsPerToken);
   const costs = [0];
   let prefixBytes = 0;
   for (const char of skill.description) {
     prefixBytes += Buffer.byteLength(char, "utf8");
     const renderedBytes = minimumBytes + prefixBytes + 1;
-    costs.push(Math.ceil(renderedBytes / 4) - minimumCost);
+    costs.push(Math.ceil(renderedBytes / charsPerToken) - minimumCost);
   }
   return costs;
 }
@@ -871,7 +863,7 @@ function isLikelyCopy(score: { description: number; body: number }): boolean {
   return score.body >= 0.95 || (score.body >= 0.85 && score.description >= 0.85);
 }
 
-function duplicateDeleteSuggestions(groups: [string, Skill[]][]): string[] {
+function duplicateReviewCandidates(groups: [string, Skill[]][]): string[] {
   const lines: string[] = [];
   for (const [name, list] of groups.slice(0, 80)) {
     const keep = preferredKeepSkill(list);
@@ -885,7 +877,7 @@ function duplicateDeleteSuggestions(groups: [string, Skill[]][]): string[] {
     lines.push(`  keep: ${keep.scope}: ${keep.path}`);
     for (const { skill, score } of candidates) {
       lines.push(
-        `  delete: ${skill.scope}: ${skill.path} (similarity body=${formatPct(score.body)}, description=${formatPct(score.description)})`,
+        `  compare: ${skill.scope}: ${skill.path} (similarity body=${formatPct(score.body)}, description=${formatPct(score.description)}); verify required behavior in every intended host before removal`,
       );
     }
   }
@@ -893,7 +885,7 @@ function duplicateDeleteSuggestions(groups: [string, Skill[]][]): string[] {
 }
 
 function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]): string {
-  const enabled = skills.filter((skill) => skill.enabled || includeAll);
+  const enabled = skills.filter((skill) => skill.enabled !== false || includeAll);
   const roots = groupBy(skills, (skill) => skill.root);
   const byBase = [...groupBy(enabled, (skill) => skill.baseName.toLowerCase()).entries()].filter(([, list]) => list.length > 1);
   const byBody = [...groupBy(enabled, (skill) => skill.bodyHash).entries()].filter(([hash, list]) => hash !== "811c9dc5" && list.length > 1);
@@ -901,12 +893,11 @@ function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]):
     .filter((skill) => skill.descChars >= 110 || skill.lineChars >= 180)
     .sort((a, b) => b.descChars - a.descChars)
     .slice(0, 30);
-  const unused = enabled
+  const unused = (logFiles.length && !noLogs ? enabled : [])
     .filter((skill) => {
       const item = usage.get(skill.name);
       return !item || item.dollar + item.fileRead + item.text === 0;
     })
-    .filter((skill) => !["codex", "codex-plugin"].includes(skill.scope))
     .sort((a, b) => a.scope.localeCompare(b.scope) || a.name.localeCompare(b.name))
     .slice(0, 80);
   const totalLineChars = enabled.reduce((sum, skill) => sum + skill.lineChars, 0);
@@ -921,7 +912,8 @@ function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]):
   lines.push(`rendered_line_chars: ${totalLineChars}`);
   lines.push(`log_files_scanned: ${logFiles.length}`, "");
 
-  lines.push("## Skill Budget", "");
+  lines.push("## Illustrative Codex-style Budget (not measured host usage)", "");
+  lines.push("Discovered files are not a confirmed loaded catalogue. Host loading and explicit-only visibility vary.");
   lines.push(`model: ${budget.model}`);
   lines.push(`context_tokens: ${formatNumber(budget.contextTokens)}`);
   lines.push(`context_source: ${budget.contextSource}`);
@@ -930,18 +922,18 @@ function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]):
   lines.push(`unbudgeted_full_tokens: ${formatNumber(budget.unbudgetedFullTokens)}`);
   lines.push(`minimum_no_description_tokens: ${formatNumber(budget.minimumTokens)}`);
   lines.push(`budgeted_tokens_used: ${formatNumber(budget.budgetedTokens)}`);
-  lines.push(`used_of_2%_budget: ${formatOnePct(budget.budgetedBudgetUsedRatio)}`);
-  lines.push(`unbudgeted_used_of_2%_budget: ${formatOnePct(budget.unbudgetedBudgetUsedRatio)}`);
+  lines.push(`used_of_metadata_budget: ${formatOnePct(budget.budgetedBudgetUsedRatio)}`);
+  lines.push(`unbudgeted_used_of_metadata_budget: ${formatOnePct(budget.unbudgetedBudgetUsedRatio)}`);
   lines.push(`used_of_context: ${formatOnePct(budget.budgetedContextUsedRatio)}`);
-  lines.push(`remaining_2%_budget_tokens: ${formatNumber(budget.remainingBudgetTokens)}`);
+  lines.push(`remaining_metadata_budget_tokens: ${formatNumber(budget.remainingBudgetTokens)}`);
   lines.push(`included_skills_after_budget: ${budget.includedSkills}`);
   lines.push(`omitted_skills_after_budget: ${budget.omittedSkills}`);
   lines.push(`truncated_description_chars: ${formatNumber(budget.truncatedDescriptionChars)}`);
   if (budget.effectiveContextTokens && budget.effectiveBudgetTokens && budget.remainingEffectiveBudgetTokens != null) {
     lines.push(`effective_context_tokens: ${formatNumber(budget.effectiveContextTokens)} (${budget.effectivePercent}%)`);
-    lines.push(`effective_2%_budget_tokens: ${formatNumber(budget.effectiveBudgetTokens)}`);
-    lines.push(`used_of_effective_2%_budget: ${formatOnePct(budget.effectiveBudgetUsedRatio ?? 0)}`);
-    lines.push(`remaining_effective_2%_budget_tokens: ${formatNumber(budget.remainingEffectiveBudgetTokens)}`);
+    lines.push(`effective_metadata_budget_tokens: ${formatNumber(budget.effectiveBudgetTokens)}`);
+    lines.push(`used_of_effective_metadata_budget: ${formatOnePct(budget.effectiveBudgetUsedRatio ?? 0)}`);
+    lines.push(`remaining_effective_metadata_budget_tokens: ${formatNumber(budget.remainingEffectiveBudgetTokens)}`);
   }
   lines.push("");
 
@@ -951,7 +943,7 @@ function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]):
     lines.push(`  path: ${skill.path}`);
     lines.push(`  chars: description=${skill.descChars}, rendered_line=${skill.lineChars}`);
     lines.push(`  current: ${skill.description}`);
-    lines.push(`  suggested: ${suggestDescription(skill)}`);
+    lines.push("  review: preserve task, important exclusions and explicit-only policy; propose a concise description after reading the skill");
   }
   if (longDescriptions.length === 0) lines.push("- none");
   lines.push("");
@@ -971,8 +963,8 @@ function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]):
   if (byBase.length === 0) lines.push("- none");
   lines.push("");
 
-  lines.push("## Duplicate Delete Suggestions", "");
-  lines.push(...duplicateDeleteSuggestions(byBase));
+  lines.push("## Duplicate Review Candidates (not deletion authority)", "");
+  lines.push(...duplicateReviewCandidates(byBase));
   lines.push("");
 
   lines.push("## Duplicates By Body Hash", "");
@@ -983,7 +975,8 @@ function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]):
   if (byBody.length === 0) lines.push("- none");
   lines.push("");
 
-  lines.push("## Unused Candidates", "");
+  lines.push("## Usage Review Candidates", "");
+  lines.push(noLogs ? "Transcript scanning disabled; no usage conclusions." : "No matching usage trace is not proof a skill is unused; inspect coverage and intended hosts.");
   for (const skill of unused) {
     const item = usage.get(skill.name) ?? { dollar: 0, fileRead: 0, text: 0 };
     lines.push(`- ${skill.name}: ${skill.scope}; usage=$${item.dollar}, reads=${item.fileRead}, text=${item.text}; ${skill.path}`);
@@ -993,18 +986,27 @@ function render(skills: Skill[], usage: Map<string, Usage>, logFiles: string[]):
 
   lines.push("## Root Summary", "");
   for (const [root, list] of [...roots.entries()].sort((a, b) => b[1].length - a[1].length)) {
-    const disabled = list.filter((skill) => !skill.enabled).length;
+    const disabled = list.filter((skill) => skill.enabled === false).length;
     lines.push(`- ${root}: ${list.length} skills${disabled ? `, ${disabled} disabled` : ""}`);
   }
+  lines.push("", "## Agent Instruction Files", "", "Symlinks share one source; assess nested scope before changing instructions.");
+  for (const file of instructions) {
+    lines.push(`- ${file.path}: ${file.lines} lines, ~${file.estimatedTokens} estimated tokens`);
+    for (const alias of file.aliases) lines.push(`  alias: ${alias}`);
+  }
+  if (!instructions.length) lines.push("- none in selected roots");
+  lines.push("", "## Inventory Gaps", "");
+  lines.push(...(scanWarnings.length ? [...new Set(scanWarnings)].map((w) => `- ${w}`) : ["- none detected within selected roots and depth limits"]));
   return lines.join("\n");
 }
 
+const instructions = discoverInstructions();
 const skills = discoverSkills();
 const logFiles = recentLogFiles();
 const usage = scanUsage(skills, logFiles);
-const consideredSkills = skills.filter((skill) => skill.enabled || includeAll);
+const consideredSkills = skills.filter((skill) => skill.enabled !== false || includeAll);
 const budget = skillBudget(consideredSkills);
 const output = json
-  ? JSON.stringify({ skills, usage: Object.fromEntries(usage), logFiles, budget }, null, 2)
-  : render(skills, usage, logFiles);
+  ? JSON.stringify({ roots, skills, instructions, usage: noLogs ? null : Object.fromEntries(usage), logFiles: scannedLogFiles, discoveredLogFiles: logFiles, budget, warnings: [...new Set(scanWarnings)], assumptions: { inventoryIsLoadedState: false, budgetIsSimulation: true, logsEnabled: !noLogs } }, null, 2)
+  : render(skills, usage, scannedLogFiles);
 console.log(output);

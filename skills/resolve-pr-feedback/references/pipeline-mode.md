@@ -1,6 +1,6 @@
 # Pipeline mode
 
-Read this when the invocation carries `mode:pipeline` — set by an orchestrator like `babysit` or `lfg`. Behave exactly as in ordinary full or targeted mode, with three specifics.
+Read this when the invocation carries `mode:pipeline` — set by an orchestrator such as `babysit`. Behave exactly as in ordinary full or targeted mode, with three specifics.
 
 ## 1. Never call the blocking-question tool
 
@@ -17,3 +17,11 @@ Return the exact typed residual defined by the rubric: `type: "needs-human"`, `s
 When the caller passes a `trajectory` (rising `unresolved_trend`, `new_threads_this_tick > 0` across passes), check whether the feedback is *not converging*: several nits that share a **root** — the approach itself is the problem (canonical: "your regex misses case X" repeated for X after X, an unbounded whack-a-mole) — or a bot re-posting fresh nits every commit without end. If so, raise **one** approach-level `needs-human` about the root decision (e.g. "regex is the wrong tool here — options: exhaustive table / a real parser / accept known limits; lean: …") and stop fixing the individual instances, rather than dutifully fixing nit after nit.
 
 Hold the anti-cry-wolf line: this fires only on a *demonstrated* shared root or a *demonstrated* treadmill across passes — a normal batch of unrelated valid nits is just fixed, one pass, as usual.
+
+## 4. Do not request another automated review
+
+Resolve feedback that already exists. After pushing a fix, return control to the
+caller's passive watcher. Never post a bot trigger such as `@codex review`, request
+or re-request an automated reviewer, or treat an unreviewed new head as permission
+to start another review. If repository automation reviews the new head on its own,
+the caller may send its newly published feedback back through this pipeline.

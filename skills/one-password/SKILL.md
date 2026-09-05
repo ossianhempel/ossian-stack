@@ -1,6 +1,6 @@
 ---
 name: one-password
-description: "Fetch secrets and env vars from 1Password with the `op` CLI, using a service account or Touch ID. Use whenever a command needs an API key, token, password, or `.env` value. Triggers: op read/run/inject, op://, 1Password, fetch secret, inject env vars."
+description: "Retrieve missing secrets and environment values securely with the 1Password op CLI. Use existing secure authentication when it already meets the task."
 metadata: {"requires":{"bins":["op"]},"install":[{"id":"brew","kind":"brew","formula":"1password-cli","bins":["op"],"label":"Install 1Password CLI (brew)"}]}
 ---
 

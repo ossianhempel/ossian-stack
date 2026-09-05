@@ -1,6 +1,6 @@
 ---
 name: babysit
-description: "Drive a GitHub or Azure DevOps Services pull request to merge-ready: watch CI, classify failures, resolve review feedback, and work the lowest unmerged PR first. Stops at merge-ready and never merges. Use for babysit this, get it green, all green, merge-ready, watch CI, address review comments, or check on PR X."
+description: "Drive a GitHub or Azure DevOps PR to merge-ready, resolve feedback, or report status. Preserve the requested mode; never merge."
 ---
 
 # Babysit
@@ -48,6 +48,16 @@ Babysitting fails the same few ways every time. Each step below exists because t
    When detected automation becomes terminal, run the step 8 resolver once more
    against the newly published feedback before accepting the next `READY`, then
    rearm after any resulting push.
+
+   Review automation is observation-only. A babysit run may wait for the automated
+   review that was already requested or triggered when the PR opened, then resolve
+   its feedback. After a fix push, **never request or re-request Codex, Copilot, or
+   another automated reviewer**, including by posting trigger comments such as
+   `@codex review`, assigning the reviewer again, or calling a review-request API.
+   A newer head than the last reviewed commit does not authorize another review.
+   Continue with CI and the quiet discovery window; handle a new review only when
+   the repository's own automation publishes it without prompting. Retrigger only
+   when the user explicitly asks for another review, separate from babysitting.
 
    Stop at `READY` for one PR (single or stack mode). Queued mode never emits `READY`; a blocker-free frontier is a non-terminal `WAITING` with reason `merge-queue`. Report that frontier merge-ready and stop the watcher. Do not leave it running until merges happen — that is Shipping's job. If another actor merges the frontier and the watcher reports `ADVANCE`, continue with the new frontier. `COMPLETE` is also terminal if another actor finishes the queue.
 

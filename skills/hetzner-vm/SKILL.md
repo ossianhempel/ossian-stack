@@ -1,6 +1,6 @@
 ---
 name: hetzner-vm
-description: "Read container logs, status, and resource usage on the Hetzner VM that hosts Coolify and its deployed apps. Use when diagnosing a deployed service — a container that is restarting, unhealthy, exited, or failing to start; a self-hosted GitHub Actions runner that will not register; disk or memory pressure on the host. Access is deliberately read-only. Triggers: hetzner, the VM, the server, container logs, docker logs, why is X restarting, is the runner up, coolify container, deployed app logs."
+description: "Read logs, container status, and resource usage on Ossian's Hetzner/Coolify VM through its restricted SSH interface. Read-only."
 ---
 
 # Hetzner VM access

@@ -1,6 +1,6 @@
 ---
 name: asc-metadata
-description: Audit, write, translate, and sync App Store listing metadata with the `asc` CLI on canonical files under `./metadata`. Use to run an ASO/keyword audit, localize descriptions/keywords/subtitle/name to multiple languages, or write engaging localized "What's New" release notes (from git log, bullets, or free text) plus promotional text.
+description: "Audit, localize, and sync App Store listing metadata, promotional text, and What's New with asc."
 ---
 
 # asc metadata

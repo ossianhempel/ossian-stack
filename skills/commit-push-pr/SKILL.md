@@ -1,12 +1,6 @@
 ---
 name: commit-push-pr
-description: >-
-  Take completed local work through PR creation to merge-ready: survey the changes,
-  group them into clean conventional commits, push, and open the PR with a value-first
-  description, then drive CI and review follow-through with babysit. Use for
-  "commit this", "ship this", "open a PR", "push and PR", or closing a unit of work.
-  Commits locally before pushing;
-  honor narrower requests, drafts, and explicit stop-at-PR instructions.
+description: "Commit, push, create or update PRs, and follow requested delivery to merge-ready. Honor commit-only, drafts, and explicit stop boundaries."
 argument-hint: "[optional: --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \"...\" | --work-items <id>]"
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: asc-release
-description: Build, version, upload, and submit iOS/macOS apps to App Store Connect with the `asc` CLI. Use to create an IPA/PKG, bump Xcode version/build numbers, run asc commands, drive the release/submission flow (including first-time fixes for availability, IAP, subscriptions, Game Center, App Privacy), or wire repeatable `asc workflow` automations into CI.
+description: "Build and upload iOS/macOS artifacts, check ASC readiness, submit releases, and define asc workflows."
 ---
 
 # asc release

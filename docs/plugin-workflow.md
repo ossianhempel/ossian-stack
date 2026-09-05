@@ -88,8 +88,9 @@ that direct GitHub import is currently pinned.
 
 When a user gives an agent this repository URL and asks it to install the plugin or
 skills, the agent should detect the harness and use the native plugin route first.
-For Gemini CLI, Windsurf, and Antigravity, which do not use this repo's native
-plugin manifests, install only the public `skills/` tree through the shared skills
+Antigravity uses the native `.gemini-plugin/plugin.json` manifest; see
+`supported-agents.md` for installation and refresh details. For Gemini CLI and
+Windsurf, install only the public `skills/` tree through the shared skills
 installer and target the current harness's global skill scope. Never install the
 checkout-local `.agents/skills/` tree.
 
@@ -176,3 +177,55 @@ For a local test install, copy the checkout into
 Customize → Plugins. For a normal install, open `/plugin`, select the repository's
 `ossian-stack` marketplace entry, and choose User scope. Refresh it later with
 `cursor-agent plugin marketplace update ossian-stack`.
+
+## Authoring-machine installation and refresh notes
+
+The following records the measured host behavior behind the installation policy.
+Recheck versions when diagnosing a different host build.
+
+Skills are **copied** into every runtime's cache, not symlinked, so an edit here is
+never live until that runtime refreshes.
+
+**Register the GitHub repo, not the local clone**, on the authoring machine too:
+
+```
+/plugin marketplace add ossianhempel/ossian-stack
+```
+
+A local-directory marketplace looks convenient and costs you automatic updates.
+Measured on Claude Code 2.1.250, Codex 0.151.0-alpha and Copilot CLI 1.0.80:
+Codex's `plugin marketplace upgrade` refreshes **git marketplaces only** and
+reports "No configured Git marketplaces to upgrade" for a local path, and Claude
+Code refuses to update a directory source whose version is unchanged, with no
+`--force` in that build. Pointing at GitHub restores the normal refresh path for
+the native plugin hosts.
+
+The trade is that **pushing is what publishes**. An unpushed edit reaches no
+runtime, which is also why `bun run validate` runs as a pre-commit hook.
+
+When an agent is handed this repository URL and asked to install the plugin or its
+skills, it must detect the current harness and prefer the native plugin route:
+Claude Code and Codex use their Git marketplace commands. Copilot uses
+`copilot plugin marketplace add ossianhempel/ossian-stack` then
+`copilot plugin install ossian-stack@ossian-stack` — it reads the `.claude-plugin/`
+manifests natively; set `"autoUpdate": true` on the marketplace's
+`extraKnownMarketplaces` entry in `~/.copilot/settings.json` so session starts
+refresh it. Cursor adds the Git
+marketplace with `cursor-agent plugin marketplace add <repo-url>`, then completes a
+user-scope install from its `/plugin` Marketplace UI; refreshes use
+`cursor-agent plugin marketplace update ossian-stack`. Cursor's official public
+Marketplace is a separate distribution channel, and `/add-plugin <repo-url>` is a
+direct GitHub import that is currently pinned. Antigravity discovers global native plugins in
+`~/.gemini/config/plugins/<plugin_name>/` (with manifest `.gemini-plugin/plugin.json`), auto-updating
+from disk on session start. Gemini CLI and Windsurf use the shared skills installer against `skills/`;
+never install the checkout-local `.agents/skills/` tree as the public package.
+
+Plugin skills cache at session start, so invoking an edited skill in the session
+that edited it tests stale content — restart the session. To know which copy is
+loaded, diff the cache file against the working tree file; a matching version
+segment proves only that the cache came from this release, not that it captured
+your latest edit. Never edit `~/.claude/plugins/cache/` or
+`~/.claude/plugins/marketplaces/` to force a reload: that is user machine state,
+it gets overwritten on update, and it is the wrong layer to test from.
+
+For the supported-host matrix, read `supported-agents.md`.

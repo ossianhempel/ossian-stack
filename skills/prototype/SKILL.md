@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: "Build throwaway code that answers a design question — a UI you can flip between variants, or a state model you can click through — then hand back the decision, not the code. Use for prototype, mock it up, sketch this, try this layout, explore what this should look like, or sanity-check whether a state model feels right."
+description: "Build a disposable UI or logic prototype to compare alternatives and answer a design question."
 ---
 
 # Prototype

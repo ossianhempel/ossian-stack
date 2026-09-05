@@ -18,9 +18,9 @@ replaced by a regular file.
 ```bash
 bun run check            # validate + plugin:validate — run before committing
 bun run validate         # manifest/skill/sources/README consistency (no network)
-bun run plugin:validate  # Claude's own schema check, --strict (needs `claude` on PATH)
+bun run plugin:validate  # Claude schema check; version warning is intentional (needs `claude` on PATH)
 bun run check:upstream   # which vendored skills moved upstream (needs `gh` + `jq`)
-bun run docs:list        # index docs/ — do this before coding
+bun run docs:list        # index docs/ for unfamiliar or cross-cutting work
 ```
 
 Bun is a **dev-time task runner** for this repo's own checks. Skills may bundle
@@ -28,7 +28,7 @@ executables, but only in a runtime the user is likely to already have: Python 3 
 the default, and several skills ship `.py` helpers. Do not reach for Bun or Node in
 a skill without a reason worth writing down.
 
-One skill breaks this: `babysit` vendors `scripts/watch-pr`, a Bun-only TypeScript
+`babysit` vendors `scripts/watch-pr`, a Bun-only TypeScript
 CLI, because it is the mechanism the playbook is built around and rewriting it on
 `gh` would lose its merge-state verdict. It runs `bun install` into its own
 directory on first use — under a plugin install that is the versioned cache, which
@@ -36,54 +36,27 @@ is replaced on every update. The skill degrades to plain status reporting when
 `bun` is absent. Any further exception needs the same kind of justification in
 `skills/sources.json`.
 
+`skill-cleaner` also retains an optional Node 22.6+ TypeScript analyzer: its
+existing dependency-free inventory, transcript heuristics, and Codex-style budget
+simulation stay together. It does not install packages or require Bun. Without
+Node, the skill audits through filesystem tools and reports missing numeric
+estimates. This runtime choice is recorded in `skills/sources.json`.
+
 ## Local plugin development
 
-Skills are **copied** into every runtime's cache, not symlinked, so an edit here is
-never live until that runtime refreshes.
+Skills are copied into runtime caches at session start. Edit this checkout's
+source; never edit installed caches or other checkouts to force a reload. A new
+session is needed to exercise refreshed skills. Diff the loaded cache copy against
+the source when checking which revision a session actually uses.
 
-**Register the GitHub repo, not the local clone**, on the authoring machine too:
+Register the GitHub marketplace, not this local clone. Pushing publishes the Git
+commit; an unpushed edit reaches no installed runtime. The pre-commit hook runs
+`bun run validate`; run the full `bun run check` before committing.
 
-```
-/plugin marketplace add ossianhempel/ossian-stack
-```
-
-A local-directory marketplace looks convenient and costs you automatic updates.
-Measured on Claude Code 2.1.250, Codex 0.151.0-alpha and Copilot CLI 1.0.80:
-Codex's `plugin marketplace upgrade` refreshes **git marketplaces only** and
-reports "No configured Git marketplaces to upgrade" for a local path, and Claude
-Code refuses to update a directory source whose version is unchanged, with no
-`--force` in that build. Pointing at GitHub restores the normal refresh path for
-the native plugin hosts.
-
-The trade is that **pushing is what publishes**. An unpushed edit reaches no
-runtime, which is also why `bun run check` runs as a pre-commit hook.
-
-When an agent is handed this repository URL and asked to install the plugin or its
-skills, it must detect the current harness and prefer the native plugin route:
-Claude Code and Codex use their Git marketplace commands. Copilot uses
-`copilot plugin marketplace add ossianhempel/ossian-stack` then
-`copilot plugin install ossian-stack@ossian-stack` — it reads the `.claude-plugin/`
-manifests natively; set `"autoUpdate": true` on the marketplace's
-`extraKnownMarketplaces` entry in `~/.copilot/settings.json` so session starts
-refresh it. Cursor adds the Git
-marketplace with `cursor-agent plugin marketplace add <repo-url>`, then completes a
-user-scope install from its `/plugin` Marketplace UI; refreshes use
-`cursor-agent plugin marketplace update ossian-stack`. Cursor's official public
-Marketplace is a separate distribution channel, and `/add-plugin <repo-url>` is a
-direct GitHub import that is currently pinned. Antigravity discovers global native plugins in
-`~/.gemini/config/plugins/<plugin_name>/` (with manifest `.gemini-plugin/plugin.json`), auto-updating
-from disk on session start. Gemini CLI and Windsurf use the shared skills installer against `skills/`;
-never install the checkout-local `.agents/skills/` tree as the public package.
-
-Plugin skills cache at session start, so invoking an edited skill in the session
-that edited it tests stale content — restart the session. To know which copy is
-loaded, diff the cache file against the working tree file; a matching version
-segment proves only that the cache came from this release, not that it captured
-your latest edit. Never edit `~/.claude/plugins/cache/` or
-`~/.claude/plugins/marketplaces/` to force a reload: that is user machine state,
-it gets overwritten on update, and it is the wrong layer to test from.
-
-Full loop: `docs/plugin-workflow.md`.
+For installation, runtime refresh, or stale-cache diagnosis, read
+`docs/plugin-workflow.md` and the relevant host entry in `docs/supported-agents.md`.
+Detect the current host and prefer its native plugin route where supported.
+Never distribute the checkout-local `.agents/skills/` tier as the public package.
 
 ## Working Agreement
 
@@ -137,10 +110,10 @@ A change here touches one of three surfaces. Do not assume which without checkin
 
 ## Two skill tiers
 
-| Where | Loaded when | Ships | `sources.json` entry | Version bump |
+| Where | Loaded when | Ships | `sources.json` entry | Release identity |
 | --- | --- | --- | --- | --- |
-| `skills/<name>/` | wherever the plugin is installed | yes | required | yes |
-| `.agents/skills/<name>/` | cwd is this checkout | no | no | no |
+| `skills/<name>/` | wherever the plugin is installed | yes | required | Git commit; no manifest version |
+| `.agents/skills/<name>/` | cwd is this checkout | no | no | No public release |
 
 `.agents/skills/` is the source of truth for internal skills; `.claude/skills` is a
 **symlink** to it, so Claude Code, Codex, and Cursor all load one copy. Add a skill
@@ -261,8 +234,9 @@ never here.
 
 ## Docs
 
-- Run `bun run docs:list` before coding — it prints `summary` + `read_when` for every
-  doc. In other repos, prefer that repo's own `docs:list` or `bin/docs-list`, then the
+- Use `bun run docs:list` for unfamiliar, architectural, installation, or workflow
+  work — it prints `summary` + `read_when` for every doc. For a localized edit,
+  read the applicable document directly. In other repos, prefer that repo's own `docs:list` or `bin/docs-list`, then the
   copy this plugin ships at `${CLAUDE_PLUGIN_ROOT}/bin/docs-list`, which lists `./docs`
   from the current working directory and exits 0 when there is none.
 - Add `read_when` hints to cross-cutting docs.

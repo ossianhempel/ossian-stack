@@ -1,14 +1,14 @@
 ---
 name: diagnosing-bugs
-description: "Diagnosis loop for hard bugs and performance regressions, run as a task you own: build a red-capable feedback loop before theorising, reproduce it yourself, trace every shipped line to runtime evidence, and stage the failing repro before the fix. Use when the user says diagnose or debug this, asks you to fix a bug or track down a regression, or reports something broken, throwing, failing, or slow."
+description: "Diagnose and fix bugs or performance regressions using a reproducible signal and verified root cause. Preserve diagnosis-only scope."
 ---
 
 # Diagnosing Bugs
 
-A discipline for hard bugs. Skip phases only when explicitly justified.
+Scale the investigation to the uncertainty. For a narrow bug with a clear failure signal, reuse that evidence, test the cause, fix within scope, and verify the original symptom. Use the full playbook below for uncertain, intermittent, or cross-system failures. Diagnosis-only requests stop at findings and proposed fixes.
 
-**You own this task.** Delegate investigation and implementation, stay in the
-lead. Reviewing a delegate's diff is yours; so is every decision about what the
+**You own this task.** Delegate independent investigation or implementation when useful and supported;
+otherwise work inline. Stay in the lead. Reviewing a delegate's diff is yours; so is every decision about what the
 evidence means.
 
 ## Evidence discipline
@@ -97,8 +97,9 @@ bug is debuggable; 1% is not, so keep raising the rate until it's debuggable.
 Stop and say so explicitly. List what you tried. Ask the user for: (a) access to
 whatever environment reproduces it, (b) a redacted captured artifact (HAR file,
 log dump, core dump, screen recording with timestamps), or (c) permission to add
-temporary production instrumentation. Do **not** proceed to hypothesise without a
-loop.
+temporary production instrumentation. Continue useful read-only source investigation
+within scope, labeling hypotheses as unverified. Do not claim a verified fix
+without evidence from the affected path.
 
 ### Completion criterion: a tight loop that goes red
 
@@ -111,9 +112,9 @@ at least once** (show the invocation and its output, redacted), and that is:
 - [ ] **Fast**: seconds, not minutes.
 - [ ] **Agent-runnable**: you can run it unattended; a human in the loop only via the template above.
 
-If you catch yourself reading code to build a theory before this command exists,
-**stop: jumping straight to a hypothesis is the exact failure this skill
-prevents.** No red-capable command, no Phase 2.
+Read source as needed to construct the loop and candidate explanations. A theory
+is not a confirmed cause: use the failure signal to discriminate before changing
+behavior or claiming the bug fixed.
 
 ## Phase 2: Reproduce + minimise
 
@@ -140,17 +141,18 @@ parts left to suspect) and becomes the clean regression test in Phase 5.
 Done when **every remaining element is load-bearing**: removing any one of them
 makes the loop go green.
 
-Do not proceed until you have reproduced **and** minimised.
+Minimise further only while it helps distinguish plausible causes; a clear, narrow
+repro need not be reduced as a separate exercise.
 
 ## Phase 3: Hypothesise
 
-Generate **3–5 ranked hypotheses** before testing any of them. Single-hypothesis
-generation anchors on the first plausible idea.
+When the cause remains uncertain, generate and rank competing hypotheses before
+committing to one. For hard bugs, 3–5 candidates can counter anchoring; do not
+invent alternatives after direct evidence already establishes the cause.
 
-Seed them by fanning out two read-only investigators concurrently: the `how` skill
-over the affected subsystem for the mechanism, and the `why` skill for the
-regression history. Investigation is where delegation pays; the ranking stays
-yours.
+Use `how` for an unclear mechanism and `why` for relevant regression history.
+Delegate independent investigations when useful and supported; reuse established
+facts instead of starting both investigators for every bug.
 
 Each hypothesis must be **falsifiable**: state the prediction it makes.
 
@@ -215,7 +217,7 @@ phase.
 
 If a correct seam exists:
 
-1. Turn the minimised repro into a failing test at that seam.
+1. Reuse a test that catches this failure, or turn the minimised repro into one.
 2. Watch it fail.
 3. Apply the fix.
 4. Watch it pass.
@@ -229,15 +231,14 @@ the proof is the Phase 1 loop going green (`principle-prove-it-works`).
 
 Required before declaring done:
 
-- [ ] Original repro no longer reproduces (re-run the Phase 1 loop)
+- [ ] Original repro passes; reuse the Phase 5 result unless cleanup or new evidence invalidated it
 - [ ] Regression test passes (or absence of seam is documented)
 - [ ] All `[DEBUG-...]` instrumentation removed (`grep` the prefix)
 - [ ] Throwaway prototypes and any copied loop script deleted (or moved to a clearly-marked debug location)
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message, so the next debugger learns
 
-Stage the commits so the failing repro lands **before** the fix. The history then
-tells the story: here is the proof it was broken, here is what fixed it. Each
-commit is a slice that stands on its own.
+Keep failing-before-passing evidence without requiring a broken commit. When
+commits are authorized, follow the project's green-history and CI conventions.
 
 ## Reply
 

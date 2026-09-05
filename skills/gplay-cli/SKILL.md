@@ -1,6 +1,6 @@
 ---
 name: gplay-cli
-description: Operate Google Play Console with the `gplay` CLI across Android builds, releases and staged rollouts, store metadata and screenshots, subscriptions and in-app products, pricing, testers, reviews, vitals, reports, purchases, users, preflight checks, and Fastlane migration. Use this skill whenever work touches Google Play Console or publishing an Android app.
+description: "Manage Google Play Console builds, releases, rollouts, listings, products, pricing, testers, reviews, and app access with gplay."
 ---
 
 # Google Play Console CLI

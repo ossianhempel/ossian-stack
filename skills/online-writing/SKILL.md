@@ -1,18 +1,6 @@
 ---
 name: online-writing
-description: >-
-  Write, audit, or revise editorial long-form writing - blog posts, Medium and
-  LinkedIn pieces, newsletter essays, Substack posts, X threads - using
-  Nicolas Cole's Art and Business of Online Writing method: Form + Idea +
-  Audience, headline first, 1/3/1 structures, Main Point skeletons, Rate of
-  Revelation. Use this whenever the user asks to write an article or blog post
-  from scratch, review or audit a draft, fix a headline or title, fix an
-  introduction, restructure a piece, decide what to write about, or asks "is
-  this any good?" about long-form prose. Intent decides against copywriter:
-  editorial pieces that teach, argue, or tell belong here; a thread,
-  newsletter, or post whose job is to sell, convert, or drive signups belongs
-  to copywriter and its persuasion-skeleton. Not for UI microcopy, App Store
-  metadata, or ad copy - use copywriter for those.
+description: "Write, audit, or revise editorial articles, essays, newsletters, and threads, including headlines and structure. Sales copy belongs to copywriter."
 ---
 
 # Online Writing

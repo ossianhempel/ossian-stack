@@ -1,10 +1,6 @@
 ---
 name: unslop
-description: >-
-  Cut AI tells from any writing and add human voice. Runs as a write-through
-  style pass on everything you draft, and doubles as the audit gate: use when
-  asked to check for AI slop, remove AI tells, make writing sound human, or
-  review a draft for robotic language.
+description: "Remove AI writing tells and improve human voice. Use for a requested writing pass or a workflow that needs the full style rubric."
 ---
 
 # Unslop
