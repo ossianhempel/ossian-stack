@@ -37,10 +37,10 @@ xcodebuild -project <App>.xcodeproj -scheme <App> -configuration Release \
 # 3. export
 xcodebuild -exportArchive -archivePath build/<App>.xcarchive \
   -exportOptionsPlist <ExportOptions-AppStore.plist> -exportPath build/export
-# 4. upload that IPA (asc-xcode-build / asc publish testflight), then promote that same build.
+# 4. upload that IPA (asc / asc publish testflight), then promote that same build.
 ```
 
-`asc-xcode-build` covers archive/export/version-number helpers; use it only when producing a local candidate. The normal path is Xcode Cloud.
+`asc` covers archive/export/version-number helpers; use it only when producing a local candidate. The normal path is Xcode Cloud.
 
 ## Release config
 

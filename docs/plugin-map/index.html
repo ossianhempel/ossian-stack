@@ -279,15 +279,11 @@
     "tag": "Ship an app",
     "steps": [
      {
-      "id": "asc-version-guard"
+      "id": "asc"
      },
      {
       "id": "ios-marketing-capture",
       "writes": "screenshots"
-     },
-     {
-      "id": "asc-metadata",
-      "writes": "store listing"
      },
      {
       "id": "app-store-optimization",
@@ -296,16 +292,9 @@
      {
       "id": "release-ios-app",
       "writes": "build + submission"
-     },
-     {
-      "id": "asc-release"
      }
     ],
     "extras": [
-     {
-      "id": "asc-pricing",
-      "note": "price tiers"
-     },
      {
       "id": "privacy-policy",
       "note": "policy page"
@@ -521,18 +510,20 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "App Store Optimization",
-   "description": "Research App Store and Google Play keywords, competitors, listing performance, and ASO experiments. Use for discovery and strategy; use asc-metadata for ASC listing edits.",
+   "description": "Research App Store and Google Play keywords, competitors, listing performance, and ASO experiments. Use for discovery and strategy; use asc for ASC listing edits.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
    "origin": "local",
    "repo": null,
    "calls": [
-    "asc-metadata",
+    "asc",
     "gplay-cli"
    ],
    "routes": [],
-   "calledBy": [],
+   "calledBy": [
+    "asc"
+   ],
    "routedBy": []
   },
   "architect": {
@@ -560,75 +551,27 @@
    ],
    "routedBy": []
   },
-  "asc-metadata": {
-   "id": "asc-metadata",
+  "asc": {
+   "id": "asc",
    "type": "skill",
    "plugin": "ossian-stack",
-   "display": "ASC Metadata",
-   "description": "Audit, localize, and sync App Store listing metadata, promotional text, and What's New with asc.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
-   "calls": [],
-   "routes": [],
-   "calledBy": [
-    "app-store-optimization",
-    "release-ios-app"
-   ],
-   "routedBy": []
-  },
-  "asc-pricing": {
-   "id": "asc-pricing",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "ASC Pricing",
-   "description": "Set App Store subscription and IAP prices by territory, or reconcile the ASC catalog with RevenueCat.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
-   "calls": [],
-   "routes": [],
-   "calledBy": [],
-   "routedBy": []
-  },
-  "asc-release": {
-   "id": "asc-release",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "ASC Release",
-   "description": "Build and upload iOS/macOS artifacts, check ASC readiness, submit releases, and define asc workflows.",
+   "display": "App Store Connect",
+   "description": "Operate App Store Connect with asc: metadata, pricing, builds, TestFlight, signing, submissions, analytics, and release automation.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
    "calls": [
-    "release-ios-app"
+    "release-ios-app",
+    "ios-marketing-capture",
+    "app-store-optimization"
    ],
    "routes": [],
    "calledBy": [
+    "app-store-optimization",
     "release-ios-app"
    ],
-   "routedBy": []
-  },
-  "asc-version-guard": {
-   "id": "asc-version-guard",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "ASC Version Guard",
-   "description": "Install, repair, or diagnose App Store Connect version/build-number guards for Xcode Cloud iOS apps. Triggers: version guard, release hooks, Xcode Cloud rejection, MARKETING_VERSION, build number collision.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "local",
-   "repo": null,
-   "calls": [],
-   "routes": [],
-   "calledBy": [],
    "routedBy": []
   },
   "autoreview": {
@@ -1213,6 +1156,7 @@
    "calls": [],
    "routes": [],
    "calledBy": [
+    "asc",
     "skill-creator"
    ],
    "routedBy": []
@@ -1671,8 +1615,7 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "asc-metadata",
-    "asc-release",
+    "asc",
     "babysit",
     "commit-push-pr",
     "gplay-cli",
@@ -1680,7 +1623,7 @@
    ],
    "routes": [],
    "calledBy": [
-    "asc-release",
+    "asc",
     "ossian-mode",
     "setup-ossian-stack"
    ],
@@ -2048,7 +1991,7 @@
   }
  },
  "counts": {
-  "skills": 72,
+  "skills": 69,
   "agents": 0,
   "plugins": 1
  }

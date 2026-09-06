@@ -43,16 +43,7 @@
     "architect": {
       "role": "both"
     },
-    "asc-metadata": {
-      "role": "both"
-    },
-    "asc-pricing": {
-      "role": "both"
-    },
-    "asc-release": {
-      "role": "both"
-    },
-    "asc-version-guard": {
+    "asc": {
       "role": "both"
     },
     "autoreview": {
@@ -256,8 +247,10 @@
   },
   "agents": {},
   "calls": {
-    "asc-release": [
-      "release-ios-app"
+    "asc": [
+      "release-ios-app",
+      "ios-marketing-capture",
+      "app-store-optimization"
     ],
     "babysit": [
       "commit-push-pr",
@@ -362,8 +355,7 @@
       "simplify-code"
     ],
     "release-ios-app": [
-      "asc-metadata",
-      "asc-release",
+      "asc",
       "babysit",
       "commit-push-pr",
       "gplay-cli",
@@ -410,7 +402,7 @@
       "setup-ossian-stack"
     ],
     "app-store-optimization": [
-      "asc-metadata",
+      "asc",
       "gplay-cli"
     ],
     "grill-me": [
@@ -580,15 +572,11 @@
         "tag": "Ship an app",
         "steps": [
           {
-            "id": "asc-version-guard"
+            "id": "asc"
           },
           {
             "id": "ios-marketing-capture",
             "writes": "screenshots"
-          },
-          {
-            "id": "asc-metadata",
-            "writes": "store listing"
           },
           {
             "id": "app-store-optimization",
@@ -597,16 +585,9 @@
           {
             "id": "release-ios-app",
             "writes": "build + submission"
-          },
-          {
-            "id": "asc-release"
           }
         ],
         "extras": [
-          {
-            "id": "asc-pricing",
-            "note": "price tiers"
-          },
           {
             "id": "privacy-policy",
             "note": "policy page"

@@ -1,8 +1,3 @@
----
-name: asc-localize-metadata
-description: Automatically translate and sync App Store metadata (description, keywords, what's new, subtitle) to multiple languages using LLM translation and asc CLI. Use when asked to localize an app's App Store listing, translate app descriptions, or add new languages to App Store Connect.
----
-
 # asc localize metadata
 
 Use this skill to pull English (or any source locale) App Store metadata, translate it with LLM, and push translations back to App Store Connect — all automated.
@@ -15,7 +10,7 @@ Use this skill to pull English (or any source locale) App Store metadata, transl
   - `asc localizations upload --help`
   - `asc apps info edit --help`
 - Prefer explicit long flags (`--app`, `--version`, `--version-id`, `--type`, `--app-info`).
-- Default output is JSON; use `--output table` only for human verification steps.
+- Output defaults are TTY-aware: table in interactive terminals and JSON in CI or other non-interactive contexts. Use explicit `--output` when the format matters.
 - Prefer deterministic ID-based operations. Do not "pick the first row" via `head -1` unless the user explicitly agrees.
 
 ## Preconditions
@@ -27,10 +22,11 @@ Use this skill to pull English (or any source locale) App Store metadata, transl
 
 App Store Connect locales for version and app-info localizations:
 ```
-ar-SA, ca, cs, da, de-DE, el, en-AU, en-CA, en-GB, en-US,
-es-ES, es-MX, fi, fr-CA, fr-FR, he, hi, hr, hu, id, it,
-ja, ko, ms, nl-NL, no, pl, pt-BR, pt-PT, ro, ru, sk,
-sv, th, tr, uk, vi, zh-Hans, zh-Hant
+ar-SA, bn-BD, ca, cs, da, de-DE, el, en-AU, en-CA, en-GB,
+en-US, es-ES, es-MX, fi, fr-CA, fr-FR, gu-IN, he, hi, hr,
+hu, id, it, ja, kn-IN, ko, ml-IN, mr-IN, ms, nl-NL, no,
+or-IN, pa-IN, pl, pt-BR, pt-PT, ro, ru, sk, sl-SI, sv,
+ta-IN, te-IN, th, tr, uk, ur-PK, vi, zh-Hans, zh-Hant
 ```
 
 ## Two Types of Metadata
@@ -61,7 +57,7 @@ asc apps info list --app "APP_ID" --output table
 Notes:
 - Version-localization fields (description, keywords, whatsNew, etc.) are per-version.
 - App-info fields (name, subtitle, privacy URLs/text) are app-level and use `--type app-info`.
-- If you only have names (app name, version string) and need IDs deterministically, use `asc-id-resolver`.
+- If you only have names (app name, version string) and need IDs deterministically, use [ID resolution](id-resolver.md).
 
 ### Step 2: Download source locale
 
@@ -177,7 +173,7 @@ asc apps info edit --app "APP_ID" --version-id "VERSION_ID" --locale "nl-NL" \
 For app-level fields:
 ```bash
 # Subtitle/name (app-info localization) is managed via app-info localizations.
-# Use the app-info localization .strings + upload flow (there is no `asc app-infos localizations ...` command).
+# Use the app-info localization .strings + upload flow; there is no app-infos localizations command.
 #
 # 1) Edit: ./app-info-localizations/nl-NL.strings
 # "subtitle" = "Leer tafels spelenderwijs";
@@ -213,7 +209,7 @@ asc localizations list --app "APP_ID" --type app-info --app-info "APP_INFO_ID" -
 
 ```bash
 # 1) Resolve IDs deterministically (do not auto-pick the "first" row)
-# If you only have names, use asc-id-resolver skill.
+# If you only have names, use [ID resolution](id-resolver.md).
 asc apps list --output table
 APP_ID="APP_ID_HERE"
 
@@ -247,7 +243,7 @@ asc localizations list --app "$APP_ID" --type app-info --app-info "$APP_INFO_ID"
 1. **Always start by reading the source locale** — never translate from memory or assumptions.
 2. **Check existing localizations first** — don't overwrite existing translations unless the user asks to update them.
 3. **Version vs app-info is different** — version fields live under `--version "VERSION_ID"`; subtitle/name/privacy live under `--app ... --type app-info`.
-4. **Prefer deterministic IDs** — do not select IDs via `head -1` unless explicitly requested; use `--output table` for selection or `asc-id-resolver`.
+4. **Prefer deterministic IDs** — do not select IDs via `head -1` unless explicitly requested; use `--output table` for selection or [ID resolution](id-resolver.md).
 5. **Validate character limits** before uploading. Count characters for each field. If over limit, re-translate shorter.
 6. **Keywords are special** — do not literally translate. Research locale-appropriate search terms. Think like a user searching the App Store in that language.
 7. **Show the user translations before uploading** — present a summary table of all fields × locales for approval. Do not push without confirmation.
@@ -259,6 +255,6 @@ asc localizations list --app "$APP_ID" --type app-info --app-info "$APP_INFO_ID"
 - Version localizations are tied to a specific version. Create the version first if it doesn't exist.
 - `promotionalText` can be updated anytime without a new version submission.
 - `whatsNew` is only relevant for updates, not the first version.
-- Use `asc-id-resolver` skill if you only have app/version names instead of IDs.
-- Use `asc-metadata-sync` skill for non-translation metadata operations.
-- For subscription/IAP display name localization, use `asc-subscription-localization` skill instead.
+- Use [ID resolution](id-resolver.md) skill if you only have app/version names instead of IDs.
+- Use [metadata sync](metadata-sync.md) skill for non-translation metadata operations.
+- For subscription/IAP display name localization, use [subscription localization](subscription-localization.md) skill instead.

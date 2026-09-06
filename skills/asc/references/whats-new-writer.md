@@ -1,8 +1,3 @@
----
-name: asc-whats-new-writer
-description: Generate engaging, localized App Store release notes (What's New) from git log, bullet points, or free text using canonical metadata under `./metadata`. Optionally pairs with promotional text updates.
----
-
 # asc What's New Writer
 
 Generate engaging, localized release notes from flexible input. Optionally pair with promotional text updates.
@@ -15,7 +10,7 @@ Generate engaging, localized release notes from flexible input. Optionally pair 
 
 ## Before You Start
 
-1. Read `release_notes_guidelines.md` for tone, structure, and examples.
+1. Read `release-notes-guidelines.md` for tone, structure, and examples.
 2. Identify the **latest version directory** under `metadata/version/` (highest semver). Use this for all metadata reads.
 3. Enumerate **existing locales** by listing the JSON files in that version directory.
 
@@ -68,7 +63,7 @@ Omit empty sections. If all changes are fixes, only show "Fixed."
 
 ### Step 2: Write Benefit-Focused Copy
 
-Follow the tone rules from `release_notes_guidelines.md`:
+Follow the tone rules from `release-notes-guidelines.md`:
 - Describe user impact, not implementation details
 - Use direct address ("you") and action verbs
 - Be specific — mention concrete improvements
@@ -171,7 +166,7 @@ On partial upload failure:
 - **Current What's New:** `metadata/version/{latest-version}/{locale}.json` → `whatsNew` field
 - **Latest version:** highest semver directory under `metadata/version/`
 - The canonical `./metadata` tree is what `asc metadata pull`, `asc metadata push`, and `asc metadata keywords ...` operate on.
-- Follows the same metadata resolution conventions as `asc-aso-audit`
+- Follows the same metadata resolution conventions as [ASO audit](aso-audit.md)
 
 ## Notes
 
@@ -181,5 +176,5 @@ On partial upload failure:
 - Each app update triggers algorithm re-evaluation — the act of updating matters, even if the text doesn't affect ranking.
 - Ideal update cadence: every 2-4 weeks.
 - For full metadata translation (all fields), use `asc-localize-metadata` instead.
-- For keyword research and optimization, use `asc-aso-audit` first.
+- For keyword research and optimization, use [ASO audit](aso-audit.md) first.
 - If the local keyword field is stale before drafting, refresh it with `asc metadata pull` or inspect planned keyword changes with `asc metadata keywords diff`.

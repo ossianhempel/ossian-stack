@@ -7,9 +7,8 @@ doc that duplicates the shared iOS release process.
 ## Target shape
 
 - Shared release decisions live in this global `release-ios-app` skill.
-- App Store Connect build/readiness/submission commands live in `asc-release`.
-- App Store release notes and metadata updates live in `asc-metadata`.
-- Xcode Cloud version/build guard installation stays in `asc-version-guard`.
+- App Store Connect build, metadata, pricing, readiness, submission, and version
+  guard procedures live in `asc`.
 - Repo-specific facts live in the app repo's `.ios-release.env` and, when needed,
   the file named by `IOS_RELEASE_NOTES_FILE`.
 
@@ -49,11 +48,9 @@ If the note would be wrong in another app repo, keep it repo-local.
 
 Do not copy these bodies into `release-ios-app`; route to them instead:
 
-- `asc-release`: `asc` CLI usage, IPA/PKG build/upload mechanics, readiness checks,
-  attach-build, preflight, staging, and final review submission.
-- `asc-metadata`: ASO, localization, promotional text, and "What's New" writing.
-- `asc-version-guard`: installable scripts and CI hooks that prevent marketing
-  version and build-number collisions in Xcode Cloud repos.
+- `asc`: CLI usage; IPA/PKG build and upload; ASO, localization, promotional
+  text, and What's New; readiness and submission; and installable Xcode Cloud
+  version and build-number guards.
 
 `release-ios-app` is the orchestration layer. It should tell the agent which
 release path to take and when to invoke those sibling skills, not duplicate their

@@ -23,7 +23,7 @@ shared profile skill plus a repo-owned manifest.
 - Keep app-specific build/sign/upload behavior in repo scripts / the relevant CLI (`xcodebuild`, `xcodegen`, `eas`, `asc`). This skill orchestrates; it does not re-implement them.
 - **Do not merge release PRs or arm auto-merge/auto-complete.** Drive the required PR to merge-ready through step 3, then hand merge to Ossian; PR creation alone is not that gate.
 - Never print secrets or key material.
-- Final App Store readiness and submission run through the `asc-release` skill. What's New copy goes through `asc-metadata`.
+- Final App Store readiness, metadata, and submission run through the `asc` skill.
 
 ## Version-bump policy (decide this first)
 
@@ -61,7 +61,7 @@ App Store submissions must **attach an already-uploaded, `VALID` TestFlight buil
 
 1. Confirm the version source matches the version you intend to submit.
 2. Pick the uploaded, `VALID` TestFlight build to ship.
-3. Use `asc-metadata` to draft/update What's New before submission. If tags are stale, derive notes from the actual commits since the last submitted App Store version.
+3. Use `asc` to draft/update What's New before submission. If tags are stale, derive notes from the actual commits since the last submitted App Store version.
 4. Hand off to the `asc` release/submission flow to attach the build and run readiness (`asc validate`, screenshots, availability, IAP/subscriptions, App Privacy). **Never create the final review submission without explicit go-ahead.** If a command asks for an IPA path during App Store submission, stop and switch to the attach-existing-build path.
 
 ## Pitfalls

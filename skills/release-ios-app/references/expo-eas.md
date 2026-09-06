@@ -11,7 +11,7 @@ Android share a single `expo.version`.
 ## Release notes
 
 - Prefer the CI release-notes artifact (GitHub Actions) when on the release branch. Fallback: the repo's local changelog command (e.g. `pnpm run changelog:release`).
-- If production tags are stale, do not paste generated notes verbatim — derive "What's New" from the actual commits since the last submitted App Store version, then run `asc-whats-new-writer`.
+- If production tags are stale, do not paste generated notes verbatim — derive "What's New" from the actual commits since the last submitted App Store version, then run `asc`.
 
 ## iOS build & submit
 

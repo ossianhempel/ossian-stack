@@ -1,8 +1,3 @@
----
-name: asc-version-guard
-description: "Install, repair, or diagnose App Store Connect version/build-number guards for Xcode Cloud iOS apps. Triggers: version guard, release hooks, Xcode Cloud rejection, MARKETING_VERSION, build number collision."
----
-
 # ASC version guard
 
 One job: make "wire up or fix the release version/build-number guard" a consistent, one-shot operation across iOS repos, instead of copy-pasting and drifting scripts per repo (the failure mode that produced three divergent copies in platesnap/petalpal/walkmon).
@@ -26,16 +21,16 @@ The version gate (local + CI) reads the live App Store version from the public i
 
 ## Assets
 
-- `assets/asc-version-lib.sh` — shared POSIX-sh helpers (`asc_normalize`, `asc_compare`, `asc_validate_shape`, `asc_live_app_store_version`, `asc_cfg`).
-- `assets/check-marketing-version.sh` — local strict check.
-- `assets/pre-push` — protected-branch git hook.
-- `assets/ci/{ci_post_clone,set_build_number,validate_release_version}.sh` — Xcode Cloud scripts.
-- `assets/.asc-release.json` — per-repo config template.
-- `assets/install.sh` — copies everything in, wires `core.hooksPath`, prints follow-ups.
+- `../assets/asc-version-lib.sh` — shared POSIX-sh helpers (`asc_normalize`, `asc_compare`, `asc_validate_shape`, `asc_live_app_store_version`, `asc_cfg`).
+- `../assets/check-marketing-version.sh` — local strict check.
+- `../assets/pre-push` — protected-branch git hook.
+- `../assets/ci/{ci_post_clone,set_build_number,validate_release_version}.sh` — Xcode Cloud scripts.
+- `../assets/.asc-release.json` — per-repo config template.
+- `../assets/install.sh` — copies everything in, wires `core.hooksPath`, prints follow-ups.
 
 ## Installing in a repo
 
-1. Copy `assets/.asc-release.json` to the repo root and fill it:
+1. Copy `../assets/.asc-release.json` to the repo root and fill it:
    - `appAppleId` — numeric ASC app ID.
    - `projectName` — Xcode project name (used for `<PROJECT>.xcodeproj` and the per-project skip env var, e.g. `PLATESNAP_SKIP_VERSION_VALIDATE`).
    - `sourceOfTruth` — path to `project.yml` (e.g. `ios/project.yml` or `project.yml`).
@@ -43,8 +38,8 @@ The version gate (local + CI) reads the live App Store version from the public i
    - `protectedBranches` — branches that get the strict gate (usually `["develop","main"]`).
    - `lookupCountry` — iTunes lookup storefront (`us`).
    - `buildNumberOffset` — `0` for new apps; for an app that had builds uploaded before Xcode Cloud, set it to the highest such build number so `CI_BUILD_NUMBER + offset` clears them.
-2. Run `SKILL_DIR="<absolute path of the directory containing the SKILL.md you just read>";
-bash "$SKILL_DIR/assets/install.sh" <repo_root> [ci_scripts_dir]` (ci dir defaults to `ci_scripts`; pass `ios/ci_scripts` for repos that nest it).
+2. Run `ASC_SKILL_DIR="<absolute path of the directory containing the main asc SKILL.md>";
+bash "$ASC_SKILL_DIR/assets/install.sh" <repo_root> [ci_scripts_dir]` (ci dir defaults to `ci_scripts`; pass `ios/ci_scripts` for repos that nest it).
 3. Add the package.json convenience script: `"version:check": "bash scripts/check-marketing-version.sh"`.
 4. Point the Xcode Cloud post-clone at `<ci_scripts_dir>/ci_post_clone.sh`. No CI secrets needed — the build number comes from `CI_BUILD_NUMBER` and the version gate uses the public iTunes lookup.
 

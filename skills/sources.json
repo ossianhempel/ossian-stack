@@ -17,36 +17,15 @@
       "upstreamCheckedAt": "2026-09-06",
       "lastSynced": "2026-09-06"
     },
-    "asc-metadata": {
+    "asc": {
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
-      "path": "asc-aso-audit, asc-localize-metadata, asc-whats-new-writer",
-      "notes": "Router skill merged from upstream @6b31882 (1622f7c). No 1:1 refresh — diff reference/ against upstream skills manually. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description. Preserve on refresh.",
+      "path": "all useful asc-* operational skills, merged behind one router",
+      "notes": "Consolidated ASC router. References are refreshed and flattened by hand; preserve the local Xcode Cloud version-guard assets and release-ios-app boundary. Upstream wall-submit and the duplicate full screenshot capture pipeline are intentionally omitted; ios-marketing-capture owns capture and asc owns screenshot validation/upload.",
       "upstreamPath": null,
-      "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
-      "upstreamCheckedAt": "2026-08-27"
-    },
-    "asc-pricing": {
-      "origin": "adapted",
-      "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
-      "path": "asc-ppp-pricing, asc-revenuecat-catalog-sync",
-      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local conditional release-PR cross-route (2026-09-04): iOS release actions that depend on repository promotion use release-ios-app for its PR/babysit/manual-merge gate; already-satisfied gates and independent ASC-only commands do not start a PR or watcher. Local audit (2026-09-05): focused description. Preserve on refresh.",
-      "upstreamPath": null,
-      "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
-      "upstreamCheckedAt": "2026-08-27"
-    },
-    "asc-release": {
-      "origin": "adapted",
-      "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
-      "path": "asc-cli-usage, asc-xcode-build, asc-release-flow, asc-workflow",
-      "notes": "Router skill merged from upstream ASC bundle (2026-06-14). Manual merge on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description. Preserve on refresh.",
-      "upstreamPath": null,
-      "upstreamRev": "3f71de280bdf8773910ef3699fa770dffbe24012",
-      "upstreamCheckedAt": "2026-08-27"
-    },
-    "asc-version-guard": {
-      "origin": "local",
-      "notes": "Authored in agent-scripts (3a35eef). Runnable install/version guard infra — not from rudrank bundle. Local audit (2026-09-05): installer path anchor. Preserve on refresh."
+      "upstreamRev": "f52c4f04323bb2dfb21ca8be82e6494e9cd0b4d8",
+      "upstreamCheckedAt": "2026-09-06",
+      "lastSynced": "2026-09-06"
     },
     "autoreview": {
       "origin": "adapted",

@@ -187,7 +187,6 @@ rest the agent invokes itself.
 - `one-password` for any secret, never plaintext.
 - Platform skills when the work touches them: `convex-cli`, `clerk-cli`,
   `revenuecat-api` (user types), `coolify`, `hetzner-vm`, `post-queue-cli`, and
-  the iOS set (`release-ios-app`, `asc-release`, `asc-metadata`,
-  `asc-version-guard`).
+  the iOS set (`release-ios-app`, `asc`).
 - `triage` (user types) only in a thread HQ has explicitly given the tracker's
   inbox.

@@ -142,8 +142,8 @@ bun run validate
 ## Namespacing
 
 Claude Code and Codex address plugin skills as `ossian-stack:<skill-name>` — e.g.
-`ossian-stack:asc-release`. Cursor exposes the same skills by their individual
-skill names, such as `/asc-release`, and can also auto-invoke them from their
+`ossian-stack:asc`. Cursor exposes the same skills by their individual
+skill names, such as `/asc`, and can also auto-invoke them from their
 trigger descriptions.
 
 ## Codex

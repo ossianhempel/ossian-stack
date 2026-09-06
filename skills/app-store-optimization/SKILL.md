@@ -1,6 +1,6 @@
 ---
 name: "app-store-optimization"
-description: "Research App Store and Google Play keywords, competitors, listing performance, and ASO experiments. Use for discovery and strategy; use asc-metadata for ASC listing edits."
+description: "Research App Store and Google Play keywords, competitors, listing performance, and ASO experiments. Use for discovery and strategy; use asc for ASC listing edits."
 triggers:
   - ASO
   - app store optimization
@@ -20,7 +20,7 @@ triggers:
 
 ---
 
-Choose the platform and research question first. Use `asc-metadata` for App Store Connect listing edits; use `gplay-cli` for Play Console operations. Verify current platform limits and source claims; label estimates and avoid inventing rankings or performance data. Deliver the requested research or plan without treating it as approval to publish metadata.
+Choose the platform and research question first. Use `asc` for App Store Connect listing edits; use `gplay-cli` for Play Console operations. Verify current platform limits and source claims; label estimates and avoid inventing rankings or performance data. Deliver the requested research or plan without treating it as approval to publish metadata.
 
 ## Tools and References
 
