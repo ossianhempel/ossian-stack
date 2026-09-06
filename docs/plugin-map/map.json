@@ -49,7 +49,7 @@
     "autoreview": {
       "role": "both"
     },
-    "babysit": {
+    "babysit-pr": {
       "role": "both"
     },
     "better-accessibility": {
@@ -77,9 +77,6 @@
       "role": "human"
     },
     "convex-cli": {
-      "role": "both"
-    },
-    "coolify": {
       "role": "both"
     },
     "copywriter": {
@@ -121,9 +118,6 @@
     "handoff": {
       "role": "human"
     },
-    "hetzner-vm": {
-      "role": "both"
-    },
     "how": {
       "role": "both"
     },
@@ -140,9 +134,6 @@
       "role": "both"
     },
     "one-password": {
-      "role": "both"
-    },
-    "online-writing": {
       "role": "both"
     },
     "orchestrate-threads": {
@@ -252,7 +243,7 @@
       "ios-marketing-capture",
       "app-store-optimization"
     ],
-    "babysit": [
+    "babysit-pr": [
       "commit-push-pr",
       "resolve-pr-feedback"
     ],
@@ -263,7 +254,7 @@
     ],
     "commit-push-pr": [
       "autoreview",
-      "babysit",
+      "babysit-pr",
       "blast-radius",
       "git-cleanup",
       "unslop"
@@ -275,7 +266,6 @@
       "skill-creator"
     ],
     "copywriter": [
-      "online-writing",
       "unslop"
     ],
     "diagnosing-bugs": [
@@ -288,20 +278,11 @@
     "gplay-cli": [
       "one-password"
     ],
-    "hetzner-vm": [
-      "coolify",
-      "one-password"
-    ],
     "onboarding-flow": [
       "copywriter"
     ],
-    "online-writing": [
-      "copywriter",
-      "obsidian",
-      "unslop"
-    ],
     "orchestrate-threads": [
-      "babysit",
+      "babysit-pr",
       "codex-first",
       "commit-push-pr",
       "diagnosing-bugs",
@@ -318,7 +299,7 @@
     "ossian-mode": [
       "architect",
       "autoreview",
-      "babysit",
+      "babysit-pr",
       "blast-radius",
       "commit-push-pr",
       "convex-cli",
@@ -356,16 +337,16 @@
     ],
     "release-ios-app": [
       "asc",
-      "babysit",
+      "babysit-pr",
       "commit-push-pr",
       "gplay-cli",
       "resolve-pr-feedback"
     ],
     "resolve-pr-feedback": [
-      "babysit"
+      "babysit-pr"
     ],
     "setup-ossian-stack": [
-      "babysit",
+      "babysit-pr",
       "continual-learning",
       "diagnosing-bugs",
       "domain-modeling",
@@ -545,7 +526,7 @@
             "writes": "GitHub / Azure PR"
           },
           {
-            "id": "babysit",
+            "id": "babysit-pr",
             "writes": "merge-ready PR"
           },
           {
@@ -638,11 +619,6 @@
           },
           {
             "id": "unslop"
-          },
-          {
-            "id": "online-writing",
-            "optional": true,
-            "writes": "draft in vault"
           }
         ],
         "extras": []
@@ -694,26 +670,6 @@
         "skills": [
           {
             "id": "revenuecat-api",
-            "phase": "setup"
-          }
-        ]
-      },
-      {
-        "id": "coolify",
-        "title": "Coolify",
-        "skills": [
-          {
-            "id": "coolify",
-            "phase": "building"
-          }
-        ]
-      },
-      {
-        "id": "hetzner",
-        "title": "Hetzner VM",
-        "skills": [
-          {
-            "id": "hetzner-vm",
             "phase": "setup"
           }
         ]

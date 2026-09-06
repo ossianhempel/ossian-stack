@@ -1,4 +1,4 @@
-# babysit
+# babysit-pr
 
 Vendored from [cursor/plugins](https://github.com/cursor/plugins)
 (`pstack/skills/poteto-mode/playbooks/babysit.md`), extracted from the
@@ -40,9 +40,9 @@ both copies aligned. No live Azure verification is claimed by the offline fixtur
 Focused offline checks:
 
 ```bash
-python3 -m unittest discover -s skills/babysit/scripts/azure -p 'test_*.py'
+python3 -m unittest discover -s skills/babysit-pr/scripts/azure -p 'test_*.py'
 python3 -m unittest discover -s skills/resolve-pr-feedback/scripts/azure -p 'test_*.py'
-bun test skills/babysit/scripts/watch-pr
+bun test skills/babysit-pr/scripts/watch-pr
 ```
 
 ## GitHub runtime dependency

@@ -1,6 +1,6 @@
 # Pipeline mode
 
-Read this when the invocation carries `mode:pipeline` — set by an orchestrator such as `babysit`. Behave exactly as in ordinary full or targeted mode, with three specifics.
+Read this when the invocation carries `mode:pipeline` — set by an orchestrator such as `babysit-pr`. Behave exactly as in ordinary full or targeted mode, with three specifics.
 
 ## 1. Never call the blocking-question tool
 

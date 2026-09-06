@@ -45,7 +45,7 @@ whether the design is already decided, not how large the diff will be:
   Codex. A brief for a build thread carries decisions; a brief for a plan
   thread carries the question and the constraints, and leaves the decisions to
   the thread.
-- A PR that already exists and needs status or readiness work: `babysit`, in the
+- A PR that already exists and needs status or readiness work: `babysit-pr`, in the
   thread that owns the PR. Use its `check` mode for a read-only status request.
 - A bug nobody understands yet: `diagnosing-bugs`, and the report is the
   diagnosis, not a fix.
@@ -67,10 +67,10 @@ delivery is not yet authorized:
 - When the inherited action scope authorizes the required commit, push, and PR
   actions, invoke `commit-push-pr` after the implementation and verification are
   complete. Its default completed, non-draft PR flow invokes or resumes
-  `babysit` in `drive` mode and carries the same action scope through review and
+  `babysit-pr` in `drive` mode and carries the same action scope through review and
   CI to merge-ready. It never merges.
-- Do not also start `babysit` or a feedback resolver from the brief for that
-  default flow. `commit-push-pr` owns the handoff, and `babysit` owns resolver
+- Do not also start `babysit-pr` or a feedback resolver from the brief for that
+  default flow. `commit-push-pr` owns the handoff, and `babysit-pr` owns resolver
   invocation. Resume an existing drive instead of creating a second one.
 - Preserve narrower outcomes exactly: local diff only, commit only, push only,
   draft PR, stop at PR, read-only status, or another explicit stop. If the next
@@ -81,7 +81,7 @@ delivery is not yet authorized:
   babysit stage.
 
 An existing PR whose thread starts with status, feedback, or readiness as its
-goal routes directly to the matching `babysit` mode. That is existing-PR
+goal routes directly to the matching `babysit-pr` mode. That is existing-PR
 ownership, not a second closeout loop.
 
 Choose tracker-dependent skills only for a workstream using that workflow:

@@ -7,7 +7,7 @@ argument-hint: "[optional: --update | --description-only | --pr-only | --branch-
 # Commit, Push, PR
 
 Take completed local work to a pull request, then continue to merge-ready through
-`babysit` in `drive` mode. Invoking this skill with ship intent authorizes commit,
+`babysit-pr` in `drive` mode. Invoking this skill with ship intent authorizes commit,
 push, PR creation, and that follow-through within the user's scope; it never
 authorizes merging. Preserve explicit stop-at-PR/no-babysit instructions and narrower
 modes. Handoff defines when to start or resume the drive.
@@ -203,7 +203,7 @@ changes applied; in `--pr-only` note that uncommitted changes were left alone.
 
 ## Handoff
 
-- **Completed, non-draft PR delivered by the default flow:** invoke `babysit` in
+- **Completed, non-draft PR delivered by the default flow:** invoke `babysit-pr` in
   `drive` mode with the full PR URL and inherited action scope. Continue until
   merge-ready or a reported human/access blocker; PR creation alone is not the
   completion condition. A green CI snapshot is not the handoff: let the watcher
@@ -218,7 +218,7 @@ changes applied; in `--pr-only` note that uncommitted changes were left alone.
 - **No drive requested by this call:** explicit stop-at-PR/no-babysit, drafts, and
   standalone narrow modes end at their requested result. Do not mark a draft ready
   to trigger follow-through. Trunk-direct projects end after commit/push.
-- On a forge unsupported by `babysit`, report the delivered PR and unverified
+- On a forge unsupported by `babysit-pr`, report the delivered PR and unverified
   follow-through limitation; never claim merge-ready from creation alone.
 - The work has not had a review pass this session and the push is about to happen →
   suggest `autoreview` before Step 4, not after.

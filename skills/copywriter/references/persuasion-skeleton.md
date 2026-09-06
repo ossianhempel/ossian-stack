@@ -14,11 +14,11 @@ rule), profile bios, or button labels. Those formats are too compressed.
 
 **Also not for editorial long-form.** This is a *sales* arc — it exists to
 convert, and it closes on a CTA. A blog post, essay, newsletter, or thread
-whose job is to teach, argue, or tell belongs to the `online-writing` skill,
-which runs a different arc (Headline → Intro → Main Points → no conclusion)
+whose job is to teach, argue, or tell belongs to the project's available
+editorial writing workflow, which should use an editorial arc
 and deliberately buries the CTA inside a Main Point. **Intent decides, not
 format:** a thread selling the app is this file; a thread arguing a point is
-`online-writing`.
+that editorial workflow.
 
 Note the deliberate contradiction between the two: **Payoff is mandatory
 here** (see step 5) and **conclusions are optional there**. Both are right

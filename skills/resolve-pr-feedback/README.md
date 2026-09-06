@@ -13,7 +13,7 @@ The Azure adapter uses REST 7.1 and existing az Entra authentication or a suppli
 AZURE_DEVOPS_EXT_PAT. It does not support Server/custom hosts or fork mutations.
 Thread writes have no atomic compare-and-swap guarantee; readback and reassessment
 are required. Offline fixtures do not establish live access or write success.
-The duplicated client.py in babysit must stay identical for skill isolation.
+The duplicated client.py in babysit-pr must stay identical for skill isolation.
 
 To update:
 

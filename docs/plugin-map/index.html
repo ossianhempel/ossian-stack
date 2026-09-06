@@ -252,7 +252,7 @@
       "writes": "GitHub / Azure PR"
      },
      {
-      "id": "babysit",
+      "id": "babysit-pr",
       "writes": "merge-ready PR"
      },
      {
@@ -345,11 +345,6 @@
      },
      {
       "id": "unslop"
-     },
-     {
-      "id": "online-writing",
-      "optional": true,
-      "writes": "draft in vault"
      }
     ],
     "extras": []
@@ -401,26 +396,6 @@
     "skills": [
      {
       "id": "revenuecat-api",
-      "phase": "setup"
-     }
-    ]
-   },
-   {
-    "id": "coolify",
-    "title": "Coolify",
-    "skills": [
-     {
-      "id": "coolify",
-      "phase": "building"
-     }
-    ]
-   },
-   {
-    "id": "hetzner",
-    "title": "Hetzner VM",
-    "skills": [
-     {
-      "id": "hetzner-vm",
       "phase": "setup"
      }
     ]
@@ -595,11 +570,11 @@
    ],
    "routedBy": []
   },
-  "babysit": {
-   "id": "babysit",
+  "babysit-pr": {
+   "id": "babysit-pr",
    "type": "skill",
    "plugin": "ossian-stack",
-   "display": "Babysit",
+   "display": "Babysit PR",
    "description": "Drive a GitHub or Azure DevOps PR to merge-ready, resolve feedback, or report status. Preserve the requested mode; never merge.",
    "role": "both",
    "humanOnly": false,
@@ -750,14 +725,14 @@
    "repo": null,
    "calls": [
     "autoreview",
-    "babysit",
+    "babysit-pr",
     "blast-radius",
     "git-cleanup",
     "unslop"
    ],
    "routes": [],
    "calledBy": [
-    "babysit",
+    "babysit-pr",
     "orchestrate-threads",
     "ossian-mode",
     "release-ios-app"
@@ -807,43 +782,23 @@
    ],
    "routedBy": []
   },
-  "coolify": {
-   "id": "coolify",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Coolify",
-   "description": "Inspect and manage Coolify applications, databases, services, deployments, domains, environment variables, and infrastructure.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "companion",
-   "repo": "https://github.com/coollabsio/coolify-cli",
-   "calls": [],
-   "routes": [],
-   "calledBy": [
-    "hetzner-vm"
-   ],
-   "routedBy": []
-  },
   "copywriter": {
    "id": "copywriter",
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Copywriter",
-   "description": "Write or improve marketing copy and product UI text: listings, landing pages, ads, social scripts, onboarding, and microcopy. Editorial long-form belongs to online-writing.",
+   "description": "Write or improve marketing copy and product UI text: listings, landing pages, ads, social scripts, onboarding, and microcopy. Editorial long-form is outside this skill.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
    "origin": "local",
    "repo": null,
    "calls": [
-    "online-writing",
     "unslop"
    ],
    "routes": [],
    "calledBy": [
-    "onboarding-flow",
-    "online-writing"
+    "onboarding-flow"
    ],
    "routedBy": []
   },
@@ -1095,25 +1050,6 @@
    ],
    "routedBy": []
   },
-  "hetzner-vm": {
-   "id": "hetzner-vm",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Hetzner VM",
-   "description": "Read logs, container status, and resource usage on Ossian's Hetzner/Coolify VM through its restricted SSH interface. Read-only.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "local",
-   "repo": null,
-   "calls": [
-    "coolify",
-    "one-password"
-   ],
-   "routes": [],
-   "calledBy": [],
-   "routedBy": []
-  },
   "how": {
    "id": "how",
    "type": "skill",
@@ -1193,9 +1129,7 @@
    "repo": null,
    "calls": [],
    "routes": [],
-   "calledBy": [
-    "online-writing"
-   ],
+   "calledBy": [],
    "routedBy": []
   },
   "onboarding-flow": {
@@ -1231,31 +1165,8 @@
    "routes": [],
    "calledBy": [
     "gplay-cli",
-    "hetzner-vm",
     "ossian-mode",
     "setup-ossian-stack"
-   ],
-   "routedBy": []
-  },
-  "online-writing": {
-   "id": "online-writing",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Online Writing",
-   "description": "Write, audit, or revise editorial articles, essays, newsletters, and threads, including headlines and structure. Sales copy belongs to copywriter.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "local",
-   "repo": null,
-   "calls": [
-    "copywriter",
-    "obsidian",
-    "unslop"
-   ],
-   "routes": [],
-   "calledBy": [
-    "copywriter"
    ],
    "routedBy": []
   },
@@ -1271,7 +1182,7 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "babysit",
+    "babysit-pr",
     "codex-first",
     "commit-push-pr",
     "diagnosing-bugs",
@@ -1307,7 +1218,7 @@
    "calls": [
     "architect",
     "autoreview",
-    "babysit",
+    "babysit-pr",
     "blast-radius",
     "commit-push-pr",
     "convex-cli",
@@ -1616,7 +1527,7 @@
    "repo": null,
    "calls": [
     "asc",
-    "babysit",
+    "babysit-pr",
     "commit-push-pr",
     "gplay-cli",
     "resolve-pr-feedback"
@@ -1641,11 +1552,11 @@
    "origin": "adapted",
    "repo": "https://github.com/EveryInc/compound-engineering-plugin",
    "calls": [
-    "babysit"
+    "babysit-pr"
    ],
    "routes": [],
    "calledBy": [
-    "babysit",
+    "babysit-pr",
     "release-ios-app"
    ],
    "routedBy": []
@@ -1696,7 +1607,7 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "babysit",
+    "babysit-pr",
     "continual-learning",
     "diagnosing-bugs",
     "domain-modeling",
@@ -1913,8 +1824,7 @@
    "routes": [],
    "calledBy": [
     "commit-push-pr",
-    "copywriter",
-    "online-writing"
+    "copywriter"
    ],
    "routedBy": []
   },
@@ -1991,7 +1901,7 @@
   }
  },
  "counts": {
-  "skills": 69,
+  "skills": 66,
   "agents": 0,
   "plugins": 1
  }

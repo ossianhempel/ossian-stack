@@ -1,6 +1,6 @@
 ---
 name: copywriter
-description: "Write or improve marketing copy and product UI text: listings, landing pages, ads, social scripts, onboarding, and microcopy. Editorial long-form belongs to online-writing."
+description: "Write or improve marketing copy and product UI text: listings, landing pages, ads, social scripts, onboarding, and microcopy. Editorial long-form is outside this skill."
 ---
 
 # Copywriter
@@ -14,7 +14,7 @@ Choose the job of the text first:
   sell the outcome with real product proof. Use the persuasion principles and
   lever catalogue; never fabricate scarcity, claims, or social proof.
 - **Editorial:** a piece that teaches, argues, or tells without a sales purpose
-  belongs to `online-writing`.
+  belongs to the project's available editorial writing workflow.
 
 Match the user's voice, medium, audience awareness, and requested scope. Preserve
 meaning and verified product facts when rewriting. Keep routine UI text useful
@@ -62,25 +62,21 @@ contains format rules, character limits, structural patterns, and examples.
 If the medium isn't covered, fall back to the core principles below and ask
 Ossian whether to add a new reference file or a section in `swipe-file.md`.
 
-## Boundary: editorial long-form belongs to `online-writing`
+## Boundary: editorial long-form
 
-Threads, newsletters, long posts and multi-paragraph pieces are claimed by both
-skills. **Intent decides, not format:**
+Threads, newsletters, long posts and multi-paragraph pieces can be sales copy or
+editorial work. **Intent decides, not format:**
 
 | The piece exists to... | Skill |
 |---|---|
 | Sell, convert, drive signups or downloads | **This skill** |
-| Teach, argue, or tell - building the library and the audience | `online-writing` |
+| Teach, argue, or tell - building the library and the audience | Use the project's available editorial writing workflow |
 
-That skill runs Nicolas Cole's editorial arc (Headline → Intro → Main Points →
-no conclusion), buries the CTA inside a Main Point rather than giving it the
-spotlight, and treats a closing recap as optional - the deliberate opposite of
-this skill's mandatory Payoff. Both are correct inside their own arc. Don't
-blend them: if a piece has no thing to sell, the Agitate beat has nothing to
-agitate about.
+Do not force the sales arc onto a piece with no thing to sell. The Agitate and
+CTA beats do not belong there.
 
 Hooks are covered in both. Use this skill's Hook Gut Check and awareness stages
-when the hook has to sell; use `online-writing` when it has to open an essay.
+when the hook has to sell; use an editorial writing workflow when it has to open an essay.
 
 ## Workflow
 

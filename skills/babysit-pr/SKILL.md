@@ -1,5 +1,5 @@
 ---
-name: babysit
+name: babysit-pr
 description: "Drive a GitHub or Azure DevOps PR to merge-ready, resolve feedback, or report status. Preserve the requested mode; never merge."
 ---
 

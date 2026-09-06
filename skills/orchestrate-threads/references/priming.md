@@ -135,8 +135,8 @@ rest the agent invokes itself.
   is not authorized, stop before it and report `awaiting delivery` with the
   verified local artifact.
 - For the default completed, non-draft PR flow, `commit-push-pr` owns the handoff
-  to `babysit` drive. Do not add separate `babysit` or `resolve-pr-feedback`
-  steps: `babysit` owns resolver invocation and resumes its watcher afterward.
+  to `babysit-pr` drive. Do not add separate `babysit-pr` or `resolve-pr-feedback`
+  steps: `babysit-pr` owns resolver invocation and resumes its watcher afterward.
 - Preserve explicit local-only, commit-only, push-only, draft, stop-at-PR, and
   other narrow outcomes. In a trunk-direct repo, `commit-push-pr` ends after the
   authorized commit and push.
@@ -152,7 +152,7 @@ rest the agent invokes itself.
   build-thread step. `principle-prove-it-works` (user types) before declaring
   done.
 - For a thread whose starting artifact is an existing PR, route status or
-  readiness work directly to the matching `babysit` mode. This is separate from
+  readiness work directly to the matching `babysit-pr` mode. This is separate from
   the default build closeout above; do not start a second drive.
 - `resolving-merge-conflicts` when a rebase stalls.
 
@@ -186,7 +186,7 @@ rest the agent invokes itself.
   do not send a second message afterward.
 - `one-password` for any secret, never plaintext.
 - Platform skills when the work touches them: `convex-cli`, `clerk-cli`,
-  `revenuecat-api` (user types), `coolify`, `hetzner-vm`, `post-queue-cli`, and
-  the iOS set (`release-ios-app`, `asc`).
+  `revenuecat-api` (user types), `post-queue-cli`, and the iOS set
+  (`release-ios-app`, `asc`).
 - `triage` (user types) only in a thread HQ has explicitly given the tracker's
   inbox.

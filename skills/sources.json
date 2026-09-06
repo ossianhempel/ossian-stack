@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-05",
+  "updated": "2026-09-06",
   "description": "Upstream map for skills/ — the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -37,7 +37,7 @@
       "upstreamRev": "1b52afd0954511b8bfdf680361b1f4bed69f1355",
       "upstreamCheckedAt": "2026-08-27"
     },
-    "babysit": {
+    "babysit-pr": {
       "origin": "adapted",
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/poteto-mode",
@@ -121,11 +121,6 @@
       "origin": "companion",
       "repo": "https://github.com/get-convex/convex-js",
       "notes": "Documents npx convex CLI; no vendored copy. Track Convex CLI release notes. Local audit (2026-09-05): focused description. Preserve on refresh."
-    },
-    "coolify": {
-      "origin": "companion",
-      "repo": "https://github.com/coollabsio/coolify-cli",
-      "notes": "Documents coolify CLI install/usage (see SKILL.md install script). Not a skill copy. Restored 2026-09-03 from agent-scripts after the 1ee0d9f prune; verified free of instance URLs, tokens, and keys before publishing. Local audit (2026-09-05): focused description; task-specific reference routing. Preserve on refresh."
     },
     "copywriter": {
       "origin": "local",
@@ -246,10 +241,6 @@
       "upstreamRev": "d28dfdc39beadc3142a33359b5cfa4765dcbd0bc",
       "upstreamCheckedAt": "2026-08-27"
     },
-    "hetzner-vm": {
-      "origin": "local",
-      "notes": "Authored in agent-scripts (235e6f0) and copied 2026-09-03. Ossian-specific Hetzner VM/SSH access patterns. Sanitized for the open-source release: the VM IP moved to 1Password (op://Development/Hetzner VM/ip) and the list of deployed apps was genericized. Local audit (2026-09-05): focused description. Preserve on refresh."
-    },
     "how": {
       "origin": "adapted",
       "repo": "https://github.com/cursor/plugins",
@@ -298,10 +289,6 @@
       "origin": "companion",
       "repo": "https://developer.1password.com/docs/cli",
       "notes": "Documents op CLI usage patterns for this environment. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description. Preserve on refresh."
-    },
-    "online-writing": {
-      "origin": "local",
-      "notes": "Authored in agent-scripts. Method distilled from Nicolas Cole's 'The Art and Business of Online Writing' via Ossian's Obsidian vault notes (3. Resources/Notes/Online writing.md and linked notes; Readwise highlights). No upstream code vendored. Local audit (2026-09-05): focused description. Preserve on refresh."
     },
     "orchestrate-threads": {
       "origin": "local",

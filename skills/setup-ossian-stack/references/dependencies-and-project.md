@@ -49,7 +49,7 @@ is a bare binary:
 | Session-start hook | `jq` | Without it, the hook exits silently and continual learning never nudges. |
 | Secret retrieval | `op` | Without it, `one-password` cannot retrieve secrets; already-materialized environment values are separate. |
 | Native Apple tooling | `xcodebuild` | Without it, native builds and Simulator captures are blocked. |
-| PR watcher | `bun` | Without it, `babysit` cannot run `watch-pr` and falls back to plain status reporting. |
+| PR watcher | `bun` | Without it, `babysit-pr` cannot run `watch-pr` and falls back to plain status reporting. |
 | Clerk | global/project-local `clerk`, or `bunx`, `npx`, `pnpm dlx`, or `yarn dlx` | A package runner makes Clerk available on demand; lack of a global binary alone is not a failure. |
 | Convex | current-project `convex` through `npx`/`bunx`, or a latest-package runner fallback | A package runner makes Convex available on demand; prefer the project's pinned package when present. |
 | RevenueCat | active RevenueCat MCP, optional verified RevenueCat `rc`, or the bundled Python API helper with `python3` and `RC_API_KEY` | Missing `rc` alone is not degradation and never makes `revenuecat-api` unusable. A command named `rc` is only a candidate until its help identifies the RevenueCat CLI; the unrelated npm configuration package uses the same name. |

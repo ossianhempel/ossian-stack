@@ -74,7 +74,7 @@ reviewer votes, or delete-source-branch flags.
 Read back the created/updated PR and verify identity, head/source, target, draft
 state, and description before reporting. Construct the full Services PR URL from
 that verified organization/project/repository/ID, encoding each component. For a
-normal completed non-draft delivery, invoke `babysit` with that URL, drive outcome,
+normal completed non-draft delivery, invoke `babysit-pr` with that URL, drive outcome,
 and inherited action scope. Azure follows the same lifecycle as GitHub: finish any
 agreed stack build first and resume an existing drive owner rather than starting a
 second one. Report unsupported/inaccessible evidence as a limitation, never READY.
