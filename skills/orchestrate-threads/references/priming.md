@@ -147,7 +147,7 @@ rest the agent invokes itself.
 - `autoreview` before every commit that will become a PR.
 - The project's own verification skill, if the repo has one, to prove the
   change in the real app by driving the feature the change touched. If there
-  is none, say so in the report rather than generating one: `close-the-loop`
+  is none, say so in the report rather than generating one: `create-verification-skill`
   (user types) is a one-time generator HQ has run once per repo, not a
   build-thread step. `principle-prove-it-works` (user types) before declaring
   done.

@@ -70,7 +70,7 @@ created lazily on purpose; pre-creating them is a mistake**, because an empty
 - `GLOSSARY.md`, `GLOSSARY-MAP.md`, `docs/adr/` — `domain-modeling` creates these
   the moment it has something real to write, and `diagnosing-bugs` reads whichever
   exists. Do not create them here. Do not create them empty ever.
-- A project-local skills directory — `close-the-loop` resolves or creates it when
+- A project-local skills directory — `create-verification-skill` resolves or creates it when
   it generates a verifier. Leave it alone until then.
 - `.env`, `.env.local` and friends — the project's own, never ours to write.
 - **`.ios-release.env` is the exception.** `release-ios-app` reads it first and
@@ -84,5 +84,5 @@ Report what is missing and who creates it. Create nothing in this step.
 If the project has no `verify-*` skill or equivalent harness that can drive the
 real product surface, offer once: "Want a project-local verification skill so
 agents can exercise the app like a user and prove changes work? Invoke
-`/close-the-loop` and I will generate one." This is optional setup. On no, move
+`/create-verification-skill` and I will generate one." This is optional setup. On no, move
 on without asking again or treating the missing verifier as a general blocker.

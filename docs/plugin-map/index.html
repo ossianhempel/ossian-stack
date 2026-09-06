@@ -234,7 +234,7 @@
       "writes": "review findings"
      },
      {
-      "id": "close-the-loop",
+      "id": "create-verification-skill",
       "writes": "proof it works"
      },
      {
@@ -476,7 +476,7 @@
    "bro",
    "continual-learning",
    "codify-conventions",
-   "maintain-close-the-loop",
+   "maintain-verification-skill",
    "skill-creator",
    "skill-cleaner"
   ],
@@ -660,25 +660,6 @@
     "skill-creator"
    ]
   },
-  "close-the-loop": {
-   "id": "close-the-loop",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Close the Loop",
-   "description": "Create and prove a project-local verification skill that launches and drives the real app, CLI, or service.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/cursor/plugins",
-   "calls": [],
-   "calledBy": [
-    "diagnosing-bugs",
-    "ossian-mode",
-    "prototype",
-    "setup-ossian-stack"
-   ]
-  },
   "codex-first": {
    "id": "codex-first",
    "type": "skill",
@@ -805,6 +786,25 @@
     "online-writing"
    ]
   },
+  "create-verification-skill": {
+   "id": "create-verification-skill",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Create Verification Skill",
+   "description": "Create and prove a project-local verification skill that launches and drives the real app, CLI, or service.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "calledBy": [
+    "diagnosing-bugs",
+    "ossian-mode",
+    "prototype",
+    "setup-ossian-stack"
+   ]
+  },
   "diagnosing-bugs": {
    "id": "diagnosing-bugs",
    "type": "skill",
@@ -817,7 +817,7 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [
-    "close-the-loop",
+    "create-verification-skill",
     "how",
     "why",
     "principle-exhaust-the-design-space",
@@ -1056,11 +1056,11 @@
     "skill-creator"
    ]
   },
-  "maintain-close-the-loop": {
-   "id": "maintain-close-the-loop",
+  "maintain-verification-skill": {
+   "id": "maintain-verification-skill",
    "type": "skill",
    "plugin": "ossian-stack",
-   "display": "Maintain Close the Loop",
+   "display": "Maintain Verification Skill",
    "description": "Audit and repair a project's verification skill and feature map against source and live behavior. Explicit invocation only.",
    "role": "human",
    "humanOnly": true,
@@ -1197,7 +1197,7 @@
     "babysit",
     "release-ios-app",
     "autoreview",
-    "close-the-loop",
+    "create-verification-skill",
     "principle-prove-it-works",
     "principle-fix-root-causes",
     "principle-sequence-verifiable-units",
@@ -1380,7 +1380,7 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [
-    "close-the-loop",
+    "create-verification-skill",
     "principle-exhaust-the-design-space"
    ],
    "calledBy": [
@@ -1498,7 +1498,7 @@
    "repo": null,
    "calls": [
     "babysit",
-    "close-the-loop",
+    "create-verification-skill",
     "continual-learning",
     "diagnosing-bugs",
     "domain-modeling",

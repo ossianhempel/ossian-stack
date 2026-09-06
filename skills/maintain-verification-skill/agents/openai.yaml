@@ -1,5 +1,5 @@
 interface:
-  display_name: "Maintain Close the Loop"
+  display_name: "Maintain Verification Skill"
   short_description: "Keep the verification skill and feature map honest"
 policy:
   allow_implicit_invocation: false

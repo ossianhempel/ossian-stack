@@ -25,7 +25,7 @@ the decision.
 | Upstream | Here |
 | --- | --- |
 | `exhaust-the-design-space` principle skill | `principle-exhaust-the-design-space` |
-| the control skill, for driving the surface | `close-the-loop` |
+| the control skill, for driving the surface | `create-verification-skill` |
 | Laziness Protocol | stated inline; folded into `simplify-code`, not shipped standalone |
 | `Feature` playbook, `architect` skill | dropped — the handoff is stated plainly instead |
 

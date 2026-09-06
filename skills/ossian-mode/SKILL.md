@@ -46,7 +46,7 @@ explicit-only deeper references; the rules here do not depend on invoking them.
 If the project has a `verify-*` skill or equivalent control harness, use it for
 every user-facing feature this change touched. If it has none, use the strongest
 real surface available and report the reusable verification gap. Offer the user
-`/close-the-loop` once; do not generate it implicitly or make accepting the offer
+`/create-verification-skill` once; do not generate it implicitly or make accepting the offer
 a condition of finishing work that can already be verified.
 
 Before delivery, complete this behavioral proof as well as the relevant focused

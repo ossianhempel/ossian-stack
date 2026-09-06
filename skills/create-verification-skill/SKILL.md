@@ -1,10 +1,10 @@
 ---
-name: close-the-loop
+name: create-verification-skill
 description: "Create and prove a project-local verification skill that launches and drives the real app, CLI, or service."
 disable-model-invocation: true
 ---
 
-# Close the Loop
+# Create Verification Skill
 
 Every serious project needs a scripted way to drive the real app and prove behavior: launch it, exercise a feature the way a user would, and capture evidence. Without it an agent can tell you it finished, never that it worked — repeated prompting rather than a loop. This skill generates the missing check as a project-local skill (`<skills-dir>/verify-<app>/`) tailored to the repo. You write the generator's output for the next agent, not for a human: it will be read cold, mid-task, by an agent that has never seen the app.
 
@@ -53,4 +53,4 @@ Run its own instructions end to end once: launch, doctor, drive ONE mapped featu
 
 ## 5. Offer the maintenance loop
 
-Point the user at `/maintain-close-the-loop` for keeping the map honest as the app changes. Suggest a cadence only if they ask.
+Point the user at `/maintain-verification-skill` for keeping the map honest as the app changes. Suggest a cadence only if they ask.

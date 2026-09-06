@@ -99,7 +99,7 @@ observe the thing you are deciding: log the timing, print the output, watch the
 render.
 
 **The observation is the test here**, not an assertion. If the project has no
-scripted way to drive its own surface, `close-the-loop` builds one.
+scripted way to drive its own surface, `create-verification-skill` builds one.
 
 ## 8. Present, then capture
 

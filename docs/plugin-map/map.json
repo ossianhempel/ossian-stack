@@ -67,7 +67,7 @@
     "clerk-cli": {
       "role": "both"
     },
-    "close-the-loop": {
+    "create-verification-skill": {
       "role": "human"
     },
     "codex-first": {
@@ -133,7 +133,7 @@
     "ios-marketing-capture": {
       "role": "both"
     },
-    "maintain-close-the-loop": {
+    "maintain-verification-skill": {
       "role": "human"
     },
     "obsidian": {
@@ -265,7 +265,7 @@
       "unslop"
     ],
     "diagnosing-bugs": [
-      "close-the-loop",
+      "create-verification-skill",
       "how",
       "why",
       "principle-exhaust-the-design-space",
@@ -319,14 +319,14 @@
       "babysit",
       "release-ios-app",
       "autoreview",
-      "close-the-loop",
+      "create-verification-skill",
       "principle-prove-it-works",
       "principle-fix-root-causes",
       "principle-sequence-verifiable-units",
       "gplay-cli"
     ],
     "prototype": [
-      "close-the-loop",
+      "create-verification-skill",
       "principle-exhaust-the-design-space"
     ],
     "refactoring": [
@@ -349,7 +349,7 @@
     ],
     "setup-ossian-stack": [
       "babysit",
-      "close-the-loop",
+      "create-verification-skill",
       "continual-learning",
       "diagnosing-bugs",
       "domain-modeling",
@@ -485,7 +485,7 @@
             "writes": "review findings"
           },
           {
-            "id": "close-the-loop",
+            "id": "create-verification-skill",
             "writes": "proof it works"
           },
           {
@@ -727,7 +727,7 @@
       "bro",
       "continual-learning",
       "codify-conventions",
-      "maintain-close-the-loop",
+      "maintain-verification-skill",
       "skill-creator",
       "skill-cleaner"
     ],

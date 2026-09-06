@@ -47,7 +47,7 @@ up.**
 that says to ask the user does not override this; you drive the instrumented
 runtime. Ask only with a stated, specific reason you cannot reach the target, and
 only after driving it as far as it goes. If the project has a verification skill,
-that is your surface — reach for `close-the-loop` when it has none and the bug
+that is your surface — reach for `create-verification-skill` when it has none and the bug
 lives behind a UI, CLI, or service you cannot otherwise drive.
 
 ### Ways to construct one, in roughly this order
