@@ -108,6 +108,16 @@ keep durable decisions in the ticket/spec and link detailed evidence. Reconcile
 material state differences within the thread's permissions; a new HQ report alone
 does not require a tracker comment. Tracker updates are not delivery evidence.
 
+For implementation and diagnosis, compare the report's `Evidence` field with
+the proof contract in the brief. HQ cannot accept `done` when required proof is
+missing, including when the only evidence is a PR plus green CI but the brief
+required behavioral proof. Keep the row open and return the same task to its
+owning thread to gather the named evidence. Repeat the original surface, state,
+and evidence type exactly; do not add a new test, demand an image diff for
+ordinary visual work, or otherwise raise the proof bar. If the report says
+`unverified: <reason>`, record that limitation and classify the work from the
+brief's done condition instead of silently treating it as proved.
+
 If the report asks a question, HQ answers it by message to that thread when the
 runtime allows, otherwise hands the user the answer to paste. If it needs a human
 decision, that goes in the ledger's blocked list and in HQ's next reply, named by

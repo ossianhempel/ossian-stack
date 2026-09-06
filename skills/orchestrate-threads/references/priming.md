@@ -21,6 +21,13 @@ You are the `<Project> · <workstream>` thread. Your HQ is the thread
 ## Goal
 <one paragraph: what done looks like, in behavior, not steps>
 
+## Proof contract
+- Behavior or claim: <what this work must prove>
+- Real surface and state: <web page, iOS flow, API, CLI, logs, or not applicable;
+  include the starting state when it matters>
+- Expected evidence: <screenshots/recording/baseline-result-diff | logs/commands/API
+  results | another explicit type>
+
 ## Scope
 - In: <bullets>
 - Out: <bullets — what you must not touch or gold-plate>
@@ -69,6 +76,8 @@ waiting for HQ to ask:
 - State: done | blocked | stuck | needs human | at authorized stop
 - Artifact: <PR, commit, doc link>
 - Delivery: <remaining commit/push/merge step, or evidence it reached its destination>
+- Evidence: <visual or nonvisual proof required by the brief, with links/results;
+  or `unverified: <reason>`>
 - What changed, in five lines or fewer
 - What HQ must decide or the user must do, if anything
 - Continuation: <complete | ask the user to type /handoff so this thread can continue>

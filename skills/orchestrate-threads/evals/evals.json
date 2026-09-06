@@ -382,6 +382,42 @@
         "The newly specific permission request triggers one proactive needs-human report to the exact recorded HQ address.",
         "The report contains the decision/input needed and does not include routine progress chatter."
       ]
+    },
+    {
+      "id": 31,
+      "name": "visual-web-ios-evidence",
+      "prompt": "Source simulation only; do not execute tools. HQ delegates two implementation workstreams. The web workstream changes a responsive checkout modal and must prove the open/close behavior at mobile and desktop widths. The iOS workstream fixes a swipe action in the real Simulator from a signed-in state. Write the proof contracts and Evidence report expectations. Neither task is matching a fixed visual reference.",
+      "expected_output": "Each brief names the behavior, real surface and starting state, and visual evidence expected. Web accepts screenshots or a recording at both widths; iOS accepts Simulator screenshots or a recording of the signed-in swipe flow. Neither requires visual-parity or an image diff because there is no fixed reference.",
+      "files": [],
+      "assertions": [
+        "The web proof contract names modal open/close behavior, mobile and desktop browser states, and screenshots or recording as acceptable evidence.",
+        "The iOS proof contract names the signed-in real Simulator swipe flow and screenshots or recording as acceptable evidence.",
+        "Neither ordinary visual task requires visual-parity, a baseline, or an image diff without a fixed reference."
+      ]
+    },
+    {
+      "id": 32,
+      "name": "nonvisual-evidence",
+      "prompt": "Source simulation only; do not execute tools. HQ delegates diagnosis of a webhook retry bug that has no visual surface. The claim to prove is that duplicate delivery is suppressed after a timeout while a genuine later event is still accepted. Production mutation is forbidden; replay logs and a local API harness are available. Write the proof contract and return report requirement.",
+      "expected_output": "The brief names the duplicate-suppression and later-event claim, the safe replay/harness state, and expects nonvisual logs, commands, or API results. The structured report contains one Evidence field with those results or an explicit unverified reason.",
+      "files": [],
+      "assertions": [
+        "The proof contract names both the duplicate suppression and genuine later-event acceptance claims.",
+        "The real surface/state is the safe replay logs and local API harness, with no production mutation.",
+        "The report has one Evidence field accepting logs, commands, API results, or `unverified: reason`."
+      ]
+    },
+    {
+      "id": 33,
+      "name": "green-ci-without-behavioral-proof",
+      "prompt": "Source simulation only; do not execute tools. A web implementation brief required a recording of keyboard checkout on the deployed preview from an empty cart. The workstream reports State: done, Artifact: PR #42, Evidence: all CI checks green. Describe HQ acceptance and next action.",
+      "expected_output": "HQ does not accept done or archive the task. It keeps the row open and returns the same task to the owning thread to record keyboard checkout on the deployed preview from an empty cart. It repeats the original proof contract without adding tests, requiring an image diff, or otherwise raising the bar.",
+      "files": [],
+      "assertions": [
+        "PR #42 plus green CI is not accepted as behavioral proof required by the brief; the row remains open.",
+        "HQ sends the same workstream back to gather the deployed-preview keyboard recording from an empty cart.",
+        "HQ preserves the original proof bar and does not add tests, image diffs, or a new requirement."
+      ]
     }
   ]
 }

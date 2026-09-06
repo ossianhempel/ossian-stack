@@ -10,8 +10,14 @@ goal, the done condition, scope boundaries, the project facts the thread cannot
 derive, the skills it should invoke and when, and the exact shape of the report
 it owes HQ. Copy the user's action scope into it: allowed edits, tracker choice,
 working environment, branching rule, delivery actions, and the first action the
-thread must not take. Delegation carries existing authorization; it does not add
-commit, push, PR, issue, publish, release, or merge permission.
+thread must not take. For implementation and diagnosis, name the behavior or
+claim to prove, the real surface and starting state when one applies, and the
+expected evidence type. Accept visual evidence (screenshots, recordings, or
+baseline/result/diff captures), nonvisual evidence (logs, commands, or API
+results), or `unverified: <reason>` when proof cannot be obtained. Use an image
+diff only when fixed-reference matching actually calls for `visual-parity`.
+Delegation carries existing authorization; it does not add commit, push, PR,
+issue, publish, release, or merge permission.
 
 Every initial kickoff and every later assignment or follow-up sent to an existing
 workstream carries a return contract. This includes the next item sent to an idle
