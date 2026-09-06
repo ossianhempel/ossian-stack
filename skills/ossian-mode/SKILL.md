@@ -22,6 +22,8 @@ the current work.
   keep the user informed while work is in progress.
 - Prefer simple changes that address the underlying condition. Add only what
   the evidence and the requested outcome require.
+- For parallel work, use same-task candidates only when selection and synthesis
+  matter. Partition coverage across disjoint slices. Isolate every writing worker.
 
 ## Verification
 
@@ -61,11 +63,16 @@ to implementation; its size alone does not require a planning detour.
 | Current need | Route |
 | --- | --- |
 | Questions or investigation | `how` for behavior and ownership; `why` for rationale and evidence. A question alone does not authorize a change. |
-| Diagnosis | `diagnosing-bugs` for broken behavior or regressions. Carry a request to fix through diagnosis, correction, and verification; keep a diagnosis-only request bounded. |
-| Unsettled design | `grilling` for decisions, `prototype` for a concrete comparison. Once decisions are settled, `to-spec` can capture them when explicitly invoked and its tracker prerequisites are met. |
-| Implementation | Implement the agreed scope directly. Load a relevant platform or craft skill only where needed, such as `convex-cli` for Convex operations or `emil-design-eng` for UI craft. |
+| Diagnosis | `diagnosing-bugs` for broken behavior. Use `performance` for latency, CPU, memory, energy, frame time, throughput, or captured profiles. Preserve diagnosis-only scope. |
+| Unsettled design | `grilling` for product decisions, `prototype` for observable alternatives, and `architect` for caller contracts and module boundaries. Once decisions are settled, `to-spec` can capture them when explicitly invoked and its tracker prerequisites are met. |
+| Implementation | Implement the agreed scope directly. For cross-boundary work settle caller usage and the data shape through `architect`. Load a relevant platform or craft skill only where needed. Use `visual-parity` when a UI must match a fixed reference. |
 | Refactoring | `refactoring` for structural changes with behavior preserved; `simplify-code` for readability in place. |
-| Delivery | `commit-push-pr` for requested commits, pushes, and PRs; `babysit` for an existing PR's requested status or readiness work; `release-ios-app` for an authorized iOS release. |
+| Delivery | Use `blast-radius` before delivery when safety depends on behavior beyond the diff. Use `commit-push-pr` for requested commits, pushes, and PRs; `babysit` for an existing PR's readiness work; `release-ios-app` for an authorized iOS release. |
+
+For a long or unattended run with several consequential decisions, use
+`show-me-your-work`. Do not add a decision log to routine work. Keep
+`orchestrate-threads` reserved for standing projects with multiple visible
+workstreams.
 
 Use the project's tracker and ticket conventions when the work calls for tracked
 delivery or the user requests tickets. Tracker availability and delegation alone

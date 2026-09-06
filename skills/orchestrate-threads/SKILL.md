@@ -14,6 +14,10 @@ back, and tells the user what needs a human. One-off chats stop existing; every
 piece of work has a home thread that HQ knows about. On GitHub Copilot, the
 checkout boundary below also excludes trivial implementation edits.
 
+This is special-case machinery for a standing project with several durable,
+visible workstreams. It is not the default route for ordinary multi-step work or
+bounded subagent delegation. When one session can own the goal, keep it there.
+
 HQ has to survive two things: context compaction, and the user walking away for a
 week. Both are solved the same way. Nothing HQ knows lives only in this chat. The
 ledger (`references/ledger.md`) is HQ's thread registry: which thread owns which
@@ -29,6 +33,11 @@ issues. For tracked work, link the tickets from the ledger rather than duplicati
 them. For untracked work, link the brief, report, and resulting artifacts.
 
 On each invocation, read the ledger and the bootstrap reference to establish whether this is bootstrap or reorientation. Carry inherited authority and exclusions into every brief. Use the monitoring reference while following active workstreams; keep outcomes and ownership durable in the ledger.
+
+For an unattended workstream with several consequential decisions, the brief may
+reference `show-me-your-work`; the workstream owns that trail and links it from the
+HQ ledger. Use `handoff` only when a workstream must pause or move sessions. HQ
+does not create either artifact for routine status tracking.
 
 ## GitHub Copilot HQ checkout boundary
 

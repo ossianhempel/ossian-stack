@@ -13,7 +13,7 @@ one SVG board from a JSON block that `scripts/build-plugin-map.js` injects.
 
 | File | Role |
 | --- | --- |
-| `map.json` | Hand-curated: a role per skill, a kind per subagent, the `calls` graph, and the `sections` that say where each id is drawn. No descriptions — those come from frontmatter. |
+| `map.json` | Hand-curated: a role per skill, `calls` for executable composition, `routes` for explicit user handoffs, and the `sections` that say where each id is drawn. No descriptions — those come from frontmatter. |
 | `scripts/build-plugin-map.js` | Walks `skills/` (and `agents/` if it ever exists), reads name, description and invocation flags from frontmatter plus origin from `sources.json`, merges with `map.json`, and rewrites the block between `<!-- plugin-map:begin -->` and `<!-- plugin-map:end -->` in `index.html`. `--check` fails instead of writing. |
 | `index.html` | Self-contained page. No framework, no fetches, works from `file://`. Hover lights a node with everything it runs and everything that runs it; click opens a drawer; `?expanded=1` draws the collapsed groups. |
 | `scripts/render-plugin-map.sh` | Headless Chrome screenshot at 2000px wide, once collapsed (`map.png`) and once expanded (`map-expanded.png`). |
@@ -42,6 +42,11 @@ one SVG board from a JSON block that `scripts/build-plugin-map.js` injects.
 Every id must appear in exactly one section. The builder fails otherwise, and also
 when a skill on disk is missing from `map.json`, when `map.json` names something
 that no longer exists, or when the HTML block is stale.
+
+Use `calls` only when the source skill may load, dispatch, or apply the target.
+Use `routes` when it recommends an explicit-only skill for the user to invoke.
+This distinction keeps the diagram from implying authority the caller does not
+have.
 
 ## Loop
 

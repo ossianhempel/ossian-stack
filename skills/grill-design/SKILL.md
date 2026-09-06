@@ -15,3 +15,7 @@ Run a `/grilling` session, using the `/prototype` skill — each question is ask
 - The grilling walks down the visual design tree, each verdict zooming in
   one level: the overall design, then component groups, then individual
   components — until the user has designed the entire feature in detail.
+
+After the user chooses a reference, use `visual-parity` when implementation must
+match it precisely. The prototype settles taste; visual parity owns controlled
+captures and the measurable convergence loop.

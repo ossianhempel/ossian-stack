@@ -38,6 +38,13 @@ So the bias is `principle-subtract-before-you-add`: remove and correct first,
 sharpen second, append last. Short-lived, task-specific, or already-enforced facts
 are the failure mode to guard against, not the material to collect.
 
+Classify each durable lesson before editing. A repository convention belongs in
+the project's active instructions or `CONVENTIONS.md` through
+`codify-conventions`. A repeated mechanical rule belongs in a lint, hook, or
+script. A reusable task workflow belongs in an existing skill through
+`skill-creator`. A one-off fact belongs only in the task artifact. Do not copy one
+lesson into several destinations.
+
 ## Guardrails
 
 - Keep transcript contents in the subagent when available. The inline fallback

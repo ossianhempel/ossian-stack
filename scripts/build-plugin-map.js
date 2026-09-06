@@ -10,7 +10,7 @@
  *   skills/<name>/agents/openai.yaml     display_name
  *   skills/sources.json                  origin + upstream repo
  *   agents/<name>.md (optional)          subagents, if the plugin ever ships any
- *   docs/plugin-map/map.json             role, kind, calls graph, board sections
+ *   docs/plugin-map/map.json             role, calls/routes graph, board sections
  *
  * Fails when a skill or agent on disk is missing from map.json, when map.json
  * names something that no longer exists, when an id is placed in zero or two
@@ -105,6 +105,10 @@ for (const [from, tos] of Object.entries(map.calls)) {
   if (!known.has(from)) fail(`map.json calls."${from}" is not a known skill or agent`);
   for (const to of tos) if (!known.has(to)) fail(`map.json calls."${from}" names unknown "${to}"`);
 }
+for (const [from, tos] of Object.entries(map.routes ?? {})) {
+  if (!known.has(from)) fail(`map.json routes."${from}" is not a known skill or agent`);
+  for (const to of tos) if (!known.has(to)) fail(`map.json routes."${from}" names unknown "${to}"`);
+}
 
 // Every id is drawn exactly once.
 const placed = new Map();
@@ -146,6 +150,7 @@ for (const id of diskSkills) {
     origin: src.origin ?? null,
     repo: src.repo ?? null,
     calls: map.calls[id] ?? [],
+    routes: map.routes?.[id] ?? [],
   };
   if (!nodes[id].description) fail(`skills/${id}/SKILL.md: frontmatter has no description`);
   if (nodes[id].humanOnly && !["human", "knowledge"].includes(curated.role)) {
@@ -157,7 +162,7 @@ for (const id of diskSkills) {
   // Sibling references in the SKILL.md that map.json does not record as calls.
   const body = read(path.join(skillsDir, id, "SKILL.md"));
   const refs = new Set([...body.matchAll(/`([a-z0-9-]+)`/g)].map((m) => m[1]).filter((t) => t !== id && diskSkills.includes(t)));
-  for (const r of refs) if (!(map.calls[id] ?? []).includes(r)) warn(`${id}: SKILL.md mentions \`${r}\` but map.json calls does not`);
+  for (const r of refs) if (!(map.calls[id] ?? []).includes(r) && !(map.routes?.[id] ?? []).includes(r)) warn(`${id}: SKILL.md mentions \`${r}\` but map.json calls/routes does not`);
 }
 for (const id of diskAgents) {
   if (!map.agents[id]) continue; // already reported above
@@ -175,11 +180,14 @@ for (const id of diskAgents) {
     origin: null,
     repo: null,
     calls: map.calls[id] ?? [],
+    routes: map.routes?.[id] ?? [],
   };
 }
 // Reverse edges.
 for (const n of Object.values(nodes)) n.calledBy = [];
 for (const n of Object.values(nodes)) for (const to of n.calls) nodes[to]?.calledBy.push(n.id);
+for (const n of Object.values(nodes)) n.routedBy = [];
+for (const n of Object.values(nodes)) for (const to of n.routes) nodes[to]?.routedBy.push(n.id);
 
 const data = {
   generated: "scripts/build-plugin-map.js",

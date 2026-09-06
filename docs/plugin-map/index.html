@@ -216,17 +216,27 @@
    {
     "id": "build",
     "title": "Build, review, ship a PR",
-    "outcome": "change the code",
+    "outcome": "change + real-surface proof",
     "tag": "Agent workflow",
     "steps": [
      {
-      "id": "diagnosing-bugs"
+      "id": "architect",
+      "optional": true
      },
      {
-      "id": "refactoring"
+      "id": "diagnosing-bugs",
+      "optional": true
+     },
+     {
+      "id": "refactoring",
+      "optional": true
      },
      {
       "id": "simplify-code",
+      "optional": true
+     },
+     {
+      "id": "performance",
       "optional": true
      },
      {
@@ -234,8 +244,8 @@
       "writes": "review findings"
      },
      {
-      "id": "create-verification-skill",
-      "writes": "proof it works"
+      "id": "blast-radius",
+      "optional": true
      },
      {
       "id": "commit-push-pr",
@@ -255,7 +265,12 @@
       "writes": "handoff note"
      }
     ],
-    "extras": []
+    "extras": [
+     {
+      "id": "create-verification-skill",
+      "note": "when a reusable harness is missing"
+     }
+    ]
    },
    {
     "id": "ship-ios",
@@ -321,6 +336,11 @@
       "id": "frontend-slides",
       "optional": true,
       "writes": "HTML deck"
+     },
+     {
+      "id": "visual-parity",
+      "optional": true,
+      "writes": "image-diff proof"
      }
     ],
     "extras": []
@@ -478,7 +498,8 @@
    "codify-conventions",
    "maintain-verification-skill",
    "skill-creator",
-   "skill-cleaner"
+   "skill-cleaner",
+   "show-me-your-work"
   ],
   "knowledge": {
    "title": "Principles",
@@ -510,7 +531,34 @@
     "asc-metadata",
     "gplay-cli"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
+  "architect": {
+   "id": "architect",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Architect",
+   "description": "Settle caller usage, types, signatures, and module ownership before implementing code that crosses boundaries.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "how",
+    "principle-exhaust-the-design-space",
+    "principle-model-the-domain",
+    "principle-redesign-from-first-principles",
+    "why"
+   ],
+   "routes": [],
+   "calledBy": [
+    "ossian-mode",
+    "refactoring"
+   ],
+   "routedBy": []
   },
   "asc-metadata": {
    "id": "asc-metadata",
@@ -524,10 +572,12 @@
    "origin": "adapted",
    "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "app-store-optimization",
     "release-ios-app"
-   ]
+   ],
+   "routedBy": []
   },
   "asc-pricing": {
    "id": "asc-pricing",
@@ -541,7 +591,9 @@
    "origin": "adapted",
    "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "asc-release": {
    "id": "asc-release",
@@ -557,9 +609,11 @@
    "calls": [
     "release-ios-app"
    ],
+   "routes": [],
    "calledBy": [
     "release-ios-app"
-   ]
+   ],
+   "routedBy": []
   },
   "asc-version-guard": {
    "id": "asc-version-guard",
@@ -573,7 +627,9 @@
    "origin": "local",
    "repo": null,
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "autoreview": {
    "id": "autoreview",
@@ -586,11 +642,15 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/openclaw/agent-skills",
-   "calls": [],
+   "calls": [
+    "blast-radius"
+   ],
+   "routes": [],
    "calledBy": [
     "commit-push-pr",
     "ossian-mode"
-   ]
+   ],
+   "routedBy": []
   },
   "babysit": {
    "id": "babysit",
@@ -607,6 +667,7 @@
     "commit-push-pr",
     "resolve-pr-feedback"
    ],
+   "routes": [],
    "calledBy": [
     "commit-push-pr",
     "orchestrate-threads",
@@ -614,7 +675,8 @@
     "release-ios-app",
     "resolve-pr-feedback",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "better-accessibility": {
    "id": "better-accessibility",
@@ -628,7 +690,34 @@
    "origin": "vendored",
    "repo": "https://github.com/jakubkrehel/skills",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
+  "blast-radius": {
+   "id": "blast-radius",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Blast Radius",
+   "description": "Find what a change could break beyond its diff and prove the safety assumptions that matter before delivery.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "how",
+    "principle-prove-it-works",
+    "why"
+   ],
+   "routes": [],
+   "calledBy": [
+    "autoreview",
+    "commit-push-pr",
+    "ossian-mode",
+    "refactoring"
+   ],
+   "routedBy": []
   },
   "bro": {
    "id": "bro",
@@ -642,7 +731,9 @@
    "origin": "vendored",
    "repo": "https://github.com/dmmulroy/skills",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "clerk-cli": {
    "id": "clerk-cli",
@@ -656,9 +747,11 @@
    "origin": "adapted",
    "repo": "https://github.com/clerk/skills",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "skill-creator"
-   ]
+   ],
+   "routedBy": []
   },
   "codex-first": {
    "id": "codex-first",
@@ -672,9 +765,11 @@
    "origin": "adapted",
    "repo": "https://github.com/steipete/agent-scripts",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "orchestrate-threads"
-   ]
+   ],
+   "routedBy": []
   },
   "codify-conventions": {
    "id": "codify-conventions",
@@ -688,9 +783,16 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "grilling"
+    "continual-learning",
+    "grilling",
+    "skill-creator"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [
+    "continual-learning",
+    "skill-creator"
+   ],
+   "routedBy": []
   },
   "commit-push-pr": {
    "id": "commit-push-pr",
@@ -706,15 +808,18 @@
    "calls": [
     "autoreview",
     "babysit",
+    "blast-radius",
     "git-cleanup",
     "unslop"
    ],
+   "routes": [],
    "calledBy": [
     "babysit",
     "orchestrate-threads",
     "ossian-mode",
     "release-ios-app"
-   ]
+   ],
+   "routedBy": []
   },
   "continual-learning": {
    "id": "continual-learning",
@@ -728,11 +833,18 @@
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [
-    "principle-subtract-before-you-add"
+    "codify-conventions",
+    "principle-encode-lessons-in-structure",
+    "principle-subtract-before-you-add",
+    "skill-creator"
    ],
+   "routes": [],
    "calledBy": [
-    "setup-ossian-stack"
-   ]
+    "codify-conventions",
+    "setup-ossian-stack",
+    "skill-creator"
+   ],
+   "routedBy": []
   },
   "convex-cli": {
    "id": "convex-cli",
@@ -746,9 +858,11 @@
    "origin": "companion",
    "repo": "https://github.com/get-convex/convex-js",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "ossian-mode"
-   ]
+   ],
+   "routedBy": []
   },
   "coolify": {
    "id": "coolify",
@@ -762,9 +876,11 @@
    "origin": "companion",
    "repo": "https://github.com/coollabsio/coolify-cli",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "hetzner-vm"
-   ]
+   ],
+   "routedBy": []
   },
   "copywriter": {
    "id": "copywriter",
@@ -781,10 +897,12 @@
     "online-writing",
     "unslop"
    ],
+   "routes": [],
    "calledBy": [
     "onboarding-flow",
     "online-writing"
-   ]
+   ],
+   "routedBy": []
   },
   "create-verification-skill": {
    "id": "create-verification-skill",
@@ -798,7 +916,13 @@
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
+   "routes": [
+    "maintain-verification-skill"
+   ],
    "calledBy": [
+    "visual-parity"
+   ],
+   "routedBy": [
     "diagnosing-bugs",
     "ossian-mode",
     "prototype",
@@ -817,18 +941,21 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [
-    "create-verification-skill",
     "how",
-    "why",
     "principle-exhaust-the-design-space",
     "principle-fix-root-causes",
-    "principle-prove-it-works"
+    "principle-prove-it-works",
+    "why"
+   ],
+   "routes": [
+    "create-verification-skill"
    ],
    "calledBy": [
     "orchestrate-threads",
     "ossian-mode",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "domain-modeling": {
    "id": "domain-modeling",
@@ -842,12 +969,14 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "grill-with-docs",
     "setup-ossian-stack",
     "triage",
     "wayfinder"
-   ]
+   ],
+   "routedBy": []
   },
   "emil-design-eng": {
    "id": "emil-design-eng",
@@ -861,9 +990,11 @@
    "origin": "adapted",
    "repo": "https://github.com/emilkowalski/skills",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "ossian-mode"
-   ]
+   ],
+   "routedBy": []
   },
   "frontend-slides": {
    "id": "frontend-slides",
@@ -877,7 +1008,9 @@
    "origin": "adapted",
    "repo": "https://github.com/zarazhangrui/frontend-slides",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "git-cleanup": {
    "id": "git-cleanup",
@@ -891,10 +1024,12 @@
    "origin": "local",
    "repo": null,
    "calls": [],
+   "routes": [],
    "calledBy": [
     "commit-push-pr",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "gplay-cli": {
    "id": "gplay-cli",
@@ -910,11 +1045,13 @@
    "calls": [
     "one-password"
    ],
+   "routes": [],
    "calledBy": [
     "app-store-optimization",
     "ossian-mode",
     "release-ios-app"
-   ]
+   ],
+   "routedBy": []
   },
   "grill-design": {
    "id": "grill-design",
@@ -927,8 +1064,12 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/will-ness-ai/skills",
-   "calls": [],
-   "calledBy": []
+   "calls": [
+    "visual-parity"
+   ],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "grill-me": {
    "id": "grill-me",
@@ -944,7 +1085,9 @@
    "calls": [
     "grilling"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "grill-with-docs": {
    "id": "grill-with-docs",
@@ -958,10 +1101,12 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [
-    "grilling",
-    "domain-modeling"
+    "domain-modeling",
+    "grilling"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "grilling": {
    "id": "grilling",
@@ -975,6 +1120,7 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "codify-conventions",
     "grill-me",
@@ -983,23 +1129,28 @@
     "ossian-mode",
     "triage",
     "wayfinder"
-   ]
+   ],
+   "routedBy": []
   },
   "handoff": {
    "id": "handoff",
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Handoff",
-   "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+   "description": "Pause work at a safe boundary or resume it from a durable handoff reconciled with live repository state.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": "What will the next session be used for?",
    "origin": "vendored",
    "repo": "https://github.com/mattpocock/skills",
-   "calls": [],
+   "calls": [
+    "show-me-your-work"
+   ],
+   "routes": [],
    "calledBy": [
     "orchestrate-threads"
-   ]
+   ],
+   "routedBy": []
   },
   "hetzner-vm": {
    "id": "hetzner-vm",
@@ -1013,10 +1164,12 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "one-password",
-    "coolify"
+    "coolify",
+    "one-password"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "how": {
    "id": "how",
@@ -1029,14 +1182,20 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
-   "calls": [
+   "calls": [],
+   "routes": [
     "why"
    ],
    "calledBy": [
+    "architect",
+    "blast-radius",
     "diagnosing-bugs",
     "ossian-mode",
+    "performance",
     "refactoring",
-    "teach",
+    "teach"
+   ],
+   "routedBy": [
     "why"
    ]
   },
@@ -1052,9 +1211,11 @@
    "origin": "adapted",
    "repo": "https://github.com/ParthJadhav/ios-marketing-capture",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "skill-creator"
-   ]
+   ],
+   "routedBy": []
   },
   "maintain-verification-skill": {
    "id": "maintain-verification-skill",
@@ -1068,7 +1229,12 @@
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": [
+    "create-verification-skill",
+    "setup-ossian-stack"
+   ]
   },
   "obsidian": {
    "id": "obsidian",
@@ -1082,9 +1248,11 @@
    "origin": "local",
    "repo": null,
    "calls": [],
+   "routes": [],
    "calledBy": [
     "online-writing"
-   ]
+   ],
+   "routedBy": []
   },
   "onboarding-flow": {
    "id": "onboarding-flow",
@@ -1100,7 +1268,9 @@
    "calls": [
     "copywriter"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "one-password": {
    "id": "one-password",
@@ -1114,12 +1284,14 @@
    "origin": "companion",
    "repo": "https://developer.1password.com/docs/cli",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "gplay-cli",
     "hetzner-vm",
     "ossian-mode",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "online-writing": {
    "id": "online-writing",
@@ -1137,9 +1309,11 @@
     "obsidian",
     "unslop"
    ],
+   "routes": [],
    "calledBy": [
     "copywriter"
-   ]
+   ],
+   "routedBy": []
   },
   "orchestrate-threads": {
    "id": "orchestrate-threads",
@@ -1153,21 +1327,27 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "ossian-mode",
+    "babysit",
+    "codex-first",
+    "commit-push-pr",
+    "diagnosing-bugs",
     "grilling",
+    "handoff",
     "prototype",
-    "wayfinder",
+    "setup-ossian-stack",
+    "show-me-your-work",
     "to-spec",
     "to-tickets",
     "triage",
-    "codex-first",
-    "commit-push-pr",
-    "babysit",
-    "diagnosing-bugs",
-    "handoff",
-    "setup-ossian-stack"
+    "wayfinder"
    ],
-   "calledBy": []
+   "routes": [
+    "ossian-mode"
+   ],
+   "calledBy": [],
+   "routedBy": [
+    "ossian-mode"
+   ]
   },
   "ossian-mode": {
    "id": "ossian-mode",
@@ -1181,31 +1361,63 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "one-password",
-    "setup-ossian-stack",
-    "how",
-    "why",
-    "diagnosing-bugs",
-    "grilling",
-    "prototype",
-    "to-spec",
-    "convex-cli",
-    "emil-design-eng",
-    "refactoring",
-    "simplify-code",
-    "commit-push-pr",
-    "babysit",
-    "release-ios-app",
+    "architect",
     "autoreview",
-    "create-verification-skill",
-    "principle-prove-it-works",
+    "babysit",
+    "blast-radius",
+    "commit-push-pr",
+    "convex-cli",
+    "diagnosing-bugs",
+    "emil-design-eng",
+    "gplay-cli",
+    "grilling",
+    "how",
+    "one-password",
+    "performance",
     "principle-fix-root-causes",
+    "principle-prove-it-works",
     "principle-sequence-verifiable-units",
-    "gplay-cli"
+    "prototype",
+    "refactoring",
+    "release-ios-app",
+    "setup-ossian-stack",
+    "show-me-your-work",
+    "simplify-code",
+    "to-spec",
+    "visual-parity",
+    "why"
    ],
-   "calledBy": [
+   "routes": [
+    "create-verification-skill",
+    "orchestrate-threads"
+   ],
+   "calledBy": [],
+   "routedBy": [
     "orchestrate-threads"
    ]
+  },
+  "performance": {
+   "id": "performance",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Performance",
+   "description": "Diagnose live performance, analyze captured profiles, or improve one metric through measured experiments.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "how",
+    "principle-prove-it-works",
+    "principle-sequence-verifiable-units",
+    "show-me-your-work"
+   ],
+   "routes": [],
+   "calledBy": [
+    "ossian-mode"
+   ],
+   "routedBy": []
   },
   "post-queue-cli": {
    "id": "post-queue-cli",
@@ -1219,7 +1431,9 @@
    "origin": "companion",
    "repo": "https://github.com/ossianhempel/post-queue",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "principle-encode-lessons-in-structure": {
    "id": "principle-encode-lessons-in-structure",
@@ -1233,7 +1447,11 @@
    "origin": "vendored",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [
+    "continual-learning"
+   ],
+   "routedBy": []
   },
   "principle-exhaust-the-design-space": {
    "id": "principle-exhaust-the-design-space",
@@ -1247,11 +1465,14 @@
    "origin": "vendored",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
+   "routes": [],
    "calledBy": [
+    "architect",
     "diagnosing-bugs",
     "prototype",
     "refactoring"
-   ]
+   ],
+   "routedBy": []
   },
   "principle-fix-root-causes": {
    "id": "principle-fix-root-causes",
@@ -1265,10 +1486,12 @@
    "origin": "vendored",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "diagnosing-bugs",
     "ossian-mode"
-   ]
+   ],
+   "routedBy": []
   },
   "principle-model-the-domain": {
    "id": "principle-model-the-domain",
@@ -1282,7 +1505,11 @@
    "origin": "vendored",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [
+    "architect"
+   ],
+   "routedBy": []
   },
   "principle-prove-it-works": {
    "id": "principle-prove-it-works",
@@ -1296,12 +1523,16 @@
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
+   "routes": [],
    "calledBy": [
+    "blast-radius",
     "diagnosing-bugs",
     "ossian-mode",
+    "performance",
     "principle-sequence-verifiable-units",
     "refactoring"
-   ]
+   ],
+   "routedBy": []
   },
   "principle-redesign-from-first-principles": {
    "id": "principle-redesign-from-first-principles",
@@ -1315,9 +1546,12 @@
    "origin": "vendored",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
+   "routes": [],
    "calledBy": [
+    "architect",
     "refactoring"
-   ]
+   ],
+   "routedBy": []
   },
   "principle-sequence-verifiable-units": {
    "id": "principle-sequence-verifiable-units",
@@ -1333,9 +1567,12 @@
    "calls": [
     "principle-prove-it-works"
    ],
+   "routes": [],
    "calledBy": [
-    "ossian-mode"
-   ]
+    "ossian-mode",
+    "performance"
+   ],
+   "routedBy": []
   },
   "principle-subtract-before-you-add": {
    "id": "principle-subtract-before-you-add",
@@ -1349,10 +1586,12 @@
    "origin": "vendored",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "continual-learning",
     "simplify-code"
-   ]
+   ],
+   "routedBy": []
   },
   "privacy-policy": {
    "id": "privacy-policy",
@@ -1366,7 +1605,9 @@
    "origin": "local",
    "repo": null,
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "prototype": {
    "id": "prototype",
@@ -1380,14 +1621,17 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [
-    "create-verification-skill",
     "principle-exhaust-the-design-space"
+   ],
+   "routes": [
+    "create-verification-skill"
    ],
    "calledBy": [
     "orchestrate-threads",
     "ossian-mode",
     "wayfinder"
-   ]
+   ],
+   "routedBy": []
   },
   "refactoring": {
    "id": "refactoring",
@@ -1401,15 +1645,19 @@
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [
+    "architect",
+    "blast-radius",
     "how",
-    "simplify-code",
     "principle-exhaust-the-design-space",
     "principle-prove-it-works",
-    "principle-redesign-from-first-principles"
+    "principle-redesign-from-first-principles",
+    "simplify-code"
    ],
+   "routes": [],
    "calledBy": [
     "ossian-mode"
-   ]
+   ],
+   "routedBy": []
   },
   "release-ios-app": {
    "id": "release-ios-app",
@@ -1426,15 +1674,17 @@
     "asc-metadata",
     "asc-release",
     "babysit",
-    "gplay-cli",
     "commit-push-pr",
+    "gplay-cli",
     "resolve-pr-feedback"
    ],
+   "routes": [],
    "calledBy": [
     "asc-release",
     "ossian-mode",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "resolve-pr-feedback": {
    "id": "resolve-pr-feedback",
@@ -1450,10 +1700,12 @@
    "calls": [
     "babysit"
    ],
+   "routes": [],
    "calledBy": [
     "babysit",
     "release-ios-app"
-   ]
+   ],
+   "routedBy": []
   },
   "resolving-merge-conflicts": {
    "id": "resolving-merge-conflicts",
@@ -1467,7 +1719,9 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "revenuecat-api": {
    "id": "revenuecat-api",
@@ -1481,9 +1735,11 @@
    "origin": "companion",
    "repo": "https://github.com/RevenueCat/docs",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "setup-ossian-stack": {
    "id": "setup-ossian-stack",
@@ -1498,7 +1754,6 @@
    "repo": null,
    "calls": [
     "babysit",
-    "create-verification-skill",
     "continual-learning",
     "diagnosing-bugs",
     "domain-modeling",
@@ -1511,11 +1766,37 @@
     "triage",
     "wayfinder"
    ],
+   "routes": [
+    "create-verification-skill",
+    "maintain-verification-skill"
+   ],
    "calledBy": [
     "orchestrate-threads",
     "ossian-mode",
     "wayfinder"
-   ]
+   ],
+   "routedBy": []
+  },
+  "show-me-your-work": {
+   "id": "show-me-your-work",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Show Me Your Work",
+   "description": "Keep and audit a compact evidence-linked decision trail for long-running or unattended work.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "routes": [],
+   "calledBy": [
+    "handoff",
+    "orchestrate-threads",
+    "ossian-mode",
+    "performance"
+   ],
+   "routedBy": []
   },
   "simplify-code": {
    "id": "simplify-code",
@@ -1531,10 +1812,12 @@
    "calls": [
     "principle-subtract-before-you-add"
    ],
+   "routes": [],
    "calledBy": [
     "ossian-mode",
     "refactoring"
-   ]
+   ],
+   "routedBy": []
   },
   "skill-cleaner": {
    "id": "skill-cleaner",
@@ -1548,7 +1831,9 @@
    "origin": "local",
    "repo": null,
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "skill-creator": {
    "id": "skill-creator",
@@ -1563,9 +1848,16 @@
    "repo": "https://github.com/anthropics/skills",
    "calls": [
     "clerk-cli",
+    "codify-conventions",
+    "continual-learning",
     "ios-marketing-capture"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [
+    "codify-conventions",
+    "continual-learning"
+   ],
+   "routedBy": []
   },
   "teach": {
    "id": "teach",
@@ -1582,7 +1874,9 @@
     "how",
     "why"
    ],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "things": {
    "id": "things",
@@ -1596,7 +1890,9 @@
    "origin": "companion",
    "repo": "https://github.com/ossianhempel/things3-cli",
    "calls": [],
-   "calledBy": []
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   },
   "to-spec": {
    "id": "to-spec",
@@ -1610,11 +1906,13 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "orchestrate-threads",
     "ossian-mode",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "to-tickets": {
    "id": "to-tickets",
@@ -1628,10 +1926,12 @@
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "orchestrate-threads",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "triage": {
    "id": "triage",
@@ -1648,10 +1948,12 @@
     "domain-modeling",
     "grilling"
    ],
+   "routes": [],
    "calledBy": [
     "orchestrate-threads",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "unslop": {
    "id": "unslop",
@@ -1665,11 +1967,34 @@
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
+   "routes": [],
    "calledBy": [
     "commit-push-pr",
     "copywriter",
     "online-writing"
-   ]
+   ],
+   "routedBy": []
+  },
+  "visual-parity": {
+   "id": "visual-parity",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Visual Parity",
+   "description": "Match a UI to a reference through controlled captures and image-diff evidence on the real surface.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "create-verification-skill"
+   ],
+   "routes": [],
+   "calledBy": [
+    "grill-design",
+    "ossian-mode"
+   ],
+   "routedBy": []
   },
   "wayfinder": {
    "id": "wayfinder",
@@ -1688,10 +2013,12 @@
     "prototype",
     "setup-ossian-stack"
    ],
+   "routes": [],
    "calledBy": [
     "orchestrate-threads",
     "setup-ossian-stack"
-   ]
+   ],
+   "routedBy": []
   },
   "why": {
    "id": "why",
@@ -1704,19 +2031,24 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
-   "calls": [
+   "calls": [],
+   "routes": [
     "how"
    ],
    "calledBy": [
+    "architect",
+    "blast-radius",
     "diagnosing-bugs",
-    "how",
     "ossian-mode",
     "teach"
+   ],
+   "routedBy": [
+    "how"
    ]
   }
  },
  "counts": {
-  "skills": 67,
+  "skills": 72,
   "agents": 0,
   "plugins": 1
  }
@@ -1846,7 +2178,16 @@
   }
 
   const sideTop = Math.max(leftBottom, platBottom) + G.sideGap;
-  const sideH = G.lanePad + G.titleH + G.pillH + G.lanePad;
+  const sideRows = [[]];
+  let sideWidth = 0;
+  const sideMaxWidth = G.platX + G.platW - G.laneX - G.lanePad * 2;
+  for (const id of SEC.sideDoors) {
+    const w = pillW(id);
+    if (sideWidth && sideWidth + w > sideMaxWidth) { sideRows.push([]); sideWidth = 0; }
+    sideRows.at(-1).push(id);
+    sideWidth += w + 12;
+  }
+  const sideH = G.lanePad + G.titleH + sideRows.length * (G.pillH + 12) + G.lanePad - 12;
   const legendTop = sideTop + sideH + 22;
   const H = legendTop + G.legendH + G.footerH;
   svg.setAttribute("viewBox", `0 0 ${G.W} ${H}`);
@@ -1987,8 +2328,12 @@
     el("rect", { class: "region", x: G.laneX, y: sideTop, width: G.platX + G.platW - G.laneX, height: sideH }, g);
     text(g, G.laneX + G.lanePad, sideTop + G.lanePad + 18, "Side doors", "t-h");
     text(g, G.laneX + G.lanePad + measure("Side doors", "600 15px Inter, system-ui, sans-serif") + 12, sideTop + G.lanePad + 18, "◂ utilities you run directly", "t-cap");
-    let x = G.laneX + G.lanePad, yy = sideTop + G.lanePad + G.titleH;
-    for (const id of SEC.sideDoors) { const { w } = drawNode(g, id, x, yy); x += w + 12; }
+    let yy = sideTop + G.lanePad + G.titleH;
+    for (const row of sideRows) {
+      let x = G.laneX + G.lanePad;
+      for (const id of row) { const { w } = drawNode(g, id, x, yy); x += w + 12; }
+      yy += G.pillH + 12;
+    }
   }
 
   // ======================================================= legend + footer
@@ -2023,11 +2368,11 @@
   function light(id) {
     const n = NODES[id]; if (!n) return;
     svg.classList.add("lit");
-    const on = new Set([id, ...n.calls, ...n.calledBy]);
+    const on = new Set([id, ...n.calls, ...n.calledBy, ...(n.routes ?? []), ...(n.routedBy ?? [])]);
     for (const [k, g] of Object.entries(nodeEls)) g.classList.toggle("on", on.has(k));
     links.innerHTML = "";
     const a = absCenter(id);
-    for (const t of [...n.calls, ...n.calledBy]) {
+    for (const t of [...n.calls, ...n.calledBy, ...(n.routes ?? []), ...(n.routedBy ?? [])]) {
       const b = absCenter(t); if (!b) continue;
       const mx = (a.x + b.x) / 2;
       el("path", { class: "link", d: `M${a.x} ${a.y} C ${mx} ${a.y}, ${mx} ${b.y}, ${b.x} ${b.y}` }, links);
@@ -2053,7 +2398,9 @@
       ${n.argumentHint ? `<h3>Argument</h3><div class="hint">${esc(n.argumentHint)}</div>` : ""}
       <h3>Description</h3><p>${esc(n.description)}</p>
       <h3>Runs, dispatches or reads</h3>${list(n.calls)}
-      <h3>Run by</h3>${list(n.calledBy)}`;
+      <h3>Run by</h3>${list(n.calledBy)}
+      <h3>Offers as an explicit next step</h3>${list(n.routes ?? [])}
+      <h3>Offered by</h3>${list(n.routedBy ?? [])}`;
     drawer.classList.add("open"); drawer.setAttribute("aria-hidden", "false");
     light(id);
     body.querySelector("h2").setAttribute("tabindex", "-1"); body.querySelector("h2").focus();

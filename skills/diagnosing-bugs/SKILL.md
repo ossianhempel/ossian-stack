@@ -52,6 +52,13 @@ lives behind a UI, CLI, or service you cannot otherwise drive.
 
 ### Ways to construct one, in roughly this order
 
+Choose the cheapest signal that proves the symptom. A failing test is valuable
+when it reaches the real contract without recreating the implementation in mocks.
+Do not add a regression test merely because a bug was fixed: skip it when the
+test would duplicate existing coverage, assert private implementation details,
+or cost more to maintain than the failure it catches. Record the choice and the
+real-surface signal used instead.
+
 1. **Failing test** at whatever seam reaches the bug: unit, integration, e2e.
 2. **Curl / HTTP script** against a running dev server.
 3. **CLI invocation** with a fixture input, diffing stdout against a known-good snapshot.

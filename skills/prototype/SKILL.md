@@ -86,6 +86,12 @@ compared from memory.
 
 This is `principle-exhaust-the-design-space` made cheap.
 
+When parallel help is useful, distinguish two shapes. Several attempts at the
+same artifact form an arena: isolate them, choose a base against a rubric, then
+graft only the strongest ideas. Different slices of a coverage problem form a
+swarm: give each worker one disjoint slice and aggregate every result. Never let
+either shape write concurrently to one worktree.
+
 ## 6. Surface the state
 
 After every action (logic) or on every variant switch (UI), print or render the

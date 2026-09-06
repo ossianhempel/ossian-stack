@@ -7,6 +7,16 @@
       "origin": "local",
       "notes": "Authored in agent-scripts (commit 3b1f581). Bespoke ASO workflow. Local audit (2026-09-05): focused description; task-specific reference routing. Preserve on refresh."
     },
+    "architect": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/architect",
+      "notes": "Lean cross-runtime adaptation of pstack architect. Preserves caller-first contracts, data-shape and module sketches, alternatives for genuinely unsettled designs, and redesign on repeated implementation friction. Removes mandatory model names, todolist mechanics, mandatory arena fan-out, and scaffold commits.",
+      "upstreamPath": "pstack/skills/architect",
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-06",
+      "lastSynced": "2026-09-06"
+    },
     "asc-metadata": {
       "origin": "adapted",
       "repo": "https://github.com/rudrankriyam/app-store-connect-cli-skills",
@@ -68,6 +78,16 @@
       "upstreamRev": "6c43b20ce00f720eed854591abe480127629c191",
       "upstreamCheckedAt": "2026-08-27"
     },
+    "blast-radius": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/blast-radius",
+      "notes": "Cross-runtime adaptation of pstack blast-radius. Preserves beyond-grep risk tracing and executable proof of the few safety facts that matter. Adds an explicit guard against broad low-value tests and preserves inherited audit-only scope.",
+      "upstreamPath": "pstack/skills/blast-radius",
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-06",
+      "lastSynced": "2026-09-06"
+    },
     "bro": {
       "origin": "vendored",
       "repo": "https://github.com/dmmulroy/skills",
@@ -88,17 +108,6 @@
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
-    },
-    "create-verification-skill": {
-      "origin": "adapted",
-      "repo": "https://github.com/cursor/plugins",
-      "path": "pstack/skills/create-verification-skill",
-      "refresh": "npx skills add cursor/plugins -y --skill create-verification-skill && echo 'hand-merge into skills/create-verification-skill/ then: trash .agents/skills/create-verification-skill'",
-      "notes": "From Cursor's pstack plugin. Generates a project-local verification skill (launch/doctor/drive/evidence/cleanup) plus a feature map, and proves it end to end before handing over. Ships references/feature-map-example/ verbatim. Adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Adapted — merge by hand on refresh, never overwrite. Local audit (2026-09-05): focused description. Preserve on refresh. Renamed from close-the-loop back to its upstream name on 2026-09-06 for clearer discovery and source alignment.",
-      "upstreamPath": "pstack/skills/create-verification-skill",
-      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
-      "upstreamCheckedAt": "2026-09-05",
-      "lastSynced": "2026-09-05"
     },
     "codex-first": {
       "origin": "adapted",
@@ -142,6 +151,17 @@
     "copywriter": {
       "origin": "local",
       "notes": "Authored in agent-scripts (1a3cfa4). Hooks and shared conversion principles remain here; AI-slop review and complete slideshow production were extracted into focused sibling skills on 2026-08-02. Local audit (2026-09-05): focused description; task-specific reference routing; utility versus acquisition boundary. Preserve on refresh."
+    },
+    "create-verification-skill": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/create-verification-skill",
+      "refresh": "npx skills add cursor/plugins -y --skill create-verification-skill && echo 'hand-merge into skills/create-verification-skill/ then: trash .agents/skills/create-verification-skill'",
+      "notes": "From Cursor's pstack plugin. Generates a project-local verification skill (launch/doctor/drive/evidence/cleanup) plus a feature map, and proves it end to end before handing over. Ships references/feature-map-example/ verbatim. Adapted: upstream hardcodes .cursor/skills/, replaced with resolution of the project's own skills directory (.agents/skills, .claude/skills, .cursor/skills; create .agents/skills and symlink .claude/skills to it when none exists). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Adapted — merge by hand on refresh, never overwrite. Local audit (2026-09-05): focused description. Preserve on refresh. Renamed from close-the-loop back to its upstream name on 2026-09-06 for clearer discovery and source alignment.",
+      "upstreamPath": "pstack/skills/create-verification-skill",
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-05",
+      "lastSynced": "2026-09-05"
     },
     "diagnosing-bugs": {
       "origin": "adapted",
@@ -312,6 +332,16 @@
       "origin": "local",
       "notes": "Authored from the approved Ossian Mode scope: explicitly invoked working standards and routing into existing skills. Routes command credentials through one-password and tracker-dependent work through project conventions, with setup only when required configuration is missing. No upstream playbook copied. Includes matching Claude/Cursor and Codex explicit-invocation metadata. Tracker routing preserves untracked planning/build work and limits missing-configuration setup to a chosen ticket workflow."
     },
+    "performance": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/poteto-mode/playbooks/perf-issue.md, hillclimb.md, runtime-forensics.md, trace-forensics.md",
+      "notes": "Consolidates four pstack performance playbooks into one portable skill with live diagnosis, captured-artifact diagnosis, and measured metric-improvement modes. Removes Cursor control-skill, fixed-model, and automatic PR assumptions; platform profilers remain adapters.",
+      "upstreamPath": null,
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-06",
+      "lastSynced": "2026-09-06"
+    },
     "post-queue-cli": {
       "origin": "companion",
       "repo": "https://github.com/ossianhempel/post-queue",
@@ -455,6 +485,16 @@
       "origin": "local",
       "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen. Concise tracker reporting policy: meaningful events only, no unchanged blocker/HQ mirroring, minimal ownership and cross-runtime recovery records. Applied to all five tracker templates and pickup instructions; project copies require a scoped merge preserving customizations. Existing Jira adoption starts with discovery: compare repository conventions with live project metadata, preserve the host scheme and recipes, and add one sparse jira-mapping row for each concept that differs. Missing rows retain the original label-based defaults. New shared Jira vocabulary or configuration requires explicit authorization. Local audit (2026-09-05): focused description; task-specific reference routing. Preserve on refresh."
     },
+    "show-me-your-work": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/show-me-your-work",
+      "notes": "Cross-runtime adaptation of pstack show-me-your-work. Keeps the compact append-only evidence-linked TSV and optional independent audit while removing Cursor transcript-path and mandatory cross-model assumptions. Intended only for consequential long or unattended work.",
+      "upstreamPath": "pstack/skills/show-me-your-work",
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-06",
+      "lastSynced": "2026-09-06"
+    },
     "simplify-code": {
       "origin": "derived",
       "lastSynced": "2026-08-29",
@@ -530,6 +570,16 @@
       "upstreamRev": "99559f2f52047978602ef365589275831e76af07",
       "upstreamCheckedAt": "2026-08-28",
       "lastSynced": "2026-08-28"
+    },
+    "visual-parity": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/poteto-mode/playbooks/visual-parity.md",
+      "notes": "Portable adaptation of pstack visual parity. Keeps immutable baselines, controlled capture conditions, image-diff convergence, and isolated component ownership while allowing an explicit tolerance for nondeterministic platform rendering.",
+      "upstreamPath": "pstack/skills/poteto-mode/playbooks/visual-parity.md",
+      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
+      "upstreamCheckedAt": "2026-09-06",
+      "lastSynced": "2026-09-06"
     },
     "wayfinder": {
       "origin": "adapted",

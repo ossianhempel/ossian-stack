@@ -9,6 +9,10 @@ Turn the way a repo actually behaves into rules someone — a linter, a hook, or
 reviewer — actually checks. A convention nobody enforces is a wish; this skill
 gives each rule a place where it is enforced or at least seen.
 
+When `continual-learning` supplies a candidate, accept only repository-wide
+conventions here. Route a reusable task procedure to `skill-creator`, and leave a
+one-off task fact in its original artifact.
+
 Two entry points, one artifact:
 
 - **Audit mode** (default when nothing is codified yet): read the code, find the

@@ -86,3 +86,9 @@ real product surface, offer once: "Want a project-local verification skill so
 agents can exercise the app like a user and prove changes work? Invoke
 `/create-verification-skill` and I will generate one." This is optional setup. On no, move
 on without asking again or treating the missing verifier as a general blocker.
+
+If a verifier already exists, inspect only enough to identify obvious staleness:
+dead launch commands, missing feature-map entries, or references to paths that no
+longer exist. When drift is plausible, offer `/maintain-verification-skill` as an
+explicit next step. Do not run maintenance or suggest a recurring cadence unless
+the user asks.
