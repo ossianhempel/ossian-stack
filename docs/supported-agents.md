@@ -22,7 +22,7 @@ with this table.
 | Codex | `.codex-plugin/plugin.json` |
 | Cursor | `.cursor-plugin/plugin.json` and `.cursor-plugin/marketplace.json` |
 | Copilot | `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json` (Copilot checks `.claude-plugin/` in its manifest search order) |
-| Antigravity | `.gemini-plugin/plugin.json` |
+| Antigravity | `.gemini-plugin/plugin.json` (exposed via root `plugin.json` symlink) |
 
 ## Installation routing
 

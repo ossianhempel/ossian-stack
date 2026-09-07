@@ -18,6 +18,7 @@
  *   6. Internal skills under .agents/skills/ are well-formed, do not collide with
  *      shipped names, and .claude/skills still symlinks to them.
  *   7. CLAUDE.md is still a symlink to AGENTS.md.
+ *   8. plugin.json is still a symlink to .gemini-plugin/plugin.json (Antigravity discovery).
  */
 import { readFileSync, readdirSync, statSync, lstatSync, readlinkSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -431,6 +432,17 @@ if (!existsSync(claudeMd)) {
   fail("CLAUDE.md: is a regular file — must stay a symlink to AGENTS.md, see AGENTS.md");
 } else if (readlinkSync(claudeMd) !== "AGENTS.md") {
   fail(`CLAUDE.md: symlink points at ${readlinkSync(claudeMd)}, expected AGENTS.md`);
+}
+
+// --------------------------------------------------------- 8. plugin.json link
+// Antigravity discovers plugins by checking for plugin.json at the plugin root.
+const geminiRootPlugin = join(ROOT, "plugin.json");
+if (!existsSync(geminiRootPlugin)) {
+  fail("plugin.json: missing (must be a symlink to .gemini-plugin/plugin.json for Antigravity discovery)");
+} else if (!lstatSync(geminiRootPlugin).isSymbolicLink()) {
+  fail("plugin.json: is a regular file — must stay a symlink to .gemini-plugin/plugin.json");
+} else if (readlinkSync(geminiRootPlugin) !== ".gemini-plugin/plugin.json") {
+  fail(`plugin.json: symlink points at ${readlinkSync(geminiRootPlugin)}, expected .gemini-plugin/plugin.json`);
 }
 
 // ------------------------------------------------------------------- report

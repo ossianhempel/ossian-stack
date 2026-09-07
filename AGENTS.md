@@ -90,6 +90,7 @@ commands/               Slash commands (currently empty)
 .codex-plugin/          Codex plugin manifest, same skills/ tree
 .cursor-plugin/         Cursor plugin manifest + marketplace catalog, same skills/ tree
 .gemini-plugin/         Antigravity plugin manifest, same skills/ tree
+plugin.json             Symlink to .gemini-plugin/plugin.json for Antigravity discovery
 bin/docs-list           Docs indexer — ships with the plugin
 scripts/                Repo-local dev tooling — NOT plugin surface
 .agents/skills/         Internal skills — loaded only in this checkout, never shipped

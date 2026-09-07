@@ -88,7 +88,8 @@ that direct GitHub import is currently pinned.
 
 When a user gives an agent this repository URL and asks it to install the plugin or
 skills, the agent should detect the harness and use the native plugin route first.
-Antigravity uses the native `.gemini-plugin/plugin.json` manifest; see
+Antigravity uses `.gemini-plugin/plugin.json` exposed via the root `plugin.json`
+symlink (required for Antigravity plugin discovery); see
 `supported-agents.md` for installation and refresh details. For Gemini CLI and
 Windsurf, install only the public `skills/` tree through the shared skills
 installer and target the current harness's global skill scope. Never install the
