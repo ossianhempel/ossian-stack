@@ -92,8 +92,7 @@ ownership, not a second closeout loop.
 
 Choose tracker-dependent skills only for a workstream using that workflow:
 `wayfinder` for large exploratory work managed through tickets, `to-spec` for a
-published tracker spec, `to-tickets` for ticket decomposition, and `triage` for an
-assigned tracker inbox. Preserve their configuration requirements and explicit
+published tracker spec, and `to-tickets` for ticket decomposition. Preserve their configuration requirements and explicit
 invocation restrictions. They are not a mandatory chain for planning or building,
 and naming them in a brief grants no authority to publish or create issues.
 

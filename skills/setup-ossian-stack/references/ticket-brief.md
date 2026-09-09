@@ -2,7 +2,7 @@
 
 Copy this file to the project's `docs/agents/ticket-brief.md` and delete this
 line. It is the shape of every ticket body on the issue tracker. `to-tickets`,
-`to-spec`, and `triage` write it; a pickup agent reads it cold, with no chat
+`to-spec` write it; a pickup agent reads it cold, with no chat
 access and no memory of how the ticket came to be. A field you cannot fill is a
 ticket that is not ready for an agent.
 

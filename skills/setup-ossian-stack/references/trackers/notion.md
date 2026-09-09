@@ -95,19 +95,13 @@ Only when the user explicitly asked, or a skill's contract says so.
 
 - **Create**: `notion-create-pages` with `parent` = the data source id, the
   properties above including `Project`, and the brief as the body. New rows
-  start at status backlog and `Triage: needs-triage` unless the skill says
-  otherwise.
+  start at status backlog and `Triage: needs-triage` unless the calling skill
+  says otherwise.
 - **Comment**: `notion-create-comment` on the page, following the handoff-comment policy,
   with the project-required AI disclosure.
 - **Update state or roles**: `notion-update-page`. `Triage` is single-valued, so
   a write replaces it. `Labels` is read-merge-write.
 - **Close**: set status to the done value. Never delete or archive a row.
-
-## Pull requests as a triage surface
-
-**PRs as a request surface: no.** Notion is not a code-review surface. Record the
-git platform's commands here (see the `github.md` template) if set to `yes`.
-When an agent opens a PR for a ticket, set `PR` and move status to in review.
 
 ## When a skill says "publish to the issue tracker"
 

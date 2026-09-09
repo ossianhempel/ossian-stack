@@ -9,13 +9,12 @@ workflow requires tracked delivery. During general setup, an absent tracker is
 optional unless that workflow is chosen; report it without forcing configuration.
 Configuring a tracker does not authorize creating issues.
 
-`triage`, `to-tickets`, `to-spec`, and `wayfinder` read per-project config that, unlike the
+`to-tickets`, `to-spec`, and `wayfinder` read per-project config that, unlike the
 files above, is **not created lazily** — an unconfigured tracker fails on first
 use with no hint where the setting lives. Check for:
 
 - `docs/agents/issue-tracker.md` — where issues live, which native hierarchy,
-  blocking, assignment, and label operations are available, and whether external
-  PRs are a request surface.
+  blocking, assignment, and label operations are available.
 - `docs/agents/triage-labels.md` — the mapping from the five canonical triage
   roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
   `wontfix`) to the actual label strings the tracker uses.
@@ -25,7 +24,7 @@ use with no hint where the setting lives. Check for:
   `jira-mapping.md`; a missing row keeps the selected tracker
   template's original behavior.
 - `docs/agents/ticket-brief.md` — the shape of every ticket body. Copy
-  `ticket-brief.md`, dropping its leading copy-me line; `to-tickets`, `to-spec`, and `triage`
+  `ticket-brief.md`, dropping its leading copy-me line; `to-tickets` and `to-spec`
   write it and a cold pickup agent reads it.
 - `docs/agents/handoff-comment.md` — when to comment and the concise content
   needed for meaningful updates and ownership recovery. Copy

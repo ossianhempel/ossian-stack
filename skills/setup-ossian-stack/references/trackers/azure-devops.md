@@ -49,12 +49,6 @@ on Scrum). Discover the valid states from an existing item before transitioning.
 - **Close**: `az boards work-item update --id <id> --state "Closed"` (or the
   process's done state).
 
-## Pull requests as a triage surface
-
-**PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs
-as feature requests.)_ PR commands: `az repos pr list`, `az repos pr show --id <id>`,
-`az repos pr create`, `az repos pr update --id <id> --status abandoned`.
-
 ## When a skill says "publish to the issue tracker"
 
 Create a work item (`az boards work-item create`).

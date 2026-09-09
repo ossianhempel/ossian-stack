@@ -57,11 +57,6 @@ Issue identifiers (`ENG-123`) work directly as the `id` argument on `issue` quer
   resolve state UUIDs from `workflowStates(filter: { team: { id: { eq: "<team-uuid>" } } })`.
 - **Close**: transition to a `completed` (or `canceled`) state.
 
-## Pull requests as a triage surface
-
-**PRs as a request surface: no.** Linear is not a code-review surface; if the repo
-connects a git platform, record its CLI commands here when set to `yes`.
-
 ## When a skill says "publish to the issue tracker"
 
 Create a Linear issue on team `<TEAM>`.

@@ -91,12 +91,6 @@ workflow/schema element, or other persistent Jira configuration likewise require
 explicit user authorization naming that change. Ordinary issue-write permission
 does not grant administrative vocabulary or schema changes.
 
-## Pull requests as a triage surface
-
-**PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs
-as feature requests.)_ Jira has no native PR state machine; record the actual
-review surface (GitHub/GitLab/Bitbucket) and its commands here when set to `yes`.
-
 ## Ticket keys downstream
 
 Branches, commits, and PR titles carry the key: `<key>/aiescp-1234-slug` style,

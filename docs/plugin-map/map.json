@@ -223,9 +223,6 @@
     "to-tickets": {
       "role": "human"
     },
-    "triage": {
-      "role": "human"
-    },
     "unslop": {
       "role": "both"
     },
@@ -289,7 +286,6 @@
       "show-me-your-work",
       "to-spec",
       "to-tickets",
-      "triage",
       "wayfinder"
     ],
     "ossian-mode": [
@@ -351,7 +347,6 @@
       "revenuecat-api",
       "to-spec",
       "to-tickets",
-      "triage",
       "wayfinder"
     ],
     "simplify-code": [
@@ -365,10 +360,6 @@
     "teach": [
       "how",
       "why"
-    ],
-    "triage": [
-      "domain-modeling",
-      "grilling"
     ],
     "wayfinder": [
       "domain-modeling",
@@ -467,10 +458,6 @@
           }
         ],
         "extras": [
-          {
-            "id": "triage",
-            "note": "from open issues"
-          },
           {
             "id": "grill-me",
             "note": "any plan"

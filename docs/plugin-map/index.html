@@ -200,10 +200,6 @@
     ],
     "extras": [
      {
-      "id": "triage",
-      "note": "from open issues"
-     },
-     {
       "id": "grill-me",
       "note": "any plan"
      },
@@ -850,7 +846,6 @@
    "calledBy": [
     "grill-with-docs",
     "setup-ossian-stack",
-    "triage",
     "wayfinder"
    ],
    "routedBy": []
@@ -1004,7 +999,6 @@
     "grill-with-docs",
     "orchestrate-threads",
     "ossian-mode",
-    "triage",
     "wayfinder"
    ],
    "routedBy": []
@@ -1211,7 +1205,6 @@
     "show-me-your-work",
     "to-spec",
     "to-tickets",
-    "triage",
     "wayfinder"
    ],
    "routes": [
@@ -1631,7 +1624,6 @@
     "revenuecat-api",
     "to-spec",
     "to-tickets",
-    "triage",
     "wayfinder"
    ],
    "routes": [
@@ -1799,28 +1791,6 @@
    ],
    "routedBy": []
   },
-  "triage": {
-   "id": "triage",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Triage",
-   "description": "Move issues and external PRs through a state machine of triage roles — categorise, verify, grill if needed, and write agent-ready briefs.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/mattpocock/skills",
-   "calls": [
-    "domain-modeling",
-    "grilling"
-   ],
-   "routes": [],
-   "calledBy": [
-    "orchestrate-threads",
-    "setup-ossian-stack"
-   ],
-   "routedBy": []
-  },
   "unslop": {
    "id": "unslop",
    "type": "skill",
@@ -1916,7 +1886,7 @@
   }
  },
  "counts": {
-  "skills": 67,
+  "skills": 66,
   "agents": 0,
   "plugins": 1
  }
