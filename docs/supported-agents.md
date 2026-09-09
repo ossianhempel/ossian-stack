@@ -35,7 +35,7 @@ its skills, it should detect the current harness and use this order:
 | Codex | Git marketplace, then `ossian-stack@ossian-stack` | auto-upgrades the Git marketplace at plugin startup and `plugin/list`; `codex plugin marketplace upgrade` forces a refresh |
 | Cursor | Git marketplace, then `ossian-stack` at User scope | `cursor-agent plugin marketplace update ossian-stack` |
 | Copilot CLI / app | Git marketplace, then `ossian-stack@ossian-stack`; opt in via `autoUpdate: true` on the marketplace's `extraKnownMarketplaces` entry in `~/.copilot/settings.json`. A repo can also enable it declaratively via `.github/copilot/settings.json` (`extraKnownMarketplaces` + `enabledPlugins`) — the only route for the Copilot cloud agent | auto-updates at session start once opted in; otherwise `copilot plugin update ossian-stack` |
-| Antigravity | Global native plugin link/clone in `~/.gemini/config/plugins/ossian-stack` or workspace `.agents/plugins/ossian-stack` | auto-updates dynamically from disk at session start / turn execution; enabled in `~/.gemini/config/config.json` |
+| Antigravity | Native plugin install: `agy plugin install https://github.com/ossianhempel/ossian-stack` | `agy plugin install https://github.com/ossianhempel/ossian-stack` (re-clones) or `git pull` in `~/.gemini/config/plugins/ossian-stack`; auto-loads from disk at session start |
 | OpenCode | Shared skills installer, global opencode scope (`~/.config/opencode/skills`) | `npx skills update` |
 | Gemini CLI | Shared skills installer, global Gemini scope | `npx skills update` |
 | Windsurf | Shared skills installer, global Windsurf scope | `npx skills update` |
@@ -55,7 +55,7 @@ Verified 2026-09-02 against each runtime's official docs and local behavior:
 | Codex | Git marketplace | plugin startup and `plugin/list` (openai/codex#17425); `codex plugin marketplace upgrade` forces it | none — installs are account/workspace-level; a trusted project's `.codex/config.toml` plugin override was tested and does not change plugin status |
 | Cursor | Git marketplace, User scope via the Customize UI | manual on personal plans (`cursor-agent plugin marketplace update` or Refresh); Auto Refresh requires a Teams/Enterprise marketplace imported from GitHub with the Cursor GitHub App on the repository | project scope is a native install choice in Customize |
 | Copilot | Git marketplace + user-level `autoUpdate: true` opt-in on the marketplace's `extraKnownMarketplaces` entry in `~/.copilot/settings.json` | session start once opted in; otherwise `copilot plugin update ossian-stack` | repo-level declarative `.github/copilot/settings.json` — the only route for the Copilot cloud agent |
-| Antigravity | Global native plugin link/clone in `~/.gemini/config/plugins/ossian-stack` | automatic on session start / turn execution (reads disk directly) | project scope via `.agents/plugins/` or `.agents/plugins.json` |
+| Antigravity | Global native plugin install in `~/.gemini/config/plugins/ossian-stack` via `agy plugin install` | session start (reads disk directly) | project scope via `.agents/plugins/` or `.agents/plugins.json` |
 
 A ChatGPT/Codex **workspace** is an account or organization, not a repository:
 its installation policies apply to a member everywhere, in every repo. Only

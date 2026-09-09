@@ -46,13 +46,14 @@ after that each runtime refreshes on its own, or immediately with
 The native manifests declare **no version**, so the commit SHA is the release —
 there is nothing to bump. Cursor's plugin version field is optional.
 
-The same repo exposes native plugin manifests to all four supported hosts:
+The same repo exposes native plugin manifests to all five supported hosts:
 
 ```
 claude plugin marketplace add ossianhempel/ossian-stack
 codex  plugin marketplace add ossianhempel/ossian-stack
 copilot plugin marketplace add ossianhempel/ossian-stack
 cursor-agent plugin marketplace add https://github.com/ossianhempel/ossian-stack
+agy plugin install https://github.com/ossianhempel/ossian-stack
 ```
 
 In Copilot, finish with the auto-update opt-in — it is part of the default
