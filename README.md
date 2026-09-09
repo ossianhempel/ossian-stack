@@ -85,7 +85,17 @@ This is the only way the Copilot **cloud agent** picks up a plugin (it cannot
 run install commands; it reads the repo's declarative config). Copilot CLI
 honors the same file as an alternative to `copilot plugin install`.
 
-For OpenCode, Gemini CLI, Windsurf, and Antigravity, there is no native plugin
+**Antigravity** (CLI, IDE) — install the plugin natively with `agy`:
+
+```
+agy plugin install https://github.com/ossianhempel/ossian-stack
+```
+
+Antigravity clones the repository into its global plugin store (`~/.gemini/config/plugins/ossian-stack`),
+registers it in `~/.gemini/config/import_manifest.json`, and enables it in `~/.gemini/config/config.json`.
+Re-running the command refreshes the clone from GitHub.
+
+For OpenCode, Gemini CLI, and Windsurf, there is no native plugin
 manifest in this repository (OpenCode's npm "plugins" are JS hook modules and
 cannot ship a skills tree). Install the public `skills/` tree with the shared
 skills installer, targeting the current harness and global scope:
@@ -213,10 +223,11 @@ refreshed, is in [`docs/plugin-workflow.md`](docs/plugin-workflow.md).
 
 ## Limitations
 
-- **Native plugin hosts.** Claude Code, Codex, Cursor, and Copilot have native
-  plugin manifests — Copilot reads this repo's `.claude-plugin/` manifests
-  directly. Gemini CLI, Windsurf, and Antigravity consume the shared skill
-  directories instead — see [`docs/supported-agents.md`](docs/supported-agents.md).
+- **Native plugin hosts.** Claude Code, Codex, Cursor, Copilot, and Antigravity
+  have native plugin manifests — Copilot reads this repo's `.claude-plugin/` manifests
+  directly, and Antigravity reads `plugin.json` (symlinked to `.gemini-plugin/plugin.json`).
+  Gemini CLI and Windsurf consume the shared skill directories instead —
+  see [`docs/supported-agents.md`](docs/supported-agents.md).
 - **Internal skills are checkout-local.** They load for any runtime that opens this
   repo and reach no one else.
 - **Vendored skills are not polled.** They drift until `bun run check:upstream`

@@ -217,8 +217,9 @@ marketplace with `cursor-agent plugin marketplace add <repo-url>`, then complete
 user-scope install from its `/plugin` Marketplace UI; refreshes use
 `cursor-agent plugin marketplace update ossian-stack`. Cursor's official public
 Marketplace is a separate distribution channel, and `/add-plugin <repo-url>` is a
-direct GitHub import that is currently pinned. Antigravity discovers global native plugins in
-`~/.gemini/config/plugins/<plugin_name>/` (with manifest `.gemini-plugin/plugin.json`), auto-updating
+direct GitHub import that is currently pinned. Antigravity installs global native plugins with
+`agy plugin install https://github.com/ossianhempel/ossian-stack` into
+`~/.gemini/config/plugins/<plugin_name>/` (reading root `plugin.json`), auto-updating
 from disk on session start. Gemini CLI and Windsurf use the shared skills installer against `skills/`;
 never install the checkout-local `.agents/skills/` tree as the public package.
 
