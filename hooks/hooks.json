@@ -1,17 +1,4 @@
 {
-  "description": "ossian-stack: nudge the continual-learning skill when enough unmined transcript material has accumulated.",
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/scripts/continual-learning-session-start.sh\"",
-            "timeout": 10
-          }
-        ]
-      }
-    ]
-  }
+  "description": "ossian-stack: repo-local hooks.",
+  "hooks": {}
 }

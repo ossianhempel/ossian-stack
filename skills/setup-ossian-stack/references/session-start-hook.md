@@ -2,10 +2,9 @@
 
 Read for hook feature readiness and host trust approval. Follow the scope and safety contract in the skill entry point.
 
-## 4. Approve the session-start hook
+## 4. Approve session-start hooks
 
-This plugin ships one hook: a session-start nudge for `continual-learning`. It
-reads transcript counts and writes nothing the user owns.
+This plugin currently ships no active default hooks in `hooks/hooks.json`. If hooks are configured locally or added in the future, follow this approval checklist.
 
 Check the two independent runtime gates in order:
 
@@ -18,5 +17,3 @@ Check the two independent runtime gates in order:
 
 Report these separately. “Hook valid” does not mean active when the feature is
 disabled, and “feature enabled” does not mean the shipped hash is trusted.
-
-The hook needs `jq`. Without it, it exits silently and nothing else breaks.

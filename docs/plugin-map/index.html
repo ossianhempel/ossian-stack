@@ -341,7 +341,14 @@
     "tag": "Words",
     "steps": [
      {
+      "id": "online-writing",
+      "writes": "research.md, swipefile.md"
+     },
+     {
       "id": "copywriter"
+     },
+     {
+      "id": "mannered-prose"
      },
      {
       "id": "unslop"
@@ -458,7 +465,6 @@
    "resolving-merge-conflicts",
    "codex-first",
    "bro",
-   "continual-learning",
    "codify-conventions",
    "maintain-verification-skill",
    "skill-creator",
@@ -701,13 +707,11 @@
    "origin": "local",
    "repo": null,
    "calls": [
-    "continual-learning",
     "grilling",
     "skill-creator"
    ],
    "routes": [],
    "calledBy": [
-    "continual-learning",
     "skill-creator"
    ],
    "routedBy": []
@@ -736,31 +740,6 @@
     "orchestrate-threads",
     "ossian-mode",
     "release-ios-app"
-   ],
-   "routedBy": []
-  },
-  "continual-learning": {
-   "id": "continual-learning",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Continual Learning",
-   "description": "Mine project session transcripts for recurring lessons and improve project instructions. Use only when explicitly requested.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/cursor/plugins",
-   "calls": [
-    "codify-conventions",
-    "principle-encode-lessons-in-structure",
-    "principle-subtract-before-you-add",
-    "skill-creator"
-   ],
-   "routes": [],
-   "calledBy": [
-    "codify-conventions",
-    "setup-ossian-stack",
-    "skill-creator"
    ],
    "routedBy": []
   },
@@ -1116,6 +1095,26 @@
     "setup-ossian-stack"
    ]
   },
+  "mannered-prose": {
+   "id": "mannered-prose",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Mannered Prose",
+   "description": "Replace metaphor and flourish with direct statement, in your own output or in text you are given. Use when writing or reviewing anything a person will read - a report, a review, an audit, a summary, a draft - and whenever the user asks for plainer, less writerly, less performed prose, or says something reads as trying too hard. Also use as a standing constraint on your own user-facing writing when a skill or workflow routes its output through it.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "derived",
+   "repo": null,
+   "calls": [],
+   "routes": [
+    "unslop"
+   ],
+   "calledBy": [],
+   "routedBy": [
+    "online-writing"
+   ]
+  },
   "obsidian": {
    "id": "obsidian",
    "type": "skill",
@@ -1168,6 +1167,25 @@
     "ossian-mode",
     "setup-ossian-stack"
    ],
+   "routedBy": []
+  },
+  "online-writing": {
+   "id": "online-writing",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Online Writing",
+   "description": "Audit and research for editorial writing published online - blog posts, newsletters, Substack, LinkedIn, X. Three jobs: score a draft (or someone else's post that performed) against the six persuasion elements, research what is already working on a topic before writing, and pick the week's topic by mining the last two weeks of reading and notes. Diagnosis and research only - it never drafts or rewrites prose.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "routes": [
+    "mannered-prose",
+    "unslop"
+   ],
+   "calledBy": [],
    "routedBy": []
   },
   "orchestrate-threads": {
@@ -1303,9 +1321,7 @@
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
    "routes": [],
-   "calledBy": [
-    "continual-learning"
-   ],
+   "calledBy": [],
    "routedBy": []
   },
   "principle-exhaust-the-design-space": {
@@ -1443,7 +1459,6 @@
    "calls": [],
    "routes": [],
    "calledBy": [
-    "continual-learning",
     "simplify-code"
    ],
    "routedBy": []
@@ -1608,7 +1623,6 @@
    "repo": null,
    "calls": [
     "babysit-pr",
-    "continual-learning",
     "diagnosing-bugs",
     "domain-modeling",
     "git-cleanup",
@@ -1703,13 +1717,11 @@
    "calls": [
     "clerk-cli",
     "codify-conventions",
-    "continual-learning",
     "ios-marketing-capture"
    ],
    "routes": [],
    "calledBy": [
-    "codify-conventions",
-    "continual-learning"
+    "codify-conventions"
    ],
    "routedBy": []
   },
@@ -1826,7 +1838,10 @@
     "commit-push-pr",
     "copywriter"
    ],
-   "routedBy": []
+   "routedBy": [
+    "mannered-prose",
+    "online-writing"
+   ]
   },
   "visual-parity": {
    "id": "visual-parity",
@@ -1901,7 +1916,7 @@
   }
  },
  "counts": {
-  "skills": 66,
+  "skills": 67,
   "agents": 0,
   "plugins": 1
  }

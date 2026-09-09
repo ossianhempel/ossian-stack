@@ -7,7 +7,7 @@ description: "Create, revise, and evaluate skills, including descriptions, suppo
 
 Create, revise, and evaluate skills for the intended tasks and runtimes.
 
-When a completed task or `continual-learning` proposes a workflow lesson, require
+When a completed task or retrospective proposes a workflow lesson, require
 evidence that it recurs across tasks and belongs in a reusable procedure. Route a
 repository convention to `codify-conventions`; encode a mechanical invariant in
 tooling; discard one-off facts instead of growing a skill around them.

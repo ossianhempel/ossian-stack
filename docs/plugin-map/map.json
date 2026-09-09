@@ -73,9 +73,6 @@
     "commit-push-pr": {
       "role": "both"
     },
-    "continual-learning": {
-      "role": "human"
-    },
     "convex-cli": {
       "role": "both"
     },
@@ -127,6 +124,9 @@
     "maintain-verification-skill": {
       "role": "human"
     },
+    "mannered-prose": {
+      "role": "both"
+    },
     "obsidian": {
       "role": "both"
     },
@@ -134,6 +134,9 @@
       "role": "both"
     },
     "one-password": {
+      "role": "both"
+    },
+    "online-writing": {
       "role": "both"
     },
     "orchestrate-threads": {
@@ -248,7 +251,6 @@
       "resolve-pr-feedback"
     ],
     "codify-conventions": [
-      "continual-learning",
       "grilling",
       "skill-creator"
     ],
@@ -258,12 +260,6 @@
       "blast-radius",
       "git-cleanup",
       "unslop"
-    ],
-    "continual-learning": [
-      "codify-conventions",
-      "principle-encode-lessons-in-structure",
-      "principle-subtract-before-you-add",
-      "skill-creator"
     ],
     "copywriter": [
       "unslop"
@@ -347,7 +343,6 @@
     ],
     "setup-ossian-stack": [
       "babysit-pr",
-      "continual-learning",
       "diagnosing-bugs",
       "domain-modeling",
       "git-cleanup",
@@ -365,7 +360,6 @@
     "skill-creator": [
       "clerk-cli",
       "codify-conventions",
-      "continual-learning",
       "ios-marketing-capture"
     ],
     "teach": [
@@ -615,7 +609,14 @@
         "tag": "Words",
         "steps": [
           {
+            "id": "online-writing",
+            "writes": "research.md, swipefile.md"
+          },
+          {
             "id": "copywriter"
+          },
+          {
+            "id": "mannered-prose"
           },
           {
             "id": "unslop"
@@ -732,7 +733,6 @@
       "resolving-merge-conflicts",
       "codex-first",
       "bro",
-      "continual-learning",
       "codify-conventions",
       "maintain-verification-skill",
       "skill-creator",
@@ -754,28 +754,35 @@
     }
   },
   "routes": {
+    "create-verification-skill": [
+      "maintain-verification-skill"
+    ],
     "diagnosing-bugs": [
       "create-verification-skill"
     ],
-    "prototype": [
-      "create-verification-skill"
+    "how": [
+      "why"
+    ],
+    "mannered-prose": [
+      "unslop"
+    ],
+    "online-writing": [
+      "mannered-prose",
+      "unslop"
+    ],
+    "orchestrate-threads": [
+      "ossian-mode"
     ],
     "ossian-mode": [
       "create-verification-skill",
       "orchestrate-threads"
     ],
+    "prototype": [
+      "create-verification-skill"
+    ],
     "setup-ossian-stack": [
       "create-verification-skill",
       "maintain-verification-skill"
-    ],
-    "create-verification-skill": [
-      "maintain-verification-skill"
-    ],
-    "orchestrate-threads": [
-      "ossian-mode"
-    ],
-    "how": [
-      "why"
     ],
     "why": [
       "how"

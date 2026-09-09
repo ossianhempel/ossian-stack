@@ -46,7 +46,6 @@ is a bare binary:
 | Jira | `curl`/`python3` against the REST API with `JIRA_*` credentials, or a repo-shipped Jira CLI | Missing credentials env vars is a configuration gap, not a missing capability — point at the tracker config's credentials section. |
 | Linear | `curl` against the GraphQL API with `LINEAR_API_KEY`, plus `jq` for response shaping | A missing key is a configuration gap, not a missing capability. |
 | Azure DevOps Boards | `az` with the `azure-devops` extension (`az extension add --name azure-devops`) | `az` without the extension covers nothing here; the extension is a one-time add. |
-| Session-start hook | `jq` | Without it, the hook exits silently and continual learning never nudges. |
 | Secret retrieval | `op` | Without it, `one-password` cannot retrieve secrets; already-materialized environment values are separate. |
 | Native Apple tooling | `xcodebuild` | Without it, native builds and Simulator captures are blocked. |
 | PR watcher | `bun` | Without it, `babysit-pr` cannot run `watch-pr` and falls back to plain status reporting. |
@@ -56,11 +55,9 @@ is a bare binary:
 | Recoverable deletion | `trash` | Without it, `git-cleanup` must not delete. |
 | Node package execution | `npx`, `bunx`, `pnpm dlx`, or `yarn dlx`, according to the owning skill | Report the runners that exist. Do not treat `npx` as universally required when a supported alternative is ready. |
 
-`jq` deserves its own line in the report: without it the hook fails **silently and
-by design**, so nothing looks broken and continual learning simply never happens.
-
 Say all of this plainly rather than burying it. Report the evidence and the
 execution path selected, not a guessed machine-wide installation state.
+
 ## 6. Project prerequisites — check, do not scaffold
 
 When run inside a project, some skills expect a file the repo owns. **Most are
