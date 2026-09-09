@@ -11,10 +11,7 @@ CLI, prefer it and record its commands here instead of the REST recipes.
 Issues and specs for this repo live in **Jira**, project `<KEY>`, at
 `<https://<SITE>.atlassian.net>`. Do not use `gh issue` for tracker work.
 
-This template defines the default Jira behavior. If
-`docs/agents/jira-mapping.md` exists, look up the exact concept before an
-operation and use that row. If the concept has no row, keep the default below.
-Do not infer other changes from the mapping file.
+This template defines the default Jira behavior.
 
 ## Existing-system evidence
 
@@ -112,48 +109,8 @@ Follow `docs/agents/handoff-comment.md`: comment only on meaningful progress,
 a new or changed blocker, a decision needed, or completion. Use a few sentences
 with evidence links and no empty sections. Do not repeat unchanged blockers or
 mirror HQ/agent coordination. Preserve the minimal claim/release/resume records
-required below; those ownership transitions still need their protocol evidence.
-The blocked/paused/done operations apply on state transitions, not on every poll.
+the project's own protocol requires; those ownership transitions still need their
+protocol evidence. Blocked, paused, and done updates are state transitions, not
+routine polls.
 Keep durable technical decisions in the ticket body or linked spec, and link
 detailed evidence. Resolution comments summarize the outcome and point there.
-
-## Pickup operations
-
-Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
-"take the next ticket". Comments follow the policy in `docs/agents/handoff-comment.md`.
-Resolve every triage role through `docs/agents/triage-labels.md`; the role names
-below are the canonical defaults for a fresh setup.
-
-- **Frontier query**: JQL `project = <KEY> AND labels = <agent-ready label (default ready-for-agent)> AND assignee IS EMPTY AND statusCategory IN ("To Do", "In Progress")`, then drop any with an inward `Blocks` link from an unresolved issue; `created ASC`. The frontier includes unclaimed `In Progress` work so a paused ticket (claim released, status kept) resurfaces.
-- **Claim**: post the claim handoff comment stating `<runtime>:<session-id>` first, then `PUT /rest/api/3/issue/<KEY>-n` with the viewer's `accountId` as assignee and a transition to the in-progress status; the comment is the session's first write. The assignee field alone is last-writer-wins, so re-read comments and assignee: the winner is the earliest claim comment. On loss, set assignee to null and take the next ticket.
-- **Blocked**: read-merge-write labels replacing the agent-ready label with the mapped `needs-info` or `ready-for-human` label, post a blocked handoff comment, set assignee to null.
-- **Paused**: a paused handoff comment, set assignee to null, keep the status. The ticket re-enters the frontier (unclaimed `In Progress` work is eligible).
-- **Done**: put the PR link in the done handoff comment (or the dev-status panel if the git integration is connected), transition to the review status. The human moves it to Done.
-- **Abandoned claim**: an assignee with `updated` older than one working day. Report it; never silently reclaim.
-
-## Wayfinding operations
-
-Used by `/wayfinder`. The **map** is a single Jira issue (type `Epic` where the
-project has one) with child issues as tickets.
-
-- **Map**: one issue labelled `wayfinder:map`, holding the Notes / Decisions-so-far /
-  Fog body. `POST /rest/api/3/issue` with type `Epic` and label `wayfinder:map`.
-- **Child ticket**: a subtask (`subtasks` field, type `Sub-task`) where the project
-  supports them, otherwise a standard issue linked to the map. Where hierarchy
-  isn't available, put `Part of: <map key>` at the top of the child description.
-  Labels: `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`).
-- **Blocking**: the native **Blocks** issue link — link each child to its blocker
-  with type `Blocks` (the child then shows the inward "is blocked by" link):
-  `POST /rest/api/3/issue/<KEY>-child/issuelinks` with
-  `{"links":[{"type":{"name":"Blocks"},"inwardIssue":{"key":"<KEY>-blocker"}}]}`.
-  Where issue links aren't available, fall back to a `Blocked by: <KEY>-n, <KEY>-n`
-  line at the top of the child description.
-- **Frontier query**: fetch the map's open children (`parent = <KEY>-map AND
-  statusCategory != Done`), then drop any whose `issuelinks` contain an open
-  inward `Blocks` link from an unresolved issue, or that already have an assignee;
-  first in map order wins.
-- **Claim**: `PUT /rest/api/3/issue/<KEY>-n` with
-  `{"fields":{"assignee":{"accountId":"<account-id>"}}}` (the viewer's `accountId`
-  from `GET /rest/api/3/myself`) — the session's first write.
-- **Resolve**: comment with the concise outcome and durable-answer link, transition to Done, then append a context
-  pointer to the map's Decisions-so-far.

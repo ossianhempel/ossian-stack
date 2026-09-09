@@ -90,11 +90,7 @@ An existing PR whose thread starts with status, feedback, or readiness as its
 goal routes directly to the matching `babysit-pr` mode. That is existing-PR
 ownership, not a second closeout loop.
 
-Choose tracker-dependent skills only for a workstream using that workflow:
-`wayfinder` for large exploratory work managed through tickets, `to-spec` for a
-published tracker spec, and `to-tickets` for ticket decomposition. Preserve their configuration requirements and explicit
-invocation restrictions. They are not a mandatory chain for planning or building,
-and naming them in a brief grants no authority to publish or create issues.
+Naming a skill in a brief grants no authority to publish or create issues.
 
 Outside GitHub Copilot, trivial edits under about twenty lines with one obvious
 change are cheaper to do here than to brief. Do them, note them in the ledger,

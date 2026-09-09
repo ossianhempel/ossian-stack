@@ -40,10 +40,18 @@ P=$(mktemp); cat >"$P" <<'EOF'
 <goal, repo + key paths, constraints ("don't touch X"), non-goals, proof expected, output shape>
 EOF
 command codex exec --yolo -C <repo> \
-  -c model_reasoning_effort="high" \
+  -m gpt-5.6-sol \
+  -c model_reasoning_effort="medium" \
   -o /tmp/codex-last.md - <"$P" 2>/dev/null
 ```
 
+- `-m gpt-5.6-sol` at `medium` effort is the house default for delegated work. Pin
+  both explicitly rather than inheriting `~/.codex/config.toml`, so a config change
+  cannot silently alter what delegation means here. Raise to `high` for a genuinely
+  hard problem — a subtle concurrency bug, a migration whose ordering is not
+  obvious — and say why in the same breath. Delegated work arrives as a frozen
+  spec, so the reasoning it needs is usually lower than the reasoning that produced
+  the spec.
 - `--yolo` is the house default; Codex may run commands/tests freely. Keep prompts scoped to the target repo.
 - `command codex` bypasses the interactive zsh wrapper; if not on PATH: `fnm exec --using default -- codex`
 - stderr suppressed (thinking noise bloats context); drop `2>/dev/null` only to debug a failing run
@@ -57,6 +65,8 @@ Follow-up fixes — cheaper than fresh runs, keeps context. `resume` has no `-C`
 ```bash
 (cd <repo> && command codex exec resume --last \
   --dangerously-bypass-approvals-and-sandbox \
+  -m gpt-5.6-sol \
+  -c model_reasoning_effort="medium" \
   -o /tmp/codex-last.md - <"$P2" 2>/dev/null)
 ```
 

@@ -16,7 +16,7 @@ routine checkpoints. A status field can be reconciled without a new comment.
 
 Default to a few sentences: what changed, the evidence link, and any next action
 or decision needed. Omit empty sections, unchanged details, and transcript-style
-logs. Use the AI disclosure required by the project's triage configuration.
+logs. Use whatever AI disclosure the project's tracker configuration requires.
 Record accepted technical decisions in the ticket body or linked spec; link
 detailed test results, logs, and other evidence instead of copying them here.
 
@@ -33,8 +33,9 @@ Example progress comment (after any required disclosure):
 
 ## Ownership and recovery
 
-Keep the short ownership records required by the tracker's claim/release protocol.
-They are necessary state changes, even when there is no implementation progress.
+Where the project's tracker configuration defines a claim/release protocol, keep
+its short ownership records. They are necessary state changes, even when there is
+no implementation progress.
 Preserve claim-before-assignment ordering, winner selection, and release operations.
 
 - **Claim:** record `Claimed by <runtime>:<session-id>` before setting the owner

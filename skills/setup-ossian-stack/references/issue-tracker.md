@@ -2,40 +2,22 @@
 
 Read for tracker-only setup or a requested tracked-delivery workflow. Follow the scope and safety contract in the skill entry point.
 
-## 7. Issue tracker and triage labels
+## 7. Issue tracker
 
 Configure a tracker when the user chooses ticket-based work or the active project
 workflow requires tracked delivery. During general setup, an absent tracker is
 optional unless that workflow is chosen; report it without forcing configuration.
 Configuring a tracker does not authorize creating issues.
 
-`to-tickets`, `to-spec`, and `wayfinder` read per-project config that, unlike the
-files above, is **not created lazily** — an unconfigured tracker fails on first
+This config is **not created lazily** — an unconfigured tracker fails on first
 use with no hint where the setting lives. Check for:
 
 - `docs/agents/issue-tracker.md` — where issues live, which native hierarchy,
   blocking, assignment, and label operations are available.
-- `docs/agents/triage-labels.md` — the mapping from the five canonical triage
-  roles (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`,
-  `wontfix`) to the actual label strings the tracker uses.
-- `docs/agents/jira-mapping.md` — optional sparse overrides for an existing Jira
-  project that represents an operation differently from this plugin. Do not
-  create it for a fresh setup. Copy the table from
-  `jira-mapping.md`; a missing row keeps the selected tracker
-  template's original behavior.
-- `docs/agents/ticket-brief.md` — the shape of every ticket body. Copy
-  `ticket-brief.md`, dropping its leading copy-me line; `to-tickets` and `to-spec`
-  write it and a cold pickup agent reads it.
 - `docs/agents/handoff-comment.md` — when to comment and the concise content
   needed for meaningful updates and ownership recovery. Copy
   `handoff-comment.md`, dropping its introductory copy paragraph.
   Resume from the ticket/spec, relevant handoff records, and linked evidence.
-- `docs/agents/pickup-loop.md` — the prompt the user pastes into the host's
-  `/loop` or a scheduled routine to have agents take `ready-for-agent` tickets
-  autonomously. Copy `pickup-loop.md`, dropping its leading
-  copy-me paragraph. There is no pickup
-  skill: the runner is a host capability, the operations live in the tracker
-  config's "Pickup operations" section.
 
 Supported trackers, each with a ready-to-adapt template bundled with this skill:
 
@@ -78,26 +60,24 @@ existing Jira project, compare repository rules with live Jira data:
    hierarchy, create fields, statuses by issue type, transitions on representative
    issues, link types, permissions, and representative issues for actual labels
    and field use. Treat filtered or empty results as unknown.
-3. Preserve matching defaults. For each actual difference in a plugin operation,
-   add one exact row to `docs/agents/jira-mapping.md`; do not copy defaults into
-   the mapping. Preserve repository branch/commit/PR conventions, permissions,
-   credentials, API/CLI recipes, and reporting rules directly in
-   `issue-tracker.md`.
+3. Preserve matching defaults. Record each actual difference, plus repository
+   branch/commit/PR conventions, permissions, credentials, API/CLI recipes, and
+   reporting rules, directly in `issue-tracker.md`.
 
 Show the discovered differences and proposed local configuration diff before
-writing. A mapping records existing values and does not change Jira. Introducing
+writing. Recording existing values does not change Jira. Introducing
 a shared Jira label, issue type, custom field, status,
 transition, workflow/schema change, or other persistent Jira vocabulary or
 configuration requires explicit user authorization naming that change. Permission
 to configure the adapter or create ordinary tickets does not grant it. When no
-existing representation fits and no Jira change is authorized, map only that
-concept to a portable body fallback. If discovery is blocked, leave the mapping
-unknown rather than guessing.
+existing representation fits and no Jira change is authorized, record only that
+concept as a portable body fallback. If discovery is blocked, leave it unknown
+rather than guessing.
 
 Existing project copies do not update when the plugin refreshes. During requested
-project setup or policy refresh, compare the handoff-comment, pickup-loop, tracker
-configuration, and optional sparse mapping with these templates and merge the
-reporting policy into the selected project. Preserve its property/label mappings,
+project setup or policy refresh, compare the handoff-comment and tracker
+configuration with these templates and merge the reporting policy into the
+selected project. Preserve its property/label mappings,
 API recipes, claim arbitration, permissions, and other customizations; do not
 overwrite whole files or edit live tickets. Apply the same policy to custom
 GitLab/local tracker recipes.

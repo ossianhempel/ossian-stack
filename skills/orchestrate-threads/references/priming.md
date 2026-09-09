@@ -115,7 +115,7 @@ local-only/no-delivery work. Do not replace it with a prose suggestion.
 Some skills are user-invoke-only: their SKILL.md sets disable-model-invocation
 and the agent's skill tool refuses them. In this list they are marked
 **(user types)**, and the brief must phrase them as a prompt to the person in
-the thread ("ask the user to type /wayfinder"), never as an agent step. The
+the thread ("ask the user to type /grill-me"), never as an agent step. The
 rest the agent invokes itself.
 
 **Plan threads**
@@ -127,15 +127,6 @@ rest the agent invokes itself.
   (user types) when the plan should leave ADRs and glossary entries behind.
 - `domain-modeling` when the vocabulary is unsettled.
 - `prototype` when a design question is cheaper to answer with throwaway code.
-
-**Chosen ticket workflows only**
-
-- `wayfinder` (user types) for large exploratory work managed through tickets;
-  `to-spec` (user types) for a published tracker spec; `to-tickets` (user types)
-  for decomposition into tickets. Select the needed skill, not an automatic chain.
-- Keep each skill's tracker prerequisites. If configuration is missing, request
-  tracker-only setup for that chosen workflow and continue independent research
-  or planning. Do not route ordinary work through a full installation audit.
 
 **Build threads**
 

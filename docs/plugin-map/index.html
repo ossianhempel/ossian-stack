@@ -174,23 +174,11 @@
     "tag": "Agent workflow",
     "steps": [
      {
-      "id": "wayfinder",
-      "writes": "decision tickets"
-     },
-     {
       "id": "domain-modeling",
       "writes": "GLOSSARY.md"
      },
      {
       "id": "grilling"
-     },
-     {
-      "id": "to-spec",
-      "writes": "spec doc"
-     },
-     {
-      "id": "to-tickets",
-      "writes": "tracker tickets"
      },
      {
       "id": "prototype",
@@ -460,6 +448,7 @@
    "git-cleanup",
    "resolving-merge-conflicts",
    "codex-first",
+   "codex-multi-agent",
    "bro",
    "codify-conventions",
    "maintain-verification-skill",
@@ -691,6 +680,24 @@
    ],
    "routedBy": []
   },
+  "codex-multi-agent": {
+   "id": "codex-multi-agent",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Codex Multi-Agent",
+   "description": "Coordinate parallel Codex subagents while staying responsive to the user: read-only scouts for exploration, owned workers for the implementation, an advisor for what gets stuck. Use when a task is large enough to fan out, needs several areas explored at once, or the user asks to delegate, parallelize, or spawn agents.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": [
+    "ossian-mode"
+   ]
+  },
   "codify-conventions": {
    "id": "codify-conventions",
    "type": "skill",
@@ -845,8 +852,7 @@
    "routes": [],
    "calledBy": [
     "grill-with-docs",
-    "setup-ossian-stack",
-    "wayfinder"
+    "setup-ossian-stack"
    ],
    "routedBy": []
   },
@@ -930,7 +936,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Grill Design",
-   "description": "Converge on a frontend look through rounds of prototypes and grilling verdicts. Use when the user wants to iterate on UI/visual taste against concrete variants, or a wayfinder prototype ticket names this skill.",
+   "description": "Converge on a frontend look through rounds of prototypes and grilling verdicts. Use when the user wants to iterate on UI/visual taste against concrete variants.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -998,8 +1004,7 @@
     "grill-me",
     "grill-with-docs",
     "orchestrate-threads",
-    "ossian-mode",
-    "wayfinder"
+    "ossian-mode"
    ],
    "routedBy": []
   },
@@ -1106,7 +1111,8 @@
    ],
    "calledBy": [],
    "routedBy": [
-    "online-writing"
+    "online-writing",
+    "ossian-mode"
    ]
   },
   "obsidian": {
@@ -1202,10 +1208,7 @@
     "handoff",
     "prototype",
     "setup-ossian-stack",
-    "show-me-your-work",
-    "to-spec",
-    "to-tickets",
-    "wayfinder"
+    "show-me-your-work"
    ],
    "routes": [
     "ossian-mode"
@@ -1249,12 +1252,13 @@
     "setup-ossian-stack",
     "show-me-your-work",
     "simplify-code",
-    "to-spec",
     "visual-parity",
     "why"
    ],
    "routes": [
+    "codex-multi-agent",
     "create-verification-skill",
+    "mannered-prose",
     "orchestrate-threads"
    ],
    "calledBy": [],
@@ -1491,8 +1495,7 @@
    ],
    "calledBy": [
     "orchestrate-threads",
-    "ossian-mode",
-    "wayfinder"
+    "ossian-mode"
    ],
    "routedBy": []
   },
@@ -1621,10 +1624,7 @@
     "git-cleanup",
     "one-password",
     "release-ios-app",
-    "revenuecat-api",
-    "to-spec",
-    "to-tickets",
-    "wayfinder"
+    "revenuecat-api"
    ],
    "routes": [
     "create-verification-skill",
@@ -1632,8 +1632,7 @@
    ],
    "calledBy": [
     "orchestrate-threads",
-    "ossian-mode",
-    "wayfinder"
+    "ossian-mode"
    ],
    "routedBy": []
   },
@@ -1752,45 +1751,6 @@
    "calledBy": [],
    "routedBy": []
   },
-  "to-spec": {
-   "id": "to-spec",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "To Spec",
-   "description": "Turn the current conversation into a spec and publish it to the project issue tracker — no interview, just synthesis of what you've already discussed.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/mattpocock/skills",
-   "calls": [],
-   "routes": [],
-   "calledBy": [
-    "orchestrate-threads",
-    "ossian-mode",
-    "setup-ossian-stack"
-   ],
-   "routedBy": []
-  },
-  "to-tickets": {
-   "id": "to-tickets",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "To Tickets",
-   "description": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker — edges as text in one file per ticket locally, or native blocking links on a real tracker.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/mattpocock/skills",
-   "calls": [],
-   "routes": [],
-   "calledBy": [
-    "orchestrate-threads",
-    "setup-ossian-stack"
-   ],
-   "routedBy": []
-  },
   "unslop": {
    "id": "unslop",
    "type": "skill",
@@ -1834,30 +1794,6 @@
    ],
    "routedBy": []
   },
-  "wayfinder": {
-   "id": "wayfinder",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Wayfinder",
-   "description": "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/mattpocock/skills",
-   "calls": [
-    "domain-modeling",
-    "grilling",
-    "prototype",
-    "setup-ossian-stack"
-   ],
-   "routes": [],
-   "calledBy": [
-    "orchestrate-threads",
-    "setup-ossian-stack"
-   ],
-   "routedBy": []
-  },
   "why": {
    "id": "why",
    "type": "skill",
@@ -1886,7 +1822,7 @@
   }
  },
  "counts": {
-  "skills": 66,
+  "skills": 64,
   "agents": 0,
   "plugins": 1
  }

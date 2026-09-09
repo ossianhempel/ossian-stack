@@ -96,7 +96,11 @@
       "upstreamPath": "skills/codex-first",
       "upstreamRev": "034471e2ce1c72f5884890befa8afc2b2a961c2f",
       "upstreamCheckedAt": "2026-08-27",
-      "notes": " Local audit (2026-09-05): portable routing rationale and dead-link removal. Preserve on refresh."
+      "notes": "Local audit (2026-09-05): portable routing rationale and dead-link removal. Preserve on refresh. Local model pin (2026-09-09): delegation runs -m gpt-5.6-sol at model_reasoning_effort=medium on both exec and resume, set explicitly rather than inherited from ~/.codex/config.toml so config drift cannot change what delegation means. Preserve on refresh."
+    },
+    "codex-multi-agent": {
+      "origin": "local",
+      "notes": "Authored 2026-09-09. Codex-only counterpart to codex-first: codex-first routes work from Claude to Codex, this governs how a Codex session fans work out to its own subagents. The standing-instructions paragraph is Ossian's, from a Readwise highlight on giving a coordinator standing instructions. Local additions: workers on gpt-5.6-sol, scouts pinned to gpt-5.6-luna at max effort (verified in ~/.codex/models_cache.json as a supported level for that model), and the fork_turns override rule - Codex accepts model/reasoning_effort only when fork_turns is \"none\" or a positive integer string, and silently ignores overrides on a full-history fork. Adds gpt-6-astra as an Advisor role at medium effort - consulted when a worker stalls, never assigned an area - which is the resolution of the open Sol-uses-Astra-as-advisor idea. The advisor spawns with a positive-integer fork_turns because it needs the stuck context but \"all\" would silently drop the Astra override."
     },
     "codify-conventions": {
       "origin": "local",
@@ -448,7 +452,7 @@
     },
     "setup-ossian-stack": {
       "origin": "local",
-      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen. Concise tracker reporting policy: meaningful events only, no unchanged blocker/HQ mirroring, minimal ownership and cross-runtime recovery records. Applied to all five tracker templates and pickup instructions; project copies require a scoped merge preserving customizations. Existing Jira adoption starts with discovery: compare repository conventions with live project metadata, preserve the host scheme and recipes, and add one sparse jira-mapping row for each concept that differs. Missing rows retain the original label-based defaults. New shared Jira vocabulary or configuration requires explicit authorization. Local audit (2026-09-05): focused description; task-specific reference routing. Preserve on refresh."
+      "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen. Concise tracker reporting policy: meaningful events only, no unchanged blocker/HQ mirroring, minimal ownership and cross-runtime recovery records. Applied to all five tracker templates; project copies require a scoped merge preserving customizations. Existing Jira adoption starts with discovery: compare repository conventions with live project metadata, preserve the host scheme and recipes, and record each differing concept in issue-tracker.md. New shared Jira vocabulary or configuration requires explicit authorization. 2026-09-09: triage/to-spec/to-tickets/wayfinder were removed from the plugin, so the pickup loop, ticket brief, triage-label mapping, and jira-mapping overrides were deleted with them; what remains is plain tracker configuration plus the handoff-comment policy. Local audit (2026-09-05): focused description; task-specific reference routing. Preserve on refresh."
     },
     "show-me-your-work": {
       "origin": "adapted",
@@ -495,26 +499,6 @@
       "repo": "https://github.com/ossianhempel/things3-cli",
       "notes": "Documents things3-cli; lives in ~/Developer/things3-cli. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
     },
-    "to-spec": {
-      "origin": "adapted",
-      "repo": "https://github.com/mattpocock/skills",
-      "path": "skills/engineering/to-spec",
-      "refresh": "npx skills add mattpocock/skills -y --skill to-spec && cp -R .agents/skills/to-spec/* skills/to-spec/ && trash .agents/skills/to-spec && echo 'adapted: re-point /setup-matt-pocock-skills at /setup-ossian-stack — diff by hand'",
-      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: the setup-skill pointer rewritten to /setup-ossian-stack. Everything else is upstream verbatim.",
-      "upstreamPath": "skills/engineering/to-spec",
-      "upstreamRev": "v1.2.3",
-      "upstreamCheckedAt": "2026-08-31"
-    },
-    "to-tickets": {
-      "origin": "adapted",
-      "repo": "https://github.com/mattpocock/skills",
-      "path": "skills/engineering/to-tickets",
-      "refresh": "npx skills add mattpocock/skills -y --skill to-tickets && cp -R .agents/skills/to-tickets/* skills/to-tickets/ && trash .agents/skills/to-tickets && echo 'adapted: re-point both /setup-matt-pocock-skills mentions at /setup-ossian-stack — diff by hand'",
-      "notes": "Vendored 2026-08-31 from plugin v1.2.3 (cache, no git SHA — pinned to the tag). Adapted: both setup-skill pointers rewritten to /setup-ossian-stack. Everything else is upstream verbatim.",
-      "upstreamPath": "skills/engineering/to-tickets",
-      "upstreamRev": "v1.2.3",
-      "upstreamCheckedAt": "2026-08-31"
-    },
     "unslop": {
       "origin": "adapted",
       "repo": "https://github.com/cursor/plugins",
@@ -535,17 +519,6 @@
       "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
       "upstreamCheckedAt": "2026-09-06",
       "lastSynced": "2026-09-06"
-    },
-    "wayfinder": {
-      "origin": "adapted",
-      "repo": "https://github.com/mattpocock/skills",
-      "path": "skills/engineering/wayfinder",
-      "refresh": "npx skills add mattpocock/skills -y --skill wayfinder && echo 'hand-merge into skills/wayfinder/ then: trash .agents/skills/wayfinder'",
-      "notes": "Vendored 2026-09-01. Preserves upstream's destination, shared map, decision-ticket frontier, fog-of-war, and one-ticket-per-session model. Adapted for this plugin: setup points to setup-ossian-stack; tracker hierarchy, type, claim, and blocking fallbacks are self-contained and capability-based; the unshipped research and grilling siblings are replaced with delegated authoritative research and an inline breadth-first interview; prototype and domain-modeling point to shipped siblings. Merge by hand on refresh; never overwrite. Resolution comments summarize and link the durable answer in the ticket/spec and its evidence. For existing Jira, an exact optional `wayfinder.*` row replaces one representation. Missing rows retain the original label, native, or fallback behavior and the core map semantics.",
-      "upstreamPath": "skills/engineering/wayfinder",
-      "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
-      "upstreamCheckedAt": "2026-09-01",
-      "lastSynced": "2026-09-01"
     },
     "why": {
       "origin": "adapted",

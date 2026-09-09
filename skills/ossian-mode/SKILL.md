@@ -18,12 +18,15 @@ the current work.
 - When a command needs credentials, use `one-password` to retrieve or inject
   the project's secrets from 1Password without printing them, hardcoding them,
   or asking the user to paste secret values into chat.
-- Communicate plainly: lead with the result, explain consequential choices, and
-  keep the user informed while work is in progress.
+- Lead with the result, explain consequential choices, and keep the user
+  informed while work is in progress. Route everything the user reads through
+  `mannered-prose`.
 - Prefer simple changes that address the underlying condition. Add only what
   the evidence and the requested outcome require.
 - For parallel work, use same-task candidates only when selection and synthesis
   matter. Partition coverage across disjoint slices. Isolate every writing worker.
+  In a Codex session, `codex-multi-agent` is the default shape for fanning work
+  out.
 
 ## Verification
 
@@ -64,7 +67,7 @@ to implementation; its size alone does not require a planning detour.
 | --- | --- |
 | Questions or investigation | `how` for behavior and ownership; `why` for rationale and evidence. A question alone does not authorize a change. |
 | Diagnosis | `diagnosing-bugs` for broken behavior. Use `performance` for latency, CPU, memory, energy, frame time, throughput, or captured profiles. Preserve diagnosis-only scope. |
-| Unsettled design | `grilling` for product decisions, `prototype` for observable alternatives, and `architect` for caller contracts and module boundaries. Once decisions are settled, `to-spec` can capture them when explicitly invoked and its tracker prerequisites are met. |
+| Unsettled design | `grilling` for product decisions, `prototype` for observable alternatives, and `architect` for caller contracts and module boundaries. |
 | Implementation | Implement the agreed scope directly. For cross-boundary work settle caller usage and the data shape through `architect`. Load a relevant platform or craft skill only where needed. Use `visual-parity` when a UI must match a fixed reference. |
 | Refactoring | `refactoring` for structural changes with behavior preserved; `simplify-code` for readability in place. |
 | Delivery | Use `blast-radius` before delivery when safety depends on behavior beyond the diff. Use `commit-push-pr` for requested commits, pushes, and PRs; `babysit-pr` for an existing PR's readiness work; `release-ios-app` for an authorized iOS release. |

@@ -5,48 +5,48 @@
       "id": 0,
       "name": "fresh-jira-keeps-defaults",
       "prompt": "Source evaluation only; do not call Jira or write files. Configure a fresh Jira project with no prior tracker conventions. Describe the project config produced.",
-      "expected_output": "Use the original Jira template and canonical triage/Wayfinder label defaults, without creating an existing-system mapping file or running an adoption audit.",
+      "expected_output": "Copy the Jira tracker template and the handoff-comment policy into docs/agents/ unchanged, without running an existing-system adoption audit.",
       "files": [],
       "assertions": [
-        "Uses the original label-based Jira, triage, pickup, and Wayfinder defaults.",
-        "Does not create or propose docs/agents/jira-mapping.md.",
+        "Uses the bundled Jira tracker template defaults without modification.",
+        "Produces docs/agents/issue-tracker.md and docs/agents/handoff-comment.md and nothing else.",
         "Keeps fresh setup concise and does not require existing-system reconciliation."
       ]
     },
     {
       "id": 1,
-      "name": "adopt-mature-jira-sparse",
-      "prompt": "Source evaluation only; do not call Jira or write files. Adopt a mature Jira project. Repo and live metadata agree on the normal triage labels and assignee claims, but use Improvement instead of Story, Initiative parents instead of Epics, Depends on instead of Blocks, and REL-123 branch/commit/PR rules through a jira-wrapper CLI. Describe the configuration diff.",
-      "expected_output": "Preserve matching defaults and host conventions; add exact sparse rows only for the differing issue type/hierarchy/dependency concepts supported by stable paths, keeping default labels and claims implicit.",
+      "name": "adopt-mature-jira",
+      "prompt": "Source evaluation only; do not call Jira or write files. Adopt a mature Jira project. Repo and live metadata agree on assignee claims, but use Improvement instead of Story, Initiative parents instead of Epics, Depends on instead of Blocks, and REL-123 branch/commit/PR rules through a jira-wrapper CLI. Describe the configuration diff.",
+      "expected_output": "Reconcile repository evidence against live Jira metadata, then record the differing issue type, hierarchy, dependency, and CLI conventions directly in docs/agents/issue-tracker.md, leaving matching defaults implicit.",
       "files": [],
       "assertions": [
         "Reconciles repository evidence with live Jira metadata before proposing configuration.",
         "Preserves jira-wrapper, Improvement, Initiative, Depends on, REL-123 conventions, permissions, and reporting rules.",
-        "Does not copy matching label or assignee defaults into the sparse mapping.",
-        "Every unmapped concept explicitly retains its original default behavior."
+        "Records the differences in issue-tracker.md rather than a separate mapping file.",
+        "Shows the proposed configuration diff before writing anything."
       ]
     },
     {
       "id": 2,
       "name": "existing-jira-no-vocabulary-approval",
-      "prompt": "Source evaluation only; do not call Jira or write files. Existing Jira has no wayfinder labels and no suitable dependency link. The user authorizes local setup but does not authorize Jira labels, fields, types, or workflow/schema changes. Describe the proposed diff.",
-      "expected_output": "Propose sparse portable body overrides only for the differing Wayfinder concepts and no persistent Jira changes; leave unrelated defaults intact.",
+      "prompt": "Source evaluation only; do not call Jira or write files. The existing Jira has no suitable dependency link type. The user authorizes local setup but does not authorize Jira labels, fields, types, or workflow/schema changes. Describe the proposed diff.",
+      "expected_output": "Record a portable body fallback for the unsupported dependency concept only, propose no persistent Jira change, and leave unrelated defaults intact.",
       "files": [],
       "assertions": [
         "Requires explicit named authorization before introducing persistent Jira vocabulary or schema.",
-        "Uses sparse body-fallback rows for only the unsupported concepts.",
-        "Does not turn the tracker into a generalized adapter mode or alter unmapped defaults."
+        "Records a portable body fallback for only the unsupported concept.",
+        "Does not turn the tracker into a generalized adapter mode or alter unrelated defaults."
       ]
     },
     {
       "id": 3,
       "name": "partial-jira-read-access",
       "prompt": "Source evaluation only; do not call Jira or write files. Issue reads work, but project metadata, permissions, and transitions return 403, and repo docs disagree about the project key. Describe setup's result.",
-      "expected_output": "Record known evidence and stop before guessed mapping or configuration writes, naming the exact missing fact needed next.",
+      "expected_output": "Record known evidence and stop before guessed configuration writes, naming the exact missing fact needed next.",
       "files": [],
       "assertions": [
         "Treats filtered metadata as unknown rather than absent.",
-        "Does not guess a project key or create sparse overrides from incomplete evidence.",
+        "Does not guess a project key or write configuration from incomplete evidence.",
         "Names the access or identity fact required to continue."
       ]
     }

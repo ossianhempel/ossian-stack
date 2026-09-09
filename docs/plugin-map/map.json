@@ -67,6 +67,9 @@
     "codex-first": {
       "role": "both"
     },
+    "codex-multi-agent": {
+      "role": "both"
+    },
     "codify-conventions": {
       "role": "both"
     },
@@ -217,20 +220,11 @@
     "things": {
       "role": "both"
     },
-    "to-spec": {
-      "role": "human"
-    },
-    "to-tickets": {
-      "role": "human"
-    },
     "unslop": {
       "role": "both"
     },
     "visual-parity": {
       "role": "both"
-    },
-    "wayfinder": {
-      "role": "human"
     },
     "why": {
       "role": "both"
@@ -283,10 +277,7 @@
       "handoff",
       "prototype",
       "setup-ossian-stack",
-      "show-me-your-work",
-      "to-spec",
-      "to-tickets",
-      "wayfinder"
+      "show-me-your-work"
     ],
     "ossian-mode": [
       "architect",
@@ -311,7 +302,6 @@
       "setup-ossian-stack",
       "show-me-your-work",
       "simplify-code",
-      "to-spec",
       "visual-parity",
       "why"
     ],
@@ -344,10 +334,7 @@
       "git-cleanup",
       "one-password",
       "release-ios-app",
-      "revenuecat-api",
-      "to-spec",
-      "to-tickets",
-      "wayfinder"
+      "revenuecat-api"
     ],
     "simplify-code": [
       "principle-subtract-before-you-add"
@@ -360,12 +347,6 @@
     "teach": [
       "how",
       "why"
-    ],
-    "wayfinder": [
-      "domain-modeling",
-      "grilling",
-      "prototype",
-      "setup-ossian-stack"
     ],
     "app-store-optimization": [
       "asc",
@@ -433,23 +414,11 @@
         "tag": "Agent workflow",
         "steps": [
           {
-            "id": "wayfinder",
-            "writes": "decision tickets"
-          },
-          {
             "id": "domain-modeling",
             "writes": "GLOSSARY.md"
           },
           {
             "id": "grilling"
-          },
-          {
-            "id": "to-spec",
-            "writes": "spec doc"
-          },
-          {
-            "id": "to-tickets",
-            "writes": "tracker tickets"
           },
           {
             "id": "prototype",
@@ -719,6 +688,7 @@
       "git-cleanup",
       "resolving-merge-conflicts",
       "codex-first",
+      "codex-multi-agent",
       "bro",
       "codify-conventions",
       "maintain-verification-skill",
@@ -761,7 +731,9 @@
       "ossian-mode"
     ],
     "ossian-mode": [
+      "codex-multi-agent",
       "create-verification-skill",
+      "mannered-prose",
       "orchestrate-threads"
     ],
     "prototype": [

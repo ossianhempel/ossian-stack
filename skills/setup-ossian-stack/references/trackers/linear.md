@@ -50,7 +50,7 @@ Issue identifiers (`ENG-123`) work directly as the `id` argument on `issue` quer
   for this workflow — record answers in the issue description or as a sub-issue
   per the resolve step below. (Re-check `issueCommentCreate` availability; the API
   has been adding it.)
-- **Apply / remove labels**: `issueLabelCreate(name: "ready-for-agent")` once per
+- **Apply / remove labels**: `issueLabelCreate(name: "<label>")` once per
   workspace, then attach via `labelIds` on `issueCreate`, or read-modify-write via
   `issueUpdate` (the input replaces the label set).
 - **Change state**: `issueUpdate(id: "ENG-123", input: { stateId: "<uuid>" })` —
@@ -72,44 +72,8 @@ Follow `docs/agents/handoff-comment.md`: comment only on meaningful progress,
 a new or changed blocker, a decision needed, or completion. Use a few sentences
 with evidence links and no empty sections. Do not repeat unchanged blockers or
 mirror HQ/agent coordination. Preserve the minimal claim/release/resume records
-required below; those ownership transitions still need their protocol evidence.
-The blocked/paused/done operations apply on state transitions, not on every poll.
+the project's own protocol requires; those ownership transitions still need their
+protocol evidence. Blocked, paused, and done updates are state transitions, not
+routine polls.
 Keep durable technical decisions in the ticket body or linked spec, and link
 detailed evidence. Resolution comments summarize the outcome and point there.
-
-## Pickup operations
-
-Used by the pickup loop (`docs/agents/pickup-loop.md`) and by any agent told to
-"take the next ticket". Comments follow the policy in `docs/agents/handoff-comment.md`.
-Resolve every triage role through `docs/agents/triage-labels.md`; the role names
-below are the canonical defaults for a fresh setup.
-
-- **Frontier query**: team issues with the agent-ready label (default `ready-for-agent`), `assignee` null, state type `backlog`, `unstarted`, or `started`, and no `blocked_by` relation to an issue in a non-done state; `createdAt` ascending. The frontier includes unclaimed `started` work so a paused ticket (claim released, state kept) resurfaces.
-- **Claim**: post the claim handoff comment (or description note) stating `<runtime>:<session-id>` first, then `issueUpdate(id, input: { assigneeId: <viewer id>, stateId: <started state> })`; the comment is the session's first write. The assignee field alone is last-writer-wins, so re-read comments and assignee: the winner is the earliest claim comment. On loss, clear `assigneeId` and take the next ticket.
-- **Blocked**: replace the agent-ready label with the mapped `needs-info` or `ready-for-human` label in the label set, post a blocked handoff comment, clear `assigneeId`.
-- **Paused**: a paused handoff comment, clear `assigneeId`, keep the state. The ticket re-enters the frontier (unclaimed `started` work is eligible).
-- **Done**: attach the PR (Linear links it from the branch name, or `attachmentLinkGitHubPR`), post a done handoff comment, transition to the review state. The merge, or the human, completes it.
-- **Abandoned claim**: an assignee with `updatedAt` older than one working day. Report it; never silently reclaim.
-
-## Wayfinding operations
-
-Used by `/wayfinder`. The **map** is a single Linear issue with sub-issues as tickets.
-
-- **Map**: one issue labelled `wayfinder:map`, holding the Notes / Decisions-so-far /
-  Fog body as its description.
-- **Child ticket**: a sub-issue via `parentId` on `issueCreate` (or `issueUpdate`).
-  Where sub-issues aren't available, put `Part of: <map identifier>` at the top of
-  the child description. Labels: `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`).
-- **Blocking**: the native **issue relation** — `issueRelationCreate(issueId:
-  "<child-uuid>", relatedIssueId: "<blocker-uuid>", type: blocked_by)` so the UI
-  shows the dependency. Where relations aren't available, fall back to a
-  `Blocked by: ENG-n, ENG-n` line at the top of the child description.
-- **Frontier query**: the map's `children` (open only), dropping any whose
-  `relations` contain a `blocked_by` related issue in a non-done state, or that
-  have an assignee; first in map order wins.
-- **Claim**: `issueUpdate(id: "...", input: { assigneeId: <viewer id> })` — the
-  session's first write.
-- **Resolve**: update the child description with the durable answer or a spec
-  link; any resolution comment summarizes and links it. Transition to a completed
-  state, then append a context
-  pointer to the map's Decisions-so-far.

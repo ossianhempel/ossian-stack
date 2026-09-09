@@ -1,0 +1,3 @@
+interface:
+  display_name: "Codex Multi-Agent"
+  short_description: "Fan out parallel Codex subagents and merge results"

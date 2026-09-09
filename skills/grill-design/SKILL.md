@@ -1,6 +1,6 @@
 ---
 name: grill-design
-description: Converge on a frontend look through rounds of prototypes and grilling verdicts. Use when the user wants to iterate on UI/visual taste against concrete variants, or a wayfinder prototype ticket names this skill.
+description: Converge on a frontend look through rounds of prototypes and grilling verdicts. Use when the user wants to iterate on UI/visual taste against concrete variants.
 ---
 
 Run a `/grilling` session, using the `/prototype` skill — each question is asked with prototypes, not words:
