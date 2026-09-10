@@ -87,7 +87,7 @@ renderWidget(name: "widget-pulse-small", size: WidgetSize.small) {
 
 ### Charts / standalone views
 
-Any SwiftUI view can be rendered as an element. Wrap it the same way — explicit size, background, corner clip:
+Any SwiftUI view can be rendered as an element. Wrap it the same way, explicit size, background, corner clip:
 
 ```swift
 @MainActor

@@ -11,8 +11,8 @@ For an existing suitable harness, reuse the supplied screen paths, locales, devi
 
 Automate reproducible marketing screenshot capture for a SwiftUI iOS app across multiple locales, with two parallel output streams:
 
-1. **Full-screen captures** — every marketing-relevant screen, with deterministic seeded data, real status bar / safe-area chrome
-2. **Element captures** — isolated renders of specific components (cards, widgets, charts) at any scale, with natural background inside rounded corners and transparency outside
+1. **Full-screen captures**, every marketing-relevant screen, with deterministic seeded data, real status bar / safe-area chrome
+2. **Element captures**, isolated renders of specific components (cards, widgets, charts) at any scale, with natural background inside rounded corners and transparency outside
 
 This skill is the **capture** step. If the user also wants Apple-style marketing pages composited around the shots (device mockups, headlines, gradients), that compositing is a separate post-processing step.
 
@@ -22,16 +22,16 @@ This skill is the **capture** step. If the user also wants Apple-style marketing
 
 Why in-app over XCUITest:
 
-- **No new test target.** Adding a UI test target to an existing Xcode project is fragile pbxproj surgery. Many projects have zero test targets and no xcodegen — adding one by hand is error-prone.
+- **No new test target.** Adding a UI test target to an existing Xcode project is fragile pbxproj surgery. Many projects have zero test targets and no xcodegen, adding one by hand is error-prone.
 - **Faster iteration.** A UI test takes 30s+ to launch per run. In-app capture is just a relaunch of the installed binary.
 - **No `xcodebuild test`.** The whole flow is `xcodebuild build` once, then `simctl launch` per locale. No test-bundle overhead.
 - **Access to real app state.** You can call ViewModels, SwiftData, ImageRenderer, and `UIWindow.drawHierarchy` directly. XCUITest can only tap and read accessibility elements.
-- **Element renders need in-process anyway.** `ImageRenderer` on widget views or isolated components must run inside the app process — there's no XCUITest equivalent.
+- **Element renders need in-process anyway.** `ImageRenderer` on widget views or isolated components must run inside the app process, there's no XCUITest equivalent.
 
 How it works:
 
 1. A DEBUG-only `MarketingCapture.swift` file lives in the main app target
-2. When launched with `-MarketingCapture 1`, the app seeds data, then a coordinator walks a list of `CaptureStep`s — each step navigates, waits for settle, snapshots, and cleans up
+2. When launched with `-MarketingCapture 1`, the app seeds data, then a coordinator walks a list of `CaptureStep`s, each step navigates, waits for settle, snapshots, and cleans up
 3. PNGs are written to the app's sandbox `Documents/marketing/<locale>/` directory
 4. A shell script builds once, installs, then loops locales by relaunching with `-AppleLanguages (xx) -AppleLocale xx`, pulling files out via `simctl get_app_container`
 
@@ -57,16 +57,16 @@ Put `marketing/` in `.gitignore`. These are outputs, not source.
 Before declaring the capture pipeline done, verify:
 
 - [ ] All locales produced N files (where N = screens + elements)
-- [ ] File sizes differ between locales (confirms translations actually render — if `en/settings.png` and `de/settings.png` are byte-identical, locale switching didn't take effect)
+- [ ] File sizes differ between locales (confirms translations actually render, if `en/settings.png` and `de/settings.png` are byte-identical, locale switching didn't take effect)
 - [ ] Read 2-3 screens visually for the primary locale and confirm they show the expected content
 - [ ] Read the same screens for at least one other locale and confirm localized strings are present
 - [ ] Read at least one widget render and one card render to verify backgrounds and corners look right
-- [ ] No screenshot shows a screen from a *different* step (the most common bug — an undismissed sheet from the previous step)
+- [ ] No screenshot shows a screen from a *different* step (the most common bug, an undismissed sheet from the previous step)
 
 ## Templates
 
-- `templates/MarketingCapture.swift.template` — skeleton of the capture file with step-based coordinator. Reference the body of this skill for the patterns to apply.
-- `templates/capture-marketing.sh.template` — skeleton of the shell script. Replace the bundle ID, scheme name, and simulator name for each project.
+- `templates/MarketingCapture.swift.template`, skeleton of the capture file with step-based coordinator. Reference the body of this skill for the patterns to apply.
+- `templates/capture-marketing.sh.template`, skeleton of the shell script. Replace the bundle ID, scheme name, and simulator name for each project.
 
 ## Task references
 

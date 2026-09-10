@@ -11,7 +11,7 @@ This skill follows the open Agent Skills layout:
 - `SKILL.md` stays short and action-oriented so agents can load it quickly.
 - `references/` stores longer material that agents can read only when needed.
 - `scripts/` contains deterministic helpers for direct execution.
-- `agents/openai.yaml` adds Codex-specific UI metadata only. Configure the RevenueCat MCP server in project `.codex/config.toml` (via `mcp-remote`), not as a skill dependency — Codex auto-writes skill MCP deps as bare `url`, which breaks stdio config load.
+- `agents/openai.yaml` adds Codex-specific UI metadata only. Configure the RevenueCat MCP server in project `.codex/config.toml` (via `mcp-remote`), not as a skill dependency, Codex auto-writes skill MCP deps as bare `url`, which breaks stdio config load.
 
 ## Installation targets
 

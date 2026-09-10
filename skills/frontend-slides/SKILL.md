@@ -11,11 +11,11 @@ Use decisions already supplied: content, outline, purpose, density, and selected
 
 ## Core Principles
 
-1. **Zero Dependencies** — Single HTML files with inline CSS/JS. No npm, no build tools.
-2. **Show, Don't Tell** — Generate visual previews, not abstract choices. People discover what they want by seeing it.
-3. **Distinctive Design** — No generic "AI slop." Every presentation must feel custom-crafted.
-4. **Progressive Disclosure** — Read lightweight style indexes first. For bold templates, use small preview cards for style previews and load the full `design.md` only after the user picks that template.
-5. **Fixed 16:9 Stage (NON-NEGOTIABLE)** — Every deck uses a 1920×1080 slide canvas scaled as a whole to the viewport. Slides must stay 16:9 on every screen, including phones. Do not reflow slide content to fit the device.
+1. **Zero Dependencies**, Single HTML files with inline CSS/JS. No npm, no build tools.
+2. **Show, Don't Tell**, Generate visual previews, not abstract choices. People discover what they want by seeing it.
+3. **Distinctive Design**, No generic "AI slop." Every presentation must feel custom-crafted.
+4. **Progressive Disclosure**, Read lightweight style indexes first. For bold templates, use small preview cards for style previews and load the full `design.md` only after the user picks that template.
+5. **Fixed 16:9 Stage (NON-NEGOTIABLE)**, Every deck uses a 1920×1080 slide canvas scaled as a whole to the viewport. Slides must stay 16:9 on every screen, including phones. Do not reflow slide content to fit the device.
 
 ## Fixed Stage Rules
 
@@ -29,7 +29,7 @@ These invariants apply to EVERY slide in EVERY presentation:
 - Slide visibility must be controlled by `.active` / `.visible` using `visibility`, `opacity`, and `pointer-events` from `viewport-base.css`. Do not use `display: none` / `display: block` for slide switching; later layout classes such as `.slide-content { display: flex; }` can override them and make every slide visible at once.
 - Use `clamp()` only for non-slide UI outside the stage, or for small fallback previews where a full stage is impractical.
 - Include `prefers-reduced-motion` support
-- Never negate CSS functions directly (`-clamp()`, `-min()`, `-max()` are silently ignored) — use `calc(-1 * clamp(...))` instead
+- Never negate CSS functions directly (`-clamp()`, `-min()`, `-max()` are silently ignored), use `calc(-1 * clamp(...))` instead
 
 **When generating, read `viewport-base.css` and include its full contents in every presentation.**
 
@@ -50,9 +50,9 @@ Baseline limits still apply: no scrolling, no overflow, no overlapping panels, a
 
 Determine what the user wants:
 
-- **Mode A: New Presentation** — Create from scratch. Go to Phase 1.
-- **Mode B: PPT Conversion** — Convert a .pptx file. Go to Phase 4.
-- **Mode C: Enhancement** — Improve an existing HTML presentation. Read it, understand it, enhance. **Follow Mode C modification rules below.**
+- **Mode A: New Presentation**, Create from scratch. Go to Phase 1.
+- **Mode B: PPT Conversion**, Convert a .pptx file. Go to Phase 4.
+- **Mode C: Enhancement**, Improve an existing HTML presentation. Read it, understand it, enhance. **Follow Mode C modification rules below.**
 
 ### Mode C: Modification Rules
 
@@ -70,9 +70,9 @@ When enhancing existing presentations, fixed-stage fitting is the biggest risk:
 
 ## Phase 5: Delivery
 
-1. **Clean up** — Delete `.frontend-slides/slide-previews/` if it exists
-2. **Open** — Use `open [filename].html` to launch in browser
-3. **Summarize** — Tell the user:
+1. **Clean up**, Delete `.frontend-slides/slide-previews/` if it exists
+2. **Open**, Use `open [filename].html` to launch in browser
+3. **Summarize**, Tell the user:
    - File location, style name, slide count
    - Navigation: Arrow keys, Space, swipe/tap if enabled
    - How to customize: `:root` CSS variables for colors, font link for typography, `.reveal` class for animations
@@ -89,7 +89,7 @@ When enhancing existing presentations, fixed-stage fitting is the biggest risk:
 | [bold-template-pack/selection-index.json](bold-template-pack/selection-index.json) | Compact bold template metadata for candidate selection | Phase 2 (style selection) |
 | [bold-template-pack/templates/*/preview.md](bold-template-pack/templates/) | Lightweight style cards for shortlisted bold title previews | Phase 2 after shortlisting |
 | [bold-template-pack/templates/*/design.md](bold-template-pack/templates/) | Detailed design-system docs for the selected bold template only | Phase 3 after user selection |
-| [viewport-base.css](viewport-base.css)             | Mandatory fixed-stage CSS — copy into every presentation             | Phase 3 (generation)      |
+| [viewport-base.css](viewport-base.css)             | Mandatory fixed-stage CSS, copy into every presentation             | Phase 3 (generation)      |
 | [html-template.md](html-template.md)               | HTML structure, JS features, code quality standards                  | Phase 3 (generation)      |
 | [animation-patterns.md](animation-patterns.md)     | CSS/JS animation snippets and effect-to-feeling guide                | Phase 3 (generation)      |
 | [scripts/extract-pptx.py](scripts/extract-pptx.py) | Python script for PPT content extraction                             | Phase 4 (conversion)      |

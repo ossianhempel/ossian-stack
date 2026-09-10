@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Creative Mode
-description: A neo-brutalist editorial presentation system built for 1920x1080 slides. The deck anchors on a warm cream canvas with heavy 4px ink borders, hard offset drop-shadows, and a bold four-color accent palette (forest green, hot pink, burnt orange, sunshine yellow). Display headlines run Archivo Black in pure uppercase — aggressive, loud, zero letter-spacing softness. Monospace labels in JetBrains Mono echo a typesetting rule-sheet. Body copy sits in Space Grotesk. Every slide uses flat color-blocking with no gradients, no rounded cards, and no subtlety. The aesthetic is part Bauhaus grid, part punk zine, part Swiss editorial.
+description: A neo-brutalist editorial presentation system built for 1920x1080 slides. The deck anchors on a warm cream canvas with heavy 4px ink borders, hard offset drop-shadows, and a bold four-color accent palette (forest green, hot pink, burnt orange, sunshine yellow). Display headlines run Archivo Black in pure uppercase, aggressive, loud, zero letter-spacing softness. Monospace labels in JetBrains Mono echo a typesetting rule-sheet. Body copy sits in Space Grotesk. Every slide uses flat color-blocking with no gradients, no rounded cards, and no subtlety. The aesthetic is part Bauhaus grid, part punk zine, part Swiss editorial.
 
 colors:
   cream: "#EFE9D9"
@@ -320,17 +320,17 @@ Use `deck-stage.js` or an equivalent inline stage scaler for final output: rende
 
 ## Overview
 
-Creative Mode is a **neo-brutalist editorial slide system** for 1920x1080 presentations. The foundational aesthetic choice is restraint of technique paired with aggression of expression: no rounded cards, no gradients, no shadows that suggest light sources — only flat color-blocking and hard offset drop-shadows (the "Risograph" or "screen-print" kind where the shadow is a sold same-color offset).
+Creative Mode is a **neo-brutalist editorial slide system** for 1920x1080 presentations. The foundational aesthetic choice is restraint of technique paired with aggression of expression: no rounded cards, no gradients, no shadows that suggest light sources, only flat color-blocking and hard offset drop-shadows (the "Risograph" or "screen-print" kind where the shadow is a sold same-color offset).
 
-The canvas is warm cream (`{colors.cream}` — #EFE9D9) with near-black ink (`{colors.ink}` — #0F0F0F) for borders, text, and rules. Four accent colors fire at full saturation: forest green, hot pink, burnt orange, and sunshine yellow. These never blend — they collide on the slide and the collision is the design.
+The canvas is warm cream (`{colors.cream}`, #EFE9D9) with near-black ink (`{colors.ink}`, #0F0F0F) for borders, text, and rules. Four accent colors fire at full saturation: forest green, hot pink, burnt orange, and sunshine yellow. These never blend, they collide on the slide and the collision is the design.
 
-Headlines run **Archivo Black** (weight 400 due to the display face being intrinsically heavy) in strict uppercase with tight line-height (0.92). Font sizes are extreme: 220px for closing slides, 160px for titles. **JetBrains Mono** carries all metadata, labels, topbar text, and axis labels — reinforcing a "designed artifact" or "technical manual" register. **Space Grotesk** handles all body paragraphs.
+Headlines run **Archivo Black** (weight 400 due to the display face being intrinsically heavy) in strict uppercase with tight line-height (0.92). Font sizes are extreme: 220px for closing slides, 160px for titles. **JetBrains Mono** carries all metadata, labels, topbar text, and axis labels, reinforcing a "designed artifact" or "technical manual" register. **Space Grotesk** handles all body paragraphs.
 
 Every slide follows an identical chrome frame: a JetBrains Mono topbar at 48px from top (left text + right pill), and a JetBrains Mono meta footer at 40px from bottom (label left, slide number right with ink dot divider). Content lives inside this frame with 96px side gutters.
 
 **Key Characteristics:**
-- Cream canvas (`{colors.cream}` — #EFE9D9) as the universal background; green (`{colors.green}` — #1F8A4C) used for the closing slide only.
-- 4px solid ink borders on every structural element — cards, panels, table cells, chart axes.
+- Cream canvas (`{colors.cream}`, #EFE9D9) as the universal background; green (`{colors.green}`, #1F8A4C) used for the closing slide only.
+- 4px solid ink borders on every structural element, cards, panels, table cells, chart axes.
 - Hard offset box-shadows in place of blurred drops: `24px 24px 0 color, 24px 24px 0 4px ink` on featured blocks.
 - Archivo Black display type in uppercase with 0.92 line-height for extreme tightness.
 - Four accent colors used as flat fills; each slide uses two or three of the four, never all simultaneously.
@@ -339,27 +339,27 @@ Every slide follows an identical chrome frame: a JetBrains Mono topbar at 48px f
 ## Colors
 
 ### Canvas and Ink
-- **Cream** (`{colors.cream}` — #EFE9D9): The universal slide background. Warm, not white. Distinguishes the deck from sterile white-background slides.
-- **Cream 2** (`{colors.cream-2}` — #E4DCC4): One step darker cream. Used exclusively as the comparison table's background fill, creating a subtle recessed surface inside the ink border.
-- **Ink** (`{colors.ink}` — #0F0F0F): Near-black used for all borders, body text, rules, topbar chrome, and the closing stamp border. Not pure #000000 — slightly softened.
-- **Ink 2** (`{colors.ink-2}` — #2A2A2A): Softer near-black for secondary body text, descriptions inside stat cells, chart footnotes.
+- **Cream** (`{colors.cream}`, #EFE9D9): The universal slide background. Warm, not white. Distinguishes the deck from sterile white-background slides.
+- **Cream 2** (`{colors.cream-2}`, #E4DCC4): One step darker cream. Used exclusively as the comparison table's background fill, creating a subtle recessed surface inside the ink border.
+- **Ink** (`{colors.ink}`, #0F0F0F): Near-black used for all borders, body text, rules, topbar chrome, and the closing stamp border. Not pure #000000, slightly softened.
+- **Ink 2** (`{colors.ink-2}`, #2A2A2A): Softer near-black for secondary body text, descriptions inside stat cells, chart footnotes.
 
 ### Accent Colors
-- **Green** (`{colors.green}` — #1F8A4C): Forest green. The dominant accent. Works on stat cells, diagram panels, process steps, and as a full-slide background for maximum visual impact.
-- **Green Dark** (`{colors.green-dark}` — #136636): Darker green variant — available for lever/depth decorative effects. Not used as a primary surface fill.
-- **Pink** (`{colors.pink}` — #F06CA8): Hot pink. High energy. Works on toggle switch illustrations, section markers, stat cells, process steps, and stamp elements.
-- **Pink Dark** (`{colors.pink-dark}` — #D14E8B): Darker pink for depth on decorative lever elements. Available for shadow-side accents.
-- **Orange** (`{colors.orange}` — #E85A1F): Burnt orange. The hard drop-shadow color on featured blocks; also works as a stat cell fill, bar chart color, and table column background.
-- **Yellow** (`{colors.yellow}` — #F5C518): Sunshine yellow. Works on decorative circles, process steps, rotated badges, and bar chart bars. A warm punctuation color.
+- **Green** (`{colors.green}`, #1F8A4C): Forest green. The dominant accent. Works on stat cells, diagram panels, process steps, and as a full-slide background for maximum visual impact.
+- **Green Dark** (`{colors.green-dark}`, #136636): Darker green variant, available for lever/depth decorative effects. Not used as a primary surface fill.
+- **Pink** (`{colors.pink}`, #F06CA8): Hot pink. High energy. Works on toggle switch illustrations, section markers, stat cells, process steps, and stamp elements.
+- **Pink Dark** (`{colors.pink-dark}`, #D14E8B): Darker pink for depth on decorative lever elements. Available for shadow-side accents.
+- **Orange** (`{colors.orange}`, #E85A1F): Burnt orange. The hard drop-shadow color on featured blocks; also works as a stat cell fill, bar chart color, and table column background.
+- **Yellow** (`{colors.yellow}`, #F5C518): Sunshine yellow. Works on decorative circles, process steps, rotated badges, and bar chart bars. A warm punctuation color.
 
 
 ## Typography
 
 ### Font Families
 The system uses three typefaces, each in a strict register:
-- **Archivo Black** — display headlines, step numbers, stat numbers, table labels, all uppercase presentation text. Intrinsically heavy, no additional font-weight needed.
-- **JetBrains Mono** — all metadata: topbar labels, meta footer, kicker labels, chart axes, legend rows, layer tags, figure notes. Carries the "technical spec" voice.
-- **Space Grotesk** — body copy only: body column text (slide 2), stat cell descriptors, diagram subtext, step descriptions, closing strap.
+- **Archivo Black**, display headlines, step numbers, stat numbers, table labels, all uppercase presentation text. Intrinsically heavy, no additional font-weight needed.
+- **JetBrains Mono**, all metadata: topbar labels, meta footer, kicker labels, chart axes, legend rows, layer tags, figure notes. Carries the "technical spec" voice.
+- **Space Grotesk**, body copy only: body column text (slide 2), stat cell descriptors, diagram subtext, step descriptions, closing strap.
 
 ### Display Scale
 The slide canvas is 1920x1080px, so font sizes are far larger than web norms.
@@ -395,7 +395,7 @@ All JetBrains Mono text sits at 24px. Letter-spacing varies by use:
 - `{typography.body-md}` (24px): Body text in stat cells, diagram annotations, step descriptions, footnotes, and strap lines.
 
 ### Principles
-Archivo Black has a line-height of 0.92 — headlines overlap their own cap-height, which is intentional. Uppercase lock is non-negotiable for the display face; lowercase Archivo Black breaks the editorial register. The monospace face uses generous letter-spacing (0.06–0.16em) to feel like a typewritten label. Never use letter-spacing on Archivo Black or Space Grotesk.
+Archivo Black has a line-height of 0.92, headlines overlap their own cap-height, which is intentional. Uppercase lock is non-negotiable for the display face; lowercase Archivo Black breaks the editorial register. The monospace face uses generous letter-spacing (0.06–0.16em) to feel like a typewritten label. Never use letter-spacing on Archivo Black or Space Grotesk.
 
 ## Layout
 
@@ -404,7 +404,7 @@ Every slide is exactly 1920×1080px in a fixed, non-scrolling viewport. The `dec
 
 ### Gutter System
 - **Chrome gutter** (64px left/right): Used by topbar and slide-meta only.
-- **Content gutter** (96px left/right): Used by all content — headlines, body, grids.
+- **Content gutter** (96px left/right): Used by all content, headlines, body, grids.
 - Headlines occasionally push right to within 96px of the right edge, or are constrained by `right: 1000px` / `right: 900px` to coexist with a right-panel diagram.
 
 
@@ -427,8 +427,8 @@ The system uses **zero blurred shadows**. Depth is expressed through two techniq
 
 ### Hard Offset Shadow
 The signature treatment: a second solid shape offset by a fixed amount in both X and Y. Two values are used:
-- **Large offset** (24px 24px): Featured blocks like the marker and poster switch — `box-shadow: 24px 24px 0 {colors.orange}, 24px 24px 0 4px {colors.ink}`. The first shadow is the colored offset; the second is the ink border around it.
-- **Medium offset** (18px 18px): Stacked blocks in the diagram — `box-shadow: 18px 18px 0 {colors.ink}`. Pure ink shadow only.
+- **Large offset** (24px 24px): Featured blocks like the marker and poster switch, `box-shadow: 24px 24px 0 {colors.orange}, 24px 24px 0 4px {colors.ink}`. The first shadow is the colored offset; the second is the ink border around it.
+- **Medium offset** (18px 18px): Stacked blocks in the diagram, `box-shadow: 18px 18px 0 {colors.ink}`. Pure ink shadow only.
 
 ### Color-Block Contrast
 Depth perception comes from juxtaposing surfaces: cream on cream-2 (table), ink on cream (kicker block), green on cream (diagram panel). No shadow needed when contrast does the work.
@@ -439,22 +439,22 @@ Topbar, meta footer, chart axis lines, legend swatches: flat, no shadow, no bord
 ## Shapes and Treatment
 
 ### Border Radius
-- **0px (square)**: All structural elements — stat cells, step cards, table cells, chart bars, diagram panels, stacked blocks. No rounding.
+- **0px (square)**: All structural elements, stat cells, step cards, table cells, chart bars, diagram panels, stacked blocks. No rounding.
 - **50% (circle)**: Decorative circles within diagram (yellow circ), the topbar pill dot (slide meta separator dot).
 - **999px (pill)**: Topbar badge pill only. The one exception to the system's overall squareness, and it reads as a label chip rather than a card.
 - **Rotated elements**: The comparison badge rotates -4deg; the closing stamp rotates -6deg. These are the system's only non-orthogonal placements.
 
 ### Borders
-- **4px solid `{colors.ink}`**: All structural borders — stat cells, step cards, diagram panels, table (outer), poster block, marker block, switch block, stamp.
-- **3px solid `{colors.ink}`**: All internal structural lines — table rows, table columns, chart axis, bar chart bars.
+- **4px solid `{colors.ink}`**: All structural borders, stat cells, step cards, diagram panels, table (outer), poster block, marker block, switch block, stamp.
+- **3px solid `{colors.ink}`**: All internal structural lines, table rows, table columns, chart axis, bar chart bars.
 - **2px solid `{colors.ink}`**: Topbar pill badge.
 - **3px dashed `{colors.ink}`**: Dashed horizontal rule separating the process slide's topbar from its flow cards.
 
 ### Decorative Elements
 - **Toggle switch**: Pink square with a lever shape (skewed div) and thick/dark underside, offset shadow in orange with ink border.
 - **Stacked blocks**: Four overlapping absolute-positioned rectangles in pink, yellow, orange, cream-2 with 18px ink hard shadows.
-- **Circle overlay**: Yellow circle centered in a green square — shape contrast acting as decorative figure.
-- **Stamp**: Pink rotated square with a cream circular inner border — acts as a seal or approval mark.
+- **Circle overlay**: Yellow circle centered in a green square, shape contrast acting as decorative figure.
+- **Stamp**: Pink rotated square with a cream circular inner border, acts as a seal or approval mark.
 
 ## Do's and Don'ts
 
@@ -492,7 +492,7 @@ This template is designed **exclusively for 1920x1080 presentation display**. It
 ### Print / Export Behavior
 - At 96dpi, the 1920x1080 canvas maps to a standard 20x11.25 inch frame.
 - For PDF export, a 1920x1080 viewport capture or browser print-to-PDF at 100% scale is recommended.
-- At 1pt = 1.333px, the effective print sizes of headlines range from 54pt (72px) to 165pt (220px) — correct for poster/title cards.
+- At 1pt = 1.333px, the effective print sizes of headlines range from 54pt (72px) to 165pt (220px), correct for poster/title cards.
 
 ## CJK & International Content
 
@@ -502,11 +502,11 @@ This template is designed **exclusively for 1920x1080 presentation display**. It
 |---|---|---|---|
 | Display / Headline (Archivo Black uppercase 400) | Archivo Black | 思源宋体 Noto Serif SC 900 | Google Fonts |
 | Body (Space Grotesk 400) | Space Grotesk | 思源宋体 Noto Serif SC 400 | Google Fonts |
-| Mono / Label (JetBrains Mono uppercase) | JetBrains Mono | JetBrains Mono (Latin/digit only — keep mono chrome in Latin) | Google Fonts |
+| Mono / Label (JetBrains Mono uppercase) | JetBrains Mono | JetBrains Mono (Latin/digit only, keep mono chrome in Latin) | Google Fonts |
 
 ### Mixed-Content Strategy
 
-Use **Strategy A — single-font-stack with fallback**: declare Noto Serif SC *after* the Latin face in the same `font-family` stack so Latin glyphs render in Archivo Black / Space Grotesk and CJK glyphs fall through to NSC automatically. JetBrains Mono chrome stays Latin/digit-only — topbar labels, slide-meta, axis ticks, and figure notes do not need a CJK fallback (and JetBrains Mono has no CJK glyphs by design).
+Use **Strategy A, single-font-stack with fallback**: declare Noto Serif SC *after* the Latin face in the same `font-family` stack so Latin glyphs render in Archivo Black / Space Grotesk and CJK glyphs fall through to NSC automatically. JetBrains Mono chrome stays Latin/digit-only, topbar labels, slide-meta, axis ticks, and figure notes do not need a CJK fallback (and JetBrains Mono has no CJK glyphs by design).
 
 ### Loading
 
@@ -527,21 +527,21 @@ Use **Strategy A — single-font-stack with fallback**: declare Noto Serif SC *a
 
 ### Universal CJK Adjustments
 
-- **Line-height**: bump CJK body line-height to ~1.55 (from 1.4) — Hanzi need more vertical breathing than Latin lowercase. For display NSC 900 at 100–220px, keep line-height tight at ~1.0 (NSC heavy weight at display size needs less leading than Archivo Black).
+- **Line-height**: bump CJK body line-height to ~1.55 (from 1.4), Hanzi need more vertical breathing than Latin lowercase. For display NSC 900 at 100–220px, keep line-height tight at ~1.0 (NSC heavy weight at display size needs less leading than Archivo Black).
 - **Letter-spacing**: zero out `letter-spacing` on Hanzi runs (negative tracking that flatters Archivo Black caps jams Hanzi strokes together). Keep tight tracking only on Latin spans.
-- **Text-transform**: drop `text-transform: uppercase` on any display/label/mono when content is Hanzi — Chinese has no case; forcing uppercase does nothing for Hanzi but breaks the rendering of any mixed Latin acronyms inside.
+- **Text-transform**: drop `text-transform: uppercase` on any display/label/mono when content is Hanzi, Chinese has no case; forcing uppercase does nothing for Hanzi but breaks the rendering of any mixed Latin acronyms inside.
 - **Punctuation**: use Chinese full-width punctuation (，。：；「」) for Chinese sentences, half-width (`,.:;""`) for Latin. Never mix half-width punctuation into a Chinese sentence.
-- **No period on headlines**: Chinese headline convention omits the terminal 。 — strip it from display strings.
+- **No period on headlines**: Chinese headline convention omits the terminal 。, strip it from display strings.
 - **Pangu spacing**: insert a thin space (or a regular space) between adjacent Hanzi and Latin/digit runs (e.g. `2026 年`, `AI 产品`). Improves readability of mixed runs.
 - **One font per sentence**: don't switch CJK families mid-sentence. Pick a single weight of Noto Serif SC for a given text run, never two inside one phrase.
 
 ### Aesthetic Notes
 
-Creative Mode's neo-brutalist register depends on Archivo Black's extreme density at 100–220px — there is no Hanzi face that matches this exact mass, so Noto Serif SC at weight 900 is the closest available substitute. NSC 900's modulated serif strokes will read as more literary than the punk-zine Archivo Black voice, but the four-color block palette, 4px ink borders, and hard 24px offset shadows do most of the brutalist work — the typography becomes one component of a louder system rather than the system itself. The "uppercase always" rule for Archivo Black is meaningless for Hanzi (no case), so drop both `text-transform: uppercase` and the -0.01em tracking when content switches to Chinese — NSC 900 stands on size and color alone. JetBrains Mono chrome (topbar pill, slide-meta, axis ticks, kicker block) intentionally stays Latin/digit-only: render `04 / 08` slide counters in mono, but render any Chinese descriptor label in NSC 400 inside the meta footer. The four accents (green / pink / orange / yellow), stat-cell color blocks, table treatment, and decorative geometry (stamp, badge, stacked blocks) are all content-agnostic.
+Creative Mode's neo-brutalist register depends on Archivo Black's extreme density at 100–220px, there is no Hanzi face that matches this exact mass, so Noto Serif SC at weight 900 is the closest available substitute. NSC 900's modulated serif strokes will read as more literary than the punk-zine Archivo Black voice, but the four-color block palette, 4px ink borders, and hard 24px offset shadows do most of the brutalist work, the typography becomes one component of a louder system rather than the system itself. The "uppercase always" rule for Archivo Black is meaningless for Hanzi (no case), so drop both `text-transform: uppercase` and the -0.01em tracking when content switches to Chinese, NSC 900 stands on size and color alone. JetBrains Mono chrome (topbar pill, slide-meta, axis ticks, kicker block) intentionally stays Latin/digit-only: render `04 / 08` slide counters in mono, but render any Chinese descriptor label in NSC 400 inside the meta footer. The four accents (green / pink / orange / yellow), stat-cell color blocks, table treatment, and decorative geometry (stamp, badge, stacked blocks) are all content-agnostic.
 
 ### Known CJK Gap
 
-**Heavy Latin display has no exact CJK equivalent.** Archivo Black's brutalist density at 220px is the system's signature — Noto Serif SC 900 is the heaviest commonly available Hanzi weight, but it reads as a literary serif rather than a poster-grotesk. Chinese decks built with Creative Mode will feel ~30% less "punk-zine" than the Latin original; compensate by leaning harder on the accent color blocks, the hard offset shadows, and the rotated badge / stamp elements. Avoid the alternative of `Smiley Sans Oblique` for display — its oblique cut conflicts with the system's strict orthogonal rectangle geometry. NSC has no italic axis, but the system doesn't use italic anywhere — no loss. The mono chrome's "technical spec" voice is best preserved by keeping all JetBrains Mono content in Latin/digit and reserving NSC for headline and body roles only.
+**Heavy Latin display has no exact CJK equivalent.** Archivo Black's brutalist density at 220px is the system's signature, Noto Serif SC 900 is the heaviest commonly available Hanzi weight, but it reads as a literary serif rather than a poster-grotesk. Chinese decks built with Creative Mode will feel ~30% less "punk-zine" than the Latin original; compensate by leaning harder on the accent color blocks, the hard offset shadows, and the rotated badge / stamp elements. Avoid the alternative of `Smiley Sans Oblique` for display, its oblique cut conflicts with the system's strict orthogonal rectangle geometry. NSC has no italic axis, but the system doesn't use italic anywhere, no loss. The mono chrome's "technical spec" voice is best preserved by keeping all JetBrains Mono content in Latin/digit and reserving NSC for headline and body roles only.
 
 ## Iteration Guide
 
@@ -560,7 +560,7 @@ Creative Mode's neo-brutalist register depends on Archivo Black's extreme densit
 - The `deck-stage.js` script (slide advancement, keyboard nav) is an external dependency not documented here.
 - Animation and transition between slides is not in scope for this template; all slides are static.
 - The title slide poster contains a decorative toggle switch illustration built from nested divs; it has no functional state.
-- Chart data (bar heights, values, labels) is hardcoded as inline styles and placeholder content — there is no data-binding layer.
+- Chart data (bar heights, values, labels) is hardcoded as inline styles and placeholder content, there is no data-binding layer.
 - Table data is all placeholder; no dynamic population is supported.
-- The `--rule` CSS variable (#0F0F0F, identical to `--ink`) is defined but not used explicitly — it is reserved for horizontal rule elements and can be considered an alias for ink.
-- Font fallback for Archivo Black is `sans-serif` — the font must be loaded from Google Fonts for the design to render correctly.
+- The `--rule` CSS variable (#0F0F0F, identical to `--ink`) is defined but not used explicitly, it is reserved for horizontal rule elements and can be considered an alias for ink.
+- Font fallback for Archivo Black is `sans-serif`, the font must be loaded from Google Fonts for the design to render correctly.

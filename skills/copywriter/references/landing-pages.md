@@ -1,7 +1,7 @@
 # Marketing Landing Pages
 
 For product / app marketing pages: hero, headline + subhead, feature sections,
-social proof, FAQ, CTAs. Read SKILL.md first — the core principles all apply.
+social proof, FAQ, CTAs. Read SKILL.md first, the core principles all apply.
 
 For the full persuasive arc (Hook → Agitate → Empathize → Solve → Payoff), open
 [persuasion-skeleton.md](./persuasion-skeleton.md) and map beats to sections
@@ -18,7 +18,7 @@ fold needs to answer:
 
 1. **What is this?** (one line, plain language)
 2. **Who is it for?** (implicit or explicit)
-3. **Why should I care?** (the outcome — what changes for me)
+3. **Why should I care?** (the outcome, what changes for me)
 4. **What do I do next?** (one clear CTA)
 
 If any of those four are missing or unclear above the fold, the page is
@@ -27,8 +27,8 @@ broken.
 ## Hero Section
 
 ```
-[ Headline — the outcome, in user language, ≤10 words ]
-[ Subhead — one sentence, 12–20 words, makes the headline concrete ]
+[ Headline, the outcome, in user language, ≤10 words ]
+[ Subhead, one sentence, 12–20 words, makes the headline concrete ]
 [ Primary CTA ]   [ Optional secondary action ]
 [ Visual proof: product shot / video / screenshot ]
 ```
@@ -46,7 +46,7 @@ broken.
 - **Make the headline concrete.** If the headline is the promise, the subhead
   is the proof / mechanism / specificity.
 - **One sentence.** Don't write a paragraph.
-- **Names the user, the problem, or the mechanism** — at least one.
+- **Names the user, the problem, or the mechanism**, at least one.
 
 ### Hero examples
 
@@ -79,8 +79,8 @@ Each section = **one outcome**, supported by **one feature**, **one image**.
 
 Pattern per section:
 ```
-[ Section headline — one outcome, ≤8 words ]
-[ Body — 1–3 sentences, in user language, says how this changes their day ]
+[ Section headline, one outcome, ≤8 words ]
+[ Body, 1–3 sentences, in user language, says how this changes their day ]
 [ Optional micro-CTA / inline link ]
 [ Visual: product screenshot showing the feature ]
 ```
@@ -89,7 +89,7 @@ Pattern per section:
 
 - Same as App Store screenshots: outcome-first, ≤8 words, hand test passes.
 - Don't repeat the hero promise. Each section should add a new angle.
-- Don't title sections "Features", "Benefits", "How it works" — those are
+- Don't title sections "Features", "Benefits", "How it works", those are
   category labels, not headlines. Lead with the outcome.
 
 ### Bad → Good
@@ -113,7 +113,7 @@ Pattern per section:
 
 ## FAQ Section (near the bottom)
 
-Use the FAQ to answer the **objections** that stop people from converting —
+Use the FAQ to answer the **objections** that stop people from converting,
 not generic questions. If you've never seen a real user ask a question, it
 doesn't belong here.
 
@@ -132,7 +132,7 @@ final CTA. This is for visitors who scrolled past everything and need a
 reminder of the offer.
 
 ```
-[ Restated outcome — same energy as the hero, different angle ]
+[ Restated outcome, same energy as the hero, different angle ]
 [ Primary CTA ]
 [ Tiny reassurance: "Free to try. No credit card." ]
 ```
@@ -140,7 +140,7 @@ reminder of the offer.
 ## Things Marketers Love That You Should Cut
 
 - **"Trusted by industry leaders"** without the actual logos.
-- **"Powerful, intuitive, seamless"** — say what it does instead.
+- **"Powerful, intuitive, seamless"**, say what it does instead.
 - **A list of every framework, integration, or platform** as a feature
   section. Most visitors don't care.
 - **Stock photos of smiling people in offices.** Use real screenshots.
@@ -154,7 +154,7 @@ reminder of the offer.
 - [ ] Above-the-fold answers: what / who / why / what next
 - [ ] Headline is ≤10 words and outcome-first
 - [ ] Subhead makes the headline concrete in one sentence
-- [ ] Hand test: cover the hero image — does the text sell alone?
+- [ ] Hand test: cover the hero image, does the text sell alone?
 - [ ] Each feature section = one outcome, one feature, one image
 - [ ] Section headlines are outcomes, not categories ("Features", "Benefits")
 - [ ] Primary CTA repeats every 1–2 sections, with verb + outcome labels

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Discover docs/ — prints summary + read_when for every doc.
+# Discover docs/, prints summary + read_when for every doc.
 # Resolves to scripts/docs-list.ts so the canonical implementation stays in one place.
 set -euo pipefail
 

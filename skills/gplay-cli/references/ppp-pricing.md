@@ -11,7 +11,7 @@ Use this skill to set different prices for different countries based on purchasi
 
 When updating subscriptions or one-time products that modify pricing, you **must** provide:
 
-- **`--regions-version`**: Required by the Google Play API when updating regional pricing. Use the **latest** version. If you don't know the current version, send any value (e.g., `"2022/02"`) — the API error will tell you the latest (e.g., `latest value is ExternalRegionLaunchVersionId{versionId=2025/03}`). Then retry with the correct version.
+- **`--regions-version`**: Required by the Google Play API when updating regional pricing. Use the **latest** version. If you don't know the current version, send any value (e.g., `"2022/02"`), the API error will tell you the latest (e.g., `latest value is ExternalRegionLaunchVersionId{versionId=2025/03}`). Then retry with the correct version.
 - **`--update-mask "basePlans"`**: Required for subscription updates. Without it, the API returns: "update_mask must contain at least one path."
 - For one-time products, use `--update-mask "purchaseOptions"`.
 
@@ -25,8 +25,8 @@ When updating subscriptions or one-time products that modify pricing, you **must
 3. Send the complete merged list (all original regions + PPP overrides)
 
 This also applies to:
-- **`otherRegionsConfig`** for subscriptions — if it was previously set on a base plan, it **must** be included in the update JSON.
-- **`newRegionsConfig`** for one-time product purchase options — if it was previously set (with `usdPrice`, `eurPrice`, and `availability`), it **must** be included. Omitting it causes: "Cannot remove currency for new regions once it has been added: EUR."
+- **`otherRegionsConfig`** for subscriptions, if it was previously set on a base plan, it **must** be included in the update JSON.
+- **`newRegionsConfig`** for one-time product purchase options, if it was previously set (with `usdPrice`, `eurPrice`, and `availability`), it **must** be included. Omitting it causes: "Cannot remove currency for new regions once it has been added: EUR."
 
 ## Critical: Currency codes come from Google Play, not from assumptions
 
@@ -43,7 +43,7 @@ normal precision and valid Play price points. The table expresses the intended
 relative discount, not an exchange rate. Preview and inspect the complete regional
 price set before applying it.
 
-### Tier 1 — Full Price (1.0x–1.1x)
+### Tier 1, Full Price (1.0x–1.1x)
 | Region | Code | Multiplier | Currency |
 |--------|------|-----------|----------|
 | United States | US | 1.0x | USD |
@@ -57,7 +57,7 @@ price set before applying it.
 | Norway | NO | 1.05x | NOK |
 | Denmark | DK | 1.0x | DKK |
 
-### Tier 2 — Medium (0.6x–0.8x)
+### Tier 2, Medium (0.6x–0.8x)
 | Region | Code | Multiplier | Currency |
 |--------|------|-----------|----------|
 | France | FR | 0.8x | EUR |
@@ -73,7 +73,7 @@ price set before applying it.
 | Saudi Arabia | SA | 0.8x | SAR |
 | UAE | AE | 0.8x | AED |
 
-### Tier 3 — Low (0.3x–0.5x)
+### Tier 3, Low (0.3x–0.5x)
 | Region | Code | Multiplier | Currency |
 |--------|------|-----------|----------|
 | India | IN | 0.3x | INR |
@@ -183,7 +183,7 @@ Build the full product JSON including listings, purchase options, and all region
 
 ### 3. Create the product
 
-**`--regions-version` is required even for creation** — the `create` command uses PATCH with `allowMissing=true` internally:
+**`--regions-version` is required even for creation**, the `create` command uses PATCH with `allowMissing=true` internally:
 ```bash
 gplay onetimeproducts create \
   --package "PACKAGE" \
@@ -225,8 +225,8 @@ gplay onetimeproducts get --package "PACKAGE" --product-id "PRODUCT_ID"
 ```
 
 Save the full JSON. Note:
-- `purchaseOptions[].regionalPricingAndAvailabilityConfigs` array — you need ALL entries
-- `purchaseOptions[].newRegionsConfig` — **must be included if previously set** (contains `usdPrice`, `eurPrice`, `availability`)
+- `purchaseOptions[].regionalPricingAndAvailabilityConfigs` array, you need ALL entries
+- `purchaseOptions[].newRegionsConfig`, **must be included if previously set** (contains `usdPrice`, `eurPrice`, `availability`)
 
 ### 3. Build PPP-adjusted JSON (fetch-then-merge)
 
@@ -292,8 +292,8 @@ gplay subscriptions get --package "PACKAGE" --product-id "PRODUCT_ID"
 ```
 
 Save the full JSON. For each base plan, note:
-- `otherRegionsConfig` (USD and EUR base prices) — **must be included if previously set**
-- `regionalConfigs` array — **must contain ALL existing regions**
+- `otherRegionsConfig` (USD and EUR base prices), **must be included if previously set**
+- `regionalConfigs` array, **must contain ALL existing regions**
 - `autoRenewingBasePlanType` or `prepaidBasePlanType`
 
 ### 3. Build PPP-adjusted subscription JSON (fetch-then-merge)
@@ -476,23 +476,23 @@ Group countries into pricing tiers:
 
 ## Common Pitfalls
 
-1. **Sending only PPP regions** — The API rejects updates that remove existing regions. Always fetch-then-merge.
-2. **Missing `--regions-version`** — Required for any pricing update. The API error will tell you the latest version if you guess wrong.
-3. **Missing `--update-mask`** — Use `"basePlans"` for subscriptions, `"purchaseOptions"` for one-time products.
-4. **Missing `otherRegionsConfig`** — If a subscription base plan previously had `otherRegionsConfig` set, it must be included in the update.
-5. **Missing `newRegionsConfig`** — If a one-time product purchase option previously had `newRegionsConfig` set, it must be included. Omitting it causes: "Cannot remove currency for new regions once it has been added."
-6. **Wrong currency codes** — Don't assume currencies. Fetch from Google Play, as they change between regions versions.
-7. **Mixing API formats** — Legacy IAPs use `priceMicros`/`currency`. New subscriptions and one-time products use `units`/`nanos`/`currencyCode`. Don't mix them.
-8. **`--dry-run` is a global flag** — Place it **before** the subcommand: `gplay --dry-run subscriptions update ...`, NOT `gplay subscriptions update --dry-run ...`. The latter fails with "flag provided but not defined."
-9. **Batch-update JSON format** — For `onetimeproducts batch-update` and `subscriptions batch-update`, `regionsVersion` and `updateMask` go **inside each request object** in the JSON, not as CLI flags.
-10. **Product IDs are permanent** — Google Play permanently reserves product IDs after deletion. If you create a product via `gplay iap create` then delete it, the ID cannot be reused — not even with `gplay onetimeproducts create`. Always choose product IDs carefully. Do **not** create a product via the legacy API and then try to recreate it via the new API.
-11. **New OTP products start in DRAFT** — After `gplay onetimeproducts create`, the purchase option is in DRAFT state. You must activate it with `gplay purchase-options batch-update-states` before it's available to users.
-12. **`--regions-version` is required for create too** — `onetimeproducts create` uses PATCH with `allowMissing=true` internally, so `--regions-version` is required even when creating new products, not just when updating.
-13. **Discover commands with `gplay --help`** — Purchase option activation is under `gplay purchase-options`, not under `gplay onetimeproducts`. Always run `gplay --help` to see all top-level command groups.
+1. **Sending only PPP regions**, The API rejects updates that remove existing regions. Always fetch-then-merge.
+2. **Missing `--regions-version`**, Required for any pricing update. The API error will tell you the latest version if you guess wrong.
+3. **Missing `--update-mask`**, Use `"basePlans"` for subscriptions, `"purchaseOptions"` for one-time products.
+4. **Missing `otherRegionsConfig`**, If a subscription base plan previously had `otherRegionsConfig` set, it must be included in the update.
+5. **Missing `newRegionsConfig`**, If a one-time product purchase option previously had `newRegionsConfig` set, it must be included. Omitting it causes: "Cannot remove currency for new regions once it has been added."
+6. **Wrong currency codes**, Don't assume currencies. Fetch from Google Play, as they change between regions versions.
+7. **Mixing API formats**, Legacy IAPs use `priceMicros`/`currency`. New subscriptions and one-time products use `units`/`nanos`/`currencyCode`. Don't mix them.
+8. **`--dry-run` is a global flag**, Place it **before** the subcommand: `gplay --dry-run subscriptions update ...`, NOT `gplay subscriptions update --dry-run ...`. The latter fails with "flag provided but not defined."
+9. **Batch-update JSON format**, For `onetimeproducts batch-update` and `subscriptions batch-update`, `regionsVersion` and `updateMask` go **inside each request object** in the JSON, not as CLI flags.
+10. **Product IDs are permanent**, Google Play permanently reserves product IDs after deletion. If you create a product via `gplay iap create` then delete it, the ID cannot be reused, not even with `gplay onetimeproducts create`. Always choose product IDs carefully. Do **not** create a product via the legacy API and then try to recreate it via the new API.
+11. **New OTP products start in DRAFT**, After `gplay onetimeproducts create`, the purchase option is in DRAFT state. You must activate it with `gplay purchase-options batch-update-states` before it's available to users.
+12. **`--regions-version` is required for create too**, `onetimeproducts create` uses PATCH with `allowMissing=true` internally, so `--regions-version` is required even when creating new products, not just when updating.
+13. **Discover commands with `gplay --help`**, Purchase option activation is under `gplay purchase-options`, not under `gplay onetimeproducts`. Always run `gplay --help` to see all top-level command groups.
 
 ## Notes
 - Price changes for subscriptions apply immediately to new subscribers.
 - Existing subscribers require explicit price migration via `migrate-prices`.
 - Use `gplay pricing convert` for currency conversion reference, but apply PPP multipliers on top.
 - Always verify prices after updates by fetching the product and reviewing the summary.
-- The PPP multiplier table provides starting points — adjust based on your market data and revenue goals.
+- The PPP multiplier table provides starting points, adjust based on your market data and revenue goals.

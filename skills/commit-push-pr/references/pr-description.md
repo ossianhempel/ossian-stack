@@ -13,7 +13,7 @@ diff itself.
 
 If the lead sentence describes what was moved, renamed, or added rather than what's
 now possible or fixed, rewrite it. This applies to every section, not just the
-opening — restating the diff is the failure mode this guide exists to prevent.
+opening, restating the diff is the failure mode this guide exists to prevent.
 
 ## Provider scope
 
@@ -22,7 +22,7 @@ GitHub commands below apply only to GitHub/GHE. For Azure DevOps Services, use
 
 ## Resolve the range
 
-- **Current-branch mode** (default) — describe `HEAD` against the resolved base
+- **Current-branch mode** (default), describe `HEAD` against the resolved base
   (default branch, or the open PR's `baseRefName` when one exists and `--base` was
   not given):
 
@@ -36,13 +36,13 @@ GitHub commands below apply only to GitHub/GHE. For Azure DevOps Services, use
   `--description-only`, prefer the best available range without mutating: remote
   qualified, then local `$BASE...HEAD`, then the visible diff with a note that no
   base ref was available.
-- **PR mode** — describe a specific PR (a URL/id was passed). Fetch metadata first:
+- **PR mode**, describe a specific PR (a URL/id was passed). Fetch metadata first:
   `gh pr view <id> --json title,state,headRefName,baseRefName,url`. If the PR is not
-  open, report and stop — do not invent a description. Use its `baseRefName` as
+  open, report and stop, do not invent a description. Use its `baseRefName` as
   `<BASE>` and `headRefName` as `<HEAD>`.
 
 Subtract fix-up commits (review fixes, lint, rebase resolutions) when reading the
-range — they are invisible to the reader.
+range, they are invisible to the reader.
 
 ## Size the description
 
@@ -65,14 +65,14 @@ For small + simple PRs, the value-led sentence is the entire description.
 When the body uses headings, use these in order. Drop a section when it is empty.
 Name real symbols and paths, not abstractions.
 
-- `## Why` — the intent and why this approach fits. This is where the core principle
+- `## Why`, the intent and why this approach fits. This is where the core principle
   lives; lead with what is now possible or fixed.
-- `## Scope` — facts from the diff. Name both sides of a rename or retarget. State
+- `## Scope`, facts from the diff. Name both sides of a rename or retarget. State
   what is in and out when the boundary matters.
-- `## Tradeoffs` — real choices only. Skip when there are none.
-- `## Blast Radius` — who and what the change touches, and why it is safe or risky.
+- `## Tradeoffs`, real choices only. Skip when there are none.
+- `## Blast Radius`, who and what the change touches, and why it is safe or risky.
   If the default branch is red without the fix, name the continuing cost.
-- `## Verification` — how you ran each check and its rigor: the real command, test
+- `## Verification`, how you ran each check and its rigor: the real command, test
   file, or surface, and the outcome of each. Never present an unverified claim as
   verified; label results you could not check.
 
@@ -86,17 +86,17 @@ prose is authoritative when they conflict.
 `type: description` or `type(scope): description`.
 
 - Type by intent, not file extension. When `fix` and `feat` both seem to fit, default
-  to `fix` — adding code to remedy missing behavior is `fix`. Reserve `feat` for
+  to `fix`, adding code to remedy missing behavior is `fix`. Reserve `feat` for
   capabilities the user could not previously accomplish. Use `refactor`/`docs`/
   `chore`/`perf`/`test` when more precise.
 - Scope: the narrowest useful label. Omit when no single label adds clarity.
 - Description: imperative, lowercase, under 72 chars, no trailing period.
 - Match the project's conventions (active instructions, else recent commits).
-- Never use `!` or `BREAKING CHANGE:` without explicit user confirmation — they can
+- Never use `!` or `BREAKING CHANGE:` without explicit user confirmation, they can
   trigger automated major-version bumps.
 
 ## Tracker links
 
-Only when an id was explicitly supplied. Use the host's syntax — GitHub/GitLab
+Only when an id was explicitly supplied. Use the host's syntax, GitHub/GitLab
 `Closes #<id>`, Azure Boards `AB#<id>`. Never invent one. ASCII only throughout the
 title and body; keep emojis out of anything that could reach console or log output.

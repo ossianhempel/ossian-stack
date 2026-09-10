@@ -114,12 +114,12 @@ These have legitimate uses, so read for them by hand instead of blanket-banning.
 - **Empty-phrase padding.** "It's worth noting", "at the end of the day", "at its core", "in today's world", "the reality is", "going forward", "let's dive in". Cut.
 - **Empty adverbs.** "just", "simply", "actually", "literally", "honestly", "truly", "fundamentally". A few are fine in casual copy; cut the ones adding nothing.
 - **Context-dependent words.** "harness", "elevate", "embark", "when it comes to". Cut when inflating ("harness the power of…"); keep when literal.
-- **Read-aloud test.** AI slop is smooth, even, and frictionless — every sentence the same length, every clause balanced. Real copy has uneven rhythm: a three-word line next to a long one, a fragment, a hard stop. If it sounds like it was written to be inoffensive, it was.
+- **Read-aloud test.** AI slop is smooth, even, and frictionless, every sentence the same length, every clause balanced. Real copy has uneven rhythm: a three-word line next to a long one, a fragment, a hard stop. If it sounds like it was written to be inoffensive, it was.
 
 ## Output (when auditing)
 
 1. **Verdict:** one sentence naming the dominant problem, or "already clean".
-2. **Findings:** meaningful issues only — the smallest useful fragment plus the tell name.
+2. **Findings:** meaningful issues only, the smallest useful fragment plus the tell name.
 3. **Revised draft:** the full cleaned version when changes are needed.
 
 Lead with the revised draft when the ask is a rewrite rather than an audit, and

@@ -17,13 +17,13 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Density: low
 - Scheme: light
 - Best for: Anything that should feel literary, elegant, and unhurried: editorial features, longform brand stories, gallery / museum decks, advisory deliverables, wedding / lifestyle media, founder essays. Equally good for tech, research, or business decks that want a Sunday-supplement warmth instead of corporate polish.
-- Avoid for: Decks that need visual heat or punch — the warm-paper palette and Cormorant serif are intentionally quiet.
+- Avoid for: Decks that need visual heat or punch, the warm-paper palette and Cormorant serif are intentionally quiet.
 
 ## Visual Snapshot
 
-A warm magazine spread aesthetic — the kind of layout a small print quarterly with field-notes pretensions would commission. Cormorant Garamond carries every headline and ornamental moment with mixed roman and italic; Work Sans recedes into supporting body. The palette is cream paper with a quartet of pastel candy accents (dusty pink, chartreuse lemon, soft peach blush, sage green, lilac) used as colored card backgrounds. Generous rounded cards (24–36px radius) float on translucent white over the cream field. The mood is editorial calm with a sprinkling of riso-print color — closer to a literary research notebook than a corporate deck.
+A warm magazine spread aesthetic, the kind of layout a small print quarterly with field-notes pretensions would commission. Cormorant Garamond carries every headline and ornamental moment with mixed roman and italic; Work Sans recedes into supporting body. The palette is cream paper with a quartet of pastel candy accents (dusty pink, chartreuse lemon, soft peach blush, sage green, lilac) used as colored card backgrounds. Generous rounded cards (24–36px radius) float on translucent white over the cream field. The mood is editorial calm with a sprinkling of riso-print color, closer to a literary research notebook than a corporate deck.
 
-Soft Editorial is a warm magazine spread presentation system that takes its visual cues from small-press literary quarterlies and design-research notebooks. The premise is a single typeface (Cormorant Garamond) doing nearly all the talking, supported by a sober humanist sans (Work Sans) only where the serif would tire. The cream paper field is the constant — every slide sits on {colors.paper} (#F2EEDF), a warm aged-cream that reads as physical paper, not screen white. On top of the field, rounded cards float in two registers: translucent white softness for default content, and saturated pastel candy for accent moments.
+Soft Editorial is a warm magazine spread presentation system that takes its visual cues from small-press literary quarterlies and design-research notebooks. The premise is a single typeface (Cormorant Garamond) doing nearly all the talking, supported by a sober humanist sans (Work Sans) only where the serif would tire. The cream paper field is the constant, every slide sits on {colors.paper} (#F2EEDF), a warm aged-cream that reads as physical paper, not screen white. On top of the field, rounded cards float in two registers: translucent white softness for default content, and saturated pastel candy for accent moments.
 
 ## Preview Ingredients
 
@@ -31,7 +31,7 @@ Soft Editorial is a warm magazine spread presentation system that takes its visu
 - Typography: Cormorant Garamond; Work Sans
 - Signature move: Single warm cream surface ({colors.paper}) across every slide; pastels appear only as card fills, never as the slide background (except the full-bleed closer slide which fills with {colors.pink}).
 - Signature move: Cormorant Garamond carries every display, headline, kicker, and ornamental moment; Work Sans is reserved for body and eyebrows.
-- Signature move: Mixed roman + italic inside headlines is the system's typographic signal — italic phrases drop to weight 400 from the headline's weight 500.
+- Signature move: Mixed roman + italic inside headlines is the system's typographic signal, italic phrases drop to weight 400 from the headline's weight 500.
 - Signature move: Saturated pastels ({colors.pink}, {colors.lemon}, {colors.blush}, {colors.sage}, {colors.lilac}) are interchangeable card fills with no fixed semantic meaning.
 - Signature move: Rounded cards (24–36px radius) are the default container; pills are fully rounded (999px); translucent white ({colors.card-fill}) is the default card fill.
 

@@ -47,7 +47,7 @@ when it is missing. Only leave it off when the user explicitly declines.
 ## 8. Verify
 
 Confirm the installed copy is the one that answers. A skill list that still shows
-the old source means step 3 did not finish, or the runtime needs a restart —
+the old source means step 3 did not finish, or the runtime needs a restart,
 plugin skills are cached at session start, so an install is not live in the
 session that performed it.
 

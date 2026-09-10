@@ -6,10 +6,10 @@ https://developer.1password.com/docs/cli/
 ## Auth / status
 
 Default auth is the service-account token (`OP_SERVICE_ACCOUNT_TOKEN` in `~/.zshenv`),
-scoped to `Development`, `H&M`, and `Rebtech` — non-interactive, no Touch ID.
+scoped to `Development`, `H&M`, and `Rebtech`, non-interactive, no Touch ID.
 
 ```bash
-op account list     # metadata only — list configured accounts
+op account list     # metadata only, list configured accounts
 op vault list       # with token set: shows Development, H&M, Rebtech
 op service-account ratelimit   # usage if reads start failing
 
@@ -41,7 +41,7 @@ echo "db_password: {{ op://Private/AppDB/password }}" | op inject
 op inject -i config.tpl.yml -o config.yml
 ```
 
-## Inspect items (metadata only — never prints field values)
+## Inspect items (metadata only, never prints field values)
 
 ```bash
 op item list --vault Private --format json

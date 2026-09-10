@@ -1,6 +1,6 @@
 # Style Presets Reference
 
-Curated visual styles for Frontend Slides. Each preset is inspired by real design references — no generic "AI slop" aesthetics. **Abstract shapes only — no illustrations.**
+Curated visual styles for Frontend Slides. Each preset is inspired by real design references, no generic "AI slop" aesthetics. **Abstract shapes only, no illustrations.**
 
 **Viewport CSS:** For mandatory base styles, see [viewport-base.css](viewport-base.css). Include in every presentation.
 
@@ -41,7 +41,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 
 **Vibe:** Bold, clean, professional, high contrast
 
-**Layout:** Split panel—white top, blue bottom. Brand marks in corners.
+**Layout:** Split panel, white top, blue bottom. Brand marks in corners.
 
 **Typography:**
 - Display: `Manrope` (800)
@@ -70,7 +70,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 
 **Vibe:** Bold, creative, energetic, retro-modern
 
-**Layout:** Split panels—electric blue left, dark right. Script accents.
+**Layout:** Split panels, electric blue left, dark right. Script accents.
 
 **Typography:**
 - Display: `Syne` (700/800)
@@ -101,7 +101,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Centered content on dark. Abstract soft shapes in corner.
 
 **Typography:**
-- Display: `Cormorant` (400/600) — elegant serif
+- Display: `Cormorant` (400/600), elegant serif
 - Body: `IBM Plex Sans` (300/400)
 
 **Colors:**
@@ -121,7 +121,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 - Warm color accents (pink, gold, terracotta)
 - Thin vertical accent lines
 - Italic signature typography
-- **No illustrations—only abstract CSS shapes**
+- **No illustrations, only abstract CSS shapes**
 
 ---
 
@@ -134,7 +134,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Cream paper card on dark background. Colorful tabs on right edge.
 
 **Typography:**
-- Display: `Bodoni Moda` (400/700) — classic editorial
+- Display: `Bodoni Moda` (400/700), classic editorial
 - Body: `DM Sans` (400/500)
 
 **Colors:**
@@ -227,7 +227,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 **Layout:** Centered content on cream. Abstract geometric shapes as accent.
 
 **Typography:**
-- Display: `Fraunces` (700/900) — distinctive serif
+- Display: `Fraunces` (700/900), distinctive serif
 - Body: `Work Sans` (400/500)
 
 **Colors:**
@@ -244,7 +244,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 - Abstract geometric shapes (circle outline + line + dot)
 - Bold bordered CTA boxes
 - Witty, conversational copy style
-- **No illustrations—only geometric CSS shapes**
+- **No illustrations, only geometric CSS shapes**
 
 ---
 
@@ -331,16 +331,16 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 
 ### Negating CSS Functions
 
-**WRONG — silently ignored by browsers (no console error):**
+**WRONG, silently ignored by browsers (no console error):**
 ```css
 right: -clamp(28px, 3.5vw, 44px);   /* Browser ignores this */
 margin-left: -min(10vw, 100px);      /* Browser ignores this */
 ```
 
-**CORRECT — wrap in `calc()`:**
+**CORRECT, wrap in `calc()`:**
 ```css
 right: calc(-1 * clamp(28px, 3.5vw, 44px));  /* Works */
 margin-left: calc(-1 * min(10vw, 100px));     /* Works */
 ```
 
-CSS does not allow a leading `-` before function names. The browser silently discards the entire declaration — no error, the element just appears in the wrong position. **Always use `calc(-1 * ...)` to negate CSS function values.**
+CSS does not allow a leading `-` before function names. The browser silently discards the entire declaration, no error, the element just appears in the wrong position. **Always use `calc(-1 * ...)` to negate CSS function values.**

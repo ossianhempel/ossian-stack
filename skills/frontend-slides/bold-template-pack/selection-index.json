@@ -37,7 +37,7 @@
       "density": "medium",
       "scheme": "dark",
       "best_for": "Anything that should feel like a CRT screen at 2am: cyberpunk, gaming, web3, indie dev tools, hackathon demos. Just as good for a tech talk that wants to lean into nostalgic-digital craft, a synthwave brand deck, or a creative review that wants to feel like a console.",
-      "avoid_for": "Contexts where the dark neon palette would actively work against the message — quiet institutional finance disclosures, healthcare patient-facing materials, traditional luxury.",
+      "avoid_for": "Contexts where the dark neon palette would actively work against the message, quiet institutional finance disclosures, healthcare patient-facing materials, traditional luxury.",
       "preview_md": "bold-template-pack/templates/8-bit-orbit/preview.md",
       "design_md": "bold-template-pack/templates/8-bit-orbit/design.md"
     },
@@ -63,7 +63,7 @@
       "density": "medium",
       "scheme": "light",
       "best_for": "Anything that should feel like an art-biennale poster or a museum's annual programme: exhibition decks, arts-institution announcements, design conference brochures, curatorial pitches, literary publications, studio retrospectives. Equally good for any deck wanting Dutch-editorial atmosphere with an unmistakable single-color signature.",
-      "avoid_for": "Decks that need visual punch or saturated multi-color energy — the warm-paper canvas and one-yellow palette are intentionally quiet and atmospheric.",
+      "avoid_for": "Decks that need visual punch or saturated multi-color energy, the warm-paper canvas and one-yellow palette are intentionally quiet and atmospheric.",
       "preview_md": "bold-template-pack/templates/biennale-yellow/preview.md",
       "design_md": "bold-template-pack/templates/biennale-yellow/design.md"
     },
@@ -110,8 +110,8 @@
       "formality": "medium-high",
       "density": "medium",
       "scheme": "light",
-      "best_for": "Anything that should feel modern-considered and lightly authoritative: B2B SaaS pitches, consulting deliverables, advisory updates, investor reports. Also a clean, tasteful choice whenever you want to read as professional without going stiff — research synthesis, internal reviews, brand work for service businesses.",
-      "avoid_for": "Contexts where the deck should feel hot, playful, or intentionally informal — the cool electric-blue restraint will read as overly polished.",
+      "best_for": "Anything that should feel modern-considered and lightly authoritative: B2B SaaS pitches, consulting deliverables, advisory updates, investor reports. Also a clean, tasteful choice whenever you want to read as professional without going stiff, research synthesis, internal reviews, brand work for service businesses.",
+      "avoid_for": "Contexts where the deck should feel hot, playful, or intentionally informal, the cool electric-blue restraint will read as overly polished.",
       "preview_md": "bold-template-pack/templates/blue-professional/preview.md",
       "design_md": "bold-template-pack/templates/blue-professional/design.md"
     },
@@ -134,8 +134,8 @@
       "formality": "medium",
       "density": "low",
       "scheme": "light",
-      "best_for": "Anything that should land like a magazine cover: brand manifestos, founder vision decks, editorial / cultural pitches, creative reviews. Excellent any time you want a few words to feel like a poster — including unexpected fits like a tech keynote or a finance manifesto that wants to be quotable.",
-      "avoid_for": "Decks that need to communicate dense information per slide — the layout is built around a few large statements, not paragraphs of detail.",
+      "best_for": "Anything that should land like a magazine cover: brand manifestos, founder vision decks, editorial / cultural pitches, creative reviews. Excellent any time you want a few words to feel like a poster, including unexpected fits like a tech keynote or a finance manifesto that wants to be quotable.",
+      "avoid_for": "Decks that need to communicate dense information per slide, the layout is built around a few large statements, not paragraphs of detail.",
       "preview_md": "bold-template-pack/templates/bold-poster/preview.md",
       "design_md": "bold-template-pack/templates/bold-poster/design.md"
     },
@@ -159,7 +159,7 @@
       "density": "medium",
       "scheme": "dark",
       "best_for": "Anything that should land like a broadside newspaper headline: brand manifestos, magazine and cultural pitches, design talks, bilingual EN/CN decks, founder vision statements. Also a striking pick for tech, research, or business decks that want a dramatic single-accent editorial feel.",
-      "avoid_for": "Decks that need to feel quiet, warm, or institutionally traditional — the dark canvas with fire-orange accent commits to drama.",
+      "avoid_for": "Decks that need to feel quiet, warm, or institutionally traditional, the dark canvas with fire-orange accent commits to drama.",
       "preview_md": "bold-template-pack/templates/broadside/preview.md",
       "design_md": "bold-template-pack/templates/broadside/design.md"
     },
@@ -184,7 +184,7 @@
       "density": "medium",
       "scheme": "light",
       "best_for": "Anything that should feel modular, modern, and a little Y2K: lifestyle brands, creator portfolios, DTC launches, beauty / wellness, agency credentials. Also fun for a playful tech demo or a research deck that wants pop-art clarity instead of gravitas.",
-      "avoid_for": "Contexts that require traditional institutional weight — the capsule shapes and pastel pops actively soften authority.",
+      "avoid_for": "Contexts that require traditional institutional weight, the capsule shapes and pastel pops actively soften authority.",
       "preview_md": "bold-template-pack/templates/capsule/preview.md",
       "design_md": "bold-template-pack/templates/capsule/design.md"
     },
@@ -207,8 +207,8 @@
       "formality": "high",
       "density": "low",
       "scheme": "light",
-      "best_for": "Anything that should feel quiet, considered, and grown-up: investment theses, white papers, advisory work, longform research, gallery / cultural decks. Also a strong choice for editorial features, founder reflections, or any deck where restraint is the message — including across tech and finance.",
-      "avoid_for": "Decks that need visual heat, multiple accents, or a sense of urgency — the warm-neutral palette is intentionally low-energy.",
+      "best_for": "Anything that should feel quiet, considered, and grown-up: investment theses, white papers, advisory work, longform research, gallery / cultural decks. Also a strong choice for editorial features, founder reflections, or any deck where restraint is the message, including across tech and finance.",
+      "avoid_for": "Decks that need visual heat, multiple accents, or a sense of urgency, the warm-neutral palette is intentionally low-energy.",
       "preview_md": "bold-template-pack/templates/cartesian/preview.md",
       "design_md": "bold-template-pack/templates/cartesian/design.md"
     },
@@ -235,7 +235,7 @@
       "density": "medium",
       "scheme": "light",
       "best_for": "Anything that should feel like a quietly serious design / research bulletin, art publication, or curated trend report. Strong for studio annuals, agency capabilities decks, design-research publications, architecture / art / academic decks, and any deck wanting one strict accent colour and a printed-ledger calmness rather than corporate polish.",
-      "avoid_for": "Decks that need warmth, multi-colour energy, or a casual / playful voice — the strict cobalt + cream + grid palette is intentionally austere.",
+      "avoid_for": "Decks that need warmth, multi-colour energy, or a casual / playful voice, the strict cobalt + cream + grid palette is intentionally austere.",
       "preview_md": "bold-template-pack/templates/cobalt-grid/preview.md",
       "design_md": "bold-template-pack/templates/cobalt-grid/design.md"
     },
@@ -258,7 +258,7 @@
       "density": "medium",
       "scheme": "mixed",
       "best_for": "Anything that should feel warm-graphic and editorial: fashion, beauty, fitness, F&B, lifestyle brands, agency credentials. Just as strong for a creator portfolio, a manifesto, or a tech / research deck that wants warmth and a single bold accent instead of corporate cool.",
-      "avoid_for": "Contexts that should feel quiet or institutional — the coral accent and oversized Bebas Neue commit hard to a confident magazine voice.",
+      "avoid_for": "Contexts that should feel quiet or institutional, the coral accent and oversized Bebas Neue commit hard to a confident magazine voice.",
       "preview_md": "bold-template-pack/templates/coral/preview.md",
       "design_md": "bold-template-pack/templates/coral/design.md"
     },
@@ -281,7 +281,7 @@
       "density": "medium-high",
       "scheme": "light",
       "best_for": "Anything that should feel design-led and confident: creative agency pitches, design studio decks, ad shop credentials, brand creative reviews, art-direction reviews. Also a great unexpected pick for a tech talk, research findings, or finance review when the speaker wants to lead with taste rather than convention.",
-      "avoid_for": "Contexts that demand institutional restraint and a quiet authority — the saturated multi-accent palette will read as expressive, not formal.",
+      "avoid_for": "Contexts that demand institutional restraint and a quiet authority, the saturated multi-accent palette will read as expressive, not formal.",
       "preview_md": "bold-template-pack/templates/creative-mode/preview.md",
       "design_md": "bold-template-pack/templates/creative-mode/design.md"
     },
@@ -306,8 +306,8 @@
       "formality": "low",
       "density": "medium",
       "scheme": "light",
-      "best_for": "Anything that should feel friendly, soft, and joyful: educational content, kids and family, wellness programs, community workshops, creator portfolios for craft / illustration. Also lovely for an unexpected playful internal kickoff, a wedding planning deck, or any moment where warmth is the message — including across tech or business contexts.",
-      "avoid_for": "Contexts where the audience explicitly expects authority and precision — the hand-drawn pastel SVG decorations are the opposite of buttoned-up.",
+      "best_for": "Anything that should feel friendly, soft, and joyful: educational content, kids and family, wellness programs, community workshops, creator portfolios for craft / illustration. Also lovely for an unexpected playful internal kickoff, a wedding planning deck, or any moment where warmth is the message, including across tech or business contexts.",
+      "avoid_for": "Contexts where the audience explicitly expects authority and precision, the hand-drawn pastel SVG decorations are the opposite of buttoned-up.",
       "preview_md": "bold-template-pack/templates/daisy-days/preview.md",
       "design_md": "bold-template-pack/templates/daisy-days/design.md"
     },
@@ -331,8 +331,8 @@
       "formality": "medium",
       "density": "medium",
       "scheme": "mixed",
-      "best_for": "Anything that should feel like a considered editorial — quarterly reviews, internal readouts, studio updates, creative-agency presentations. Equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives.",
-      "avoid_for": "Contexts that need to feel urgent, punchy, or sales-driven — the palette and rhythm are intentionally quiet.",
+      "best_for": "Anything that should feel like a considered editorial, quarterly reviews, internal readouts, studio updates, creative-agency presentations. Equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives.",
+      "avoid_for": "Contexts that need to feel urgent, punchy, or sales-driven, the palette and rhythm are intentionally quiet.",
       "preview_md": "bold-template-pack/templates/editorial-forest/preview.md",
       "design_md": "bold-template-pack/templates/editorial-forest/design.md"
     },
@@ -355,8 +355,8 @@
       "formality": "medium-high",
       "density": "medium",
       "scheme": "mixed",
-      "best_for": "Anything that should feel like a fashion-magazine spread: editorial pitches, fashion brand decks, lifestyle media, art direction reviews. Equally good for any deck — including tech, research, or business — that wants tri-tone discipline and serif/sans contrast instead of the usual neutrals.",
-      "avoid_for": "Decks that need to read as soft or comforting — the burgundy/pink/cream tri-tone is intentionally high-contrast and styled.",
+      "best_for": "Anything that should feel like a fashion-magazine spread: editorial pitches, fashion brand decks, lifestyle media, art direction reviews. Equally good for any deck, including tech, research, or business, that wants tri-tone discipline and serif/sans contrast instead of the usual neutrals.",
+      "avoid_for": "Decks that need to read as soft or comforting, the burgundy/pink/cream tri-tone is intentionally high-contrast and styled.",
       "preview_md": "bold-template-pack/templates/editorial-tri-tone/preview.md",
       "design_md": "bold-template-pack/templates/editorial-tri-tone/design.md"
     },
@@ -379,8 +379,8 @@
       "formality": "medium-high",
       "density": "medium",
       "scheme": "mixed",
-      "best_for": "Anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. The double-rule masthead ornament gives it editorial gravitas without making it stiff — also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate.",
-      "avoid_for": "Contexts that need to read as quiet, neutral, or institutionally restrained — the emerald field is too saturated to disappear into the background.",
+      "best_for": "Anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. The double-rule masthead ornament gives it editorial gravitas without making it stiff, also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate.",
+      "avoid_for": "Contexts that need to read as quiet, neutral, or institutionally restrained, the emerald field is too saturated to disappear into the background.",
       "preview_md": "bold-template-pack/templates/emerald-editorial/preview.md",
       "design_md": "bold-template-pack/templates/emerald-editorial/design.md"
     },
@@ -405,7 +405,7 @@
       "density": "medium",
       "scheme": "mixed",
       "best_for": "Anything that should feel organic, considered, and grown-up: sustainability and wellness brands, outdoor / nature products, wineries and restaurants, literary or arts decks, advisory deliverables, bilingual EN/CN reports. Also a calm, distinctive choice for tech, research, or business decks that want patience over urgency.",
-      "avoid_for": "Decks that need neon energy or rapid-fire pop — the forest-green canvas and Playfair serif commit to a slow, classical voice.",
+      "avoid_for": "Decks that need neon energy or rapid-fire pop, the forest-green canvas and Playfair serif commit to a slow, classical voice.",
       "preview_md": "bold-template-pack/templates/grove/preview.md",
       "design_md": "bold-template-pack/templates/grove/design.md"
     },
@@ -434,7 +434,7 @@
       "density": "medium",
       "scheme": "light",
       "best_for": "Anything that should feel like a warm, intimate, modern hospitality / community brand: supper clubs, dinner series, small restaurants, creative-studio events, membership pitches, lifestyle and wine brands. Equally good for any deck wanting a single warm accent colour, mixed-weight typography, and a social-media-aware modern-editorial voice.",
-      "avoid_for": "Decks that need corporate polish, technical density, or a cold / minimalist register — the rust-red palette and bold serif mix are intentionally warm and people-facing.",
+      "avoid_for": "Decks that need corporate polish, technical density, or a cold / minimalist register, the rust-red palette and bold serif mix are intentionally warm and people-facing.",
       "preview_md": "bold-template-pack/templates/long-table/preview.md",
       "design_md": "bold-template-pack/templates/long-table/design.md"
     },
@@ -458,7 +458,7 @@
       "density": "medium",
       "scheme": "mixed",
       "best_for": "Anything that should feel mid-century, tactile, and intentional: design studio credentials, architecture / interior brands, ceramics / craft / furniture, advisory decks. Also a warm, distinctive choice for tech, research, or business decks that want a considered analog feel instead of digital-cool.",
-      "avoid_for": "Contexts that need fast tech energy or institutional restraint — the muted sage and burnt-orange palette is intentionally warm and slow.",
+      "avoid_for": "Contexts that need fast tech energy or institutional restraint, the muted sage and burnt-orange palette is intentionally warm and slow.",
       "preview_md": "bold-template-pack/templates/mat/preview.md",
       "design_md": "bold-template-pack/templates/mat/design.md"
     },
@@ -482,7 +482,7 @@
       "density": "high",
       "scheme": "light",
       "best_for": "Anything that should feel like a hand-typeset ledger: user research synthesis, white papers, longform reports, academic and policy briefs, advisory deliverables, bilingual EN/CN reports. Equally good for tech, design, or brand decks that want their words to be the only thing on the page.",
-      "avoid_for": "Decks that need visual personality or color-led storytelling — the all-ink palette is intentionally austere.",
+      "avoid_for": "Decks that need visual personality or color-led storytelling, the all-ink palette is intentionally austere.",
       "preview_md": "bold-template-pack/templates/monochrome/preview.md",
       "design_md": "bold-template-pack/templates/monochrome/design.md"
     },
@@ -506,7 +506,7 @@
       "density": "high",
       "scheme": "light",
       "best_for": "Anything that should feel confident and editorial-graphic: design-led pitches, brand work, founder talks, conference keynotes. Excellent for stat-heavy slides, comparisons, and process flows. Just as strong for tech, research, or finance when the speaker wants to read as design-led rather than corporate.",
-      "avoid_for": "Contexts that need to feel quiet, traditional, or warm — the neon-yellow accent and uppercase display commit to a confident editorial voice.",
+      "avoid_for": "Contexts that need to feel quiet, traditional, or warm, the neon-yellow accent and uppercase display commit to a confident editorial voice.",
       "preview_md": "bold-template-pack/templates/neo-grid-bold/preview.md",
       "design_md": "bold-template-pack/templates/neo-grid-bold/design.md"
     },
@@ -529,8 +529,8 @@
       "formality": "medium-low",
       "density": "medium-high",
       "scheme": "light",
-      "best_for": "Anything that should feel honest, loud, and graphic: cultural commentary, manifestos, civic and community decks, design talks, campaign pitches. Excellent for founder-vision moments, mission statements, or any deck — including across industries — that wants protest-poster energy instead of corporate polish.",
-      "avoid_for": "Contexts where institutional restraint is the actual goal — the saturated political-poster palette commits hard to expressive energy.",
+      "best_for": "Anything that should feel honest, loud, and graphic: cultural commentary, manifestos, civic and community decks, design talks, campaign pitches. Excellent for founder-vision moments, mission statements, or any deck, including across industries, that wants protest-poster energy instead of corporate polish.",
+      "avoid_for": "Contexts where institutional restraint is the actual goal, the saturated political-poster palette commits hard to expressive energy.",
       "preview_md": "bold-template-pack/templates/peoples-platform/preview.md",
       "design_md": "bold-template-pack/templates/peoples-platform/design.md"
     },
@@ -554,14 +554,14 @@
       "formality": "medium",
       "density": "medium",
       "scheme": "light",
-      "best_for": "Anything that should feel hand-crafted, warm, and literary: qualitative research findings, founder reflections, longform brand stories, workshop debriefs. The signature safety-pin illustrations and paper-grain texture make it especially good for any deck — including tech or business — that wants personality and warmth over polish.",
-      "avoid_for": "Decks that need to feel digital-native polished or rigorously data-driven — handwritten Caveat is intentionally informal.",
+      "best_for": "Anything that should feel hand-crafted, warm, and literary: qualitative research findings, founder reflections, longform brand stories, workshop debriefs. The signature safety-pin illustrations and paper-grain texture make it especially good for any deck, including tech or business, that wants personality and warmth over polish.",
+      "avoid_for": "Decks that need to feel digital-native polished or rigorously data-driven, handwritten Caveat is intentionally informal.",
       "preview_md": "bold-template-pack/templates/pin-and-paper/preview.md",
       "design_md": "bold-template-pack/templates/pin-and-paper/design.md"
     },
     {
       "slug": "pink-script",
-      "name": "Pink Script — After Hours",
+      "name": "Pink Script, After Hours",
       "tagline": "Black canvas, hot pink accent, pearl-cream paper, Instrument Serif headlines: late-night editorial luxury.",
       "mood": [
         "nocturnal",
@@ -602,8 +602,8 @@
       "formality": "low",
       "density": "medium",
       "scheme": "light",
-      "best_for": "Anything that should feel warm, indie, and approachable: creator portfolios, indie product launches, lifestyle brands, small-business pitches, newsletter / community decks. Also welcoming for any deck — including tech or research — that wants to feel friendly and human rather than corporate.",
-      "avoid_for": "Contexts where institutional credibility matters more than warmth — the peach palette is intentionally informal.",
+      "best_for": "Anything that should feel warm, indie, and approachable: creator portfolios, indie product launches, lifestyle brands, small-business pitches, newsletter / community decks. Also welcoming for any deck, including tech or research, that wants to feel friendly and human rather than corporate.",
+      "avoid_for": "Contexts where institutional credibility matters more than warmth, the peach palette is intentionally informal.",
       "preview_md": "bold-template-pack/templates/playful/preview.md",
       "design_md": "bold-template-pack/templates/playful/design.md"
     },
@@ -627,7 +627,7 @@
       "density": "high",
       "scheme": "light",
       "best_for": "Anything that should feel direct and graphic-confident: founder pitches, accelerator demos, brand decks, indie launches, creator portfolios. Strong for stat slides, comparison tables, and process flows. Equally good for tech, research, or finance when the speaker wants the deck to feel scrappy-confident rather than buttoned-up.",
-      "avoid_for": "Contexts that need to feel soft, warm, or intentionally quiet — the brutalist borders and offset shadows commit to a graphic voice.",
+      "avoid_for": "Contexts that need to feel soft, warm, or intentionally quiet, the brutalist borders and offset shadows commit to a graphic voice.",
       "preview_md": "bold-template-pack/templates/raw-grid/preview.md",
       "design_md": "bold-template-pack/templates/raw-grid/design.md"
     },
@@ -651,7 +651,7 @@
       "density": "medium",
       "scheme": "light",
       "best_for": "Anything that should feel knowingly nostalgic: retro gaming, Y2K-aesthetic brands, creator portfolios with a 90s vibe, tech-history talks, deliberately tongue-in-cheek decks. A great choice anywhere a playful retro reference is the entire point.",
-      "avoid_for": "Decks that need to read as modern, elegant, or institutionally credible — the Win95 chrome will always read as a costume.",
+      "avoid_for": "Decks that need to read as modern, elegant, or institutionally credible, the Win95 chrome will always read as a costume.",
       "preview_md": "bold-template-pack/templates/retro-windows/preview.md",
       "design_md": "bold-template-pack/templates/retro-windows/design.md"
     },
@@ -675,7 +675,7 @@
       "density": "medium",
       "scheme": "light",
       "best_for": "Anything that should feel printed, lo-fi, and crafted: indie zines and publications, music / arts brands, creator portfolios, small-batch craft launches, community decks. Also a great underdog choice for tech, research, or business decks that want a riso-print warmth instead of digital polish.",
-      "avoid_for": "Contexts that demand digital-native polish or fast modern-tech energy — the layered zine aesthetic intentionally feels handmade.",
+      "avoid_for": "Contexts that demand digital-native polish or fast modern-tech energy, the layered zine aesthetic intentionally feels handmade.",
       "preview_md": "bold-template-pack/templates/retro-zine/preview.md",
       "design_md": "bold-template-pack/templates/retro-zine/design.md"
     },
@@ -702,7 +702,7 @@
       "density": "medium",
       "scheme": "light",
       "best_for": "Anything that should feel like a vintage Japanese cassette package or a TDK / Sony / Sakura Color product catalogue: indie hardware brand decks, music-label release schedules, analog studio retrospectives, zine and magazine pitches, kawaii-tech product launches, creative-studio annual reports. Equally good for any deck wanting bold colour, condensed display type, and a tactile printed-product personality.",
-      "avoid_for": "Decks that need restrained, corporate, or quiet typography — the bold condensed lockups, ribbon stripes, and primary-colour palette are intentionally loud and product-page-y.",
+      "avoid_for": "Decks that need restrained, corporate, or quiet typography, the bold condensed lockups, ribbon stripes, and primary-colour palette are intentionally loud and product-page-y.",
       "preview_md": "bold-template-pack/templates/sakura-chroma/preview.md",
       "design_md": "bold-template-pack/templates/sakura-chroma/design.md"
     },
@@ -726,8 +726,8 @@
       "formality": "low",
       "density": "high",
       "scheme": "light",
-      "best_for": "Anything that should feel like a designer's whiteboard: brainstorms, workshops, creative-agency credentials, design-thinking sessions, ideation pitches, art-direction reviews. Equally fun for any deck — including tech, research, or business — that wants to read as in-progress thinking rather than polished conclusions.",
-      "avoid_for": "Contexts that demand precision and institutional weight — the post-it sticky-note aesthetic intentionally reads as warm and unfinished.",
+      "best_for": "Anything that should feel like a designer's whiteboard: brainstorms, workshops, creative-agency credentials, design-thinking sessions, ideation pitches, art-direction reviews. Equally fun for any deck, including tech, research, or business, that wants to read as in-progress thinking rather than polished conclusions.",
+      "avoid_for": "Contexts that demand precision and institutional weight, the post-it sticky-note aesthetic intentionally reads as warm and unfinished.",
       "preview_md": "bold-template-pack/templates/scatterbrain/preview.md",
       "design_md": "bold-template-pack/templates/scatterbrain/design.md"
     },
@@ -751,7 +751,7 @@
       "density": "high",
       "scheme": "mixed",
       "best_for": "Anything that should feel weighty, considered, and credibly institutional: investor decks, board presentations, consulting deliverables, legal / policy briefs, advisory pitches. Also a strong choice for tech, research, or brand work that wants to read as quietly authoritative rather than loud.",
-      "avoid_for": "Contexts that should feel hot, fast, or intentionally playful — the navy + gold restraint commits to a sober voice.",
+      "avoid_for": "Contexts that should feel hot, fast, or intentionally playful, the navy + gold restraint commits to a sober voice.",
       "preview_md": "bold-template-pack/templates/signal/preview.md",
       "design_md": "bold-template-pack/templates/signal/design.md"
     },
@@ -775,7 +775,7 @@
       "density": "low",
       "scheme": "light",
       "best_for": "Anything that should feel literary, elegant, and unhurried: editorial features, longform brand stories, gallery / museum decks, advisory deliverables, wedding / lifestyle media, founder essays. Equally good for tech, research, or business decks that want a Sunday-supplement warmth instead of corporate polish.",
-      "avoid_for": "Decks that need visual heat or punch — the warm-paper palette and Cormorant serif are intentionally quiet.",
+      "avoid_for": "Decks that need visual heat or punch, the warm-paper palette and Cormorant serif are intentionally quiet.",
       "preview_md": "bold-template-pack/templates/soft-editorial/preview.md",
       "design_md": "bold-template-pack/templates/soft-editorial/design.md"
     },
@@ -799,8 +799,8 @@
       "formality": "medium-high",
       "density": "medium",
       "scheme": "light",
-      "best_for": "Anything that should feel archival, tactile, and weighty-graphic: museum and cultural-institution decks, art / architecture brands, longform research, heritage and craft brands, manifestos. A great choice anytime — including across tech and business — when you want the deck to feel like a field manual rather than a slide deck.",
-      "avoid_for": "Contexts that demand digital-native polish or playful pop — the stencil-cut display and earth-tone palette commit to a deliberate analog feel.",
+      "best_for": "Anything that should feel archival, tactile, and weighty-graphic: museum and cultural-institution decks, art / architecture brands, longform research, heritage and craft brands, manifestos. A great choice anytime, including across tech and business, when you want the deck to feel like a field manual rather than a slide deck.",
+      "avoid_for": "Contexts that demand digital-native polish or playful pop, the stencil-cut display and earth-tone palette commit to a deliberate analog feel.",
       "preview_md": "bold-template-pack/templates/stencil-tablet/preview.md",
       "design_md": "bold-template-pack/templates/stencil-tablet/design.md"
     },
@@ -825,7 +825,7 @@
       "density": "medium",
       "scheme": "dark",
       "best_for": "Anything that should feel electric and design-led: studio credentials, creative agency pitches, brand showcases, art-direction reviews, fashion / sneaker brand work. Also a striking unexpected choice for tech, research, or business decks where the speaker wants the deck to *be* a brand statement.",
-      "avoid_for": "Contexts that should feel quiet or institutional — the black-and-electric-yellow palette is the loudest in the library.",
+      "avoid_for": "Contexts that should feel quiet or institutional, the black-and-electric-yellow palette is the loudest in the library.",
       "preview_md": "bold-template-pack/templates/studio/preview.md",
       "design_md": "bold-template-pack/templates/studio/design.md"
     },
@@ -849,8 +849,8 @@
       "formality": "high",
       "density": "low",
       "scheme": "dark",
-      "best_for": "Anything that should feel scholarly, literary, and quietly intelligent: research synthesis, white papers, academic and policy briefs, advisory deliverables, longform editorial pieces, founder reflections. Equally strong for any deck — including tech, business, or creator work — that wants a calm, considered atmosphere instead of energetic visuals.",
-      "avoid_for": "Contexts that need visual heat or pop — the navy + warm-yellow Cormorant aesthetic is intentionally low-tempo.",
+      "best_for": "Anything that should feel scholarly, literary, and quietly intelligent: research synthesis, white papers, academic and policy briefs, advisory deliverables, longform editorial pieces, founder reflections. Equally strong for any deck, including tech, business, or creator work, that wants a calm, considered atmosphere instead of energetic visuals.",
+      "avoid_for": "Contexts that need visual heat or pop, the navy + warm-yellow Cormorant aesthetic is intentionally low-tempo.",
       "preview_md": "bold-template-pack/templates/vellum/preview.md",
       "design_md": "bold-template-pack/templates/vellum/design.md"
     }

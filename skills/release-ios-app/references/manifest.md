@@ -1,7 +1,7 @@
 # `.ios-release.env` manifest
 
 Each iOS app repo owns a `.ios-release.env` at its root. It is a `KEY=value` shell file
-(sourced, not executed) and **must contain no secrets** — only paths, IDs, commands, and
+(sourced, not executed) and **must contain no secrets**, only paths, IDs, commands, and
 flags. The global `release-ios-app` skill and `scripts/ios-release` read it.
 
 ## Keys
@@ -27,7 +27,7 @@ flags. The global `release-ios-app` skill and `scripts/ios-release` read it.
 ## Annotated example (native, PlateSnap)
 
 ```sh
-# .ios-release.env — repo-owned iOS release manifest. NO SECRETS.
+# .ios-release.env, repo-owned iOS release manifest. NO SECRETS.
 IOS_RELEASE_APP_ID="6759206859"
 IOS_RELEASE_BUNDLE_ID="com.ossianhempel.platesnap"
 IOS_RELEASE_BUILD_SYSTEM="xcodegen-xcodecloud"
@@ -64,6 +64,6 @@ IOS_RELEASE_NOTES_FILE=".ios-release-notes.md"
 
 ## Notes file (`IOS_RELEASE_NOTES_FILE`)
 
-Holds only the **non-shared** repo knowledge — environment caveats, distribution traps,
+Holds only the **non-shared** repo knowledge, environment caveats, distribution traps,
 secret-validation rules, build-number offsets, EAS-Submit fallbacks. The shared flow lives
 in the global skill; do not duplicate it here. Keep it short.

@@ -63,8 +63,8 @@ what the database calls it. Create missing required properties before first use.
 | assignee | `Assignee` | people | no | human owner; agents never set it |
 | parent | `Parent item` / `Sub-items` | relation, self (Notion sub-items) | no | epic and tickets |
 | pr | `PR` | url | no | the pull request an agent opened |
-| last-update | `Last edited time` | built-in | — | stale-claim checks |
-| created | `Created time` | built-in | — | ordering |
+| last-update | `Last edited time` | built-in |, | stale-claim checks |
+| created | `Created time` | built-in |, | ordering |
 
 When an optional property is missing, fall back to a line at the top of the page
 body: `Blocked by: <URL>, <URL>`, `Part of: <URL>`, `PR: <URL>`. When `Type` or

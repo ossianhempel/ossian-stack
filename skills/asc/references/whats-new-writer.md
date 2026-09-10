@@ -55,9 +55,9 @@ Prompt the user: "What changed in this release? You can paste git log output, bu
 ### Step 1: Classify Changes
 
 Group changes into sections per the guidelines:
-- **New** — new features or capabilities
-- **Improved** — enhancements to existing features
-- **Fixed** — bug fixes users would notice
+- **New**, new features or capabilities
+- **Improved**, enhancements to existing features
+- **Fixed**, bug fixes users would notice
 
 Omit empty sections. If all changes are fixes, only show "Fixed."
 
@@ -66,7 +66,7 @@ Omit empty sections. If all changes are fixes, only show "Fixed."
 Follow the tone rules from `release-notes-guidelines.md`:
 - Describe user impact, not implementation details
 - Use direct address ("you") and action verbs
-- Be specific — mention concrete improvements
+- Be specific, mention concrete improvements
 
 ### Step 3: Front-Load the Hook
 
@@ -78,7 +78,7 @@ The first ~170 characters are the only visible part before "more." Lead with the
    - These canonical files are also what `asc metadata keywords ...` reads and writes.
 2. If the field is empty or missing, skip this step
 3. Identify keywords relevant to the changes being described
-4. Weave them naturally into the notes — never force or stuff
+4. Weave them naturally into the notes, never force or stuff
 
 ### Step 5: Respect Character Limits
 
@@ -104,8 +104,8 @@ Translate the approved notes to all existing locales.
 ### Translation Rules
 
 - Use formal register and formal "you" forms (Russian: вы, German: Sie, French: vous, Spanish: usted, Dutch: u, Italian: Lei)
-- Adapt tone to local market — playful English may need adjustment for formal markets (ja, de-DE)
-- Do NOT literally translate idioms — adapt them to local equivalents
+- Adapt tone to local market, playful English may need adjustment for formal markets (ja, de-DE)
+- Do NOT literally translate idioms, adapt them to local equivalents
 - A playful tone in English may need to be more respectful or formal in other cultures
 
 ### Locale-Specific Keyword Echo
@@ -119,7 +119,7 @@ For each locale:
 
 - All translations must be ≤ 4,000 characters
 - Promotional text must be ≤ 170 characters per locale
-- If a translation exceeds the limit, shorten it — never truncate mid-sentence
+- If a translation exceeds the limit, shorten it, never truncate mid-sentence
 
 ## Phase 4: Review & Upload
 
@@ -130,8 +130,8 @@ Show a table of all locales with their notes and character counts:
 ```
 | Locale | What's New (first 80 chars...) | Chars | Promo Text | Chars |
 |--------|-------------------------------|-------|------------|-------|
-| en-US  | Search just got faster — ...   | 847   | New sleep… | 142   |
-| ar-SA  | البحث أصبح أسرع — ...           | 923   | نوم جديد…  | 138   |
+| en-US  | Search just got faster, ...   | 847   | New sleep… | 142   |
+| ar-SA  | البحث أصبح أسرع, ...           | 923   | نوم جديد…  | 138   |
 | ...    | ...                           | ...   | ...        | ...   |
 ```
 
@@ -170,10 +170,10 @@ On partial upload failure:
 
 ## Notes
 
-- What's New is **not indexed** for App Store search — write for humans, not algorithms.
+- What's New is **not indexed** for App Store search, write for humans, not algorithms.
 - Promotional text is the only metadata field updatable without a new submission.
 - The 170-char visible window is the most important part of your release notes.
-- Each app update triggers algorithm re-evaluation — the act of updating matters, even if the text doesn't affect ranking.
+- Each app update triggers algorithm re-evaluation, the act of updating matters, even if the text doesn't affect ranking.
 - Ideal update cadence: every 2-4 weeks.
 - For full metadata translation (all fields), use `asc-localize-metadata` instead.
 - For keyword research and optimization, use [ASO audit](aso-audit.md) first.

@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 #
-# Marketing screenshot capture — builds once, installs to a simulator,
+# Marketing screenshot capture, builds once, installs to a simulator,
 # then relaunches the binary per locale with -MarketingCapture 1 and
 # pulls PNGs from the app sandbox into ./marketing/<locale>/.
 #
-# TEMPLATE — replace the values in the configuration block below.
+# TEMPLATE, replace the values in the configuration block below.
 # The rest of the script is generic and should work for any SwiftUI app.
 
 set -euo pipefail
 
 # ============================================================================
-# CONFIGURATION — edit these for your project
+# CONFIGURATION, edit these for your project
 # ============================================================================
 
 LOCALES=(en de es fr ja)         # language codes from Localizable.xcstrings
@@ -22,7 +22,7 @@ SIM_NAME="iPhone 17"             # simulator device name
 TIMEOUT=90                       # seconds to wait per locale before failing
 
 # ============================================================================
-# INTERNALS — no edits needed below this line
+# INTERNALS, no edits needed below this line
 # ============================================================================
 
 DERIVED="build/marketing-dd"
@@ -101,7 +101,7 @@ for L in "${LOCALES[@]}"; do
     xcrun simctl terminate "$DEVICE_ID" "$BUNDLE_ID" 2>/dev/null || true
     sleep 0.5
 
-    # Clear any prior sandbox output for this locale — the _done sentinel
+    # Clear any prior sandbox output for this locale, the _done sentinel
     # check needs to be unambiguous between runs.
     SBOX=$(xcrun simctl get_app_container "$DEVICE_ID" "$BUNDLE_ID" data)
     rm -rf "$SBOX/Documents/marketing/$L"

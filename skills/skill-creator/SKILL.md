@@ -50,12 +50,12 @@ It's OK to briefly explain terms if you're in doubt, and feel free to clarify te
 
 The agents/ directory contains instructions for specialized subagents. Read them when you need to spawn the relevant subagent.
 
-- `agents/grader.md` — How to evaluate assertions against outputs
-- `agents/comparator.md` — How to do blind A/B comparison between two outputs
-- `agents/analyzer.md` — How to analyze why one version beat another
+- `agents/grader.md`, How to evaluate assertions against outputs
+- `agents/comparator.md`, How to do blind A/B comparison between two outputs
+- `agents/analyzer.md`, How to analyze why one version beat another
 
 The references/ directory has additional documentation:
-- `references/schemas.md` — JSON structures for evals.json, grading.json, etc.
+- `references/schemas.md`, JSON structures for evals.json, grading.json, etc.
 
 ## Task references
 

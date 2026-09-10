@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ios-release — manifest-driven helper for the release-ios-app skill.
+# ios-release, manifest-driven helper for the release-ios-app skill.
 # Reads the repo-owned .ios-release.env and reports release readiness signals.
 # Heavy lifting (build/sign/upload/submit) stays in repo scripts and asc/eas/xcodebuild.
 
@@ -83,10 +83,10 @@ cmd_status() {
     if version_gt "$cur" "$live"; then
       echo "gate:          OK ($cur > $live)"
     else
-      echo "gate:          BLOCKED ($cur is not > live $live — bump before pushing the release train)"
+      echo "gate:          BLOCKED ($cur is not > live $live, bump before pushing the release train)"
     fi
   else
-    echo "gate:          (skipped — missing current or live version)"
+    echo "gate:          (skipped, missing current or live version)"
   fi
   [[ -n "${IOS_RELEASE_NOTES_FILE:-}" ]] && echo "repo notes:    $IOS_RELEASE_NOTES_FILE (read before release moves)"
   return 0

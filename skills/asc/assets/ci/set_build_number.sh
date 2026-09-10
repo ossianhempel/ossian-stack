@@ -2,7 +2,7 @@
 # CI build-number strategy: CI_BUILD_NUMBER + buildNumberOffset (converged standard).
 #
 # Xcode Cloud injects a monotonic integer CI_BUILD_NUMBER per workflow run, so
-# CFBundleVersion is unique without any external dependency — no asc CLI, no
+# CFBundleVersion is unique without any external dependency, no asc CLI, no
 # ASC_* creds, no network round-trip to fail on. We write it straight into the
 # committed .pbxproj (Xcode Cloud builds the checked-in project as-is).
 #
@@ -16,7 +16,7 @@
 set -eu
 
 if [ "${CI_XCODE_CLOUD:-false}" != "true" ] && [ "${CI:-false}" != "TRUE" ]; then
-  echo "Not in Xcode Cloud — skipping build-number sync."
+  echo "Not in Xcode Cloud, skipping build-number sync."
   exit 0
 fi
 

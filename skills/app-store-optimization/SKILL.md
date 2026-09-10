@@ -41,7 +41,7 @@ Choose the platform and research question first. Use `asc` for App Store Connect
 | iOS keyword changes | Require app submission |
 | iOS promotional text | Editable without an app update |
 | Android metadata changes | Index in 1-2 hours |
-| Android keyword field | None — use description instead (see Google Play Specifics) |
+| Android keyword field | None, use description instead (see Google Play Specifics) |
 | Android ratings | Continuous, never reset per version |
 | Android A/B testing | Play Store Experiments, up to 3 variants, 7-day min |
 | Keyword volume data | Estimates only; no official source |

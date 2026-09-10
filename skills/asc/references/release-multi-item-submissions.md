@@ -46,7 +46,7 @@ Branch before writing:
 asc review submissions-create --app "APP_ID" --platform IOS --output json
 ```
 
-- Otherwise—when drafts are ambiguous or the intended version or review items belong to another active submission—stop and diagnose through [submission health](submission-health.md). Do not create a second submission.
+- Otherwise, when drafts are ambiguous or the intended version or review items belong to another active submission, stop and diagnose through [submission health](submission-health.md). Do not create a second submission.
 
 Use the reused or newly created ID as `SUBMISSION_ID` below. If neither branch assigned one, do not continue.
 

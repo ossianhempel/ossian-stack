@@ -48,7 +48,7 @@ shape is already clear and local.
 ## 3. Name the target shape before moving
 
 State what the module layout, types, and call graph should be if this were built
-today — the `principle-redesign-from-first-principles` shape, where the new
+today, the `principle-redesign-from-first-principles` shape, where the new
 requirement reads as if it had been there on day one. Write it down before the
 first move, so the moves have something to aim at and you can tell when you have
 arrived.
@@ -101,7 +101,7 @@ leaves the code equally hard to read has spent risk for nothing.
 ## 8. Commit in ordered slices
 
 When commits and history edits are authorized, arrange small commits that tell the story: the subtraction, then the
-reshape, then any follow-on cleanup — so a single revert undoes one slice. Each
+reshape, then any follow-on cleanup, so a single revert undoes one slice. Each
 slice is behavior-preserving and green before the next begins.
 
 ## Reply

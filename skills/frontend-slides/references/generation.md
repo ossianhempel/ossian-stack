@@ -6,7 +6,7 @@ Read for creating the HTML deck in the chosen style. Follow the scope and safety
 
 Generate the full presentation using content from Phase 1 (text, or text + curated images) and style from Phase 2.
 
-If images were provided, the slide outline already incorporates them from Step 1.2. If not, CSS-generated visuals (gradients, shapes, patterns) provide visual interest — this is a fully supported first-class path.
+If images were provided, the slide outline already incorporates them from Step 1.2. If not, CSS-generated visuals (gradients, shapes, patterns) provide visual interest, this is a fully supported first-class path.
 
 Apply the user's density choice throughout the deck:
 
@@ -36,15 +36,15 @@ If the user selected a self-generated custom wildcard, treat that preview's CSS 
 
 **Before generating, read these supporting files:**
 
-- [html-template.md](../html-template.md) — HTML architecture and JS features
-- [viewport-base.css](../viewport-base.css) — Mandatory CSS (include in full)
-- [animation-patterns.md](../animation-patterns.md) — Animation reference for the chosen feeling
+- [html-template.md](../html-template.md), HTML architecture and JS features
+- [viewport-base.css](../viewport-base.css), Mandatory CSS (include in full)
+- [animation-patterns.md](../animation-patterns.md), Animation reference for the chosen feeling
 
 **Key requirements:**
 
 - Single self-contained HTML file, all CSS/JS inline
 - Include the FULL contents of viewport-base.css in the `<style>` block
-- Use fonts from Fontshare or Google Fonts — never system fonts
+- Use fonts from Fontshare or Google Fonts, never system fonts
 - Add detailed comments explaining each section
 - Every section needs a clear `/* === SECTION NAME === */` comment block
 

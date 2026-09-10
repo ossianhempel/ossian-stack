@@ -7,7 +7,7 @@ When available, include Apple-generated app tags as a discoverability signal.
 
 - Metadata pulled locally into canonical files via `asc metadata pull --app "APP_ID" --version "1.2.3" --dir "./metadata"`.
 - If metadata came from `asc migrate export` or `asc localizations download`, normalize it into the canonical `./metadata` layout before running this skill.
-- For Astro gap analysis: app tracked in Astro MCP (optional — offline checks run without it).
+- For Astro gap analysis: app tracked in Astro MCP (optional, offline checks run without it).
 - For Apple-generated discoverability tags: `asc app-tags list --app "APP_ID" --output json` works when the API returns tags for the app.
 
 ## Before You Start
@@ -28,11 +28,11 @@ Run these 5 checks against the local metadata directory. No network calls requir
 
 ### 1. Keyword Waste
 
-Tokenize the `subtitle` field (and `name` if available). Flag any token that also appears in the `keywords` field — it is already indexed and wastes keyword budget.
+Tokenize the `subtitle` field (and `name` if available). Flag any token that also appears in the `keywords` field, it is already indexed and wastes keyword budget.
 
 ```
 Severity: ⚠️ Warning
-Example:  "quran" appears in subtitle AND keywords — remove from keywords to free 6 characters
+Example:  "quran" appears in subtitle AND keywords, remove from keywords to free 6 characters
 ```
 
 How to check:
@@ -40,7 +40,7 @@ How to check:
 2. Read `metadata/version/{latest-version}/{locale}.json` for `keywords`
 3. Tokenize subtitle (+ name):
    - **Latin/Cyrillic scripts:** split by whitespace, strip leading/trailing punctuation, lowercase
-   - **Chinese/Japanese/Korean:** split by `、` `，` `,` or iterate characters — each character or character-group is a token. Whitespace tokenization does not work for CJK.
+   - **Chinese/Japanese/Korean:** split by `、` `，` `,` or iterate characters, each character or character-group is a token. Whitespace tokenization does not work for CJK.
    - **Arabic:** split by whitespace, then also generate prefix-stripped variants (remove ال prefix) since Apple likely normalizes definite articles. For example, "القرآن" in subtitle should flag both "القرآن" and "قرآن" in keywords.
 4. Split keywords by comma, trim whitespace, lowercase
 5. Report intersection (including fuzzy matches from prefix stripping)
@@ -97,14 +97,14 @@ Flag fields using less than their recommended minimum:
 
 ```
 Severity: ⚠️ Warning
-Example:  keywords is 62/100 characters (62%) — 38 characters of indexing opportunity unused
+Example:  keywords is 62/100 characters (62%), 38 characters of indexing opportunity unused
 ```
 
 ### 3. Missing Fields
 
 Flag empty or missing required fields: `subtitle`, `keywords`, `description`, `whatsNew`.
 
-Note: `name` may not be in the export — only flag it if the app-info JSON explicitly contains a `name` key with an empty value.
+Note: `name` may not be in the export, only flag it if the app-info JSON explicitly contains a `name` key with an empty value.
 
 ```
 Severity: ❌ Error
@@ -120,16 +120,16 @@ Check the `keywords` field for formatting issues:
 
 ```
 Severity: ❌ Error
-Example:  keywords contain spaces after commas — wastes 3 characters
+Example:  keywords contain spaces after commas, wastes 3 characters
 ```
 
 ### 5. Cross-Locale Keyword Gaps
 
-Compare `keywords` fields across all available locales. Flag locales where keywords are identical to the primary locale (`en-US` by default) — this usually means they were not localized.
+Compare `keywords` fields across all available locales. Flag locales where keywords are identical to the primary locale (`en-US` by default), this usually means they were not localized.
 
 ```
 Severity: ⚠️ Warning
-Example:  ar keywords identical to en-US — likely not localized for Arabic market
+Example:  ar keywords identical to en-US, likely not localized for Arabic market
 ```
 
 How to check:
@@ -139,7 +139,7 @@ How to check:
 
 ### 6. Description Keyword Coverage
 
-Check whether keywords appear naturally in the `description` field. While Apple does **not** index descriptions for search, users who see their search terms reflected in the description are more likely to download — this improves conversion rate, which indirectly boosts rankings.
+Check whether keywords appear naturally in the `description` field. While Apple does **not** index descriptions for search, users who see their search terms reflected in the description are more likely to download, this improves conversion rate, which indirectly boosts rankings.
 
 ```
 Severity: 💡 Info
@@ -150,12 +150,12 @@ How to check:
 1. Load `keywords` and `description` for each locale
 2. For each keyword, check if it appears as a substring in the description (case-insensitive)
 3. Account for inflected forms: Arabic root matches, verb conjugations (e.g., "memorizar" ≈ "memorices"), and case declensions (e.g., Russian "сура" ≈ "суры")
-4. Report missing keywords per locale — recommend weaving them naturally into existing sentences
-5. Do NOT flag: Latin-script keywords in non-Latin descriptions (e.g., "quran" in Cyrillic text) — these target separate search paths
+4. Report missing keywords per locale, recommend weaving them naturally into existing sentences
+5. Do NOT flag: Latin-script keywords in non-Latin descriptions (e.g., "quran" in Cyrillic text), these target separate search paths
 
 ## Phase 2: Astro MCP Keyword Gap Analysis
 
-If Astro MCP is available and the app is tracked, run keyword gap analysis. **Run this per store/locale, not just for the US store** — keyword popularity varies dramatically across markets.
+If Astro MCP is available and the app is tracked, run keyword gap analysis. **Run this per store/locale, not just for the US store**, keyword popularity varies dramatically across markets.
 
 ### Steps
 
@@ -163,7 +163,7 @@ If Astro MCP is available and the app is tracked, run keyword gap analysis. **Ru
 
 2. **Check multi-store tracking**: Query existing tracking for each locale's App Store territory. Report untracked stores as unavailable and continue the audit. Use `add_keywords` only when the user separately authorizes tracking setup; empty rankings for an untracked store do not prove poor performance.
 
-3. **Extract competitor keywords**: Call `extract_competitors_keywords` with 3-5 top competitor app IDs to find keyword gaps. This is the highest-value Astro tool — it reveals keywords competitors rank for that you don't. Run this per store when possible.
+3. **Extract competitor keywords**: Call `extract_competitors_keywords` with 3-5 top competitor app IDs to find keyword gaps. This is the highest-value Astro tool, it reveals keywords competitors rank for that you don't. Run this per store when possible.
 
 4. **Get suggestions**: Call `get_keyword_suggestions` with the app ID for additional recommendations based on category analysis.
 
@@ -223,16 +223,16 @@ Present results as a single audit report. The report covers only the latest vers
 
 #### Recommendations
 
-1. [Highest priority action — errors first]
-2. [Next priority — keyword waste]
+1. [Highest priority action, errors first]
+2. [Next priority, keyword waste]
 3. [Utilization improvements]
 4. [Keyword gap opportunities]
 ```
 
 ## Notes
 
-- Offline checks work without any network access — they read local files only.
-- Astro gap analysis is additive — the audit is useful even without it.
+- Offline checks work without any network access, they read local files only.
+- Astro gap analysis is additive, the audit is useful even without it.
 - Run this skill after `asc metadata pull` to ensure canonical metadata files are current.
 - For keyword-only follow-up after the audit, prefer the canonical keyword workflow:
   - `asc metadata keywords diff --app "APP_ID" --version "1.2.3" --dir "./metadata"`

@@ -1,5 +1,5 @@
 # shellcheck shell=sh
-# asc-version-lib.sh — shared version/build-number helpers for the ASC release guard.
+# asc-version-lib.sh, shared version/build-number helpers for the ASC release guard.
 #
 # POSIX sh. Source it; do not execute. Every per-repo script (local pre-push
 # check + Xcode Cloud CI scripts) sources this single file so the
@@ -19,7 +19,7 @@ asc_require_tool() {
   command -v "$1" >/dev/null 2>&1 || asc_fail "Missing required tool: $1"
 }
 
-# asc_find_root <start_dir> — walk up from start_dir until .asc-release.json
+# asc_find_root <start_dir>, walk up from start_dir until .asc-release.json
 # is found; print that dir. Robust regardless of how deep the CI scripts nest.
 asc_find_root() {
   _dir="$1"
@@ -30,7 +30,7 @@ asc_find_root() {
   asc_fail "Could not find .asc-release.json walking up from $1"
 }
 
-# asc_cfg <root_dir> <json_key> — read a top-level string key from .asc-release.json.
+# asc_cfg <root_dir> <json_key>, read a top-level string key from .asc-release.json.
 # Array keys (protectedBranches) print space-separated.
 asc_cfg() {
   _root="$1"; _key="$2"
@@ -48,7 +48,7 @@ print(" ".join(val) if isinstance(val, list) else val)
 PY
 }
 
-# asc_cfg_opt <root_dir> <json_key> <default> — like asc_cfg but returns
+# asc_cfg_opt <root_dir> <json_key> <default>, like asc_cfg but returns
 # <default> when the key is absent (for optional fields like buildNumberOffset).
 asc_cfg_opt() {
   _root="$1"; _key="$2"; _default="$3"
@@ -64,7 +64,7 @@ print(" ".join(val) if isinstance(val, list) else val)
 PY
 }
 
-# asc_validate_shape <version> — must look like 1.2 or 1.2.3.
+# asc_validate_shape <version>, must look like 1.2 or 1.2.3.
 asc_validate_shape() {
   printf '%s' "$1" | grep -Eq '^[0-9]+(\.[0-9]+){1,2}$' \
     || asc_fail "Version must look like 1.2 or 1.2.3, got: $1"
@@ -77,7 +77,7 @@ asc_normalize() {
   printf '%s %s %s\n' "${1:-0}" "${2:-0}" "${3:-0}"
 }
 
-# asc_compare <left> <right> — prints -1 / 0 / 1 for left<right / == / left>right.
+# asc_compare <left> <right>, prints -1 / 0 / 1 for left<right / == / left>right.
 asc_compare() {
   set -- $(asc_normalize "$1") $(asc_normalize "$2")
   _lM="$1"; _lm="$2"; _lp="$3"; _rM="$4"; _rm="$5"; _rp="$6"
@@ -90,7 +90,7 @@ asc_compare() {
   echo 0
 }
 
-# asc_marketing_version_from_yml <project.yml> — first MARKETING_VERSION: "x.y.z".
+# asc_marketing_version_from_yml <project.yml>, first MARKETING_VERSION: "x.y.z".
 asc_marketing_version_from_yml() {
   sed -nE 's/^[[:space:]]*MARKETING_VERSION:[[:space:]]*"([^"]+)".*/\1/p' "$1" | head -n 1
 }
@@ -98,8 +98,8 @@ asc_marketing_version_from_yml() {
 # asc_live_app_store_version <apple_id> <country>
 # Prints the live App Store version. Empty output with exit 0 means the app is
 # genuinely not live yet (a successful lookup that returned zero results).
-# Returns 2 on a hard lookup failure — network/HTTP error or an unparsable
-# response — so strict callers can fail closed instead of mistaking an outage
+# Returns 2 on a hard lookup failure, network/HTTP error or an unparsable
+# response, so strict callers can fail closed instead of mistaking an outage
 # for "no live version yet".
 asc_live_app_store_version() {
   asc_require_tool curl

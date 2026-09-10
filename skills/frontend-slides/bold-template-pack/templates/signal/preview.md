@@ -17,13 +17,13 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Density: high
 - Scheme: mixed
 - Best for: Anything that should feel weighty, considered, and credibly institutional: investor decks, board presentations, consulting deliverables, legal / policy briefs, advisory pitches. Also a strong choice for tech, research, or brand work that wants to read as quietly authoritative rather than loud.
-- Avoid for: Contexts that should feel hot, fast, or intentionally playful — the navy + gold restraint commits to a sober voice.
+- Avoid for: Contexts that should feel hot, fast, or intentionally playful, the navy + gold restraint commits to a sober voice.
 
 ## Visual Snapshot
 
-A literary editorial presentation system in the spirit of a long-form magazine — The Economist's restraint crossed with a private intelligence briefing. Source Serif 4 carries every headline with roman/italic mixing mid-sentence in antique gold, DM Sans steps back for body, and IBM Plex Mono runs all the timestamps, kickers, and chrome. The dual surface system is warm cream paper (#F0ECE3) and deep editorial navy (#1C2644), connected by a single hot accent — antique gold (#C8A870) — used only on rules, italic emphasis, and numerical figures. A near-invisible 80px grid texture overlays every dark slide as a fingerprint. The effect is sober, considered, and a little bit aristocratic.
+A literary editorial presentation system in the spirit of a long-form magazine, The Economist's restraint crossed with a private intelligence briefing. Source Serif 4 carries every headline with roman/italic mixing mid-sentence in antique gold, DM Sans steps back for body, and IBM Plex Mono runs all the timestamps, kickers, and chrome. The dual surface system is warm cream paper (#F0ECE3) and deep editorial navy (#1C2644), connected by a single hot accent, antique gold (#C8A870), used only on rules, italic emphasis, and numerical figures. A near-invisible 80px grid texture overlays every dark slide as a fingerprint. The effect is sober, considered, and a little bit aristocratic.
 
-Signal is a literary editorial presentation system — what a long-form intelligence briefing or a quarterly review from a serious magazine would look like if it ran as a deck. The visual premise is the marriage of two faces: a Scottish-roast editorial serif (Source Serif 4) carrying the voice, and a precision grotesque (DM Sans) carrying the substance, with a condensed monospace (IBM Plex Mono) for every timestamp, kicker, and piece of chrome metadata. The result reads like a quiet authority — the deck does not need to shout because the typography already telegraphs seriousness.
+Signal is a literary editorial presentation system, what a long-form intelligence briefing or a quarterly review from a serious magazine would look like if it ran as a deck. The visual premise is the marriage of two faces: a Scottish-roast editorial serif (Source Serif 4) carrying the voice, and a precision grotesque (DM Sans) carrying the substance, with a condensed monospace (IBM Plex Mono) for every timestamp, kicker, and piece of chrome metadata. The result reads like a quiet authority, the deck does not need to shout because the typography already telegraphs seriousness.
 
 ## Preview Ingredients
 
@@ -31,7 +31,7 @@ Signal is a literary editorial presentation system — what a long-form intellig
 - Typography: Source Serif 4; DM Sans; IBM Plex Mono; {typography.label.fontFamily}
 - Signature move: Source Serif 4 carries every headline with a roman/italic mix mid-sentence; italics in headlines are always gold.
 - Signature move: DM Sans for body and IBM Plex Mono for every timestamp, kicker, label, and chrome element.
-- Signature move: Dual surfaces — {colors.navy} (dark) and {colors.cream} (light) — used interchangeably, never blended in the same slide except in special split layouts.
+- Signature move: Dual surfaces, {colors.navy} (dark) and {colors.cream} (light), used interchangeably, never blended in the same slide except in special split layouts.
 - Signature move: Antique gold ({colors.gold}) is the only accent. It marks rules, italic emphasis, and numerical figures, and appears nowhere else.
 - Signature move: Hairline 1px borders in {colors.border-dark} / {colors.border-light} separate every region. No card chrome, no rounded panels.
 

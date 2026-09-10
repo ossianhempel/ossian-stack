@@ -10,12 +10,12 @@ Analyze the user's app codebase to understand what it does and who it's for.
 
 Look at:
 - The project's active instructions already in context, README, marketing copy or App Store metadata
-- UI files, views, screens, components — what can the user DO in this app?
-- Models and data structures — what domain does this operate in?
+- UI files, views, screens, components, what can the user DO in this app?
+- Models and data structures, what domain does this operate in?
 - Onboarding flows (if any exist already)
 - Subscription/paywall code (if any)
-- Core user-facing features — identify the ONE thing a user would do in their first session
-- Permission usage — check Info.plist (iOS), AndroidManifest.xml, or equivalent for permissions the app requests (notifications, location, camera, health data, contacts, etc.)
+- Core user-facing features, identify the ONE thing a user would do in their first session
+- Permission usage, check Info.plist (iOS), AndroidManifest.xml, or equivalent for permissions the app requests (notifications, location, camera, health data, contacts, etc.)
 
 Build a mental model of:
 - **What the app does** (core functionality in one sentence)
@@ -23,7 +23,7 @@ Build a mental model of:
 - **The core loop** (the repeated action that makes the app valuable)
 - **The "aha moment"** (when a new user first experiences value)
 - **Existing paywall/subscription** (present or not, type, pricing)
-- **Permissions required** (notifications, location, camera, health, etc. — detected from the codebase)
+- **Permissions required** (notifications, location, camera, health, etc., detected from the codebase)
 
 ### Step 2: Ask the User Clarifying Questions
 
@@ -60,10 +60,10 @@ Work with the user to articulate:
 ### Step 2: Extract the Core Benefit Statements
 
 From the transformation, extract 3-5 benefit statements. These must:
-1. **Be specific and measurable where possible** — "Save 2 hours a week on meal planning" not "Save time"
+1. **Be specific and measurable where possible**, "Save 2 hours a week on meal planning" not "Save time"
 2. **Address a real pain point from the BEFORE state**
 3. **Lead with what the USER gets**, not what the app does
-4. **Be believable** — stretch goals are fine, fantasy is not
+4. **Be believable**, stretch goals are fine, fantasy is not
 
 Present this for confirmation only when the transformation story is a new unresolved design choice:
 
@@ -74,9 +74,9 @@ BEFORE: [1-2 sentences describing the frustration]
 AFTER: [1-2 sentences describing the outcome]
 
 Core benefits:
-1. [Benefit] — addresses [pain point]
-2. [Benefit] — addresses [pain point]
-3. [Benefit] — addresses [pain point]
+1. [Benefit], addresses [pain point]
+2. [Benefit], addresses [pain point]
+3. [Benefit], addresses [pain point]
 ```
 
 ---

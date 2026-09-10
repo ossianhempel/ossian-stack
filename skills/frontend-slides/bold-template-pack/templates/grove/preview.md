@@ -17,7 +17,7 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Density: medium
 - Scheme: mixed
 - Best for: Anything that should feel organic, considered, and grown-up: sustainability and wellness brands, outdoor / nature products, wineries and restaurants, literary or arts decks, advisory deliverables, bilingual EN/CN reports. Also a calm, distinctive choice for tech, research, or business decks that want patience over urgency.
-- Avoid for: Decks that need neon energy or rapid-fire pop — the forest-green canvas and Playfair serif commit to a slow, classical voice.
+- Avoid for: Decks that need neon energy or rapid-fire pop, the forest-green canvas and Playfair serif commit to a slow, classical voice.
 
 ## Visual Snapshot
 
@@ -29,11 +29,11 @@ Grove is a quiet, editorial-serif presentation system in the register of a liter
 
 - Palette: bg #192B1B; bg-alt #1E3221; bg-light #E8E4D6; bg-light-alt #DEDAD0; fg #D4CFBF; fg-light #192B1B; accent #C8524A
 - Typography: See full design doc after selection.
-- Signature move: Playfair Display at weight 400 carries every headline, every quote, every stat figure, and every watermark numeral. Bold serif is not permitted — the no-bold rule is the system's most important typographic commitment. Italicized Playfair in {colors.accent} co...
-- Signature move: Jost at weight 300 carries every paragraph and bullet body. The light weight is the "good paper" feel — it sits back and lets the serif lead.
+- Signature move: Playfair Display at weight 400 carries every headline, every quote, every stat figure, and every watermark numeral. Bold serif is not permitted, the no-bold rule is the system's most important typographic commitment. Italicized Playfair in {colors.accent} co...
+- Signature move: Jost at weight 300 carries every paragraph and bullet body. The light weight is the "good paper" feel, it sits back and lets the serif lead.
 - Signature move: JetBrains Mono at weight 300 carries every label, kicker, footline, slide counter, and stat caption. Always uppercase, always with at least 0.12em letter-spacing.
-- Signature move: Noto Serif SC / Noto Sans SC at weight 300–500 are loaded as Chinese fallbacks for every role. The deck is built bilingually-aware — Chinese characters render through the Noto cuts when present in the content.
-- Signature move: Playfair Display at weight 400 — never bold — for every serif moment. Italic in {colors.accent} is the headline accent.
+- Signature move: Noto Serif SC / Noto Sans SC at weight 300–500 are loaded as Chinese fallbacks for every role. The deck is built bilingually-aware, Chinese characters render through the Noto cuts when present in the content.
+- Signature move: Playfair Display at weight 400, never bold, for every serif moment. Italic in {colors.accent} is the headline accent.
 
 ## International / CJK Preview Note
 

@@ -57,7 +57,7 @@ Read for persuasive acquisition copy and its craft tests. Follow the scope and s
 11. **The tool, not the pitch.** For organic short-form content (Reels,
     TikTok, UGC ads), the highest-converting frame is showing the product
     being *used* inside a real moment, not pitching it. The best calorie
-    tracker content isn't "download this amazing app" — it's a creator
+    tracker content isn't "download this amazing app", it's a creator
     filming their lunch and saying "let me see how many calories are in
     this." The app is the tool that solves the moment. The viewer's
     download intent comes from self-projection ("I want to do that too"),

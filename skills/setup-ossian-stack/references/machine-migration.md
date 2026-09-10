@@ -10,7 +10,7 @@ Report what is actually there. Do not assume any of it.
 - **Which plugins are registered and enabled** in each, and their versions.
 - **Whether this plugin is loaded and enabled** in each detected runtime, and at
   which version.
-- **Skill directories the user maintains by hand** — a global skills folder full
+- **Skill directories the user maintains by hand**, a global skills folder full
   of symlinks into another checkout is the pattern this plugin exists to replace,
   and it will keep shadowing the installed copy until it is cleared.
 - **Superseded plugins.** Anything shipping a skill name this plugin also ships is
@@ -26,7 +26,7 @@ Present this as a short table before proposing anything.
 One confirmation per item, each naming exactly what disappears.
 
 - **Superseded plugins**: uninstall through the runtime's own interface. Never
-  delete a plugin's cache directory by hand — that is runtime-owned state and it
+  delete a plugin's cache directory by hand, that is runtime-owned state and it
   comes back on the next update.
 - **Hand-maintained symlinks**: list them, say what each points at, and remove
   only the ones this plugin now supersedes. A symlink pointing somewhere this

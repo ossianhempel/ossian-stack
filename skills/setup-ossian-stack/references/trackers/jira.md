@@ -62,7 +62,7 @@ curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" \
 curl -s -u "$JIRA_EMAIL:$JIRA_API_TOKEN" "$JIRA_BASE_URL/rest/api/3/issue/<KEY>-123/comment" | jq
 ```
 
-Issue bodies use Atlassian Document Format (ADF) — build descriptions as
+Issue bodies use Atlassian Document Format (ADF), build descriptions as
 `{"type":"doc","version":1,"content":[...]}`, not plain strings.
 
 ## Writing
@@ -70,13 +70,13 @@ Issue bodies use Atlassian Document Format (ADF) — build descriptions as
 Only when the user explicitly asked for a ticket to be created or mutated.
 
 - **Create**: `POST /rest/api/3/issue` with `{"fields":{"project":{"key":"<KEY>"},"issuetype":{"name":"Story"},"summary":"...","description":<ADF>}}`.
-  Read the live issue types first — projects differ (`Story` may not exist; `Task`
+  Read the live issue types first, projects differ (`Story` may not exist; `Task`
   is the usual fallback). Honour an explicitly requested type.
 - **Comment**: `POST /rest/api/3/issue/<KEY>-123/comment` with an ADF body.
-- **Transition (never a field write)**: transition IDs are workflow-specific —
+- **Transition (never a field write)**: transition IDs are workflow-specific,
   discover per issue with `GET /rest/api/3/issue/<KEY>-123/transitions`, then
   `POST /rest/api/3/issue/<KEY>-123/transitions` with `{"transition":{"id":"<id>"}}`.
-- **Labels**: Jira replaces the whole label array on update — read the current
+- **Labels**: Jira replaces the whole label array on update, read the current
   labels, merge, write back. Labels are a shared project-wide vocabulary: a new
   string becomes permanent the moment a write succeeds. Check existing labels
   first and obtain explicit user authorization naming any new value before its
@@ -91,7 +91,7 @@ does not grant administrative vocabulary or schema changes.
 ## Ticket keys downstream
 
 Branches, commits, and PR titles carry the key: `<key>/aiescp-1234-slug` style,
-e.g. `feature/KEY-1234-slug` and `KEY-1234: Title Case Description` — adapt to the
+e.g. `feature/KEY-1234-slug` and `KEY-1234: Title Case Description`, adapt to the
 project's git conventions.
 
 ## When a skill says "publish to the issue tracker"

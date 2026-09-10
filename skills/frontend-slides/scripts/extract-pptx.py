@@ -93,4 +93,4 @@ if __name__ == "__main__":
     print(f"Extracted {len(slides)} slides to {output_path}")
     for s in slides:
         img_count = len(s["images"])
-        print(f"  Slide {s['number']}: {s['title'] or '(no title)'} — {img_count} image(s)")
+        print(f"  Slide {s['number']}: {s['title'] or '(no title)'}, {img_count} image(s)")

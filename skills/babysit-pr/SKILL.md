@@ -54,7 +54,7 @@ Babysitting fails the same few ways every time. Each step below exists because t
    is not permission. Handle reviews started independently; retrigger only when the
    user explicitly asks for another review.
 
-   Stop at `READY` for one PR (single or stack mode). Queued mode never emits `READY`; a blocker-free frontier is a non-terminal `WAITING` with reason `merge-queue`. Report that frontier merge-ready and stop the watcher. Do not leave it running until merges happen — that is Shipping's job. If another actor merges the frontier and the watcher reports `ADVANCE`, continue with the new frontier. `COMPLETE` is also terminal if another actor finishes the queue.
+   Stop at `READY` for one PR (single or stack mode). Queued mode never emits `READY`; a blocker-free frontier is a non-terminal `WAITING` with reason `merge-queue`. Report that frontier merge-ready and stop the watcher. Do not leave it running until merges happen, that is Shipping's job. If another actor merges the frontier and the watcher reports `ADVANCE`, continue with the new frontier. `COMPLETE` is also terminal if another actor finishes the queue.
 
    Watcher re-arms never authorize merging or arming merge-when-ready. Do not merge through any interface or run `gh pr merge` unless the user explicitly asked to merge, land, ship, or merge when ready. Stop and hand it back to the user; landing is their call, not this skill's. A stacked PR whose parent has no required checks may merge immediately into that parent when merge-when-ready is armed. This collapses review granularity. A lost-ref race can also mark it merged without updating the parent ref.
 

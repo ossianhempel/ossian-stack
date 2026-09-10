@@ -4,7 +4,7 @@ Research by [DesignerAnts](https://www.designerants.com) on screenshot copy that
 
 ## The 70/30 Rule
 
-**70% of screenshot effectiveness comes from the text overlay** — not the UI. One app saw an **80% conversion lift** just from rewriting the copy on existing screenshots.
+**70% of screenshot effectiveness comes from the text overlay**, not the UI. One app saw an **80% conversion lift** just from rewriting the copy on existing screenshots.
 
 Your UI is evidence. Your text is the argument.
 
@@ -42,19 +42,19 @@ Cover your UI with your hand and read only the text. Does it tell a story? Or do
 
 Your screenshots should only make sense in order. If they work in any sequence, you have a catalog, not a story.
 
-### Screenshot 1 — Name the Pain
+### Screenshot 1, Name the Pain
 Their frustration, **before** they found you.
 > "Buried in notes you'll never find again?"
 
-### Screenshot 2 — State the Shift
+### Screenshot 2, State the Shift
 What changes **when they use** your app.
 > "Everything you capture, organized automatically."
 
-### Screenshot 3 — Show Proof
+### Screenshot 3, Show Proof
 Numbers, users, concrete result.
 > "Used by 10,000 developers every day."
 
-### Screenshots 4–5 — Feature Delivery
+### Screenshots 4–5, Feature Delivery
 The one or two capabilities that actually deliver the promise from Screenshot 2.
 
 **Each screenshot does one job. One message.** If it needs two sentences to explain, split it into two screens.
@@ -78,7 +78,7 @@ Write the headline for each screenshot **before** designing the screen. If you c
 - No clear user pain or motivation
 - Nothing grabs attention or stops the scroll
 - Assumes the user already understands why this matters
-- Described the product—but didn't sell it
+- Described the product, but didn't sell it
 
 **The rewrite (outcomes):**
 - Stop Designing Slides. Write notes. Start presenting.
@@ -90,7 +90,7 @@ Write the headline for each screenshot **before** designing the screen. If you c
 - Leads with outcome, not implementation
 - Makes sense instantly (even to non-users)
 - Connects to real pain: time, focus, clarity
-- Uses the feature as support—not the headline
+- Uses the feature as support, not the headline
 
 ## Quick Checklist
 

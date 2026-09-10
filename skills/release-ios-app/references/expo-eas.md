@@ -1,4 +1,4 @@
-# Expo build & submit — EAS
+# Expo build & submit, EAS
 
 For repos with `IOS_RELEASE_BUILD_SYSTEM="eas"` (GainsLog and other Expo apps). iOS and
 Android share a single `expo.version`.
@@ -11,18 +11,18 @@ Android share a single `expo.version`.
 ## Release notes
 
 - Prefer the CI release-notes artifact (GitHub Actions) when on the release branch. Fallback: the repo's local changelog command (e.g. `pnpm run changelog:release`).
-- If production tags are stale, do not paste generated notes verbatim — derive "What's New" from the actual commits since the last submitted App Store version, then run `asc`.
+- If production tags are stale, do not paste generated notes verbatim, derive "What's New" from the actual commits since the last submitted App Store version, then run `asc`.
 
 ## iOS build & submit
 
 - Submit through the repo's guarded command (e.g. `pnpm run submit:ios`), which typically wraps `eas build` + `eas submit` and **blocks re-submitting the same `expo.version`**.
 - Ensure App Store Connect has a version record for the new marketing version before submitting; the guard intentionally fails when the ASC version is missing.
-- **Treat EAS Submit success as binary-upload success only** — confirm the review-submission/version status in App Store Connect afterward.
+- **Treat EAS Submit success as binary-upload success only**, confirm the review-submission/version status in App Store Connect afterward.
 
 ### EAS Submit fallbacks
 
 - If EAS Submit uploads the build but leaves the version in `PREPARE_FOR_SUBMISSION` / `READY_FOR_REVIEW`, drive the submission directly through the `asc` review flow rather than re-running EAS.
-- If EAS Submit schedules but stalls without Apple receiving the build, fall back to a direct `asc` upload of the produced artifact — but still follow the golden rule (promote one build; don't double-upload a fresh IPA just for App Store).
+- If EAS Submit schedules but stalls without Apple receiving the build, fall back to a direct `asc` upload of the produced artifact, but still follow the golden rule (promote one build; don't double-upload a fresh IPA just for App Store).
 
 ## Android (when `IOS_RELEASE_ANDROID=true`)
 

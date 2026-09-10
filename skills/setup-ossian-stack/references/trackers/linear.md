@@ -1,7 +1,7 @@
 # Template: Linear (via GraphQL API)
 
 Copy this body into the project's `docs/agents/issue-tracker.md`, fill in the
-team, and delete this line. Linear has no official CLI — use the GraphQL API with
+team, and delete this line. Linear has no official CLI, use the GraphQL API with
 `curl`. Written from the API without a local reference install; verify field
 names against <https://studio.apollographql.com/public/Linear/variant/current>
 before scripting unfamiliar ones.
@@ -47,13 +47,13 @@ Issue identifiers (`ENG-123`) work directly as the `id` argument on `issue` quer
   Resolve `teamId` with `query { teams { nodes { id name } } }`. Optional:
   `parentId` (sub-issue), `assigneeId`, `labelIds`, `projectId`.
 - **Comment**: Linear has no first-class comment mutation in the public API usable
-  for this workflow — record answers in the issue description or as a sub-issue
+  for this workflow, record answers in the issue description or as a sub-issue
   per the resolve step below. (Re-check `issueCommentCreate` availability; the API
   has been adding it.)
 - **Apply / remove labels**: `issueLabelCreate(name: "<label>")` once per
   workspace, then attach via `labelIds` on `issueCreate`, or read-modify-write via
   `issueUpdate` (the input replaces the label set).
-- **Change state**: `issueUpdate(id: "ENG-123", input: { stateId: "<uuid>" })` —
+- **Change state**: `issueUpdate(id: "ENG-123", input: { stateId: "<uuid>" })`,
   resolve state UUIDs from `workflowStates(filter: { team: { id: { eq: "<team-uuid>" } } })`.
 - **Close**: transition to a `completed` (or `canceled`) state.
 

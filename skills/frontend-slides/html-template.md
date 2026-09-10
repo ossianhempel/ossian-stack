@@ -12,7 +12,7 @@ Reference architecture for generating slide presentations. Every presentation fo
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presentation Title</title>
 
-    <!-- Fonts: use Fontshare or Google Fonts — never system fonts -->
+    <!-- Fonts: use Fontshare or Google Fonts, never system fonts -->
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=...">
 
     <style>
@@ -21,7 +21,7 @@ Reference architecture for generating slide presentations. Every presentation fo
            Change these to change the whole look
            =========================================== */
         :root {
-            /* Colors — from chosen style preset */
+            /* Colors, from chosen style preset */
             --bg-primary: #0a0f1c;
             --bg-secondary: #111827;
             --text-primary: #ffffff;
@@ -29,14 +29,14 @@ Reference architecture for generating slide presentations. Every presentation fo
             --accent: #00ffcc;
             --accent-glow: rgba(0, 255, 204, 0.3);
 
-            /* Typography — authored at 1920×1080 stage size */
+            /* Typography, authored at 1920×1080 stage size */
             --font-display: 'Clash Display', sans-serif;
             --font-body: 'Satoshi', sans-serif;
             --title-size: 112px;
             --subtitle-size: 34px;
             --body-size: 28px;
 
-            /* Spacing — authored at 1920×1080 stage size */
+            /* Spacing, authored at 1920×1080 stage size */
             --slide-padding: 72px;
             --content-gap: 32px;
 
@@ -149,13 +149,13 @@ Reference architecture for generating slide presentations. Every presentation fo
 
 Every presentation must include:
 
-1. **SlidePresentation Class** — Main controller with:
+1. **SlidePresentation Class**, Main controller with:
    - Keyboard navigation (arrows, space, page up/down)
    - Touch/swipe support
    - Mouse wheel navigation
    - Optional progress indicator or page count, kept outside the slide stage
 
-2. **Stage Scaling** — For fixed 16:9 presentation behavior:
+2. **Stage Scaling**, For fixed 16:9 presentation behavior:
    - Keep all slides at 1920×1080 inside `.deck-stage`
    - Scale the whole stage with one transform
    - Letterbox/pillarbox as needed; never reflow slide content per device
@@ -295,7 +295,7 @@ Save processed images with `_processed` suffix. Never overwrite originals.
 
 ### Image Placement
 
-**Use direct file paths** (not base64) — presentations are viewed locally:
+**Use direct file paths** (not base64), presentations are viewed locally:
 
 ```html
 <img src="assets/logo_round.png" alt="Logo" class="slide-image logo">

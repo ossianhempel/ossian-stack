@@ -16,14 +16,14 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Formality: medium-high
 - Density: medium
 - Scheme: mixed
-- Best for: Anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. The double-rule masthead ornament gives it editorial gravitas without making it stiff — also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate.
-- Avoid for: Contexts that need to read as quiet, neutral, or institutionally restrained — the emerald field is too saturated to disappear into the background.
+- Best for: Anything that should feel like the front of a serious magazine, including but not limited to leadership readouts, planning-office reviews, and strategy briefings. The double-rule masthead ornament gives it editorial gravitas without making it stiff, also a great unexpected pick for product launches or research recaps that want to feel considered rather than corporate.
+- Avoid for: Contexts that need to read as quiet, neutral, or institutionally restrained, the emerald field is too saturated to disappear into the background.
 
 ## Visual Snapshot
 
 A bold display-serif editorial system in the register of a fashion masthead or vintage magazine cover. Bodoni Moda runs at weight 900 across a wide scale (44–460px), set against a saturated emerald-green canvas with deep navy ink and oat-paper accents. The signature treatment is a stacked double-rule ornament that brackets centered display words like a 19th-century theatrical playbill. The aesthetic borrows from Harper's Bazaar / Vogue / Wallpaper covers: confident, theatrical, paper-and-ink committed, with a tight three-color palette and zero gradients or shadows.
 
-Emerald Editorial is a bold display-serif editorial system rooted in the visual language of fashion magazines and 19th-century theatrical playbills. The foundational premise is a single typographic face — Bodoni Moda at weight 900 — used at unapologetic scale: 92px for routine headlines, 130–200px for statements and section openers, and 460px for hero numerals. The serif is loud, theatrical, and confident. Every slide leads with type, not with image.
+Emerald Editorial is a bold display-serif editorial system rooted in the visual language of fashion magazines and 19th-century theatrical playbills. The foundational premise is a single typographic face, Bodoni Moda at weight 900, used at unapologetic scale: 92px for routine headlines, 130–200px for statements and section openers, and 460px for hero numerals. The serif is loud, theatrical, and confident. Every slide leads with type, not with image.
 
 ## Preview Ingredients
 

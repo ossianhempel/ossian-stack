@@ -17,13 +17,13 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Density: medium
 - Scheme: light
 - Best for: Anything that should feel printed, lo-fi, and crafted: indie zines and publications, music / arts brands, creator portfolios, small-batch craft launches, community decks. Also a great underdog choice for tech, research, or business decks that want a riso-print warmth instead of digital polish.
-- Avoid for: Contexts that demand digital-native polish or fast modern-tech energy — the layered zine aesthetic intentionally feels handmade.
+- Avoid for: Contexts that demand digital-native polish or fast modern-tech energy, the layered zine aesthetic intentionally feels handmade.
 
 ## Visual Snapshot
 
-A risograph-zine editorial system on warm khaki paper with a deep forest-green accent and ink-black structure. Display type runs in Bebas Neue (condensed industrial sans, uppercase, generously tracked); body type runs in Space Grotesk at weight 300–500; handwritten emphasis runs in Caveat. A subtle SVG grain overlay sits over every slide, reinforcing the printed-paper feel. The aesthetic borrows from independent press, mid-century activist posters, and DIY zine culture: slightly rotated stamp marks, masking-tape pieces in collage layouts, drop caps, and offset paper-on-paper shadows. The effect is hand-printed editorial — warm but disciplined, confident but tactile.
+A risograph-zine editorial system on warm khaki paper with a deep forest-green accent and ink-black structure. Display type runs in Bebas Neue (condensed industrial sans, uppercase, generously tracked); body type runs in Space Grotesk at weight 300–500; handwritten emphasis runs in Caveat. A subtle SVG grain overlay sits over every slide, reinforcing the printed-paper feel. The aesthetic borrows from independent press, mid-century activist posters, and DIY zine culture: slightly rotated stamp marks, masking-tape pieces in collage layouts, drop caps, and offset paper-on-paper shadows. The effect is hand-printed editorial, warm but disciplined, confident but tactile.
 
-Retro Zine is a risograph-zine editorial system on a warm khaki canvas ({colors.bg} — #C8B99A) with deep forest-green ({colors.green} — #008F4D) as the meaningful accent and ink-black ({colors.black} — #1A1A1A) as the structural color. The aesthetic borrows from independent press culture, mid-century activist posters, and DIY zine layouts: condensed industrial display type, hand-script emphasis, slightly rotated stamps, masking-tape collage marks, drop caps, and a print-grain overlay that ties every surface to a printed-paper register.
+Retro Zine is a risograph-zine editorial system on a warm khaki canvas ({colors.bg}, #C8B99A) with deep forest-green ({colors.green}, #008F4D) as the meaningful accent and ink-black ({colors.black}, #1A1A1A) as the structural color. The aesthetic borrows from independent press culture, mid-century activist posters, and DIY zine layouts: condensed industrial display type, hand-script emphasis, slightly rotated stamps, masking-tape collage marks, drop caps, and a print-grain overlay that ties every surface to a printed-paper register.
 
 ## Preview Ingredients
 

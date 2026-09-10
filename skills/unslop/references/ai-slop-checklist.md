@@ -31,7 +31,7 @@ moreover, furthermore, additionally
 ### Banned openers
 
 Don't start a piece, section, or paragraph with these. Includes throat-clearing
-openers — warm-up phrases that delay the actual point.
+openers, warm-up phrases that delay the actual point.
 
 welcome to, introducing, here's the thing, let me be clear, i'll be honest,
 the uncomfortable truth, what nobody tells you, what most people get wrong
@@ -47,7 +47,7 @@ going forward, let's dive in
 
 ### Em dashes and double hyphens
 
-Never use em dashes (—) in any output. Don't substitute the literal double
+Never use em dashes (, ) in any output. Don't substitute the literal double
 hyphen (`--`) either. Restructure with commas, periods, or parentheses, or
 split into two sentences. (A normal hyphen inside a compound word like
 `best-in-class` or `two-tap` is fine.)
@@ -66,7 +66,7 @@ declaring copy done.
 
 ### Structural tells
 
-- **Rule of three.** "X, Y, and Z" lists everywhere. Use 2 or 4 — whatever the
+- **Rule of three.** "X, Y, and Z" lists everywhere. Use 2 or 4, whatever the
   content actually has. One rule-of-three list in a piece is fine; a cadence of
   them is the tell.
 - **Negative parallelism.** "It's not about X, it's about Y." Once per piece,
@@ -87,7 +87,7 @@ declaring copy done.
 ### Tone tells
 
 - **Inflated symbolism.** Framing mundane things as epic narratives.
-- **Editorializing.** Telling the reader how to feel — "This is exciting,"
+- **Editorializing.** Telling the reader how to feel, "This is exciting,"
   "Interestingly." Present the thing; let them react.
 - **Superficial -ing commentary.** Vague gerund phrases that add nothing:
   "Creating a more engaging experience."
@@ -109,7 +109,7 @@ declaring copy done.
 - **Fake-profound kickers.** The closing "deep" line that restates the point as
   a metaphor or aphorism: "The future isn't coming. It's already here." /
   "And that changes everything." Delete it. End on a concrete point, a takeaway,
-  or the next action — never on a manufactured mic-drop.
+  or the next action, never on a manufactured mic-drop.
 
 ### Formatting tells
 
@@ -127,7 +127,7 @@ declaring copy done.
 Words like `just`, `simply`, `actually`, `literally`, `honestly`, `truly`,
 `fundamentally`, `importantly`, `crucially`, `inherently`, `inevitably` are
 usually filler ("this is *just* a simpler way" → "this is a simpler way").
-A few are legitimate in casual/spoken copy — read for them by hand and cut the
+A few are legitimate in casual/spoken copy, read for them by hand and cut the
 ones that add nothing.
 
 ### Context-dependent words and phrases (judgment, not a hard ban)
@@ -151,11 +151,11 @@ a plainer concrete word: "substrate" becomes "base", "wedge in" becomes "add",
 "vector" becomes "way" or "method", "gold-plating" becomes "more than the job
 needs", "ratchet" becomes the mechanism's real name, "evacuate" becomes "move
 out", "endgame" becomes "the last phase". Several have literal uses (a real
-wedge, an actual surface area) — swap only when the metaphor is doing the work.
+wedge, an actual surface area), swap only when the metaphor is doing the work.
 
 ### The read-aloud test
 
-Read the draft out loud. AI slop is smooth, even, and frictionless — every
+Read the draft out loud. AI slop is smooth, even, and frictionless, every
 sentence the same length, every clause balanced. Real copy has uneven rhythm:
 a three-word line next to a long one, a fragment, a hard stop. If it sounds
 like it was written to be inoffensive, it was. Rewrite for friction.

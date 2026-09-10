@@ -30,7 +30,7 @@ You are the `<Project> · <workstream>` thread. Your HQ is the thread
 
 ## Scope
 - In: <bullets>
-- Out: <bullets — what you must not touch or gold-plate>
+- Out: <bullets, what you must not touch or gold-plate>
 
 ## Facts you cannot derive from the repo
 <decisions already made, links to spec/tickets/ADRs, constraints, branch.

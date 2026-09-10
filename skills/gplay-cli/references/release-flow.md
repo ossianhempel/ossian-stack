@@ -181,7 +181,7 @@ gplay rollout complete --package com.example.app --track production
 The single `--release-notes` flag accepts three shapes: a JSON array (multi-locale), plain text (auto-assigned to `en-US`), or an `@file` path pointing to either. There is no separate locale flag.
 
 ### JSON array format (multi-locale)
-`release-notes.json` — a JSON array of `{language, text}` entries:
+`release-notes.json`, a JSON array of `{language, text}` entries:
 ```json
 [
   { "language": "en-US", "text": "Bug fixes and performance improvements" },
@@ -192,7 +192,7 @@ The single `--release-notes` flag accepts three shapes: a JSON array (multi-loca
 Pass it with `--release-notes @release-notes.json`.
 
 ### Plain text format (single locale)
-Provide release notes as plain text — it is auto-assigned to `en-US`:
+Provide release notes as plain text, it is auto-assigned to `en-US`:
 ```bash
 gplay release \
   --package com.example.app \

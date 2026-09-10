@@ -1,6 +1,6 @@
 # Auditing an Existing Onboarding Flow
 
-Use this reference when the user already has an onboarding flow and wants to diagnose drop-off or score it — not when they're building from scratch (that's the main SKILL.md). The main flow assumes builder mode; this file covers auditor mode.
+Use this reference when the user already has an onboarding flow and wants to diagnose drop-off or score it, not when they're building from scratch (that's the main SKILL.md). The main flow assumes builder mode; this file covers auditor mode.
 
 ## The Activation Principle
 
@@ -47,7 +47,7 @@ Flag each screen: **Required** | **Value-adding** | **Friction only**. Remove or
 
 ## Permission Prompt Timing
 
-Permissions are the #1 drop-off point. Always show a native-looking pre-permission screen (priming) before triggering the system prompt — users who understand the "why" grant at 2–3× the rate.
+Permissions are the #1 drop-off point. Always show a native-looking pre-permission screen (priming) before triggering the system prompt, users who understand the "why" grant at 2–3× the rate.
 
 | Permission | When to ask | Never ask |
 |------------|-------------|-----------|
@@ -57,7 +57,7 @@ Permissions are the #1 drop-off point. Always show a native-looking pre-permissi
 | Contacts | When a social feature is used | In onboarding |
 | Tracking (ATT) | After user is invested | On first open |
 
-iOS notification permission and ATT are one-shot — if denied, you're stuck with Settings deep-linking. Never trigger them without priming.
+iOS notification permission and ATT are one-shot, if denied, you're stuck with Settings deep-linking. Never trigger them without priming.
 
 ## Sign-Up Friction
 
@@ -68,7 +68,7 @@ iOS notification permission and ATT are one-shot — if denied, you're stuck wit
 | Long profile setup | High drop-off | Ask 1 question max, defer rest |
 | Email verification required | Kills momentum | Defer or make optional |
 
-**Guest mode** — letting users experience core value before requiring an account — typically converts guest → registered at 40–60%, vs. 15–30% for a hard sign-up gate.
+**Guest mode**, letting users experience core value before requiring an account, typically converts guest → registered at 40–60%, vs. 15–30% for a hard sign-up gate.
 
 ## Funnel Benchmarks
 
@@ -86,8 +86,8 @@ Compare the audited flow against these reference rates. Below "Poor" usually mea
 
 | Placement | Works When |
 |-----------|------------|
-| Before activation | Almost never — user has no reference for value |
-| At activation moment | Strong — user just felt the value |
+| Before activation | Almost never, user has no reference for value |
+| At activation moment | Strong, user just felt the value |
 | Post-activation, D1 | Strongest for subscription apps |
 | Contextual (feature gate) | Good for feature-based paywall |
 
@@ -95,19 +95,19 @@ Compare the audited flow against these reference rates. Below "Poor" usually mea
 
 ```
 Current flow:
-  [Screen 1] — Required / friction
-  [Screen 2] — Value-adding
+  [Screen 1], Required / friction
+  [Screen 2], Value-adding
   ...
-  [Activation event] — Step N
+  [Activation event], Step N
 
 Drop-off analysis:
   Biggest drop: [screen] ([X]% exit if known)
   Estimated cause: [hypothesis]
 
 Recommended changes:
-1. [Remove / defer X] — Expected impact: [lift in activation]
-2. [Reorder Y before Z] — Expected impact: [rationale]
-3. [Add pre-permission screen for Z] — Expected impact: [grant rate improvement]
+1. [Remove / defer X], Expected impact: [lift in activation]
+2. [Reorder Y before Z], Expected impact: [rationale]
+3. [Add pre-permission screen for Z], Expected impact: [grant rate improvement]
 
 Revised flow:
   Open → [Screen] → [Screen] → Activation → Sign-up → Permissions
@@ -120,11 +120,11 @@ Revised flow:
 ```
 [Icon representing the permission]
 
-[Benefit headline — what the user gets]
+[Benefit headline, what the user gets]
 e.g., "Get notified when your goal is complete"
 
 [One-line explanation]
-e.g., "We'll only send you reminders you set — no spam."
+e.g., "We'll only send you reminders you set, no spam."
 
 [Allow]     [Not now]
 ```

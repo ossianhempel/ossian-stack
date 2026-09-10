@@ -24,7 +24,7 @@ az devops configure --defaults organization=https://dev.azure.com/<ORG> project=
 
 Types: `User Story`, `Task`, `Bug`, `Feature`, `Epic`. Confirm against the live
 project before relying on a type for a write: `az boards work-item create --help`
-does not enumerate types — list them from a query instead.
+does not enumerate types, list them from a query instead.
 
 States are process-template specific (`New`, `Active`, `Closed` on Agile; `Done`
 on Scrum). Discover the valid states from an existing item before transitioning.
@@ -34,7 +34,7 @@ on Scrum). Discover the valid states from an existing item before transitioning.
 - **Create a work item**:
   `az boards work-item create --title "..." --type "Task" --description "..."`.
   Tags go through fields: `--fields "System.Tags=<tag>"`. Use a file for
-  long descriptions: `--description @/tmp/body.md` is not supported — pass `--fields`
+  long descriptions: `--description @/tmp/body.md` is not supported, pass `--fields`
   with `System.Description` read from a file via `az boards work-item create ... --fields "System.Description=$(cat body.md)"`, or write the description after create.
 - **Read a work item**: `az boards work-item show --id <id> --expand all` (fields +
   relations). Comments are separate: `az rest --method get --url "<ORG>/_apis/wit/workItems/<id>/comments?api-version=7.1"`.
@@ -44,7 +44,7 @@ on Scrum). Discover the valid states from an existing item before transitioning.
   `System.AreaPath`; macros `@Me`, `@Today`, `@CurrentIteration`.
 - **Comment**: `az boards work-item update --id <id> --discussion "..."`.
 - **Tags (the label surface)**: `System.Tags` is a semicolon-joined string, replaced
-  wholesale on write — read, modify, write back: `--fields "System.Tags=<tag>;<tag>"`.
+  wholesale on write, read, modify, write back: `--fields "System.Tags=<tag>;<tag>"`.
 - **Change state**: `az boards work-item update --id <id> --state "In Progress"`.
 - **Close**: `az boards work-item update --id <id> --state "Closed"` (or the
   process's done state).

@@ -23,19 +23,19 @@ providers or assume Azure DevOps Server support.
 
 ## Modes
 
-- **Default** — commit complete local changes (if needed), push, open or update the
+- **Default**, commit complete local changes (if needed), push, open or update the
   PR, then follow through to merge-ready (see Handoff).
-- `--update` — refresh an existing PR's title/body for the current branch. Requires an
+- `--update`, refresh an existing PR's title/body for the current branch. Requires an
   open PR; if none, report and stop. Metadata only; no commit, push, or new babysit.
-- `--description-only` (add `--body-only` to print just the body) — compose the title
+- `--description-only` (add `--body-only` to print just the body), compose the title
   and body and print them. Read-only: no branch, commit, push, or PR mutation.
-- `--pr-only` — open or update the PR for already-committed work. Leave uncommitted
+- `--pr-only`, open or update the PR for already-committed work. Leave uncommitted
   changes in the tree and out of the description. No review fixes or new babysit
   unless the enclosing request already includes drive follow-through.
-- `--branch-only` — establish branch safety, then stop. No commit, push, or PR.
-- `--draft` — open the PR as a draft. Default is ready for review; a draft is for
+- `--branch-only`, establish branch safety, then stop. No commit, push, or PR.
+- `--draft`, open the PR as a draft. Default is ready for review; a draft is for
   deliberately early feedback.
-- `--base <branch>` — target a non-default base. Without it, preserve an existing
+- `--base <branch>`, target a non-default base. Without it, preserve an existing
   open PR's base rather than retargeting.
 
 Dispatch only the steps needed by the mode; description-only and metadata-only
@@ -68,14 +68,14 @@ an open PR on the current branch (GitHub command below; Azure uses its reference
 gh pr list --head "$(git branch --show-current)" --state open --json number,title,state,isDraft,baseRefName
 ```
 
-A "no pull requests" result means NO_OPEN_PR — that is normal for new work. Treat any
+A "no pull requests" result means NO_OPEN_PR, that is normal for new work. Treat any
 other `gh` failure as a blocking error, not as NO_OPEN_PR. In `--description-only`,
 stay read-only: no branch switch, no fetch that mutates, no PR calls unless a PR
 URL/id was supplied.
 
 ## Step 2: Branch safety
 
-**First read the project's own branching rule** — the project's active instructions
+**First read the project's own branching rule**, the project's active instructions
 already in your context, else recent branch names. Two shapes:
 
 - **Default branch protected, everything lands via PR** (the common shape). Create a
@@ -87,7 +87,7 @@ already in your context, else recent branch names. Two shapes:
 
   If local `<default>` has unpushed commits (`git log origin/<default>..HEAD --oneline`
   while on it), show them and ask: carry them onto the new branch, or leave them on
-  local `<default>`? Never default silently — carrying foreign commits into a PR is
+  local `<default>`? Never default silently, carrying foreign commits into a PR is
   worse than asking again. Then `git checkout -b <branch> "$BASE_REF"`. If checkout
   fails on uncommitted changes, `git stash push -u`, branch, `git stash pop`; surface
   pop conflicts rather than auto-resolving. If the fetch failed, branch from local HEAD
@@ -97,14 +97,14 @@ already in your context, else recent branch names. Two shapes:
   creation and the PR: commit and push per Steps 3-4, then stop and report. Do not
   open a PR against a repo that does not use them.
 
-- **Detached HEAD** — explain a branch is required and ask; never commit detached.
+- **Detached HEAD**, explain a branch is required and ask; never commit detached.
 
 Branch naming follows the project's convention; otherwise `feature/<slug>` from the
 change content.
 
 **Branch/task alignment before pushing.** If the branch already exists on origin or has
 an open PR, verify it belongs to this work (branch slug, recent commits, PR title vs
-the current task). If it does not, stop and ask — pushing into an unrelated or
+the current task). If it does not, stop and ask, pushing into an unrelated or
 someone else's PR is the one unrecoverable mistake here. In autonomous closeout, do
 not push into an unverified existing PR at all.
 
@@ -113,11 +113,11 @@ In `--branch-only` mode, stop here and report the branch state.
 ## Step 3: Commit complete work
 
 Survey `git status`, `git diff`, and `git diff --staged`. Group the changes into
-coherent logical units — one commit per unit; not one giant commit, not one per file;
+coherent logical units, one commit per unit; not one giant commit, not one per file;
 2-3 commits at most, grouped at file level only (no `git add -p`). Commit only
 **complete** work: leave in-progress or unrelated changes unstaged and say so.
 
-**Never `git add .` or `git add -A`** — they sweep in `.env`, build artifacts, and
+**Never `git add .` or `git add -A`**, they sweep in `.env`, build artifacts, and
 generated files. Stage explicit paths per unit:
 
 ```bash
@@ -126,13 +126,13 @@ git add path/to/file path/to/other && git commit -m "type(scope): summary"
 
 Messages follow the project's commit conventions (active instructions first, else
 recent commits, else Conventional Commits). Where `fix:` and `feat:` both seem to fit,
-default to `fix:` — remedying broken or missing behavior is a fix even when
+default to `fix:`, remedying broken or missing behavior is a fix even when
 implemented by adding code. The summary states what changed and why it matters, not
 the file list. One subject line; a short body only when the why is not obvious. ASCII
-messages. Never commit secrets or large data files — flag them instead.
+messages. Never commit secrets or large data files, flag them instead.
 
 If the repo has pre-commit hooks, let them run and fix what they flag; `--no-verify`
-only when the user asks. If a hook rejects the commit, fix and create a new commit —
+only when the user asks. If a hook rejects the commit, fix and create a new commit,
 do not amend the failed one. If the branch implements a plan or spec with a tracked
 status, update that status to match what is shipping **before** the push.
 
@@ -149,7 +149,7 @@ restriction, fetch and rebase rather than force.
 
 ## Step 5: Compose the title and body
 
-**You MUST read `references/pr-description.md`** (in this skill's directory) in full —
+**You MUST read `references/pr-description.md`** (in this skill's directory) in full,
 its core principle governs the writing: the diff is already visible; the description
 explains what the diff cannot show. Size the description to the change, use the
 `## Why` / `## Scope` / `## Tradeoffs` / `## Blast Radius` / `## Verification` section
@@ -159,7 +159,7 @@ headers.
 Title: `type(scope): summary` per the reference, matching the project's conventions.
 State how each check was run and its outcome; label anything you could not verify as
 unverified rather than implying it passed. Then run the `unslop` pass over the title
-and body — the description is user-facing prose and gets the same treatment as any
+and body, the description is user-facing prose and gets the same treatment as any
 other writing.
 
 **Tracker links are opt-in only.** Do not ask about, infer, or nag for an issue. Link
@@ -171,7 +171,7 @@ If `--title` was supplied, use it; otherwise compose. ASCII only.
 
 ## Step 6: Apply and report
 
-For GitHub, write the body to a temp file and pass it by file reference — never inline
+For GitHub, write the body to a temp file and pass it by file reference, never inline
 `--body "$(cat ...)"`, which can silently produce an empty body while the CLI exits 0:
 
 ```bash
@@ -186,7 +186,7 @@ expanding.
 - **New PR** (no open PR from Step 1): `gh pr create --base "$BASE" --title "<TITLE>"
   --body-file "$BODY_FILE"`. Add `--draft` only when requested.
 - **Existing PR** (default, `--pr-only`, or `--update`): preview
-  before overwriting — ask: new title, the first sentence or two of the body, total
+  before overwriting, ask: new title, the first sentence or two of the body, total
   line count. On confirmation, `gh pr edit <number> --title "<TITLE>" --body-file
   "$BODY_FILE"`. In autonomous closeout, apply directly and report what changed. If
   `--base` was given and differs from the PR's base, retarget with
@@ -195,7 +195,7 @@ expanding.
 - Clean up the temp file.
 
 Never merge (`gh pr merge`, `glab mr merge`, Azure `--auto-complete`) and never arm
-auto-merge — landing is the user's call.
+auto-merge, landing is the user's call.
 
 **Report:** the PR URL, target branch, the commits included, what stayed unstaged and
 why, and whether the PR is draft or ready. In `--update` mode report the title/body

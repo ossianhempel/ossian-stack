@@ -19,7 +19,7 @@ trade-off. Any one missing, skip it.
 Upstream names the glossary `CONTEXT.md`. This plugin uses `GLOSSARY.md`, so all
 21 references were converted, `CONTEXT-FORMAT.md` was renamed to
 `GLOSSARY-FORMAT.md`, and the multi-context `CONTEXT-MAP.md` became
-`GLOSSARY-MAP.md`. Upstream's own wording argues for the rename — it says the
+`GLOSSARY-MAP.md`. Upstream's own wording argues for the rename, it says the
 file "is a glossary and nothing else."
 
 Pairs with `principle-model-the-domain`, which is the write-time rule for

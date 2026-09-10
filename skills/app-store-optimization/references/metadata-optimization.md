@@ -128,7 +128,7 @@ professionals organize their daily activities and boost productivity.
 **After:**
 ```
 Forget missed deadlines. MyTasks keeps every task, reminder, and project
-in one place—so you focus on doing, not remembering. Trusted by 500,000+
+in one place, so you focus on doing, not remembering. Trusted by 500,000+
 professionals.
 ```
 

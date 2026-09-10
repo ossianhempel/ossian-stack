@@ -1,7 +1,7 @@
 #!/bin/sh
 # Xcode Cloud entry point. Runs right after clone, before package resolution.
 # Order matters: set the build number first (CI_BUILD_NUMBER + offset), then
-# gate the marketing version. No external deps — both scripts use only the
+# gate the marketing version. No external deps, both scripts use only the
 # CI-injected env, sed, curl/plutil (always present on macOS runners) and
 # python3 for config parsing.
 set -eu

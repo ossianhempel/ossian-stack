@@ -47,7 +47,7 @@ up.**
 that says to ask the user does not override this; you drive the instrumented
 runtime. Ask only with a stated, specific reason you cannot reach the target, and
 only after driving it as far as it goes. If the project has a verification skill,
-that is your surface — reach for `create-verification-skill` when it has none and the bug
+that is your surface, reach for `create-verification-skill` when it has none and the bug
 lives behind a UI, CLI, or service you cannot otherwise drive.
 
 ### Ways to construct one, in roughly this order
@@ -68,7 +68,7 @@ real-surface signal used instead.
 7. **Property / fuzz loop.** If the bug is "sometimes wrong output", run 1000 random inputs and look for the failure mode.
 8. **Bisection harness.** If the bug appeared between two known states (commit, dataset, version), automate "boot at state X, check, repeat" so you can `git bisect run` it.
 9. **Differential loop.** Run the same input through old-version vs new-version (or two configs) and diff outputs.
-10. **Human-in-the-loop script.** Last resort. If a human must click, drive _them_ with the bundled template so the loop is still structured, and feed the captured output back to yourself. Copy it out of the skill directory before editing — set the path inline, in the same command, since shell state does not persist between calls:
+10. **Human-in-the-loop script.** Last resort. If a human must click, drive _them_ with the bundled template so the loop is still structured, and feed the captured output back to yourself. Copy it out of the skill directory before editing, set the path inline, in the same command, since shell state does not persist between calls:
 
     ```
     SKILL_DIR="<absolute path of the directory containing the SKILL.md you just read>";
@@ -200,7 +200,7 @@ the real cause sits one subsystem over.
 
 ## Phase 5: Fix + regression test
 
-Fix at the root, not the symptom — see `principle-fix-root-causes`. A guard that
+Fix at the root, not the symptom, see `principle-fix-root-causes`. A guard that
 silences the crash leaves the bug in place and teaches the next reader that the
 condition is expected.
 
@@ -208,7 +208,7 @@ If the fix crosses a function boundary, decide its shape before writing it; when
 the shape is not obvious, sketch two and compare rather than taking the first
 (`principle-exhaust-the-design-space`). Implementation can go to a subagent with a
 specific scope: the files, the mechanism you confirmed, and the behavior to hold.
-Review the diff yourself — a delegate's summary is not review.
+Review the diff yourself, a delegate's summary is not review.
 
 Write the regression test **before the fix**, but only if there is a **correct
 seam** for it.
@@ -231,7 +231,7 @@ If a correct seam exists:
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
 
 Verify on the same surface the bug appeared on. "Inconclusive" or a different
-surface is not a pass; flag it. Unit tests show branch behavior, not bug absence —
+surface is not a pass; flag it. Unit tests show branch behavior, not bug absence,
 the proof is the Phase 1 loop going green (`principle-prove-it-works`).
 
 ## Phase 6: Cleanup

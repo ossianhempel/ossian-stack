@@ -9,12 +9,12 @@ workflow requires tracked delivery. During general setup, an absent tracker is
 optional unless that workflow is chosen; report it without forcing configuration.
 Configuring a tracker does not authorize creating issues.
 
-This config is **not created lazily** — an unconfigured tracker fails on first
+This config is **not created lazily**, an unconfigured tracker fails on first
 use with no hint where the setting lives. Check for:
 
-- `docs/agents/issue-tracker.md` — where issues live, which native hierarchy,
+- `docs/agents/issue-tracker.md`, where issues live, which native hierarchy,
   blocking, assignment, and label operations are available.
-- `docs/agents/handoff-comment.md` — when to comment and the concise content
+- `docs/agents/handoff-comment.md`, when to comment and the concise content
   needed for meaningful updates and ownership recovery. Copy
   `handoff-comment.md`, dropping its introductory copy paragraph.
   Resume from the ticket/spec, relevant handoff records, and linked evidence.
@@ -33,8 +33,8 @@ Supported trackers, each with a ready-to-adapt template bundled with this skill:
 
 If both files exist, sanity-check them against the repo: a `git remote` pointing at
 GitHub with a GitLab tracker config is a mismatch worth surfacing. For a chosen
-ticket workflow, if either is missing, ask where issues actually live — one question, recommended answer
-first (GitHub for a GitHub-hosted repo) — and write the file after they confirm.
+ticket workflow, if either is missing, ask where issues actually live, one question, recommended answer
+first (GitHub for a GitHub-hosted repo), and write the file after they confirm.
 For a supported tracker, start from the template and fill in the project
 specifics; do not improvise the command recipes. For Notion, discover existing task or issue databases with the MCP first
 (fetch each hit and dedupe by data source id, since one shared Tasks database
@@ -42,7 +42,7 @@ appears as a linked view under every project page), present them, and ask whethe
 property, or dedicated) or create a new dedicated one; then map the chosen
 database's actual property names in the template's table. Notion has no CLI: before
 writing its config, confirm the session exposes `notion-*` MCP tools, and if not
-tell the user to connect the Notion MCP in every runtime they use — the tracker
+tell the user to connect the Notion MCP in every runtime they use, the tracker
 skills stop rather than fall back when the tools are absent. Keep both short; they are
 configuration the skills parse, not prose. Labels default to the canonical role
 names unless the tracker already uses different strings.
@@ -82,5 +82,5 @@ API recipes, claim arbitration, permissions, and other customizations; do not
 overwrite whole files or edit live tickets. Apply the same policy to custom
 GitLab/local tracker recipes.
 
-Domain docs (`GLOSSARY.md`, `docs/adr/`) stay lazy — that is the section above,
+Domain docs (`GLOSSARY.md`, `docs/adr/`) stay lazy, that is the section above,
 not this one.

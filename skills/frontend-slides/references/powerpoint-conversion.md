@@ -7,9 +7,9 @@ In commands and code examples, resolve bundled paths from the directory containi
 
 When converting PowerPoint files:
 
-1. **Extract content** — Run `SKILL_DIR="<absolute directory containing the loaded SKILL.md>"; python3 "$SKILL_DIR/scripts/extract-pptx.py" <input.pptx> <output_dir>` (install python-pptx if needed: `pip install python-pptx`)
-2. **Check the extraction** — Verify slide titles, content, and images; surface ambiguous conversion choices without repeating approval of supplied content
-3. **Style selection** — Reuse the selected style or read the style-discovery reference for an unresolved style
-4. **Generate HTML** — Read [generation](generation.md) for the required template and animation guidance. Convert to chosen style, preserving all text, images (from assets/), slide order, and speaker notes (as HTML comments)
+1. **Extract content**, Run `SKILL_DIR="<absolute directory containing the loaded SKILL.md>"; python3 "$SKILL_DIR/scripts/extract-pptx.py" <input.pptx> <output_dir>` (install python-pptx if needed: `pip install python-pptx`)
+2. **Check the extraction**, Verify slide titles, content, and images; surface ambiguous conversion choices without repeating approval of supplied content
+3. **Style selection**, Reuse the selected style or read the style-discovery reference for an unresolved style
+4. **Generate HTML**, Read [generation](generation.md) for the required template and animation guidance. Convert to chosen style, preserving all text, images (from assets/), slide order, and speaker notes (as HTML comments)
 
 ---

@@ -50,14 +50,14 @@ All three inputs on a 0–100 scale. Difficulty is inverted so lower competition
 
 ### Keyword Grouping (Strategic Buckets)
 
-Group candidates into four buckets — placement and priority flow from the bucket:
+Group candidates into four buckets, placement and priority flow from the bucket:
 
 | Bucket | Count | Where it lives | Notes |
 |--------|-------|----------------|-------|
 | **Primary** | 3–5 | Title or subtitle | Highest Opportunity Score; defines positioning |
 | **Secondary** | 5–10 | Subtitle + keyword field (iOS) / short description (Android) | Good opportunity; rotate based on performance |
 | **Long-tail** | 10–20 | Keyword field / full description | Lower volume, specific intent, easier to rank |
-| **Aspirational** | 3–5 | Tracked only — not in metadata yet | High volume + high difficulty; long-term targets, don't sacrifice primary for these |
+| **Aspirational** | 3–5 | Tracked only, not in metadata yet | High volume + high difficulty; long-term targets, don't sacrifice primary for these |
 
 ### Keyword Placement Priority
 
@@ -78,7 +78,7 @@ Top Keywords by Opportunity
 
 | Keyword | Volume | Difficulty | Relevance | Opportunity | Current Rank | Bucket |
 |---------|--------|------------|-----------|-------------|--------------|--------|
-| ...     | 0–100  | 0–100      | 0–100     | computed    | rank or —    | Primary/Secondary/Long-tail/Aspirational |
+| ...     | 0–100  | 0–100      | 0–100     | computed    | rank or,   | Primary/Secondary/Long-tail/Aspirational |
 
 Proposed placement:
   Title (30):     [primary keywords]

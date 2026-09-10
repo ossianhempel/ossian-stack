@@ -16,14 +16,14 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Formality: medium
 - Density: medium
 - Scheme: mixed
-- Best for: Anything that should feel like a considered editorial — quarterly reviews, internal readouts, studio updates, creative-agency presentations. Equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives.
-- Avoid for: Contexts that need to feel urgent, punchy, or sales-driven — the palette and rhythm are intentionally quiet.
+- Best for: Anything that should feel like a considered editorial, quarterly reviews, internal readouts, studio updates, creative-agency presentations. Equally good for any deck that wants to feel warm and unhurried rather than corporate, including research recaps, book or program announcements, and team retrospectives.
+- Avoid for: Contexts that need to feel urgent, punchy, or sales-driven, the palette and rhythm are intentionally quiet.
 
 ## Visual Snapshot
 
-A serif-led editorial presentation system in the register of a literary quarterly or art-book monograph. Display type runs in Source Serif 4 at weight 500 with optical-size axis engaged, scaling up to 220px for cover and stat moments. The palette pairs a deep forest green (#2e4a2a) with a dusty rose pink (#e89cb1) over an oat-cream paper ground (#efe7d4), with JetBrains Mono as the editorial chrome (labels, captions, axis ticks). The aesthetic is closer to a Penguin classic, Apartamento spread, or quiet annual report than a tech keynote — confident, paper-feeling, and committed to a small color vocabulary.
+A serif-led editorial presentation system in the register of a literary quarterly or art-book monograph. Display type runs in Source Serif 4 at weight 500 with optical-size axis engaged, scaling up to 220px for cover and stat moments. The palette pairs a deep forest green (#2e4a2a) with a dusty rose pink (#e89cb1) over an oat-cream paper ground (#efe7d4), with JetBrains Mono as the editorial chrome (labels, captions, axis ticks). The aesthetic is closer to a Penguin classic, Apartamento spread, or quiet annual report than a tech keynote, confident, paper-feeling, and committed to a small color vocabulary.
 
-Editorial Forest is a serif-led editorial presentation system in the tonal register of a Penguin classic, a quiet annual report, or an art-book spread. The system's foundational premise is a single, confident typographic voice — Source Serif 4 — used at extreme scale (up to 220px) for headlines and stat figures, with JetBrains Mono playing the supporting role of editorial chrome (labels, captions, axis ticks, page footlines).
+Editorial Forest is a serif-led editorial presentation system in the tonal register of a Penguin classic, a quiet annual report, or an art-book spread. The system's foundational premise is a single, confident typographic voice, Source Serif 4, used at extreme scale (up to 220px) for headlines and stat figures, with JetBrains Mono playing the supporting role of editorial chrome (labels, captions, axis ticks, page footlines).
 
 ## Preview Ingredients
 
@@ -33,7 +33,7 @@ Editorial Forest is a serif-led editorial presentation system in the tonal regis
 - Signature move: Source Serif 4 at weight 500 for every headline, body, and display moment. Optical-size axis engaged for size-aware letterforms.
 - Signature move: JetBrains Mono at weight 500 uppercase with wide tracking (0.14em–0.18em) for every label, caption, axis tick, and footline.
 - Signature move: Display type scales to 220px for cover and stat-figure moments; 96px for primary headlines; 56–84px for card titles.
-- Signature move: 2px hairline rules separate stacked sections — never thicker, never colored beyond region context.
+- Signature move: 2px hairline rules separate stacked sections, never thicker, never colored beyond region context.
 
 ## International / CJK Preview Note
 

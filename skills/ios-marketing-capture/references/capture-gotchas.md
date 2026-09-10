@@ -14,7 +14,7 @@ Fix: call `<ActivityManager>.shared.endImmediately()` at the very start of the m
 
 ### 2. Don't re-seed on every locale
 
-Seeding SwiftData + CloudKit per locale causes sync churn and crashes. The SwiftData store persists across relaunches — the data is locale-agnostic demo content, so seed **once** on the first run and skip subsequent runs:
+Seeding SwiftData + CloudKit per locale causes sync churn and crashes. The SwiftData store persists across relaunches, the data is locale-agnostic demo content, so seed **once** on the first run and skip subsequent runs:
 
 ```swift
 contentVM.fetchItems()
@@ -48,7 +48,7 @@ Then in the step's `cleanup`, post the notification and allow **at least 900ms**
 
 ### 5. NavigationPath can't be popped from outside
 
-If a child view holds `@State private var navigationPath = NavigationPath()` and a deep link pushes onto it, the coordinator can't reach in to pop. Solution: **reorder your capture sequence** so screens that push onto a stack come AFTER screens that need a clean stack. Example: capture Shelf first, then push into Coffee Detail — don't do it the other way around.
+If a child view holds `@State private var navigationPath = NavigationPath()` and a deep link pushes onto it, the coordinator can't reach in to pop. Solution: **reorder your capture sequence** so screens that push onto a stack come AFTER screens that need a clean stack. Example: capture Shelf first, then push into Coffee Detail, don't do it the other way around.
 
 ### 6. Widget views normally live in the extension target only
 
@@ -65,7 +65,7 @@ Without an explicit style, `ProgressView` determinate renders as a red circle-wi
 
 ### 8. `.containerBackground(for: .widget)` is a no-op outside widget context
 
-When you render a widget view via ImageRenderer in the app, its `.containerBackground` does nothing — the widget's background is transparent, and pixels outside the content are bare. You must wrap the widget render with an explicit background color + rounded rect clip:
+When you render a widget view via ImageRenderer in the app, its `.containerBackground` does nothing, the widget's background is transparent, and pixels outside the content are bare. You must wrap the widget render with an explicit background color + rounded rect clip:
 
 ```swift
 content()
@@ -83,11 +83,11 @@ If the user asks for a "6.5\" iPhone" (legacy App Store size), note that iOS 26+
 
 ### 10. Locale launch arguments
 
-Pass `-AppleLanguages (xx) -AppleLocale xx` at every `simctl launch`. The parens around the language code are mandatory (it's a plist array literal). Use `Locale.current.language.languageCode?.identifier` for folder naming — it's more robust than `Locale.current.identifier` which may include region suffixes like `en_US`.
+Pass `-AppleLanguages (xx) -AppleLocale xx` at every `simctl launch`. The parens around the language code are mandatory (it's a plist array literal). Use `Locale.current.language.languageCode?.identifier` for folder naming, it's more robust than `Locale.current.identifier` which may include region suffixes like `en_US`.
 
 ### 11. SwiftUI animations in ImageRenderer
 
-`ImageRenderer` captures a single frame — it doesn't wait for animations. If your component has an `.onAppear` animation (chart drawing, number counting up), the render may capture the initial state. Either disable the animation in capture mode or add an explicit delay before rendering:
+`ImageRenderer` captures a single frame, it doesn't wait for animations. If your component has an `.onAppear` animation (chart drawing, number counting up), the render may capture the initial state. Either disable the animation in capture mode or add an explicit delay before rendering:
 
 ```swift
 try? await Task.sleep(for: .milliseconds(500))  // let onAppear animations finish

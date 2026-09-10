@@ -4,7 +4,7 @@ Long-form narrative template for copy that needs a full arc: landing pages,
 App Store descriptions, long IG/TikTok captions, slideshow/carousel stacks,
 email, and thread-style social posts.
 
-Read `SKILL.md` first — levers, specificity, and the cold-stranger test still
+Read `SKILL.md` first, levers, specificity, and the cold-stranger test still
 apply. This file is the **sequence**: which beat comes when, and what each beat
 must do. Format-specific length and layout rules live in the medium reference
 (`landing-pages.md`, `ig-captions.md`, etc.).
@@ -12,7 +12,7 @@ must do. Format-specific length and layout rules live in the medium reference
 **Do not use this skeleton for:** in-app microcopy, screenshot headlines (8-word
 rule), profile bios, or button labels. Those formats are too compressed.
 
-**Also not for editorial long-form.** This is a *sales* arc — it exists to
+**Also not for editorial long-form.** This is a *sales* arc, it exists to
 convert, and it closes on a CTA. A blog post, essay, newsletter, or thread
 whose job is to teach, argue, or tell belongs to the project's available
 editorial writing workflow, which should use an editorial arc
@@ -22,21 +22,21 @@ that editorial workflow.
 
 Note the deliberate contradiction between the two: **Payoff is mandatory
 here** (see step 5) and **conclusions are optional there**. Both are right
-inside their own arc — a sales arc has to close because the close is the
+inside their own arc, a sales arc has to close because the close is the
 point, while an editorial arc already discharged its promise in the Main
 Points. Don't blend them.
 
 ## When to Open This File
 
-Open when the deliverable is a **story arc** — multiple paragraphs or slides
+Open when the deliverable is a **story arc**, multiple paragraphs or slides
 that move a cold stranger from recognition to action. If you're only writing
 one headline or one caption hook, use the format reference instead.
 
 Pair with:
-- `landing-pages.md` — map beats to page sections
-- `ig-captions.md` — long-caption mode (hook-overlay)
+- `landing-pages.md`, map beats to page sections
+- `ig-captions.md`, long-caption mode (hook-overlay)
 - The repo-local `/slideshow-creator` skill owns the complete deliverable; this file provides one beat per slide cluster.
-- `appstore-descriptions.md` — opening through closing payoff
+- `appstore-descriptions.md`, opening through closing payoff
 
 ## The Skeleton
 
@@ -55,7 +55,7 @@ from a stranger instead of help from someone who understands.
 
 ## 1. HOOK
 
-**Principle:** Schwartz's Stages of Awareness — match the reader's exact belief
+**Principle:** Schwartz's Stages of Awareness, match the reader's exact belief
 about their situation *right now*, not generic attention-grabbing.
 
 **The mechanism:** The hook's job is recognition, not novelty. Name the moment
@@ -89,7 +89,7 @@ doesn't match where the reader actually is. See Hook Gut Check in `SKILL.md`.
 **Principle:** Loss aversion + Halbert's sensory specificity.
 
 **The mechanism:** People act harder to avoid a concrete loss than to chase an
-equivalent abstract gain. The cost must be specific and physical — a scene they
+equivalent abstract gain. The cost must be specific and physical, a scene they
 can feel, not a restated complaint.
 
 **Write agitation as a scene, not a summary:**
@@ -111,7 +111,7 @@ caption hook line. Save the full scene for long captions and landing body copy.
 
 ## 3. EMPATHIZE
 
-**Principle:** Cialdini's liking / rapport — persuasion from someone who "gets
+**Principle:** Cialdini's liking / rapport, persuasion from someone who "gets
 it" faces less resistance than the same argument from a perceived outsider.
 
 **The mechanism:** Bridge agitation and solution. Acknowledge the reader isn't
@@ -125,8 +125,8 @@ people in it to know why the obvious fixes fail.
 - "You're not behind. The advice just wasn't written for your situation."
 - "I used to [specific failed behavior] until I realized [insight]."
 
-**Fails when:** Skipped entirely — the solution reads as a pitch from a
-stranger. Or overdone — three paragraphs of shared suffering before any value
+**Fails when:** Skipped entirely, the solution reads as a pitch from a
+stranger. Or overdone, three paragraphs of shared suffering before any value
 kills momentum.
 
 **Rule of thumb:** One beat. One to three sentences. Then move to the mechanism.
@@ -135,7 +135,7 @@ kills momentum.
 
 ## 4. SOLVE
 
-**Principle:** Hopkins' specificity-as-proof + Ogilvy's big idea — a named,
+**Principle:** Hopkins' specificity-as-proof + Ogilvy's big idea, a named,
 specific mechanism reads as evidence; a vague solution reads as marketing noise.
 
 **The mechanism:** Name *how* the outcome happens. Not "we help you grow" but
@@ -152,7 +152,7 @@ specific mechanism reads as evidence; a vague solution reads as marketing noise.
 "We help you stay organized" convinces no one.
 
 **Product placement:** For organic short-form (UGC, native moments), the app
-is the tool inside the scene — not a pitch paragraph. See
+is the tool inside the scene, not a pitch paragraph. See
 `short-form-video.md`. The skeleton still applies to the *caption* or voiceover
 arc; the video shows the solve in action.
 
@@ -160,7 +160,7 @@ arc; the video shows the solve in action.
 
 ## 5. PAYOFF
 
-**Principle:** Sugarman's buying-moment psychology — the reader acts on a vivid
+**Principle:** Sugarman's buying-moment psychology, the reader acts on a vivid
 picture of their own after-state, not a logical feature recap.
 
 **The mechanism:** Show them living in the result. What does Tuesday morning
@@ -174,10 +174,10 @@ end are the most common failure mode.
 
 - Weak: "Download now to get started on your fitness journey."
 - Strong: "Next leg day, you'll walk in knowing exactly what you lifted last
-  time — and whether today's the day to add five pounds."
+  time, and whether today's the day to add five pounds."
 
 Stack social proof here when it's real and specific: one quote, one number, one
-recognizable name — not a logo wall.
+recognizable name, not a logo wall.
 
 Close with one CTA that names the next physical action ("Start logging",
 "Try it free", "Read the caption below 👇"). The payoff paints the life; the
@@ -196,7 +196,7 @@ CTA is one step.
 | Hook-overlay video | On-screen text (hook only) | Caption opening | Caption mid | Caption body | Caption close |
 
 You may merge beats when space is tight (Hook + Agitate in slide 1; Empathize
-woven into Solve). Never skip Payoff — compress it to one line if needed.
+woven into Solve). Never skip Payoff, compress it to one line if needed.
 
 ---
 
@@ -204,15 +204,15 @@ woven into Solve). Never skip Payoff — compress it to one line if needed.
 
 Before calling long-form copy done, verify each beat:
 
-1. **Hook** — Cold-stranger test passes. Reader thinks "that's me" or "wait,
+1. **Hook**, Cold-stranger test passes. Reader thinks "that's me" or "wait,
    what?" Wrong awareness stage? Rewrite hook only.
-2. **Agitate** — Can you picture a scene? Is there a concrete cost (time,
+2. **Agitate**, Can you picture a scene? Is there a concrete cost (time,
    money, embarrassment, physical feeling)? If it's abstract, sharpen.
-3. **Empathize** — Would a skeptical reader feel understood, not sold to?
+3. **Empathize**, Would a skeptical reader feel understood, not sold to?
    If it reads like marketing, add one line of rapport or cut the pitch tone.
-4. **Solve** — Can you name the mechanism in one sentence? Is there proof?
+4. **Solve**, Can you name the mechanism in one sentence? Is there proof?
    If it's a feature list, pick one mechanism and lead with it.
-5. **Payoff** — Read only the last paragraph. Is it a recap or a life?
+5. **Payoff**, Read only the last paragraph. Is it a recap or a life?
    If it summarizes earlier points, rewrite as after-state.
 
 Then run the `unslop` skill's judgment checklist (`references/ai-slop-checklist.md`)
@@ -229,13 +229,13 @@ same.
 me what you benched last Tuesday if I paid you.
 
 **EMPATHIZE:** It's not because you're slacking. Most apps let you log sets.
-None tell you when you're actually ready to add weight — so you guess, stall,
+None tell you when you're actually ready to add weight, so you guess, stall,
 and wonder if genetics won.
 
 **SOLVE:** GainsLog tracks every set in two taps and flags the exact session
 when your reps and RPE say "add five pounds."
 
 **PAYOFF:** Next month, you're not guessing. You walk up to the bar knowing
-it's load day — and you've got the log to prove you earned it.
+it's load day, and you've got the log to prove you earned it.
 
-**CTA:** Link in bio — first week free.
+**CTA:** Link in bio, first week free.

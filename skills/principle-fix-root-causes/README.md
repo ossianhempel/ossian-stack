@@ -9,8 +9,8 @@ A debugging principle: trace each symptom to its root cause and fix it there.
 It is kept as its own skill rather than folded into `simplify-code` because it
 governs a different moment. `simplify-code` restructures code that already works
 and explicitly is not a bug hunt; this one applies while you are chasing a
-failure. The one piece that does transfer — a guard added to silence a crash is
-a symptom fix, and fix the pattern rather than the instance — is stated in
+failure. The one piece that does transfer, a guard added to silence a crash is
+a symptom fix, and fix the pattern rather than the instance, is stated in
 `simplify-code` alongside rules 5 and 12.
 
 To update:

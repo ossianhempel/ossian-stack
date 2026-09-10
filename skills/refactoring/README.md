@@ -24,7 +24,7 @@ Kept: the `how` skill reference, which this plugin does ship.
 Also dropped: a hardcoded default refactoring model, since model availability is
 not something a skill should assume.
 
-Boundary with the sibling skills here — `simplify-code` makes settled code
+Boundary with the sibling skills here, `simplify-code` makes settled code
 readable without moving it; this skill moves modules, APIs, and call graphs.
 
 To update:

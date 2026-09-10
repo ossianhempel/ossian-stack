@@ -10,7 +10,7 @@ Guidelines:
 - Seed **enough data that every captured screen looks populated**. Audit the screen list against the seed.
 - Use realistic content: real place names, plausible numbers, varied states (some items "running low", some "fresh", some with images, some without).
 - If the app uses SwiftData, write directly to the `ModelContext`. If Core Data, use the managed object context. If a REST backend, seed via the local cache/store layer.
-- Make seeding **idempotent** — check if data already exists before inserting. The store persists across simulator relaunches, and re-seeding per locale causes CloudKit sync churn and crashes.
+- Make seeding **idempotent**, check if data already exists before inserting. The store persists across simulator relaunches, and re-seeding per locale causes CloudKit sync churn and crashes.
 - Include enough variety to fill different UI states: empty states should NOT appear unless they're a marketing screen.
 
 Minimal shape:

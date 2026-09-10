@@ -388,14 +388,14 @@ gplay orders batch-get \
 ```
 
 ### Refund order
-`orders refund` is a destructive write and requires `--confirm` — without it the
+`orders refund` is a destructive write and requires `--confirm`, without it the
 command refuses to run.
 ```bash
 gplay orders refund \
   --package com.example.app \
   --order-id GPA.1234-5678-9012-34567 \
   --revoke \    # Also revoke entitlement/access
-  --confirm     # Required — refund is irreversible
+  --confirm     # Required, refund is irreversible
 ```
 
 ## Security Best Practices

@@ -22,10 +22,10 @@ Keep in Claude:
 
 - design, API design, architecture, naming, UX judgment
 - tasks where writing the spec IS the work (ambiguity = design)
-- tiny edits (~<20 lines, single obvious change) — delegation overhead loses
+- tiny edits (~<20 lines, single obvious change), delegation overhead loses
 - anything needing session tools: MCP (browser/computer-use/chronicle), 1Password, secrets
-- destructive/irreversible ops, releases, pushes, GitHub mutations — Claude-side per git rules
-- review of Codex output — never delegated, never skipped
+- destructive/irreversible ops, releases, pushes, GitHub mutations, Claude-side per git rules
+- review of Codex output, never delegated, never skipped
 
 Mixed task: Claude designs first, freezes spec, delegates build-out.
 Heuristic: prompt reads as a work order → delegate; writing it forces decisions → design, Claude.
@@ -48,8 +48,8 @@ command codex exec --yolo -C <repo> \
 - `-m gpt-5.6-sol` at `medium` effort is the house default for delegated work. Pin
   both explicitly rather than inheriting `~/.codex/config.toml`, so a config change
   cannot silently alter what delegation means here. Raise to `high` for a genuinely
-  hard problem — a subtle concurrency bug, a migration whose ordering is not
-  obvious — and say why in the same breath. Delegated work arrives as a frozen
+  hard problem, a subtle concurrency bug, a migration whose ordering is not
+  obvious, and say why in the same breath. Delegated work arrives as a frozen
   spec, so the reasoning it needs is usually lower than the reasoning that produced
   the spec.
 - `--yolo` is the house default; Codex may run commands/tests freely. Keep prompts scoped to the target repo.
@@ -60,7 +60,7 @@ command codex exec --yolo -C <repo> \
 - parallel independent tasks OK: separate repos/dirs, separate `-o` files
 - outside a git repo add `--skip-git-repo-check`
 
-Follow-up fixes — cheaper than fresh runs, keeps context. `resume` has no `-C`/`--yolo`: run from the repo dir, spell the long flag:
+Follow-up fixes, cheaper than fresh runs, keeps context. `resume` has no `-C`/`--yolo`: run from the repo dir, spell the long flag:
 
 ```bash
 (cd <repo> && command codex exec resume --last \

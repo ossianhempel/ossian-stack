@@ -7,7 +7,7 @@ Read for drafting approved screens or implementing the chosen flow. Follow the s
 For each screen in the confirmed blueprint, draft the full content:
 
 - **Headline** (bold, short, action-oriented)
-- **Subheadline** (if needed — one line of supporting text)
+- **Subheadline** (if needed, one line of supporting text)
 - **Options/items** (with emoji icons where appropriate)
 - **CTA button text**
 - **Any stats or social proof copy**
@@ -18,7 +18,7 @@ Present related screens together. Ask only for unresolved new content choices; u
 - Write like a human, not a marketer. Short sentences. No jargon.
 - Every headline should pass the "would I say this to a friend?" test
 - Options should use the user's language, not technical terms
-- Stats should feel specific and credible — round numbers feel fake
+- Stats should feel specific and credible, round numbers feel fake
 - CTAs should describe what happens next: "Pick my first [items]" not "Continue"
 
 ---
@@ -31,7 +31,7 @@ Build the onboarding flow in the user's app.
 Before writing any code, understand:
 - Framework and UI toolkit (SwiftUI, UIKit, React Native, Flutter, Jetpack Compose, etc.)
 - Navigation pattern (NavigationStack, UINavigationController, React Navigation, etc.)
-- Existing onboarding code (if any — extend or replace?)
+- Existing onboarding code (if any, extend or replace?)
 - Design system (colours, fonts, component library, spacing conventions)
 - State management approach
 - How the app currently handles first-launch detection
@@ -41,10 +41,10 @@ Before writing any code, understand:
 For each screen in the blueprint:
 
 1. **Create the view/screen** following the app's existing code patterns and conventions
-2. **Wire up navigation** — screens should flow forward with back button support
-3. **Add the progress bar** — shows position in the total flow
-4. **Store user responses** — questionnaire answers should be persisted (these inform personalisation and can be sent to analytics)
-5. **Implement interactions** — tinder swipes, grid selection, multi-select checkboxes, etc.
+2. **Wire up navigation**, screens should flow forward with back button support
+3. **Add the progress bar**, shows position in the total flow
+4. **Store user responses**, questionnaire answers should be persisted (these inform personalisation and can be sent to analytics)
+5. **Implement interactions**, tinder swipes, grid selection, multi-select checkboxes, etc.
 
 ### Step 3: Build the App Demo Screen
 
@@ -73,6 +73,6 @@ This is the hardest screen. Approach:
 
 ### Step 6: Implement the First-Session Handoff
 
-Onboarding isn't done when the paywall closes — it's done when the user completes their first real action inside the app. Implement the handoff strategy chosen in Phase 6 before calling the flow complete. Read [first-session handoff](first-session-handoff.md) for details.
+Onboarding isn't done when the paywall closes, it's done when the user completes their first real action inside the app. Implement the handoff strategy chosen in Phase 6 before calling the flow complete. Read [first-session handoff](first-session-handoff.md) for details.
 
 ---

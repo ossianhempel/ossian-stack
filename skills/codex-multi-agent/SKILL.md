@@ -5,7 +5,7 @@ description: "Coordinate parallel Codex subagents while staying responsive to th
 
 # Codex Multi-Agent
 
-Codex sessions only — the spawn tools are Codex's.
+Codex sessions only, the spawn tools are Codex's.
 
 Stay available to the user while delegating substantive work. Send focused,
 read-only scouts out in parallel, and give the implementation to owned workers.
@@ -34,7 +34,7 @@ worker has actually failed.
 ## fork_turns gates every override
 
 `model` and `reasoning_effort` are accepted only when `fork_turns` is `"none"`
-or a positive integer string. On `"all"` — or with the parameter omitted — the
+or a positive integer string. On `"all"`, or with the parameter omitted, the
 agent inherits the parent's model and effort and **silently ignores** what you
 passed.
 

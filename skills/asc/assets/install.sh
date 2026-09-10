@@ -20,7 +20,7 @@ REPO_ROOT="${1:?usage: install.sh <repo_root> [ci_scripts_dir]}"
 CI_DIR_REL="${2:-ci_scripts}"
 
 [ -f "$REPO_ROOT/.asc-release.json" ] || {
-  echo "error: $REPO_ROOT/.asc-release.json not found — copy and fill assets/.asc-release.json first." >&2
+  echo "error: $REPO_ROOT/.asc-release.json not found, copy and fill assets/.asc-release.json first." >&2
   exit 1
 }
 

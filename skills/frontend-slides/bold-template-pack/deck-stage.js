@@ -1,17 +1,17 @@
 /**
- * <deck-stage> — reusable web component for HTML decks.
+ * <deck-stage>, reusable web component for HTML decks.
  *
  * Handles:
- *  (a) speaker notes — reads <script type="application/json" id="speaker-notes">
+ *  (a) speaker notes, reads <script type="application/json" id="speaker-notes">
  *      and posts {slideIndexChanged: N} to the parent window on nav.
- *  (b) keyboard navigation — ←/→, PgUp/PgDn, Space, Home/End, number keys.
+ *  (b) keyboard navigation, ←/→, PgUp/PgDn, Space, Home/End, number keys.
  *  (c) press R to reset to slide 0 (with a tasteful keyboard hint).
  *  (d) bottom-center overlay showing slide count + hints, fades out on idle.
- *  (e) auto-scaling — inner canvas is a fixed design size (default 1920×1080)
+ *  (e) auto-scaling, inner canvas is a fixed design size (default 1920×1080)
  *      scaled with `transform: scale()` to fit the viewport, letterboxed.
- *      Set the `noscale` attribute to render at authored size (1:1) — the
+ *      Set the `noscale` attribute to render at authored size (1:1), the
  *      PPTX exporter sets this so its DOM capture sees unscaled geometry.
- *  (f) print — `@media print` lays every slide out as its own page at the
+ *  (f) print, `@media print` lays every slide out as its own page at the
  *      design size, so the browser's Print → Save as PDF produces a clean
  *      one-page-per-slide PDF with no extra setup.
  *
@@ -19,7 +19,7 @@
  * `visibility: hidden` + `opacity: 0`, so their state (videos, iframes,
  * form inputs, React trees) is preserved across navigation.
  *
- * Lifecycle event — the component dispatches a `slidechange` CustomEvent on
+ * Lifecycle event, the component dispatches a `slidechange` CustomEvent on
  * itself whenever the active slide changes (including the initial mount).
  * The event bubbles and composes out of shadow DOM, so you can listen on
  * the <deck-stage> element or on document:
@@ -103,7 +103,7 @@
       visibility: visible;
     }
 
-    /* Tap zones for mobile — back/forward thirds like Stories.
+    /* Tap zones for mobile, back/forward thirds like Stories.
        Transparent, no visible UI, don't block the overlay. */
     .tapzones {
       position: fixed;
@@ -386,7 +386,7 @@
       this._totalEl = overlay.querySelector('.total');
     }
 
-    /** @page must live in the document stylesheet — it's a no-op inside
+    /** @page must live in the document stylesheet, it's a no-op inside
      *  shadow DOM. Inject/update a single <head> style tag so the print
      *  sheet matches the design size and Save-as-PDF yields one slide per
      *  page with no margins. */
@@ -527,7 +527,7 @@
     _fit() {
       if (!this._canvas) return;
       // PPTX export sets noscale so the DOM capture sees authored-size
-      // geometry — the scaled canvas is in shadow DOM, so the exporter's
+      // geometry, the scaled canvas is in shadow DOM, so the exporter's
       // resetTransformSelector can't reach .canvas.style.transform directly.
       if (this.hasAttribute('noscale')) {
         this._canvas.style.transform = 'none';

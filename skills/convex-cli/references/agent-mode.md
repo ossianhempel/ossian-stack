@@ -1,4 +1,4 @@
-# Convex CLI — agent mode
+# Convex CLI, agent mode
 
 ## Why `convex dev` is special
 
@@ -20,7 +20,7 @@ CONVEX_AGENT_MODE=anonymous npx convex dev --once
 
 Or add `CONVEX_AGENT_MODE=anonymous` to `.env.local`.
 
-This runs a **local anonymous** backend — separate from the user's cloud dev deployment. Good for codegen and function testing without OAuth; not a substitute for testing against their real deployment data.
+This runs a **local anonymous** backend, separate from the user's cloud dev deployment. Good for codegen and function testing without OAuth; not a substitute for testing against their real deployment data.
 
 ## One-shot sync options
 

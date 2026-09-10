@@ -136,7 +136,7 @@ components:
     description: "Green sticky variant."
   post-it-orange:
     background: "{colors.orange}"
-    description: "Orange sticky variant. Flat fill (no gradient) — the only post-it that ships flat."
+    description: "Orange sticky variant. Flat fill (no gradient), the only post-it that ships flat."
   post-it-purple:
     background: "{colors.purple}"
     description: "Purple sticky variant. Flat fill."
@@ -208,7 +208,7 @@ components:
     opacity: 0.15
     stroke: "{colors.ink}"
     strokeWidth: 3
-    description: "Decorative SVG mark placed absolutely in slide corners — a circle, squiggle, triangle, line, or X+ pair. All at 0.15 opacity, all in 3px ink stroke. Slides have 0–2 doodles each."
+    description: "Decorative SVG mark placed absolutely in slide corners, a circle, squiggle, triangle, line, or X+ pair. All at 0.15 opacity, all in 3px ink stroke. Slides have 0–2 doodles each."
   timeline-connector:
     height: 60px
     pathStyle: "Q (quadratic) bezier curve at 0.3 opacity, stroke-dasharray '8 4', polygon arrowhead at end"
@@ -231,11 +231,11 @@ Use `deck-stage.js` or an equivalent inline stage scaler for final output: rende
 
 ## Overview
 
-Scatterbrain is a **Post-it-note-and-cork-board presentation system**. Every content block is a colored sticky note (`{components.post-it}`) layered onto one of three textured background variants — cork board, desk paper, or warm gradient — with red / blue / green / gold thumbtacks pinning the notes and translucent masking tape sometimes added on top. The visual metaphor is total: the deck is a creative-workshop wall, a brainstorming board, or a thinker's desk, and the content is the cluster of sticky notes pinned across it.
+Scatterbrain is a **Post-it-note-and-cork-board presentation system**. Every content block is a colored sticky note (`{components.post-it}`) layered onto one of three textured background variants, cork board, desk paper, or warm gradient, with red / blue / green / gold thumbtacks pinning the notes and translucent masking tape sometimes added on top. The visual metaphor is total: the deck is a creative-workshop wall, a brainstorming board, or a thinker's desk, and the content is the cluster of sticky notes pinned across it.
 
-The typeface stack pairs three Google Fonts with distinct emotional roles. **Shrikhand** is the display voice — a chunky decorative display serif with playful curves and high contrast. Used at weight 400 (the only weight available) for every headline, statement, feature icon glyph, stat value, and oversized callout. Its loud, friendly personality is the system's primary signal: it reads as hand-lettered marker pen rather than typeset publication. **Zilla Slab** is the body voice — a friendly modern slab serif with humanist proportions. Used at weights 300–700 for body paragraphs, list items, and labels. Its slab serifs match the warm hand-drawn register of Shrikhand without competing for attention. **Caveat** is the hand-script voice — a casual cursive. Used for personal notes, side annotations, label-script eyebrows, stat-divider quips, and any moment that should read as "scribbled on the note in pen."
+The typeface stack pairs three Google Fonts with distinct emotional roles. **Shrikhand** is the display voice, a chunky decorative display serif with playful curves and high contrast. Used at weight 400 (the only weight available) for every headline, statement, feature icon glyph, stat value, and oversized callout. Its loud, friendly personality is the system's primary signal: it reads as hand-lettered marker pen rather than typeset publication. **Zilla Slab** is the body voice, a friendly modern slab serif with humanist proportions. Used at weights 300–700 for body paragraphs, list items, and labels. Its slab serifs match the warm hand-drawn register of Shrikhand without competing for attention. **Caveat** is the hand-script voice, a casual cursive. Used for personal notes, side annotations, label-script eyebrows, stat-divider quips, and any moment that should read as "scribbled on the note in pen."
 
-The color philosophy is **pastel sticky-note palette on tactile paper backgrounds**. Seven sticky-note colors (`yellow`, `blue`, `pink`, `green`, `orange`, `purple`, plus bordered `white`) provide categorical variety; each has a deeper sibling that drives the 135° gradient fill. The ink (`{colors.ink}` — #2d2a26) is a soft warm charcoal rather than pure black, sitting comfortably on warm pastels. Three background variants — cork (`bg-cork`), paper (`bg-paper`), warm gradient (`bg-warm`) — provide tactile variation across slides so the deck doesn't read as monotonous. The pastels are pale enough that ink text remains legible on every sticky-note color without inversion.
+The color philosophy is **pastel sticky-note palette on tactile paper backgrounds**. Seven sticky-note colors (`yellow`, `blue`, `pink`, `green`, `orange`, `purple`, plus bordered `white`) provide categorical variety; each has a deeper sibling that drives the 135° gradient fill. The ink (`{colors.ink}`, #2d2a26) is a soft warm charcoal rather than pure black, sitting comfortably on warm pastels. Three background variants, cork (`bg-cork`), paper (`bg-paper`), warm gradient (`bg-warm`), provide tactile variation across slides so the deck doesn't read as monotonous. The pastels are pale enough that ink text remains legible on every sticky-note color without inversion.
 
 Depth comes from **soft drop shadows + small rotations + layered tactile elements** (pins, tape, doodles). The signature treatment: every post-it carries a soft blurred drop shadow (`2px 3px 15px {colors.shadow}`) that suggests a slight lift off the surface, plus a small rotation (±1° to ±15°) that reads as hand-placed rather than grid-snapped. Optional pins (red thumbtacks via `::before`) and tape (translucent white via `::after`) add tactile depth without using box-shadow tricks.
 
@@ -256,51 +256,51 @@ Depth comes from **soft drop shadows + small rotations + layered tactile element
 ### Palette
 
 **Sticky-note colors** (gradient-filled or flat):
-- **Yellow** (`{colors.yellow}` — #ffe066 → `{colors.yellow-deep}` — #ffd43b): Classic sticky-note yellow. Most common note color. The system's "default" sticky.
-- **Blue** (`{colors.blue}` — #a5d8ff → `{colors.blue-deep}` — #74c0fc): Soft sky blue. The system's "secondary" sticky.
-- **Pink** (`{colors.pink}` — #ffc9c9 → `{colors.pink-deep}` — #ff9f9f): Soft rose pink. The system's "warm accent" sticky.
-- **Green** (`{colors.green}` — #b2f2bb → `{colors.green-deep}` — #8ce99a): Mint green. The system's "cool accent" sticky.
-- **Orange** (`{colors.orange}` — #ffcc80): Warm peach-orange. Flat fill, no gradient. Used as a tertiary accent for variety.
-- **Purple** (`{colors.purple}` — #d0bfff): Lavender purple. Flat fill, no gradient. Used as a tertiary accent for variety.
+- **Yellow** (`{colors.yellow}`, #ffe066 → `{colors.yellow-deep}`, #ffd43b): Classic sticky-note yellow. Most common note color. The system's "default" sticky.
+- **Blue** (`{colors.blue}`, #a5d8ff → `{colors.blue-deep}`, #74c0fc): Soft sky blue. The system's "secondary" sticky.
+- **Pink** (`{colors.pink}`, #ffc9c9 → `{colors.pink-deep}`, #ff9f9f): Soft rose pink. The system's "warm accent" sticky.
+- **Green** (`{colors.green}`, #b2f2bb → `{colors.green-deep}`, #8ce99a): Mint green. The system's "cool accent" sticky.
+- **Orange** (`{colors.orange}`, #ffcc80): Warm peach-orange. Flat fill, no gradient. Used as a tertiary accent for variety.
+- **Purple** (`{colors.purple}`, #d0bfff): Lavender purple. Flat fill, no gradient. Used as a tertiary accent for variety.
 
 **Special note colors**:
 - **White** (`#fff`): A bordered white sticky used in timelines and comparisons where a "plain" or "neutral" note is needed. Always carries a 2px ink border because pure white otherwise disappears into the cream/paper backgrounds.
 
 **Paper / surface colors**:
-- **Cream** (`{colors.cream}` — #faf8f3): The lightest paper variant. Used inside the `bg-paper` and `bg-warm` background gradients.
-- **Paper** (`{colors.paper}` — #f7f5f0): The body background — sits just behind every slide as the page color visible through the bg overlays. Used as the inverted text color on dark ink surfaces.
+- **Cream** (`{colors.cream}`, #faf8f3): The lightest paper variant. Used inside the `bg-paper` and `bg-warm` background gradients.
+- **Paper** (`{colors.paper}`, #f7f5f0): The body background, sits just behind every slide as the page color visible through the bg overlays. Used as the inverted text color on dark ink surfaces.
 
 **Ink / text colors**:
-- **Ink** (`{colors.ink}` — #2d2a26): The structural color. All headlines, all body text, all borders, all doodle strokes. Slightly softer than pure black for warmth.
-- **Ink Light** (`{colors.ink-light}` — #5c5750): Secondary text color for body paragraphs, captions, and de-emphasized text.
+- **Ink** (`{colors.ink}`, #2d2a26): The structural color. All headlines, all body text, all borders, all doodle strokes. Slightly softer than pure black for warmth.
+- **Ink Light** (`{colors.ink-light}`, #5c5750): Secondary text color for body paragraphs, captions, and de-emphasized text.
 
 **Shadow tokens**:
-- `{colors.shadow}` (rgba(45, 42, 38, 0.15)): Soft drop shadow — used on every post-it.
-- `{colors.shadow-deep}` (rgba(45, 42, 38, 0.25)): Stronger contact shadow — used as the second layer of the post-it drop shadow.
+- `{colors.shadow}` (rgba(45, 42, 38, 0.15)): Soft drop shadow, used on every post-it.
+- `{colors.shadow-deep}` (rgba(45, 42, 38, 0.25)): Stronger contact shadow, used as the second layer of the post-it drop shadow.
 
 ### Defaults
 - **Default surface background**: pick one of `{components.bg-cork}` / `{components.bg-paper}` / `{components.bg-warm}` per slide. Cork is the default for tactile / wall-of-notes moments; paper for desk / focused-content moments; warm-gradient for hero / atmospheric moments.
-- **Default post-it color**: `{components.post-it-yellow}` — yellow is the most-common sticky and reads as the system's baseline.
-- **Default headline color**: `{colors.ink}` (#2d2a26) — Shrikhand display in soft warm charcoal on every post-it.
+- **Default post-it color**: `{components.post-it-yellow}`, yellow is the most-common sticky and reads as the system's baseline.
+- **Default headline color**: `{colors.ink}` (#2d2a26), Shrikhand display in soft warm charcoal on every post-it.
 - **Default body text color**: `{colors.ink-light}` (#5c5750) for paragraph body; `{colors.ink}` for list items and emphasized body.
 - **Default border color**: `{colors.ink}` for the white-note 2px border and for the feature-icon round border. Most sticky notes have no border (the gradient fill defines them).
-- **Default pin color**: `{components.pin}` (red) — the system's "default" thumbtack. Use blue / green / gold variants to match the post-it color underneath when visual variety is needed.
-- **Default tape**: applied sparingly — typically on hero / statement post-its where the note feels "officially posted" with both a pin and a strip of tape.
+- **Default pin color**: `{components.pin}` (red), the system's "default" thumbtack. Use blue / green / gold variants to match the post-it color underneath when visual variety is needed.
+- **Default tape**: applied sparingly, typically on hero / statement post-its where the note feels "officially posted" with both a pin and a strip of tape.
 - **Default text color on ink surfaces**: `{colors.paper}` (#f7f5f0).
 - **Default decorative doodle color**: `{colors.ink}` at 0.15 opacity, 3px stroke.
 
-The seven sticky-note colors have **no fixed semantic meaning** — yellow is not "warning," green is not "success." They serve as a categorical palette where the choice signals "which note in the cluster is this." Cycle through colors for visual variety; pair gradient-filled notes (yellow, blue, pink, green) with flat-filled notes (orange, purple) for textural variation.
+The seven sticky-note colors have **no fixed semantic meaning**, yellow is not "warning," green is not "success." They serve as a categorical palette where the choice signals "which note in the cluster is this." Cycle through colors for visual variety; pair gradient-filled notes (yellow, blue, pink, green) with flat-filled notes (orange, purple) for textural variation.
 
 ## Typography
 
 ### Font Family
 The system has three Google Fonts each with a distinct role:
 
-- **Shrikhand** (display): A chunky decorative display serif with high stroke contrast, playful curves, and a hand-lettered marker-pen feel. Single weight (400). Used for every display moment — headlines, statements, titles, feature-icon glyphs, stat values, versus-circle text. Its loud personality is the system's primary identity; substituting another display serif loses the workshop voice.
+- **Shrikhand** (display): A chunky decorative display serif with high stroke contrast, playful curves, and a hand-lettered marker-pen feel. Single weight (400). Used for every display moment, headlines, statements, titles, feature-icon glyphs, stat values, versus-circle text. Its loud personality is the system's primary identity; substituting another display serif loses the workshop voice.
 - **Zilla Slab** (body): A friendly modern slab serif with humanist warmth. Multi-weight (300–700, with italic variants 300 and 400). Used at weight 400 for body paragraphs (the default), 300 for the lightest captions, 500–700 for emphasis. The slabs read as warm-handed rather than mechanical.
 - **Caveat** (hand-script): A casual cursive with multiple weights (400–700). Used for personal notes, side annotations, label-script eyebrows (uppercase tracked 0.15em), closing-slide sign-offs, decorative quips inside stat-divider rows.
 
-Italic exists for Zilla Slab (300 and 400 italic) but is rarely used — emphasis comes from weight switching or face switching, not from italics. Underline is not used.
+Italic exists for Zilla Slab (300 and 400 italic) but is rarely used, emphasis comes from weight switching or face switching, not from italics. Underline is not used.
 
 ### Type Scale
 
@@ -380,22 +380,22 @@ In every pattern, individual post-its sit on one of the three background texture
 | `{spacing.gap-sm}` | 2rem | Timeline row gap |
 
 ### Persistent Chrome
-The system has no persistent slide chrome — no progress bar, no slide counter, no nav hint. The custom thumbtack cursor is the only persistent visual signal. Navigation is purely keyboard / swipe / wheel driven.
+The system has no persistent slide chrome, no progress bar, no slide counter, no nav hint. The custom thumbtack cursor is the only persistent visual signal. Navigation is purely keyboard / swipe / wheel driven.
 
 ## Depth and Elevation
 
 ### Soft Drop Shadow (Primary Technique)
 The system's defining depth treatment is the **soft drop shadow** on every post-it, photo-frame, chart-card, and diagram-canvas: `2px 3px 15px {colors.shadow}, 0 1px 3px {colors.shadow-deep}`. The 15px-blur outer shadow with 2px horizontal and 3px vertical offset suggests the note hovers slightly above the cork or paper surface. The 1px-blur inner shadow with 1px vertical offset adds the contact shadow at the bottom edge. Together they read as "lifted note pinned to a board."
 
-This is the **only system that defines depth via soft blurred shadows** — most other templates in this library prohibit them. Scatterbrain embraces them because the visual metaphor depends on the tactile lift of a paper note off a textured surface.
+This is the **only system that defines depth via soft blurred shadows**, most other templates in this library prohibit them. Scatterbrain embraces them because the visual metaphor depends on the tactile lift of a paper note off a textured surface.
 
 ### Rotation (Secondary Technique)
 Every post-it carries a small rotation (±1° to ±15°). Hero / statement / feature post-its take small rotations (±1° to ±3°); accent / floating / closing-cluster post-its take larger rotations (±5° to ±15°). Rotations alternate direction across adjacent notes so the cluster reads as casually applied, not grid-snapped.
 
 ### Tactile Layering (Pins + Tape)
 Optional layered marks on individual post-its provide additional depth:
-- **Pin** (`{components.pin}`) — a 16px round red thumbtack via `::before` at the top-center of the note. The radial-gradient highlight + inset shadow + drop shadow make it read as a 3D bead.
-- **Tape** (`{components.tape}`) — an 80×25px translucent white tape strip via `::after` at the top-center, slightly rotated.
+- **Pin** (`{components.pin}`), a 16px round red thumbtack via `::before` at the top-center of the note. The radial-gradient highlight + inset shadow + drop shadow make it read as a 3D bead.
+- **Tape** (`{components.tape}`), an 80×25px translucent white tape strip via `::after` at the top-center, slightly rotated.
 
 Pins and tape can combine on a single note (the `.pin.tape` class pair). Color variants of pins (`pin-blue`, `pin-green`, `pin-gold`) match the underlying note color for visual cohesion.
 
@@ -415,38 +415,38 @@ The three background variants (`bg-cork`, `bg-paper`, `bg-warm`) and the full-vi
 Most surfaces are strict rectangles. Round shapes are reserved for icons, pins, and the versus-marker. The chart bars carry a subtle 3px round corner (inside SVG) for friendliness.
 
 ### Border Weights
-- **2px solid `{colors.ink}`** — used on the white-note border and on chart SVG `<rect>` strokes.
-- **3px solid `{colors.ink}`** — used on feature-icon round border and on doodle SVG paths.
-- **1px dashed rgba(ink, 0.2)** — used as stat-row hairline divider.
-- **1px solid rgba(ink, 0.1)** — used as compare-list row divider.
+- **2px solid `{colors.ink}`**, used on the white-note border and on chart SVG `<rect>` strokes.
+- **3px solid `{colors.ink}`**, used on feature-icon round border and on doodle SVG paths.
+- **1px dashed rgba(ink, 0.2)**, used as stat-row hairline divider.
+- **1px solid rgba(ink, 0.1)**, used as compare-list row divider.
 
 Borders are universally ink (warm charcoal). Colored borders do not appear.
 
 ### Decorative Element Types
 
-**Post-it** (`{components.post-it}`) — Colored sticky-note in one of seven variants (yellow, blue, pink, green, orange, purple, bordered-white). Padding from the `{spacing.post-it-pad-*}` scale. Always carries the soft drop shadow. Almost always carries a small rotation. Usually carries a pin and sometimes tape.
+**Post-it** (`{components.post-it}`), Colored sticky-note in one of seven variants (yellow, blue, pink, green, orange, purple, bordered-white). Padding from the `{spacing.post-it-pad-*}` scale. Always carries the soft drop shadow. Almost always carries a small rotation. Usually carries a pin and sometimes tape.
 
-**Pin** (`{components.pin}`) — Red thumbtack via `::before`. Default color red; variants blue, green, gold. Sits at top-center of the note.
+**Pin** (`{components.pin}`), Red thumbtack via `::before`. Default color red; variants blue, green, gold. Sits at top-center of the note.
 
-**Tape** (`{components.tape}`) — Translucent white masking-tape mark via `::after` at top-center of the note, slightly rotated.
+**Tape** (`{components.tape}`), Translucent white masking-tape mark via `::after` at top-center of the note, slightly rotated.
 
-**Feature icon** (`{components.feature-icon}`) — 60px round ink-bordered circle with a Shrikhand glyph (single character) inside. Used at the top of feature post-its as a category marker.
+**Feature icon** (`{components.feature-icon}`), 60px round ink-bordered circle with a Shrikhand glyph (single character) inside. Used at the top of feature post-its as a category marker.
 
-**Versus circle** (`{components.versus-circle}`) — Ink-filled circle with cream Shrikhand text, centered between two compare-post-its with absolute positioning. Carries its own drop shadow.
+**Versus circle** (`{components.versus-circle}`), Ink-filled circle with cream Shrikhand text, centered between two compare-post-its with absolute positioning. Carries its own drop shadow.
 
-**Photo frame** (`{components.photo-frame}`) — Polaroid-style white card with 1rem padding around a 4:3 inner image area. Same drop shadow as post-its; small rotation.
+**Photo frame** (`{components.photo-frame}`), Polaroid-style white card with 1rem padding around a 4:3 inner image area. Same drop shadow as post-its; small rotation.
 
-**Chart canvas** (`{components.chart-canvas}`) — White card hosting an inline SVG chart. Same drop shadow as post-its; small rotation. SVG charts use the post-it color palette (yellow, blue, pink, green) for bars / segments. Axis labels in Zilla Slab; value labels in Caveat.
+**Chart canvas** (`{components.chart-canvas}`), White card hosting an inline SVG chart. Same drop shadow as post-its; small rotation. SVG charts use the post-it color palette (yellow, blue, pink, green) for bars / segments. Axis labels in Zilla Slab; value labels in Caveat.
 
-**Diagram canvas** — White card hosting a circular donut / pie SVG. Same treatment as chart canvas. SVG segments use post-it palette; legend rows use ink text.
+**Diagram canvas**, White card hosting a circular donut / pie SVG. Same treatment as chart canvas. SVG segments use post-it palette; legend rows use ink text.
 
-**Stat row** (`{components.stat-row}`) — Label-value row inside a stat post-it. Zilla Slab label + Shrikhand stat-value, separated by a dashed ink-alpha bottom border.
+**Stat row** (`{components.stat-row}`), Label-value row inside a stat post-it. Zilla Slab label + Shrikhand stat-value, separated by a dashed ink-alpha bottom border.
 
-**Timeline node + connector** — Each timeline row has a left post-it (timeline node with phase-label Caveat caption) + a center dashed-bezier SVG connector + a right white-bordered post-it (timeline content body). Row direction alternates (left/right) via `flex-direction: row-reverse` on even rows.
+**Timeline node + connector**, Each timeline row has a left post-it (timeline node with phase-label Caveat caption) + a center dashed-bezier SVG connector + a right white-bordered post-it (timeline content body). Row direction alternates (left/right) via `flex-direction: row-reverse` on even rows.
 
-**Doodle SVG** (`{components.doodle}`) — Decorative SVG mark placed absolutely in slide corners: circle, squiggle, triangle, line, X+ pair. 3px ink stroke at 0.15 opacity. Slides have 0–2 doodles each.
+**Doodle SVG** (`{components.doodle}`), Decorative SVG mark placed absolutely in slide corners: circle, squiggle, triangle, line, X+ pair. 3px ink stroke at 0.15 opacity. Slides have 0–2 doodles each.
 
-**Custom cursor** — SVG thumbtack cursor (red outer circle + white center) replaces the default cursor when hovering over slides.
+**Custom cursor**, SVG thumbtack cursor (red outer circle + white center) replaces the default cursor when hovering over slides.
 
 ## Do's and Don'ts
 
@@ -454,7 +454,7 @@ Borders are universally ink (warm charcoal). Colored borders do not appear.
 - Pick a background variant per slide: `{components.bg-cork}` for "wall of notes" energy, `{components.bg-paper}` for "desk surface" focus, `{components.bg-warm}` for "morning light" atmosphere. Vary across slides for tactile variety.
 - Keep the SVG grain overlay (`{components.grain-overlay}`) on every slide at 4% opacity. It is the texture that ties the deck to its paper register.
 - Use Shrikhand for every display moment (headlines, titles, feature icons, stat values) and Zilla Slab for every body paragraph and list item.
-- Use Caveat for casual / personal notes — side annotations, decorative quips ("Jot it down before you forget!", ":)"), and label-script eyebrows. The hand-script is the system's most distinctive voice.
+- Use Caveat for casual / personal notes, side annotations, decorative quips ("Jot it down before you forget!", ":)"), and label-script eyebrows. The hand-script is the system's most distinctive voice.
 - Give every post-it a small rotation (±1° to ±15°). Alternate rotation direction across adjacent notes; nothing should align to a grid.
 - Apply the standard soft drop shadow (`2px 3px 15px shadow, 0 1px 3px shadow-deep`) to every post-it, photo-frame, chart-card, and diagram-canvas.
 - Pin every primary post-it with a red thumbtack via `::before`. Use color-matched pin variants (blue / green / gold) when the post-it color suggests it.
@@ -479,9 +479,9 @@ Borders are universally ink (warm charcoal). Colored borders do not appear.
 The system targets `100vw × 100vh` and uses `clamp()` throughout for fluid scaling. A single media query at `max-width: 900px` reflows multi-column grids and timelines to single-column, neutralizes some rotations (versus-circle becomes inline rather than absolute), and stacks compare-cards vertically.
 
 ### Scaling Behavior
-- Display headlines scale via `clamp(2.5rem, 5vw, 4.5rem)` patterns — fluid between minimum and maximum.
+- Display headlines scale via `clamp(2.5rem, 5vw, 4.5rem)` patterns, fluid between minimum and maximum.
 - Body text scales from 1rem at minimum to 1.25rem at maximum.
-- Post-it padding does not scale by viewport — fixed at the values in the spacing scale.
+- Post-it padding does not scale by viewport, fixed at the values in the spacing scale.
 - Drop shadows, pin sizes, tape sizes, and decorative SVG sizes are fixed regardless of viewport.
 
 ### Presenter Behavior
@@ -503,11 +503,11 @@ A `@media print` rule sets `page-break-after: always` on each slide with `min-he
 |---|---|---|---|
 | Display / Headline / Statement / Title / Stat-value / Feature-icon glyph | Shrikhand (400) | **站酷快乐体 ZCOOL KuaiLe** | regular (single weight) |
 | Body / List-item / Caption-subtitle | Zilla Slab (400) | **悠哉字体 Yozai** | regular |
-| Hand-script (Caveat) — Latin only | Caveat (400 / 500 / 600) | *(no CJK substitute)* | n/a |
+| Hand-script (Caveat), Latin only | Caveat (400 / 500 / 600) | *(no CJK substitute)* | n/a |
 
 ### Mixed-Content Strategy
 
-**Strategy A — display CJK + body CJK, each with its own personality.** Scatterbrain's whole register is playful-tactile-warmth, and the Chinese pairing should land in the same emotional register. **ZCOOL KuaiLe (站酷快乐体)** is a chunky decorative display face with rounded curves and a hand-drawn marker-pen feel — it is the closest CJK match for Shrikhand's chunky decorative serif voice. Both faces share the "loud and friendly" personality that defines the workshop-board aesthetic. **Yozai (悠哉字体)** is a warm rounded body face derived from M+ Rounded — it carries the same friendly humanist quality as Zilla Slab's slab serif, with soft terminals that feel like written notes rather than typeset text. Together the two CJK faces preserve the playful-chunky-display + warm-friendly-body rhythm that makes Scatterbrain's voice work.
+**Strategy A, display CJK + body CJK, each with its own personality.** Scatterbrain's whole register is playful-tactile-warmth, and the Chinese pairing should land in the same emotional register. **ZCOOL KuaiLe (站酷快乐体)** is a chunky decorative display face with rounded curves and a hand-drawn marker-pen feel, it is the closest CJK match for Shrikhand's chunky decorative serif voice. Both faces share the "loud and friendly" personality that defines the workshop-board aesthetic. **Yozai (悠哉字体)** is a warm rounded body face derived from M+ Rounded, it carries the same friendly humanist quality as Zilla Slab's slab serif, with soft terminals that feel like written notes rather than typeset text. Together the two CJK faces preserve the playful-chunky-display + warm-friendly-body rhythm that makes Scatterbrain's voice work.
 
 ### Loading
 
@@ -537,17 +537,17 @@ font-family: 'Zilla Slab', 'Yozai', serif;
 ### Aesthetic Notes for This System
 
 - **The 0.02em positive tracking on Shrikhand display must drop to 0** on ZCOOL KuaiLe. Tracked Chinese display characters look broken.
-- **Display line-height should open from 1.1 to 1.2–1.3** for ZCOOL KuaiLe — the rounded chunky strokes need more vertical breathing.
+- **Display line-height should open from 1.1 to 1.2–1.3** for ZCOOL KuaiLe, the rounded chunky strokes need more vertical breathing.
 - **Feature-icon round borders work beautifully with a single Chinese character** (新, 巧, 趣) inside the 60px circle at ZCOOL KuaiLe. The chunky display weight makes the single character read as a stamped category mark.
 - **Versus circles work with short Chinese words** (对比, 与) at smaller display weight; the cream-on-ink contrast carries through.
-- **The label-script Caveat eyebrow (uppercase tracked 0.15em) becomes the trickiest translation.** Options: (1) keep eyebrows in Latin (`CHAPTER ONE`, `THE SETUP`) for the hand-script signature; (2) replace with a Yozai eyebrow at 0.9rem, no tracking, no uppercase — which loses the categorical-label affordance. Option (1) preserves the system's most distinctive small voice and works well when the Latin eyebrow sits above a Chinese headline (the deck reads as a Chinese article with an English kicker, which is a common editorial convention).
-- **Personal notes / decorative quips in Caveat (`Jot it down before you forget!`, `:)`) should stay Latin** — the casual ballpoint script has no acceptable Chinese substitute. On Chinese-primary slides, treat hand-script moments as Latin margin notes; this can actually deepen the workshop voice (the deck reads as a Chinese brainstorm with English asides, which is plausible for any modern Chinese creative team).
-- **Post-it pins, tape, drop shadows, rotations, custom cursor, doodle SVGs, background textures** are all glyph-agnostic — they carry the playful-tactile system equally well behind Chinese content.
+- **The label-script Caveat eyebrow (uppercase tracked 0.15em) becomes the trickiest translation.** Options: (1) keep eyebrows in Latin (`CHAPTER ONE`, `THE SETUP`) for the hand-script signature; (2) replace with a Yozai eyebrow at 0.9rem, no tracking, no uppercase, which loses the categorical-label affordance. Option (1) preserves the system's most distinctive small voice and works well when the Latin eyebrow sits above a Chinese headline (the deck reads as a Chinese article with an English kicker, which is a common editorial convention).
+- **Personal notes / decorative quips in Caveat (`Jot it down before you forget!`, `:)`) should stay Latin**, the casual ballpoint script has no acceptable Chinese substitute. On Chinese-primary slides, treat hand-script moments as Latin margin notes; this can actually deepen the workshop voice (the deck reads as a Chinese brainstorm with English asides, which is plausible for any modern Chinese creative team).
+- **Post-it pins, tape, drop shadows, rotations, custom cursor, doodle SVGs, background textures** are all glyph-agnostic, they carry the playful-tactile system equally well behind Chinese content.
 - **Stat-row label-and-value pattern** works cleanly with Chinese labels (用户数量, 转化率) in Yozai and Latin numerical values in ZCOOL KuaiLe.
 
 ### Known CJK Gap
 
-Caveat — the system's most distinctive voice (the casual ballpoint hand-script that anchors every personal note) — has no CJK equivalent. There are handwritten-style Chinese web fonts (悠果手写体, 站酷庆科黄油体), but the cultural register of casual cursive handwriting differs sharply between Latin and CJK traditions, and no Chinese face will read as "the same voice as Caveat." The recommended workaround is to retain Caveat for Latin margin annotations even on otherwise-Chinese slides — the Chinese-body-with-English-handwriting pattern is common in modern Chinese editorial design and lands as authentic rather than as a translation gap.
+Caveat, the system's most distinctive voice (the casual ballpoint hand-script that anchors every personal note), has no CJK equivalent. There are handwritten-style Chinese web fonts (悠果手写体, 站酷庆科黄油体), but the cultural register of casual cursive handwriting differs sharply between Latin and CJK traditions, and no Chinese face will read as "the same voice as Caveat." The recommended workaround is to retain Caveat for Latin margin annotations even on otherwise-Chinese slides, the Chinese-body-with-English-handwriting pattern is common in modern Chinese editorial design and lands as authentic rather than as a translation gap.
 
 ## Iteration Guide
 
@@ -565,11 +565,11 @@ Caveat — the system's most distinctive voice (the casual ballpoint hand-script
 ## Known Gaps
 
 - The system loads three Google Fonts (Shrikhand, Zilla Slab, Caveat). Shrikhand is single-weight (400 only); attempting a heavier weight will fall back. Self-hosting is recommended for production.
-- The custom SVG thumbtack cursor (`{components.custom-cursor}`) does not render on all browsers identically — Safari and Firefox may scale or position the cursor hotspot differently than Chrome. On touch-only devices the cursor is irrelevant.
+- The custom SVG thumbtack cursor (`{components.custom-cursor}`) does not render on all browsers identically, Safari and Firefox may scale or position the cursor hotspot differently than Chrome. On touch-only devices the cursor is irrelevant.
 - The background textures (`bg-cork`, `bg-paper`, `bg-warm`) use combinations of CSS gradients and inline SVG data-URI patterns. Rendering is consistent across modern browsers but the tonal warmth varies slightly with screen color profiles.
 - Pins (`::before`) and tape (`::after`) consume both pseudo-element slots on a post-it. If additional decorative marks are needed (a corner curl, a stain, etc.), they would require a real child element instead of pseudo-elements.
 - The soft drop shadow on every post-it adds rendering overhead. Slides with 10+ post-its may show slight shadow rendering lag on lower-end devices.
 - The custom cursor and absolute-positioned pins / tape do not interact with screen readers as expected. The decorative elements should remain hidden from assistive tech.
-- Inline SVG charts (bar, donut, pie) are hardcoded — bar heights, segment paths, and labels are baked into the SVG. There is no data-binding layer; new chart values require manual SVG path / position recalculation.
+- Inline SVG charts (bar, donut, pie) are hardcoded, bar heights, segment paths, and labels are baked into the SVG. There is no data-binding layer; new chart values require manual SVG path / position recalculation.
 - The custom cursor (red thumbtack) appears on every slide including text-heavy ones, which may be visually noisy when users are reading body paragraphs. Treat the cursor as a deck-wide accent, not a per-slide affordance.
 - The mouse-wheel navigation lock (700ms) is unusual and may surprise users expecting smooth-scroll. Trackpad users especially may find the wheel-step behavior counter-intuitive.

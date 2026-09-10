@@ -41,7 +41,7 @@ Start from `scale(0.9)` or higher, combined with opacity. Even a barely-visible 
 
 ### Make popovers origin-aware
 
-Popovers should scale in from their trigger, not from center. The default `transform-origin: center` is wrong for almost every popover. **Exception: modals.** Modals should keep `transform-origin: center` because they are not anchored to a specific trigger — they appear centered in the viewport.
+Popovers should scale in from their trigger, not from center. The default `transform-origin: center` is wrong for almost every popover. **Exception: modals.** Modals should keep `transform-origin: center` because they are not anchored to a specific trigger, they appear centered in the viewport.
 
 ```css
 /* Radix UI */
@@ -104,7 +104,7 @@ CSS transitions can be interrupted and retargeted mid-animation. Keyframes resta
 
 When a crossfade between two states feels off despite trying different easings and durations, add subtle `filter: blur(2px)` during the transition.
 
-**Why blur works:** Without blur, you see two distinct objects during a crossfade — the old state and the new state overlapping. This looks unnatural. Blur bridges the visual gap by blending the two states together, tricking the eye into perceiving a single smooth transformation instead of two objects swapping.
+**Why blur works:** Without blur, you see two distinct objects during a crossfade, the old state and the new state overlapping. This looks unnatural. Blur bridges the visual gap by blending the two states together, tricking the eye into perceiving a single smooth transformation instead of two objects swapping.
 
 Combine blur with scale-on-press (`scale(0.97)`) for a polished button state transition:
 
@@ -173,13 +173,13 @@ These principles come from building Sonner (13M+ weekly npm downloads) and apply
 
 ### Cohesion matters
 
-Sonner's animation feels satisfying partly because the whole experience is cohesive. The easing and duration fit the vibe of the library. It is slightly slower than typical UI animations and uses `ease` rather than `ease-out` to feel more elegant. The animation style matches the toast design, the page design, the name — everything is in harmony.
+Sonner's animation feels satisfying partly because the whole experience is cohesive. The easing and duration fit the vibe of the library. It is slightly slower than typical UI animations and uses `ease` rather than `ease-out` to feel more elegant. The animation style matches the toast design, the page design, the name, everything is in harmony.
 
 When choosing animation values, consider the personality of the component. A playful component can be bouncier. A professional dashboard should be crisp and fast. Match the motion to the mood.
 
 ### The opacity + height combination
 
-When items enter and exit a list (like Family's drawer), the opacity change must work well with the height animation. This is often trial and error. There is no formula — you adjust until it feels right.
+When items enter and exit a list (like Family's drawer), the opacity change must work well with the height animation. This is often trial and error. There is no formula, you adjust until it feels right.
 
 ### Review your work the next day
 

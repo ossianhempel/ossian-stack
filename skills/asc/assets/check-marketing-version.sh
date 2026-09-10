@@ -28,7 +28,7 @@ asc_validate_shape "$target_version"
 
 # Stale-project guard: Xcode Cloud builds the committed .pbxproj, but this hook
 # reads project.yml. If they disagree, the dev bumped project.yml without
-# regenerating — fail so the push can't ship a project CI will build with the
+# regenerating, fail so the push can't ship a project CI will build with the
 # old version. Skipped automatically when the .pbxproj isn't committed.
 XCODEPROJ="$(asc_cfg "$ROOT_DIR" xcodeprojPath)"
 PBXPROJ="$ROOT_DIR/$XCODEPROJ/project.pbxproj"
@@ -51,12 +51,12 @@ fi
 
 if live_version="$(asc_live_app_store_version "$APP_APPLE_ID" "$LOOKUP_COUNTRY")"; then
   if [ -z "$live_version" ]; then
-    printf 'MARKETING_VERSION %s (no live App Store version yet — OK)\n' "$target_version"
+    printf 'MARKETING_VERSION %s (no live App Store version yet, OK)\n' "$target_version"
     exit 0
   fi
   asc_validate_shape "$live_version"
 else
-  # Lookup failed (offline / API error). Locally we warn and allow — the CI gate
+  # Lookup failed (offline / API error). Locally we warn and allow, the CI gate
   # (ci/validate_release_version.sh) fails closed and is the real enforcement.
   printf 'warning: could not reach the App Store to verify MARKETING_VERSION %s (lookup failed). Allowing push; Xcode Cloud enforces strictly.\n' "$target_version" >&2
   exit 0
@@ -70,7 +70,7 @@ fi
 cat >&2 <<EOF
 error: MARKETING_VERSION ($target_version) is not higher than the live App Store version ($live_version).
 
-Fix before pushing — Xcode Cloud will reject the build otherwise:
+Fix before pushing, Xcode Cloud will reject the build otherwise:
 
   1. Edit $PROJECT_YML and bump MARKETING_VERSION above $live_version.
   2. (cd "\$(dirname $PROJECT_YML)" && xcodegen)

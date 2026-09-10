@@ -6,7 +6,7 @@ Use this skill when you need to list or download financial reports (earnings, sa
 
 Google Play Console reports are **not available via the REST API**. They are stored as CSV/ZIP files in Google Cloud Storage (GCS) buckets:
 
-- **Bucket name**: varies by account — either `pubsite_prod_rev_<id>` or `pubsite_prod_<id>`. Always copy the exact URI from Play Console.
+- **Bucket name**: varies by account, either `pubsite_prod_rev_<id>` or `pubsite_prod_<id>`. Always copy the exact URI from Play Console.
 - **Financial reports**: `earnings/`, `sales/`, `payouts/`, `play_balance_krw/`, `wht_statements/` prefixes
 - **Statistics reports**: `stats/installs/`, `stats/ratings/`, `stats/crashes/`, `stats/store_performance/`, `financial-stats/subscriptions/` prefixes
 
@@ -15,7 +15,7 @@ The service account must have access to the GCS bucket (this access is granted a
 ## Prerequisites
 
 - A service account configured via `gplay auth login`
-- The GCS bucket ID (see below — this is **not** the same as the Play Console URL developer ID)
+- The GCS bucket ID (see below, this is **not** the same as the Play Console URL developer ID)
 - For financial reports: `VIEW_FINANCIAL_DATA` permission (service account must be added to Play Console with "View financial data" access)
 - For stats reports: `VIEW_APP_INFORMATION` permission (service account must be added to Play Console with "View app information" access)
 

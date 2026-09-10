@@ -89,7 +89,7 @@ Before reporting back:
    - **Protected-branch lock (priority fix)**: auxiliary worktree (not the
      primary repo checkout) has `main`, `master`, `develop`, or `dev` checked
      out. These block branch switches in the primary checkout. If clean, remove
-     immediately — no merge review needed. If dirty, ask before removing.
+     immediately, no merge review needed. If dirty, ask before removing.
    - **Stale metadata**: path is missing or `git worktree prune --dry-run`
      reports it. Safe to prune metadata with `git worktree prune`.
    - **Clean removable worktree**: path exists, is not the main worktree, and

@@ -2,10 +2,10 @@
 # Version-gate that runs inside Xcode Cloud, branch-aware to match the
 # two-workflow setup:
 #
-#   - non-release branches (develop, feature/*, hotfix/*): log only —
+#   - non-release branches (develop, feature/*, hotfix/*): log only,
 #     bumping MARKETING_VERSION every internal build is churn, and the
 #     build number (asc-next) already keeps CFBundleVersion unique.
-#   - protected release branches: STRICT — fail unless MARKETING_VERSION is
+#   - protected release branches: STRICT, fail unless MARKETING_VERSION is
 #     strictly greater than the live App Store version. Equal fails too;
 #     this standard never auto-bumps (bump deliberately in project.yml).
 #
@@ -14,7 +14,7 @@
 set -eu
 
 if [ "${CI_XCODE_CLOUD:-false}" != "true" ] && [ "${CI:-false}" != "TRUE" ]; then
-  echo "Not in Xcode Cloud — skipping release version validation."
+  echo "Not in Xcode Cloud, skipping release version validation."
   exit 0
 fi
 
@@ -28,7 +28,7 @@ PROJECT_NAME="$(asc_cfg "$REPO_DIR" projectName)"
 skip_var="$(printf '%s' "$PROJECT_NAME" | tr '[:lower:]' '[:upper:]')_SKIP_VERSION_VALIDATE"
 eval "skip_val=\${$skip_var:-0}"
 if [ "$skip_val" = "1" ]; then
-  echo "$skip_var=1 — skipping release version validation."
+  echo "$skip_var=1, skipping release version validation."
   exit 0
 fi
 
@@ -40,7 +40,7 @@ for b in $protected; do
   [ "$ci_branch" = "$b" ] && is_protected=1 && break
 done
 if [ "$is_protected" -eq 0 ]; then
-  echo "Branch '$ci_branch' is not a protected release branch — skipping strict MARKETING_VERSION check."
+  echo "Branch '$ci_branch' is not a protected release branch, skipping strict MARKETING_VERSION check."
   exit 0
 fi
 
@@ -56,14 +56,14 @@ asc_validate_shape "$target_version"
 
 if live_version="$(asc_live_app_store_version "$APP_APPLE_ID" "$LOOKUP_COUNTRY")"; then
   if [ -z "$live_version" ]; then
-    printf 'MARKETING_VERSION %s (no live App Store version yet — OK)\n' "$target_version"
+    printf 'MARKETING_VERSION %s (no live App Store version yet, OK)\n' "$target_version"
     exit 0
   fi
   asc_validate_shape "$live_version"
 else
   cat >&2 <<EOF
 error: Could not determine the live App Store version (lookup failed: network/HTTP error or unparsable response).
-Refusing to validate a protected-branch release against an unverified version — failing closed.
+Refusing to validate a protected-branch release against an unverified version, failing closed.
 Re-run once the App Store lookup is reachable, or set $skip_var=1 for a one-off override.
 EOF
   exit 1

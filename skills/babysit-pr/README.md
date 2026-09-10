@@ -67,5 +67,5 @@ To update:
 ```bash
 npx skills add cursor/plugins -y --skill poteto-mode
 # then hand-merge playbooks/babysit.md, references/bugbot-triage.md, and scripts/
-# from .agents/skills/poteto-mode/ — this copy is adapted, do not overwrite
+# from .agents/skills/poteto-mode/, this copy is adapted, do not overwrite
 ```

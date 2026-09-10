@@ -2,8 +2,8 @@
 
 Manage team members and their permissions in Google Play Console. Two layers:
 
-- **Users** (`gplay users`) — account-wide members. Permissions here (`*_GLOBAL`, `CAN_SEE_ALL_APPS`) apply across the whole developer account.
-- **Grants** (`gplay grants`) — per-app access for a user. Permissions here apply to a single package only.
+- **Users** (`gplay users`), account-wide members. Permissions here (`*_GLOBAL`, `CAN_SEE_ALL_APPS`) apply across the whole developer account.
+- **Grants** (`gplay grants`), per-app access for a user. Permissions here apply to a single package only.
 
 Use **users** to add someone to the account (optionally with account-wide powers). Use **grants** to give an existing user access to specific apps without granting account-wide reach. Least privilege: prefer per-app grants over global permissions.
 
@@ -19,7 +19,7 @@ Use **users** to add someone to the account (optionally with account-wide powers
 - There is **no** `--role` or `--permissions` flag. Permissions are supplied as a JSON body via `--json`.
 - `--json` accepts an inline JSON string **or** `@path/to/file.json`.
 - Users JSON key: `developerAccountPermissions` (account-wide). Grants JSON key: `appLevelPermissions` (per-app).
-- `delete` requires `--confirm` — it is a no-op safety guard, and the deletion is irreversible.
+- `delete` requires `--confirm`, it is a no-op safety guard, and the deletion is irreversible.
 
 ## Users (account-wide)
 
@@ -148,7 +148,7 @@ Build the JSON body from the constants above. `CAN_ACCESS_APP` is the base for a
 
 ## Workflows
 
-**Onboard a member scoped to specific apps** — create the user with minimal (or no) account-wide permissions, then add per-app grants:
+**Onboard a member scoped to specific apps**, create the user with minimal (or no) account-wide permissions, then add per-app grants:
 ```bash
 gplay users create --developer DEVELOPER_ID --email dev@example.com \
   --json '{"developerAccountPermissions":[]}'
@@ -156,12 +156,12 @@ gplay grants create --developer DEVELOPER_ID --email dev@example.com \
   --package com.example.app --json '{"appLevelPermissions":["CAN_ACCESS_APP","CAN_MANAGE_PUBLIC_APKS"]}'
 ```
 
-**Offboard** — delete the user to revoke all access at once:
+**Offboard**, delete the user to revoke all access at once:
 ```bash
 gplay users delete --developer DEVELOPER_ID --email departed@example.com --confirm
 ```
 
-**Audit** — list everyone as a table:
+**Audit**, list everyone as a table:
 ```bash
 gplay users list --developer DEVELOPER_ID --paginate --output table
 ```

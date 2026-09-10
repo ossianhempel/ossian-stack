@@ -17,13 +17,13 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Density: medium
 - Scheme: light
 - Best for: Anything that should feel like a quietly serious design / research bulletin, art publication, or curated trend report. Strong for studio annuals, agency capabilities decks, design-research publications, architecture / art / academic decks, and any deck wanting one strict accent colour and a printed-ledger calmness rather than corporate polish.
-- Avoid for: Decks that need warmth, multi-colour energy, or a casual / playful voice — the strict cobalt + cream + grid palette is intentionally austere.
+- Avoid for: Decks that need warmth, multi-colour energy, or a casual / playful voice, the strict cobalt + cream + grid palette is intentionally austere.
 
 ## Visual Snapshot
 
-A Japanese-magazine trend-report system built on warm cream paper, electric cobalt ink, and a graph-paper grid that lives permanently behind every slide. Newsreader serif headlines tower at 18vh while DM Mono carries chrome and ticker text. The signature decoration is a pixel-glitch column — vertical scanlines stair-stepped down the right edge of declarative slides — paired with QR-style 8×8 grid patches. The cultural reference is WIRED Japan, Shift magazine, and architectural trend reports printed in two-color risograph: cream + one cobalt.
+A Japanese-magazine trend-report system built on warm cream paper, electric cobalt ink, and a graph-paper grid that lives permanently behind every slide. Newsreader serif headlines tower at 18vh while DM Mono carries chrome and ticker text. The signature decoration is a pixel-glitch column, vertical scanlines stair-stepped down the right edge of declarative slides, paired with QR-style 8×8 grid patches. The cultural reference is WIRED Japan, Shift magazine, and architectural trend reports printed in two-color risograph: cream + one cobalt.
 
-Cobalt Grid is a two-color trend-report editorial system built on three immovable foundations: a warm cream paper canvas ({colors.paper}), an electric cobalt ink ({colors.ink}), and a permanent graph-paper grid that sits behind every slide. The grid is not optional decoration — it is rendered via a ::before pseudo on every .stage and cannot be turned off. The aesthetic is "two-color risograph monograph": cream + cobalt only, with the grid lending the entire deck the feel of architectural tracing paper or a Japanese trend report.
+Cobalt Grid is a two-color trend-report editorial system built on three immovable foundations: a warm cream paper canvas ({colors.paper}), an electric cobalt ink ({colors.ink}), and a permanent graph-paper grid that sits behind every slide. The grid is not optional decoration, it is rendered via a ::before pseudo on every .stage and cannot be turned off. The aesthetic is "two-color risograph monograph": cream + cobalt only, with the grid lending the entire deck the feel of architectural tracing paper or a Japanese trend report.
 
 ## Preview Ingredients
 

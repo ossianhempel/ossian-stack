@@ -16,14 +16,14 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Formality: high
 - Density: low
 - Scheme: light
-- Best for: Anything that should feel quiet, considered, and grown-up: investment theses, white papers, advisory work, longform research, gallery / cultural decks. Also a strong choice for editorial features, founder reflections, or any deck where restraint is the message — including across tech and finance.
-- Avoid for: Decks that need visual heat, multiple accents, or a sense of urgency — the warm-neutral palette is intentionally low-energy.
+- Best for: Anything that should feel quiet, considered, and grown-up: investment theses, white papers, advisory work, longform research, gallery / cultural decks. Also a strong choice for editorial features, founder reflections, or any deck where restraint is the message, including across tech and finance.
+- Avoid for: Decks that need visual heat, multiple accents, or a sense of urgency, the warm-neutral palette is intentionally low-energy.
 
 ## Visual Snapshot
 
-A quiet, museum-catalog editorial system built on Playfair Display serif headlines, Inter sans body, and a five-tone warm-stone palette. The aesthetic is "consulting deck meets architectural monograph" — minimal geometric line decorations (thin circles, dashed arcs, vertical and horizontal hairlines) drift behind content, suggesting drafting paper and compass work. Every divider is a single 1px line in a muted taupe; nothing is bold, nothing is loud. The cultural reference is Massimo Vignelli's editorial work, the Cooper Hewitt catalog, and pencil-and-tracing-paper urban planning documents.
+A quiet, museum-catalog editorial system built on Playfair Display serif headlines, Inter sans body, and a five-tone warm-stone palette. The aesthetic is "consulting deck meets architectural monograph", minimal geometric line decorations (thin circles, dashed arcs, vertical and horizontal hairlines) drift behind content, suggesting drafting paper and compass work. Every divider is a single 1px line in a muted taupe; nothing is bold, nothing is loud. The cultural reference is Massimo Vignelli's editorial work, the Cooper Hewitt catalog, and pencil-and-tracing-paper urban planning documents.
 
-Cartesian is a quiet museum-catalog editorial system. Its defining premise is restraint through 1px lines. Every structural element — list separators, agenda rules, timeline connectors, card borders, table dividers — is a single 1px line in a muted taupe {colors.line}. There are no thick borders, no fills, no shadows, no rounded surfaces. Hierarchy is built through type contrast and negative space; depth does not exist in the conventional sense.
+Cartesian is a quiet museum-catalog editorial system. Its defining premise is restraint through 1px lines. Every structural element, list separators, agenda rules, timeline connectors, card borders, table dividers, is a single 1px line in a muted taupe {colors.line}. There are no thick borders, no fills, no shadows, no rounded surfaces. Hierarchy is built through type contrast and negative space; depth does not exist in the conventional sense.
 
 ## Preview Ingredients
 

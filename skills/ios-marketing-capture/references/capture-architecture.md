@@ -33,7 +33,7 @@ for step in steps {
 
 **TabView app** (most common):
 ```swift
-// Simple tab switch — just set the index
+// Simple tab switch, just set the index
 CaptureStep(name: "01-home", navigate: { setTab(0) }, settle: .milliseconds(1800), cleanup: nil)
 
 // Tab + presented sheet
@@ -88,7 +88,7 @@ Bad:   Coffee Detail → Shelf (stack still has detail pushed)
 If two screens share a NavigationStack, capture the root-level view first.
 ## Priming View State
 
-Some screens need to be captured in a specific non-default state — a timer mid-countdown, a chart with particular values, a form half-filled. The pattern:
+Some screens need to be captured in a specific non-default state, a timer mid-countdown, a chart with particular values, a form half-filled. The pattern:
 
 1. Add a `static var` to `MarketingCapture` for each priming value:
    ```swift

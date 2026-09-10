@@ -1,6 +1,6 @@
 # Google Play Screenshot Management
 
-Use this skill to organize, validate, and upload Android screenshots and store graphics to a Google Play listing with `gplay`. This skill covers the gplay-specific upload/validate flow — not screenshot *capture*.
+Use this skill to organize, validate, and upload Android screenshots and store graphics to a Google Play listing with `gplay`. This skill covers the gplay-specific upload/validate flow, not screenshot *capture*.
 
 Capturing the raw images is standard Android tooling and not gplay-specific: take them with `adb shell screencap` (then `adb pull`), or drive state-based captures with an Espresso / UI Automator instrumentation test, switching emulator locale via `setprop persist.sys.locale` when you need per-language shots. Produce PNGs organized by locale and device type, then use the commands below.
 
@@ -44,7 +44,7 @@ Google Play requires PNG or JPEG (PNG recommended), max 8 MB per image.
 
 ## 1) Validate before uploading
 
-Always validate the directory first — this catches count/dimension/format issues before you spend an upload:
+Always validate the directory first, this catches count/dimension/format issues before you spend an upload:
 
 ```bash
 # Validate all locales
@@ -56,7 +56,7 @@ gplay validate screenshots --dir ./metadata --locale en-US --output table
 
 ## 2) Upload
 
-### Option A — bulk import (preferred)
+### Option A, bulk import (preferred)
 
 Imports every image in the Fastlane tree in one command. Requires an open edit:
 
@@ -72,7 +72,7 @@ gplay edits validate --package com.example.app --edit "$EDIT_ID"
 gplay edits commit   --package com.example.app --edit "$EDIT_ID"
 ```
 
-### Option B — individual images
+### Option B, individual images
 
 Use when you need fine control over specific files:
 
@@ -97,7 +97,7 @@ gplay edits validate --package com.example.app --edit "$EDIT_ID"
 gplay edits commit   --package com.example.app --edit "$EDIT_ID"
 ```
 
-### Option C — as part of a release
+### Option C, as part of a release
 
 Upload screenshots alongside a bundle in one release flow:
 

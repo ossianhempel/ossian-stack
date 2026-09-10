@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# deploy.sh — Deploy a slide deck to Vercel for instant sharing
+# deploy.sh, Deploy a slide deck to Vercel for instant sharing
 #
 # Usage:
 #   bash scripts/deploy.sh <path-to-slide-folder-or-html>
@@ -15,7 +15,7 @@
 #   4. Prints the live URL
 #
 # The deployed URL is permanent and works on any device (mobile, tablet, desktop).
-# No server to maintain — Vercel hosts it for free.
+# No server to maintain, Vercel hosts it for free.
 set -euo pipefail
 
 # ─── Colors ────────────────────────────────────────────────
@@ -72,7 +72,7 @@ if [[ -f "$INPUT" && "$INPUT" == *.html ]]; then
     fi
 
     CLEANUP_TEMP=true
-    info "Single HTML file detected — preparing for deployment..."
+    info "Single HTML file detected, preparing for deployment..."
 elif [[ -d "$INPUT" ]]; then
     # Verify the folder has an index.html
     if [[ ! -f "$INPUT/index.html" ]]; then
@@ -203,7 +203,7 @@ ok "Slides deployed successfully!"
 echo ""
 echo -e "  ${BOLD}Live URL:${NC}  $DEPLOY_URL"
 echo ""
-echo "  This URL works on any device — phones, tablets, laptops."
+echo "  This URL works on any device, phones, tablets, laptops."
 echo "  Share it via Slack, email, text, or anywhere."
 echo ""
 echo -e "  ${CYAN}Tip:${NC} To take it down later, visit https://vercel.com/dashboard"

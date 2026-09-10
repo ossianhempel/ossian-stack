@@ -13,7 +13,7 @@ There are exactly three groups. There is **no** `crashes list/get`, no `errors l
 | Command | Purpose |
 |---------|---------|
 | `vitals crashes query` | Crash / ANR **rate** metrics over a date range |
-| `vitals crashes anomalies` | Auto-detected regressions — the release gate |
+| `vitals crashes anomalies` | Auto-detected regressions, the release gate |
 | `vitals performance startup\|rendering\|battery` | Performance metric breakdowns |
 | `vitals errors issues` | Grouped error **issues** (AIP-160 filterable) |
 | `vitals errors reports` | Individual error **reports** with stack traces |
@@ -38,9 +38,9 @@ gplay vitals crashes query --package com.example.app --dimension deviceModel --p
 
 Other valid dimensions include `deviceModel`, `deviceBrand`, `apiLevel`, `countryCode`. Use `--paginate` to pull every page.
 
-## Anomaly detection — the regression / release gate
+## Anomaly detection, the regression / release gate
 
-`gplay vitals crashes anomalies` lists automatically detected deviations that likely indicate a regression from a new release. This is the command to run in a post-release watch or a CI gate — it does the "is this worse than baseline?" judgement for you across crash, ANR, error, and performance metric sets.
+`gplay vitals crashes anomalies` lists automatically detected deviations that likely indicate a regression from a new release. This is the command to run in a post-release watch or a CI gate, it does the "is this worse than baseline?" judgement for you across crash, ANR, error, and performance metric sets.
 
 ```bash
 # All anomalies in the last 7 days (default window)
@@ -73,8 +73,8 @@ gplay vitals performance battery --package com.example.app --type wakelock
 
 ## Errors: issues vs. reports, filtered with AIP-160
 
-- **`errors issues`** — reports grouped into issues (counts, distinct users). Start here to triage.
-- **`errors reports`** — individual reports with stack traces and device info. Drill in from an issue.
+- **`errors issues`**, reports grouped into issues (counts, distinct users). Start here to triage.
+- **`errors reports`**, individual reports with stack traces and device info. Drill in from an issue.
 
 Both filter via a single `--filter` AIP-160 expression. Supported fields: `errorIssueType` (`CRASH`, `ANR`, `NON_FATAL`), `apiLevel`, `versionCode`, `deviceModel`, `deviceBrand`, `deviceType`, `appProcessState` (`FOREGROUND`, `BACKGROUND`), `isUserPerceived`; `reports` additionally supports `errorIssueId` and `errorReportId`.
 
@@ -114,15 +114,15 @@ gplay vitals crashes anomalies --package com.example.app --from 2026-06-25 --to 
   | jq '.anomalies | length'
 ```
 
-Field names vary by endpoint — inspect once with `--pretty` before scripting against a path.
+Field names vary by endpoint, inspect once with `--pretty` before scripting against a path.
 
 ## Stability workflow
 
-1. **Watch after every release.** Run `vitals crashes anomalies` scoped to the rollout window first — it surfaces regressions without you setting thresholds.
+1. **Watch after every release.** Run `vitals crashes anomalies` scoped to the rollout window first, it surfaces regressions without you setting thresholds.
 2. **Confirm the trend.** `vitals crashes query --type crash` and `--type anr` for the rate; add `--dimension versionCode` to confirm the new build is the culprit.
 3. **Triage.** `vitals errors issues --filter 'errorIssueType = CRASH' --order-by 'errorReportCount desc'` to rank by impact.
 4. **Drill in.** Take the issue id and run `vitals errors reports --filter 'errorIssueId = <id>'` for stack traces and device breakdown.
-5. **Track ANRs separately** — they weigh heavily on Play ranking; always check `--type anr` distinctly.
+5. **Track ANRs separately**, they weigh heavily on Play ranking; always check `--type anr` distinctly.
 
 ## CI/CD stability gate
 
@@ -138,6 +138,6 @@ if [ "$ANOMALIES" -gt 0 ]; then
   exit 1
 fi
 
-# Clean — promote beta to a 10% staged production rollout
+# Clean, promote beta to a 10% staged production rollout
 gplay promote --package com.example.app --from beta --to production --rollout 0.1
 ```

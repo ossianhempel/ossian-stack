@@ -4,7 +4,7 @@ Read for spring tuning or staggered entrances. Follow the scope and safety contr
 
 ## Spring Animations
 
-Springs feel more natural than duration-based animations because they simulate real physics. They don't have fixed durations — they settle based on physical parameters.
+Springs feel more natural than duration-based animations because they simulate real physics. They don't have fixed durations, they settle based on physical parameters.
 
 ### When to use springs
 
@@ -30,11 +30,11 @@ const springRotation = useSpring(mouseX * 0.1, {
 });
 ```
 
-This works because the animation is **decorative** — it doesn't serve a function. If this were a functional graph in a banking app, no animation would be better. Know when decoration helps and when it hinders.
+This works because the animation is **decorative**, it doesn't serve a function. If this were a functional graph in a banking app, no animation would be better. Know when decoration helps and when it hinders.
 
 ### Spring configuration
 
-**Apple's approach (recommended — easier to reason about):**
+**Apple's approach (recommended, easier to reason about):**
 
 ```js
 { type: "spring", duration: 0.5, bounce: 0.2 }
@@ -50,7 +50,7 @@ Keep bounce subtle (0.1-0.3) when used. Avoid bounce in most UI contexts. Use it
 
 ### Interruptibility advantage
 
-Springs maintain velocity when interrupted — CSS animations and keyframes restart from zero. This makes springs ideal for gestures users might change mid-motion. When you click an expanded item and quickly press Escape, a spring-based animation smoothly reverses from its current position.
+Springs maintain velocity when interrupted, CSS animations and keyframes restart from zero. This makes springs ideal for gestures users might change mid-motion. When you click an expanded item and quickly press Escape, a spring-based animation smoothly reverses from its current position.
 ## Stagger Animations
 
 When multiple elements enter together, stagger their appearance. Each element animates in with a small delay after the previous one. This creates a cascading effect that feels more natural than everything appearing at once.
@@ -83,4 +83,4 @@ When multiple elements enter together, stagger their appearance. Each element an
 }
 ```
 
-Keep stagger delays short (30-80ms between items). Long delays make the interface feel slow. Stagger is decorative — never block interaction while stagger animations are playing.
+Keep stagger delays short (30-80ms between items). Long delays make the interface feel slow. Stagger is decorative, never block interaction while stagger animations are playing.

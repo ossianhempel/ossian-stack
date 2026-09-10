@@ -22,7 +22,7 @@ Google Play has two APIs for one-time products:
 
 ## Critical: Product IDs Are Permanent
 
-**Google Play permanently reserves product IDs after deletion.** If you create `premium_unlock` and later delete it, the ID `premium_unlock` can never be reused — not even with a different API. Choose product IDs carefully.
+**Google Play permanently reserves product IDs after deletion.** If you create `premium_unlock` and later delete it, the ID `premium_unlock` can never be reused, not even with a different API. Choose product IDs carefully.
 
 This means:
 - Do NOT create a "test" product with a good ID and then delete it
@@ -38,7 +38,7 @@ gplay onetimeproducts list --package com.example.app
 
 ### Create product
 
-**`--regions-version` is required** — the `create` command uses PATCH with `allowMissing=true` internally:
+**`--regions-version` is required**, the `create` command uses PATCH with `allowMissing=true` internally:
 ```bash
 gplay onetimeproducts create \
   --package com.example.app \
@@ -129,7 +129,7 @@ gplay iap list --package com.example.app
 ```
 
 ### Create product
-`iap create` has no `--sku` flag — the SKU/productId lives in the JSON body:
+`iap create` has no `--sku` flag, the SKU/productId lives in the JSON body:
 ```bash
 gplay iap create \
   --package com.example.app \
@@ -168,7 +168,7 @@ gplay iap batch-update --package com.example.app --json @products.json
 # Batch get
 gplay iap batch-get --package com.example.app --skus "premium,coins_100,coins_500"
 
-# Delete (permanent — ID cannot be reused)
+# Delete (permanent, ID cannot be reused)
 gplay iap delete --package com.example.app --sku premium_upgrade --confirm
 ```
 
@@ -233,7 +233,7 @@ Subscriptions use the `units`/`nanos`/`currencyCode` price format:
 Subscription listings are an **array** of per-locale objects (not an object
 keyed by locale). Each entry uses `languageCode`, `title`, `benefits` (array,
 max 4), and `description`. One `subscriptions update` call sets every locale
-atomically — use `--update-mask listings` so base plans and pricing are left
+atomically, use `--update-mask listings` so base plans and pricing are left
 untouched.
 
 **1. Discover the locales your app already ships** (cover at least these):
@@ -408,7 +408,7 @@ gplay pricing convert \
 ```
 
 ### price-request.json (ConvertRegionPricesRequest)
-The body is a single base `price` as Money — `units` is the whole-currency
+The body is a single base `price` as Money, `units` is the whole-currency
 amount as a string, `nanos` is the fractional part (990000000 = .99):
 ```json
 {

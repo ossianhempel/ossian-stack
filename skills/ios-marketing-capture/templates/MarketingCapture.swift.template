@@ -1,13 +1,13 @@
-// TEMPLATE — reference patterns for building a marketing capture system.
+// TEMPLATE, reference patterns for building a marketing capture system.
 //
 // This is NOT copy-paste scaffolding. Every project has different navigation,
 // models, and views. Read the SKILL.md for the reasoning behind each pattern,
 // then compose the pieces that apply to your project.
 //
 // The three components:
-//   1. MarketingCapture enum     — launch arg parsing, output, window snapshot
-//   2. MarketingCaptureCoordinator — step-based screen capture loop
-//   3. MarketingElementHarness   — ImageRenderer for cards, widgets, charts
+//   1. MarketingCapture enum, launch arg parsing, output, window snapshot
+//   2. MarketingCaptureCoordinator, step-based screen capture loop
+//   3. MarketingElementHarness, ImageRenderer for cards, widgets, charts
 //
 // See SKILL.md "Known Gotchas" for the reasoning behind every #if DEBUG hook.
 
@@ -295,7 +295,7 @@ enum MarketingElementHarness {
 //            try? await Task.sleep(for: .milliseconds(500))
 //
 //            let steps: [CaptureStep] = [
-//                // Tab switch — no cleanup needed
+//                // Tab switch, no cleanup needed
 //                CaptureStep(name: "01-home") { setTab(0) },
 //
 //                // Presented detail on tab 0
@@ -309,7 +309,7 @@ enum MarketingElementHarness {
 //                // Clean tab BEFORE pushing onto its stack (gotcha #5)
 //                CaptureStep(name: "03-list") { setTab(1) },
 //
-//                // Push onto tab 1's stack — after clean capture
+//                // Push onto tab 1's stack, after clean capture
 //                CaptureStep(name: "04-item-detail") {
 //                    setTab(1)
 //                    deepLinkItem = items.first
@@ -330,7 +330,7 @@ enum MarketingElementHarness {
 //                    pendingSheetItem = nil
 //                },
 //
-//                // Last tab — no stack state to worry about
+//                // Last tab, no stack state to worry about
 //                CaptureStep(name: "06-settings") { setTab(4) },
 //            ]
 //
@@ -349,7 +349,7 @@ enum MarketingElementHarness {
 //                            .padding(.vertical, 12)
 //                    }
 //                }
-//                // Widgets (requires widget files in main target — gotcha #6)
+//                // Widgets (requires widget files in main target, gotcha #6)
 //                MarketingElementHarness.renderWidget(
 //                    name: "widget-pulse-small",
 //                    size: MarketingElementHarness.WidgetSize.small,

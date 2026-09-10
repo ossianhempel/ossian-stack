@@ -7,7 +7,7 @@ In commands and code examples, resolve bundled paths from the directory containi
 
 Use this sequence when paired output evaluations are appropriate. Preserve the requested evaluation and write scope; use the intended host's facilities rather than assuming a named testing tool exists.
 
-Put results in a writable task workspace outside installed plugin caches, such as a user-project scratch directory. Use absolute workspace paths in helper calls. Within the workspace, organize results by iteration (`iteration-1/`, `iteration-2/`, etc.) and within that, each test case gets a directory (`eval-0/`, `eval-1/`, etc.). Don't create all of this upfront — just create directories as you go.
+Put results in a writable task workspace outside installed plugin caches, such as a user-project scratch directory. Use absolute workspace paths in helper calls. Within the workspace, organize results by iteration (`iteration-1/`, `iteration-2/`, etc.) and within that, each test case gets a directory (`eval-0/`, `eval-1/`, etc.). Don't create all of this upfront, just create directories as you go.
 
 ### Step 1: Run paired trials in fresh contexts
 
@@ -21,14 +21,14 @@ Execute this task:
 - Task: <eval prompt>
 - Input files: <eval files if any, or "none">
 - Save outputs to: <absolute-workspace-path>/iteration-<N>/eval-<ID>/with_skill/outputs/
-- Outputs to save: <what the user cares about — e.g., "the .docx file", "the final CSV">
+- Outputs to save: <what the user cares about, e.g., "the .docx file", "the final CSV">
 ```
 
 **Baseline run** (same prompt, but the baseline depends on context):
 - **Creating a new skill**: no skill at all. Same prompt, no skill path, save to `without_skill/outputs/`.
 - **Improving an existing skill**: the old version. Before editing, snapshot the skill (`cp -r <skill-path> <absolute-workspace-path>/skill-snapshot/`), then point the baseline subagent at the snapshot. Save to `old_skill/outputs/`.
 
-Write an `eval_metadata.json` for each test case (assertions can be empty for now). Give each eval a descriptive name based on what it's testing — not just "eval-0". Use this name for the directory too. If this iteration uses new or modified eval prompts, create these files for each new eval directory — don't assume they carry over from previous iterations.
+Write an `eval_metadata.json` for each test case (assertions can be empty for now). Give each eval a descriptive name based on what it's testing, not just "eval-0". Use this name for the directory too. If this iteration uses new or modified eval prompts, create these files for each new eval directory, don't assume they carry over from previous iterations.
 
 ```json
 {
@@ -41,11 +41,11 @@ Write an `eval_metadata.json` for each test case (assertions can be empty for no
 
 ### Step 2: While runs are in progress, draft assertions
 
-Don't just wait for the runs to finish — you can use this time productively. Draft quantitative assertions for each test case and explain them to the user. If assertions already exist in `evals/evals.json`, review them and explain what they check.
+Don't just wait for the runs to finish, you can use this time productively. Draft quantitative assertions for each test case and explain them to the user. If assertions already exist in `evals/evals.json`, review them and explain what they check.
 
-Good assertions are objectively verifiable and have descriptive names — they should read clearly in the benchmark viewer so someone glancing at the results immediately understands what each one checks. Subjective skills (writing style, design quality) are better evaluated qualitatively — don't force assertions onto things that need human judgment.
+Good assertions are objectively verifiable and have descriptive names, they should read clearly in the benchmark viewer so someone glancing at the results immediately understands what each one checks. Subjective skills (writing style, design quality) are better evaluated qualitatively, don't force assertions onto things that need human judgment.
 
-Update the `eval_metadata.json` files and `evals/evals.json` with the assertions once drafted. Also explain to the user what they'll see in the viewer — both the qualitative outputs and the quantitative benchmark.
+Update the `eval_metadata.json` files and `evals/evals.json` with the assertions once drafted. Also explain to the user what they'll see in the viewer, both the qualitative outputs and the quantitative benchmark.
 
 ### Step 3: As runs complete, capture timing data
 
@@ -65,9 +65,9 @@ Capture metrics when the host provides them. If unavailable, report the gap and 
 
 Once all runs are done:
 
-1. **Grade each run** — spawn a grader subagent (or grade inline) that reads `../agents/grader.md` and evaluates each assertion against the outputs. Save results to `grading.json` in each run directory. The grading.json expectations array must use the fields `text`, `passed`, and `evidence` (not `name`/`met`/`details` or other variants) — the viewer depends on these exact field names. For assertions that can be checked programmatically, write and run a script rather than eyeballing it — scripts are faster, more reliable, and can be reused across iterations.
+1. **Grade each run**, spawn a grader subagent (or grade inline) that reads `../agents/grader.md` and evaluates each assertion against the outputs. Save results to `grading.json` in each run directory. The grading.json expectations array must use the fields `text`, `passed`, and `evidence` (not `name`/`met`/`details` or other variants), the viewer depends on these exact field names. For assertions that can be checked programmatically, write and run a script rather than eyeballing it, scripts are faster, more reliable, and can be reused across iterations.
 
-2. **Aggregate into benchmark** — run the aggregation script from the skill-creator directory:
+2. **Aggregate into benchmark**, run the aggregation script from the skill-creator directory:
    ```bash
    SKILL_DIR="<absolute directory containing the loaded SKILL.md>";
    cd "$SKILL_DIR" && python3 -m scripts.aggregate_benchmark <absolute-workspace-path>/iteration-N --skill-name <name>
@@ -75,7 +75,7 @@ Once all runs are done:
    This produces `benchmark.json` and `benchmark.md` with pass_rate, time, and tokens for each configuration, with mean ± stddev and the delta. If generating benchmark.json manually, see `schemas.md` for the exact schema the viewer expects.
 Put each with_skill version before its baseline counterpart.
 
-3. **Do an analyst pass** — read the benchmark data and surface patterns the aggregate stats might hide. See `../agents/analyzer.md` (the "Analyzing Benchmark Results" section) for what to look for — things like assertions that always pass regardless of skill (non-discriminating), high-variance evals (possibly flaky), and time/token tradeoffs.
+3. **Do an analyst pass**, read the benchmark data and surface patterns the aggregate stats might hide. See `../agents/analyzer.md` (the "Analyzing Benchmark Results" section) for what to look for, things like assertions that always pass regardless of skill (non-discriminating), high-variance evals (possibly flaky), and time/token tradeoffs.
 
 4. **Launch the viewer** with both qualitative outputs and quantitative data:
    ```bash
@@ -93,7 +93,7 @@ Put each with_skill version before its baseline counterpart.
 
 Note: please use generate_review.py to create the viewer; there's no need to write custom HTML.
 
-5. **Tell the user** something like: "I've opened the results in your browser. There are two tabs — 'Outputs' lets you click through each test case and leave feedback, 'Benchmark' shows the quantitative comparison. When you're done, come back here and let me know."
+5. **Tell the user** something like: "I've opened the results in your browser. There are two tabs, 'Outputs' lets you click through each test case and leave feedback, 'Benchmark' shows the quantitative comparison. When you're done, come back here and let me know."
 
 ### What the user sees in the viewer
 

@@ -17,7 +17,7 @@ This is the one place where the usual bias toward the smallest change, and the
 usual verification bar, both invert. Speed over polish. Code quality does not
 matter. No planning.
 
-The rigor is in picking the right design cheaply — not in the code that gets you
+The rigor is in picking the right design cheaply, not in the code that gets you
 there. Be bold: propose variations the user didn't ask for, throw an approach
 away and try another.
 
@@ -38,7 +38,7 @@ Identify which question is being answered, from the user's prompt, the
 surrounding code, or by asking if they are around:
 
 - **"Does this logic / state model feel right?"** → [LOGIC.md](LOGIC.md). A single
-  shareable HTML file — free-play buttons plus tabbed guided walkthroughs — that
+  shareable HTML file, free-play buttons plus tabbed guided walkthroughs, that
   pushes the state machine through cases that are hard to reason about on paper,
   and that a non-developer can drive.
 - **"What should this look like?"** → [UI.md](UI.md). Several radically different
@@ -71,7 +71,7 @@ direction is already set.
 3. **No persistence by default.** State lives in memory. Persistence is the thing
    a prototype *checks*, not something it should depend on. If the question
    explicitly involves a database, hit a scratch DB or a local file named clearly
-   enough to delete — "PROTOTYPE, wipe me".
+   enough to delete, "PROTOTYPE, wipe me".
 4. **Skip the polish.** No tests, no abstractions, no error handling beyond what
    makes it runnable. Vanilla HTML/CSS/JS or the lightest stack that renders the
    idea; CDN dependencies and a hot-reloading dev server are fine here. No
@@ -79,8 +79,8 @@ direction is already set.
 
 ## 5. Put the alternatives behind one switcher
 
-When comparing, build every variant behind a single switcher — buttons or a
-keypress — each labeled so the user can name the one they mean. Flipping between
+When comparing, build every variant behind a single switcher, buttons or a
+keypress, each labeled so the user can name the one they mean. Flipping between
 them in one place is what makes the comparison honest; two separate artifacts get
 compared from memory.
 
@@ -100,7 +100,7 @@ full relevant state, so the user can see what changed rather than infer it.
 ## 7. Verify by observing, not asserting
 
 On the matching surface. For a visual decision, screenshot each variant and drive
-the interaction — the eye is the test. For a behavioral or timing decision,
+the interaction, the eye is the test. For a behavioral or timing decision,
 observe the thing you are deciding: log the timing, print the output, watch the
 render.
 
@@ -110,7 +110,7 @@ scripted way to drive its own surface, `create-verification-skill` builds one.
 ## 8. Present, then capture
 
 Present the variants, the tradeoffs, and a recommendation. The output is the
-decision plus the throwaway artifact — not shippable code.
+decision plus the throwaway artifact, not shippable code.
 
 Then capture both, because a prototype answers a question once and the answer
 outlives the code:

@@ -6,7 +6,7 @@ Read for capturing intent, writing a skill, creating UI metadata, and drafting r
 
 ### Capture Intent
 
-Start by understanding the user's intent. The current conversation might already contain a workflow the user wants to capture (e.g., they say "turn this into a skill"). If so, extract answers from the conversation history first — the tools used, the sequence of steps, corrections the user made, input/output formats observed. The user may need to fill the gaps, and should confirm before proceeding to the next step.
+Start by understanding the user's intent. The current conversation might already contain a workflow the user wants to capture (e.g., they say "turn this into a skill"). If so, extract answers from the conversation history first, the tools used, the sequence of steps, corrections the user made, input/output formats observed. The user may need to fill the gaps, and should confirm before proceeding to the next step.
 
 1. What should this skill enable the agent to do?
 2. When should this skill trigger? (what user phrases/contexts)
@@ -53,7 +53,7 @@ Rules (full reference: `openai-yaml.md`):
   untouched and update only `interface` fields. Never regenerate the whole file
   over an existing one.
 - If SKILL.md sets `disable-model-invocation: true`, the yaml must carry
-  `policy.allow_implicit_invocation: false` — the repo validator enforces the
+  `policy.allow_implicit_invocation: false`, the repo validator enforces the
   pairing, and the two runtimes read different files.
 
 ### Skill Writing Guide
@@ -130,9 +130,9 @@ Try to explain to the model why things are important in lieu of heavy-handed mus
 
 ### Test Cases
 
-After writing the skill draft, come up with 2-3 realistic test prompts — the kind of thing a real user would actually say. Share them with the user: [you don't have to use this exact language] "Here are a few test cases I'd like to try. Do these look right, or do you want to add more?" Then run them.
+After writing the skill draft, come up with 2-3 realistic test prompts, the kind of thing a real user would actually say. Share them with the user: [you don't have to use this exact language] "Here are a few test cases I'd like to try. Do these look right, or do you want to add more?" Then run them.
 
-Save test cases to `evals/evals.json`. Don't write assertions yet — just the prompts. You'll draft assertions in the next step while the runs are in progress.
+Save test cases to `evals/evals.json`. Don't write assertions yet, just the prompts. You'll draft assertions in the next step while the runs are in progress.
 
 ```json
 {

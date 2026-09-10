@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Long Table
-description: A warm, single-ink editorial system in the register of a supper-club poster, a small-batch zine, or a Risograph-printed program. The entire system runs in one ink color — a warm rust terracotta (#B53D2A) — on a buttery cream paper ground (#FAF1E2), with a subtle 4px radial-dot texture overlay giving the surface its "printed paper" quality. Display type runs in Bricolage Grotesque at weight 700–800 in uppercase; body and metadata run in Fraunces serif at weight 400–600 with optical-size axis engaged. Pill buttons, outlined edition badges, italic-edition numerals, and dashed/solid 1.5px borders complete the printed-program vocabulary.
+description: A warm, single-ink editorial system in the register of a supper-club poster, a small-batch zine, or a Risograph-printed program. The entire system runs in one ink color, a warm rust terracotta (#B53D2A), on a buttery cream paper ground (#FAF1E2), with a subtle 4px radial-dot texture overlay giving the surface its "printed paper" quality. Display type runs in Bricolage Grotesque at weight 700–800 in uppercase; body and metadata run in Fraunces serif at weight 400–600 with optical-size axis engaged. Pill buttons, outlined edition badges, italic-edition numerals, and dashed/solid 1.5px borders complete the printed-program vocabulary.
 
 colors:
   paper: "#FAF1E2"
@@ -206,7 +206,7 @@ components:
     border: "1.5px solid {colors.ink}"
     borderRadius: "50%"
   rect-tag:
-    description: "Outlined rectangular tag — like the pill but with sharp corners. Holds short italic Fraunces text. Used as a category / status / metadata chip when the pill's roundness isn't appropriate."
+    description: "Outlined rectangular tag, like the pill but with sharp corners. Holds short italic Fraunces text. Used as a category / status / metadata chip when the pill's roundness isn't appropriate."
     border: "1.5px solid {colors.ink}"
     padding: "clamp(7px, 0.9vh, 12px) clamp(14px, 1.4vw, 22px)"
     typography: "{typography.pill-text}"
@@ -256,45 +256,45 @@ Use `deck-stage.js` or an equivalent inline stage scaler for final output: rende
 
 ## Overview
 
-Long Table is a **single-ink editorial system** in the register of a supper-club poster, a Risograph zine, or a small-press dinner program. The foundational premise is monochromatic: every visible mark in the system — every headline, every paragraph, every border, every rule, every pill, every page number — is rendered in a single warm rust terracotta ink (`{colors.ink}` — #B53D2A) on a buttery cream paper ground (`{colors.paper}` — #FAF1E2). The only chromatic variation is opacity: the same ink at 100% for primary marks, at 78% for de-emphasized metadata, at 32% for dashed internal dividers, at 10% for the paper-texture dots.
+Long Table is a **single-ink editorial system** in the register of a supper-club poster, a Risograph zine, or a small-press dinner program. The foundational premise is monochromatic: every visible mark in the system, every headline, every paragraph, every border, every rule, every pill, every page number, is rendered in a single warm rust terracotta ink (`{colors.ink}`, #B53D2A) on a buttery cream paper ground (`{colors.paper}`, #FAF1E2). The only chromatic variation is opacity: the same ink at 100% for primary marks, at 78% for de-emphasized metadata, at 32% for dashed internal dividers, at 10% for the paper-texture dots.
 
-The single-ink constraint is the system's identity. The aesthetic borrows from one-color screen printing, letterpress posters, and Risograph stationery — formats where each additional color is a separate printing pass and therefore a deliberate decision. By committing to one ink, the system achieves the calm authority of a printed object rather than the polish of a digital surface.
+The single-ink constraint is the system's identity. The aesthetic borrows from one-color screen printing, letterpress posters, and Risograph stationery, formats where each additional color is a separate printing pass and therefore a deliberate decision. By committing to one ink, the system achieves the calm authority of a printed object rather than the polish of a digital surface.
 
-A signature **paper-texture overlay** sits on every slide: a 4px-tile radial-dot pattern in 50%-opacity ink at 10% opacity, applied via the `.stage::before` pseudo-element. The dots are invisible at conversational viewing distance but visible up close — they give the cream surface its "printed paper" feel and are an essential part of the design system, not optional decoration.
+A signature **paper-texture overlay** sits on every slide: a 4px-tile radial-dot pattern in 50%-opacity ink at 10% opacity, applied via the `.stage::before` pseudo-element. The dots are invisible at conversational viewing distance but visible up close, they give the cream surface its "printed paper" feel and are an essential part of the design system, not optional decoration.
 
 The typographic stack is a two-face pairing:
 
-- **Bricolage Grotesque** at weights 700 and 800 in **strict uppercase** carries every display moment — covers, headlines, card titles, course names, quote bodies, info values, who-tags. Bricolage is a wide, slightly-condensed grotesque with strong personality; its uppercase set has the impact of a hand-lettered poster. The optical-size axis (`opsz` 12..96) is engaged.
-- **Fraunces** at weight 400–600 carries every body paragraph, every metadata field, every pill, every page number, every edition label. **Italic Fraunces is the default body style** — the slanted serif is the system's body voice, lending warmth and editorial personality. Roman Fraunces appears only for specific tight cases (info keys, the description body inside index cards). The optical-size axis (`opsz` 9..144) is engaged for both styles.
+- **Bricolage Grotesque** at weights 700 and 800 in **strict uppercase** carries every display moment, covers, headlines, card titles, course names, quote bodies, info values, who-tags. Bricolage is a wide, slightly-condensed grotesque with strong personality; its uppercase set has the impact of a hand-lettered poster. The optical-size axis (`opsz` 12..96) is engaged.
+- **Fraunces** at weight 400–600 carries every body paragraph, every metadata field, every pill, every page number, every edition label. **Italic Fraunces is the default body style**, the slanted serif is the system's body voice, lending warmth and editorial personality. Roman Fraunces appears only for specific tight cases (info keys, the description body inside index cards). The optical-size axis (`opsz` 9..144) is engaged for both styles.
 
-A massive **italic Fraunces edition numeral** at up to 480px is the system's signature display anchor — it replaces the hand-drawn illustration that would traditionally fill the cover/featured slide right-half, giving the slide a typographic centerpiece in the same ink as the rest of the page.
+A massive **italic Fraunces edition numeral** at up to 480px is the system's signature display anchor, it replaces the hand-drawn illustration that would traditionally fill the cover/featured slide right-half, giving the slide a typographic centerpiece in the same ink as the rest of the page.
 
 Depth is **flat and printed**. There are no shadows, no gradients, no blur, no glow. Elevation is communicated entirely through 1.5px solid ink borders on cards, badges, pills, and tags; 1px solid or 1px-dashed internal dividers at 32% opacity; and the texture overlay's atmospheric quality. The whole system reads as ink soaked into paper.
 
-**Density philosophy: rich-but-curated.** Long Table reads as authoritative when slides carry substantive content — a cover with a hero title plus a tagline plus action pills plus stats plus a big edition numeral; an index slide with a topbar headline plus three rich cards; a menu slide with five course rows with name + description + pairing. The slides are full but never crowded — each region carries one focused element with breathing room around it. A slide that holds only a headline reads as missing-its-program; a slide that holds 8 competing content blocks reads as broken. Reach for one major typographic moment (Bricolage display) anchored by 2–4 supporting groups (cards, pills, ledger rows, info-value pairs) per slide.
+**Density philosophy: rich-but-curated.** Long Table reads as authoritative when slides carry substantive content, a cover with a hero title plus a tagline plus action pills plus stats plus a big edition numeral; an index slide with a topbar headline plus three rich cards; a menu slide with five course rows with name + description + pairing. The slides are full but never crowded, each region carries one focused element with breathing room around it. A slide that holds only a headline reads as missing-its-program; a slide that holds 8 competing content blocks reads as broken. Reach for one major typographic moment (Bricolage display) anchored by 2–4 supporting groups (cards, pills, ledger rows, info-value pairs) per slide.
 
 **Key Characteristics:**
-- One ink color (`{colors.ink}` — warm rust terracotta) on cream paper (`{colors.paper}`). Opacity variants are the only color variation.
+- One ink color (`{colors.ink}`, warm rust terracotta) on cream paper (`{colors.paper}`). Opacity variants are the only color variation.
 - Bricolage Grotesque weight 700–800 uppercase for every display moment; Fraunces 400–600 italic-default for every body and metadata moment.
-- Subtle 4px radial-dot paper texture on every slide via `.stage::before` — invisible at distance, present up close.
-- Pill buttons (border-radius 999px), edition badges (circular), rect-tags (sharp-cornered), and outlined cards (1.5px solid) — all single-weight ink outlines, no fills.
+- Subtle 4px radial-dot paper texture on every slide via `.stage::before`, invisible at distance, present up close.
+- Pill buttons (border-radius 999px), edition badges (circular), rect-tags (sharp-cornered), and outlined cards (1.5px solid), all single-weight ink outlines, no fills.
 - A massive italic Fraunces edition numeral (up to 480px) is the system's hero typographic anchor on cover-class slides.
 - 1.5px structural borders, 1px @ 32%-opacity solid or dashed internal dividers. No thicker borders, no shadows.
 - Page number (italic Fraunces) at every slide's bottom-right; nav-hint (italic Fraunces at 45% opacity) at the bottom-left.
-- The system is single-ink by design — adding any second color (a navy, a green, a yellow) shatters the printed-program register.
+- The system is single-ink by design, adding any second color (a navy, a green, a yellow) shatters the printed-program register.
 
 ## Colors
 
 ### Palette
-- **Paper / Cream** (`{colors.paper}` — #FAF1E2): The dominant warm buttery cream surface. Reads as good-quality paper stock — not white, not beige, somewhere between. The default slide background, and the only background fill the system uses.
-- **Paper Dark** (`{colors.paper-d}` — #F2E5CF): A slightly darker cream for secondary surfaces or tonal separation. Available in the token system but used sparingly.
-- **Paper Very Dark** (`{colors.paper-vd}` — #E8D7B6): A deeper cream for accent surfaces. Reserved.
-- **Ink / Warm Rust Terracotta** (`{colors.ink}` — #B53D2A): The single ink color. Every text run, every border, every rule, every pill outline, every page number — all in this one color. The system's structural and expressive color.
-- **Ink Deep** (`{colors.ink-dp}` — #8E2D1F): A deeper rust reserved for emphasis. Available in the token system but used sparingly in the published slides.
-- **Rule** (`{colors.rule}` — #B53D2A): An alias for `{colors.ink}` — same hex, used semantically when referring to a rule line.
-- **Ink @ 78%** (`{colors.ink-78}` — rgba(181,61,42,0.78)): The ink at 78% opacity. Used for de-emphasized metadata text where slightly lower contrast is desired (e.g., pairing notes in menu rows, meta-tags under quotes).
-- **Ink @ 50%** (`{colors.ink-50}` — rgba(181,61,42,0.5)): The ink at 50% opacity. Used inside the paper-texture radial-dot gradient.
-- **Ink @ 32%** (`{colors.ink-32}` — rgba(181,61,42,0.32)): The ink at 32% opacity. Used for internal dividers — solid 1px lines and 1px dashed lines inside cards, between ledger rows, between course rows.
+- **Paper / Cream** (`{colors.paper}`, #FAF1E2): The dominant warm buttery cream surface. Reads as good-quality paper stock, not white, not beige, somewhere between. The default slide background, and the only background fill the system uses.
+- **Paper Dark** (`{colors.paper-d}`, #F2E5CF): A slightly darker cream for secondary surfaces or tonal separation. Available in the token system but used sparingly.
+- **Paper Very Dark** (`{colors.paper-vd}`, #E8D7B6): A deeper cream for accent surfaces. Reserved.
+- **Ink / Warm Rust Terracotta** (`{colors.ink}`, #B53D2A): The single ink color. Every text run, every border, every rule, every pill outline, every page number, all in this one color. The system's structural and expressive color.
+- **Ink Deep** (`{colors.ink-dp}`, #8E2D1F): A deeper rust reserved for emphasis. Available in the token system but used sparingly in the published slides.
+- **Rule** (`{colors.rule}`, #B53D2A): An alias for `{colors.ink}`, same hex, used semantically when referring to a rule line.
+- **Ink @ 78%** (`{colors.ink-78}`, rgba(181,61,42,0.78)): The ink at 78% opacity. Used for de-emphasized metadata text where slightly lower contrast is desired (e.g., pairing notes in menu rows, meta-tags under quotes).
+- **Ink @ 50%** (`{colors.ink-50}`, rgba(181,61,42,0.5)): The ink at 50% opacity. Used inside the paper-texture radial-dot gradient.
+- **Ink @ 32%** (`{colors.ink-32}`, rgba(181,61,42,0.32)): The ink at 32% opacity. Used for internal dividers, solid 1px lines and 1px dashed lines inside cards, between ledger rows, between course rows.
 
 ### Defaults
 - **Default slide background**: `{colors.paper}`. Every slide. There is no alternate surface in this system.
@@ -303,9 +303,9 @@ Depth is **flat and printed**. There are no shadows, no gradients, no blur, no g
 - **Default headline color**: `{colors.ink}`.
 - **Default body color**: `{colors.ink}`.
 - **Default page-number / nav-hint color**: `{colors.ink}` (full opacity for pagenum; 45% opacity for nav-hint).
-- **Default de-emphasized metadata color**: `{colors.ink-78}` — when a small piece of supporting text needs to recede from a primary line.
+- **Default de-emphasized metadata color**: `{colors.ink-78}`, when a small piece of supporting text needs to recede from a primary line.
 
-The palette is intentionally single-ink. There is no "accent color" to reach for — the design language depends on the one-ink constraint. If a moment needs to stand out, scale up the type (Bricolage 800 at 180px) or reach for the italic Fraunces edition numeral; do not introduce a second color.
+The palette is intentionally single-ink. There is no "accent color" to reach for, the design language depends on the one-ink constraint. If a moment needs to stand out, scale up the type (Bricolage 800 at 180px) or reach for the italic Fraunces edition numeral; do not introduce a second color.
 
 ## Typography
 
@@ -317,7 +317,7 @@ The system loads exactly two web fonts from Google Fonts, both with optical-size
 
 The two-face role split is strict: **Bricolage uppercase carries every display moment** (covers, headlines, card titles, course names, quote bodies, info values, who-tags, edition labels with tracking). **Fraunces italic carries every body moment** (paragraphs, leads, metadata, taglines, pills, page numbers, info keys, edition labels without tracking). **Fraunces roman** is reserved for specific tight roles (info keys in info-rows where italic tracking would feel out of place, and the description body inside index cards where roman is more readable).
 
-The optical-size axis is critical: the same Fraunces face renders with subtly different letterforms at 14px metadata sizes versus 480px hero-numeral sizes — small sizes pick up sturdier strokes; large sizes pick up finer detail. Self-hosted fallbacks without `opsz` will lose this quality.
+The optical-size axis is critical: the same Fraunces face renders with subtly different letterforms at 14px metadata sizes versus 480px hero-numeral sizes, small sizes pick up sturdier strokes; large sizes pick up finer detail. Self-hosted fallbacks without `opsz` will lose this quality.
 
 ### Display, Body, and Chrome Scale
 
@@ -350,10 +350,10 @@ The optical-size axis is critical: the same Fraunces face renders with subtly di
 ### Defaults
 - **Default size for a primary slide headline**: `{typography.headline}` (up to 120px) in Bricolage 800 uppercase.
 - **Default size for a cover-scale title**: `{typography.display-cover}` (up to 180px).
-- **Default size for the hero typographic anchor on cover-class slides**: `{typography.display-jumbo-numeral}` (italic Fraunces up to 480px) — the system's signature hero element.
+- **Default size for the hero typographic anchor on cover-class slides**: `{typography.display-jumbo-numeral}` (italic Fraunces up to 480px), the system's signature hero element.
 - **Default size for a body paragraph**: `{typography.body-serif-italic}` (up to 22px) in italic Fraunces.
 - **Default size for a lede paragraph**: `{typography.body-serif-italic-lg}` (up to 28px).
-- **Default size for body text inside a card**: `{typography.body-roman}` (up to 17px) in **roman** Fraunces — the roman is more readable at small sizes than italic.
+- **Default size for body text inside a card**: `{typography.body-roman}` (up to 17px) in **roman** Fraunces, the roman is more readable at small sizes than italic.
 - **Default size for an "EDITION N." label**: `{typography.edition-label}` (up to 30px) in italic Fraunces, paired with an `{components.ed-badge}` circular ordinal.
 - **Default weight for any Bricolage display moment**: 800. (Weight 700 is reserved for the quote body and course/who-tag elements; weight 800 is the primary display weight.)
 - **Default weight for any Fraunces body moment**: 400.
@@ -365,21 +365,21 @@ These treatments are **non-optional whenever the corresponding element type is u
 
 - **Every Bricolage display element is UPPERCASE with negative letter-spacing (-0.005em to -0.012em).** A sentence-case Bricolage headline does not exist in this system. The uppercase + negative-tracking + weight 800 combination is the system's display voice.
 - **Every Fraunces body element is italic by default.** Roman Fraunces appears only for specific tight cases (info-key in info-rows, body inside index cards). When in doubt, italic.
-- **The edition badge (`{components.ed-badge}`) is always paired with an italic edition label** — the circle ordinal and the "EDITION N." text are one unit. Using one without the other reads as broken.
+- **The edition badge (`{components.ed-badge}`) is always paired with an italic edition label**, the circle ordinal and the "EDITION N." text are one unit. Using one without the other reads as broken.
 - **Every card / pill / rect-tag / badge carries a 1.5px solid ink border with no fill.** The single-weight outlined-shape vocabulary is the system's structural language. Filled shapes do not exist.
 - **The paper-texture overlay (`{components.paper-texture}`) is on every slide.** Removing it (or running the system on a pure flat cream without texture) loses the printed-paper quality.
-- **Every slide carries the page-number marker** at bottom-right in italic Fraunces. The page-number is the system's spine — without it, slides feel unanchored.
+- **Every slide carries the page-number marker** at bottom-right in italic Fraunces. The page-number is the system's spine, without it, slides feel unanchored.
 - **Internal dividers inside cards alternate between 1px solid @ 32% opacity (above content) and 1px dashed @ 32% opacity (below content).** The solid/dashed pairing is the system's card-rhythm device.
 
 ### Typography Principles
-The weight 800 + uppercase + negative letter-spacing combination is the system's Bricolage voice. Switching any of those three properties (e.g., weight 700 uppercase, or weight 800 sentence case, or default tracking) reads as a different design system. The Fraunces italic-default + opsz-axis combination is the system's body voice — using a non-opsz fallback face flattens the quality at small sizes.
+The weight 800 + uppercase + negative letter-spacing combination is the system's Bricolage voice. Switching any of those three properties (e.g., weight 700 uppercase, or weight 800 sentence case, or default tracking) reads as a different design system. The Fraunces italic-default + opsz-axis combination is the system's body voice, using a non-opsz fallback face flattens the quality at small sizes.
 
 Underline is not used. Bold within body paragraphs uses Fraunces weight 600 (not 700/800). Color emphasis does not exist because there is only one color. The system's only emphasis mechanisms are: scale (bigger Bricolage), weight shift inside body (Fraunces 400 → 600), italic ↔ roman switch, and opacity (full → 78%).
 
 ## Layout
 
 ### Canvas System
-The system targets a fluid viewport — each `.slide` is `100vw × 100vh` with absolute positioning. Slides stack inside a `.stage` container with the paper-texture overlay sitting absolutely on the stage. Only one `.slide.active` is visible at a time; opacity transitions between slides take 280ms.
+The system targets a fluid viewport, each `.slide` is `100vw × 100vh` with absolute positioning. Slides stack inside a `.stage` container with the paper-texture overlay sitting absolutely on the stage. Only one `.slide.active` is visible at a time; opacity transitions between slides take 280ms.
 
 ### Padding Scale (uses `clamp()` ranges)
 | Token | Range | Use |
@@ -402,9 +402,9 @@ Every slide carries a **page-number marker** at the bottom-right (italic Fraunce
 Slides with a topbar (index, calendar) carry a Bricolage headline on the left + a small italic Fraunces label-tag on the right, separated below by a 1.5px solid ink horizontal rule. The topbar-divider is the system's universal page-divider device.
 
 ### Border-Radius
-- **999px** — pill buttons (fully pill-shaped)
-- **50%** — circular edition badges
-- **0** — every other shape (cards, rect-tags, info-cards, ledger rows, internal dividers)
+- **999px**, pill buttons (fully pill-shaped)
+- **50%**, circular edition badges
+- **0**, every other shape (cards, rect-tags, info-cards, ledger rows, internal dividers)
 
 The system uses sharp corners for content containers and pill/circle for action and ordinal markers. No medium border-radius values (4px, 8px, 12px) exist.
 
@@ -413,69 +413,69 @@ The system uses sharp corners for content containers and pill/circle for action 
 ### Flat, No Shadows
 The system uses **zero shadows**. No box-shadow, no text-shadow, no filter, no gradient. Elevation is communicated entirely through:
 
-1. **1.5px solid ink borders** on cards, pills, badges, rect-tags — the outlined-shape vocabulary is the system's structural depth.
-2. **1px solid or dashed internal dividers at 32% opacity** inside cards and between rows — the subtle horizontal lines give cards their internal rhythm.
-3. **The paper-texture overlay** at 10% opacity on every slide — the dotted texture sits atmospherically beneath all content, giving the page its print-stock quality.
-4. **Opacity layering on text** — primary at 100%, de-emphasized metadata at 78%, near-invisible dividers at 32%.
+1. **1.5px solid ink borders** on cards, pills, badges, rect-tags, the outlined-shape vocabulary is the system's structural depth.
+2. **1px solid or dashed internal dividers at 32% opacity** inside cards and between rows, the subtle horizontal lines give cards their internal rhythm.
+3. **The paper-texture overlay** at 10% opacity on every slide, the dotted texture sits atmospherically beneath all content, giving the page its print-stock quality.
+4. **Opacity layering on text**, primary at 100%, de-emphasized metadata at 78%, near-invisible dividers at 32%.
 
 The absence of shadow is itself the depth language. Adding `box-shadow: 0 4px 12px rgba(0,0,0,0.1)` shatters the printed-paper feel.
 
 ### Paper Texture as Atmospheric Depth
-The radial-dot texture on `.stage::before` is part of the depth system — it is not optional decoration. The texture gives the cream surface a quality that flat #FAF1E2 lacks: a sense that the surface is paper stock with grain, not a CSS background fill. The 4px tile size with 0.5px radial dots in 50%-opacity ink at 10% overall opacity is calibrated to be invisible at conversational viewing distance and just-visible at close inspection.
+The radial-dot texture on `.stage::before` is part of the depth system, it is not optional decoration. The texture gives the cream surface a quality that flat #FAF1E2 lacks: a sense that the surface is paper stock with grain, not a CSS background fill. The 4px tile size with 0.5px radial dots in 50%-opacity ink at 10% overall opacity is calibrated to be invisible at conversational viewing distance and just-visible at close inspection.
 
 ## Shapes and Treatment
 
 ### Border Weight and Style
-- **1.5px solid `{colors.ink}`** — the universal structural border. Cards, pills, edition badges, rect-tags, topbar dividers, who-row top borders, info-card outlines.
-- **1px solid `{colors.ink-32}`** — internal solid dividers inside cards (between card-top metadata and the card title), between ledger rows, between course rows.
-- **1px dashed `{colors.ink-32}`** — internal dashed dividers inside cards (between the card body and the meta-row at the bottom), between info-rows in info-cards.
+- **1.5px solid `{colors.ink}`**, the universal structural border. Cards, pills, edition badges, rect-tags, topbar dividers, who-row top borders, info-card outlines.
+- **1px solid `{colors.ink-32}`**, internal solid dividers inside cards (between card-top metadata and the card title), between ledger rows, between course rows.
+- **1px dashed `{colors.ink-32}`**, internal dashed dividers inside cards (between the card body and the meta-row at the bottom), between info-rows in info-cards.
 
 Borders are never thicker than 1.5px. Never colored beyond ink (full or 32%). Never dotted (dotted is reserved for the paper-texture pattern). The solid/dashed pairing inside cards is the system's signature rhythm device.
 
 ### Decorative Element Types
 
-**Paper Texture Overlay** (`{components.paper-texture}`) — A 4px-tile radial-dot pattern in 50%-opacity ink at 10% overall opacity on `.stage::before`. The system's atmospheric base; on every slide.
+**Paper Texture Overlay** (`{components.paper-texture}`), A 4px-tile radial-dot pattern in 50%-opacity ink at 10% overall opacity on `.stage::before`. The system's atmospheric base; on every slide.
 
-**Pill Button** (`{components.pill}`) — An outlined fully-rounded-rectangle (border-radius 999px) holding short italic Fraunces text. The system's CTA / action button. Pills cluster in action rows (e.g., cover action row).
+**Pill Button** (`{components.pill}`), An outlined fully-rounded-rectangle (border-radius 999px) holding short italic Fraunces text. The system's CTA / action button. Pills cluster in action rows (e.g., cover action row).
 
-**Pill Divider** (`{components.pill-divider}`) — A small italic Fraunces character (typically `·` or `/`) at 70% opacity placed between pills in a row.
+**Pill Divider** (`{components.pill-divider}`), A small italic Fraunces character (typically `·` or `/`) at 70% opacity placed between pills in a row.
 
-**Edition Badge** (`{components.ed-badge}`) — A ~38px circular outlined badge holding a single italic Fraunces digit. The system's edition / chapter ordinal marker; always paired with an italic "EDITION N." label.
+**Edition Badge** (`{components.ed-badge}`), A ~38px circular outlined badge holding a single italic Fraunces digit. The system's edition / chapter ordinal marker; always paired with an italic "EDITION N." label.
 
-**Rect Tag** (`{components.rect-tag}`) — An outlined sharp-cornered rectangular tag holding short italic Fraunces text. The sharp-cornered cousin of the pill; used where roundness isn't appropriate.
+**Rect Tag** (`{components.rect-tag}`), An outlined sharp-cornered rectangular tag holding short italic Fraunces text. The sharp-cornered cousin of the pill; used where roundness isn't appropriate.
 
-**Outlined Card** (`{components.card-outlined}`) — A 1.5px ink-outlined rectangular card. Holds a card-top metadata row (separated below by a 1px @ 32% solid divider), a Bricolage card title, a Fraunces body description, and a meta-row at the bottom (separated above by a 1px @ 32% dashed divider). The system's primary content card.
+**Outlined Card** (`{components.card-outlined}`), A 1.5px ink-outlined rectangular card. Holds a card-top metadata row (separated below by a 1px @ 32% solid divider), a Bricolage card title, a Fraunces body description, and a meta-row at the bottom (separated above by a 1px @ 32% dashed divider). The system's primary content card.
 
-**Topbar with Divider** — A Bricolage headline on the left + a small italic Fraunces label-tag on the right, separated below by a 1.5px solid ink horizontal rule. The system's universal section opener.
+**Topbar with Divider**, A Bricolage headline on the left + a small italic Fraunces label-tag on the right, separated below by a 1.5px solid ink horizontal rule. The system's universal section opener.
 
-**Info-Card** — A wider outlined card with internal info-rows (key / value pairs separated by 1px @ 32% dashed dividers). Used as a featured-edition supporting panel.
+**Info-Card**, A wider outlined card with internal info-rows (key / value pairs separated by 1px @ 32% dashed dividers). Used as a featured-edition supporting panel.
 
-**Ledger Row** (`{components.ledger-row}`) — A multi-column grid row with a 1px @ 32% solid border-bottom. Holds tags, labels, and pills aligned in columns. The system's calendar / schedule / index pattern.
+**Ledger Row** (`{components.ledger-row}`), A multi-column grid row with a 1px @ 32% solid border-bottom. Holds tags, labels, and pills aligned in columns. The system's calendar / schedule / index pattern.
 
-**Course Row** — A 64px / 1fr / auto grid row with a 1px @ 32% solid border-bottom. Holds a Fraunces num-tag, an item (Bricolage name + Fraunces description), and a Fraunces pairing tag. The menu / programme pattern.
+**Course Row**, A 64px / 1fr / auto grid row with a 1px @ 32% solid border-bottom. Holds a Fraunces num-tag, an item (Bricolage name + Fraunces description), and a Fraunces pairing tag. The menu / programme pattern.
 
-**Italic Jumbo Edition Numeral** — A massive italic Fraunces digit at up to 480px. The system's signature hero typographic anchor on cover-class slides, paired with a small tracked Bricolage label beneath and an italic Fraunces meta line.
+**Italic Jumbo Edition Numeral**, A massive italic Fraunces digit at up to 480px. The system's signature hero typographic anchor on cover-class slides, paired with a small tracked Bricolage label beneath and an italic Fraunces meta line.
 
-**Page Number** (`{components.pagenum}`) — Italic Fraunces at the bottom-right of every slide.
+**Page Number** (`{components.pagenum}`), Italic Fraunces at the bottom-right of every slide.
 
-**Nav Hint** (`{components.nav-hint}`) — Italic Fraunces at 45% opacity at the bottom-left of the viewport, suggesting keyboard navigation.
+**Nav Hint** (`{components.nav-hint}`), Italic Fraunces at 45% opacity at the bottom-left of the viewport, suggesting keyboard navigation.
 
 ## Do's and Don'ts
 
 ### Do
-- Commit to single-ink rendering. Every text, border, rule, badge, and pill is `{colors.ink}` — the warm rust terracotta. Use opacity (78%, 32%, 10%) for variation, never a different hue.
+- Commit to single-ink rendering. Every text, border, rule, badge, and pill is `{colors.ink}`, the warm rust terracotta. Use opacity (78%, 32%, 10%) for variation, never a different hue.
 - Apply the paper-texture overlay to every slide. The 4px radial-dot pattern at 10% opacity is part of the design system, not optional polish.
 - Run every Bricolage display element at weight 800 (or 700 for quote / course-name / who-tag) in strict uppercase with negative letter-spacing.
 - Run every Fraunces body element in italic by default. Use roman only for info-keys (where italic tracking would feel out of place) and card body descriptions (where italic at small size is less readable).
 - Reach for the italic Fraunces jumbo numeral (up to 480px) as the hero typographic anchor on cover-class slides. It's the system's signature.
-- Pair every edition badge with an italic "EDITION N." Fraunces label — the circle ordinal and the text label are one unit.
+- Pair every edition badge with an italic "EDITION N." Fraunces label, the circle ordinal and the text label are one unit.
 - Use the outlined-card pattern (1.5px ink border + internal 1px @ 32% solid divider above content + 1px @ 32% dashed divider below content) for primary content cards. The solid/dashed pairing is the system's rhythm.
-- Use the pill (border-radius 999px) and the rect-tag (sharp corners) intentionally — pill for actions, rect for metadata / status. Don't conflate them.
+- Use the pill (border-radius 999px) and the rect-tag (sharp corners) intentionally, pill for actions, rect for metadata / status. Don't conflate them.
 - Place the page-number marker (italic Fraunces, bottom-right) on every slide. The marker is the system's spine.
 - Keep slides rich-but-curated: one major Bricolage display moment + 2–4 supporting groups (cards, pills, ledger rows, info pairs). Single-element slides feel underweight; 8-element slides feel broken.
 
 ### Don't
-- Don't introduce a second ink color. The system is single-ink — adding a navy, green, yellow, or any second hue shatters the printed-program register.
+- Don't introduce a second ink color. The system is single-ink, adding a navy, green, yellow, or any second hue shatters the printed-program register.
 - Don't fill any shape. Cards, pills, badges, rect-tags are outline-only. Filled rectangles in the ink color do not exist.
 - Don't use box-shadow, gradient, blur, or filter on any element. The system is flat printed paper.
 - Don't omit the paper-texture overlay. A flat #FAF1E2 background without the dot pattern reads as digital, not paper.
@@ -488,7 +488,7 @@ Borders are never thicker than 1.5px. Never colored beyond ink (full or 32%). Ne
 
 ## Responsive Behavior
 
-The system uses **`clamp()` units throughout** — every size, padding, gap, and rule scales fluidly between minimum and maximum based on viewport width and height. The same composition renders correctly on a 1280×720 laptop, a 1920×1080 monitor, and a 2560×1440 display without media queries.
+The system uses **`clamp()` units throughout**, every size, padding, gap, and rule scales fluidly between minimum and maximum based on viewport width and height. The same composition renders correctly on a 1280×720 laptop, a 1920×1080 monitor, and a 2560×1440 display without media queries.
 
 ### Scaling Behavior
 - Bricolage display sizes clamp between a min (e.g. 60px), a vw/vh-based middle value, and a max (e.g. 140px). The `min()` inner function combines width-based and height-based caps so headlines never overflow on short viewports.
@@ -514,13 +514,13 @@ There is no `@media print` rule in the system. Print export will render only the
 | Display / cover / headline (Bricolage roles, 96–180px) | 思源宋体 Noto Serif SC | 700 | Mincho heavy weight carries the printed-program mass that Bricolage 800 provides in Latin |
 | Card title / course-name / info-value (28–44px) | 思源宋体 Noto Serif SC | 700 | Same Mincho voice at smaller sizes for consistency |
 | Hero edition numeral (480px italic Fraunces) | 思源宋体 Noto Serif SC | 400 | Use a Chinese ordinal character (一二三 / 春夏秋) for the hero anchor instead of a Western digit |
-| Body / lede / tagline (Fraunces italic roles) | 思源宋体 Noto Serif SC | 400 | Mincho body voice — warmth without italic, since Chinese has no italic |
+| Body / lede / tagline (Fraunces italic roles) | 思源宋体 Noto Serif SC | 400 | Mincho body voice, warmth without italic, since Chinese has no italic |
 | Pill text / meta-tag / pagenum | 思源宋体 Noto Serif SC | 400 | Keep all chrome in Mincho 400; the system's single-ink discipline carries through |
 | Info-key / edition-label-tracked (uppercase tracked roles) | 思源宋体 Noto Serif SC | 400 with 0.16em letter-spacing | Maintains the tracked-chrome feel |
 
 ### Mixed-Content Strategy
 
-Use **Strategy A** — switch the entire face stack to Noto Serif SC across all roles, replacing both Bricolage Grotesque (display) and Fraunces (body). Long Table is a minimal single-ink data / program system where the typographic personality is carried more by the **single-ink rust terracotta**, the **outlined-shape vocabulary**, and the **paper-texture overlay** than by the specific Latin faces. Going all-Mincho in Chinese preserves the printed-program register cleanly without the per-glyph baseline wobble that Strategy C would introduce on a system this typographically dense. Stack:
+Use **Strategy A**, switch the entire face stack to Noto Serif SC across all roles, replacing both Bricolage Grotesque (display) and Fraunces (body). Long Table is a minimal single-ink data / program system where the typographic personality is carried more by the **single-ink rust terracotta**, the **outlined-shape vocabulary**, and the **paper-texture overlay** than by the specific Latin faces. Going all-Mincho in Chinese preserves the printed-program register cleanly without the per-glyph baseline wobble that Strategy C would introduce on a system this typographically dense. Stack:
 
 ```css
 /* Bricolage roles (display, headline, card-title, course-name, info-value) */
@@ -546,49 +546,49 @@ Add to the existing Google Fonts `<link>`:
 These adjustments apply to **every CJK block** in this system, regardless of size or role:
 
 - **Loosen line-height by 0.05–0.08.** CJK glyphs are full-width squares with more visual weight than Latin letterforms; line-heights tuned for Latin (0.86–0.95 on display, 1.45–1.5 on body) read as cramped in Chinese. Bump display to 1.0–1.1 and body to 1.55–1.65.
-- **Remove negative letter-spacing on CJK headlines.** Bricolage display uses -0.005em to -0.012em tracking, which collides Chinese glyphs into each other. For CJK runs, set `letter-spacing: 0` — or a tiny positive `0.02em` if the headline feels visually packed.
-- **Never `text-transform: uppercase` on CJK text.** Chinese has no case; the CSS property does nothing on Han glyphs but will silently break any mixed-script line where the Bricolage portion was meant to be capitalized. (This matters here — every Bricolage display element in the source is `text-transform: uppercase`.)
+- **Remove negative letter-spacing on CJK headlines.** Bricolage display uses -0.005em to -0.012em tracking, which collides Chinese glyphs into each other. For CJK runs, set `letter-spacing: 0`, or a tiny positive `0.02em` if the headline feels visually packed.
+- **Never `text-transform: uppercase` on CJK text.** Chinese has no case; the CSS property does nothing on Han glyphs but will silently break any mixed-script line where the Bricolage portion was meant to be capitalized. (This matters here, every Bricolage display element in the source is `text-transform: uppercase`.)
 - **Use Chinese full-width punctuation** (`，。：；！？「」『』（）`) inside Chinese sentences, not the Latin equivalents (`,.:;!?""''()`). Mixing punctuation systems within one sentence reads as a typesetting error.
-- **No period (。) at the end of CJK headlines.** Chinese headlines follow the same rule as Latin — title-style lines drop terminal punctuation. Body paragraphs keep their 。
+- **No period (。) at the end of CJK headlines.** Chinese headlines follow the same rule as Latin, title-style lines drop terminal punctuation. Body paragraphs keep their 。
 - **Apply Pangu spacing (盘古之白) at the boundary between CJK and Latin runs.** A space (or 0.25em margin) belongs between a Chinese character and an adjacent Latin word or digit, e.g. `2026 年 5 月` not `2026年5月`. Either type the spaces manually or use a `pangu.js`-style auto-spacer.
-- **One font per sentence.** Don't switch between Noto Serif SC weight 400 and 700 inside the same sentence — pick the weight that matches the role (headline = 700, body = 400) and commit to it for the whole run.
+- **One font per sentence.** Don't switch between Noto Serif SC weight 400 and 700 inside the same sentence, pick the weight that matches the role (headline = 700, body = 400) and commit to it for the whole run.
 
 ### Aesthetic Notes for This System
 
-Long Table's whole voice is "supper-club poster / Risograph zine / small-press dinner program" — single-ink rust terracotta on cream, outlined shapes, paper-texture overlay. In Chinese, the system's identity does not depend on the specific Latin faces (Bricolage and Fraunces); it depends on the **single-ink commitment**, the **1.5px outlined-shape vocabulary**, the **4px radial-dot paper texture**, and the **rich-but-curated density**. Going all-Noto-Serif-SC preserves every one of those identity markers cleanly.
+Long Table's whole voice is "supper-club poster / Risograph zine / small-press dinner program", single-ink rust terracotta on cream, outlined shapes, paper-texture overlay. In Chinese, the system's identity does not depend on the specific Latin faces (Bricolage and Fraunces); it depends on the **single-ink commitment**, the **1.5px outlined-shape vocabulary**, the **4px radial-dot paper texture**, and the **rich-but-curated density**. Going all-Noto-Serif-SC preserves every one of those identity markers cleanly.
 
-The default-italic body rule does not translate to Chinese (Chinese has no italic concept; slanted Han glyphs read as broken, not as a body voice). In Chinese, every Fraunces-italic role simply becomes **Noto Serif SC weight 400 upright** — the warmth comes from the Mincho character itself, not from the slant. This is the right trade-off for this system.
+The default-italic body rule does not translate to Chinese (Chinese has no italic concept; slanted Han glyphs read as broken, not as a body voice). In Chinese, every Fraunces-italic role simply becomes **Noto Serif SC weight 400 upright**, the warmth comes from the Mincho character itself, not from the slant. This is the right trade-off for this system.
 
-The hero italic Fraunces jumbo numeral (up to 480px) is the system's signature anchor in Latin — a single italic digit acting as a typographic centerpiece. In Chinese, **use a Chinese ordinal or season character instead of a Western digit**: 「三」、「五」、「春」、「秋」, rendered in Noto Serif SC at weight 400. The Han glyph's denser visual weight at 480px balances the cover slide better than a Western digit would; the cream paper background and warm rust ink carry the printed-program feel through unchanged.
+The hero italic Fraunces jumbo numeral (up to 480px) is the system's signature anchor in Latin, a single italic digit acting as a typographic centerpiece. In Chinese, **use a Chinese ordinal or season character instead of a Western digit**: 「三」、「五」、「春」、「秋」, rendered in Noto Serif SC at weight 400. The Han glyph's denser visual weight at 480px balances the cover slide better than a Western digit would; the cream paper background and warm rust ink carry the printed-program feel through unchanged.
 
-The system's outlined-shape vocabulary (pills, edition badges, rect-tags, outlined cards) works identically in Chinese — no adjustments needed. The "EDITION N." label paired with the circular badge becomes 「第三期」or 「第 03 期」inside the circle, with the meta-label below in Noto Serif SC 400. The 32%-opacity solid / dashed internal divider rhythm is purely structural and unaffected by language.
+The system's outlined-shape vocabulary (pills, edition badges, rect-tags, outlined cards) works identically in Chinese, no adjustments needed. The "EDITION N." label paired with the circular badge becomes 「第三期」or 「第 03 期」inside the circle, with the meta-label below in Noto Serif SC 400. The 32%-opacity solid / dashed internal divider rhythm is purely structural and unaffected by language.
 
 ### Known CJK Gap
 
-The Fraunces italic-default body voice is one of Long Table's most distinctive typographic moves in Latin — italic Mincho-style serif body that gives the system its lyrical, hand-written warmth. Chinese has no equivalent: there is no commonly-available "italic Mincho" face on the Google Fonts CDN, and slanted Han glyphs read as broken regardless. The Chinese rendering loses the italic-default character — every body line becomes upright Noto Serif SC weight 400. This is a real loss of personality, partially compensated by Noto Serif SC's own warmth at body sizes, but Chinese-content Long Table decks read measurably more "neutral magazine" than "supper-club poster." For decks where this matters, lean harder on the **single-ink color** and the **paper-texture overlay** to carry the warmth that the italic body would have carried in Latin.
+The Fraunces italic-default body voice is one of Long Table's most distinctive typographic moves in Latin, italic Mincho-style serif body that gives the system its lyrical, hand-written warmth. Chinese has no equivalent: there is no commonly-available "italic Mincho" face on the Google Fonts CDN, and slanted Han glyphs read as broken regardless. The Chinese rendering loses the italic-default character, every body line becomes upright Noto Serif SC weight 400. This is a real loss of personality, partially compensated by Noto Serif SC's own warmth at body sizes, but Chinese-content Long Table decks read measurably more "neutral magazine" than "supper-club poster." For decks where this matters, lean harder on the **single-ink color** and the **paper-texture overlay** to carry the warmth that the italic body would have carried in Latin.
 
 ## Iteration Guide
 
-1. Any new mark on a slide is in `{colors.ink}` — full opacity for primary, 78% for de-emphasized metadata, 32% for internal dividers. No second color.
-2. Any new headline is Bricolage Grotesque weight 800 uppercase with negative letter-spacing. Pick the size from the headline ladder (96 / 100 / 120 / 140 / 160 / 180px max) — do not invent a new size.
+1. Any new mark on a slide is in `{colors.ink}`, full opacity for primary, 78% for de-emphasized metadata, 32% for internal dividers. No second color.
+2. Any new headline is Bricolage Grotesque weight 800 uppercase with negative letter-spacing. Pick the size from the headline ladder (96 / 100 / 120 / 140 / 160 / 180px max), do not invent a new size.
 3. Any new body paragraph is Fraunces italic at weight 400. Use roman only for info-keys (tracked uppercase) and card-body descriptions.
 4. Any new edition / ordinal marker uses the `{components.ed-badge}` (circular outline) paired with an italic "EDITION N." Fraunces label.
 5. Any new action button is the `{components.pill}` (border-radius 999px); any new metadata tag is the `{components.rect-tag}` (sharp corners). Don't conflate the two.
 6. Any new card is the `{components.card-outlined}` pattern: 1.5px ink border, internal 1px @ 32% solid divider above content, internal 1px @ 32% dashed divider below content.
 7. Any new ledger / schedule / calendar row uses the multi-column grid + 1px @ 32% solid border-bottom pattern (`{components.ledger-row}`).
 8. Any new section opener uses the topbar pattern: Bricolage headline + small italic Fraunces label on the right + 1.5px solid ink horizontal rule beneath.
-9. Any new cover-class moment reaches for the italic Fraunces jumbo edition numeral as the hero typographic anchor — paired with a small tracked Bricolage label beneath and a italic Fraunces meta line.
+9. Any new cover-class moment reaches for the italic Fraunces jumbo edition numeral as the hero typographic anchor, paired with a small tracked Bricolage label beneath and a italic Fraunces meta line.
 10. Every slide carries the page-number marker. If you skip it, the slide will feel unanchored.
 
 ## Known Gaps
 
-- The two Google Fonts (Bricolage Grotesque with `opsz` 12..96, Fraunces with `opsz` 9..144) are loaded via `<link>`. Offline rendering will fall back to system sans (for Bricolage) and Georgia (for Fraunces) — which loses the optical-size axis and the personality of both faces. Self-hosting recommended for offline / print reliability.
+- The two Google Fonts (Bricolage Grotesque with `opsz` 12..96, Fraunces with `opsz` 9..144) are loaded via `<link>`. Offline rendering will fall back to system sans (for Bricolage) and Georgia (for Fraunces), which loses the optical-size axis and the personality of both faces. Self-hosting recommended for offline / print reliability.
 - The `opsz` optical-size axis is critical to quality at large display sizes (480px jumbo numeral) and small metadata sizes (14px page-number). Fallback faces without `opsz` will look noticeably flat at the extremes.
 - The system is single-ink by design. If a deck needs a second emphasis color (a "callout" or "warning" hue), the system cannot accommodate it without breaking the printed-program register. Use Bricolage scale + opacity + italic/roman switch as the only emphasis mechanisms.
 - The paper-texture overlay uses a `background-image` radial-gradient that may render with subtle compression artifacts on some browsers at high zoom. The texture is essential to the system identity; do not remove it as a "performance optimization."
-- Body paragraphs are italic by default. For deck content where italic at body scale is hard to read (long technical paragraphs, code samples), the system has no clean fallback — italic is the body voice. Keep paragraphs short and lyrical.
-- The CSS has several empty rule blocks (`.body-it { ... }`, `.s-cover .stats .num { font-weight: 600; }` etc.) where the original commented-out italic / weight properties have been stripped. The intended treatment in many places is "italic Fraunces at weight 400" — the default style — but the empty blocks make this implicit rather than explicit. Treat italic as the default everywhere the comments hint at it.
-- The system loads Bricolage weights 400 and 600 and Fraunces weights 500 — these are not actively used in the published CSS. Using them would introduce intermediate weights that break the single-weight commitment per face.
-- The fallback `.body-it` and `.body-ro` utility classes are defined but use the explicit class names sparingly in the markup. Most slides set typography per-element rather than via the utility classes — copy the per-element styles when authoring new slides, not the utilities.
-- The hero italic Fraunces jumbo numeral at 480px is a literal numeral character — there is no glyph alternation or kerning fix for specific characters. The "0" and "8" glyphs may need optical adjustment at extreme sizes; check rendering at the target viewport.
+- Body paragraphs are italic by default. For deck content where italic at body scale is hard to read (long technical paragraphs, code samples), the system has no clean fallback, italic is the body voice. Keep paragraphs short and lyrical.
+- The CSS has several empty rule blocks (`.body-it { ... }`, `.s-cover .stats .num { font-weight: 600; }` etc.) where the original commented-out italic / weight properties have been stripped. The intended treatment in many places is "italic Fraunces at weight 400", the default style, but the empty blocks make this implicit rather than explicit. Treat italic as the default everywhere the comments hint at it.
+- The system loads Bricolage weights 400 and 600 and Fraunces weights 500, these are not actively used in the published CSS. Using them would introduce intermediate weights that break the single-weight commitment per face.
+- The fallback `.body-it` and `.body-ro` utility classes are defined but use the explicit class names sparingly in the markup. Most slides set typography per-element rather than via the utility classes, copy the per-element styles when authoring new slides, not the utilities.
+- The hero italic Fraunces jumbo numeral at 480px is a literal numeral character, there is no glyph alternation or kerning fix for specific characters. The "0" and "8" glyphs may need optical adjustment at extreme sizes; check rendering at the target viewport.
 - The system has no `@media print` rule. Print export will not paginate; treat Long Table as screen-first.

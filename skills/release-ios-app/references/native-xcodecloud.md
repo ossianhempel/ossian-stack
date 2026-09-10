@@ -1,15 +1,15 @@
-# Native build & promote — XcodeGen + Xcode Cloud
+# Native build & promote, XcodeGen + Xcode Cloud
 
 For repos with `IOS_RELEASE_BUILD_SYSTEM="xcodegen-xcodecloud"` (PlateSnap, Shotly, Walkmon, and most native Swift apps).
 
 ## Version source & xcodegen
 
-- `MARKETING_VERSION` (`CFBundleShortVersionString`) and `CURRENT_PROJECT_VERSION` (`CFBundleVersion`) live in `IOS_RELEASE_VERSION_SOURCE` (`ios/project.yml` or root `project.yml`) — **not** the generated `.xcodeproj`.
+- `MARKETING_VERSION` (`CFBundleShortVersionString`) and `CURRENT_PROJECT_VERSION` (`CFBundleVersion`) live in `IOS_RELEASE_VERSION_SOURCE` (`ios/project.yml` or root `project.yml`), **not** the generated `.xcodeproj`.
 - After any version change **or any source file add/move/rename**, run `xcodegen` in `IOS_RELEASE_XCODEGEN_DIR` and **commit the regenerated `*.xcodeproj/project.pbxproj`**. Xcode Cloud builds the committed `.pbxproj`; if a repo's `ci_post_clone.sh` runs xcodegen it still expects a consistent committed project. Skipping the commit ships a stale project missing new Swift files → a wall of "Cannot find X in scope" build failures.
 
 ## Build number
 
-- Xcode Cloud: `ci_scripts/set_xcode_cloud_build_number.sh` overwrites `CURRENT_PROJECT_VERSION` from `CI_BUILD_NUMBER` (some repos add an offset env var — see the repo notes file). Don't bump it manually for cloud archives.
+- Xcode Cloud: `ci_scripts/set_xcode_cloud_build_number.sh` overwrites `CURRENT_PROJECT_VERSION` from `CI_BUILD_NUMBER` (some repos add an offset env var, see the repo notes file). Don't bump it manually for cloud archives.
 - Local manual archive: set a new integer `CURRENT_PROJECT_VERSION` in the version source, run `xcodegen`, then archive. Never reuse a build number already in TestFlight.
 
 ## Channels
@@ -44,5 +44,5 @@ xcodebuild -exportArchive -archivePath build/<App>.xcarchive \
 
 ## Release config
 
-- Production secrets for local Release builds live in an untracked `*.xcconfig` (e.g. `Config/Release.local.xcconfig`); Xcode Cloud generates one from workflow env vars instead. Exact required keys and validation rules are repo-specific — see the repo's `IOS_RELEASE_NOTES_FILE`.
+- Production secrets for local Release builds live in an untracked `*.xcconfig` (e.g. `Config/Release.local.xcconfig`); Xcode Cloud generates one from workflow env vars instead. Exact required keys and validation rules are repo-specific, see the repo's `IOS_RELEASE_NOTES_FILE`.
 - Confirm the Release config points at the environment you intend to ship before cutting a non-internal build.

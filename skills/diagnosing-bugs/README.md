@@ -7,7 +7,7 @@ Vendored verbatim from [mattpocock/skills](https://github.com/mattpocock/skills)
 Six phases for a hard bug. Its thesis is phase 1: **build a tight, red-capable
 feedback loop before forming any theory**. Ten ranked ways to construct one, a
 completion criterion (one command, already run, deterministic, seconds not
-minutes, agent-runnable), and an explicit stop — "if you catch yourself reading
+minutes, agent-runnable), and an explicit stop, "if you catch yourself reading
 code to build a theory before this command exists, stop."
 
 Pairs with `bug-fix`, which owns running the task around this loop.

@@ -3,9 +3,9 @@
 For everything inside a consumer mobile product: UI strings, buttons, empty
 states, errors, onboarding, permission prompts, push notifications,
 confirmations, toasts, paywall transitions, account creation prompts. Read
-SKILL.md first — the core principles all apply.
+SKILL.md first, the core principles all apply.
 
-In-app copy is where users *already chose you*. The job is no longer to sell —
+In-app copy is where users *already chose you*. The job is no longer to sell,
 it's to keep them moving, make them feel competent, and at key moments
 re-sell them on the value they're getting. Every string is either moving
 them forward, making them stop and think, or wasting a moment that could
@@ -32,12 +32,12 @@ For deep interface-copy reviews (audit existing strings in code), use the **Revi
 ## The Three Foundational Rules (consumer mobile)
 
 Sophistication loses. Obviousness wins. The product can be sophisticated under
-the hood — the surface has to be brain-dead simple.
+the hood, the surface has to be brain-dead simple.
 
 ### 1. Show value in 3 seconds or less
 
-Any user-facing surface — screenshot, empty state, paywall, onboarding screen,
-push preview — has to communicate the value in under 3 seconds. If a user
+Any user-facing surface, screenshot, empty state, paywall, onboarding screen,
+push preview, has to communicate the value in under 3 seconds. If a user
 can't tell what they get out of it before their thumb moves, it's dead.
 
 Test it: glance for 3 seconds, look away. Can you say what it does for you?
@@ -171,7 +171,7 @@ field keeps a visible label; placeholders vanish on input.
 ## Universal Rules
 
 1. **Use the user's verbs.** "Save" beats "Persist". "Done" beats "Confirm".
-2. **One job per string.** A button label, an error message, a toast — each
+2. **One job per string.** A button label, an error message, a toast, each
    says one thing.
 3. **Direct status, present tense.** "Unable to save your changes" beats
    "We're having trouble saving" or passive "Your changes were unable to be
@@ -180,7 +180,7 @@ field keeps a visible label; placeholders vanish on input.
 5. **Fail without blaming the user.** Errors should explain what happened and
    what to do next, not "Invalid input".
 6. **Match the tone of the product.** Most of Ossian's apps are direct,
-   confident, slightly dry. Don't get cute unless the product is cute — and
+   confident, slightly dry. Don't get cute unless the product is cute, and
    never get cute in errors (see UX craft rules).
 
 ## Buttons & CTAs
@@ -200,12 +200,12 @@ field keeps a visible label; placeholders vanish on input.
 | OK          | Got it (dismiss only) / Delete project (confirm) |
 | Confirm     | Delete workout             |
 | Learn more  | See how exports work       |
-| Get Started | (still fine) — beats "Begin Your Journey" |
+| Get Started | (still fine), beats "Begin Your Journey" |
 | New Entry   | Log Workout                |
 
 ## Hype-Moment Copy (account creation, paywall reveal, plan summary)
 
-Most in-app strings are utility. A handful of moments are *not* utility —
+Most in-app strings are utility. A handful of moments are *not* utility,
 they're the moment the user sees what they're getting. Account creation
 prompts, paywall transitions, "here's your personalized plan" reveals,
 end-of-onboarding summaries.
@@ -230,7 +230,7 @@ like they're getting away with something. The user has just done work
    is a feature. "A complete program built around the answers you just gave"
    is a personalized outcome.
 5. **Add scarcity or urgency when it's honest.** "Save it before you lose
-   it", "We built this just now — create an account so it's still here when
+   it", "We built this just now, create an account so it's still here when
    you come back". Never invent fake countdowns.
 
 ### Before / After
@@ -289,7 +289,7 @@ Then write the copy. The CTA is almost an afterthought.
 
 ## Empty States
 
-The empty state is the most important screen in your app — it's the first
+The empty state is the most important screen in your app, it's the first
 impression of every feature. Treat it like a screenshot.
 
 Structure:
@@ -316,7 +316,7 @@ Three parts: **what happened**, **why** (only if useful), **what to do next**.
 Prefer inline copy next to the failing field over a vague toast.
 
 - Don't blame the user. "Invalid email" → "That doesn't look like an email
-  address — check for typos?"
+  address, check for typos?"
 - Don't show error codes unless the user is supposed to send them somewhere.
 - Don't apologize three times. Once is enough.
 - No "Oops", no humor, no exclamation marks.
@@ -337,7 +337,7 @@ Prefer inline copy next to the failing field over a vague toast.
 - **Permission prompts come *after* the user understands why** they're needed.
   Pre-prompt with a one-line reason; don't trigger the system dialog cold.
 - **End of onboarding is a hype moment, not a summary.** See the Hype-Moment
-  section above. The user just did work — make the payoff feel huge.
+  section above. The user just did work, make the payoff feel huge.
 
 Pre-permission pattern:
 > To remind you about your next workout, we need to send notifications.
@@ -371,7 +371,7 @@ Pre-permission pattern:
 - **Be honest about what's happening.** "Syncing your last 3 workouts…" >
   "Loading…"
 - **Show progress when you can.** A progress bar with a number beats a spinner.
-- **If it's slow, say what's slow.** "Uploading photos — this can take a
+- **If it's slow, say what's slow.** "Uploading photos, this can take a
   minute on a slow connection."
 
 ## Sign-In / Auth
@@ -388,14 +388,14 @@ Pre-permission pattern:
 
 - Most of Ossian's apps default to Swedish (i18n via i18next, `sv.ts` /
   `en.ts`). Write source strings English-first if asked, but **always think
-  about how they'll feel in Swedish** — Swedish is more direct, less salesy,
+  about how they'll feel in Swedish**, Swedish is more direct, less salesy,
   shorter. Don't write English copy that only works because of marketing fluff
   the Swedish version will strip.
 - The hype-moment examples above are Swedish-native. The pattern (anchor
-  against cost, name what they received, add urgency) translates cleanly —
+  against cost, name what they received, add urgency) translates cleanly,
   it isn't a hype-up-with-adjectives pattern, it's a reframe-the-value
   pattern, which survives translation.
-- German and Finnish run long — leave room in buttons.
+- German and Finnish run long, leave room in buttons.
 - **Never concatenate localized strings** around variables; use full templates
   with pluralization (see UX craft rules §4).
 

@@ -16,14 +16,14 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Formality: low
 - Density: high
 - Scheme: light
-- Best for: Anything that should feel like a designer's whiteboard: brainstorms, workshops, creative-agency credentials, design-thinking sessions, ideation pitches, art-direction reviews. Equally fun for any deck — including tech, research, or business — that wants to read as in-progress thinking rather than polished conclusions.
-- Avoid for: Contexts that demand precision and institutional weight — the post-it sticky-note aesthetic intentionally reads as warm and unfinished.
+- Best for: Anything that should feel like a designer's whiteboard: brainstorms, workshops, creative-agency credentials, design-thinking sessions, ideation pitches, art-direction reviews. Equally fun for any deck, including tech, research, or business, that wants to read as in-progress thinking rather than polished conclusions.
+- Avoid for: Contexts that demand precision and institutional weight, the post-it sticky-note aesthetic intentionally reads as warm and unfinished.
 
 ## Visual Snapshot
 
 A Post-it-note-and-cork-board presentation system. Every content block is a colored sticky note on a textured paper or cork surface, layered with red thumbtacks, masking tape, and decorative doodles. Display type runs in Shrikhand (a chunky decorative display serif) on every headline; body type runs in Zilla Slab (a friendly slab serif); handwritten emphasis runs in Caveat. The palette is pastel sticky-note colors (yellow, blue, pink, green, orange, purple) on cream paper / cork / warm gradient backgrounds. The aesthetic borrows from creative-workshop wall art, brainstorming boards, and indie-studio mood boards: scattered slight rotations, multiple background texture variants per slide, pin / tape / drop-shadow combinations. The effect is warmth, play, and tactile creative-process energy.
 
-Scatterbrain is a Post-it-note-and-cork-board presentation system. Every content block is a colored sticky note ({components.post-it}) layered onto one of three textured background variants — cork board, desk paper, or warm gradient — with red / blue / green / gold thumbtacks pinning the notes and translucent masking tape sometimes added on top. The visual metaphor is total: the deck is a creative-workshop wall, a brainstorming board, or a thinker's desk, and the content is the cluster of sticky notes pinned across it.
+Scatterbrain is a Post-it-note-and-cork-board presentation system. Every content block is a colored sticky note ({components.post-it}) layered onto one of three textured background variants, cork board, desk paper, or warm gradient, with red / blue / green / gold thumbtacks pinning the notes and translucent masking tape sometimes added on top. The visual metaphor is total: the deck is a creative-workshop wall, a brainstorming board, or a thinker's desk, and the content is the cluster of sticky notes pinned across it.
 
 ## Preview Ingredients
 

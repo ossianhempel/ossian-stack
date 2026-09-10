@@ -1,7 +1,7 @@
 # App Store Descriptions
 
 For App Store name, subtitle, promotional text, full description, and What's
-New. Read SKILL.md first — the core principles (specificity, outcome-first,
+New. Read SKILL.md first, the core principles (specificity, outcome-first,
 hand test, cut filler) all apply here.
 
 For the full description arc, draft with
@@ -25,7 +25,7 @@ If you don't already have this context, ask before drafting. Don't guess.
 
 **App basics**
 - What does the app do, in one sentence?
-- Who is it for? Be specific — "people who lift weights" beats "fitness users".
+- Who is it for? Be specific, "people who lift weights" beats "fitness users".
 - What problem does it solve in their actual day?
 
 **Features**
@@ -34,7 +34,7 @@ If you don't already have this context, ask before drafting. Don't guess.
 - Any awards, press, or recognition worth naming?
 
 **Social proof**
-- Number of users, downloads, sessions — only mention if it's real and
+- Number of users, downloads, sessions, only mention if it's real and
   impressive.
 - Any quotes, reviews, or press mentions worth citing?
 - Any integrations or partnerships that build trust?
@@ -48,7 +48,7 @@ If you don't already have this context, ask before drafting. Don't guess.
 
 ### App Name (30)
 
-- Brand + at most one descriptor. "GainsLog: Workout Tracker", not "GainsLog —
+- Brand + at most one descriptor. "GainsLog: Workout Tracker", not "GainsLog,
   The Best Workout Tracker for Strength Training & Hypertrophy".
 - Apple may truncate. Make sure the name reads on its own.
 
@@ -61,7 +61,7 @@ If you don't already have this context, ask before drafting. Don't guess.
 ### Promotional Text (170)
 
 - Sits above the description. First thing users see after the screenshots.
-- Updateable without app review — use it for launches, sales, seasonal hooks,
+- Updateable without app review, use it for launches, sales, seasonal hooks,
   recent press, or current value props.
 - Should create curiosity, urgency, or novelty.
 - Don't waste it on a generic tagline you already have in the subtitle.
@@ -74,7 +74,7 @@ load the value.
 Structure:
 
 ```
-[Hook — 1–2 lines, outcome-first, no warm-up]
+[Hook, 1–2 lines, outcome-first, no warm-up]
 
 [Short paragraph: who it's for and what changes]
 
@@ -83,9 +83,9 @@ Structure:
 • Feature → benefit in user terms
 • Feature → benefit in user terms
 
-[Optional social proof — only if it's real and specific]
+[Optional social proof, only if it's real and specific]
 
-[How it works — 2–3 sentences max]
+[How it works, 2–3 sentences max]
 
 [Call to action]
 
@@ -94,10 +94,10 @@ Structure:
 
 ### What's New (4000)
 
-- Lead with the change users actually care about — not "bug fixes and
+- Lead with the change users actually care about, not "bug fixes and
   performance improvements".
 - Group: NEW / IMPROVED / FIXED. Skip groups that are empty.
-- Mention if you fixed something users complained about — they notice.
+- Mention if you fixed something users complained about, they notice.
 
 ```
 Version X.X
@@ -111,7 +111,7 @@ IMPROVED
 FIXED
 • [Bug, especially if users reported it]
 
-Thanks for the feedback — keep it coming.
+Thanks for the feedback, keep it coming.
 ```
 
 ## Opening Hook Patterns
@@ -134,7 +134,7 @@ Pick the angle that fits the product. All of these beat "Welcome to..."
 
 ## Description Scaffolds
 
-Two starting points. Don't fill them in literally — they're shapes, not
+Two starting points. Don't fill them in literally, they're shapes, not
 templates. Adapt to the product. Both follow the outcome-first rule: features
 serve outcomes, not the other way around.
 
@@ -148,15 +148,15 @@ changes when they use this. Concrete language.]
 
 What you can do:
 
-• [Outcome] — [feature that delivers it]
-• [Outcome] — [feature that delivers it]
-• [Outcome] — [feature that delivers it]
-• [Outcome] — [feature that delivers it]
+• [Outcome], [feature that delivers it]
+• [Outcome], [feature that delivers it]
+• [Outcome], [feature that delivers it]
+• [Outcome], [feature that delivers it]
 
 [Optional: one paragraph of social proof if you have something real and
-specific. Skip otherwise — empty proof is worse than no proof.]
+specific. Skip otherwise, empty proof is worse than no proof.]
 
-[2–3 sentences on how it actually works in practice. Not a feature list — a
+[2–3 sentences on how it actually works in practice. Not a feature list, a
 walkthrough of a moment in the user's day.]
 
 [Single CTA line. What they'll do once they download.]
@@ -170,7 +170,7 @@ Questions or feedback? [support email]
 [Hook: an evocative one-liner that names what the user creates, not what the
 app does.]
 
-[1–2 sentences on what becomes possible — the kind of work, not the toolbar.]
+[1–2 sentences on what becomes possible, the kind of work, not the toolbar.]
 
 Make:
 
@@ -207,7 +207,7 @@ IMPROVED
 FIXED
 • [Bug, especially one users reported]
 
-Keep the feedback coming — it shapes what we build next.
+Keep the feedback coming, it shapes what we build next.
 ```
 
 (Skip any group that's empty. Don't pad with "various improvements".)
@@ -217,20 +217,20 @@ Keep the feedback coming — it shapes what we build next.
 - Don't start with "Welcome to..." or "Introducing..."
 - Don't write a feature catalog. Write outcomes with features as proof.
 - Don't use ALL CAPS for emphasis (a single bullet header is fine).
-- Don't mention prices — they change and Apple discourages it.
+- Don't mention prices, they change and Apple discourages it.
 - Don't claim "#1" or "best" without proof.
 - Don't mention competitors by name.
-- Don't include URLs in the body — they're not clickable.
+- Don't include URLs in the body, they're not clickable.
 - Don't pile on emojis. One per section header, max.
 - Don't repeat the subtitle as the first line of the description.
 
 ## Localization Notes
 
-- Don't just translate — adapt. The hook that works in English may not work in
+- Don't just translate, adapt. The hook that works in English may not work in
   Swedish.
 - German expands ~30%. Plan for it on subtitle/promo.
 - Most of Ossian's apps default to Swedish. Write Swedish copy with the same
-  outcome-first rules — translate the *idea*, not the words.
+  outcome-first rules, translate the *idea*, not the words.
 
 ## Quick Checklist
 
@@ -240,4 +240,4 @@ Keep the feedback coming — it shapes what we build next.
 - [ ] Bullets are outcomes, with the feature as proof
 - [ ] What's New leads with what users care about, not bug fixes
 - [ ] Keywords field uses no spaces, comma-separated
-- [ ] Hand test: cover the screenshots — does the description sell alone?
+- [ ] Hand test: cover the screenshots, does the description sell alone?

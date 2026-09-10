@@ -1,6 +1,6 @@
 # asc localize metadata
 
-Use this skill to pull English (or any source locale) App Store metadata, translate it with LLM, and push translations back to App Store Connect — all automated.
+Use this skill to pull English (or any source locale) App Store metadata, translate it with LLM, and push translations back to App Store Connect, all automated.
 
 ## Command discovery and output conventions
 
@@ -83,12 +83,12 @@ asc localizations list --version "VERSION_ID" --output table
 For each target locale, translate the source text. Follow these rules:
 
 #### Translation Guidelines
-- **Tone & Register**: Always use formal, polite language. Use formal "you" forms where the language distinguishes them (Russian: «вы», German: «Sie», French: «vous», Spanish: «usted», Dutch: «u», Italian: «Lei», Portuguese: «você» formal, etc.). App Store descriptions are professional marketing copy — never use casual or informal register.
+- **Tone & Register**: Always use formal, polite language. Use formal "you" forms where the language distinguishes them (Russian: «вы», German: «Sie», French: «vous», Spanish: «usted», Dutch: «u», Italian: «Lei», Portuguese: «você» formal, etc.). App Store descriptions are professional marketing copy, never use casual or informal register.
 - **description**: Translate naturally, adapt tone to local market. Keep formatting (line breaks, bullet points, emoji). Stay within 4000 chars.
 - **keywords**: Do NOT literally translate. Research what users in that locale would search for. Comma-separated, max 100 chars total. No duplicates, no app name (Apple adds it automatically).
 - **whatsNew**: Translate release notes. Keep it concise. Max 4000 chars.
 - **promotionalText**: Translate marketing hook. Max 170 chars. This can be updated without a new version.
-- **subtitle**: Translate or adapt tagline. Max 30 chars — this is very tight, may need creative adaptation.
+- **subtitle**: Translate or adapt tagline. Max 30 chars, this is very tight, may need creative adaptation.
 - **name**: Usually keep the original app name. Only translate if the user explicitly asks. Max 30 chars.
 
 #### LLM Translation Prompt Template
@@ -105,7 +105,7 @@ Rules:
 - promotionalText: Translate marketing tagline. Max 170 chars.
 - subtitle: Adapt tagline creatively to fit 30 chars max.
 - name: Keep the original app name unless explicitly requested to translate it. Max 30 chars.
-- Use formal, polite language and formal "you" forms (Russian: вы, German: Sie, French: vous, Spanish: usted, Dutch: u, etc.). App Store copy is professional marketing — never use informal register.
+- Use formal, polite language and formal "you" forms (Russian: вы, German: Sie, French: vous, Spanish: usted, Dutch: u, etc.). App Store copy is professional marketing, never use informal register.
 - Respect cultural context. A playful tone in English may need adjustment for formal markets (e.g., ja, de-DE).
 
 Source ({source_locale}):
@@ -203,7 +203,7 @@ asc localizations list --app "APP_ID" --type app-info --app-info "APP_INFO_ID" -
 | What's New | 4000 |
 | Promotional Text | 170 |
 
-**Always validate** translated text fits within limits before uploading. Truncated text looks unprofessional. If translation exceeds the limit, shorten it — do not truncate mid-sentence.
+**Always validate** translated text fits within limits before uploading. Truncated text looks unprofessional. If translation exceeds the limit, shorten it, do not truncate mid-sentence.
 
 ## Full Example: Add nl-NL and ru to Roxy Math
 
@@ -240,16 +240,16 @@ asc localizations list --app "$APP_ID" --type app-info --app-info "$APP_INFO_ID"
 
 ## Agent Behavior
 
-1. **Always start by reading the source locale** — never translate from memory or assumptions.
-2. **Check existing localizations first** — don't overwrite existing translations unless the user asks to update them.
-3. **Version vs app-info is different** — version fields live under `--version "VERSION_ID"`; subtitle/name/privacy live under `--app ... --type app-info`.
-4. **Prefer deterministic IDs** — do not select IDs via `head -1` unless explicitly requested; use `--output table` for selection or [ID resolution](id-resolver.md).
+1. **Always start by reading the source locale**, never translate from memory or assumptions.
+2. **Check existing localizations first**, don't overwrite existing translations unless the user asks to update them.
+3. **Version vs app-info is different**, version fields live under `--version "VERSION_ID"`; subtitle/name/privacy live under `--app ... --type app-info`.
+4. **Prefer deterministic IDs**, do not select IDs via `head -1` unless explicitly requested; use `--output table` for selection or [ID resolution](id-resolver.md).
 5. **Validate character limits** before uploading. Count characters for each field. If over limit, re-translate shorter.
-6. **Keywords are special** — do not literally translate. Research locale-appropriate search terms. Think like a user searching the App Store in that language.
-7. **Show the user translations before uploading** — present a summary table of all fields × locales for approval. Do not push without confirmation.
-8. **Process one locale at a time** if translating many languages — easier to review and catch errors.
+6. **Keywords are special**, do not literally translate. Research locale-appropriate search terms. Think like a user searching the App Store in that language.
+7. **Show the user translations before uploading**, present a summary table of all fields × locales for approval. Do not push without confirmation.
+8. **Process one locale at a time** if translating many languages, easier to review and catch errors.
 9. **If upload fails** for a locale, log the error, continue with other locales, report all failures at the end.
-10. **For updates to existing localizations** — download current, show diff of what will change, get approval, then upload.
+10. **For updates to existing localizations**, download current, show diff of what will change, get approval, then upload.
 
 ## Notes
 - Version localizations are tied to a specific version. Create the version first if it doesn't exist.

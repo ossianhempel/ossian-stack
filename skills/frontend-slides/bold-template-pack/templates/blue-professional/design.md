@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Blue Professional
-description: A restrained, consulting-grade presentation system on a warm cream canvas (#fdfae7) with a single saturated cobalt blue (#1e2bfa) as the only accent color. Display type runs Space Grotesk for headlines and numerical callouts; Inter handles body and chrome. Cards are soft-tinted cobalt at 4% opacity with 1.5px translucent borders and 10-14px rounded corners — quiet, never bordered in solid color. The aesthetic borrows from investment-research reports, McKinsey-grade quarterly briefings, and contemporary financial dashboards — measured, data-dense without feeling crowded, and unmistakably professional. The system is built for executive readability at distance, with strong typographic hierarchy and a single accent color carrying every emphasis moment.
+description: A restrained, consulting-grade presentation system on a warm cream canvas (#fdfae7) with a single saturated cobalt blue (#1e2bfa) as the only accent color. Display type runs Space Grotesk for headlines and numerical callouts; Inter handles body and chrome. Cards are soft-tinted cobalt at 4% opacity with 1.5px translucent borders and 10-14px rounded corners, quiet, never bordered in solid color. The aesthetic borrows from investment-research reports, McKinsey-grade quarterly briefings, and contemporary financial dashboards, measured, data-dense without feeling crowded, and unmistakably professional. The system is built for executive readability at distance, with strong typographic hierarchy and a single accent color carrying every emphasis moment.
 
 colors:
   bg: "#fdfae7"
@@ -335,25 +335,25 @@ Use `deck-stage.js` or an equivalent inline stage scaler for final output: rende
 
 ## Overview
 
-Blue Professional is a **consulting-grade presentation system** designed for executive briefings, research deliverables, and quarterly reviews. Its foundational visual premise is **restraint with one strong commitment**: a warm cream canvas (`{colors.bg}` — `#fdfae7`) and a single saturated cobalt (`{colors.primary}` — `#1e2bfa`) that carries every accent, every metric, every CTA, every eyebrow, every chart fill. There is no secondary brand color, no palette of pastels, no warm/cool pairing — just cream, cobalt, and a tight ladder of muted grays for body text.
+Blue Professional is a **consulting-grade presentation system** designed for executive briefings, research deliverables, and quarterly reviews. Its foundational visual premise is **restraint with one strong commitment**: a warm cream canvas (`{colors.bg}`, `#fdfae7`) and a single saturated cobalt (`{colors.primary}`, `#1e2bfa`) that carries every accent, every metric, every CTA, every eyebrow, every chart fill. There is no secondary brand color, no palette of pastels, no warm/cool pairing, just cream, cobalt, and a tight ladder of muted grays for body text.
 
-The type system uses two open Google Fonts in tightly defined roles. **Space Grotesk** (weights 300-700) is the display, headline, numerical, and chrome face — used for h1-h3 headings, all metric/stat numerals, eyebrow labels (in uppercase with 0.08em tracking), tag pills, CTAs, slide counters, agenda numbers, and step circles. Its slightly geometric character + soft humanist warmth makes it read as both modern (suitable for AI/tech audiences) and trustworthy (suitable for finance audiences). **Inter** (weights 300-600) is the body face — used for paragraph text, list bodies, metric descriptions, and table-style content. The Space Grotesk / Inter pairing is deliberately ordinary; what makes the system feel distinctive is the discipline of their usage, not the novelty of the faces.
+The type system uses two open Google Fonts in tightly defined roles. **Space Grotesk** (weights 300-700) is the display, headline, numerical, and chrome face, used for h1-h3 headings, all metric/stat numerals, eyebrow labels (in uppercase with 0.08em tracking), tag pills, CTAs, slide counters, agenda numbers, and step circles. Its slightly geometric character + soft humanist warmth makes it read as both modern (suitable for AI/tech audiences) and trustworthy (suitable for finance audiences). **Inter** (weights 300-600) is the body face, used for paragraph text, list bodies, metric descriptions, and table-style content. The Space Grotesk / Inter pairing is deliberately ordinary; what makes the system feel distinctive is the discipline of their usage, not the novelty of the faces.
 
-The color philosophy is **one accent, three text grays**. Cobalt does all the emphasis work: headlines stay in `{colors.text}` (a near-black `#111111`), but every metric value, every eyebrow, every CTA, every chart bar, every callout border, every step circle, every progress indicator is cobalt. Body text uses a three-step gray ladder — `{colors.text}` for primary body, `{colors.text-muted}` (`#6b6b6b`) for paragraph body and metric descriptions, `{colors.text-light}` (`#9a9a9a`) for tertiary metadata. Only two non-cobalt accent colors exist: `{colors.positive}` (a subdued green `#059669`) and `{colors.negative}` (a subdued red `#dc2626`), used only on directional change indicators (arrows and percentages on metric cards) — and these are inline text colors, not fills.
+The color philosophy is **one accent, three text grays**. Cobalt does all the emphasis work: headlines stay in `{colors.text}` (a near-black `#111111`), but every metric value, every eyebrow, every CTA, every chart bar, every callout border, every step circle, every progress indicator is cobalt. Body text uses a three-step gray ladder, `{colors.text}` for primary body, `{colors.text-muted}` (`#6b6b6b`) for paragraph body and metric descriptions, `{colors.text-light}` (`#9a9a9a`) for tertiary metadata. Only two non-cobalt accent colors exist: `{colors.positive}` (a subdued green `#059669`) and `{colors.negative}` (a subdued red `#dc2626`), used only on directional change indicators (arrows and percentages on metric cards), and these are inline text colors, not fills.
 
-Depth is **soft and tinted**, never offset or shadowed. Cards are 4% cobalt tints (`{colors.card-bg}`) with 1.5px translucent cobalt borders (`{colors.border}` — cobalt at 20% opacity) and 10-14px rounded corners. There are no drop shadows except a single subtle cobalt-tinted shadow on the CTA hover state (`0 8px 24px rgba(30, 43, 250, 0.25)`). The lack of harsh shadows is what gives the system its quiet, premium feel — every elevation is implied by border + tint, not by shadow.
+Depth is **soft and tinted**, never offset or shadowed. Cards are 4% cobalt tints (`{colors.card-bg}`) with 1.5px translucent cobalt borders (`{colors.border}`, cobalt at 20% opacity) and 10-14px rounded corners. There are no drop shadows except a single subtle cobalt-tinted shadow on the CTA hover state (`0 8px 24px rgba(30, 43, 250, 0.25)`). The lack of harsh shadows is what gives the system its quiet, premium feel, every elevation is implied by border + tint, not by shadow.
 
-**Density philosophy: balanced and data-dense without crowding.** This system is built to carry information — six-stat dashboards, six-detail-block grids, seven-bar rankings, multi-column splits with callouts and mini-stats. The system reads as authoritative when populated with substantive content and timid when sparse. A typical surface holds: a slide-header (h4 eyebrow + tag pill) + a section h2 headline + a grid or list of 3-6 information cells. Cards have moderate internal padding (1.5rem) and moderate inter-card gap (1.2-1.5rem) — neither tight nor airy. The system can support both quote/cover-class surfaces (one bold statement in space) and dashboard-class surfaces (six cards of dense data) without feeling like two different systems.
+**Density philosophy: balanced and data-dense without crowding.** This system is built to carry information, six-stat dashboards, six-detail-block grids, seven-bar rankings, multi-column splits with callouts and mini-stats. The system reads as authoritative when populated with substantive content and timid when sparse. A typical surface holds: a slide-header (h4 eyebrow + tag pill) + a section h2 headline + a grid or list of 3-6 information cells. Cards have moderate internal padding (1.5rem) and moderate inter-card gap (1.2-1.5rem), neither tight nor airy. The system can support both quote/cover-class surfaces (one bold statement in space) and dashboard-class surfaces (six cards of dense data) without feeling like two different systems.
 
 **Key Characteristics:**
-- Warm cream ground (`{colors.bg}`) on every surface — never pure white, never gray.
-- Single saturated cobalt (`{colors.primary}`) as the only accent — used for every eyebrow, metric, CTA, chart fill, and progress indicator.
-- Space Grotesk (display + chrome) + Inter (body) — never substitute either.
+- Warm cream ground (`{colors.bg}`) on every surface, never pure white, never gray.
+- Single saturated cobalt (`{colors.primary}`) as the only accent, used for every eyebrow, metric, CTA, chart fill, and progress indicator.
+- Space Grotesk (display + chrome) + Inter (body), never substitute either.
 - Cards are 4% cobalt tints with 1.5px cobalt-at-20% borders and 10-14px rounded corners.
 - Soft pill-shaped chrome (`{components.tag-pill}`, `{components.cta-button}`) with full `100px` border-radius.
 - Headlines use Space Grotesk weight 600-700 with -0.02em tracking on a near-black text color.
 - Body uses Inter weight 400 at 13.6-16.8px with 1.6 line-height in the muted gray.
-- Every slide carries a slide-header (eyebrow + tag pill), a single h2, and a flexible content region — the structure is rhythmic across the deck.
+- Every slide carries a slide-header (eyebrow + tag pill), a single h2, and a flexible content region, the structure is rhythmic across the deck.
 - Persistent chrome: cobalt progress bar at bottom edge, slide-counter at bottom-left, circular nav-arrows at bottom-right.
 - Decorative atmospheric elements (concentric circles, dot grids, diagonal accent panels) appear only on cover and closing-class surfaces.
 
@@ -361,44 +361,44 @@ Depth is **soft and tinted**, never offset or shadowed. Cards are 4% cobalt tint
 
 ### Palette
 
-- **Bg** (`{colors.bg}` — `#fdfae7`): The warm cream canvas. The default and universal surface. Slightly green-cream-leaning warmth that distinguishes the system from corporate-template white. Every slide rests on this ground.
-- **Primary** (`{colors.primary}` — `#1e2bfa`): The signature cobalt. A highly saturated electric blue that carries every emphasis moment. Used for h4 eyebrows, metric values, stat numerals, chart bar fills, CTA fills, step circles, progress bars, accent lines, agenda numbers, and the cite border on highlight blocks. No other accent color exists.
-- **Text** (`{colors.text}` — `#111111`): The primary text color. Near-black, slightly warmer than `#000000`. Used for h1-h3 headlines, primary content text, metric labels, and any text that should carry full weight.
-- **Text-muted** (`{colors.text-muted}` — `#6b6b6b`): Secondary text — body paragraphs, metric descriptions, captions. Reads as comfortably softer than the primary text without disappearing.
-- **Text-light** (`{colors.text-light}` — `#9a9a9a`): Tertiary text — slide meta info, hairline dividers in text, stat context lines. The lightest readable gray; below this, text becomes ambient noise.
-- **Accent-light** (`{colors.accent-light}` — `rgba(30, 43, 250, 0.08)`): The default cobalt tint for tag pills, bar tracks, highlight callouts, and cover-decoration panels.
-- **Accent-medium** (`{colors.accent-medium}` — `rgba(30, 43, 250, 0.15)`): A slightly darker cobalt tint, available but used sparingly.
-- **Border** (`{colors.border}` — `rgba(30, 43, 250, 0.2)`): Cobalt at 20% opacity. The universal soft border color for cards, nav buttons, decorative circles, and structural rules.
-- **Card-bg** (`{colors.card-bg}` — `rgba(30, 43, 250, 0.04)`): Cobalt at 4% opacity. The universal card fill — softer than accent-light, reading as a barely-tinted surface that lifts slightly off the cream ground.
-- **Positive** (`{colors.positive}` — `#059669`): Subdued green. Used only inline as the text color for positive-change indicators (up-arrow + percentage). Never used as a fill or border.
-- **Negative** (`{colors.negative}` — `#dc2626`): Subdued red. Used only inline as the text color for negative-change indicators. Never used as a fill or border.
+- **Bg** (`{colors.bg}`, `#fdfae7`): The warm cream canvas. The default and universal surface. Slightly green-cream-leaning warmth that distinguishes the system from corporate-template white. Every slide rests on this ground.
+- **Primary** (`{colors.primary}`, `#1e2bfa`): The signature cobalt. A highly saturated electric blue that carries every emphasis moment. Used for h4 eyebrows, metric values, stat numerals, chart bar fills, CTA fills, step circles, progress bars, accent lines, agenda numbers, and the cite border on highlight blocks. No other accent color exists.
+- **Text** (`{colors.text}`, `#111111`): The primary text color. Near-black, slightly warmer than `#000000`. Used for h1-h3 headlines, primary content text, metric labels, and any text that should carry full weight.
+- **Text-muted** (`{colors.text-muted}`, `#6b6b6b`): Secondary text, body paragraphs, metric descriptions, captions. Reads as comfortably softer than the primary text without disappearing.
+- **Text-light** (`{colors.text-light}`, `#9a9a9a`): Tertiary text, slide meta info, hairline dividers in text, stat context lines. The lightest readable gray; below this, text becomes ambient noise.
+- **Accent-light** (`{colors.accent-light}`, `rgba(30, 43, 250, 0.08)`): The default cobalt tint for tag pills, bar tracks, highlight callouts, and cover-decoration panels.
+- **Accent-medium** (`{colors.accent-medium}`, `rgba(30, 43, 250, 0.15)`): A slightly darker cobalt tint, available but used sparingly.
+- **Border** (`{colors.border}`, `rgba(30, 43, 250, 0.2)`): Cobalt at 20% opacity. The universal soft border color for cards, nav buttons, decorative circles, and structural rules.
+- **Card-bg** (`{colors.card-bg}`, `rgba(30, 43, 250, 0.04)`): Cobalt at 4% opacity. The universal card fill, softer than accent-light, reading as a barely-tinted surface that lifts slightly off the cream ground.
+- **Positive** (`{colors.positive}`, `#059669`): Subdued green. Used only inline as the text color for positive-change indicators (up-arrow + percentage). Never used as a fill or border.
+- **Negative** (`{colors.negative}`, `#dc2626`): Subdued red. Used only inline as the text color for negative-change indicators. Never used as a fill or border.
 
 ### Defaults
 
-- **Default surface background**: `{colors.bg}` — every surface starts on cream.
-- **Default headline color**: `{colors.text}` (`#111111`) — headlines are near-black, never cobalt. Cobalt is reserved for accent moments (eyebrows, metrics, CTAs).
-- **Default body text color**: `{colors.text-muted}` (`#6b6b6b`) — body paragraphs default to muted, not full black.
-- **Default eyebrow / h4 color**: `{colors.primary}` — eyebrows are always cobalt, always uppercase, always with 0.08em tracking.
-- **Default card fill**: `{colors.card-bg}` (cobalt at 4%) — the universal soft tint.
+- **Default surface background**: `{colors.bg}`, every surface starts on cream.
+- **Default headline color**: `{colors.text}` (`#111111`), headlines are near-black, never cobalt. Cobalt is reserved for accent moments (eyebrows, metrics, CTAs).
+- **Default body text color**: `{colors.text-muted}` (`#6b6b6b`), body paragraphs default to muted, not full black.
+- **Default eyebrow / h4 color**: `{colors.primary}`, eyebrows are always cobalt, always uppercase, always with 0.08em tracking.
+- **Default card fill**: `{colors.card-bg}` (cobalt at 4%), the universal soft tint.
 - **Default card border**: `{colors.border}` (cobalt at 20%) at 1px or 1.5px. Never solid full-cobalt borders.
 - **Default card border-radius**: 10-14px depending on card size (`{radii.card-sm}` for stat cells, `{radii.card-md}` for stat cards and detail blocks, `{radii.card-lg}` for metric cards).
 - **Default accent for any numerical value (metric, stat, agenda number, bar percentage)**: `{colors.primary}`.
 - **Default chart bar color**: `{colors.primary}` solid fill on a `{colors.accent-light}` track.
-- **Default CTA**: `{components.cta-button}` — solid cobalt pill with cream text and 100px border-radius.
-- **Default tag pill**: `{components.tag-pill}` — soft cobalt tint with cobalt text and 100px border-radius, paired with an h4 eyebrow in the slide-header.
+- **Default CTA**: `{components.cta-button}`, solid cobalt pill with cream text and 100px border-radius.
+- **Default tag pill**: `{components.tag-pill}`, soft cobalt tint with cobalt text and 100px border-radius, paired with an h4 eyebrow in the slide-header.
 
-The system has **no secondary accent color**. Don't reach for orange, teal, or purple to differentiate categories — the single-cobalt discipline is the system's identity. Categorical differentiation should be done through positioning, sizing, or labeling, not through additional hues.
+The system has **no secondary accent color**. Don't reach for orange, teal, or purple to differentiate categories, the single-cobalt discipline is the system's identity. Categorical differentiation should be done through positioning, sizing, or labeling, not through additional hues.
 
 ## Typography
 
 ### Font Family Stack
 The system runs two faces, each with a single role.
 
-**Space Grotesk** (Google Fonts, weights 300-700) is the display + numerical + chrome face. Used for every h1, h2, h3, h4 heading; every numerical callout (metric values, stat numbers, agenda numbers, bar percentages, step circles); every chrome element (tag pills, CTAs, slide counters, hint text); and every uppercase eyebrow with 0.08em tracking. Its slightly geometric character + softly rounded humanist forms read as both contemporary and trustworthy — suitable for both AI/tech and finance audiences.
+**Space Grotesk** (Google Fonts, weights 300-700) is the display + numerical + chrome face. Used for every h1, h2, h3, h4 heading; every numerical callout (metric values, stat numbers, agenda numbers, bar percentages, step circles); every chrome element (tag pills, CTAs, slide counters, hint text); and every uppercase eyebrow with 0.08em tracking. Its slightly geometric character + softly rounded humanist forms read as both contemporary and trustworthy, suitable for both AI/tech and finance audiences.
 
 **Inter** (Google Fonts, weights 300-600) is the body face. Used for paragraph text, list bodies, metric descriptions, agenda descriptions, detail-block body, and any longer-form content. Set at weight 400 with line-height 1.6 in the muted gray, Inter reads as comfortable, generous, and editorial.
 
-The face roles are non-overlapping: Space Grotesk handles every numeral and every heading; Inter handles every paragraph and list body. Don't cross the boundary — Inter h1 reads as a different brand; Space Grotesk body reads as a tech startup landing page.
+The face roles are non-overlapping: Space Grotesk handles every numeral and every heading; Inter handles every paragraph and list body. Don't cross the boundary, Inter h1 reads as a different brand; Space Grotesk body reads as a tech startup landing page.
 
 ### Typography Scale
 
@@ -433,7 +433,7 @@ The face roles are non-overlapping: Space Grotesk handles every numeral and ever
 ### Defaults
 
 - **Default size for a cover title**: `{typography.h1}` (44.8–67.2px). Always Space Grotesk weight 700 with -0.02em tracking.
-- **Default size for the primary section headline on each slide**: `{typography.h2}` (28.8–41.6px). Space Grotesk weight 600. The "section h2" is the system's structural workhorse — every content slide has one.
+- **Default size for the primary section headline on each slide**: `{typography.h2}` (28.8–41.6px). Space Grotesk weight 600. The "section h2" is the system's structural workhorse, every content slide has one.
 - **Default size for a region or agenda-item title**: `{typography.h3}` (17.6–24px).
 - **Default size for the eyebrow above the h2**: `{typography.h4-eyebrow}` (13.6–16px) in cobalt, uppercase, 0.08em tracking.
 - **Default size for paragraph body**: `{typography.body}` (13.6–16.8px clamp). Inter weight 400 with line-height 1.6.
@@ -450,9 +450,9 @@ When unsure which heading token to reach for, default to `{typography.h2}` (28.8
 
 These treatments are **non-optional whenever the corresponding element type is used**:
 
-- **Every h4 eyebrow is Space Grotesk weight 600 in `{colors.primary}` cobalt, uppercase, with 0.08em letter-spacing.** No exceptions. An eyebrow without uppercase + tracking + cobalt color is not the system's eyebrow — it's a stray sans element.
+- **Every h4 eyebrow is Space Grotesk weight 600 in `{colors.primary}` cobalt, uppercase, with 0.08em letter-spacing.** No exceptions. An eyebrow without uppercase + tracking + cobalt color is not the system's eyebrow, it's a stray sans element.
 - **Every headline (h1, h2, h3) uses negative letter-spacing of -0.02em.** Default-tracked Space Grotesk display reads as untreated and breaks the editorial discipline.
-- **Every headline uses `{colors.text}` (`#111111`), not cobalt.** Cobalt headlines are forbidden — cobalt is reserved for accent moments (eyebrows, metrics, CTAs, chart bars). Reversing this collapses the visual hierarchy.
+- **Every headline uses `{colors.text}` (`#111111`), not cobalt.** Cobalt headlines are forbidden, cobalt is reserved for accent moments (eyebrows, metrics, CTAs, chart bars). Reversing this collapses the visual hierarchy.
 - **Every numerical callout (metric value, stat number, agenda number, bar percentage, step circle) is Space Grotesk weight 600-700 in `{colors.primary}` cobalt.** Numerical values are the system's primary accent moment.
 - **Every body paragraph is Inter weight 400 in `{colors.text-muted}` (`#6b6b6b`) with line-height 1.6.** Body in pure black reads as too heavy; body in text-light reads as too faint.
 - **Every CTA is the `{components.cta-button}` pattern: solid cobalt pill with cream text, 100px border-radius, 0.9rem × 2.2rem padding.** CTAs in any other shape or color don't exist.
@@ -492,9 +492,9 @@ Default slide padding is asymmetric: `3.5vw` left, top, and right; `8.5vh` botto
 
 ### Persistent Chrome
 Three elements appear on every slide:
-- **Slide counter** at bottom-left — Space Grotesk 12.8px weight 500 in text-muted gray, fixed at `bottom: 2.5vh; left: 3vw`.
-- **Nav controls** at bottom-right — two circular 44px nav-buttons with 1.5px cobalt-at-20% borders, fixed at `bottom: 2.5vh; right: 3vw`. Disabled state at 30% opacity (first slide / last slide).
-- **Progress bar** at bottom edge — 3px solid cobalt strip with width = `(currentSlide + 1) / total * 100%`. Animates on slide change.
+- **Slide counter** at bottom-left, Space Grotesk 12.8px weight 500 in text-muted gray, fixed at `bottom: 2.5vh; left: 3vw`.
+- **Nav controls** at bottom-right, two circular 44px nav-buttons with 1.5px cobalt-at-20% borders, fixed at `bottom: 2.5vh; right: 3vw`. Disabled state at 30% opacity (first slide / last slide).
+- **Progress bar** at bottom edge, 3px solid cobalt strip with width = `(currentSlide + 1) / total * 100%`. Animates on slide change.
 
 A **keyboard hint** ("Use arrow keys to navigate") appears at bottom center in text-light gray.
 
@@ -513,68 +513,68 @@ The system uses **soft cobalt-tinted backgrounds + soft cobalt-borders + rounded
 There are no `box-shadow` declarations on cards, stat cells, detail blocks, or any content container. The only shadow in the system is a single soft cobalt-tinted hover state on the CTA button: `0 8px 24px rgba(30, 43, 250, 0.25)`, which appears for 200ms on hover and disappears on mouse-out. This is the only colored, blurred shadow in the system.
 
 ### Border-Left Accent (Highlight Block)
-The `{components.split-highlight-block}` uses a 4px solid cobalt left border to signal "this is a quoted callout, distinct from surrounding body". This is the system's structural accent mechanism — it's not a shadow, but it carries the same elevation cue (the colored rule pulls the block forward visually).
+The `{components.split-highlight-block}` uses a 4px solid cobalt left border to signal "this is a quoted callout, distinct from surrounding body". This is the system's structural accent mechanism, it's not a shadow, but it carries the same elevation cue (the colored rule pulls the block forward visually).
 
 ### Rounded Corners as Softness
 The 10-14px border-radius on cards is part of the depth language. Without rounded corners, the cobalt-tinted cards would read as flat panels; the soft radius softens them into "lifted" surfaces.
 
 ### Atmospheric Decorations
-Decorative elements (cover-decoration diagonal panel, concentric closing-circles, cover-dots grid, quote decoration circles) appear only on cover, quote, and closing-class surfaces. They are atmospheric, not structural — used to soften open-space surfaces without filling them with content.
+Decorative elements (cover-decoration diagonal panel, concentric closing-circles, cover-dots grid, quote decoration circles) appear only on cover, quote, and closing-class surfaces. They are atmospheric, not structural, used to soften open-space surfaces without filling them with content.
 
 ## Shapes and Treatment
 
 ### Border Radius
-- **`{radii.pill}` = 100px** — fully rounded. Used on `{components.tag-pill}`, `{components.cta-button}`, and any pill-shaped chrome.
-- **`{radii.card-lg}` = 14px** — used on large metric cards.
-- **`{radii.card-md}` = 12px** — used on standard stat cells, split-highlight blocks.
-- **`{radii.card-sm}` = 10px** — used on detail blocks and mini-stats.
-- **`{radii.bar}` = 6px** — used on bar tracks and bar fills.
-- **`{radii.circle}` = 50%** — used on step circles, nav-button circles, accent dots, closing decoration circles, cover dots, quote decoration circles.
+- **`{radii.pill}` = 100px**, fully rounded. Used on `{components.tag-pill}`, `{components.cta-button}`, and any pill-shaped chrome.
+- **`{radii.card-lg}` = 14px**, used on large metric cards.
+- **`{radii.card-md}` = 12px**, used on standard stat cells, split-highlight blocks.
+- **`{radii.card-sm}` = 10px**, used on detail blocks and mini-stats.
+- **`{radii.bar}` = 6px**, used on bar tracks and bar fills.
+- **`{radii.circle}` = 50%**, used on step circles, nav-button circles, accent dots, closing decoration circles, cover dots, quote decoration circles.
 
 The radius ladder is graduated: tighter radii on smaller chrome, larger radii on bigger cards, fully rounded on pills, perfect circles on chrome. The system has **no square (0px) corners** anywhere except the progress bar.
 
 ### Border Weights
-- **1px solid `{colors.border}`** — universal soft border. Used on stat cells, mini-stats, detail blocks, agenda items (bottom border only), stat-context dividers (top border only).
-- **1.5px solid `{colors.border}`** — slightly heavier soft border. Used on metric cards, nav-buttons.
-- **2px solid `{colors.border}`** — used on the split column divider (border-left on the right column of split layouts).
-- **4px solid `{colors.primary}`** — used only as the left rule on `{components.split-highlight-block}` to signal a quoted callout.
+- **1px solid `{colors.border}`**, universal soft border. Used on stat cells, mini-stats, detail blocks, agenda items (bottom border only), stat-context dividers (top border only).
+- **1.5px solid `{colors.border}`**, slightly heavier soft border. Used on metric cards, nav-buttons.
+- **2px solid `{colors.border}`**, used on the split column divider (border-left on the right column of split layouts).
+- **4px solid `{colors.primary}`**, used only as the left rule on `{components.split-highlight-block}` to signal a quoted callout.
 
-The borders are **never opaque cobalt** — they are always at 20% opacity (`{colors.border}`). This is what gives the system its quiet, lifted quality.
+The borders are **never opaque cobalt**, they are always at 20% opacity (`{colors.border}`). This is what gives the system its quiet, lifted quality.
 
 ### Decorative Element Types
 
-**Tinted card** (`{components.card-tinted}`) — Cobalt-at-4% background with 1.5px cobalt-at-20% border, 14px radius. The primary content card.
+**Tinted card** (`{components.card-tinted}`), Cobalt-at-4% background with 1.5px cobalt-at-20% border, 14px radius. The primary content card.
 
-**Tag pill** (`{components.tag-pill}`) — Fully rounded cobalt-at-8% pill with cobalt text. Sits in the top-right of the slide-header.
+**Tag pill** (`{components.tag-pill}`), Fully rounded cobalt-at-8% pill with cobalt text. Sits in the top-right of the slide-header.
 
-**Eyebrow** (`{typography.h4-eyebrow}`) — Uppercase cobalt label with 0.08em tracking. Sits in the top-left of the slide-header.
+**Eyebrow** (`{typography.h4-eyebrow}`), Uppercase cobalt label with 0.08em tracking. Sits in the top-left of the slide-header.
 
-**CTA button** (`{components.cta-button}`) — Solid cobalt pill with cream text. The system's only solid-color element. Used once per closing surface.
+**CTA button** (`{components.cta-button}`), Solid cobalt pill with cream text. The system's only solid-color element. Used once per closing surface.
 
-**Accent line** (`{components.accent-line}`) — A short 60×4 horizontal cobalt rule with 2px radius. Used above cover titles and as eyebrow separators on open-space surfaces.
+**Accent line** (`{components.accent-line}`), A short 60×4 horizontal cobalt rule with 2px radius. Used above cover titles and as eyebrow separators on open-space surfaces.
 
-**Step circle** (`{components.step-circle}`) — A 56×56 solid cobalt circle with cream Space Grotesk numeral inside. Sequential timeline steps reduce opacity (1.0 → 0.85 → 0.7 → 0.55) to suggest fade-into-future.
+**Step circle** (`{components.step-circle}`), A 56×56 solid cobalt circle with cream Space Grotesk numeral inside. Sequential timeline steps reduce opacity (1.0 → 0.85 → 0.7 → 0.55) to suggest fade-into-future.
 
-**Bar track + fill** (`{components.bar-track}` + `{components.bar-fill}`) — 28px-tall track in cobalt-at-8% with a solid cobalt fill whose width carries the data. 6px rounded corners on both.
+**Bar track + fill** (`{components.bar-track}` + `{components.bar-fill}`), 28px-tall track in cobalt-at-8% with a solid cobalt fill whose width carries the data. 6px rounded corners on both.
 
-**Insight list item** (`{components.insight-list-item}`) — A counter-numbered list using CSS counter() to render decimal-leading-zero prefixes ("01", "02") in cobalt Space Grotesk 600 / 12.5px positioned absolute left.
+**Insight list item** (`{components.insight-list-item}`), A counter-numbered list using CSS counter() to render decimal-leading-zero prefixes ("01", "02") in cobalt Space Grotesk 600 / 12.5px positioned absolute left.
 
-**Split highlight block** (`{components.split-highlight-block}`) — A cobalt-at-8% tinted block with a 4px cobalt left rule and a cite line below. Used for inline pull-quotes inside split-column layouts.
+**Split highlight block** (`{components.split-highlight-block}`), A cobalt-at-8% tinted block with a 4px cobalt left rule and a cite line below. Used for inline pull-quotes inside split-column layouts.
 
-**Cover decoration** (`{components.cover-decoration}`) — A clipped diagonal cobalt-tinted panel filling the right ~35% of cover surfaces. Reads as a printed accent without enclosing the layout.
+**Cover decoration** (`{components.cover-decoration}`), A clipped diagonal cobalt-tinted panel filling the right ~35% of cover surfaces. Reads as a printed accent without enclosing the layout.
 
-**Cover dots** (`{components.cover-dots}`) — A 3×3 grid of 6px cobalt dots at 12px gap, 25% opacity. Decorative atmosphere on open-space surfaces.
+**Cover dots** (`{components.cover-dots}`), A 3×3 grid of 6px cobalt dots at 12px gap, 25% opacity. Decorative atmosphere on open-space surfaces.
 
-**Closing circles** (`{components.closing-circles}`) — Two concentric centered circles (500px outer, 360px inner) with 1px cobalt-at-20% borders, opacity 0.3-0.4. Atmospheric decoration on closing-class surfaces.
+**Closing circles** (`{components.closing-circles}`), Two concentric centered circles (500px outer, 360px inner) with 1px cobalt-at-20% borders, opacity 0.3-0.4. Atmospheric decoration on closing-class surfaces.
 
-**Metric change chip** (`{components.metric-change-positive}` / `{components.metric-change-negative}`) — Inline directional indicator: a small arrow glyph + percentage value in `{colors.positive}` or `{colors.negative}`. No fill, no border — pure inline text color.
+**Metric change chip** (`{components.metric-change-positive}` / `{components.metric-change-negative}`), Inline directional indicator: a small arrow glyph + percentage value in `{colors.positive}` or `{colors.negative}`. No fill, no border, pure inline text color.
 
 ## Do's and Don'ts
 
 ### Do
 
 - Apply `{colors.bg}` (cream) as the universal canvas. Every surface starts on warm cream, never pure white.
-- Use `{colors.primary}` cobalt as the only accent color across the entire deck — for eyebrows, metrics, CTAs, chart fills, step circles, and progress indicators.
+- Use `{colors.primary}` cobalt as the only accent color across the entire deck, for eyebrows, metrics, CTAs, chart fills, step circles, and progress indicators.
 - Set headlines (h1, h2, h3) in `{colors.text}` (`#111111`) near-black with -0.02em tracking. Cobalt headlines are forbidden; cobalt is for accent moments only.
 - Set every h4 eyebrow in cobalt Space Grotesk weight 600 with uppercase + 0.08em tracking. The eyebrow is the universal section opener.
 - Use `{components.card-tinted}` (cobalt-at-4% fill + cobalt-at-20% 1.5px border + 14px radius) as the universal content card pattern.
@@ -582,14 +582,14 @@ The borders are **never opaque cobalt** — they are always at 20% opacity (`{co
 - Set body in Inter weight 400 at 13.6-16.8px in `{colors.text-muted}` (`#6b6b6b`) with line-height 1.6. The muted gray body is what makes the system feel premium.
 - Render every numerical callout (metric, stat, bar percentage, agenda number) in Space Grotesk weight 600-700 in cobalt. The cobalt numerical accent is the system's data voice.
 - Use full 100px border-radius on all chrome (tag pills, CTAs, nav-buttons). The pill shape is the system's chrome signature.
-- Use directional change chips (`{components.metric-change-positive}` / `{components.metric-change-negative}`) inline with no fill — green for positive, red for negative, both subdued.
+- Use directional change chips (`{components.metric-change-positive}` / `{components.metric-change-negative}`) inline with no fill, green for positive, red for negative, both subdued.
 
 ### Don't
 
-- Don't introduce a second accent color. Cobalt is the only accent — orange, teal, purple, or any additional brand color breaks the single-accent discipline.
+- Don't introduce a second accent color. Cobalt is the only accent, orange, teal, purple, or any additional brand color breaks the single-accent discipline.
 - Don't set headlines in cobalt. Headlines are near-black; cobalt is reserved for eyebrows, metrics, CTAs, and chart fills.
 - Don't use drop shadows on cards or content. The system has zero box-shadows except a single soft cobalt CTA hover.
-- Don't use square corners (0px radius) anywhere. The system is built around soft rounded corners — square corners immediately read as a different aesthetic.
+- Don't use square corners (0px radius) anywhere. The system is built around soft rounded corners, square corners immediately read as a different aesthetic.
 - Don't use opaque cobalt borders on cards. Borders are always cobalt-at-20% (`{colors.border}`). Full-opacity borders break the quiet, lifted feel.
 - Don't substitute fonts. Space Grotesk + Inter is the pairing. Substituting Arial, Helvetica, Roboto, or Open Sans collapses the typographic identity.
 - Don't crowd the canvas with bordered hard-edged elements. The system depends on soft tints and gentle borders; adding heavy outlines makes it feel like a different system.
@@ -599,7 +599,7 @@ The borders are **never opaque cobalt** — they are always at 20% opacity (`{co
 
 ## Responsive Behavior
 
-Blue Professional is designed as a **1920×1080 presentation system** (effective 100vw × 100vh). Sizing uses CSS `clamp()` for type and `vw / vh / rem` for spacing. The system has minimal responsive behavior — it's built for landscape presentation contexts.
+Blue Professional is designed as a **1920×1080 presentation system** (effective 100vw × 100vh). Sizing uses CSS `clamp()` for type and `vw / vh / rem` for spacing. The system has minimal responsive behavior, it's built for landscape presentation contexts.
 
 ### Scaling Behavior
 - h1 scales 44.8px → 67.2px on viewport width.
@@ -634,11 +634,11 @@ The system has no `@media print` rule. The slide transition is screen-only; prin
 - Nav-buttons invert on hover (cobalt fill, cream icon).
 - Agenda items get a subtle `{colors.card-bg}` background on hover (200ms transition).
 - CTA button lifts -2px on hover with a soft cobalt drop shadow (the only shadow in the system).
-- Bar fills animate from 0 to data value with a 0.8s ease transition — most visible on slide entry.
+- Bar fills animate from 0 to data value with a 0.8s ease transition, most visible on slide entry.
 
 ## CJK & International Content
 
-When using this template for Chinese (or other CJK) content, swap the Latin typeface stack for an equivalent Chinese pairing and apply universal CJK adjustments. All recommended Chinese fonts load via CDN — no install required.
+When using this template for Chinese (or other CJK) content, swap the Latin typeface stack for an equivalent Chinese pairing and apply universal CJK adjustments. All recommended Chinese fonts load via CDN, no install required.
 
 ### Recommended Chinese Pairing
 
@@ -650,7 +650,7 @@ When using this template for Chinese (or other CJK) content, swap the Latin type
 
 ### Mixed-Content Strategy
 
-**Strategy A** — single CJK family per role with Latin glyph coverage built in. Use 思源黑体 Noto Sans SC for every Space Grotesk role (display, eyebrow, numerical, chrome) and 思源宋体 Noto Serif SC for the Inter body role. Both faces ship Latin glyphs that read cleanly alongside Chinese characters. The serif body pairing reinforces the consulting-grade editorial register that this template is built for — investor reports and McKinsey-style briefings often pair sans display with serif body in Chinese.
+**Strategy A**, single CJK family per role with Latin glyph coverage built in. Use 思源黑体 Noto Sans SC for every Space Grotesk role (display, eyebrow, numerical, chrome) and 思源宋体 Noto Serif SC for the Inter body role. Both faces ship Latin glyphs that read cleanly alongside Chinese characters. The serif body pairing reinforces the consulting-grade editorial register that this template is built for, investor reports and McKinsey-style briefings often pair sans display with serif body in Chinese.
 
 ### Loading
 
@@ -666,15 +666,15 @@ Add to the template's `<head>`:
 
 - **Line-height**: increase by ~15–25% from the Latin spec. Body 1.75–1.85 (up from 1.6), display 1.2–1.3 (up from 1.1). CJK characters are visually full and crowd vertically more than Latin.
 - **Letter-spacing**: set to 0 on every CJK run. The template's −0.02em negative tracking on h1–h3 overlaps CJK strokes; the +0.08em positive tracking on h4 eyebrows reads as gappy on square glyphs.
-- **Text transform**: don't apply `uppercase` to Chinese text — CJK has no case. The h4-eyebrow and cite tokens use `text-transform: uppercase` in the Latin original; remove it for CJK runs.
+- **Text transform**: don't apply `uppercase` to Chinese text, CJK has no case. The h4-eyebrow and cite tokens use `text-transform: uppercase` in the Latin original; remove it for CJK runs.
 - **Punctuation**: use full-width Chinese punctuation （，。：；！？「」（））.
 - **No period on display headlines**: Chinese typography convention omits trailing 。 on display-scale headlines.
 - **Space between CJK and Latin (盘古之白)**: insert an ASCII space between every Chinese character and adjacent Latin character or digit. Write `2024 Q3 业绩复盘` not `2024Q3业绩复盘`.
-- **One font per sentence**: 思源黑体 / 思源宋体 cover both CJK and Latin glyphs — let one face handle each sentence. Don't let the browser fall back to Space Grotesk or Inter for ASCII characters mid-sentence.
+- **One font per sentence**: 思源黑体 / 思源宋体 cover both CJK and Latin glyphs, let one face handle each sentence. Don't let the browser fall back to Space Grotesk or Inter for ASCII characters mid-sentence.
 
 ### Aesthetic Notes for This System
 
-The system's identity rests on **restraint with one strong commitment** — cream ground, cobalt accent, soft tinted cards, no shadows. None of that depends on Latin typography; it transfers cleanly to Chinese. The h4-eyebrow loses its "uppercase + 0.08em tracked + cobalt" character in CJK because both uppercase and wide tracking drop. Compensate by **always pairing the eyebrow with the cobalt accent-line component above the headline** — the 60×4 cobalt rule does the chrome-recognition work that the tracked-uppercase did in Latin. Keep the eyebrow's cobalt color and weight-600 contrast against the muted-gray body.
+The system's identity rests on **restraint with one strong commitment**, cream ground, cobalt accent, soft tinted cards, no shadows. None of that depends on Latin typography; it transfers cleanly to Chinese. The h4-eyebrow loses its "uppercase + 0.08em tracked + cobalt" character in CJK because both uppercase and wide tracking drop. Compensate by **always pairing the eyebrow with the cobalt accent-line component above the headline**, the 60×4 cobalt rule does the chrome-recognition work that the tracked-uppercase did in Latin. Keep the eyebrow's cobalt color and weight-600 contrast against the muted-gray body.
 
 The cobalt color discipline (`#1e2bfa` as the only accent, full-opacity on numerals and CTAs, 20% opacity on borders, 4% opacity on card fills) is the system's actual identity and transfers entirely to a CJK build. Numerical callouts remain Latin Arabic digits in Chinese consulting decks by convention (业绩 $24.3M, 同比 +18%), so the cobalt Space Grotesk → 思源黑体 swap mostly affects labels and headlines, not the headline-grabbing numerical figures. Keep numerals in 思源黑体 weight 700 for the digit rendering.
 
@@ -682,7 +682,7 @@ The cobalt color discipline (`#1e2bfa` as the only accent, full-opacity on numer
 
 - **No CDN Chinese face matches Space Grotesk's "trustworthy consulting" register exactly.** 思源黑体 reads as more institutional and slightly less contemporary than Space Grotesk. The template will feel slightly more "official report" and slightly less "AI startup" than its Latin original. This is generally desirable for executive-briefing contexts in Chinese.
 - **The h4-eyebrow signal weakens.** The "uppercase Space Grotesk 600 in cobalt with 0.08em tracking" combination is the system's most recognizable small chrome and loses both the uppercase and tracking signals in CJK. Adding the `{components.accent-line}` above or below the eyebrow is the recommended compensation; without it, eyebrows can blend into body weight contrast.
-- **Body in 思源宋体 changes the register.** Inter body reads as neutral-modern; 思源宋体 reads as editorial-serious. The system's "premium consulting" feel becomes slightly more "policy paper" — appropriate for state-owned enterprise or government audiences, slightly heavy for startup-pitch audiences. For startup contexts, swap body to 思源黑体 Noto Sans SC 400 instead.
+- **Body in 思源宋体 changes the register.** Inter body reads as neutral-modern; 思源宋体 reads as editorial-serious. The system's "premium consulting" feel becomes slightly more "policy paper", appropriate for state-owned enterprise or government audiences, slightly heavy for startup-pitch audiences. For startup contexts, swap body to 思源黑体 Noto Sans SC 400 instead.
 
 ## Iteration Guide
 
@@ -691,18 +691,18 @@ The cobalt color discipline (`#1e2bfa` as the only accent, full-opacity on numer
 3. Any new headline uses Space Grotesk weight 600-700 in `{colors.text}` near-black with -0.02em tracking. Reach for h2 (28.8-41.6px) for primary moments.
 4. Any new card uses the tinted pattern: `{colors.card-bg}` (cobalt at 4%) + 1-1.5px `{colors.border}` (cobalt at 20%) + 10-14px radius. Never use solid color fills or opaque borders.
 5. Any new numerical callout (metric value, stat number, agenda number, bar percentage, step circle) is Space Grotesk weight 600-700 in `{colors.primary}` cobalt. Numbers are the accent moment.
-6. Any new accent line, divider, or directional rule uses cobalt — solid for the primary rule, soft-cobalt (20% opacity) for borders.
+6. Any new accent line, divider, or directional rule uses cobalt, solid for the primary rule, soft-cobalt (20% opacity) for borders.
 7. Any new CTA uses the `{components.cta-button}` pattern: solid cobalt pill with cream text, 100px radius, no other CTA shape exists.
 8. Any new chart bar uses `{components.bar-fill}` (solid cobalt) on `{components.bar-track}` (cobalt at 8%) with 6px radius.
 9. Any new step or sequential indicator uses the `{components.step-circle}` with diminishing opacity for future steps (1.0 → 0.85 → 0.7 → 0.55).
-10. If a surface feels too sparse, add information (more stats, more detail blocks) — don't add a second accent color or a heavier border to fill space. The system reads as elegant when populated with substance, not noise.
+10. If a surface feels too sparse, add information (more stats, more detail blocks), don't add a second accent color or a heavier border to fill space. The system reads as elegant when populated with substance, not noise.
 
 ## Known Gaps
 
-- **Space Grotesk and Inter are loaded from Google Fonts** via a preconnect + `<link>`. There are no system fallbacks beyond `sans-serif` — in environments where Google Fonts fail, the system collapses to system defaults and loses its character.
+- **Space Grotesk and Inter are loaded from Google Fonts** via a preconnect + `<link>`. There are no system fallbacks beyond `sans-serif`, in environments where Google Fonts fail, the system collapses to system defaults and loses its character.
 - **The directional change colors (`{colors.positive}` and `{colors.negative}`) are inline-only.** There is no token-level support for status fills, success/error badges, or alerts beyond these two inline text colors.
-- **The single-accent discipline limits categorical color encoding.** Multi-series charts must distinguish through positioning or labeling — there is no design-system answer for "show 4 categorical series in different colors". This is intentional but limits chart expressiveness.
-- **The agenda-item hover state changes background to `{colors.card-bg}`** — interactive on hover. This may not work as expected in static screen-share contexts.
+- **The single-accent discipline limits categorical color encoding.** Multi-series charts must distinguish through positioning or labeling, there is no design-system answer for "show 4 categorical series in different colors". This is intentional but limits chart expressiveness.
+- **The agenda-item hover state changes background to `{colors.card-bg}`**, interactive on hover. This may not work as expected in static screen-share contexts.
 - **Bar fills animate from 0 to value on entry** but only the active slide's bars are visible. Re-entering a slide replays the animation; the system does not preserve animation state.
 - **The progress bar reads as decorative on slide 1** (it's at ~10% on a 10-slide deck) and not very informative until later in the deck. Combine with the slide-counter for explicit position cues.
 - **The slide transition uses translateX (40px in/out)** with opacity fade. On very wide displays the 40px shift is barely perceptible; on small displays it may feel jarring.

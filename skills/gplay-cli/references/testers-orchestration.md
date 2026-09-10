@@ -19,13 +19,13 @@ and closed tracks are managed by email address or by Google Group.
 
 ## Tester commands
 
-`gplay testers` has only three subcommands. There is **no `testers list`** — to
+`gplay testers` has only three subcommands. There is **no `testers list`**, to
 list the testers on a track, use `testers get`.
 
-- `gplay testers get` — read the testers on a track.
-- `gplay testers update` — **replace** the entire tester set (emails/groups not
+- `gplay testers get`, read the testers on a track.
+- `gplay testers update`, **replace** the entire tester set (emails/groups not
   included are removed).
-- `gplay testers patch` — **merge** with the existing set (preserves fields you
+- `gplay testers patch`, **merge** with the existing set (preserves fields you
   omit).
 
 ### List (get) testers for a track
@@ -158,5 +158,5 @@ gplay promote --package com.example.app --from beta --to production --rollout 0.
   update`/`patch` inside an edit, then commit.
 - Use `update` to set the exact tester set, `patch` to add without removing.
 - `--rollout` values are fractions (0.1 = 10%), range 0.0–1.0.
-- Always `gplay edits commit` — tester changes are inert until committed.
+- Always `gplay edits commit`, tester changes are inert until committed.
 - Confirm flags with `--help` before running.

@@ -10,24 +10,24 @@ Analyze competitors to identify keyword gaps and positioning opportunities. Most
 
 If the user doesn't already have a list, find them through:
 
-1. **Category chart** — top apps in the same category/country
-2. **Keyword overlap** — apps ranking for the same keywords (OpenASO's shared-keyword evidence)
-3. **Similar apps** — Apple's "You Might Also Like" section on the listing
-4. **User perception** — ask: "What would your users use if your app didn't exist?"
+1. **Category chart**, top apps in the same category/country
+2. **Keyword overlap**, apps ranking for the same keywords (OpenASO's shared-keyword evidence)
+3. **Similar apps**, Apple's "You Might Also Like" section on the listing
+4. **User perception**, ask: "What would your users use if your app didn't exist?"
 
-Aim for a **3–5 app mix**: 2 direct competitors + 1–2 aspirational (larger, more mature) + 1 emerging (rising fast). Avoid analyzing only the category leader — their playbook may not apply at your stage.
+Aim for a **3–5 app mix**: 2 direct competitors + 1–2 aspirational (larger, more mature) + 1 emerging (rising fast). Avoid analyzing only the category leader, their playbook may not apply at your stage.
 
 ### Workflow: Analyze Competitor ASO Strategy
 
 1. Build the competitor set using the mix above.
 2. Extract competitor keywords from titles, subtitles, the first 100 words of descriptions, and OpenASO keyword rankings.
-3. Build a competitor keyword matrix — which keywords each app targets, coverage % per keyword.
+3. Build a competitor keyword matrix, which keywords each app targets, coverage % per keyword.
 4. Identify keyword gaps:
    - Keywords competitors rank for that you don't
-   - Keywords you rank for that competitors don't (your moat — protect)
+   - Keywords you rank for that competitors don't (your moat, protect)
    - Keywords where you're outranked (close the gap)
 5. Analyze visual assets: icon, screenshots (count, first-3 strategy, text overlays), preview video.
-6. Compare ratings and review patterns — themes, response practice.
+6. Compare ratings and review patterns, themes, response practice.
 7. Compare growth signals and monetization (see tables below).
 8. Document positioning opportunities and threats.
 9. **Validation:** 3+ competitors analyzed; keyword matrix complete; visual + ratings + monetization compared; gaps surfaced with volume evidence.
@@ -72,7 +72,7 @@ Aim for a **3–5 app mix**: 2 direct competitors + 1–2 aspirational (larger, 
 | Apple Search Ads presence? | | | | |
 | Downloads / revenue (est) | | | | |
 
-Downloads and revenue estimates are unsupported by OpenASO — label as estimates from third-party tools or omit.
+Downloads and revenue estimates are unsupported by OpenASO, label as estimates from third-party tools or omit.
 
 **Monetization**
 
@@ -88,7 +88,7 @@ Downloads and revenue estimates are unsupported by OpenASO — label as estimate
 
 | Opportunity Type | Example | Action |
 |------------------|---------|--------|
-| Keyword gap | "habit tracker" — comp ranks #3, you don't rank | Add to keyword field |
+| Keyword gap | "habit tracker", comp ranks #3, you don't rank | Add to keyword field |
 | Feature gap | Competitor lacks widget | Highlight in screenshots |
 | Visual gap | No videos in top 5 | Create app preview |
 | Messaging gap | None mention "free" | Test free positioning |
@@ -113,10 +113,10 @@ Plot the user vs competitors on visibility (chart position / install velocity) �
 
 ### Output Structure
 
-1. **Executive Summary** — 2–3 paragraphs: landscape, your position, biggest opportunities.
-2. **Comparison tables** — metadata / keyword gap / ratings / growth / monetization.
-3. **Position map** — ASCII 2×2.
-4. **Top Opportunities** — Quick Win, Keyword Gap, Creative Edge, Feature Gap, Market Gap.
-5. **Threats to Monitor** — competitor moves to watch, market trends.
+1. **Executive Summary**, 2–3 paragraphs: landscape, your position, biggest opportunities.
+2. **Comparison tables**, metadata / keyword gap / ratings / growth / monetization.
+3. **Position map**, ASCII 2×2.
+4. **Top Opportunities**, Quick Win, Keyword Gap, Creative Edge, Feature Gap, Market Gap.
+5. **Threats to Monitor**, competitor moves to watch, market trends.
 
 ---

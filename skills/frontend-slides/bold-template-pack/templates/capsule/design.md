@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Capsule
-description: A playful editorial system built on pill-shaped containers, a sun-bleached cream canvas, and a nine-color candy palette. Bodoni Moda serif headlines pair with Space Grotesk body to suggest a literary magazine that took a holiday at a 1970s ice-cream parlor. Every container that holds text is a pill (border-radius 9999px) outlined with a 2px ink stroke, casting a soft 6–12px offset shadow. The aesthetic is "Memphis-meets-editorial" — confident typography, generous bordered shapes, and decorative floating pills as atmospheric wallpaper.
+description: A playful editorial system built on pill-shaped containers, a sun-bleached cream canvas, and a nine-color candy palette. Bodoni Moda serif headlines pair with Space Grotesk body to suggest a literary magazine that took a holiday at a 1970s ice-cream parlor. Every container that holds text is a pill (border-radius 9999px) outlined with a 2px ink stroke, casting a soft 6–12px offset shadow. The aesthetic is "Memphis-meets-editorial", confident typography, generous bordered shapes, and decorative floating pills as atmospheric wallpaper.
 
 colors:
   cream: "#F5F5F0"
@@ -142,7 +142,7 @@ components:
     fontWeight: 500
     letterSpacing: 0.02em
     whiteSpace: nowrap
-    description: "The universal container shape. Any text container — chip, button, label, statement-highlight, stat tile, card, bar — is a pill with 2px outline. Background can be any palette accent or white."
+    description: "The universal container shape. Any text container, chip, button, label, statement-highlight, stat tile, card, bar, is a pill with 2px outline. Background can be any palette accent or white."
   pill-card:
     background: "{colors.white}"
     border: "2px solid {colors.outline}"
@@ -156,7 +156,7 @@ components:
     borderRadius: "2rem"
     padding: "2rem 1.5rem"
     boxShadow: "6px 6px 0 {colors.shadow}"
-    description: "Stat tile — pill-shaped white card containing a colored stat number, label, and a tiny accent bar."
+    description: "Stat tile, pill-shaped white card containing a colored stat number, label, and a tiny accent bar."
   bar-track:
     height: 36px
     background: "{colors.cream}"
@@ -211,7 +211,7 @@ components:
     padding: "1rem 2rem"
     boxShadow: "6px 6px 0 {colors.shadow}"
     background: "{colors.white}"
-    description: "Flow-diagram node — pill-shaped container with shadow. Connected by 50×4 ink connectors with triangular arrowheads."
+    description: "Flow-diagram node, pill-shaped container with shadow. Connected by 50×4 ink connectors with triangular arrowheads."
   diagram-connector:
     width: 50px
     height: 4px
@@ -221,7 +221,7 @@ components:
     borderRadius: "2rem"
     border: "2px solid {colors.outline}"
     boxShadow: "12px 12px 0 {colors.shadow}"
-    description: "Large image/illustration frame — slightly squared pill (2rem radius) with thicker 12px offset shadow. Often filled with a tri-stop linear gradient and a dot-pattern overlay."
+    description: "Large image/illustration frame, slightly squared pill (2rem radius) with thicker 12px offset shadow. Often filled with a tri-stop linear gradient and a dot-pattern overlay."
   grain-overlay:
     position: fixed
     inset: 0
@@ -248,23 +248,23 @@ Use `deck-stage.js` or an equivalent inline stage scaler for final output: rende
 
 ## Overview
 
-Capsule is a **playful editorial system** whose defining structural premise is the **pill**: every text container is a pill, every icon is a pill, every bar is a pill, every node in a diagram is a pill. The `border-radius: 9999px` rule applies to virtually all UI elements, with larger panels softening to a 2rem radius. Combined with the 2px ink outline that wraps every shape, the result is a system where containers feel inflated, friendly, and graphically distinct — a nod to Memphis design and late-70s ice-cream-parlor signage without abandoning editorial discipline.
+Capsule is a **playful editorial system** whose defining structural premise is the **pill**: every text container is a pill, every icon is a pill, every bar is a pill, every node in a diagram is a pill. The `border-radius: 9999px` rule applies to virtually all UI elements, with larger panels softening to a 2rem radius. Combined with the 2px ink outline that wraps every shape, the result is a system where containers feel inflated, friendly, and graphically distinct, a nod to Memphis design and late-70s ice-cream-parlor signage without abandoning editorial discipline.
 
-The typeface stack is a deliberate two-face conversation. **Bodoni Moda** — a high-contrast didone serif — carries every display moment, every section headline, every stat numeral, every card title, every quote. Bodoni's tall capitals and thin-thick stroke contrast give the headlines their editorial weight and a touch of fashion-magazine glamour. **Space Grotesk** — a contemporary geometric sans — carries every body paragraph, every label, every pill text, every subtitle. The serif/grotesk pairing creates the system's primary typographic rhythm: glamorous serif statements + clean grotesk supporting structure.
+The typeface stack is a deliberate two-face conversation. **Bodoni Moda**, a high-contrast didone serif, carries every display moment, every section headline, every stat numeral, every card title, every quote. Bodoni's tall capitals and thin-thick stroke contrast give the headlines their editorial weight and a touch of fashion-magazine glamour. **Space Grotesk**, a contemporary geometric sans, carries every body paragraph, every label, every pill text, every subtitle. The serif/grotesk pairing creates the system's primary typographic rhythm: glamorous serif statements + clean grotesk supporting structure.
 
-The palette runs nine colors plus three neutrals. The canvas is `{colors.cream}` — a warm sun-bleached off-white that signals "magazine paper" rather than "screen white." The ink is `{colors.ink}`, used for body text, headlines, and the universal outline. The seven candy accents — `{colors.coral}`, `{colors.lime}`, `{colors.lavender}`, `{colors.sky}`, `{colors.violet}`, `{colors.yellow}`, `{colors.peach}`, plus `{colors.mint}` — are interchangeable. They fill pills, color stat numbers, fill bar charts, and float as decorative atmosphere. There is no semantic mapping: no color means "warning," none means "success." Each accent is chosen for compositional balance, not meaning.
+The palette runs nine colors plus three neutrals. The canvas is `{colors.cream}`, a warm sun-bleached off-white that signals "magazine paper" rather than "screen white." The ink is `{colors.ink}`, used for body text, headlines, and the universal outline. The seven candy accents, `{colors.coral}`, `{colors.lime}`, `{colors.lavender}`, `{colors.sky}`, `{colors.violet}`, `{colors.yellow}`, `{colors.peach}`, plus `{colors.mint}`, are interchangeable. They fill pills, color stat numbers, fill bar charts, and float as decorative atmosphere. There is no semantic mapping: no color means "warning," none means "success." Each accent is chosen for compositional balance, not meaning.
 
-Depth comes from **soft hard-offset shadows** at 4px, 6px, 8px, and 12px in a low-opacity ink color (`{colors.shadow}` = `rgba(26, 26, 26, 0.08)`). Unlike a true brutalist shadow, these are slightly transparent — they read as "lifted" rather than "stamped." Combined with the 2px outline, every pill feels like it's floating just above the cream canvas. There is no use of blurred drop shadows; the offset is always solid, always to the bottom-right.
+Depth comes from **soft hard-offset shadows** at 4px, 6px, 8px, and 12px in a low-opacity ink color (`{colors.shadow}` = `rgba(26, 26, 26, 0.08)`). Unlike a true brutalist shadow, these are slightly transparent, they read as "lifted" rather than "stamped." Combined with the 2px outline, every pill feels like it's floating just above the cream canvas. There is no use of blurred drop shadows; the offset is always solid, always to the bottom-right.
 
-**Density philosophy: medium-high atmospheric.** Capsule slides feel populated. The system is built around the idea that decorative floating pills should orbit the actual content as wallpaper — small colored pills tilted at 5–25° rotations across the slide background, each containing a single uppercase word. These atmospheric pills are non-functional; they are typographic confetti. A correctly composed slide pairs one or two substantive content blocks (a pill-card, a stat grid, a diagram) with 5–8 floating decorative pills around the edges. A slide that feels broken in Capsule is one with empty corners or unrelieved cream space — the candy palette wants to participate even where the content doesn't strictly require it.
+**Density philosophy: medium-high atmospheric.** Capsule slides feel populated. The system is built around the idea that decorative floating pills should orbit the actual content as wallpaper, small colored pills tilted at 5–25° rotations across the slide background, each containing a single uppercase word. These atmospheric pills are non-functional; they are typographic confetti. A correctly composed slide pairs one or two substantive content blocks (a pill-card, a stat grid, a diagram) with 5–8 floating decorative pills around the edges. A slide that feels broken in Capsule is one with empty corners or unrelieved cream space, the candy palette wants to participate even where the content doesn't strictly require it.
 
 **Key Characteristics:**
-- Universal pill geometry — `border-radius: 9999px` for small containers, 2rem for larger cards/frames.
+- Universal pill geometry, `border-radius: 9999px` for small containers, 2rem for larger cards/frames.
 - 2px solid `{colors.outline}` stroke wraps every pill, icon, and card.
 - Bodoni Moda serif for every display/headline/stat; Space Grotesk sans for every body/label/pill text.
 - Sun-bleached cream canvas `{colors.cream}` with soft radial glows in candy accent colors at 6–15% opacity for background atmosphere.
 - Hard-offset shadows in low-opacity ink (`{colors.shadow}`) at 4/6/8/12px offsets, always solid, always bottom-right.
-- Nine-color candy accent palette used interchangeably — no semantic mapping.
+- Nine-color candy accent palette used interchangeably, no semantic mapping.
 - Decorative floating pills tilted at 5–25° rotations populate slide backgrounds as atmospheric wallpaper.
 - A persistent fractal-noise grain overlay (4% opacity, multiply blend) sits over the entire viewport at all times.
 - Full-screen vertical nav-dot column at right, mono slide counter at bottom-right.
@@ -272,27 +272,27 @@ Depth comes from **soft hard-offset shadows** at 4px, 6px, 8px, and 12px in a lo
 ## Colors
 
 ### Canvas & Ink
-- **Cream** (`{colors.cream}` — #F5F5F0): The canvas. Warm sun-bleached off-white. Used as default slide background, default bar-track interior, and any neutral region that wants paper warmth without being pure white.
-- **Ink** (`{colors.ink}` — #1A1A1A): The primary text color. Used for headlines, body, and (under the alias `outline`) the universal stroke.
-- **Outline** (`{colors.outline}` — #1E1E1E): Functionally identical to ink; reserved as the stroke color on every pill, card, icon, and frame for semantic clarity.
-- **White** (`{colors.white}` — #FFFFFF): True white. Used as the default fill for pill-cards, stat-pills, diagram nodes, and any pill that needs the highest contrast against the cream canvas. White pills always carry the 2px ink outline.
+- **Cream** (`{colors.cream}`, #F5F5F0): The canvas. Warm sun-bleached off-white. Used as default slide background, default bar-track interior, and any neutral region that wants paper warmth without being pure white.
+- **Ink** (`{colors.ink}`, #1A1A1A): The primary text color. Used for headlines, body, and (under the alias `outline`) the universal stroke.
+- **Outline** (`{colors.outline}`, #1E1E1E): Functionally identical to ink; reserved as the stroke color on every pill, card, icon, and frame for semantic clarity.
+- **White** (`{colors.white}`, #FFFFFF): True white. Used as the default fill for pill-cards, stat-pills, diagram nodes, and any pill that needs the highest contrast against the cream canvas. White pills always carry the 2px ink outline.
 
 ### Candy Accents
-- **Coral** (`{colors.coral}` — #E85D4E): Warm orange-red. The most "voice-y" of the accents; used as a default accent-line color, default pill-card icon fill on the first card in a sequence, and the most frequent stat-number color.
-- **Lime** (`{colors.lime}` — #C4D94E): Vivid chartreuse-green. Pairs well with coral; default fill for orbit-center anchors and frequent stat-number color.
-- **Lavender** (`{colors.lavender}` — #C5B5E0): Soft lilac-purple. Used as a calming pill fill in headers and as a frequent quote-highlight color.
-- **Sky** (`{colors.sky}` — #8BB4F7): Mid-saturation cornflower blue. The default "third accent" — sits comfortably next to coral and lime in a 3-card grid.
-- **Violet** (`{colors.violet}` — #A06CE8): Deeper purple. Used when a slide already has lavender as one accent and needs a second purple-family pop.
-- **Yellow** (`{colors.yellow}` — #F2D160): Warm marigold. The default fill for title pills, closing pills, and any pill that should read as "important / featured."
-- **Peach** (`{colors.peach}` — #F5B895): Pale apricot. The softest accent; used in floating decorative pills and circular decorative spots.
-- **Mint** (`{colors.mint}` — #A8E6CF): Pale aqua-green. Used most often inside the linear-gradient visual frame and in lower-emphasis decorative pills.
-- **Shadow** (`{colors.shadow}` — `rgba(26, 26, 26, 0.08)`): The universal soft hard-offset shadow color. Never use a different shadow color.
+- **Coral** (`{colors.coral}`, #E85D4E): Warm orange-red. The most "voice-y" of the accents; used as a default accent-line color, default pill-card icon fill on the first card in a sequence, and the most frequent stat-number color.
+- **Lime** (`{colors.lime}`, #C4D94E): Vivid chartreuse-green. Pairs well with coral; default fill for orbit-center anchors and frequent stat-number color.
+- **Lavender** (`{colors.lavender}`, #C5B5E0): Soft lilac-purple. Used as a calming pill fill in headers and as a frequent quote-highlight color.
+- **Sky** (`{colors.sky}`, #8BB4F7): Mid-saturation cornflower blue. The default "third accent", sits comfortably next to coral and lime in a 3-card grid.
+- **Violet** (`{colors.violet}`, #A06CE8): Deeper purple. Used when a slide already has lavender as one accent and needs a second purple-family pop.
+- **Yellow** (`{colors.yellow}`, #F2D160): Warm marigold. The default fill for title pills, closing pills, and any pill that should read as "important / featured."
+- **Peach** (`{colors.peach}`, #F5B895): Pale apricot. The softest accent; used in floating decorative pills and circular decorative spots.
+- **Mint** (`{colors.mint}`, #A8E6CF): Pale aqua-green. Used most often inside the linear-gradient visual frame and in lower-emphasis decorative pills.
+- **Shadow** (`{colors.shadow}`, `rgba(26, 26, 26, 0.08)`): The universal soft hard-offset shadow color. Never use a different shadow color.
 
 ### Defaults
 - **Default slide surface**: `{colors.cream}`.
-- **Default headline color**: `{colors.ink}` — Bodoni serif headlines are always ink, never colored. Color appears only on stat numerals and inside accent pills.
+- **Default headline color**: `{colors.ink}`, Bodoni serif headlines are always ink, never colored. Color appears only on stat numerals and inside accent pills.
 - **Default body text color**: `{colors.ink}` rendered at opacity 0.6–0.7 to soften it against the cream canvas.
-- **Default outline color**: `{colors.outline}` (≈ ink) — 2px on every pill/card/icon, no exceptions.
+- **Default outline color**: `{colors.outline}` (≈ ink), 2px on every pill/card/icon, no exceptions.
 - **Default card fill**: `{colors.white}`.
 - **Default accent-line color**: `{colors.coral}`.
 - **Default title-pill fill**: `{colors.yellow}`.
@@ -308,7 +308,7 @@ Accent colors have no semantic role. Choose accents based on warm/cool balance a
 ### Font Family
 The system runs on a **two-face conversation**: `Bodoni Moda` (serif, weights 400–900, opsz axis) carries every display and headline; `Space Grotesk` (sans, weights 300–700) carries every body, label, and pill text. There is no third face. Both families are loaded from Google Fonts at variable-axis weights.
 
-Bodoni Moda's high contrast and didone modulation give the system its editorial-glamour register; the thin-thick stroke contrast is most pronounced at large sizes, so display weights should always be 700+ to maintain stroke presence. Space Grotesk's geometric grotesque carries clean, modern body — it never tries to compete with the Bodoni headlines.
+Bodoni Moda's high contrast and didone modulation give the system its editorial-glamour register; the thin-thick stroke contrast is most pronounced at large sizes, so display weights should always be 700+ to maintain stroke presence. Space Grotesk's geometric grotesque carries clean, modern body, it never tries to compete with the Bodoni headlines.
 
 An inline `<em>` inside a Bodoni headline keeps Bodoni and shifts to italic. A `quote-highlight` inside a Bodoni quote body switches the wrapped word to a pill (Space Grotesk uppercase pill text on a candy fill) for visual emphasis.
 
@@ -363,7 +363,7 @@ Line-height tightens at scale: `{typography.display}` at 0.9, `{typography.headl
 ## Layout
 
 ### Canvas System
-The canvas is `100vw × 100vh` — full viewport with hidden overflow. Each `.slide` is absolutely positioned to fill the viewport, with one slide carrying `.active` (opacity 1) at a time. Transitions are 0.6s opacity fades via `cubic-bezier(0.4, 0, 0.2, 1)`. All sizes use rem units inside CSS `clamp()` so the layout scales fluidly.
+The canvas is `100vw × 100vh`, full viewport with hidden overflow. Each `.slide` is absolutely positioned to fill the viewport, with one slide carrying `.active` (opacity 1) at a time. Transitions are 0.6s opacity fades via `cubic-bezier(0.4, 0, 0.2, 1)`. All sizes use rem units inside CSS `clamp()` so the layout scales fluidly.
 
 ### Padding and Gap Scale
 | Token | Value | Use |
@@ -382,22 +382,22 @@ The canvas is `100vw × 100vh` — full viewport with hidden overflow. Each `.sl
 
 ### Atmospheric Background Layer
 Every slide layers two atmospheric treatments on top of the cream canvas:
-1. **Radial glows** — one to three soft `radial-gradient(ellipse at X% Y%, rgba(accent, 0.06–0.15), transparent)` washes anchored to corners or center. These tint the canvas warmly without changing its surface color.
-2. **Grain overlay** — a fractal-noise SVG fixed at `inset: 0`, opacity 0.04, mix-blend-mode multiply, z-index 9999. Always present, always identical, never removed.
+1. **Radial glows**, one to three soft `radial-gradient(ellipse at X% Y%, rgba(accent, 0.06–0.15), transparent)` washes anchored to corners or center. These tint the canvas warmly without changing its surface color.
+2. **Grain overlay**, a fractal-noise SVG fixed at `inset: 0`, opacity 0.04, mix-blend-mode multiply, z-index 9999. Always present, always identical, never removed.
 
 These are not decorative options; they are baseline canvas treatments that should appear on every slide.
 
 ### Decorative Pill Wallpaper
-A signature: small decorative pills (60–160px wide, 35–90px tall) tilted at -20° to +25° rotations are placed absolutely on slide backgrounds as atmospheric typographic confetti. Each contains a single uppercase Space-Grotesk word and a candy fill. Some are circular (border-radius 50%) instead of capsule-shaped. They have no informational role — they are visual atmosphere. Typical count: 5–8 per slide on cover/closing/quote layouts; 0 on dense data layouts.
+A signature: small decorative pills (60–160px wide, 35–90px tall) tilted at -20° to +25° rotations are placed absolutely on slide backgrounds as atmospheric typographic confetti. Each contains a single uppercase Space-Grotesk word and a candy fill. Some are circular (border-radius 50%) instead of capsule-shaped. They have no informational role, they are visual atmosphere. Typical count: 5–8 per slide on cover/closing/quote layouts; 0 on dense data layouts.
 
 ## Depth and Elevation
 
 ### Soft Hard-Offset Shadow
 The system's only depth technique is a **solid hard-offset shadow** in low-opacity ink:
-- **4px 4px 0** — small elevated nodes (step nodes, small pills).
-- **6px 6px 0** — orbit pills, stat-pills, diagram nodes.
-- **8px 8px 0** — pillar-cards, chart container.
-- **12px 12px 0** — large visual frame (the most lifted element in the system).
+- **4px 4px 0**, small elevated nodes (step nodes, small pills).
+- **6px 6px 0**, orbit pills, stat-pills, diagram nodes.
+- **8px 8px 0**, pillar-cards, chart container.
+- **12px 12px 0**, large visual frame (the most lifted element in the system).
 
 All shadows use `{colors.shadow}` (`rgba(26, 26, 26, 0.08)`). The opacity is the key distinction from a brutalist hard shadow: at 8% the shadow reads as a soft lift rather than a stamped offset. The offset direction is always bottom-right.
 
@@ -405,7 +405,7 @@ All shadows use `{colors.shadow}` (`rgba(26, 26, 26, 0.08)`). The opacity is the
 Most apparent depth comes from the 2px ink outline that wraps every pill against the cream canvas. The outline does much of the elevation work; the shadow adds the lift on cards and elevated pills.
 
 ### Flat Decorative Layer
-Decorative floating pills and radial glows are flat — they cast no shadow. The shadow is reserved for content-bearing containers (cards, stat tiles, diagram nodes, visual frames). This visual rule separates "content" from "atmosphere" at a glance.
+Decorative floating pills and radial glows are flat, they cast no shadow. The shadow is reserved for content-bearing containers (cards, stat tiles, diagram nodes, visual frames). This visual rule separates "content" from "atmosphere" at a glance.
 
 ## Shapes and Treatment
 
@@ -421,47 +421,47 @@ Decorative floating pills and radial glows are flat — they cast no shadow. The
 The system has **no sharp-cornered text containers**. Every container that holds text or icon content is rounded.
 
 ### Border Weights
-- **2px solid `{colors.outline}`** — the universal stroke. Used on every pill, card, icon, frame, bar track, nav dot.
-- **2px dashed `{colors.outline}`** — used only on the inner frame inside the visual-frame component (a decorative interior border indicating "image placeholder").
-- **4px solid ink** — used only on the timeline-line that connects sequential step nodes horizontally.
+- **2px solid `{colors.outline}`**, the universal stroke. Used on every pill, card, icon, frame, bar track, nav dot.
+- **2px dashed `{colors.outline}`**, used only on the inner frame inside the visual-frame component (a decorative interior border indicating "image placeholder").
+- **4px solid ink**, used only on the timeline-line that connects sequential step nodes horizontally.
 
 All borders are `{colors.outline}`. Colored borders do not exist in the system.
 
 ### Decorative Element Types
 
-**Decorative floating pill** — A small (60–160px wide × 35–90px tall) pill or circle in a candy fill, tilted at -20° to +25° rotation, positioned absolutely on the slide background. Contains a single uppercase Space-Grotesk word at 0.55–0.85rem. Functions as typographic confetti / atmospheric wallpaper. Five to eight per declarative slide.
+**Decorative floating pill**, A small (60–160px wide × 35–90px tall) pill or circle in a candy fill, tilted at -20° to +25° rotation, positioned absolutely on the slide background. Contains a single uppercase Space-Grotesk word at 0.55–0.85rem. Functions as typographic confetti / atmospheric wallpaper. Five to eight per declarative slide.
 
-**Header tag pill** — A small (≈0.7rem text) pill in a candy fill (typically lavender) with `pill-pad-sm` padding, centered above a section headline. The system's section-tag chip.
+**Header tag pill**, A small (≈0.7rem text) pill in a candy fill (typically lavender) with `pill-pad-sm` padding, centered above a section headline. The system's section-tag chip.
 
-**Title pill / closing pill** — A medium pill (`pill-pad-lg`) in `{colors.yellow}` carrying uppercase Space-Grotesk text. Placed above the largest display headline on cover and closing slides.
+**Title pill / closing pill**, A medium pill (`pill-pad-lg`) in `{colors.yellow}` carrying uppercase Space-Grotesk text. Placed above the largest display headline on cover and closing slides.
 
-**Pillar-card** — A 2rem-radius white card with 2px outline and 8px offset shadow, containing a circular `card-icon` at the top, a Bodoni `card-headline`, and a Space-Grotesk body paragraph. Used in 3-card and 4-card grids.
+**Pillar-card**, A 2rem-radius white card with 2px outline and 8px offset shadow, containing a circular `card-icon` at the top, a Bodoni `card-headline`, and a Space-Grotesk body paragraph. Used in 3-card and 4-card grids.
 
-**Stat-pill** — A 2rem-radius white card containing a colored Bodoni stat number, a small uppercase label, and a tiny 40×4 accent bar at the bottom. Sits in 3- or 4-column stat grids.
+**Stat-pill**, A 2rem-radius white card containing a colored Bodoni stat number, a small uppercase label, and a tiny 40×4 accent bar at the bottom. Sits in 3- or 4-column stat grids.
 
-**Bar-track** — A 36px-tall horizontal pill (9999px radius) with 2px outline and cream interior. The fill is a child pill in a candy color with the value label printed at the right edge inside the fill.
+**Bar-track**, A 36px-tall horizontal pill (9999px radius) with 2px outline and cream interior. The fill is a child pill in a candy color with the value label printed at the right edge inside the fill.
 
-**Orbit composition** — A central 160px circular pill in `{colors.lime}` carrying a Bodoni ordinal, surrounded by 4–6 small `orbit-pill` satellites in candy fills, each tilted, positioned at 8–45% / 8–45% offsets, with 6px shadows.
+**Orbit composition**, A central 160px circular pill in `{colors.lime}` carrying a Bodoni ordinal, surrounded by 4–6 small `orbit-pill` satellites in candy fills, each tilted, positioned at 8–45% / 8–45% offsets, with 6px shadows.
 
-**Diagram-node + connector** — Pill-shaped flow node (`diagram-node`) with 6px shadow, connected to the next node by a 50×4 ink bar with a triangular arrowhead. Nodes may carry candy fills; arrows are always ink.
+**Diagram-node + connector**, Pill-shaped flow node (`diagram-node`) with 6px shadow, connected to the next node by a 50×4 ink bar with a triangular arrowhead. Nodes may carry candy fills; arrows are always ink.
 
-**Visual-frame** — A 2rem-radius large frame with 12px offset shadow, filled with a tri-stop linear gradient (typically lavender → sky → mint), overlaid with a dot-grid pattern at 0.15 opacity, with an inner dashed border indicating "image placeholder." Used for hero visual moments.
+**Visual-frame**, A 2rem-radius large frame with 12px offset shadow, filled with a tri-stop linear gradient (typically lavender → sky → mint), overlaid with a dot-grid pattern at 0.15 opacity, with an inner dashed border indicating "image placeholder." Used for hero visual moments.
 
-**Quote-highlight** — An inline pill in lime or sky with 2px outline, wrapped around a single phrase inside a Bodoni quote body. The system's primary inline emphasis mechanism.
+**Quote-highlight**, An inline pill in lime or sky with 2px outline, wrapped around a single phrase inside a Bodoni quote body. The system's primary inline emphasis mechanism.
 
-**Accent line** — A 60×4 (or 80×4 on closing slides) horizontal pill in `{colors.coral}` used as a sub-headline accent rule.
+**Accent line**, A 60×4 (or 80×4 on closing slides) horizontal pill in `{colors.coral}` used as a sub-headline accent rule.
 
 ## Do's and Don'ts
 
 ### Do
-- Make every text container a pill — 9999px radius for small pills, 2rem radius for larger cards. The pill geometry is the system's most distinctive single trait.
+- Make every text container a pill, 9999px radius for small pills, 2rem radius for larger cards. The pill geometry is the system's most distinctive single trait.
 - Apply the 2px `{colors.outline}` stroke to every pill, card, icon, and frame. The outline is what makes the candy palette read as graphic rather than candy.
 - Set every Bodoni display element in `{colors.ink}`, never in a candy color. Color belongs on stat numerals and pill fills, not on serif headlines.
 - Use Bodoni Moda for every headline/stat/card title; use Space Grotesk for every body/label/pill. The two-face split is non-negotiable.
 - Render shadows as solid hard offsets at 4/6/8/12px in `{colors.shadow}` (`rgba(26,26,26,0.08)`). Never blur; never re-color.
 - Populate slide backgrounds with 5–8 floating decorative pills tilted at -20° to +25° rotations on cover, closing, quote, and other declarative layouts. The wallpaper-pill treatment is a system signature.
 - Layer radial-gradient accent glows (6–15% opacity) into the cream canvas on every slide for atmospheric warmth.
-- Keep the grain overlay (4% opacity, multiply blend) active on every slide — it is a baseline layer, not optional decoration.
+- Keep the grain overlay (4% opacity, multiply blend) active on every slide, it is a baseline layer, not optional decoration.
 - Wrap inline emphasis phrases in `quote-highlight` pills (lime, sky, or another candy) inside Bodoni quote bodies, rather than bolding or italicizing.
 - Pair warm + cool accents adjacently: coral with sky, yellow with lavender, peach with mint. Avoid two same-family accents next to each other.
 
@@ -509,7 +509,7 @@ Not explicitly handled; opacity-toggling means a naïve print captures only the 
 
 ### Mixed-Content Strategy
 
-Use **Strategy A — single-font-stack with fallback**: declare the CJK font *after* the Latin font in the same `font-family` stack so Latin glyphs render in Bodoni Moda / Space Grotesk and CJK glyphs fall through to the Chinese face automatically. One CSS rule per role, no manual class switching.
+Use **Strategy A, single-font-stack with fallback**: declare the CJK font *after* the Latin font in the same `font-family` stack so Latin glyphs render in Bodoni Moda / Space Grotesk and CJK glyphs fall through to the Chinese face automatically. One CSS rule per role, no manual class switching.
 
 ### Loading
 
@@ -529,25 +529,25 @@ Use **Strategy A — single-font-stack with fallback**: declare the CJK font *af
 
 ### Universal CJK Adjustments
 
-- **Line-height**: bump CJK body line-height to ~1.7 (from 1.6) — Hanzi need more vertical breathing than Latin lowercase.
+- **Line-height**: bump CJK body line-height to ~1.7 (from 1.6), Hanzi need more vertical breathing than Latin lowercase.
 - **Letter-spacing**: zero out `letter-spacing` on Hanzi runs (negative tracking that flatters Bodoni capitals jams Hanzi strokes together). Keep tight tracking only on Latin spans.
-- **Text-transform**: drop `text-transform: uppercase` on any pill/label/subtitle when content is Hanzi — Chinese has no case; forcing uppercase does nothing for Hanzi but breaks the rendering of any mixed Latin acronyms inside.
+- **Text-transform**: drop `text-transform: uppercase` on any pill/label/subtitle when content is Hanzi, Chinese has no case; forcing uppercase does nothing for Hanzi but breaks the rendering of any mixed Latin acronyms inside.
 - **Punctuation**: use Chinese full-width punctuation (，。：；「」) for Chinese sentences, half-width (`,.:;""`) for Latin. Never mix half-width punctuation into a Chinese sentence.
-- **No period on headlines**: Chinese headline convention omits the terminal 。 — strip it from display strings.
+- **No period on headlines**: Chinese headline convention omits the terminal 。, strip it from display strings.
 - **Pangu spacing**: insert a thin space (or a regular space) between adjacent Hanzi and Latin/digit runs (e.g. `2026 年`, `AI 产品`). Improves readability of mixed runs.
 - **One font per sentence**: don't switch CJK families mid-sentence. Pick ZCOOL XiaoWei *or* Yozai for a given text run based on its role, never both inside one phrase.
 
 ### Aesthetic Notes
 
-ZCOOL XiaoWei is a high-contrast literary serif-leaning Hanzi face whose thin-thick stroke modulation echoes Bodoni Moda's didone register — it gives display headlines the same editorial-glamour weight as the Latin original. Yozai is a friendly rounded Hanzi sans whose open counters and modest stroke contrast mirror Space Grotesk's geometric grotesque, so pill text, labels, and body paragraphs retain the "clean modern sans" feel rather than reverting to a stiff system Hanzi. Both pair cleanly with the candy palette: ZCOOL XiaoWei in `{colors.ink}` keeps the rule "Bodoni headlines are never colored" intact, and Yozai sits inside coral / lime / yellow pills without losing legibility against the 2px ink outline. The decorative floating pill wallpaper still works in Chinese — substitute single-character or two-character atmospheric words (愿景, 未来, 下一步) for the English uppercase confetti.
+ZCOOL XiaoWei is a high-contrast literary serif-leaning Hanzi face whose thin-thick stroke modulation echoes Bodoni Moda's didone register, it gives display headlines the same editorial-glamour weight as the Latin original. Yozai is a friendly rounded Hanzi sans whose open counters and modest stroke contrast mirror Space Grotesk's geometric grotesque, so pill text, labels, and body paragraphs retain the "clean modern sans" feel rather than reverting to a stiff system Hanzi. Both pair cleanly with the candy palette: ZCOOL XiaoWei in `{colors.ink}` keeps the rule "Bodoni headlines are never colored" intact, and Yozai sits inside coral / lime / yellow pills without losing legibility against the 2px ink outline. The decorative floating pill wallpaper still works in Chinese, substitute single-character or two-character atmospheric words (愿景, 未来, 下一步) for the English uppercase confetti.
 
 ### Known CJK Gap
 
-ZCOOL XiaoWei is a display face with limited weight axis (single weight) and a smaller glyph set than Noto family — exotic or technical Hanzi (rare surnames, classical characters, simplified-only variants outside GB2312) may fall back to system font. For Traditional Chinese decks, swap Yozai for `LXGW WenKai TC` (Google Fonts) which has fuller TC coverage and a similar friendly humanist register. The ZCOOL XiaoWei italic / heavy moments that Bodoni achieves via the opsz axis have no equivalent in the Chinese face — use scale and color to compensate when Latin would have leaned on italic Bodoni.
+ZCOOL XiaoWei is a display face with limited weight axis (single weight) and a smaller glyph set than Noto family, exotic or technical Hanzi (rare surnames, classical characters, simplified-only variants outside GB2312) may fall back to system font. For Traditional Chinese decks, swap Yozai for `LXGW WenKai TC` (Google Fonts) which has fuller TC coverage and a similar friendly humanist register. The ZCOOL XiaoWei italic / heavy moments that Bodoni achieves via the opsz axis have no equivalent in the Chinese face, use scale and color to compensate when Latin would have leaned on italic Bodoni.
 
 ## Iteration Guide
 
-1. Any new container that holds text uses the pill geometry — 9999px radius for small, 2rem radius for cards. Don't introduce a sharp-cornered text container.
+1. Any new container that holds text uses the pill geometry, 9999px radius for small, 2rem radius for cards. Don't introduce a sharp-cornered text container.
 2. Any new pill carries the 2px solid `{colors.outline}` stroke. Don't render an unstroked pill.
 3. Any new headline uses Bodoni Moda in `{colors.ink}`. Don't color a serif headline; don't switch to Space Grotesk for display.
 4. Any new card carries a `8px 8px 0 {colors.shadow}` offset shadow (4px for small nodes, 12px for the visual frame). Don't blur; don't re-color.
@@ -560,10 +560,10 @@ ZCOOL XiaoWei is a display face with limited weight axis (single weight) and a s
 ## Known Gaps
 
 - Two Bodoni font axes (italic and opsz 6..96) are loaded but the template only exercises the upright axis at fixed sizes; the optical-size variation across display sizes is not explicitly opted into.
-- Bar-chart values are inline-styled via `style="width: NN%"` — there is no data-binding layer.
+- Bar-chart values are inline-styled via `style="width: NN%"`, there is no data-binding layer.
 - The decorative floating pill positions and rotations are all hand-tuned via inline style on each instance; there is no generative placement system.
-- The visual-frame's tri-stop gradient (lavender → sky → mint) is a hardcoded "default" — alternate gradient combinations are valid but need to be authored per instance.
+- The visual-frame's tri-stop gradient (lavender → sky → mint) is a hardcoded "default", alternate gradient combinations are valid but need to be authored per instance.
 - The grain overlay uses an inline SVG data URL; replacing or removing it requires editing the markup, not a CSS variable.
 - The chart-bar-fill border-right at 2px solid outline is what gives bars their pill-end-cap definition; removing it loses the pill aesthetic on bars.
-- The system inherits all 9 candy accent CSS variables but only ~6 are actively used across the source — peach and mint are present in the palette but used sparingly. They are available for new compositions.
+- The system inherits all 9 candy accent CSS variables but only ~6 are actively used across the source, peach and mint are present in the palette but used sparingly. They are available for new compositions.
 - Decorative floating pills include their text content as part of the visual identity (single uppercase Space-Grotesk words). The words are not informational; new compositions should pick neutral single-word atmospheres ("VISION", "FUTURE", "NEXT", etc.) rather than content-specific text.

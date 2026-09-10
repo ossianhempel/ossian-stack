@@ -3,7 +3,7 @@ name: grill-design
 description: Converge on a frontend look through rounds of prototypes and grilling verdicts. Use when the user wants to iterate on UI/visual taste against concrete variants.
 ---
 
-Run a `/grilling` session, using the `/prototype` skill — each question is asked with prototypes, not words:
+Run a `/grilling` session, using the `/prototype` skill, each question is asked with prototypes, not words:
 
 - Each round, build 5 radically different prototypes of the current design
   question into one live mocked app: one standalone HTML file, opened in a live browser or the host's
@@ -14,7 +14,7 @@ Run a `/grilling` session, using the `/prototype` skill — each question is ask
   the mock between them.
 - The grilling walks down the visual design tree, each verdict zooming in
   one level: the overall design, then component groups, then individual
-  components — until the user has designed the entire feature in detail.
+  components, until the user has designed the entire feature in detail.
 
 After the user chooses a reference, use `visual-parity` when implementation must
 match it precisely. The prototype settles taste; visual parity owns controlled

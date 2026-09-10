@@ -44,7 +44,7 @@ parameter.
 **[14] Falsely optional.** An argument marked optional that every caller
 supplies, or whose absence the body immediately errors on.
 
-**[15] Repeated decisions.** The same choice made in more than one place — the
+**[15] Repeated decisions.** The same choice made in more than one place, the
 same condition re-derived, the same default re-applied, the same branch
 re-tested. Name where it should live instead, and what the other sites should
 receive: usually one already-decided flag rather than the inputs to decide again.
@@ -71,7 +71,7 @@ the direct path would be.
 
 For each finding, on its own line:
 
-`[rule] file:line — the states this allows → the shape that removes them`
+`[rule] file:line, the states this allows → the shape that removes them`
 
 Order by how many impossible states each change eliminates, most first. Then one
 closing line: the current state count and what it would be after your findings.

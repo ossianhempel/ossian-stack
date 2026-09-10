@@ -9,7 +9,7 @@ Take code that works and make it consumable. Not a rewrite of the feature, not a
 bug hunt, not a style pass. The output does exactly what the input did, in a
 shape a reader can hold in their head.
 
-Run it when a unit has settled — before review, commit, or handoff. Do not run it
+Run it when a unit has settled, before review, commit, or handoff. Do not run it
 while the change is still being shaped; it fights you.
 
 ## Scope
@@ -35,7 +35,7 @@ Subtract, then collapse, then polish. This order matters: deletion shrinks the
 surface, which usually makes the next simplification obvious, and polishing code
 you are about to delete is wasted work.
 
-1. **Subtract.** Remove what is not strictly required — dead paths, unused
+1. **Subtract.** Remove what is not strictly required, dead paths, unused
    exports, speculative validators and guards, compatibility shims for earlier
    forms of this same unshipped change, comments that restate the identifiers.
    Design for observed usage, not imagined edge cases.
@@ -96,8 +96,8 @@ a crash is a symptom fix; it leaves the real cause in place and makes the next
 reader believe the condition is expected.
 
 **Fix the pattern, not the instance.** When a finding is a shape rather than a
-one-off — the same duplicated decision, the same falsely optional argument, the
-same swallowed exception — search the scope for every other occurrence and fix
+one-off, the same duplicated decision, the same falsely optional argument, the
+same swallowed exception, search the scope for every other occurrence and fix
 them in one pass. Fixing one and leaving five teaches the next reader that the
 shape is fine.
 
@@ -125,7 +125,7 @@ just produce overlapping reports of the same rules.
 
 Give each reviewer the persona file's contents as its instructions, plus the
 **paths** of the files in scope. Do not paste the file bodies into the prompt;
-let it read them. Give it nothing else — no diff, no original, no history, no
+let it read them. Give it nothing else, no diff, no original, no history, no
 account of why anything is the way it is. Anything you add re-anchors it to the
 shape you are trying to escape.
 
@@ -134,7 +134,7 @@ edits its own findings produces conflicting changes and no coherent view of the
 state space.
 
 Where the host cannot run a subagent, read the persona files and apply them
-inline as two separate passes — but re-read the files from disk first and judge
+inline as two separate passes, but re-read the files from disk first and judge
 only what is on the page, not what you remember writing.
 
 Repeat only for substantive unresolved findings, at most three passes. Stop when
@@ -149,8 +149,8 @@ That is what the tests are for.
 Behavior is fixed. Verify, do not assume.
 
 Never relax an assertion, weaken a type signature, delete a test, or skip a
-check to make things pass. Never remove a safety check — trust-boundary
-validation, data-loss protection, security, accessibility — because a rule above
+check to make things pass. Never remove a safety check, trust-boundary
+validation, data-loss protection, security, accessibility, because a rule above
 called it boilerplate. Rule 5 governs values your own types already guarantee,
 not input crossing a trust boundary.
 
@@ -163,7 +163,7 @@ conflict rather than resolving it silently.
 
 ## Verify
 
-Run the project's own typecheck, lint, and tests — whatever this repo actually
+Run the project's own typecheck, lint, and tests, whatever this repo actually
 uses, discovered from its config and scripts, not assumed. Scope the tests to the
 blast radius, and widen when a shared helper moved.
 
@@ -176,7 +176,7 @@ Keep it short:
 
 - What changed, by rule number
 - Passes run, and what the last one found
-- Anything skipped, and why — a rule that would have broken behavior, a fix that
+- Anything skipped, and why, a rule that would have broken behavior, a fix that
   fell outside the scope, a safety check that outranked a rule
 - Checks run and their results
 

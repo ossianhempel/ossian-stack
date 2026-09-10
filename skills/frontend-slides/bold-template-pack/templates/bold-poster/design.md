@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: Bold Poster
-description: "A populist editorial poster system that mashes vintage Italian sports-magazine display lettering with classical serif body and tight monospace metadata. The display face is Shrikhand — a heavy slab/script hybrid with playful italic personality — rendered at poster scale (often 200-320px) and routinely tilted off-axis. Body runs Libre Baskerville for a literary editorial register; Space Grotesk handles tiny uppercase labels and chrome. The palette is uncompromising: white canvas, deep brown-black ink (#1C1410), single saturated tomato red (#D8000F), and a warm off-white (#F5F2EF) for alternating panels. Borders are bold 1.5-3px ink rules; the only shadow is a single stacked offset behind red display text. The aesthetic is loud, confident, and unmistakably print-poster — closer to a 1970s European brand annual report or a wine merchant's catalogue than a contemporary slide deck."
+description: "A populist editorial poster system that mashes vintage Italian sports-magazine display lettering with classical serif body and tight monospace metadata. The display face is Shrikhand, a heavy slab/script hybrid with playful italic personality, rendered at poster scale (often 200-320px) and routinely tilted off-axis. Body runs Libre Baskerville for a literary editorial register; Space Grotesk handles tiny uppercase labels and chrome. The palette is uncompromising: white canvas, deep brown-black ink (#1C1410), single saturated tomato red (#D8000F), and a warm off-white (#F5F2EF) for alternating panels. Borders are bold 1.5-3px ink rules; the only shadow is a single stacked offset behind red display text. The aesthetic is loud, confident, and unmistakably print-poster, closer to a 1970s European brand annual report or a wine merchant's catalogue than a contemporary slide deck."
 
 colors:
   bg: "#FFFFFF"
@@ -273,17 +273,17 @@ components:
   red-leftbar-card:
     borderLeft: "4px solid {colors.red}"
     paddingLeft: 18px
-    description: "Service or content card marked by a 4px solid red left rule and 18px left padding. The system's editorial card pattern — no outline, just the red rule signaling the start of a block."
+    description: "Service or content card marked by a 4px solid red left rule and 18px left padding. The system's editorial card pattern, no outline, just the red rule signaling the start of a block."
   red-leftbar-card-thin:
     borderLeft: "3px solid {colors.red}"
     paddingLeft: 16px
     description: "Thinner variant of the red-leftbar card used on dark surfaces (roadmap phases). Same pattern, scaled-down rule weight."
   bullet-em-dash:
-    glyph: "—"
+    glyph: ", "
     color: "{colors.red}"
     fontWeight: 700
     paddingLeft: 14px
-    description: "List bullet using a red em-dash (—) glyph in place of a disc. The dash sits at position absolute left and the body text indents to clear it."
+    description: "List bullet using a red em-dash (, ) glyph in place of a disc. The dash sits at position absolute left and the body text indents to clear it."
   bullet-bullet:
     glyph: "•"
     color: "{colors.red}"
@@ -317,7 +317,7 @@ components:
     color: "{colors.dark}"
     borderBottom: "2px solid {colors.red}"
     paddingBottom: 4px
-    description: "Footer link style — Space Grotesk uppercase with a 2px red underline. Hover swaps text color to red."
+    description: "Footer link style, Space Grotesk uppercase with a 2px red underline. Hover swaps text color to red."
   hero-title-stack:
     description: "A three-line stacked title where each line is a Shrikhand display element at a slightly different size. Two of the three lines carry rotation transforms (-4deg, +2deg) and one is set in red. The composition is the system's signature opener."
 ---
@@ -335,25 +335,25 @@ Use `deck-stage.js` or an equivalent inline stage scaler for final output: rende
 
 ## Overview
 
-Bold Poster is a **populist editorial poster system** that lifts its visual vocabulary from vintage Italian sports magazines, mid-century European brand annual reports, and wine-merchant catalogues. The premise is that every slide should feel printed — set in heavy display type, locked to one strong red accent, on a white or off-white sheet, with grids ruled in ink and decoration kept to a strict minimum.
+Bold Poster is a **populist editorial poster system** that lifts its visual vocabulary from vintage Italian sports magazines, mid-century European brand annual reports, and wine-merchant catalogues. The premise is that every slide should feel printed, set in heavy display type, locked to one strong red accent, on a white or off-white sheet, with grids ruled in ink and decoration kept to a strict minimum.
 
-The type system is three faces working in tight roles. **Shrikhand** (Google Fonts) is the display face — a heavy slab/script hybrid with chunky italic terminals, narrow apertures, and a distinctly Italian-sports-script personality. Used at poster scale (often 100-320px) and almost always with playful rotation (-6° to +2°), Shrikhand carries every hero title, every section header, every stat figure, every card title. **Libre Baskerville** (Google Fonts) is the body face — a classical literary serif with strong stroke contrast that anchors the system in editorial register. Used at 11-16px with 1.5-1.75 line-height in deep ink, Libre Baskerville is what makes the system feel printed rather than digital. **Space Grotesk** (Google Fonts) is the chrome face — used exclusively for tiny uppercase labels (9-12px, 2-3px tracking), bullet body inside cards, slide counters, and footer links. The Space Grotesk treatment is the system's "metadata" voice.
+The type system is three faces working in tight roles. **Shrikhand** (Google Fonts) is the display face, a heavy slab/script hybrid with chunky italic terminals, narrow apertures, and a distinctly Italian-sports-script personality. Used at poster scale (often 100-320px) and almost always with playful rotation (-6° to +2°), Shrikhand carries every hero title, every section header, every stat figure, every card title. **Libre Baskerville** (Google Fonts) is the body face, a classical literary serif with strong stroke contrast that anchors the system in editorial register. Used at 11-16px with 1.5-1.75 line-height in deep ink, Libre Baskerville is what makes the system feel printed rather than digital. **Space Grotesk** (Google Fonts) is the chrome face, used exclusively for tiny uppercase labels (9-12px, 2-3px tracking), bullet body inside cards, slide counters, and footer links. The Space Grotesk treatment is the system's "metadata" voice.
 
-The color philosophy is **uncompromising restraint**: white canvas, deep brown-black ink (`{colors.dark}` — `#1C1410`), single saturated tomato red (`{colors.red}` — `#D8000F`), and a warm off-white (`{colors.light}` — `#F5F2EF`) for alternating panels. There are no secondary brand colors, no gradients (except the inside of the stacked text-shadow), no tints, no semantic state colors. Every numerical callout, every active rule, every CTA, every emphasis moment is red — and red is reserved for these moments only (it is never used as body text, never as fill on a card without text on top, never as a tint).
+The color philosophy is **uncompromising restraint**: white canvas, deep brown-black ink (`{colors.dark}`, `#1C1410`), single saturated tomato red (`{colors.red}`, `#D8000F`), and a warm off-white (`{colors.light}`, `#F5F2EF`) for alternating panels. There are no secondary brand colors, no gradients (except the inside of the stacked text-shadow), no tints, no semantic state colors. Every numerical callout, every active rule, every CTA, every emphasis moment is red, and red is reserved for these moments only (it is never used as body text, never as fill on a card without text on top, never as a tint).
 
-Depth is **structural, not atmospheric**. The system has no drop shadows except a single stacked text-shadow applied to red display text on red panels (three steps at 2/2, 4/4, 6/6 in decreasing-opacity ink). All other depth comes from heavy borders: 3px ink outlines on tabular grids, 1.5-2px ink borders on cells, 4px red left rules on editorial cards, 1px hairline rules between bullet items. The double-border treatment (3px outer + 1.5px inner) is the system's signature tabular pattern — it produces a printed-newsprint quality that defines the look.
+Depth is **structural, not atmospheric**. The system has no drop shadows except a single stacked text-shadow applied to red display text on red panels (three steps at 2/2, 4/4, 6/6 in decreasing-opacity ink). All other depth comes from heavy borders: 3px ink outlines on tabular grids, 1.5-2px ink borders on cells, 4px red left rules on editorial cards, 1px hairline rules between bullet items. The double-border treatment (3px outer + 1.5px inner) is the system's signature tabular pattern, it produces a printed-newsprint quality that defines the look.
 
-**Density philosophy: high — populist and packed.** This system reads as authoritative when slides are dense and timid when sparse. Roadmap, pillar, and financial slides routinely carry 3-6 distinct cells with body paragraphs, bullet lists, and tabular data — and they read as energetic, not crowded. Conversely, hero, closing, and statement slides intentionally drop to one or two huge display elements with massive negative space — the very-low and very-high density polarities are both deliberate. A typical content slide carries a section header + a grid of 3-6 cells, each holding a red numerical/title + a Libre Baskerville body paragraph + 3-6 Space Grotesk mono bullets. A typical statement slide carries one rotated red Shrikhand element occupying half the canvas with a single tagline below.
+**Density philosophy: high, populist and packed.** This system reads as authoritative when slides are dense and timid when sparse. Roadmap, pillar, and financial slides routinely carry 3-6 distinct cells with body paragraphs, bullet lists, and tabular data, and they read as energetic, not crowded. Conversely, hero, closing, and statement slides intentionally drop to one or two huge display elements with massive negative space, the very-low and very-high density polarities are both deliberate. A typical content slide carries a section header + a grid of 3-6 cells, each holding a red numerical/title + a Libre Baskerville body paragraph + 3-6 Space Grotesk mono bullets. A typical statement slide carries one rotated red Shrikhand element occupying half the canvas with a single tagline below.
 
 **Key Characteristics:**
 - White (`{colors.bg}`) canvas alternating with off-white (`{colors.light}`) panels for striping, plus dark (`{colors.dark}`) and red (`{colors.red}`) full-bleed panel surfaces for statement moments.
-- Single tomato red (`{colors.red}`) as the only accent — used for every numerical figure, every section rule, every label, every left-bar marker.
+- Single tomato red (`{colors.red}`) as the only accent, used for every numerical figure, every section rule, every label, every left-bar marker.
 - Three-face stack: Shrikhand (display + numerical), Libre Baskerville (body), Space Grotesk (mono labels + bullets + chrome).
-- Display Shrikhand is routinely tilted (-6° to +2°) — the rotation is the system's signature movement.
+- Display Shrikhand is routinely tilted (-6° to +2°), the rotation is the system's signature movement.
 - Heavy ink borders: 3px on tabular grid containers, 1.5-2px on cells, 4px red on editorial leftbar cards, 1px hairlines between bullet rows.
-- Stacked text-shadow (three steps at 2/2, 4/4, 6/6 in decreasing ink opacity) on red display elements — the only shadow in the system.
+- Stacked text-shadow (three steps at 2/2, 4/4, 6/6 in decreasing ink opacity) on red display elements, the only shadow in the system.
 - Persistent red progress bar (5px thick) at the bottom edge of every slide.
-- Em-dash and bullet glyphs in red as list markers — never default disc bullets.
+- Em-dash and bullet glyphs in red as list markers, never default disc bullets.
 - Hero compositions stack three Shrikhand lines at varying sizes with at least one in red and at least one tilted.
 - Footer links use Space Grotesk uppercase with a 2px red underline.
 
@@ -361,10 +361,10 @@ Depth is **structural, not atmospheric**. The system has no drop shadows except 
 
 ### Palette
 
-- **Bg** (`{colors.bg}` — `#FFFFFF`): Pure white canvas. The default ground for most surfaces. Reads as fresh newsprint paper.
-- **Dark** (`{colors.dark}` — `#1C1410`): A deep brown-black with warm bias — not pure black. Used for every line of body text, every border, every Space Grotesk label, every Libre Baskerville paragraph, and as a full-bleed panel ground on roadmap-class surfaces. The warmth distinguishes it from generic editorial black.
-- **Red** (`{colors.red}` — `#D8000F`): Saturated tomato red. The system's single accent. Used for every numerical figure (Shrikhand red numerals are the most common element), every section eyebrow label, every leftbar rule on editorial cards, every list bullet glyph, every footer link underline, the persistent progress bar, and as a full-bleed panel ground on statement-class surfaces. Never used as body text color, never as a tint, never as a card fill without overlaid text.
-- **Light** (`{colors.light}` — `#F5F2EF`): Warm off-white. Used for alternating panel backgrounds inside pillar layouts (every other pillar swaps to off-white for vertical striping) and as the background of the hint-pill chrome. Subtly warmer than the white canvas — creates surface differentiation without disrupting the printed-paper register.
+- **Bg** (`{colors.bg}`, `#FFFFFF`): Pure white canvas. The default ground for most surfaces. Reads as fresh newsprint paper.
+- **Dark** (`{colors.dark}`, `#1C1410`): A deep brown-black with warm bias, not pure black. Used for every line of body text, every border, every Space Grotesk label, every Libre Baskerville paragraph, and as a full-bleed panel ground on roadmap-class surfaces. The warmth distinguishes it from generic editorial black.
+- **Red** (`{colors.red}`, `#D8000F`): Saturated tomato red. The system's single accent. Used for every numerical figure (Shrikhand red numerals are the most common element), every section eyebrow label, every leftbar rule on editorial cards, every list bullet glyph, every footer link underline, the persistent progress bar, and as a full-bleed panel ground on statement-class surfaces. Never used as body text color, never as a tint, never as a card fill without overlaid text.
+- **Light** (`{colors.light}`, `#F5F2EF`): Warm off-white. Used for alternating panel backgrounds inside pillar layouts (every other pillar swaps to off-white for vertical striping) and as the background of the hint-pill chrome. Subtly warmer than the white canvas, creates surface differentiation without disrupting the printed-paper register.
 
 ### Defaults
 
@@ -378,20 +378,20 @@ Depth is **structural, not atmospheric**. The system has no drop shadows except 
 - **Default border color for cells and grids**: `{colors.dark}`. There are no colored cell borders.
 - **Default bullet glyph color**: `{colors.red}`. Default disc bullets do not exist in this system; every list uses red em-dash or red round-bullet glyphs.
 
-The system commits **hard** to the four-color palette. Don't introduce a fifth color (green for positive, blue for info, yellow for highlight). All emphasis is achieved by red, all body is dark on light, all inversion is white on red or white on dark. Categorical differentiation comes from positioning, label, and tilt — never from color.
+The system commits **hard** to the four-color palette. Don't introduce a fifth color (green for positive, blue for info, yellow for highlight). All emphasis is achieved by red, all body is dark on light, all inversion is white on red or white on dark. Categorical differentiation comes from positioning, label, and tilt, never from color.
 
 ## Typography
 
 ### Font Family Stack
 The system runs three faces, each tightly bound to its role.
 
-**Shrikhand** (Google Fonts) is the display + numerical face. It's a single-weight (400) heavy slab-script with playful italic-leaning forms and narrow apertures — a face that reads as both old-world (postcard-script) and contemporary (variable-weight digital display). Used at every scale from 18px (inline stats) to 320px (the hero stat). Always weight 400 (the face has no other weights). Rotation is part of the face's voice — multiple Shrikhand elements per slide carry transforms ranging from -6° to +2°.
+**Shrikhand** (Google Fonts) is the display + numerical face. It's a single-weight (400) heavy slab-script with playful italic-leaning forms and narrow apertures, a face that reads as both old-world (postcard-script) and contemporary (variable-weight digital display). Used at every scale from 18px (inline stats) to 320px (the hero stat). Always weight 400 (the face has no other weights). Rotation is part of the face's voice, multiple Shrikhand elements per slide carry transforms ranging from -6° to +2°.
 
-**Libre Baskerville** (Google Fonts, 400 / 700 + italic) is the body face. A classical literary serif with high stroke contrast — used for every paragraph, every body cell, every metadata line, every cite, every close-sub. Set at 11-16px with 1.5-1.75 line-height, the face reads as comfortably editorial. The face's italic and bold weights are loaded but used sparingly — italic exists for inline emphasis, bold weight 700 is rarely needed since Shrikhand already handles all the heavy display work.
+**Libre Baskerville** (Google Fonts, 400 / 700 + italic) is the body face. A classical literary serif with high stroke contrast, used for every paragraph, every body cell, every metadata line, every cite, every close-sub. Set at 11-16px with 1.5-1.75 line-height, the face reads as comfortably editorial. The face's italic and bold weights are loaded but used sparingly, italic exists for inline emphasis, bold weight 700 is rarely needed since Shrikhand already handles all the heavy display work.
 
 **Space Grotesk** (Google Fonts, weights 400-700) is the metadata + chrome face. Used at 9-12px in uppercase with 2-3px letter-spacing for labels, eyebrows, slide counters, link text, card bullet bodies (when not using Libre Baskerville), and progress chrome. The wide-tracked uppercase treatment is the system's "stamped metadata" voice.
 
-The roles are non-overlapping: Shrikhand handles every display moment and every numerical figure; Libre Baskerville handles every body paragraph and editorial text; Space Grotesk handles every uppercase label, bullet, and chrome element. Don't cross — Shrikhand body would be illegible; Libre Baskerville labels would look like book footnotes; Space Grotesk headlines would feel like a tech startup.
+The roles are non-overlapping: Shrikhand handles every display moment and every numerical figure; Libre Baskerville handles every body paragraph and editorial text; Space Grotesk handles every uppercase label, bullet, and chrome element. Don't cross, Shrikhand body would be illegible; Libre Baskerville labels would look like book footnotes; Space Grotesk headlines would feel like a tech startup.
 
 ### Typography Scale
 
@@ -438,7 +438,7 @@ The roles are non-overlapping: Shrikhand handles every display moment and every 
 - **Default size for a card body**: `{typography.body-card}` (12–14px) at line-height 1.6.
 - **Default size for a section eyebrow label**: `{typography.tag-label}` (10–12px) Space Grotesk weight 600 in red, uppercase, with 2-3px letter-spacing.
 - **Default size for a list bullet body**: `{typography.bullet-body}` (10–12px) Space Grotesk weight 400.
-- **Default weight for Shrikhand**: 400 — the face has no other weights.
+- **Default weight for Shrikhand**: 400, the face has no other weights.
 - **Default weight for Libre Baskerville body**: 400. Bold (700) is used only for inline emphasis inside body paragraphs.
 - **Default weight for Space Grotesk labels**: 600. Wide tracking is the system's label voice; weight 400 is for bullet bodies only.
 
@@ -449,17 +449,17 @@ When unsure which display token to reach for, default to `{typography.section-he
 These treatments are **non-optional whenever the corresponding element type is used**:
 
 - **Every hero-class Shrikhand element is part of a multi-line stacked composition with at least one rotated line and at least one red line.** A single-line Shrikhand hero title without rotation or color contrast collapses into a generic display moment.
-- **Every tabular numerical cell figure is Shrikhand at the cell-number scale (28–52px) in `{colors.red}`.** Numerical cells in dark text break the system's hierarchy — red is the data signal.
+- **Every tabular numerical cell figure is Shrikhand at the cell-number scale (28–52px) in `{colors.red}`.** Numerical cells in dark text break the system's hierarchy, red is the data signal.
 - **Every section eyebrow is Space Grotesk weight 600 in `{colors.red}`, uppercase, with 2-3px letter-spacing.** No exceptions. Eyebrows at any other tracking, weight, color, or case are not the system's eyebrow.
-- **Every statement-class Shrikhand element (stat-big, close-big) is rotated -5° to -6° in `{colors.red}`.** Untilted red Shrikhand at hero scale looks like a misplaced word — the tilt is the system's "movement" signal.
+- **Every statement-class Shrikhand element (stat-big, close-big) is rotated -5° to -6° in `{colors.red}`.** Untilted red Shrikhand at hero scale looks like a misplaced word, the tilt is the system's "movement" signal.
 - **Every red-panel display element carries the stacked text-shadow** (`2px 2px 0 rgba(28,20,16,0.25), 4px 4px 0 rgba(28,20,16,0.2), 6px 6px 0 rgba(28,20,16,0.15)`). Without the shadow, white Shrikhand on red reads as floating; with it, the text feels printed-and-pressed into the panel.
-- **Every list bullet uses a `{colors.red}` em-dash (—) or round-bullet (•) glyph** at position absolute left with a 12-14px padding-left on the body. Default disc bullets do not exist; the red marker is the system's list signal.
+- **Every list bullet uses a `{colors.red}` em-dash (, ) or round-bullet (•) glyph** at position absolute left with a 12-14px padding-left on the body. Default disc bullets do not exist; the red marker is the system's list signal.
 - **Every Libre Baskerville body is at line-height ≥ 1.5 (preferably 1.6-1.75).** Tighter line-height collapses the editorial register.
-- **Every body strong (`<strong>`) inside a Libre Baskerville paragraph switches face to Space Grotesk weight 600.** The inline face-switch is the system's primary inline emphasis mechanism — a serif strong tag does not produce the same effect.
+- **Every body strong (`<strong>`) inside a Libre Baskerville paragraph switches face to Space Grotesk weight 600.** The inline face-switch is the system's primary inline emphasis mechanism, a serif strong tag does not produce the same effect.
 
 ### Typography Principles
 
-The voice contrast is **chunky tilted display Shrikhand ↔ literary serif body ↔ wide-tracked mono labels**. Italic is rare (Libre Baskerville italic exists but is used only for inline emphasis inside body); underline is reserved for the red-underline footer link treatment. Bold within Libre Baskerville body is replaced by an inline face-switch to Space Grotesk weight 600 — the change-of-face is the emphasis signal.
+The voice contrast is **chunky tilted display Shrikhand ↔ literary serif body ↔ wide-tracked mono labels**. Italic is rare (Libre Baskerville italic exists but is used only for inline emphasis inside body); underline is reserved for the red-underline footer link treatment. Bold within Libre Baskerville body is replaced by an inline face-switch to Space Grotesk weight 600, the change-of-face is the emphasis signal.
 
 Numerical content (stat figures, financial values, percentage callouts, mini-stats) is always Shrikhand in red. Even small inline stats inside body cells become red Shrikhand. The numerical-as-display pattern is what gives the system its sports-magazine register.
 
@@ -488,17 +488,17 @@ The system targets `100vw × 100vh` per slide. Slides are absolutely positioned 
 
 ### Persistent Chrome
 Three elements appear on every slide:
-- **Progress bar** at the bottom edge — a 5px thick `{colors.red}` strip that grows in width with slide index. The thickest, most visible piece of chrome; it functions as both progress indicator and bottom-edge poster trim.
-- **Slide counter** at bottom-right (`bottom: 18px right: 24px`) — Space Grotesk weight 600 uppercase NN / NN at 50% opacity.
-- **Hint pill** at bottom-center — Space Grotesk uppercase text in an off-white pill, opacity 0 by default, fading to 50% on `body:hover`.
+- **Progress bar** at the bottom edge, a 5px thick `{colors.red}` strip that grows in width with slide index. The thickest, most visible piece of chrome; it functions as both progress indicator and bottom-edge poster trim.
+- **Slide counter** at bottom-right (`bottom: 18px right: 24px`), Space Grotesk weight 600 uppercase NN / NN at 50% opacity.
+- **Hint pill** at bottom-center, Space Grotesk uppercase text in an off-white pill, opacity 0 by default, fading to 50% on `body:hover`.
 
 ### Surface Variations
 The deck cycles through five surface treatments:
-- **White content surfaces** — default, most slides.
-- **Off-white striped panels** — inside pillar layouts, alternating columns get `{colors.light}` background for vertical striping.
-- **Full-bleed red panel** — statement / quote slides flood the canvas in `{colors.red}` with white display text and the stacked text-shadow.
-- **Full-bleed dark panel** — roadmap-class surfaces use `{colors.dark}` ground with white text and red accents.
-- **Bordered tabular grids** — financial-figure and summary-highlight grids carry a 3px ink outer border + 1.5px ink inner cell borders, producing the system's signature double-border tabular composition.
+- **White content surfaces**, default, most slides.
+- **Off-white striped panels**, inside pillar layouts, alternating columns get `{colors.light}` background for vertical striping.
+- **Full-bleed red panel**, statement / quote slides flood the canvas in `{colors.red}` with white display text and the stacked text-shadow.
+- **Full-bleed dark panel**, roadmap-class surfaces use `{colors.dark}` ground with white text and red accents.
+- **Bordered tabular grids**, financial-figure and summary-highlight grids carry a 3px ink outer border + 1.5px ink inner cell borders, producing the system's signature double-border tabular composition.
 
 ### Hero Stack Composition
 The standard cover/hero pattern is a **three-line Shrikhand stack** where each line carries a different size and at least one carries rotation and at least one is in red. The stack reads top-left → bottom-right, with the smallest line at the bottom and the boldest red rotation in the middle. The composition is the system's most distinctive opener.
@@ -512,13 +512,13 @@ The system uses **almost no box-shadows**. Cards do not float off the surface vi
 - **Tilted display elements** that break the grid alignment.
 
 ### The Single Shadow Pattern (Stacked Text Shadow)
-The only shadow in the entire system is the **stacked text-shadow on red display text on red panels**: three steps at 2/2, 4/4, 6/6 with decreasing-opacity ink fill (0.25, 0.20, 0.15). The shadow is applied via `text-shadow:` not `box-shadow:`. The effect is a printed-press feel — the text reads as having been stamped slightly off-register, three times. This treatment appears only on the red-quote and certain rotated Shrikhand display moments on red panels.
+The only shadow in the entire system is the **stacked text-shadow on red display text on red panels**: three steps at 2/2, 4/4, 6/6 with decreasing-opacity ink fill (0.25, 0.20, 0.15). The shadow is applied via `text-shadow:` not `box-shadow:`. The effect is a printed-press feel, the text reads as having been stamped slightly off-register, three times. This treatment appears only on the red-quote and certain rotated Shrikhand display moments on red panels.
 
 ### Border-as-Depth (Tabular Grid Signature)
-The financial-grid and summary-highlight-grid patterns use a **3px solid ink outer border** with **1.5px solid ink inner cell borders** — the two border weights touch at every cell intersection, producing a printed-newsprint quality. This is the system's primary structural depth mechanism on data-heavy surfaces.
+The financial-grid and summary-highlight-grid patterns use a **3px solid ink outer border** with **1.5px solid ink inner cell borders**, the two border weights touch at every cell intersection, producing a printed-newsprint quality. This is the system's primary structural depth mechanism on data-heavy surfaces.
 
 ### Leftbar Rules
-Editorial cards (service cards, roadmap phases, global cards) are marked by a **4px (or 3px on dark surfaces) red solid left border** with 16-18px padding-left. The leftbar rule signals "this is a card" without enclosing it — the card reads as cantilevered off the red rule. This is the system's most common card pattern.
+Editorial cards (service cards, roadmap phases, global cards) are marked by a **4px (or 3px on dark surfaces) red solid left border** with 16-18px padding-left. The leftbar rule signals "this is a card" without enclosing it, the card reads as cantilevered off the red rule. This is the system's most common card pattern.
 
 ### Tilt as Depth
 Rotated Shrikhand display elements break the horizontal baseline and create perceived dimensionality without using perspective. The standard rotations are -6° (stat-big), -5° (close-big), -4° (hero-title-red), +2° (hero-title-bottom). These tilts are part of the system's spatial language.
@@ -527,47 +527,47 @@ Rotated Shrikhand display elements break the horizontal baseline and create perc
 
 ### Border Radius
 - **0px** on everything except the hint-pill (4px) and the bar-track elements (none in this template, but if used should be 0px). Every card, every cell, every panel, every callout is a strict rectangle.
-- **4px** on the hint-pill only — a minor concession for the floating chrome.
+- **4px** on the hint-pill only, a minor concession for the floating chrome.
 
 The square-corner discipline is essential. Rounded cards immediately collapse the printed-poster feel into generic web aesthetic.
 
 ### Border Weights
-- **5px solid `{colors.red}`** — used only on the persistent progress bar.
-- **4px solid `{colors.red}`** — used on the editorial leftbar card (service cards on white surfaces).
-- **3px solid `{colors.dark}`** — used on the outer border of tabular grids (financial-grid, summary-highlights) and as the vertical pillar separator.
-- **3px solid `{colors.red}`** — used on the leftbar of roadmap phase cards (on dark surfaces).
-- **2px solid `{colors.red}`** — used as the underline rule on footer links.
-- **2px solid `{colors.dark}`** — used as the outline border on global cards.
-- **1.5px solid `{colors.dark}`** — used on inner cells of tabular grids.
-- **1px solid `rgba(28, 20, 16, 0.08)`** — hairline-soft separator between bullet rows inside pillar panels.
+- **5px solid `{colors.red}`**, used only on the persistent progress bar.
+- **4px solid `{colors.red}`**, used on the editorial leftbar card (service cards on white surfaces).
+- **3px solid `{colors.dark}`**, used on the outer border of tabular grids (financial-grid, summary-highlights) and as the vertical pillar separator.
+- **3px solid `{colors.red}`**, used on the leftbar of roadmap phase cards (on dark surfaces).
+- **2px solid `{colors.red}`**, used as the underline rule on footer links.
+- **2px solid `{colors.dark}`**, used as the outline border on global cards.
+- **1.5px solid `{colors.dark}`**, used on inner cells of tabular grids.
+- **1px solid `rgba(28, 20, 16, 0.08)`**, hairline-soft separator between bullet rows inside pillar panels.
 
 The border ladder (1px-soft / 1.5px / 2px / 3px / 4px / 5px) is fixed. Every border is solid; dashed and dotted borders do not exist.
 
 ### Decorative Element Types
 
-**Hero title stack** — A three-line Shrikhand composition at varying sizes with rotation and color contrast. The system's signature opener.
+**Hero title stack**, A three-line Shrikhand composition at varying sizes with rotation and color contrast. The system's signature opener.
 
-**Red panel** — Full-bleed `{colors.red}` ground with white display text carrying the stacked text-shadow. Used for statement / quote moments.
+**Red panel**, Full-bleed `{colors.red}` ground with white display text carrying the stacked text-shadow. Used for statement / quote moments.
 
-**Dark panel** — Full-bleed `{colors.dark}` ground with white text and red accents. Used for roadmap-class dense-data surfaces.
+**Dark panel**, Full-bleed `{colors.dark}` ground with white text and red accents. Used for roadmap-class dense-data surfaces.
 
-**Tabular bordered grid** — 3px ink outer border + 1.5px ink inner cell borders producing a double-border tabular composition. Each cell holds a Shrikhand red numeral + Space Grotesk uppercase label + Libre Baskerville body paragraph + optional Space Grotesk micro line at bottom.
+**Tabular bordered grid**, 3px ink outer border + 1.5px ink inner cell borders producing a double-border tabular composition. Each cell holds a Shrikhand red numeral + Space Grotesk uppercase label + Libre Baskerville body paragraph + optional Space Grotesk micro line at bottom.
 
-**Red leftbar card** — A 4px solid red left rule with 18px left padding holding a Shrikhand card title + Libre Baskerville body + Space Grotesk red-bullet list. The system's primary editorial card pattern.
+**Red leftbar card**, A 4px solid red left rule with 18px left padding holding a Shrikhand card title + Libre Baskerville body + Space Grotesk red-bullet list. The system's primary editorial card pattern.
 
-**Pillar panel** — A vertical column inside a multi-pillar layout, separated by 3px ink vertical rules and alternating between white and off-white backgrounds. Each pillar holds a Shrikhand red numeral, Shrikhand title, Libre Baskerville lead, and Space Grotesk bullets separated by 1px hairline-soft rules.
+**Pillar panel**, A vertical column inside a multi-pillar layout, separated by 3px ink vertical rules and alternating between white and off-white backgrounds. Each pillar holds a Shrikhand red numeral, Shrikhand title, Libre Baskerville lead, and Space Grotesk bullets separated by 1px hairline-soft rules.
 
-**Global card** — A 2px solid ink-bordered card with 24px padding holding a Space Grotesk red label + Shrikhand title + Libre Baskerville body + inline gc-stats row. Used on the global-presence surface.
+**Global card**, A 2px solid ink-bordered card with 24px padding holding a Space Grotesk red label + Shrikhand title + Libre Baskerville body + inline gc-stats row. Used on the global-presence surface.
 
-**Em-dash bullet** — A red em-dash glyph at position absolute left with 14px padding-left on the body. The system's primary list marker.
+**Em-dash bullet**, A red em-dash glyph at position absolute left with 14px padding-left on the body. The system's primary list marker.
 
-**Round bullet** — A red round-bullet glyph at position absolute left with 12px padding-left on the body. Secondary list marker, used in card and pillar bullets.
+**Round bullet**, A red round-bullet glyph at position absolute left with 12px padding-left on the body. Secondary list marker, used in card and pillar bullets.
 
-**Footer link** — Space Grotesk uppercase text with a 2px red underline and 4px padding-bottom. Hover swaps text color to red.
+**Footer link**, Space Grotesk uppercase text with a 2px red underline and 4px padding-bottom. Hover swaps text color to red.
 
-**Stacked text shadow** — Three-step decreasing-opacity ink shadow applied to red display text on red panels. The system's only shadow treatment.
+**Stacked text shadow**, Three-step decreasing-opacity ink shadow applied to red display text on red panels. The system's only shadow treatment.
 
-**Tilted display** — Shrikhand elements rotated -6° to +2°. Used on hero-title-red, stat-big, close-big, and hero-title-bottom.
+**Tilted display**, Shrikhand elements rotated -6° to +2°. Used on hero-title-red, stat-big, close-big, and hero-title-bottom.
 
 ## Do's and Don'ts
 
@@ -575,7 +575,7 @@ The border ladder (1px-soft / 1.5px / 2px / 3px / 4px / 5px) is fixed. Every bor
 
 - Apply `{colors.bg}` (white) as the default canvas on most surfaces. Switch to `{colors.red}` for statement slides, `{colors.dark}` for dense-data slides, and alternate `{colors.bg}` / `{colors.light}` for vertical pillar striping.
 - Set every hero-class title as a multi-line Shrikhand stack with at least one rotated line and at least one red line. The composed-stack is the system's opener signature.
-- Use Shrikhand at every numerical-callout moment in `{colors.red}` — tabular cells, summary highlights, pillar numbers, inline mini-stats. Red Shrikhand numerals are the system's data voice.
+- Use Shrikhand at every numerical-callout moment in `{colors.red}`, tabular cells, summary highlights, pillar numbers, inline mini-stats. Red Shrikhand numerals are the system's data voice.
 - Set every section eyebrow in Space Grotesk weight 600 uppercase with 2-3px letter-spacing in `{colors.red}`. The wide-tracked red label is the universal section opener.
 - Apply the stacked text-shadow to red display text on red panels. The three-step decreasing-opacity ink shadow is the system's only shadow and creates the printed-press feel.
 - Use the 4px red leftbar pattern (`{components.red-leftbar-card}`) for editorial cards. The cantilevered-off-the-rule treatment is the system's primary card pattern.
@@ -586,14 +586,14 @@ The border ladder (1px-soft / 1.5px / 2px / 3px / 4px / 5px) is fixed. Every bor
 
 ### Don't
 
-- Don't introduce a second accent color. Red is the only accent — green for positive, blue for info, yellow for highlight all break the single-accent discipline.
+- Don't introduce a second accent color. Red is the only accent, green for positive, blue for info, yellow for highlight all break the single-accent discipline.
 - Don't round any corner on cards, panels, cells, or callouts. Square corners are non-negotiable; the only exception is the 4px hint-pill chrome.
 - Don't add drop shadows or blurred shadows. The system has zero box-shadows; the only shadow is the stacked text-shadow on red display text.
 - Don't substitute fonts. Shrikhand + Libre Baskerville + Space Grotesk is the trio. Replacing Shrikhand with any other display face collapses the entire identity.
 - Don't use Shrikhand for body or Libre Baskerville for labels. The three-face role discipline is non-negotiable.
 - Don't use default bullet points or disc list markers. Lists always use red em-dash or red round-bullet glyphs at position absolute left.
 - Don't omit the tilt on hero-class red Shrikhand elements. The rotation is the system's signature movement; untilted red display reads as flat.
-- Don't render headlines in red on white surfaces (except for stat-big, close-big, hero-title-red — the rotated statement elements). Most section headers are `{colors.dark}` Shrikhand, not red.
+- Don't render headlines in red on white surfaces (except for stat-big, close-big, hero-title-red, the rotated statement elements). Most section headers are `{colors.dark}` Shrikhand, not red.
 - Don't tighten Libre Baskerville body line-height below 1.5. Tight body line-height collapses the literary register into something cramped.
 - Don't crowd a statement slide with cards or structural content. Statement surfaces (red panel, stat slide, close slide) deliberately reserve massive negative space around a single rotated red display element.
 
@@ -621,7 +621,7 @@ A single `@media (max-width: 768px)` block restructures dense layouts for narrow
 - Stat row stacks vertically.
 - Hero tagline shifts from absolute-positioned bottom-right to relative-positioned below the hero title stack.
 
-The system is functional but not optimized for sub-768px portrait usage — it's designed for landscape presentation contexts.
+The system is functional but not optimized for sub-768px portrait usage, it's designed for landscape presentation contexts.
 
 ### Presenter Behavior
 - Slides advance via `ArrowRight`, `ArrowDown`, `Space`, `Enter`, or `PageDown`.
@@ -640,7 +640,7 @@ The system has no `@media print` rule. The transition is screen-only. For static
 
 ## CJK & International Content
 
-When using this template for Chinese (or other CJK) content, swap the Latin typeface stack for an equivalent Chinese pairing and apply universal CJK adjustments. All recommended Chinese fonts load via CDN — no install required.
+When using this template for Chinese (or other CJK) content, swap the Latin typeface stack for an equivalent Chinese pairing and apply universal CJK adjustments. All recommended Chinese fonts load via CDN, no install required.
 
 ### Recommended Chinese Pairing
 
@@ -652,7 +652,7 @@ When using this template for Chinese (or other CJK) content, swap the Latin type
 
 ### Mixed-Content Strategy
 
-**Strategy A** — single CJK family per role with Latin glyph coverage built in. Use **思源宋体 Noto Serif SC** for both display and body (weight 900 for display, weight 400 for body — visual hierarchy comes from weight, size, color, and rotation, not face contrast). Use **思源黑体 Noto Sans SC** weight 500 for the small uppercase chrome (labels, bullet bodies, counter, links). 思源宋体 ships Latin glyphs that pair cleanly with Chinese characters; for mixed display moments, 思源宋体 weight 900 will render both 中文 and Latin in the same heavy serif voice.
+**Strategy A**, single CJK family per role with Latin glyph coverage built in. Use **思源宋体 Noto Serif SC** for both display and body (weight 900 for display, weight 400 for body, visual hierarchy comes from weight, size, color, and rotation, not face contrast). Use **思源黑体 Noto Sans SC** weight 500 for the small uppercase chrome (labels, bullet bodies, counter, links). 思源宋体 ships Latin glyphs that pair cleanly with Chinese characters; for mixed display moments, 思源宋体 weight 900 will render both 中文 and Latin in the same heavy serif voice.
 
 ### Loading
 
@@ -668,23 +668,23 @@ Add to the template's `<head>`:
 
 - **Line-height**: increase by ~15–25% from the Latin spec. Body 1.75–1.85 (already close to Libre Baskerville 1.75; keep at 1.8 for CJK), display 1.1–1.25 (up from the very tight 0.82–0.9 used on Shrikhand). Display at 0.82 collides vertically in CJK; open to 1.0 minimum.
 - **Letter-spacing**: set to 0 on every CJK run. The template's 1px positive tracking on hero-title and the 2–3px tracking on Space Grotesk labels both read as gappy on square CJK glyphs.
-- **Text transform**: don't apply `uppercase` to Chinese text — CJK has no case. Every Space Grotesk label, tag-label, rm-label, counter, and link uses `text-transform: uppercase` in the Latin original; remove for CJK runs.
+- **Text transform**: don't apply `uppercase` to Chinese text, CJK has no case. Every Space Grotesk label, tag-label, rm-label, counter, and link uses `text-transform: uppercase` in the Latin original; remove for CJK runs.
 - **Punctuation**: use full-width Chinese punctuation （，。：；！？「」（））.
 - **No period on display headlines**: Chinese typography convention omits trailing 。 on display-scale headlines.
 - **Space between CJK and Latin (盘古之白)**: insert an ASCII space between every Chinese character and adjacent Latin character or digit. Write `1970 米兰式海报` not `1970米兰式海报`.
-- **One font per sentence**: 思源宋体 covers both CJK and Latin glyphs in a unified serif style — let it handle mixed sentences in display and body. Don't let the browser fall back to Shrikhand or Libre Baskerville mid-word for ASCII characters.
+- **One font per sentence**: 思源宋体 covers both CJK and Latin glyphs in a unified serif style, let it handle mixed sentences in display and body. Don't let the browser fall back to Shrikhand or Libre Baskerville mid-word for ASCII characters.
 
 ### Aesthetic Notes for This System
 
-The system's identity rests on **Shrikhand's chunky slab-script personality + rotation + saturated red**. Shrikhand is the most distinctive single decision in this template — and it has no Chinese equivalent. 思源宋体 weight 900 carries weight and editorial register but loses the playful italic-leaning slab character entirely. Compensate by **leaning harder on the non-typographic signatures**: keep all rotations intact (-6° on stat-big, -5° on close-big, -4° on hero-title-red, +2° on hero-title-bottom), keep the stacked text-shadow on red-panel display, keep the saturated tomato red as the only accent, keep the 3px + 1.5px double-border tabular grids, keep the red leftbar cards, keep the red em-dash bullet markers. The rotation, red, and printed-newsprint structural language survive the face swap.
+The system's identity rests on **Shrikhand's chunky slab-script personality + rotation + saturated red**. Shrikhand is the most distinctive single decision in this template, and it has no Chinese equivalent. 思源宋体 weight 900 carries weight and editorial register but loses the playful italic-leaning slab character entirely. Compensate by **leaning harder on the non-typographic signatures**: keep all rotations intact (-6° on stat-big, -5° on close-big, -4° on hero-title-red, +2° on hero-title-bottom), keep the stacked text-shadow on red-panel display, keep the saturated tomato red as the only accent, keep the 3px + 1.5px double-border tabular grids, keep the red leftbar cards, keep the red em-dash bullet markers. The rotation, red, and printed-newsprint structural language survive the face swap.
 
-The system's three-face role discipline (Shrikhand display / Libre Baskerville body / Space Grotesk chrome) collapses to a two-face system in CJK: 思源宋体 for everything Latin-serif, 思源黑体 for everything Latin-mono. The body-vs-display contrast becomes pure weight (400 vs 900) plus color (dark vs red). For inline `<strong>` emphasis inside body, switch from 思源宋体 400 to 思源黑体 600 — the change-of-face is what signals emphasis in the Latin original, and the serif-to-sans swap preserves the same logic in CJK.
+The system's three-face role discipline (Shrikhand display / Libre Baskerville body / Space Grotesk chrome) collapses to a two-face system in CJK: 思源宋体 for everything Latin-serif, 思源黑体 for everything Latin-mono. The body-vs-display contrast becomes pure weight (400 vs 900) plus color (dark vs red). For inline `<strong>` emphasis inside body, switch from 思源宋体 400 to 思源黑体 600, the change-of-face is what signals emphasis in the Latin original, and the serif-to-sans swap preserves the same logic in CJK.
 
 ### Known CJK Gap
 
-- **No exact online CJK match for Shrikhand's slab-script personality.** The face is Italian-sports-magazine display script with chunky terminals and playful italic forms — there is no Chinese equivalent on Google Fonts, Adobe Fonts, or cn-fontsource. 思源宋体 weight 900 gives heft and editorial register but reads as serious rather than playful. The rotation transforms and saturated red carry the playful-sports-magazine voice on their own; don't drop the tilts when translating to CJK.
+- **No exact online CJK match for Shrikhand's slab-script personality.** The face is Italian-sports-magazine display script with chunky terminals and playful italic forms, there is no Chinese equivalent on Google Fonts, Adobe Fonts, or cn-fontsource. 思源宋体 weight 900 gives heft and editorial register but reads as serious rather than playful. The rotation transforms and saturated red carry the playful-sports-magazine voice on their own; don't drop the tilts when translating to CJK.
 - **No CDN Chinese monospace face for the chrome voice.** Space Grotesk's role (uppercase tracked labels, slide counter, footer links with red underline) depends on the uppercase + 2–3px tracking treatment. 思源黑体 weight 500–600 at 0 tracking is the closest match but loses the "stamped metadata" signal. The red color and 1–2px border treatments on tags/links do most of the chrome-recognition work in a CJK build.
-- **Libre Baskerville's classical literary register has no exact Chinese counterpart.** 思源宋体 reads as institutional-modern rather than 19th-century-literary. For projects that need the literary-quarterly voice specifically (long body paragraphs in essays or manifestos), consider 霞鹜文楷 LXGW WenKai instead of 思源宋体 — it carries a hand-written/calligraphic warmth closer to Baskerville's editorial personality.
+- **Libre Baskerville's classical literary register has no exact Chinese counterpart.** 思源宋体 reads as institutional-modern rather than 19th-century-literary. For projects that need the literary-quarterly voice specifically (long body paragraphs in essays or manifestos), consider 霞鹜文楷 LXGW WenKai instead of 思源宋体, it carries a hand-written/calligraphic warmth closer to Baskerville's editorial personality.
 
 ## Iteration Guide
 
@@ -695,19 +695,19 @@ The system's three-face role discipline (Shrikhand display / Libre Baskerville b
 5. Any new data-grid is wrapped in a 3px ink outer border with 1.5px ink inner cell borders. Each cell holds: Shrikhand red numeral + Space Grotesk uppercase label + Libre Baskerville body + optional Space Grotesk micro-context line at bottom.
 6. Any new statement slide uses a full-bleed `{colors.red}` panel with white Shrikhand display text carrying the stacked text-shadow, and white Libre Baskerville cite below.
 7. Any new dense-data slide uses a full-bleed `{colors.dark}` panel with white text, red Space Grotesk labels, red 3px leftbar rules on phase cards, and red round-bullet glyphs on lists.
-8. Any new list uses red em-dash or red round-bullet glyphs at position absolute left — never default disc bullets.
+8. Any new list uses red em-dash or red round-bullet glyphs at position absolute left, never default disc bullets.
 9. Any new hero composition is a multi-line Shrikhand stack: at least three lines, at least one rotated, at least one in red. Don't collapse to a single horizontal title.
-10. If a surface feels too monotone, switch the surface ground (white → red / dark / off-white panel) — don't add a second accent color or a third typeface.
+10. If a surface feels too monotone, switch the surface ground (white → red / dark / off-white panel), don't add a second accent color or a third typeface.
 
 ## Known Gaps
 
-- **Shrikhand is a single-weight (400) display face** — there are no bolder or lighter weights available. Every Shrikhand element is the same weight; visual hierarchy comes from size, color, and rotation only.
-- **Shrikhand, Libre Baskerville, and Space Grotesk are loaded from Google Fonts** via a single `<link>` request. There are no system fallbacks beyond `cursive` / `serif` / `sans-serif` — in environments where Google Fonts fail, the system collapses to generic system fonts and loses its identity entirely.
+- **Shrikhand is a single-weight (400) display face**, there are no bolder or lighter weights available. Every Shrikhand element is the same weight; visual hierarchy comes from size, color, and rotation only.
+- **Shrikhand, Libre Baskerville, and Space Grotesk are loaded from Google Fonts** via a single `<link>` request. There are no system fallbacks beyond `cursive` / `serif` / `sans-serif`, in environments where Google Fonts fail, the system collapses to generic system fonts and loses its identity entirely.
 - **The stacked text-shadow is hardcoded for ink-on-red contexts.** Applying it to different color combinations (e.g., red text on a light ground) does not produce the same effect; the three-step shadow is specifically tuned for the red-panel surface.
 - **Rotation transforms are fixed per element type** (-6° on stat-big, -5° on close-big, -4° on hero-title-red, +2° on hero-title-bottom). Adjusting individual rotations requires per-instance style overrides.
 - **The financial-grid and summary-highlights grid use overlapping borders** (3px outer + 1.5px inner that physically overlap by half-pixel due to box-sizing). Browser rendering of this overlap is generally clean but can produce subtle 1-pixel artifacts at certain zoom levels.
-- **The pillars layout uses `overflow-y: auto`** on each pillar column. On surfaces with long content, this introduces visible scrollbars on certain operating systems — the system is designed for content that fits the viewport.
+- **The pillars layout uses `overflow-y: auto`** on each pillar column. On surfaces with long content, this introduces visible scrollbars on certain operating systems, the system is designed for content that fits the viewport.
 - **The hero tagline on slide-hero is absolutely positioned at `bottom: 8vh; right: 7vw`** with a 300px max-width. On very wide aspect ratios or very narrow ones it may misalign with the hero title stack.
-- **The progress bar is a 5px height strip** that may visually overlap content on slides with bottom-edge text — the slide-close surface in particular places close-links at `bottom: 5vh` which clears the progress bar but only by a small margin.
+- **The progress bar is a 5px height strip** that may visually overlap content on slides with bottom-edge text, the slide-close surface in particular places close-links at `bottom: 5vh` which clears the progress bar but only by a small margin.
 - **The click-to-advance interaction divides the viewport at 50% width** for next/prev. This may conflict with click-to-interact behaviors on links inside slides (the close-slide footer links). The system relies on link click events to stopPropagation, which they do not by default.
-- **The bullet-list class is defined globally** with em-dash glyphs but is not used in the demo template — the pillar bullets, service bullets, and roadmap bullets all redefine their own bullet styles inline. There's some inconsistency between the defined utility and the actual usage patterns.
+- **The bullet-list class is defined globally** with em-dash glyphs but is not used in the demo template, the pillar bullets, service bullets, and roadmap bullets all redefine their own bullet styles inline. There's some inconsistency between the defined utility and the actual usage patterns.

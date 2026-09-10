@@ -7,7 +7,7 @@ description: "Operate Convex deployments, functions, data, environment variables
 
 The `convex` npm package ships the CLI. In a project with `convex` installed, run `npx convex <command>`. When the repo pins an older CLI or a command is missing, use `npx -y convex@latest <command>`.
 
-Docs: https://docs.convex.dev/cli — run `npx convex docs` to open them.
+Docs: https://docs.convex.dev/cli, run `npx convex docs` to open them.
 
 ## Invoking the CLI
 
@@ -30,7 +30,7 @@ npx convex --version
 test -d convex && test -f .env.local && grep -q CONVEX_DEPLOYMENT .env.local
 ```
 
-If `convex/` or `CONVEX_DEPLOYMENT` is missing, run the project's own Convex setup first — do not guess deployment URLs.
+If `convex/` or `CONVEX_DEPLOYMENT` is missing, run the project's own Convex setup first, do not guess deployment URLs.
 
 ## Deployment targeting
 
@@ -145,7 +145,7 @@ npx convex run tasks:list --watch
 npx convex run tasks:list --prod
 ```
 
-Function identifiers: `file:functionName` or `api.module.function` style depending on export — check `convex/_generated/api`.
+Function identifiers: `file:functionName` or `api.module.function` style depending on export, check `convex/_generated/api`.
 
 ### Inspect database
 
@@ -175,7 +175,7 @@ Never commit secrets. Never paste deploy keys or secret env values into chat.
 # Dev sync (agent-safe one-shot)
 npx convex dev --once
 
-# Production — only with explicit user approval
+# Production, only with explicit user approval
 npx convex deploy
 
 # CI pattern: build frontend with deployment URL injected
@@ -205,4 +205,4 @@ If `insights` is missing locally, retry with `npx -y convex@latest insights --de
 
 ## References
 
-- [references/agent-mode.md](references/agent-mode.md) — headless dev, anonymous mode, CI deploy keys, sandbox pitfalls
+- [references/agent-mode.md](references/agent-mode.md), headless dev, anonymous mode, CI deploy keys, sandbox pitfalls

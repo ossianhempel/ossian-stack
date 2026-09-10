@@ -8,7 +8,7 @@ Official documentation:
 - Codex skills: https://developers.openai.com/codex/skills
 - ChatGPT skill building: https://learn.chatgpt.com/docs/build-skills
 - Note: the Agent Plugins 1.0 spec (agent-plugins.org) does NOT cover
-  `agents/` — it is OpenAI client-specific, not part of the portable format.
+  `agents/`, it is OpenAI client-specific, not part of the portable format.
 
 ## File format
 
@@ -44,14 +44,14 @@ dependencies:
    (ASC, CLI, iOS, PR, UI). OpenAI's generator logic is Title Case with a
    small-word/acronym list; match it rather than inventing a different style.
 4. **Partial updates only.** When a file already exists, edit the field you
-   need and leave `policy:` and `dependencies:` untouched — regenerating the
+   need and leave `policy:` and `dependencies:` untouched, regenerating the
    file silently drops the invocation policy.
 5. **Policy pairing.** `disable-model-invocation: true` in SKILL.md (Claude
    Code, Cursor) must be mirrored by `policy.allow_implicit_invocation: false`
    here (Codex reads only this file). The repo validator (`bun run validate`)
    fails on a one-sided declaration.
 6. **Vendored skills.** Upstreams rarely ship this file; a local
-   `agents/openai.yaml` is a local addition — record it in the skill's
+   `agents/openai.yaml` is a local addition, record it in the skill's
    `sources.json` notes so a refresh doesn't silently treat the skill as
    unmodified upstream, and merge by hand.
 

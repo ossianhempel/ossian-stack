@@ -11,7 +11,7 @@ if it would be exhausting to maintain, it is a bad solution however correct.
 
 Read top to bottom, at reading speed, once. Note every place you slowed down.
 Then go back and say why you slowed down. The places you slowed down are the
-findings — that reaction is the signal, and it is the one thing the author can
+findings, that reaction is the signal, and it is the one thing the author can
 no longer feel.
 
 ## What you are hunting for
@@ -62,7 +62,7 @@ work is not a deep call chain; a chain of thin hops is.
 
 For each finding, on its own line:
 
-`[rule] file:line — what made you slow down → what it should be instead`
+`[rule] file:line, what made you slow down → what it should be instead`
 
 Order by how much confusion each one costs a reader, worst first. Then one
 closing line: the single change that would most improve this code.

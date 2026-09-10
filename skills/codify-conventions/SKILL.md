@@ -5,8 +5,8 @@ description: "Audit or define repository conventions and connect approved rules 
 
 # Codify conventions
 
-Turn the way a repo actually behaves into rules someone — a linter, a hook, or a
-reviewer — actually checks. A convention nobody enforces is a wish; this skill
+Turn the way a repo actually behaves into rules someone, a linter, a hook, or a
+reviewer, actually checks. A convention nobody enforces is a wish; this skill
 gives each rule a place where it is enforced or at least seen.
 
 When a past task or retrospective supplies a candidate, accept only repository-wide
@@ -25,13 +25,13 @@ before writing anything; every rule lands with the user's yes.
 
 ## The artifact: `CONVENTIONS.md`
 
-Project-root `CONVENTIONS.md`, created **lazily** — never pre-create it empty.
+Project-root `CONVENTIONS.md`, created **lazily**, never pre-create it empty.
 An empty conventions file gets read, believed, and found empty; create it only
 when the first real rule lands. It holds two classes of rule, clearly separated:
 
-1. **Enforced by tooling** — the linter or hook catches violations. Each rule
+1. **Enforced by tooling**, the linter or hook catches violations. Each rule
    names where it is enforced (config file + rule id).
-2. **Judgment calls** — a linter cannot catch it, so a reviewer or agent must.
+2. **Judgment calls**, a linter cannot catch it, so a reviewer or agent must.
    Write these as a checkable question, not a vibe: "error messages name the
    failing operation, not just 'something failed'", not "good error messages".
 
@@ -48,22 +48,22 @@ distinguish convention from accident.
 
 1. **Sample broadly**: recent commits (`git log` + diffs), file and directory
    naming, error handling, test layout, comment style, import ordering, commit
-   message shape. Whatever the stack suggests — read its idioms from the code,
+   message shape. Whatever the stack suggests, read its idioms from the code,
    not from a style guide you remember.
 2. **Find patterns that hold**: a rule is a candidate only if it holds in the
    strong majority of the code. If it holds half the time, it is not a
-   convention yet — it is a choice the user gets to make, which is grill-mode
+   convention yet, it is a choice the user gets to make, which is grill-mode
    material.
 3. **Distinguish convention from accident**: three files doing the same thing
    by coincidence is not a convention. Look for repetition across authors,
    across time, and in code that was deliberately written (config, README,
    scripts) versus incidental.
-4. **Propose**: present candidates as a table — pattern, evidence, enforceable
+4. **Propose**: present candidates as a table, pattern, evidence, enforceable
    now or judgment call, proposed enforcement. The user strikes and amends;
    nothing is written until they say so.
 
 Audit mode never invents rules the code does not follow. If the user wants the
-code to *start* behaving a certain way, that is a new rule — mark it as such so
+code to *start* behaving a certain way, that is a new rule, mark it as such so
 they know it will fight existing code, and offer to fix the existing violations
 in the same pass.
 
@@ -80,28 +80,28 @@ the audit leaves gaps only they can fill:
 
 ## Enforcement wiring
 
-Wire it here — this skill owns the whole path from rule to hook. But wire what
+Wire it here, this skill owns the whole path from rule to hook. But wire what
 the project already has; do not import an ecosystem.
 
 1. **Inventory first**: which linters, formatters, and hook managers does the
    project already use (check lockfiles, config files, package scripts)? Which
    package manager? A project on Ruff does not get ESLint; a project with no
-   hook manager gets the lightest wiring its ecosystem supports, or — for
-   language-less repos — a plain script under `.githooks/` enabled with
+   hook manager gets the lightest wiring its ecosystem supports, or, for
+   language-less repos, a plain script under `.githooks/` enabled with
    `git config core.hooksPath .githooks`.
 2. **Map rules to enforcement**: each enforceable rule becomes a specific
    linter rule, a hook check, or a small bundled script. If a rule is not worth
-   the wiring, say so and leave it as a judgment rule — visible beats enforced-
+   the wiring, say so and leave it as a judgment rule, visible beats enforced-
    badly.
 3. **Wire without clobbering**: add to existing config, never replace it. Show
    the diff before writing. If a proposed rule contradicts an existing linter
-   rule, surface the contradiction — the user resolves it, not you.
+   rule, surface the contradiction, the user resolves it, not you.
 4. **Verify the enforcement actually fires**: commit a deliberate violation on
    a scratch file, watch the hook block it, then revert and trash the scratch
    file. A hook that has never blocked anything is decoration. Report what you
    verified.
 5. **Degrade loudly**: where a runtime skips hooks (`--no-verify`) or a check
-   cannot run, say so in the artifact — a rule enforced 80% of the time is
+   cannot run, say so in the artifact, a rule enforced 80% of the time is
    still worth having, but the user should know which 20% it misses.
 
 ## Adding a rule later
@@ -112,10 +112,10 @@ The common case, and it must stay cheap:
 2. Classify: tooling or judgment.
 3. Add one line to `CONVENTIONS.md` under the right heading, wire the
    enforcement if tooling, verify it fires.
-4. Done — no re-audit, no re-interview.
+4. Done, no re-audit, no re-interview.
 
 When run in a repo whose `CONVENTIONS.md` already exists, start from step 1 of
-this section, not from the audit — the conventions conversation already
+this section, not from the audit, the conventions conversation already
 happened; extend it.
 
 ## Verify
@@ -123,5 +123,5 @@ happened; extend it.
 - Every rule in `CONVENTIONS.md` is either wired into tooling or written as a
   judgment rule. Nothing orphaned, nothing dropped.
 - The hook blocks a real violation (tested, not assumed).
-- The existing lint setup still passes — codifying conventions must not turn a
+- The existing lint setup still passes, codifying conventions must not turn a
   green repo red.

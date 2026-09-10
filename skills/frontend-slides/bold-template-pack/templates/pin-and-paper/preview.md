@@ -16,14 +16,14 @@ Use this small file for title-slide previews only. For final deck generation, re
 - Formality: medium
 - Density: medium
 - Scheme: light
-- Best for: Anything that should feel hand-crafted, warm, and literary: qualitative research findings, founder reflections, longform brand stories, workshop debriefs. The signature safety-pin illustrations and paper-grain texture make it especially good for any deck — including tech or business — that wants personality and warmth over polish.
-- Avoid for: Decks that need to feel digital-native polished or rigorously data-driven — handwritten Caveat is intentionally informal.
+- Best for: Anything that should feel hand-crafted, warm, and literary: qualitative research findings, founder reflections, longform brand stories, workshop debriefs. The signature safety-pin illustrations and paper-grain texture make it especially good for any deck, including tech or business, that wants personality and warmth over polish.
+- Avoid for: Decks that need to feel digital-native polished or rigorously data-driven, handwritten Caveat is intentionally informal.
 
 ## Visual Snapshot
 
-A field-notebook editorial system rendered as yellow legal-pad paper with deep cobalt-blue ink. Every slide carries a fractalnoise paper-grain overlay, hand-drawn safety-pin SVG illustrations that "pin" cards to the page, and a hand-script Caveat face for personal annotations. Space Grotesk at heavy weights carries the printed headlines; DM Mono handles archival labels. The aesthetic borrows from analog field reports, vintage public-notice boards, and the diary pages of scientific notebooks — closer to a lab journal pinned to a corkboard than a polished deck.
+A field-notebook editorial system rendered as yellow legal-pad paper with deep cobalt-blue ink. Every slide carries a fractalnoise paper-grain overlay, hand-drawn safety-pin SVG illustrations that "pin" cards to the page, and a hand-script Caveat face for personal annotations. Space Grotesk at heavy weights carries the printed headlines; DM Mono handles archival labels. The aesthetic borrows from analog field reports, vintage public-notice boards, and the diary pages of scientific notebooks, closer to a lab journal pinned to a corkboard than a polished deck.
 
-Pin & Paper is a field-notebook editorial system built on a single material premise: every slide is yellow legal-pad paper. The paper is rendered through a base color ({colors.paper} — saturated cadmium yellow), two soft radial-gradient highlights (upper-left light, lower-right shadow), and a non-optional fractal-noise grain overlay on a ::before pseudo-element with multiply blend. This stack creates a surface that reads as physical paper under raking light. Without the grain, the system collapses into flat cartoon-yellow; the texture is foundational, not decorative.
+Pin & Paper is a field-notebook editorial system built on a single material premise: every slide is yellow legal-pad paper. The paper is rendered through a base color ({colors.paper}, saturated cadmium yellow), two soft radial-gradient highlights (upper-left light, lower-right shadow), and a non-optional fractal-noise grain overlay on a ::before pseudo-element with multiply blend. This stack creates a surface that reads as physical paper under raking light. Without the grain, the system collapses into flat cartoon-yellow; the texture is foundational, not decorative.
 
 ## Preview Ingredients
 
@@ -32,7 +32,7 @@ Pin & Paper is a field-notebook editorial system built on a single material prem
 - Signature move: Yellow paper background ({components.paper-surface}) with two layered radial gradients and a non-optional fractal-noise grain overlay ({components.paper-grain-overlay}) on every slide.
 - Signature move: Deep cobalt-blue ink ({colors.ink}) as the universal text, border, divider, and pin-illustration color.
 - Signature move: Cream card surfaces ({colors.cream}) with 1.5px ink borders, 4px micro-radius, and a hard ink-blue offset shadow (5px–6px, zero blur).
-- Signature move: Hand-drawn safety-pin SVG illustrations ({components.pin-illustration}) — closed and open variants — pinned to cards at slight rotation angles.
+- Signature move: Hand-drawn safety-pin SVG illustrations ({components.pin-illustration}), closed and open variants, pinned to cards at slight rotation angles.
 - Signature move: Three-voice typography: Space Grotesk for print headlines, Caveat hand-script for personal voice, DM Mono for archival labels.
 
 ## International / CJK Preview Note

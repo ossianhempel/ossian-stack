@@ -8,7 +8,7 @@ style pass and the audit/cleanup job.
 Upstream's pattern list is kept verbatim and numbered (rules 1–31); local
 additions continue at 32. Everything under `references/` is local.
 
-To refresh from upstream — **diff by hand before overwriting**, rules beyond 31
+To refresh from upstream, **diff by hand before overwriting**, rules beyond 31
 and everything under `references/` are local:
 
 ```bash

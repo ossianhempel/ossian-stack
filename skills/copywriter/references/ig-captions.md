@@ -1,7 +1,7 @@
 # IG Caption Reference
 
 Captions / post descriptions for Instagram and TikTok posts (Reels,
-carousels, slideshows, video). This file is about the caption only —
+carousels, slideshows, video). This file is about the caption only,
 the text under the post that pairs with the asset above.
 
 For long captions and thread-style posts, draft beat-by-beat using
@@ -9,9 +9,9 @@ For long captions and thread-style posts, draft beat-by-beat using
 Empathize → Solve → Payoff), then tighten to caption length here.
 
 For the asset itself, see:
-- [short-form-video.md](./short-form-video.md) — Reels and TikTok video
+- [short-form-video.md](./short-form-video.md), Reels and TikTok video
 - The repo-local `/slideshow-creator` skill owns the complete IG carousel and TikTok slideshow workflow.
-- [swipe-file.md](./swipe-file.md) — curated caption and hook examples (read before drafting)
+- [swipe-file.md](./swipe-file.md), curated caption and hook examples (read before drafting)
 
 ## Two Caption Modes
 
@@ -172,7 +172,7 @@ One small adjustment. Big difference over time.
 ## Long Caption (Pairs With Hook-Overlay Video)
 
 The caption format for the 7-second hook-overlay video documented in
-[short-form-video.md](./short-form-video.md). The video sold the click —
+[short-form-video.md](./short-form-video.md). The video sold the click,
 the caption is the value delivery.
 
 ### Rules
@@ -209,7 +209,7 @@ the caption is the value delivery.
 ### Workflow
 
 When the user gives you a hook, expand it into the caption yourself in one
-pass. Don't ask them to write bullets, don't hand it off — the hook is the
+pass. Don't ask them to write bullets, don't hand it off, the hook is the
 input, the full caption is the output.
 
 - Match the caption structure to the hook's promise exactly. "5 signs..." = 5

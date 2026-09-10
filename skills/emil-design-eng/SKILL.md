@@ -96,7 +96,7 @@ Is the element entering or exiting?
 --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 ```
 
-**Never use ease-in for UI animations.** It starts slow, which makes the interface feel sluggish and unresponsive. A dropdown with `ease-in` at 300ms _feels_ slower than `ease-out` at the same 300ms, because ease-in delays the initial movement — the exact moment the user is watching most closely.
+**Never use ease-in for UI animations.** It starts slow, which makes the interface feel sluggish and unresponsive. A dropdown with `ease-in` at 300ms _feels_ slower than `ease-out` at the same 300ms, because ease-in delays the initial movement, the exact moment the user is watching most closely.
 
 **Easing curve resources:** Don't create curves from scratch. Use [easing.dev](https://easing.dev/) or [easings.co](https://easings.co/) to find stronger custom variants of standard easings.
 
@@ -114,7 +114,7 @@ Is the element entering or exiting?
 
 ### Perceived performance
 
-Speed in animation is not just about feeling snappy — it directly affects how users perceive your app's performance:
+Speed in animation is not just about feeling snappy, it directly affects how users perceive your app's performance:
 
 - A **fast-spinning spinner** makes loading feel faster (same load time, different perception)
 - A **180ms select** animation feels more responsive than a **400ms** one

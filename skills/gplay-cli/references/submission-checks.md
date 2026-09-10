@@ -13,7 +13,7 @@ Use this skill to validate everything before submitting a release to Google Play
 The CLI has canonical, purpose-built commands. Reach for these before
 hand-scripting individual validators:
 
-- **`gplay validate --package <pkg>`** — the canonical release-readiness report.
+- **`gplay validate --package <pkg>`**, the canonical release-readiness report.
   Combines local artifact/metadata/screenshot/release-note checks with remote
   track and listing state and Console-only follow-up items. Use `--bundle`,
   `--listings-dir`, `--screenshots-dir`, `--track`, and `--strict` (treat
@@ -27,7 +27,7 @@ hand-scripting individual validators:
     --strict
   ```
 
-- **`gplay preflight --file <app.aab>`** — offline AAB/APK compliance and
+- **`gplay preflight --file <app.aab>`**, offline AAB/APK compliance and
   hygiene. Fully decodes `AndroidManifest.xml` (binary AXML for APKs, aapt2
   protobuf for App Bundles) and runs nine scanners: `manifest`, `permissions`,
   `native_libs`, `metadata`, `secrets`, `billing`, `privacy`, `policy`, `size`.
@@ -47,7 +47,7 @@ hand-scripting individual validators:
   **See the preflight playbook** for what each scanner catches, how to read
   the findings, and CI gating patterns.
 
-- **`gplay checks upload`** — Google Checks compliance analysis as a CI gate.
+- **`gplay checks upload`**, Google Checks compliance analysis as a CI gate.
   Use `--severity-threshold PRIORITY` to fail the pipeline on high-priority
   failed checks before release.
 
@@ -60,7 +60,7 @@ hand-scripting individual validators:
     --severity-threshold PRIORITY
   ```
 
-- **`gplay publish track --strict`** — preflight + publish in one step. Builds
+- **`gplay publish track --strict`**, preflight + publish in one step. Builds
   the readiness report, stops on blocking issues (and warnings with `--strict`),
   then runs the release workflow only if preflight passes.
 
@@ -257,7 +257,7 @@ android {
 }
 ```
 
-Do not tell the user a specific required API level from memory — read it from
+Do not tell the user a specific required API level from memory, read it from
 the `policy` scanner output or from Play's published requirement.
 
 ### Permissions Declarations

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# export-pdf.sh — Export an HTML presentation to PDF
+# export-pdf.sh, Export an HTML presentation to PDF
 #
 # Usage:
 #   bash scripts/export-pdf.sh <path-to-html> [output.pdf]
@@ -14,7 +14,7 @@
 #   3. Combines all screenshots into a single PDF
 #   4. Cleans up the server and temp files
 #
-# The PDF preserves colors, fonts, and layout — but not animations.
+# The PDF preserves colors, fonts, and layout, but not animations.
 # Perfect for email attachments, printing, or embedding in documents.
 set -euo pipefail
 
@@ -124,7 +124,7 @@ SERVE_DIR=$(dirname "$INPUT_HTML")
 HTML_FILENAME=$(basename "$INPUT_HTML")
 
 cat > "$TEMP_SCRIPT" << 'EXPORT_SCRIPT'
-// export-slides.mjs — Playwright script to export HTML slides to PDF
+// export-slides.mjs, Playwright script to export HTML slides to PDF
 //
 // How it works:
 // 1. Starts a local HTTP server (needed for fonts/assets to load)
@@ -405,7 +405,7 @@ echo ""
 FILE_SIZE=$(du -h "$OUTPUT_PDF" | cut -f1 | xargs)
 echo "  Size: $FILE_SIZE"
 echo ""
-echo "  This PDF works everywhere — email, Slack, Notion, print."
+echo "  This PDF works everywhere, email, Slack, Notion, print."
 echo "  Note: Animations are not preserved (it's a static export)."
 echo -e "${BOLD}════════════════════════════════════════${NC}"
 echo ""

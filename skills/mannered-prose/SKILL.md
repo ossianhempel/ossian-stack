@@ -22,8 +22,8 @@ One question per suspect phrase: **is a literal phrase available?**
 
 If yes, the metaphor is decoration and costs the reader time. Replace it.
 
-If no — the idea has no plain name, and the comparison is doing explanatory work
-the literal version cannot do — keep it. This is the part that is easy to get
+If no, the idea has no plain name, and the comparison is doing explanatory work
+the literal version cannot do, keep it. This is the part that is easy to get
 wrong in the other direction. Stripping every figure of speech produces flat,
 lifeless text, which is a different failure, not a fix. The target is the
 metaphor that *stands in for* a plain phrase, not the metaphor that earns its
@@ -48,7 +48,7 @@ weight"), and a claim dressed as a scene. Replace each with what you meant.
 
 **To supplied text**: return the rewrite, with the changed phrases listed
 alongside what they became, so the writer can see the pattern rather than only
-the result. Preserve their meaning, their examples, and their voice — this pass
+the result. Preserve their meaning, their examples, and their voice, this pass
 changes phrasing, never claims. Where a literal replacement would lose real
 meaning, leave the metaphor and say why.
 
@@ -59,8 +59,8 @@ Anthropic gives is enough on its own:
 
 ## Boundary
 
-`unslop` is the broad rubric for AI writing tells — stock phrases, formulaic
-structure, hedging, false range, and much else — and it rewrites end to end.
+`unslop` is the broad rubric for AI writing tells, stock phrases, formulaic
+structure, hedging, false range, and much else, and it rewrites end to end.
 This skill is one narrow failure, and it applies to prose that is otherwise
 human and good. Reach for it during writing, as a constraint on the sentences
 being produced; reach for `unslop` afterwards, as a full pass over a finished

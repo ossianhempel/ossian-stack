@@ -12,7 +12,7 @@ When reviewing UI code, you MUST use a markdown table with Before/After columns.
 | `transform: scale(0)` | `transform: scale(0.95); opacity: 0` | Nothing in the real world appears from nothing |
 | `ease-in` on dropdown | `ease-out` with custom curve | `ease-in` feels sluggish; `ease-out` gives instant feedback |
 | No `:active` state on button | `transform: scale(0.97)` on `:active` | Buttons must feel responsive to press |
-| `transform-origin: center` on popover | `transform-origin: var(--radix-popover-content-transform-origin)` | Popovers should scale from their trigger (not modals — modals stay centered) |
+| `transform-origin: center` on popover | `transform-origin: var(--radix-popover-content-transform-origin)` | Popovers should scale from their trigger (not modals, modals stay centered) |
 
 Wrong format (never do this):
 
@@ -34,7 +34,7 @@ When reviewing UI code, check for:
 | `transition: all`                          | Specify exact properties: `transition: transform 200ms ease-out` |
 | `scale(0)` entry animation                 | Start from `scale(0.95)` with `opacity: 0`                       |
 | `ease-in` on UI element                    | Switch to `ease-out` or custom curve                             |
-| `transform-origin: center` on popover      | Set to trigger location or use Radix/Base UI CSS variable (modals are exempt — keep centered) |
+| `transform-origin: center` on popover      | Set to trigger location or use Radix/Base UI CSS variable (modals are exempt, keep centered) |
 | Animation on keyboard action               | Remove animation entirely                                        |
 | Duration > 300ms on UI element             | Reduce to 150-250ms                                              |
 | Hover animation without media query        | Add `@media (hover: hover) and (pointer: fine)`                  |

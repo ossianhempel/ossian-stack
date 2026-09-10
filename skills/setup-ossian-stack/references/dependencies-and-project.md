@@ -21,14 +21,14 @@ or other host-provided interfaces.
 
 Classify each capability by the best execution path that actually exists:
 
-- **Ready** — a global command, current-project command, active runtime tool/MCP,
+- **Ready**, a global command, current-project command, active runtime tool/MCP,
   or bundled fallback can perform the work now.
-- **On demand** — the owning skill supports an installed package runner, but its
+- **On demand**, the owning skill supports an installed package runner, but its
   package is neither global nor current-project-local. Say which runner will fetch
   it on first use and that network access may be required. Do not call it missing.
-- **Degraded** — the preferred path is absent but a narrower fallback works. Name
+- **Degraded**, the preferred path is absent but a narrower fallback works. Name
   only the lost surface.
-- **Blocked** — no supported execution path remains. Only this state belongs in a
+- **Blocked**, no supported execution path remains. Only this state belongs in a
   “missing” list.
 
 “Installed somewhere on the computer” is not the same as ready in the current
@@ -43,7 +43,7 @@ is a bare binary:
 | App Store Connect | `asc` | Without it, App Store Connect CLI work is blocked. |
 | GitHub | `gh`, or a host-provided GitHub interface where the owning skill permits one | Missing `gh` blocks commands and bundled scripts that specifically require it; do not erase host-tool coverage. |
 | GitLab | `glab`, or a host-provided interface where the owning skill permits one | Missing `glab` matters only where the tracker config names GitLab. |
-| Jira | `curl`/`python3` against the REST API with `JIRA_*` credentials, or a repo-shipped Jira CLI | Missing credentials env vars is a configuration gap, not a missing capability — point at the tracker config's credentials section. |
+| Jira | `curl`/`python3` against the REST API with `JIRA_*` credentials, or a repo-shipped Jira CLI | Missing credentials env vars is a configuration gap, not a missing capability, point at the tracker config's credentials section. |
 | Linear | `curl` against the GraphQL API with `LINEAR_API_KEY`, plus `jq` for response shaping | A missing key is a configuration gap, not a missing capability. |
 | Azure DevOps Boards | `az` with the `azure-devops` extension (`az extension add --name azure-devops`) | `az` without the extension covers nothing here; the extension is a one-time add. |
 | Secret retrieval | `op` | Without it, `one-password` cannot retrieve secrets; already-materialized environment values are separate. |
@@ -58,23 +58,23 @@ is a bare binary:
 Say all of this plainly rather than burying it. Report the evidence and the
 execution path selected, not a guessed machine-wide installation state.
 
-## 6. Project prerequisites — check, do not scaffold
+## 6. Project prerequisites, check, do not scaffold
 
 When run inside a project, some skills expect a file the repo owns. **Most are
 created lazily on purpose; pre-creating them is a mistake**, because an empty
 `GLOSSARY.md` is a file that gets read, believed, and found empty.
 
-- `GLOSSARY.md`, `GLOSSARY-MAP.md`, `docs/adr/` — `domain-modeling` creates these
+- `GLOSSARY.md`, `GLOSSARY-MAP.md`, `docs/adr/`, `domain-modeling` creates these
   the moment it has something real to write, and `diagnosing-bugs` reads whichever
   exists. Do not create them here. Do not create them empty ever.
-- A project-local skills directory — `create-verification-skill` resolves or creates it when
+- A project-local skills directory, `create-verification-skill` resolves or creates it when
   it generates a verifier. Leave it alone until then.
-- `.env`, `.env.local` and friends — the project's own, never ours to write.
+- `.env`, `.env.local` and friends, the project's own, never ours to write.
 - **`.ios-release.env` is the exception.** `release-ios-app` reads it first and
   assumes it exists, so an iOS repo without one cannot use that skill. If this
   looks like an iOS app repo and the manifest is absent, say so and point at that
   skill's own `references/manifest.md`, which documents every key. Do not guess
-  values — the manifest carries app IDs and branch names only its owner knows.
+  values, the manifest carries app IDs and branch names only its owner knows.
 
 Report what is missing and who creates it. Create nothing in this step.
 

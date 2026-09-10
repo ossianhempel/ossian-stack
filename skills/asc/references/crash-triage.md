@@ -48,11 +48,11 @@ Requires a build ID. Resolve via `asc builds info --app "APP_ID" --latest --plat
 
 When presenting results, organize by severity and frequency:
 
-1. **Total count** — how many crashes/feedbacks in the result set.
-2. **Top crash signatures** — group by exception type or crash reason, ranked by count.
-3. **Affected builds** — which build versions are impacted.
-4. **Device & OS breakdown** — most affected device models and OS versions.
-5. **Timeline** — when crashes started or spiked.
+1. **Total count**, how many crashes/feedbacks in the result set.
+2. **Top crash signatures**, group by exception type or crash reason, ranked by count.
+3. **Affected builds**, which build versions are impacted.
+4. **Device & OS breakdown**, most affected device models and OS versions.
+5. **Timeline**, when crashes started or spiked.
 
 For performance diagnostics, highlight the highest-weight signatures first.
 

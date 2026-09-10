@@ -92,7 +92,7 @@ Trigger the desire. Then show the product as the relief.
 
 A hook's only job is to provoke an involuntary emotional reaction *before*
 the reader decides whether to keep going. Recognition, fear, indignation,
-curiosity, "wait, what?", "that's me" — something has to fire. If the first
+curiosity, "wait, what?", "that's me", something has to fire. If the first
 line could be read out loud at a dinner party and get zero reaction, it is
 not a hook. It is a sentence.
 
@@ -107,17 +107,17 @@ called out? If they nod politely, kill it and rewrite.
 writing one):
 
 - **Topic announcements**: "Here's how to...", "Let's talk about...",
-  "A quick note on...", "Today I want to share..." — these announce that
+  "A quick note on...", "Today I want to share...", these announce that
   content is coming instead of being the content.
 - **Soft observations**: "It's interesting that...", "A lot of people
-  don't realize...", "Something I've been thinking about..." — no stakes,
+  don't realize...", "Something I've been thinking about...", no stakes,
   no friction, no reason to care.
 - **Neutral descriptions of the product/topic**: "This app helps you...",
-  "An easy way to...", "A guide to..." — describing, not provoking.
-- **Throat-clearing openers**: "So,", "Okay,", "Alright,", "Look," — the
+  "An easy way to...", "A guide to...", describing, not provoking.
+- **Throat-clearing openers**: "So,", "Okay,", "Alright,", "Look,", the
   first word is doing nothing.
 - **Vague stakes**: "This could change everything", "You need to know
-  this" — claims a reaction instead of triggering one.
+  this", claims a reaction instead of triggering one.
 - **Setup without payoff in view**: hooks that promise the interesting
   thing is coming later. The interesting thing is the hook.
 

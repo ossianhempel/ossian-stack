@@ -162,7 +162,7 @@ xcrun stapler staple "/tmp/YourApp.dmg"
 
 ## PKG Notarization
 
-To notarize `.pkg` files, you need a **Developer ID Installer** certificate (separate from Developer ID Application). This certificate type is not available through the App Store Connect API — create it at https://developer.apple.com/account/resources/certificates/add.
+To notarize `.pkg` files, you need a **Developer ID Installer** certificate (separate from Developer ID Application). This certificate type is not available through the App Store Connect API, create it at https://developer.apple.com/account/resources/certificates/add.
 
 Sign the package:
 ```bash

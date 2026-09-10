@@ -1,4 +1,4 @@
-# gplay preflight — offline build scanning
+# gplay preflight, offline build scanning
 
 `gplay preflight` inspects a local `.aab` or `.apk` and reports findings. It
 makes **no API calls and needs no credentials**, so it works on any machine, in
@@ -31,8 +31,8 @@ gplay preflight --list-scanners
 
 ## How preflight reads the build
 
-`preflight` fully decodes `AndroidManifest.xml` — binary AXML for APKs, aapt2
-protobuf for App Bundles — so findings reflect real, typed attribute values
+`preflight` fully decodes `AndroidManifest.xml`, binary AXML for APKs, aapt2
+protobuf for App Bundles, so findings reflect real, typed attribute values
 rather than substring guesses.
 
 This matters when you interpret results: an attribute pointing at a resource
@@ -52,17 +52,17 @@ Every scanner has an ID. Select with `--only` or exclude with `--skip`
 
 Manifest-level correctness and release-blocking flags.
 
-- `android:debuggable="true"` — **error**. Ships a debuggable build.
-- `android:testOnly="true"` — **error**. Play rejects the upload outright.
+- `android:debuggable="true"`, **error**. Ships a debuggable build.
+- `android:testOnly="true"`, **error**. Play rejects the upload outright.
 - Component with an `<intent-filter>` and no `android:exported` on
-  `targetSdk` 31+ — **error**. This is an *install failure* on Android 12+,
+  `targetSdk` 31+, **error**. This is an *install failure* on Android 12+,
   not a warning. Launcher activities are exempt.
-- Exported `<provider>` with `grantUriPermissions` — **error**. Any app can
+- Exported `<provider>` with `grantUriPermissions`, **error**. Any app can
   reach the granted URIs.
-- Foreground service type without its matching permission on `targetSdk` 34+ —
+- Foreground service type without its matching permission on `targetSdk` 34+,
   Android 14 throws `SecurityException` at runtime. A `dataSync` type needs
   `FOREGROUND_SERVICE_DATA_SYNC`.
-- `usesCleartextTraffic="true"` — warning, downgraded to info when a
+- `usesCleartextTraffic="true"`, warning, downgraded to info when a
   `networkSecurityConfig` is present.
 - `allowBackup`, `requestLegacyExternalStorage`, package/version sanity.
 
@@ -80,13 +80,13 @@ Manifest-level correctness and release-blocking flags.
 
 ### `native_libs`
 
-- Missing `arm64-v8a` — **error**. Play has required 64-bit since 2019.
+- Missing `arm64-v8a`, **error**. Play has required 64-bit since 2019.
 - **16 KB memory page alignment**, read from real ELF program headers. Error on
   `targetSdk` 35+, warning below. Android 15 devices with 16 KB pages will not
   load misaligned `.so` files.
 - `x86` without `x86_64`, bare `armeabi`.
-- Unstripped `.debug_*` / `.symtab` sections — wasted download size.
-- `extractNativeLibs="true"` — larger install footprint.
+- Unstripped `.debug_*` / `.symtab` sections, wasted download size.
+- `extractNativeLibs="true"`, larger install footprint.
 
 ### `metadata`
 
@@ -94,7 +94,7 @@ Manifest-level correctness and release-blocking flags.
 layout (`<dir>/<locale>/title.txt`, `<dir>/<locale>/images/...`).
 
 - Title ≤ 30, short description ≤ 80, full description ≤ 4000, release notes
-  ≤ 500 characters — counted in runes, not bytes.
+  ≤ 500 characters, counted in runes, not bytes.
 - **Real pixel dimensions**: icon 512×512, feature graphic 1024×500, promo
   graphic 180×120, TV banner 1280×720.
 - Screenshots: min 320px per side, max 3840px, max 2:1 aspect ratio, at least 2
@@ -111,7 +111,7 @@ Warnings: Google API keys (`AIza…`) and JWTs.
 
 > Google API keys are a **warning, not an error**, on purpose. Android apps
 > embed Maps and Firebase keys by design. The fix is restricting the key to your
-> package name and signing certificate in Cloud Console — not removing it from
+> package name and signing certificate in Cloud Console, not removing it from
 > the binary. Do not tell the user to delete it.
 
 Dex bytecode is scanned too, so hardcoded string literals are caught.
@@ -119,7 +119,7 @@ Dex bytecode is scanned too, so hardcoded string literals are caught.
 ### `billing`
 
 Third-party payment processors (Stripe, Braintree, PayPal, Adyen, Razorpay…)
-present in the build — a warning on its own, downgraded to info when Play
+present in the build, a warning on its own, downgraded to info when Play
 Billing is also present. Also flags `com.android.vending.BILLING` declared with
 no billing implementation, and billing wrappers (RevenueCat, Adapty,
 Qonversion) shipped without the Play Billing Library.
@@ -208,7 +208,7 @@ Run them in that order. `preflight` is the cheapest and catches the most.
 
 - Run `gplay preflight --file <artifact>` **before** any upload or release
   command, and report findings before proceeding.
-- Pass `--listings-dir` whenever a metadata directory exists — otherwise the
+- Pass `--listings-dir` whenever a metadata directory exists, otherwise the
   `metadata` scanner is skipped and listing problems go unreported.
 - Treat `error` findings as blocking. Do not upload past them without the user
   explicitly saying to.
