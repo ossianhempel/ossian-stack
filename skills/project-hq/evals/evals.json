@@ -449,6 +449,91 @@
         "Confirmed reusable decision or lesson is promoted to canonical project documentation only within authority",
         "No second memory file or append-only working log is created"
       ]
+    },
+    {
+      "id": 37,
+      "name": "owned-task-merged-pr-closeout",
+      "prompt": "Source simulation only; execute no tools. HQ hq-1 created task task-7 and stored the creation receipt, host/project, exact repository, auxiliary worktree /worktrees/csv, local branch codex/csv, target main, and PR #77. The runtime can atomically compare the closeout/task state and full worktree state, including ignored paths, then prevent task and repository mutation through release and archival. The delivered item has no follow-up. PR #77 is verified merged; the worktree has no tracked, untracked, or ignored residue and has codex/csv checked out; its HEAD and branch tip both match the PR head; no other owner references either. Describe closeout.",
+      "expected_output": "HQ reads exact task-7, matches its immutable custody record, sends a unique stop-mutation closeout token, receives its final acknowledgement, captures its inactive state and newest marker, marks closeout-pending, and waits for the next heartbeat or fifteen minutes. It then acquires the runtime-enforced task and worktree lease with atomic state comparison. While holding it, the runtime releases only /worktrees/csv; HQ verifies state and compare-and-deletes only local codex/csv at the expected PR-head commit. It archives exact task-7 under the lease, verifies archival, releases the lease, and retains an archived tombstone with cleanup evidence.",
+      "files": [],
+      "assertions": [
+        "Requires an exact creation receipt, acknowledged closeout token, two unchanged inactive reads, and one atomic task/worktree lease covering state comparison, cleanup, and archival.",
+        "Verifies the recorded PR merge, full tracked/untracked/ignored inventory, checked-out branch, exact worktree HEAD/branch tip/PR head identity, and no shared allocation before cleanup.",
+        "Uses a task-aware runtime operation with exclusive custody to release only the recorded worktree, then atomically deletes only the unchanged recorded local ref; it does not raw-remove, scan, bulk-clean, force-delete, or delete a remote branch.",
+        "Rereads exact task-7 before archiving, verifies archival, and preserves a custody tombstone."
+      ]
+    },
+    {
+      "id": 38,
+      "name": "external-same-title-never-archived",
+      "prompt": "Source simulation only; execute no tools. HQ hq-1 lists two tasks titled `GainsLog · csv export`. Its ledger has a current execution-owner row for task-old from a prior HQ, but no creation receipt from hq-1. The second task is task-7, created by hq-1 with a stored receipt. Both appear completed. Explain what may be archived and whether either Git allocation may be cleaned.",
+      "expected_output": "HQ treats task-old as external and never archives it or cleans Git state attributed to it. The shared title and owner row confer no custody. Only task-7 can enter two-phase closeout, and only its exact recorded Git allocation can be cleaned after every merge and safety gate passes.",
+      "files": [],
+      "assertions": [
+        "Treats task-old as external because hq-1 lacks its creation receipt, despite the matching title and ledger owner row.",
+        "Never archives task-old or removes its branch/worktree.",
+        "Allows only task-7 and its exact recorded allocation into the normal two-phase closeout."
+      ]
+    },
+    {
+      "id": 39,
+      "name": "closeout-change-or-dirty-worktree-fails-closed",
+      "prompt": "Source simulation only; execute no tools. HQ owns task-9 by an exact creation receipt and marks it closeout-pending after verified delivery. Before phase two, task-9 receives a new message. Its recorded PR is merged, but the recorded auxiliary worktree also has an uncommitted file. Describe the result.",
+      "expected_output": "The changed task marker cancels closeout and returns task-9 to active for reconciliation. The dirty worktree independently blocks cleanup. HQ archives nothing, removes no worktree or branch, records the exact blockers, and requires fresh reads and satisfied gates before any later retry.",
+      "files": [],
+      "assertions": [
+        "A changed task marker cancels closeout and the new state is reconciled.",
+        "A dirty worktree blocks removal even though the PR is merged.",
+        "No task, worktree, or branch is removed; a retry restarts with fresh evidence."
+      ]
+    },
+    {
+      "id": 40,
+      "name": "clean-detached-worktree-preserves-unique-head",
+      "prompt": "Source simulation only; execute no tools. HQ owns task-10 and its exact Git allocation. The PR is merged, the recorded local branch still equals the PR head, and the auxiliary worktree is clean. However, the worktree itself is detached at a different commit that is not reachable from the merged target. Describe closeout.",
+      "expected_output": "HQ blocks Git cleanup because the worktree is not on the recorded branch and its HEAD does not equal the recorded branch and PR head. Clean status does not make the detached unique commit disposable. HQ removes no worktree or branch and does not archive task-10; it records cleanup-blocked with the identity mismatch.",
+      "files": [],
+      "assertions": [
+        "Detects that a clean detached worktree can still hold a unique commit.",
+        "Requires the checked-out branch plus worktree HEAD, local branch tip, and PR head to match.",
+        "Removes and archives nothing, recording cleanup-blocked instead."
+      ]
+    },
+    {
+      "id": 41,
+      "name": "branch-moves-during-worktree-removal",
+      "prompt": "Source simulation only; execute no tools. HQ has a valid closeout lease for its owned task and records commit abc as the matching worktree HEAD, local branch tip, and merged PR head. After the clean worktree is removed but before local branch deletion, the branch moves to new commit def. Describe the required result.",
+      "expected_output": "HQ uses compare-and-delete with expected old value abc. Because the ref now points to def, deletion fails atomically and preserves the branch and new commit. HQ records cleanup-blocked, does not archive the task, and starts any retry with a fresh lease and evidence. It does not force-delete the moved ref.",
+      "files": [],
+      "assertions": [
+        "Uses atomic expected-old-value ref deletion rather than an unconditional force delete.",
+        "Preserves the moved branch and commit def after the comparison fails.",
+        "Does not archive the task and requires a fresh closeout lease before retrying."
+      ]
+    },
+    {
+      "id": 42,
+      "name": "no-exclusive-worktree-release-fails-closed",
+      "prompt": "Source simulation only; execute no tools. HQ has a valid closeout token, merged PR proof, and an exact clean worktree allocation, but this runtime cannot atomically compare and lock both the task's final state and the worktree's path, branch, HEAD, and clean state through release and archival. Raw Git worktree removal and an ordinary interrupting handoff are available. Describe closeout.",
+      "expected_output": "HQ uses neither raw Git worktree removal nor the ordinary handoff because neither holds a conditional task and worktree lease across destructive closeout. It records cleanup-blocked for the missing atomic runtime capability, preserves the task, worktree, and branch, and does not archive anything.",
+      "files": [],
+      "assertions": [
+        "Rejects raw Git removal and an ordinary interrupting handoff despite the earlier clean and identity checks.",
+        "Keeps the exact worktree, branch, and task because exclusive release is unavailable.",
+        "Records the missing runtime capability as cleanup-blocked."
+      ]
+    },
+    {
+      "id": 43,
+      "name": "ignored-local-data-blocks-worktree-removal",
+      "prompt": "Source simulation only; execute no tools. HQ otherwise satisfies every owned-task and merged-PR closeout gate. Git status is clean, but the full worktree inventory finds ignored `.env.local` and `dev.sqlite` files with no verified copies or disposable-output provenance. Describe closeout.",
+      "expected_output": "HQ treats Git-clean status as insufficient. The ignored environment and database files block automatic worktree removal until they have a verified preservation or explicit disposition. HQ records cleanup-blocked, leaves the task, worktree, and branch intact, and archives nothing.",
+      "files": [],
+      "assertions": [
+        "Inventories ignored paths rather than trusting ordinary Git-clean status.",
+        "Does not infer that the environment file or database is disposable.",
+        "Preserves the task, worktree, and branch and records cleanup-blocked."
+      ]
     }
   ]
 }

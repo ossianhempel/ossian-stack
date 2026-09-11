@@ -274,6 +274,7 @@
       "commit-push-pr",
       "diagnosing-bugs",
       "grilling",
+      "git-cleanup",
       "handoff",
       "prototype",
       "setup-ossian-stack",

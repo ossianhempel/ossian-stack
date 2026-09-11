@@ -66,16 +66,102 @@ When an owner completes or becomes idle:
 3. Assign the next ready item in the same workstream to the same owner when one
    exists, repeating the exact HQ return contract and authority.
 4. Otherwise dispatch the highest-priority nonconflicting ready item elsewhere.
-5. Archive an idle owner only after it has no queued follow-up and every result is
-   delivered, transferred, canceled, or explicitly abandoned.
+5. Start the two-phase closeout below only after the owner has no queued follow-up
+   and every result is delivered, transferred, canceled, or explicitly abandoned.
 
 Repository work is delivered only after the project's required remote commit,
 merged PR, or other destination is verified. A local diff, local commit, passing
 checks, or merge-ready PR can still be awaiting delivery.
 
-Archive through the runtime when available. If it cannot archive, leave the owner
-unarchived and record that limitation; do not make sidebar cleanup the user's job.
-Never archive an unread report, open question, active turn, or undelivered change.
+## Two-phase task and Git closeout
+
+Only the HQ whose exact address appears as `Created by HQ` beside the task's stored
+creation receipt may archive it. Missing, legacy, discovered, or conflicting
+custody fails closed: leave the task open. Never select an archive candidate by
+title, project, workstream, branch, sidebar location, or task-list membership.
+
+For phase one:
+
+1. Read the exact task address and confirm no active turn, unread report, open
+   question, queued follow-up, undelivered change, or queue reference remains.
+2. Match its address, host/project, creating HQ address, and creation receipt to
+   Task custody. Send a unique closeout token to that task: it must stop repository
+   mutation, return its final state, acknowledge the token, and remain idle. HQ
+   sends no further assignment while the token is held.
+3. After the acknowledgement, confirm the task has no active turn, record its
+   newest cursor, turn ID, revision, or message timestamp beside the token, mark
+   the custody row `closeout-pending`, and wait for the next heartbeat or at least
+   fifteen minutes. If the runtime cannot message, read, stop, and identify the
+   exact task well enough to establish this lease, leave cleanup blocked. The
+   daily watchdog task never performs cleanup.
+
+On phase two, acquire a runtime-enforced exclusive closeout lease that atomically
+compares the exact task address, acknowledged token, inactive state, newest
+marker, recorded worktree path, checked-out branch, HEAD, and clean state. The
+comparison includes the complete untracked and ignored-path inventory plus each
+path's recorded disposition. The lease must prevent both new task turns and
+repository/worktree mutation until Git cleanup and archival finish. If the runtime
+offers no such conditional task and worktree lease, leave the task and Git
+allocation `cleanup-blocked`; an interrupt, ordinary handoff, filesystem status
+check, or prior read is not an equivalent lock. If the comparison fails, release
+any lease, return the task to `active`, and reconcile the new state. Otherwise
+hold the lease while closing its recorded Git allocation and archiving the task:
+
+- Apply `git-cleanup` only to the exact repository, auxiliary worktree path, local
+  branch, target branch, and PR stored for this owner. Never scan and clean other
+  candidates as part of HQ closeout.
+- Verify through the repository host that the recorded PR is merged into the
+  recorded target. Fetch/prune, confirm the worktree is not the primary/current
+  checkout, confirm it is clean, and confirm no active owner references its path
+  or branch.
+- As part of lease acquisition, confirm the worktree has the recorded local
+  branch checked out and that the worktree HEAD, local branch tip, and recorded PR
+  head are the same commit. A detached HEAD, dirty state, or any mismatch blocks
+  cleanup. Record that commit as the expected deletion value.
+- Inventory tracked changes, untracked paths, and ignored paths before acquiring
+  the lease. An ignored path is disposable only when project rules or exact task
+  provenance proves it is reproducible generated/cache output and not its sole
+  copy. Preserve it first when a verified destination exists; otherwise block.
+  Unknown ignored files, `.env` files, credentials, databases, and user-created
+  artifacts always block automatic removal. Git-clean status alone is never
+  sufficient.
+- While holding that lease, remove the worktree only through a runtime operation
+  that serializes release of this exact task's associated worktree, such as a
+  task/worktree handoff back to the project checkout. Wait for the operation,
+  verify the task is inactive outside the worktree, and verify the exact worktree
+  is absent. Do not call raw `git worktree remove`: it has no expected-HEAD guard.
+- After the worktree is released, atomically delete the exact local ref only if it
+  still equals the expected PR-head commit (`git update-ref -d <ref>
+  <expected-old>` or an equivalent compare-and-delete). Never use an
+  unconditional force deletion. If the ref moved, preserve it and record
+  `cleanup-blocked`; the removed worktree can be recreated from the retained
+  branch. Prune stale metadata and verify the intended results. The user's request
+  to run Project HQ authorizes this narrow cleanup after a verified merge.
+- For squash and rebase merges, the source commits need not be ancestors of the
+  target. Verify the merged destination contains the requested result and retain
+  the PR as its durable delivery record. Deleting the unchanged source ref may
+  discard those source commit identities; that is part of the user's explicit
+  merged-branch cleanup authority. Preserve a durable ref instead when the
+  project's rules require the original commit topology.
+- Never remove a dirty worktree, protected/current branch, mismatched branch tip,
+  unmerged PR allocation, shared allocation, or allocation with uncertain
+  provenance or unresolved ignored paths. Leave it in `cleanup-blocked: <reason>`
+  for a decision. Never delete the remote branch from this workflow.
+- For `N/A`, a missing worktree whose metadata is already pruned, or a verified
+  absent local branch, record the corresponding no-op evidence and continue. If
+  the worktree is missing but its branch remains, apply the same branch-tip and
+  PR-head identity check before deleting the branch.
+
+After Git cleanup, archive that exact address while the closeout lease still
+prevents reactivation. Verify its archived state and unchanged final marker, then
+release the lease and change the custody lifecycle to an immutable `archived
+<date>` tombstone with cleanup evidence. If archive or verification fails, release
+the lease safely and leave it `archive-pending`; every retry starts again with a
+fresh lease and read.
+
+Subagents return to HQ and have no durable sidebar task to archive. If the runtime
+cannot archive, leave the task open and record that limitation; do not make
+sidebar cleanup the user's job.
 
 ## Reporting
 

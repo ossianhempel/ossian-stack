@@ -42,8 +42,17 @@ HQ and state the exact missing capability.
 
 Before creating any owner, reconcile its queue item against live tasks, branches,
 PRs, documents, and prior dispatch records. Record `dispatching`, create the owner,
-then store its exact address and mark the item active. A partial failure remains
-recoverable and is inspected before retry.
+then store the creation result, exact address, creating HQ address, timestamp, and
+host/project in Task custody before marking the item active. Copy the exact
+repository, auxiliary worktree, local branch, target branch, and PR into its Git
+allocation when applicable. A partial result with only an operation or client
+address remains `dispatching` until the runtime resolves the exact task address.
+Inspect every partial failure before retrying.
+
+Task custody is established only by the creation result returned to this HQ. A
+same-title task, discovered task, reused legacy owner, or task created by another
+HQ remains external and cannot be archived by this HQ. Task lists help find state;
+they never confer custody.
 
 ## Return address
 

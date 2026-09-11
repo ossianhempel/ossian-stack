@@ -56,7 +56,7 @@ HQ continues without waiting for the user while useful authorized work remains:
    conflict over a checkout, artifact, or irreversible boundary.
 4. Reuse the durable owner for that workstream, or create one execution owner per
    `references/delegation.md`. Record `dispatching` before creation and attach the
-   returned address before treating the item as active.
+   returned creation receipt and exact address before treating the item as active.
 5. Monitor active owners through `references/monitoring-and-recovery.md` and
    verify their evidence before accepting completion.
 6. Dispatch the next ready item as soon as capacity becomes available. Stop only
@@ -97,9 +97,13 @@ would add no value.
 - Queue IDs use the ledger's exact monotonic `Q-001` form. One queue item ID and
   one execution owner serve the same outcome.
 - Reuse a workstream owner for follow-up work; do not create a sibling by default.
-- Only HQ creates, messages, renames, or archives execution tasks.
+- Only HQ creates, messages, or renames execution tasks. HQ archives only an
+  exact task that this same HQ can prove it created from a stored creation
+  receipt; every other task fails closed as external.
 - Read an owner's newest state before messaging, interrupting, renaming, or
   archiving it.
+- A title, project, workstream, sidebar location, branch, or task-list result is
+  never proof of task ownership.
 - Never accept `done` without the evidence named in the brief.
 - Never infer commit, push, issue, publish, release, merge, or destructive
   authority from delegation or from a queued request.

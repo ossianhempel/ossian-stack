@@ -43,7 +43,8 @@ Each daily run:
 4. Skip unpinned or inaccessible entries. Report an access or delivery failure in
    the watchdog run rather than claiming the HQ woke.
 
-The watchdog does not read project files, create owners, or perform queued work.
-The addressed HQ turn does that with its normal permissions and ledger. While an
-HQ has active items, retain its runtime-specific short heartbeat instead of
-waiting for the next daily run.
+The watchdog does not read project files, create owners, perform queued work, or
+archive tasks and clean Git allocations. The addressed HQ turn does that with its
+normal permissions and ledger. While an HQ has active items or a task is
+`closeout-pending`, retain its runtime-specific short heartbeat instead of waiting
+for the next daily run.
