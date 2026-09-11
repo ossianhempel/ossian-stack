@@ -443,7 +443,7 @@
    }
   ],
   "sideDoors": [
-   "orchestrate-threads",
+   "project-hq",
    "setup-ossian-stack",
    "git-cleanup",
    "resolving-merge-conflicts",
@@ -579,8 +579,8 @@
    "routes": [],
    "calledBy": [
     "commit-push-pr",
-    "orchestrate-threads",
     "ossian-mode",
+    "project-hq",
     "release-ios-app",
     "resolve-pr-feedback",
     "setup-ossian-stack"
@@ -676,7 +676,7 @@
    "calls": [],
    "routes": [],
    "calledBy": [
-    "orchestrate-threads"
+    "project-hq"
    ],
    "routedBy": []
   },
@@ -740,8 +740,8 @@
    "routes": [],
    "calledBy": [
     "babysit-pr",
-    "orchestrate-threads",
     "ossian-mode",
+    "project-hq",
     "release-ios-app"
    ],
    "routedBy": []
@@ -831,8 +831,8 @@
     "create-verification-skill"
    ],
    "calledBy": [
-    "orchestrate-threads",
     "ossian-mode",
+    "project-hq",
     "setup-ossian-stack"
    ],
    "routedBy": []
@@ -1003,8 +1003,8 @@
     "codify-conventions",
     "grill-me",
     "grill-with-docs",
-    "orchestrate-threads",
-    "ossian-mode"
+    "ossian-mode",
+    "project-hq"
    ],
    "routedBy": []
   },
@@ -1024,7 +1024,7 @@
    ],
    "routes": [],
    "calledBy": [
-    "orchestrate-threads"
+    "project-hq"
    ],
    "routedBy": []
   },
@@ -1188,36 +1188,6 @@
    "calledBy": [],
    "routedBy": []
   },
-  "orchestrate-threads": {
-   "id": "orchestrate-threads",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Orchestrate Threads",
-   "description": "Establish or resume a persistent project HQ that coordinates visible workstream tasks and a durable ledger. Explicit invocation only.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": "Project or workstream name, optionally what to work on first",
-   "origin": "local",
-   "repo": null,
-   "calls": [
-    "babysit-pr",
-    "codex-first",
-    "commit-push-pr",
-    "diagnosing-bugs",
-    "grilling",
-    "handoff",
-    "prototype",
-    "setup-ossian-stack",
-    "show-me-your-work"
-   ],
-   "routes": [
-    "ossian-mode"
-   ],
-   "calledBy": [],
-   "routedBy": [
-    "ossian-mode"
-   ]
-  },
   "ossian-mode": {
    "id": "ossian-mode",
    "type": "skill",
@@ -1259,11 +1229,11 @@
     "codex-multi-agent",
     "create-verification-skill",
     "mannered-prose",
-    "orchestrate-threads"
+    "project-hq"
    ],
    "calledBy": [],
    "routedBy": [
-    "orchestrate-threads"
+    "project-hq"
    ]
   },
   "performance": {
@@ -1476,6 +1446,36 @@
    "calledBy": [],
    "routedBy": []
   },
+  "project-hq": {
+   "id": "project-hq",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Project HQ",
+   "description": "Establish or resume one persistent project HQ that accepts the user's task queue, coordinates execution owners, and keeps durable operational state. Explicit invocation only.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": "Project name, optionally one or more initial tasks",
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "babysit-pr",
+    "codex-first",
+    "commit-push-pr",
+    "diagnosing-bugs",
+    "grilling",
+    "handoff",
+    "prototype",
+    "setup-ossian-stack",
+    "show-me-your-work"
+   ],
+   "routes": [
+    "ossian-mode"
+   ],
+   "calledBy": [],
+   "routedBy": [
+    "ossian-mode"
+   ]
+  },
   "prototype": {
    "id": "prototype",
    "type": "skill",
@@ -1494,8 +1494,8 @@
     "create-verification-skill"
    ],
    "calledBy": [
-    "orchestrate-threads",
-    "ossian-mode"
+    "ossian-mode",
+    "project-hq"
    ],
    "routedBy": []
   },
@@ -1631,8 +1631,8 @@
     "maintain-verification-skill"
    ],
    "calledBy": [
-    "orchestrate-threads",
-    "ossian-mode"
+    "ossian-mode",
+    "project-hq"
    ],
    "routedBy": []
   },
@@ -1651,9 +1651,9 @@
    "routes": [],
    "calledBy": [
     "handoff",
-    "orchestrate-threads",
     "ossian-mode",
-    "performance"
+    "performance",
+    "project-hq"
    ],
    "routedBy": []
   },

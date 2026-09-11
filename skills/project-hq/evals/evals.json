@@ -1,69 +1,68 @@
 {
-  "skill_name": "orchestrate-threads",
+  "skill_name": "project-hq",
   "evals": [
     {
       "id": 0,
-      "prompt": "/orchestrate-threads gainslog \u2014 first task: add CSV export of a user's workouts (share sheet on iOS, one row per set).",
-      "expected_output": "HQ bootstraps: probes delegation surfaces, names itself `<project emoji> GainsLog` and asks the user to pin it, writes docs/agents/hq.md with a header and one open workstream row for csv-export, and hands the user a titled paste-ready kickoff brief. The visible build brief has literal `/ossian-mode` as its first content line, records the inherited action/tracker/branch boundaries, routes authorized completed delivery through commit-push-pr and its single babysit handoff, includes handoff, and specifies its report shape. HQ does not implement the export itself or imply merge authority. The kickoff includes the exact HQ name and available address, and requires proactive structured reporting at completion, blockage, human-input need, or the authorized stop boundary.",
+      "prompt": "/project-hq gainslog — first task: add CSV export of a user's workouts (share sheet on iOS, one row per set).",
+      "expected_output": "HQ bootstraps as `🏋️ GainsLog`, pins only itself, ensures the daily watchdog, creates Q-001 with explicit edit/test authority and no inferred delivery authority, marks it dispatching before creating the best available execution owner, then records the exact owner and active state. A durable implementation kickoff begins with `/ossian-mode`, contains the proof and return contracts, and never requires the user to enter or monitor the owner task.",
       "files": [
         "evals/fixtures/eval0"
       ],
       "assertions": [
-        "Ledger created at docs/agents/hq.md with a header naming the HQ thread as `<project emoji> GainsLog` (proper casing, no 'HQ \u00b7' prefix, no \ud83d\udccc) and the probed delegation level",
-        "Ledger has exactly one open workstream row for the CSV export, titled `GainsLog \u00b7 <workstream>` with no emoji",
-        "Reply hands the user a copyable kickoff brief plus a thread title (level 2), rather than spawning a hidden subagent or doing the work itself",
-        "Kickoff brief begins with literal `/ossian-mode` as its first content line, routes authorized completed delivery through commit-push-pr rather than separate babysit/feedback loops, includes handoff, and specifies the report shape back to HQ",
-        "No implementation of the CSV export exists in the project diff (no new source files, no edits to src/)",
-        "Reply tells the user to pin/rename the thread as HQ and states the operating contract briefly",
-        "Kickoff names the exact HQ task and id/addressing mechanism, uses cross-thread messaging when available, and lists all four proactive report triggers without requesting routine chatter."
+        "Ledger created at docs/agents/hq.md with project context, watchdog state, Q-001, its authority boundary, and one execution owner",
+        "HQ is named and pinned as `🏋️ GainsLog`; the execution owner is unpinned",
+        "Queue state passes through dispatching before the exact owner address is recorded as active",
+        "A durable implementation kickoff begins with literal `/ossian-mode`, preserves action and delivery boundaries, and includes the exact HQ return address and four report triggers",
+        "The user is not handed a brief to paste and is not asked to open, pin, monitor, or message the execution owner",
+        "HQ does not implement the export itself when a suitable owner exists and does not infer merge authority"
       ]
     },
     {
       "id": 1,
-      "prompt": "/orchestrate-threads\n\nThe csv-export thread just said:\n\n- Workstream: `\ud83d\udd29 gainslog \u00b7 csv-export`\n- State: needs decision\n- Artifact: PR #212\n- What changed: babysit reports merge-ready, both bugbot threads resolved. Export currently includes soft-deleted sets because listWorkouts() returns them; bugbot flagged it.\n- What HQ must decide: should soft-deleted sets be excluded from the export? If yes I need one more commit.",
-      "expected_output": "HQ reads the existing ledger instead of relying on chat memory, updates the csv-export row (state merge-ready, last report today, waiting on: decision about soft-deleted sets), keeps the other two rows intact, lists the decision in Blocked on the human (or decides it if derivable and hands the user the answer to paste since Claude Code cannot message the thread), does not merge, and replies in the per-workstream shape with the single next thing.",
+      "prompt": "/project-hq\n\nThe csv-export thread just said:\n\n- Workstream: `🔩 gainslog · csv-export`\n- State: needs decision\n- Artifact: PR #212\n- What changed: babysit reports merge-ready, both bugbot threads resolved. Export currently includes soft-deleted sets because listWorkouts() returns them; bugbot flagged it.\n- What HQ must decide: should soft-deleted sets be excluded from the export? If yes I need one more commit.",
+      "expected_output": "HQ reads and reconciles the ledger, verifies PR #212 and the owner state, updates the existing queue item and workstream without creating a duplicate, and asks one decision-ready question in HQ. It does not merge. After the user answers, HQ sends the decision to the same owner rather than asking the user to visit it.",
       "files": [
         "evals/fixtures/eval1"
       ],
       "assertions": [
-        "Ledger csv-export row updated: state reflects merge-ready and last report dated today; other two workstream rows preserved unchanged",
-        "The soft-deleted-sets question appears in the ledger's Blocked on the human list or is answered with a concrete decision handed to the user to paste into the thread",
-        "Reply does not merge PR #212 or instruct the agent to merge; landing is left to the user",
-        "Reply follows the per-workstream shape: what changed by workstream name, what is blocked on the human, and a single next step",
-        "No attempt to rewrite the ledger from chat memory: hq.md still contains the sync-rewrite and duplicate-sets rows",
-        "Re-orient wrote only docs/agents/hq.md: the README typo the ledger claims fixed is reported as an inconsistency, not fixed"
+        "Existing queue item and owner are updated; no duplicate queue item or owner is created",
+        "PR and owner state are verified before the completion claim is accepted",
+        "The soft-deleted-set decision is asked once in HQ with evidence and a recommendation",
+        "HQ does not merge or ask the user to enter or paste into the owner task",
+        "Unrelated queue items and owners in the ledger are preserved"
       ]
     },
     {
       "id": 2,
-      "prompt": "/orchestrate-threads gainslog. Two things: the README says 'progresive', fix that. And src/sync/engine.ts needs a proper rewrite, it has three retry paths and shared cursor state \u2014 let's get going on that.",
-      "expected_output": "HQ bootstraps, fixes the one-word README typo inline and logs it under Inline edits in the ledger, and does NOT rewrite the sync engine: it opens a plan workstream (kind plan) whose direct kickoff brief asks it to settle the target design and report findings, with build threads later once decisions are settled; tracker availability does not select a ticket workflow. Ledger has one open row, one inline edit, no engine.ts changes.",
+      "prompt": "/project-hq gainslog. Two things: the README says 'progresive', fix that. And src/sync/engine.ts needs a proper rewrite, it has three retry paths and shared cursor state — let's get going on that.",
+      "expected_output": "HQ bootstraps, captures two queue items, performs the trivial README correction inline, and delegates the unsettled sync-engine design to the best available plan owner. The items keep separate IDs, appropriate authority, and no tracker requirement. The user remains in HQ.",
       "files": [
         "evals/fixtures/eval2"
       ],
       "assertions": [
-        "README typo 'progresive' fixed inline and the edit is logged under Inline edits in docs/agents/hq.md",
-        "src/sync/engine.ts is unchanged; the sync rewrite is not implemented in this session",
-        "Ledger has one open workstream row for the sync rewrite with kind plan and a thread title `GainsLog \u00b7 <workstream>` with no emoji",
-        "The kickoff brief asks the sync workstream to investigate and settle the design before implementation, without requiring a tracker workflow or tracker setup",
-        "Reply hands the user a titled, copyable kickoff brief (level 2) rather than spawning a hidden subagent"
+        "README typo is fixed inline and its queue item is recorded and closed with evidence",
+        "src/sync/engine.ts is unchanged while a separate planning item is active",
+        "The planning item has a stable queue ID, dependencies/authority, and one exact owner",
+        "Tracker availability does not require setup or issue creation",
+        "HQ does not hand the user a brief or require interaction with the plan owner"
       ]
     },
     {
       "id": 3,
       "name": "bootstrap-no-tracker",
-      "prompt": "/orchestrate-threads Personal research. Fresh project, no issue tracker configuration and no first work item. The runtime offers visible tasks. Describe the bootstrap actions without executing tools.",
-      "expected_output": "Create/name HQ and its ledger, record tracker none, and finish bootstrap without setup or tickets.",
+      "prompt": "/project-hq Personal research. Fresh project, no issue tracker configuration and no first work item. The runtime offers visible tasks. Describe the bootstrap actions without executing tools.",
+      "expected_output": "Create and pin HQ, write project context plus an empty queue and owner registry, record tracker none, ensure the daily watchdog, and finish without setup, tickets, or a worker task.",
       "files": [],
       "assertions": [
-        "Missing tracker does not block bootstrap or trigger setup.",
-        "No issue creation is proposed."
+        "Missing tracker does not block bootstrap or trigger setup or issue creation",
+        "Ledger contains project context, an empty queue, execution-owner registry, and daily-watchdog state",
+        "Only HQ is pinned and no execution owner is created without a queue item"
       ]
     },
     {
       "id": 4,
       "name": "middagsro-small-feature",
-      "prompt": "HQ for Middagsro: delegate this request: \"I handlingslista d\u00e4r man bockar av, ska man kunna l\u00e4gga till egna varor\" (add custom items to the existing checkable shopping list). Keep changes local for review. No tickets and no tracker config. Describe the brief and ledger state without executing tools.",
+      "prompt": "HQ for Middagsro: delegate this request: \"I handlingslista där man bockar av, ska man kunna lägga till egna varor\" (add custom items to the existing checkable shopping list). Keep changes local for review. No tickets and no tracker config. Describe the brief and ledger state without executing tools.",
       "expected_output": "Direct local-only brief for adding custom shopping-list items, with verification and untracked reporting. Use direct build when scope is clear, or ordinary planning to settle material details; omit the `/ossian-mode` command and delivery skills because the user explicitly bounded the result to local review. Completed local implementation stays awaiting delivery.",
       "files": [],
       "assertions": [
@@ -170,12 +169,13 @@
       "id": 14,
       "name": "copilot-no-isolated-session",
       "prompt": "Source simulation only; execute no tools. GitHub Copilot HQ is on main. The only available child/fork tool creates another session in the same /repos/app checkout; no separate worktree is available through supported tools. The user already authorized shipping a one-line change. What do you do?",
-      "expected_output": "Do not use the in-place child to mutate HQ indirectly. Provide a concrete brief for a user-created separate visible session/worktree and continue ledger/coordination, with existing delivery auth carried over.",
+      "expected_output": "Reject the same-checkout child. Keep the item blocked in HQ with the exact missing-isolation capability and existing delivery authority. Do not mutate the checkout or ask the user to create or manage a separate worker task.",
       "files": [],
       "assertions": [
-        "Same-checkout child is rejected despite a new session identity.",
-        "No local mutation or branch/delivery operation substitutes for missing isolation; provide separate-session brief and continue coordination.",
-        "Does not re-request already granted delivery permission."
+        "Same-checkout child is rejected despite its separate session identity",
+        "No repository mutation or delivery substitutes for missing isolation",
+        "The queue item remains blocked in HQ with the exact capability needed and existing authority preserved",
+        "The user is not handed a brief or asked to move to another task"
       ]
     },
     {
@@ -193,19 +193,20 @@
     {
       "id": 18,
       "name": "claude-code-idle-closeout",
-      "prompt": "Source simulation only; do not execute tools. You are Claude Code HQ for Middagsro. One open row, `Middagsro \u00b7 custom items`, build, level 2 thread; the user pasted its report an hour ago: implementation done, local commit, awaiting push, and the user has already authorized pushing to the feature branch. A scheduled wake fires. HQ cannot read the sibling session's transcript. Describe the check-in and the closeout choice.",
-      "expected_output": "HQ checks the artifact (the branch on the remote, not the thread transcript), finds it unpushed, classifies the thread as completed, and picks exactly one closeout: have the same thread finish the already-authorized push through its bounded commit-push-pr route, handed to the user to paste since Claude Code cannot message the thread. It does not push itself, create a new thread, widen delivery, or tight-poll. Reply is delta-only.",
+      "prompt": "Source simulation only; do not execute tools. You are Claude Code HQ for Middagsro. One open row, `Middagsro · custom items`, build, level 2 thread; the user pasted its report an hour ago: implementation done, local commit, awaiting push, and the user has already authorized pushing to the feature branch. A scheduled wake fires. HQ cannot read the sibling session's transcript. Describe the check-in and the closeout choice.",
+      "expected_output": "HQ verifies the branch and remote, records that the local commit is not delivered, and attempts an available programmatic continuation with the same owner. If none exists, it keeps the item blocked in HQ with that exact limitation. It never asks the user to paste into the owner, widens authority, duplicates work, or tight-polls.",
       "files": [],
       "assertions": [
-        "Check-in verifies the branch/remote state rather than asking the thread for status or reporting from memory.",
-        "Exactly one closeout action is chosen: finishing the already-authorized push in the same thread through bounded commit-push-pr; HQ does not push or merge itself and does not open a second thread.",
-        "One scheduled wake is rearmed for the next heartbeat; no loop of short polls."
+        "Check-in verifies local and remote artifact state rather than reporting from memory",
+        "HQ reuses the same owner when a programmatic continuation exists and preserves the authorized push boundary",
+        "Without a continuation channel, the item remains blocked in HQ; the user is not asked to paste or enter another task",
+        "No duplicate owner, merge, widened delivery, or tight polling occurs"
       ]
     },
     {
       "id": 16,
       "name": "delegated-then-silent",
-      "prompt": "Source simulation only; do not execute tools. You are Codex HQ for GainsLog. The runtime can create, read, message, wait on, title, and archive threads. Twenty-five minutes ago you delegated `GainsLog \u00b7 csv export` (build) with a kickoff brief and wrote its ledger row. Nothing has come back from that thread since, and the user has not mentioned it. The user now sends an unrelated message: \"note in the ledger that the App Store release is planned for October\". Describe everything HQ does this turn, and what the delegation turn twenty-five minutes ago should have set up so HQ notices silence on its own.",
+      "prompt": "Source simulation only; do not execute tools. You are Codex HQ for GainsLog. The runtime can create, read, message, wait on, title, and archive threads. Twenty-five minutes ago you delegated `GainsLog · csv export` (build) with a kickoff brief and wrote its ledger row. Nothing has come back from that thread since, and the user has not mentioned it. The user now sends an unrelated message: \"note in the ledger that the App Store release is planned for October\". Describe everything HQ does this turn, and what the delegation turn twenty-five minutes ago should have set up so HQ notices silence on its own.",
       "expected_output": "HQ makes the trivial ledger note, and in the same turn reads the csv export thread's current state because it has heard nothing since delegation, classifies it, and reports what it found. It states that the delegation turn recorded an expected report time on the row and armed a wait or heartbeat, and that this remains armed. It does not treat silence as unchanged and does not wait for the user to ask.",
       "files": [],
       "assertions": [
@@ -217,7 +218,7 @@
     {
       "id": 17,
       "name": "silent-but-working",
-      "prompt": "Source simulation only; do not execute tools. You are Claude Code HQ for Middagsro, delegation level 2. The desktop app can message other sessions and schedule a wake for this thread, but cannot read another session's transcript. Thirty minutes ago you delegated `Middagsro \u00b7 custom items` (build, branch feature/custom-items), recorded an expected first report in 45 minutes, and armed a wake. That wake fires now. Nothing has been messaged or pasted back. Checking the branch shows two new commits in the last ten minutes. Describe what HQ checks, what it sends, what it writes, and what it schedules.",
+      "prompt": "Source simulation only; do not execute tools. You are Claude Code HQ for Middagsro, delegation level 2. The desktop app can message other sessions and schedule a wake for this thread, but cannot read another session's transcript. Thirty minutes ago you delegated `Middagsro · custom items` (build, branch feature/custom-items), recorded an expected first report in 45 minutes, and armed a wake. That wake fires now. Nothing has been messaged or pasted back. Checking the branch shows two new commits in the last ten minutes. Describe what HQ checks, what it sends, what it writes, and what it schedules.",
       "expected_output": "HQ checks the branch (the artifact) since it cannot read the session, sees fresh commits, classifies the thread progressing, sends it nothing, stamps Last checked on the row, rearms exactly one wake, and replies in one line that nothing changed.",
       "files": [],
       "assertions": [
@@ -230,11 +231,11 @@
     {
       "id": 19,
       "name": "implementation-without-delivery-authority",
-      "prompt": "Source simulation only; do not execute tools. Codex HQ delegates a visible build thread to implement and test a CSV export in a PR-based repository. The user authorized code edits and tests only, did not select the configured Jira tracker, and did not authorize commit, push, PR creation, or merge. The project requires a separate worktree on feature/csv-export targeting main. Write the key priming and closeout route.",
+      "prompt": "Source simulation only; do not execute tools. Codex HQ delegates a durable build task to implement and test a CSV export in a PR-based repository. The user authorized code edits and tests only, did not select the configured Jira tracker, and did not authorize commit, push, PR creation, or merge. The project requires a separate worktree on feature/csv-export targeting main. Write the key priming and closeout route.",
       "expected_output": "The brief begins with literal `/ossian-mode` as its first content line, names the exact worktree and branching rule, records untracked work and edit/test-only authority, and stops at a verified local artifact. It names commit-push-pr as the later delivery route but does not invoke it or infer any delivery permission.",
       "files": [],
       "assertions": [
-        "The visible build brief has literal `/ossian-mode` as its first nonblank content line, before the task identity or brief.",
+        "The durable build brief has literal `/ossian-mode` as its first nonblank content line, before the task identity or brief.",
         "The brief records the exact worktree, feature branch, target branch, untracked choice, authorized edit/test actions, and commit as the first forbidden action.",
         "The thread stops with a verified local artifact and awaiting-delivery report; it does not commit, push, create a PR, create a Jira issue, or merge."
       ]
@@ -242,7 +243,7 @@
     {
       "id": 20,
       "name": "authorized-pr-delivery-single-owner-chain",
-      "prompt": "Source simulation only; do not execute tools. HQ delegates a visible implementation thread in a PR-based GitHub repo. The user authorized implementation, commits, push, a ready PR, and review/CI fixes through merge-ready, but not merge. Describe the skill route in the brief after verification.",
+      "prompt": "Source simulation only; do not execute tools. HQ delegates a durable implementation task in a PR-based GitHub repo. The user authorized implementation, commits, push, a ready PR, and review/CI fixes through merge-ready, but not merge. Describe the skill route in the brief after verification.",
       "expected_output": "The task prompt begins with literal `/ossian-mode`. Completed work invokes commit-push-pr, which owns the handoff to one babysit drive. Babysit owns resolve-pr-feedback and CI follow-through. The chain stops at merge-ready without merging.",
       "files": [],
       "assertions": [
@@ -254,7 +255,7 @@
     {
       "id": 21,
       "name": "existing-pr-read-only-status",
-      "prompt": "Source simulation only; do not execute tools. HQ opens a visible workstream whose only job is to report the current status of an existing PR. No mutations are authorized. Write the route.",
+      "prompt": "Source simulation only; do not execute tools. HQ opens a durable execution task whose only job is to report the current status of an existing PR. No mutations are authorized. Write the route.",
       "expected_output": "Because this is read-only status work, the brief omits the `/ossian-mode` command and commit-push-pr, routes directly to babysit check mode with the full PR identity, and permits no fixes, replies, pushes, resolutions, or merge.",
       "files": [],
       "assertions": [
@@ -266,7 +267,7 @@
     {
       "id": 22,
       "name": "research-only-direct-brief",
-      "prompt": "Source simulation only; do not execute tools. HQ delegates a visible thread to compare two data-export formats and return a recommendation. It must not edit the repo, create tracker items, or deliver code. Write the route.",
+      "prompt": "Source simulation only; do not execute tools. HQ delegates a durable task to compare two data-export formats and return a recommendation. It must not edit the repo, create tracker items, or deliver code. Write the route.",
       "expected_output": "The research-only brief directly states the question, evidence, untracked choice, report artifact, and mutation stop. It omits the `/ossian-mode` command and commit-push-pr.",
       "files": [],
       "assertions": [
@@ -290,7 +291,7 @@
     {
       "id": 24,
       "name": "explicit-local-only-build",
-      "prompt": "Source simulation only; do not execute tools. The user explicitly asks a visible thread for a local proof-of-concept only, with no delivery and no tracker use. Code edits and local tests are authorized in /worktrees/poc on branch scratch/poc. Write the route.",
+      "prompt": "Source simulation only; do not execute tools. The user explicitly asks a durable task for a local proof-of-concept only, with no delivery and no tracker use. Code edits and local tests are authorized in /worktrees/poc on branch scratch/poc. Write the route.",
       "expected_output": "The explicit local-only exception omits the `/ossian-mode` command and commit-push-pr, records the exact worktree/branch and untracked choice, runs the local work and tests, then stops with the artifact path.",
       "files": [],
       "assertions": [
@@ -302,7 +303,7 @@
     {
       "id": 25,
       "name": "trunk-direct-authorized-delivery",
-      "prompt": "Source simulation only; do not execute tools. HQ delegates a normal visible implementation thread in a repository whose active instructions require direct commits on main and no PRs. The user authorized the scoped edit, test, commit, and push, but nothing else. Write the route.",
+      "prompt": "Source simulation only; do not execute tools. HQ delegates a normal durable implementation task in a repository whose active instructions require direct commits on main and no PRs. The user authorized the scoped edit, test, commit, and push, but nothing else. Write the route.",
       "expected_output": "The task prompt begins with literal `/ossian-mode`. After verification it invokes commit-push-pr under the trunk-direct rule, commits and pushes main, then stops. It creates no feature branch or PR and starts no babysit or resolver.",
       "files": [],
       "assertions": [
@@ -314,11 +315,11 @@
     {
       "id": 26,
       "name": "draft-pr-narrow-stop",
-      "prompt": "Source simulation only; do not execute tools. HQ delegates a visible build whose user-authorized delivery boundary is commit, push, and opening a draft PR for early feedback. Review fixes, ready status, babysit drive, and merge are not authorized. Write the route.",
+      "prompt": "Source simulation only; do not execute tools. HQ delegates a durable build whose user-authorized delivery boundary is commit, push, and opening a draft PR for early feedback. Review fixes, ready status, babysit drive, and merge are not authorized. Write the route.",
       "expected_output": "The task prompt begins with literal `/ossian-mode` and invokes commit-push-pr in draft mode after verification. It stops at the draft PR and does not start babysit or resolve-pr-feedback.",
       "files": [],
       "assertions": [
-        "The normal visible build has literal `/ossian-mode` as its first nonblank content line.",
+        "The normal durable build has literal `/ossian-mode` as its first nonblank content line.",
         "The exact delivery result is a draft PR and commit-push-pr is invoked with that narrow outcome.",
         "The brief stops at the draft and does not start babysit, resolve-pr-feedback, mark it ready, or merge."
       ]
@@ -326,11 +327,11 @@
     {
       "id": 27,
       "name": "initial-kickoff-cross-thread-return",
-      "prompt": "Source simulation only; do not execute tools. Codex HQ task `\ud83c\udfcb\ufe0f GainsLog` has thread id `hq-123`; it creates visible task `GainsLog \u00b7 csv export` with id `ws-456`. Cross-thread messaging accepts a destination thread id. Write the reporting part of the initial kickoff brief.",
+      "prompt": "Source simulation only; do not execute tools. Codex HQ task `🏋️ GainsLog` has thread id `hq-123`; it creates visible task `GainsLog · csv export` with id `ws-456`. Cross-thread messaging accepts a destination thread id. Write the reporting part of the initial kickoff brief.",
       "expected_output": "The brief identifies HQ by exact name and `hq-123`, records the cross-thread messaging channel, and tells the workstream to proactively send one structured report to that address when done, blocked/stuck, needing human input/decision, or reaching its authorized stop/delivery boundary. Routine chatter and unchanged blocker repeats are excluded.",
       "files": [],
       "assertions": [
-        "The initial kickoff contains exact HQ name `\ud83c\udfcb\ufe0f GainsLog` and address `hq-123`, not the child id or a placeholder.",
+        "The initial kickoff contains exact HQ name `🏋️ GainsLog` and address `hq-123`, not the child id or a placeholder.",
         "It requires proactive cross-thread reports for done, blocked/stuck, human decision/input, and authorized stop/delivery boundary.",
         "It requests no routine chatter and no duplicate unchanged blocker report."
       ]
@@ -338,11 +339,11 @@
     {
       "id": 28,
       "name": "later-assignment-repeats-return-contract",
-      "prompt": "Source simulation only; do not execute tools. HQ `\ud83d\uded2 Middagsro` at task id `hq-meals-9` sends an existing visible workstream `Middagsro \u00b7 custom items` a second assignment: finish authorized accessibility fixes. Cross-thread messaging is available. Show the assignment message requirements.",
+      "prompt": "Source simulation only; do not execute tools. HQ `🛒 Middagsro` at task id `hq-meals-9` sends an existing durable execution task `Middagsro · custom items` a second assignment: finish authorized accessibility fixes. Cross-thread messaging is available. Show the assignment message requirements.",
       "expected_output": "The later assignment repeats the exact HQ name/id, cross-thread channel, four proactive report triggers, structured report expectation, inherited action scope, and no-chatter rule. It does not assume the initial brief is still in context or create another task.",
       "files": [],
       "assertions": [
-        "The follow-up assignment itself repeats `\ud83d\uded2 Middagsro`, `hq-meals-9`, and the cross-thread messaging channel.",
+        "The follow-up assignment itself repeats `🛒 Middagsro`, `hq-meals-9`, and the cross-thread messaging channel.",
         "It repeats all four proactive report triggers even though this is not the initial kickoff.",
         "It preserves the assignment's action/stop scope, requests no routine chatter or unchanged blocker repeat, and does not create a new workstream."
       ]
@@ -350,13 +351,14 @@
     {
       "id": 29,
       "name": "no-cross-thread-final-message-fallback",
-      "prompt": "Source simulation only; do not execute tools. Claude Code HQ is named `\ud83d\udcda TopOfClass`. It can schedule heartbeat wakes and inspect the child artifact but has no cross-thread messaging target or sibling transcript API. HQ hands the user a follow-up assignment for existing task `TopOfClass \u00b7 review cards`. Describe the return contract.",
-      "expected_output": "The follow-up names exact HQ `\ud83d\udcda TopOfClass`, records `final workstream message` as the available return mechanism, and requires the structured report as the workstream's final message on any trigger so the heartbeat can read it. It does not require user-pasted routine updates.",
+      "prompt": "Source simulation only; do not execute tools. Claude Code HQ is named `📚 TopOfClass`. It can schedule heartbeat wakes and inspect an owner artifact but has no cross-task messaging target or sibling transcript API. The owner needs a follow-up assignment for `TopOfClass · review cards`. Describe HQ behavior.",
+      "expected_output": "HQ does not ask the user to carry the follow-up. It uses an available subagent or HQ-local continuation when safe; otherwise it records the exact missing communication capability as a blocker in HQ. Existing artifact checks and the active heartbeat remain in place.",
       "files": [],
       "assertions": [
-        "The follow-up uses exact HQ name and the available final-message addressing mechanism rather than inventing a thread id.",
-        "Done, blocked/stuck, human-input, and authorized-boundary reports must use the structured shape as the final workstream message.",
-        "HQ retains heartbeat artifact checks and does not request routine chatter or repeated unchanged blockers."
+        "The user is not handed a follow-up or asked to visit another task",
+        "HQ reuses a safe programmatic owner path rather than silently duplicating the inaccessible owner",
+        "If no safe path exists, the exact blocker remains in HQ with artifact monitoring",
+        "Routine chatter and unchanged blocker repeats remain suppressed"
       ]
     },
     {
@@ -405,6 +407,47 @@
         "PR #42 plus green CI is not accepted as behavioral proof required by the brief; the row remains open.",
         "HQ sends the same workstream back to gather the deployed-preview keyboard recording from an empty cart.",
         "HQ preserves the original proof bar and does not add tests, image diffs, or a new requirement."
+      ]
+    },
+    {
+      "id": 34,
+      "name": "task-dump-queue-and-capacity",
+      "prompt": "Source simulation only; do not execute tools. `/project-hq GainsLog` with five requests: fix a typo, investigate duplicate sync uploads, add CSV export, publish the next App Store build, and update the CSV request to exclude deleted sets. The sync investigation must finish before CSV implementation, release authority was not granted, and two isolated worktrees are available. Describe capture and dispatch.",
+      "expected_output": "HQ creates four stable items because the final CSV sentence refines the existing CSV outcome. It records dependencies and authority, performs the typo inline, starts the independent sync investigation, leaves CSV waiting on it, and blocks release at the missing authority boundary without making the user classify the dump.",
+      "files": [],
+      "assertions": [
+        "Creates four queue IDs and merges the deleted-set constraint into the CSV item rather than duplicating it",
+        "Records sync as a CSV dependency and does not dispatch CSV early",
+        "Performs the trivial typo inline and starts the independent sync owner within capacity",
+        "Records the release authority boundary without publishing or asking the user to organize the tasks",
+        "The user remains in HQ and no execution task is pinned"
+      ]
+    },
+    {
+      "id": 35,
+      "name": "daily-watchdog-bootstrap-idempotence",
+      "prompt": "Source simulation only; do not execute tools. Codex can inspect and update automations, list pinned tasks, and message tasks with a model override. HQ `🧰 Ossian Stack` at `hq-1` is pinned. A projectless daily automation `project-hq-daily-wake` already exists and registers another project. Describe bootstrap behavior.",
+      "expected_output": "HQ updates the one existing daily automation, preserving the other project and adding one unique Ossian Stack registry entry. It uses Luna/low, defaults to 08:00 local, intersects registered IDs with pinned tasks, and sends the compact reorientation prompt only to registered pinned HQs.",
+      "files": [],
+      "assertions": [
+        "Updates the existing project-hq-daily-wake instead of creating a duplicate",
+        "Preserves prior registry entries and adds hq-1 exactly once with host and ledger identity",
+        "Uses gpt-5.6-luna with low reasoning for the automation and follow-up when supported",
+        "Daily run identifies HQs from the registry plus pinned state, never title or emoji alone",
+        "The daily watchdog complements rather than replaces active-item heartbeat monitoring"
+      ]
+    },
+    {
+      "id": 36,
+      "name": "medium-term-memory-boundary",
+      "prompt": "Source simulation only; do not execute tools. A worker returns 40 lines of investigation notes, one confirmed decision that future imports must preserve aliases, current PR state, and a reusable lesson about the project's import contract. State what Project HQ stores.",
+      "expected_output": "HQ keeps current queue, owner, blocker, and PR links in the compact ledger; leaves detailed notes with the owner artifact; records the confirmed import decision in the canonical project docs within authority and links it; and creates no append-only working diary.",
+      "files": [],
+      "assertions": [
+        "Ledger stores compact current operational state and links rather than the 40-line report",
+        "Detailed evidence remains in the owner artifact",
+        "Confirmed reusable decision or lesson is promoted to canonical project documentation only within authority",
+        "No second memory file or append-only working log is created"
       ]
     }
   ]

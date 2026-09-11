@@ -142,7 +142,7 @@
     "online-writing": {
       "role": "both"
     },
-    "orchestrate-threads": {
+    "project-hq": {
       "role": "human"
     },
     "ossian-mode": {
@@ -268,7 +268,7 @@
     "onboarding-flow": [
       "copywriter"
     ],
-    "orchestrate-threads": [
+    "project-hq": [
       "babysit-pr",
       "codex-first",
       "commit-push-pr",
@@ -683,7 +683,7 @@
       }
     ],
     "sideDoors": [
-      "orchestrate-threads",
+      "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
       "resolving-merge-conflicts",
@@ -727,14 +727,14 @@
       "mannered-prose",
       "unslop"
     ],
-    "orchestrate-threads": [
+    "project-hq": [
       "ossian-mode"
     ],
     "ossian-mode": [
       "codex-multi-agent",
       "create-verification-skill",
       "mannered-prose",
-      "orchestrate-threads"
+      "project-hq"
     ],
     "prototype": [
       "create-verification-skill"

@@ -74,8 +74,8 @@ to implementation; its size alone does not require a planning detour.
 
 For a long or unattended run with several consequential decisions, use
 `show-me-your-work`. Do not add a decision log to routine work. Keep
-`orchestrate-threads` reserved for standing projects with multiple visible
-workstreams.
+`project-hq` reserved for standing projects with a durable task queue and
+multiple execution owners.
 
 Use the project's tracker and ticket conventions when the work calls for tracked
 delivery or the user requests tickets. Tracker availability and delegation alone
@@ -98,9 +98,9 @@ required, prepare the concrete, reviewable result first.
 ## Keep the roles distinct
 
 **setup-ossian-stack** configures the installation and project. **ossian-mode**
-handles this request. **orchestrate-threads** coordinates long-lived visible tasks
-when explicitly invoked; this skill creates no tasks automatically. Direct calls
-to any existing skill remain valid.
+handles this request. **project-hq** provides one persistent interface for a
+project queue and its execution owners when explicitly invoked; this skill
+creates no tasks automatically. Direct calls to any existing skill remain valid.
 
 Finish with the answer or artifact, the evidence that supports it, and any
 remaining limitation or decision. Choosing a route alone is not completion.

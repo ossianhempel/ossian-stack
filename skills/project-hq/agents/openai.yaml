@@ -1,0 +1,5 @@
+interface:
+  display_name: "Project HQ"
+  short_description: "Run one persistent HQ for a project's task queue"
+policy:
+  allow_implicit_invocation: false
