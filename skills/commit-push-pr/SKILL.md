@@ -1,16 +1,20 @@
 ---
 name: commit-push-pr
-description: "Commit, push, create or update PRs, and follow requested delivery to merge-ready. Honor commit-only, drafts, and explicit stop boundaries."
-argument-hint: "[optional: --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \"...\" | --work-items <id>]"
+description: "Commit and push completed work to the selected branch, or create, update, and drive a PR when explicitly requested or required by project policy. Honor commit-only, drafts, and explicit stop boundaries."
+argument-hint: "[optional: --push-only | --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \"...\" | --work-items <id>]"
 ---
 
 # Commit, Push, PR
 
-Take completed local work to a pull request, then continue to merge-ready through
-`babysit-pr` in `drive` mode. Invoking this skill with ship intent authorizes commit,
-push, PR creation, and that follow-through within the user's scope; it never
-authorizes merging. Preserve explicit stop-at-PR/no-babysit instructions and narrower
-modes. Handoff defines when to start or resume the drive.
+Deliver completed local work through the repository's selected path. Direct-branch
+delivery commits and pushes the checked-out branch without creating a branch,
+worktree, or pull request. PR delivery opens or updates a pull request, then
+continues to merge-ready through `babysit-pr` in `drive` mode. Invoking this skill
+with ship intent authorizes commit and push within the user's scope. It authorizes
+PR creation and follow-through only when the user requested a PR or the project's
+active branching policy requires one; it never authorizes merging. Preserve
+explicit stop boundaries and narrower modes. Handoff defines when to start or
+resume a PR drive.
 
 Resolve the forge from the explicit URL or selected project remote/configuration
 before PR calls. GitHub/GHE uses the gh examples below with the actual host. Azure
@@ -23,8 +27,14 @@ providers or assume Azure DevOps Server support.
 
 ## Modes
 
-- **Default**, commit complete local changes (if needed), push, open or update the
-  PR, then follow through to merge-ready (see Handoff).
+- **Default**, select the delivery path from the user's request and the project's
+  active branching policy. When neither requires a PR, commit complete local
+  changes (if needed) and push the checked-out branch. Do not create a branch,
+  worktree, or PR merely because this skill was invoked. When a PR was requested or
+  is required, open or update it and follow through to merge-ready (see Handoff).
+- `--push-only`, commit complete local changes (if needed) and push the checked-out
+  branch, then stop. A project rule that forbids direct pushes still applies; report
+  that conflict instead of bypassing it.
 - `--update`, refresh an existing PR's title/body for the current branch. Requires an
   open PR; if none, report and stop. Metadata only; no commit, push, or new babysit.
 - `--description-only` (add `--body-only` to print just the body), compose the title
@@ -61,8 +71,19 @@ git remote get-url origin
 ```
 
 Resolve the default branch from `git rev-parse --abbrev-ref origin/HEAD` (strip the
-`origin/` prefix, fall back to `main`). For any mode that touches the forge, check for
-an open PR on the current branch (GitHub command below; Azure uses its reference):
+`origin/` prefix, fall back to `main`). Select the delivery path before forge calls:
+
+- Choose PR delivery when the user explicitly requests a PR, a PR-specific mode is
+  used, or the project's active branching rule requires changes to land through a
+  PR.
+- Otherwise choose direct-branch delivery. An explicitly named branch selects that
+  branch; otherwise use the checked-out branch. `main`, `develop`, release branches,
+  and other existing branches are valid direct targets when project policy permits.
+- A skill name, prior habit, forge availability, or absence of a project rule does
+  not imply PR intent.
+
+Only for PR delivery, resolve the forge and check for an open PR on the current
+branch (GitHub command below; Azure uses its reference):
 
 ```bash
 gh pr list --head "$(git branch --show-current)" --state open --json number,title,state,isDraft,baseRefName
@@ -73,13 +94,21 @@ other `gh` failure as a blocking error, not as NO_OPEN_PR. In `--description-onl
 stay read-only: no branch switch, no fetch that mutates, no PR calls unless a PR
 URL/id was supplied.
 
-## Step 2: Branch safety
+## Step 2: Delivery path and branch safety
 
-**First read the project's own branching rule**, the project's active instructions
-already in your context, else recent branch names. Two shapes:
+**First read the project's own branching rule** from the project's active
+instructions already in your context, then apply the selected path:
 
-- **Default branch protected, everything lands via PR** (the common shape). Create a
-  feature branch off a freshly fetched origin default:
+- **Direct branch.** Stay on the checked-out branch and use it as the push target.
+  If the user explicitly named a different branch, verify that it is checked out or
+  ask before moving completed work. Do not create a branch or worktree. Verify that
+  the branch is the intended work and that its upstream, when configured, matches
+  the selected remote branch. Then continue to Steps 3-4 and stop. If project policy
+  forbids direct pushes to that branch, report the policy conflict; do not silently
+  convert the request into a PR.
+
+- **PR required or requested.** When the checked-out branch is the protected base,
+  create a feature branch off a freshly fetched origin default:
 
   ```bash
   git fetch --no-tags origin <default>
@@ -93,20 +122,16 @@ already in your context, else recent branch names. Two shapes:
   pop conflicts rather than auto-resolving. If the fetch failed, branch from local HEAD
   and say base freshness was not verified.
 
-- **Trunk-direct project** (commits land on the default branch directly). Skip branch
-  creation and the PR: commit and push per Steps 3-4, then stop and report. Do not
-  open a PR against a repo that does not use them.
-
 - **Detached HEAD**, explain a branch is required and ask; never commit detached.
 
 Branch naming follows the project's convention; otherwise `feature/<slug>` from the
 change content.
 
-**Branch/task alignment before pushing.** If the branch already exists on origin or has
-an open PR, verify it belongs to this work (branch slug, recent commits, PR title vs
-the current task). If it does not, stop and ask, pushing into an unrelated or
-someone else's PR is the one unrecoverable mistake here. In autonomous closeout, do
-not push into an unverified existing PR at all.
+**Branch/task alignment before pushing.** Verify that the selected branch belongs to
+this work from its name, upstream, and recent commits. For PR delivery, also compare
+the PR title. If they do not align, stop and ask; pushing into an unrelated shared
+branch or someone else's PR is the one unrecoverable mistake here. In autonomous
+closeout, do not push into an unverified existing PR at all.
 
 In `--branch-only` mode, stop here and report the branch state.
 
@@ -147,7 +172,9 @@ force-push a shared branch. If the remote moved, follow the enclosing action sco
 a babysit helper reports the needed rebase to its owner and returns; outside that
 restriction, fetch and rebase rather than force.
 
-## Step 5: Compose the title and body
+## Step 5: Compose the title and body for PR delivery
+
+Skip Steps 5-6 entirely for direct-branch delivery.
 
 **You MUST read `references/pr-description.md`** (in this skill's directory) in full,
 its core principle governs the writing: the diff is already visible; the description
@@ -197,9 +224,11 @@ expanding.
 Never merge (`gh pr merge`, `glab mr merge`, Azure `--auto-complete`) and never arm
 auto-merge, landing is the user's call.
 
-**Report:** the PR URL, target branch, the commits included, what stayed unstaged and
-why, and whether the PR is draft or ready. In `--update` mode report the title/body
-changes applied; in `--pr-only` note that uncommitted changes were left alone.
+**Report:** for direct-branch delivery, report the pushed branch, commits included,
+and what stayed unstaged and why. For PR delivery, report the PR URL, target branch,
+the commits included, what stayed unstaged and why, and whether the PR is draft or
+ready. In `--update` mode report the title/body changes applied; in `--pr-only` note
+that uncommitted changes were left alone.
 
 ## Handoff
 
@@ -215,9 +244,9 @@ changes applied; in `--pr-only` note that uncommitted changes were left alone.
 - **An existing drive owns the work:** return the PR URL, changed head, and outcome
   to that owner and resume its watcher. Never recursively start a second babysitter,
   including after a follow-up PR or a narrow helper call.
-- **No drive requested by this call:** explicit stop-at-PR/no-babysit, drafts, and
-  standalone narrow modes end at their requested result. Do not mark a draft ready
-  to trigger follow-through. Trunk-direct projects end after commit/push.
+- **No PR delivery:** direct-branch deliveries end after the verified push. Explicit
+  stop-at-PR/no-babysit, drafts, and standalone narrow modes end at their requested
+  result. Do not mark a draft ready to trigger follow-through.
 - On a forge unsupported by `babysit-pr`, report the delivered PR and unverified
   follow-through limitation; never claim merge-ready from creation alone.
 - The work has not had a review pass this session and the push is about to happen →

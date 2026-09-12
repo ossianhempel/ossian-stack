@@ -199,7 +199,7 @@
    },
    {
     "id": "build",
-    "title": "Build, review, ship a PR",
+    "title": "Build, review, ship changes",
     "outcome": "change + real-surface proof",
     "tag": "Agent workflow",
     "steps": [
@@ -233,7 +233,7 @@
      },
      {
       "id": "commit-push-pr",
-      "writes": "GitHub / Azure PR"
+      "writes": "branch or PR"
      },
      {
       "id": "babysit-pr",
@@ -724,10 +724,10 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Commit Push PR",
-   "description": "Commit, push, create or update PRs, and follow requested delivery to merge-ready. Honor commit-only, drafts, and explicit stop boundaries.",
+   "description": "Commit and push completed work to the selected branch, or create, update, and drive a PR when explicitly requested or required by project policy. Honor commit-only, drafts, and explicit stop boundaries.",
    "role": "both",
    "humanOnly": false,
-   "argumentHint": "[optional: --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \\\"...\\\" | --work-items <id>]",
+   "argumentHint": "[optional: --push-only | --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \\\"...\\\" | --work-items <id>]",
    "origin": "derived",
    "repo": null,
    "calls": [

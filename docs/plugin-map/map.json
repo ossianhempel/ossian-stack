@@ -440,7 +440,7 @@
       },
       {
         "id": "build",
-        "title": "Build, review, ship a PR",
+        "title": "Build, review, ship changes",
         "outcome": "change + real-surface proof",
         "tag": "Agent workflow",
         "steps": [
@@ -474,7 +474,7 @@
           },
           {
             "id": "commit-push-pr",
-            "writes": "GitHub / Azure PR"
+            "writes": "branch or PR"
           },
           {
             "id": "babysit-pr",

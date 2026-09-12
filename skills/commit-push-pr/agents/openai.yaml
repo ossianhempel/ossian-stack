@@ -1,3 +1,3 @@
 interface:
   display_name: "Commit Push PR"
-  short_description: "Commit and drive GitHub or Azure PRs to merge-ready"
+  short_description: "Push branches directly or drive PRs to merge-ready"

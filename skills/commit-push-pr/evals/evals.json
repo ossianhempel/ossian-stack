@@ -1,0 +1,53 @@
+{
+  "skill_name": "commit-push-pr",
+  "evals": [
+    {
+      "id": 1,
+      "name": "direct-main-push",
+      "prompt": "Use commit-push-pr to ship the completed changes. I am already on main and this repository permits direct pushes. I did not ask for a PR. Describe the actions without executing tools.",
+      "expected_output": "Review and commit only the completed intended changes, then push main directly. Do not create or switch branches, create a worktree, query or create a PR, compose a PR description, or invoke babysit-pr.",
+      "files": [],
+      "assertions": [
+        "Keeps the checked-out main branch and pushes it directly after the normal status, diff, review, and commit steps",
+        "Does not create a branch, worktree, or PR and does not invoke babysit-pr",
+        "Reports the pushed branch, included commits, and any intentionally unstaged files"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "direct-develop-push",
+      "prompt": "The fix is finished on develop. Commit and push it with commit-push-pr. Project instructions allow pushes to develop. Do not open a PR. Describe the actions without executing tools.",
+      "expected_output": "Keep develop checked out, review and commit the completed fix, and push develop to its matching upstream. Respect the explicit no-PR boundary and create no branch or worktree.",
+      "files": [],
+      "assertions": [
+        "Treats develop as the selected direct delivery branch and verifies its matching upstream",
+        "Creates no branch, worktree, PR, PR description, or babysit run",
+        "Preserves unrelated or incomplete changes instead of staging them"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "project-policy-requires-pr",
+      "prompt": "Use commit-push-pr to ship this change. I am on main, and the active repository instructions say all changes must land through pull requests. Describe the actions without executing tools.",
+      "expected_output": "Follow the repository's required PR path: establish a safe feature branch, commit and push the intended work, create or update the PR, and hand a completed ready PR to babysit-pr without merging it.",
+      "files": [],
+      "assertions": [
+        "Treats the active project PR requirement as selecting PR delivery despite starting on main",
+        "Uses a feature branch and PR flow rather than pushing main directly",
+        "Does not merge or arm auto-merge"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "explicit-pr-request",
+      "prompt": "Commit these completed changes and open a PR to develop, then get it merge-ready. Describe the commit-push-pr flow without executing tools.",
+      "expected_output": "Select PR delivery from the explicit request, preserve develop as the requested base, commit and push a task-aligned branch, create or update the PR, and invoke one babysit-pr drive without merging.",
+      "files": [],
+      "assertions": [
+        "Selects PR delivery because the user explicitly requested it",
+        "Targets develop and preserves an existing PR base unless the user requested retargeting",
+        "Invokes one merge-ready follow-through and never merges"
+      ]
+    }
+  ]
+}
