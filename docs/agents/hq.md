@@ -44,9 +44,11 @@ None.
 | Q-002 | coordination workflows | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/c705a55f78ea94837fc589a8c043ac69c06aaeeb) | 2026-09-05: routing, heartbeat monitoring, and proactive HQ reporting delivered. | `Ossian Stack · ossian-mode`, archived |
 | Q-003 | ossian-mode | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/7bbeb08447c2e2d03c7579a61ae978df475019b3) | 2026-09-04: Copilot HQ isolation reviewed and source scenarios passed. | `Ossian Stack · ossian-mode`, archived |
 | Q-004 | commit-push-pr | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/7c6a900) | 2026-09-12: direct branch delivery added; full checks and structured review passed; pushed to `main` without a PR. | `🧰 Ossian Stack`, inline |
+| Q-005 | commit-push-pr | [Published commit](https://github.com/ossianhempel/ossian-stack/commit/d8690e4) | 2026-09-12: direct delivery narrowed to `main`/`develop`; verified merged allocations route to targeted cleanup; broad cleanup requires explicit intent. Full checks and structured review passed. | `🧰 Ossian Stack`, inline |
 
 ## Inline actions
 
+- 2026-09-12: Refocused `git-cleanup` on one exact merged allocation, retained the repository-wide sweep behind explicit intent, and added branch/worktree deletion race protections.
 - 2026-09-12: Updated `commit-push-pr` so ship intent defaults to the selected existing branch; branch, worktree, and PR creation now require explicit PR intent or active project policy.
 - 2026-09-11: Migrated the skill and this ledger from orchestrate-threads to Project HQ; added the durable queue, sole-interface contract, duplicate-dispatch recovery, and registered daily Luna watchdog.
 - 2026-09-05: Reused ossian-mode to make proactive report-back instructions part of every execution-owner assignment, not only initial priming.
