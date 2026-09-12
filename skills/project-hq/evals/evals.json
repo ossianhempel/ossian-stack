@@ -427,12 +427,13 @@
       "id": 35,
       "name": "daily-watchdog-bootstrap-idempotence",
       "prompt": "Source simulation only; do not execute tools. Codex can inspect and update automations, list pinned tasks, and message tasks with a model override. HQ `🧰 Ossian Stack` at `hq-1` is pinned. A projectless daily automation `project-hq-daily-wake` already exists and registers another project. Describe bootstrap behavior.",
-      "expected_output": "HQ updates the one existing daily automation, preserving the other project and adding one unique Ossian Stack registry entry. It uses Luna/low, defaults to 08:00 local, intersects registered IDs with pinned tasks, and sends the compact reorientation prompt only to registered pinned HQs.",
+      "expected_output": "HQ updates the one existing daily automation, preserving the other project and adding one unique Ossian Stack registry entry. It uses Luna/low, defaults to 08:00 local, calls list_threads once with limit 1 because pinnedThreads is complete regardless of that non-pinned limit, intersects registered IDs with pinned tasks, and sends the compact reorientation prompt only to registered pinned HQs.",
       "files": [],
       "assertions": [
         "Updates the existing project-hq-daily-wake instead of creating a duplicate",
         "Preserves prior registry entries and adds hq-1 exactly once with host and ledger identity",
         "Uses gpt-5.6-luna with low reasoning for the automation and follow-up when supported",
+        "Calls list_threads at most once with limit 1; a returned error or cancellation stops the run before follow-ups",
         "Daily run identifies HQs from the registry plus pinned state, never title or emoji alone",
         "The daily watchdog complements rather than replaces active-item heartbeat monitoring"
       ]
@@ -533,6 +534,19 @@
         "Inventories ignored paths rather than trusting ordinary Git-clean status.",
         "Does not infer that the environment file or database is disposable.",
         "Preserves the task, worktree, and branch and records cleanup-blocked."
+      ]
+    },
+    {
+      "id": 44,
+      "name": "daily-watchdog-listing-failure-stops-once",
+      "prompt": "Source simulation only; execute no tools. The Project HQ daily watchdog calls the Codex task listing once with limit 1 and the call returns a cancellation error. Describe the run behavior, and state what happens instead if a tool call never returns control.",
+      "expected_output": "The watchdog does not retry during the same run, sends no HQ follow-ups because pinned membership was not verified, and reports the returned cancellation without claiming any HQ woke. If a call remains pending indefinitely, the watchdog cannot report from inside that call and relies on the host run timeout to mark the run failed.",
+      "files": [],
+      "assertions": [
+        "Uses limit 1 because pinnedThreads is complete independently of the non-pinned result limit.",
+        "Does not retry the canceled task listing in the same run.",
+        "Sends no messages and reports the returned listing failure without claiming success.",
+        "Does not claim it can recover or report after an indefinitely pending call; assigns that case to the host timeout."
       ]
     }
   ]

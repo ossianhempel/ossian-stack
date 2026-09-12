@@ -30,7 +30,12 @@ project or address twice. If the runtime cannot schedule or message tasks, recor
 
 Each daily run:
 
-1. Read the current pinned-task inventory.
+1. Read the current pinned-task inventory with one task-list call. In Codex, use
+   `list_threads` with `limit: 1`: the limit applies only to non-pinned results,
+   while `pinnedThreads` still contains every pinned task. Make no second listing
+   call in the same run. If the call returns an error or cancellation, report it
+   and stop. An indefinitely pending call has no model-level recovery path; the
+   host run timeout owns that failure.
 2. Intersect it with the registered HQ addresses. Never infer HQ identity from an
    emoji or title alone.
 3. Send one compact follow-up to every registered HQ that remains pinned, using a
