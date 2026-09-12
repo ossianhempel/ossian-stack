@@ -1,0 +1,124 @@
+{
+  "skill_name": "git-cleanup",
+  "evals": [
+    {
+      "id": 1,
+      "name": "targeted-merged-worktree",
+      "prompt": "Source simulation only; execute no tools. Clean the local allocation for merged PR #42: branch feature/export at abc123, target main, auxiliary worktree /worktrees/export. The PR head, branch tip, and clean worktree HEAD all match abc123; ignored files are verified disposable build output.",
+      "expected_output": "Inspect only the exact allocation, independently verify merge and current identities, remove /worktrees/export through git worktree remove from the primary repository, compare-delete local feature/export at abc123, preserve the remote branch, and verify both removals.",
+      "files": [],
+      "assertions": [
+        "Targets only feature/export and /worktrees/export rather than inventorying or deleting other allocations",
+        "Requires merged PR proof, matching PR head, branch tip, worktree branch and HEAD, clean state, and reviewed ignored files",
+        "Uses registered worktree removal and expected-old-value local ref deletion",
+        "Preserves the remote branch because no remote deletion was authorized"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "merge-ready-is-too-early",
+      "prompt": "Source simulation only; execute no tools. PR #51 from feature/paywall to develop is merge-ready but still open. Its auxiliary worktree is clean. Run targeted git-cleanup.",
+      "expected_output": "Remove nothing because merge-ready is not merged. Report cleanup pending with the exact PR state and preserve the worktree, local branch, and remote branch.",
+      "files": [],
+      "assertions": [
+        "Does not treat merge-ready or green CI as merged proof",
+        "Preserves the exact branch and worktree and reports cleanup pending"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "protected-branches",
+      "prompt": "Source simulation only; execute no tools. The user asks to delete local main, develop, and trunk after old PRs merged. origin/HEAD resolves to trunk.",
+      "expected_output": "Refuse all three deletions. Literal main and develop are permanent, and trunk is protected as the configured default branch.",
+      "files": [],
+      "assertions": [
+        "Never removes main or develop",
+        "Never removes trunk because it is the configured default branch",
+        "Does not let explicit naming or merged history override protected-branch rules"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "primary-checkout-switch",
+      "prompt": "Source simulation only; execute no tools. Merged PR #63 used feature/settings in the primary checkout and targeted main. The checkout is clean, feature/settings still equals the verified PR head, and main exists. Describe targeted cleanup.",
+      "expected_output": "Switch the clean primary checkout to verified target main, re-read feature/settings, compare-delete it only at the expected PR head, preserve the remote branch, and verify the result.",
+      "files": [],
+      "assertions": [
+        "Switches the primary checkout only because it is clean and the verified target is main",
+        "Rechecks branch identity and uses expected-old-value deletion",
+        "Preserves main and the remote feature branch"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "broad-mode-requires-explicit-request",
+      "prompt": "Source simulation only; execute no tools. Invoke git-cleanup with no branch, worktree, PR, --all, or request to clean the repository.",
+      "expected_output": "Request the missing target and perform no repository-wide inventory or deletion.",
+      "files": [],
+      "assertions": [
+        "Does not infer permission for a broad branch or worktree sweep from a bare invocation",
+        "Deletes nothing and asks for the exact target or an explicit whole-repository request"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "explicit-all-retains-global-audit",
+      "prompt": "Source simulation only; execute no tools. Run git-cleanup --all --dry-run in a repository with several merged and unmerged branches and worktrees.",
+      "expected_output": "Inventory the whole repository, refresh remote refs when possible, classify safe, review-first, and protected candidates, and report the plan without deletion.",
+      "files": [],
+      "assertions": [
+        "Uses repository-wide inventory because --all was explicit",
+        "Separates safe candidates from dirty, unique, current, shared, and protected allocations",
+        "Deletes nothing because --dry-run was supplied"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "non-origin-remote-and-hierarchical-default",
+      "prompt": "Source simulation only; execute no tools. Targeted cleanup concerns branch feature/api delivered to remote upstream, whose HEAD points to upstream/release/stable. The branch was not delivered to origin. Describe verification and protection.",
+      "expected_output": "Use the recorded upstream remote for fetch and ancestry or PR verification, preserve the full release/stable default-branch name, and refuse evidence from origin as a substitute. Never delete release/stable.",
+      "files": [],
+      "assertions": [
+        "Fetches and verifies against the recorded upstream remote rather than hard-coded origin",
+        "Strips only the exact upstream/ prefix and preserves release/stable as the configured default branch",
+        "Does not delete from evidence belonging to a different remote"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "primary-ignored-path-collision",
+      "prompt": "Source simulation only; execute no tools. A merged feature branch is checked out in a clean primary checkout, but ignored dev.sqlite would be tracked by target main. Describe cleanup.",
+      "expected_output": "Block the switch and all cleanup until dev.sqlite is preserved or explicitly disposed. A clean tracked and untracked status is insufficient because switching to main could overwrite the ignored file.",
+      "files": [],
+      "assertions": [
+        "Inventories ignored paths in the primary checkout before switching",
+        "Detects the collision between ignored dev.sqlite and a tracked target path",
+        "Preserves the checkout, branch, and file while disposition is unresolved"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "advanced-remote-branch-preserved",
+      "prompt": "Source simulation only; execute no tools. Remote deletion of feature/api was explicitly authorized after its PR merged at abc123, but the current remote feature/api tip is def456. Describe cleanup.",
+      "expected_output": "Preserve the remote branch because it advanced beyond the verified PR head. A conditional expected-tip deletion must fail or be skipped; the merged state of the old PR does not authorize deleting def456.",
+      "files": [],
+      "assertions": [
+        "Reads the current remote source tip immediately before deletion",
+        "Requires the remote tip to equal the verified delivered head",
+        "Uses an expected-tip lease and preserves a concurrently advanced branch"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "live-default-and-fresh-target",
+      "prompt": "Source simulation only; execute no tools. Cached upstream/HEAD says main, but a live upstream HEAD query says refs/heads/release/stable. A custom fetch refspec leaves upstream/release/stable stale while a targeted fetch writes the current target to FETCH_HEAD. Describe cleanup verification.",
+      "expected_output": "Protect release/stable from the live remote HEAD result and use only the FETCH_HEAD produced by the exact target fetch for ancestry proof. Do not trust either cached remote-tracking ref.",
+      "files": [],
+      "assertions": [
+        "Queries the live recorded remote HEAD and preserves the complete release/stable branch name",
+        "Does not trust cached upstream/HEAD for default-branch protection",
+        "Verifies ancestry against the FETCH_HEAD written by the exact target fetch rather than a stale remote-tracking ref"
+      ]
+    }
+  ]
+}

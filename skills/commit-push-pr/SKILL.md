@@ -1,20 +1,20 @@
 ---
 name: commit-push-pr
-description: "Commit and push completed work to the selected branch, or create, update, and drive a PR when explicitly requested or required by project policy. Honor commit-only, drafts, and explicit stop boundaries."
+description: "Commit and push completed work directly on main or develop, or create, update, and drive a PR for other branches or when project policy requires it. Route verified merged branches and worktrees to targeted cleanup."
 argument-hint: "[optional: --push-only | --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \"...\" | --work-items <id>]"
 ---
 
 # Commit, Push, PR
 
 Deliver completed local work through the repository's selected path. Direct-branch
-delivery commits and pushes the checked-out branch without creating a branch,
-worktree, or pull request. PR delivery opens or updates a pull request, then
+delivery commits and pushes a checked-out `main` or `develop` without creating a
+branch, worktree, or pull request. PR delivery opens or updates a pull request, then
 continues to merge-ready through `babysit-pr` in `drive` mode. Invoking this skill
 with ship intent authorizes commit and push within the user's scope. It authorizes
 PR creation and follow-through only when the user requested a PR or the project's
-active branching policy requires one; it never authorizes merging. Preserve
-explicit stop boundaries and narrower modes. Handoff defines when to start or
-resume a PR drive.
+active branching policy or branch selection requires one; it never authorizes
+merging. Preserve explicit stop boundaries and narrower modes. Handoff defines when
+to start or resume a PR drive.
 
 Resolve the forge from the explicit URL or selected project remote/configuration
 before PR calls. GitHub/GHE uses the gh examples below with the actual host. Azure
@@ -28,10 +28,11 @@ providers or assume Azure DevOps Server support.
 ## Modes
 
 - **Default**, select the delivery path from the user's request and the project's
-  active branching policy. When neither requires a PR, commit complete local
-  changes (if needed) and push the checked-out branch. Do not create a branch,
-  worktree, or PR merely because this skill was invoked. When a PR was requested or
-  is required, open or update it and follow through to merge-ready (see Handoff).
+  active branching policy. On a checked-out `main` or `develop`, commit complete
+  local changes (if needed) and push that branch when policy permits. On every
+  other branch, use PR delivery unless the user explicitly requests a direct push.
+  When a PR was requested or is required, open or update it and follow through to
+  merge-ready (see Handoff).
 - `--push-only`, commit complete local changes (if needed) and push the checked-out
   branch, then stop. A project rule that forbids direct pushes still applies; report
   that conflict instead of bypassing it.
@@ -73,14 +74,15 @@ git remote get-url origin
 Resolve the default branch from `git rev-parse --abbrev-ref origin/HEAD` (strip the
 `origin/` prefix, fall back to `main`). Select the delivery path before forge calls:
 
-- Choose PR delivery when the user explicitly requests a PR, a PR-specific mode is
-  used, or the project's active branching rule requires changes to land through a
-  PR.
-- Otherwise choose direct-branch delivery. An explicitly named branch selects that
-  branch; otherwise use the checked-out branch. `main`, `develop`, release branches,
-  and other existing branches are valid direct targets when project policy permits.
+- Choose direct-branch delivery by default only when the checked-out branch is
+  exactly `main` or `develop` and project policy permits direct pushes.
+- Choose PR delivery for every other branch, when the user explicitly requests a
+  PR, when a PR-specific mode is used, or when the project's active branching rule
+  requires changes to land through a PR.
+- An explicit `--push-only`, "push this branch without a PR", or equivalent request
+  selects direct delivery for another branch when project policy permits it.
 - A skill name, prior habit, forge availability, or absence of a project rule does
-  not imply PR intent.
+  not override this branch routing.
 
 Only for PR delivery, resolve the forge and check for an open PR on the current
 branch (GitHub command below; Azure uses its reference):
@@ -100,12 +102,14 @@ URL/id was supplied.
 instructions already in your context, then apply the selected path:
 
 - **Direct branch.** Stay on the checked-out branch and use it as the push target.
-  If the user explicitly named a different branch, verify that it is checked out or
-  ask before moving completed work. Do not create a branch or worktree. Verify that
-  the branch is the intended work and that its upstream, when configured, matches
-  the selected remote branch. Then continue to Steps 3-4 and stop. If project policy
-  forbids direct pushes to that branch, report the policy conflict; do not silently
-  convert the request into a PR.
+  The default path is available only for exact `main` or `develop`; another branch
+  needs explicit direct-push intent. If the user explicitly named a different
+  branch, verify that it is checked out or ask before moving completed work. Do not
+  create a branch or worktree. Verify that the branch is the intended work and that
+  its upstream, when configured, matches the selected remote branch. Then continue
+  to Steps 3-4 and stop. If project policy forbids direct pushes to that branch,
+  report the policy conflict; do not silently convert an explicit no-PR request
+  into a PR.
 
 - **PR required or requested.** When the checked-out branch is the protected base,
   create a feature branch off a freshly fetched origin default:
@@ -251,4 +255,26 @@ that uncommitted changes were left alone.
   follow-through limitation; never claim merge-ready from creation alone.
 - The work has not had a review pass this session and the push is about to happen →
   suggest `autoreview` before Step 4, not after.
-- After a merge, branch cleanup is `git-cleanup`.
+- After a merge, use the targeted post-merge cleanup below.
+
+## Targeted post-merge cleanup
+
+PR creation and merge-ready status are too early for cleanup. Before handing off a
+PR, retain the exact repository, PR URL or stable ID, target branch, PR head commit,
+local source branch, and auxiliary worktree path when one exists. Report cleanup as
+pending when the flow stops at merge-ready. Do not poll indefinitely to wait for a
+human merge.
+
+When this workflow, its HQ, or a later invocation observes the PR as merged, verify
+the merge and refresh those exact identities. Then invoke `git-cleanup` for that one
+branch and worktree. Never pass a repository-wide cleanup request from this flow.
+The cleanup call may remove only the recorded local branch and recorded auxiliary
+worktree. It never removes `main`, `develop`, or the repository's configured default
+branch, and it does not delete the remote branch without separate explicit
+authorization.
+
+If the feature branch is checked out in the primary checkout, targeted cleanup may
+switch to the verified PR target only when the checkout is clean and that target is
+`main` or `develop`. A dirty checkout, missing merge proof, identity mismatch, moved
+branch, unexpected target, or unverified worktree keeps cleanup pending with the
+exact blocker.

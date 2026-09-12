@@ -48,6 +48,42 @@
         "Targets develop and preserves an existing PR base unless the user requested retargeting",
         "Invokes one merge-ready follow-through and never merges"
       ]
+    },
+    {
+      "id": 5,
+      "name": "feature-branch-defaults-to-pr",
+      "prompt": "Use commit-push-pr to ship the finished work. I am on feature/export and did not specify a delivery mode. Project policy does not say. Describe the actions without executing tools.",
+      "expected_output": "Use the existing feature/export branch for PR delivery, commit and push it, create or update its PR, and drive it to merge-ready. Do not create a second branch or push it as a completed direct-branch delivery.",
+      "files": [],
+      "assertions": [
+        "Selects PR delivery because feature/export is neither main nor develop",
+        "Reuses the task-aligned existing feature branch rather than creating another branch or worktree",
+        "Records targeted cleanup as pending at merge-ready and does not delete before verified merge"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "explicit-feature-direct-push",
+      "prompt": "Use commit-push-pr to commit and push feature/export directly. Do not create a PR. Project policy permits this. Describe the actions without executing tools.",
+      "expected_output": "Respect the explicit direct-push override, keep feature/export checked out, commit the intended work, and push it without creating a branch, worktree, or PR. Do not run post-merge cleanup because no merge was verified.",
+      "files": [],
+      "assertions": [
+        "Uses direct delivery on feature/export only because the user explicitly requested it",
+        "Creates no branch, worktree, PR, PR description, or babysit run",
+        "Does not delete the branch or invoke post-merge cleanup without merge proof"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "verified-merge-routes-targeted-cleanup",
+      "prompt": "A commit-push-pr flow recorded feature/export, auxiliary worktree /tmp/export, PR #42 targeting main, and head abc123. The flow now verifies that PR #42 merged with that head. Describe closeout without executing tools.",
+      "expected_output": "Invoke git-cleanup in targeted mode with the exact repository, feature/export branch, /tmp/export worktree, main target, PR #42, and abc123 head. Remove nothing until git-cleanup independently verifies the current identities, clean state, ignored-file disposition, and merge.",
+      "files": [],
+      "assertions": [
+        "Routes only the recorded feature/export allocation to git-cleanup after verified merge",
+        "Does not request or perform a repository-wide cleanup",
+        "Preserves main, develop, the configured default branch, remote branch, dirty work, and identity mismatches"
+      ]
     }
   ]
 }
