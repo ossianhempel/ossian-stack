@@ -48,11 +48,13 @@ explicit-only deeper references; the rules here do not depend on invoking them.
   PRs so each state is independently understandable and verifiable under the
   project's branching conventions.
 
-If the project has a `verify-*` skill or equivalent control harness, use it for
-every user-facing feature this change touched. If it has none, use the strongest
-real surface available and report the reusable verification gap. Offer the user
-`/create-verification-skill` once; do not generate it implicitly or make accepting the offer
-a condition of finishing work that can already be verified.
+**Use the project's verification skill.** When the project ships a verification
+skill (`verify-*`) or equivalent control harness, load and run it for every
+user-facing feature this change touched; that run is the required behavioral
+proof, and it comes ahead of any weaker surface. When it has none, say so plainly,
+fall back to the strongest real surface available, and offer
+`/create-verification-skill` once, so the next change can be proven rather than
+asserted. Creating it is a suggestion, not a gate.
 
 Before delivery, complete this behavioral proof as well as the relevant focused
 checks and `autoreview`. In the final response, name the artifact exercised, the
