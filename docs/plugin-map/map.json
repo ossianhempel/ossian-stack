@@ -193,9 +193,6 @@
     "resolve-pr-feedback": {
       "role": "both"
     },
-    "resolving-merge-conflicts": {
-      "role": "both"
-    },
     "revenuecat-api": {
       "role": "human"
     },
@@ -687,7 +684,6 @@
       "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
-      "resolving-merge-conflicts",
       "codex-first",
       "codex-multi-agent",
       "bro",

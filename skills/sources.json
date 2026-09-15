@@ -435,16 +435,6 @@
       "upstreamRev": "0e758b60b35cec165470443fde5acf60db8bdae9",
       "upstreamCheckedAt": "2026-08-30"
     },
-    "resolving-merge-conflicts": {
-      "origin": "adapted",
-      "repo": "https://github.com/mattpocock/skills",
-      "path": "skills/engineering/resolving-merge-conflicts",
-      "refresh": "npx skills add mattpocock/skills -y --skill resolving-merge-conflicts && echo 'Hand-merge the upstream scratch copy .agents/skills/resolving-merge-conflicts/ with skills/resolving-merge-conflicts/; preserve local adaptations and reference routing, then: trash .agents/skills/resolving-merge-conflicts'",
-      "notes": "Vendored verbatim 2026-08-29, including agents/openai.yaml (Codex display metadata only). Part of migrating off the installed mattpocock-skills plugin: vendor the wanted skills here, then uninstall the plugin. Local audit (2026-09-05): unrelated-change protection and decision boundaries. Preserve on refresh.",
-      "upstreamPath": "skills/engineering/resolving-merge-conflicts",
-      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
-      "upstreamCheckedAt": "2026-08-29"
-    },
     "revenuecat-api": {
       "origin": "companion",
       "repo": "https://github.com/RevenueCat/docs",
