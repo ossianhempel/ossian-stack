@@ -33,6 +33,26 @@ if [ -z "$OWNER" ] || [ -z "$REPO" ]; then
     exit 1
 fi
 
+# Matching the comment needs jq or Python 3. jq ships with macOS 15+, but
+# Windows and many Linux images only have Python, so fall back to it. Resolve
+# the tool before any network call so a machine with neither fails fast.
+json_tool=
+if command -v jq >/dev/null 2>&1; then
+    json_tool=jq
+else
+    for candidate in python3 python; do
+        if "$candidate" -c 'import sys; sys.exit(sys.version_info < (3, 7))' >/dev/null 2>&1; then
+            json_tool=$candidate
+            break
+        fi
+    done
+fi
+
+if [ -z "$json_tool" ]; then
+    echo "Error: get-thread-for-comment needs jq or Python 3.7+ to match the comment to its thread, and neither is installed." >&2
+    exit 1
+fi
+
 # Pagination (issue #798): paginate the reviewThreads connection so PRs with
 # more than one page of threads can still resolve a comment to its parent
 # thread. Per-thread comments are still capped at 100 -- threads exceeding
@@ -71,6 +91,38 @@ query Threads($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
     }
   }
 }' > "$tmp_threads"
+
+if [ "$json_tool" != jq ]; then
+    # Python mirror of the jq program below -- change the two together.
+    "$json_tool" - "$tmp_threads" "$COMMENT_NODE_ID" <<'PY'
+import json
+import re
+import sys
+
+pages_path, comment_id = sys.argv[1:3]
+with open(pages_path, encoding="utf-8") as f:
+    pages = json.load(f)
+
+threads = [
+    thread
+    for page in pages
+    for thread in page["data"]["repository"]["pullRequest"]["reviewThreads"]["nodes"]
+    if any(comment.get("id") == comment_id for comment in thread["comments"]["nodes"])
+]
+if not threads:
+    sys.exit(f"No thread found for comment {comment_id}")
+
+match = re.search(r"discussion_r([0-9]+)", threads[0]["comments"]["nodes"][0]["url"])
+if not match:
+    sys.exit(f"No discussion_r comment ID in the root comment URL of thread {threads[0]['id']}")
+
+# Bodies carry emoji and non-Latin text that a Windows console codec rejects.
+sys.stdout.reconfigure(encoding="utf-8")
+json.dump({**threads[0], "root_comment_id": int(match.group(1))}, sys.stdout, indent=2, ensure_ascii=False)
+print()
+PY
+    exit
+fi
 
 jq -e -n --slurpfile pages "$tmp_threads" --arg cid "$COMMENT_NODE_ID" '
   [$pages[0][].data.repository.pullRequest.reviewThreads.nodes[]

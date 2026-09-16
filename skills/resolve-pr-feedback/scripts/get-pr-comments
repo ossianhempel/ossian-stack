@@ -29,6 +29,26 @@ if [ -z "$OWNER" ] || [ -z "$REPO" ]; then
     exit 1
 fi
 
+# Merging the responses needs jq or Python 3. jq ships with macOS 15+, but
+# Windows and many Linux images only have Python, so fall back to it. Resolve
+# the tool before any network call so a machine with neither fails fast.
+json_tool=
+if command -v jq >/dev/null 2>&1; then
+    json_tool=jq
+else
+    for candidate in python3 python; do
+        if "$candidate" -c 'import sys; sys.exit(sys.version_info < (3, 7))' >/dev/null 2>&1; then
+            json_tool=$candidate
+            break
+        fi
+    done
+fi
+
+if [ -z "$json_tool" ]; then
+    echo "Error: get-pr-comments needs jq or Python 3.7+ to merge the GitHub responses, and neither is installed." >&2
+    exit 1
+fi
+
 # Output is a JSON object with these keys:
 #   pending_review   - node ID of the viewer's own unsubmitted (PENDING) review
 #                      on this PR, or null. Replies posted while one exists get
@@ -146,6 +166,72 @@ query Reviews($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
 # was addressed. Resolution state is the only authoritative signal; outdated
 # threads are still surfaced (with their isOutdated flag intact) so the
 # resolver can factor in that the referenced line may have moved.
+if [ "$json_tool" != jq ]; then
+    # Python mirror of the jq program below -- change the two together.
+    "$json_tool" - "$tmp_threads" "$tmp_comments" "$tmp_reviews" <<'PY'
+import json
+import re
+import sys
+
+
+def load(path):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def dig(value, *path):
+    for key in path:
+        if value is None:
+            return None
+        value = value.get(key) if isinstance(value, dict) else value[key]
+    return value
+
+
+def nodes(pages, connection):
+    return [n for page in pages for n in dig(page, "data", "repository", "pullRequest", connection, "nodes")]
+
+
+def has_body(node):
+    return re.fullmatch(r"\s*", node.get("body") or "") is None
+
+
+thread_pages, comment_pages, review_pages = (load(path) for path in sys.argv[1:4])
+viewer = dig(review_pages, 0, "data", "viewer", "login")
+reviews = nodes(review_pages, "reviews")
+
+review_threads = []
+for thread in nodes(thread_pages, "reviewThreads"):
+    if thread.get("isResolved") is not False:
+        continue
+    # jq's capture() emits nothing without a match, which drops the thread.
+    match = re.search(r"discussion_r([0-9]+)", thread["comments"]["nodes"][0]["url"])
+    if match:
+        review_threads.append({"node": thread, "root_comment_id": int(match.group(1))})
+
+result = {
+    "pending_review": next(
+        (
+            review["id"]
+            for review in reviews
+            if review.get("state") == "PENDING" and viewer in (None, dig(review, "author", "login"))
+        ),
+        None,
+    ),
+    "review_threads": review_threads,
+    "pr_comments": [c for c in nodes(comment_pages, "comments") if has_body(c)],
+    "review_bodies": [r for r in reviews if has_body(r)],
+    "pr_author": dig(thread_pages, 0, "data", "repository", "pullRequest", "author", "login"),
+    "viewer": viewer,
+}
+
+# Bodies carry emoji and non-Latin text that a Windows console codec rejects.
+sys.stdout.reconfigure(encoding="utf-8")
+json.dump(result, sys.stdout, indent=2, ensure_ascii=False)
+print()
+PY
+    exit
+fi
+
 jq -n \
   --slurpfile threads "$tmp_threads" \
   --slurpfile comments "$tmp_comments" \

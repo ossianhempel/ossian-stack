@@ -216,10 +216,9 @@ If the second command prints a review ID, fetch that review and require a state 
 GH_HOST=<derived-host> GH_REPO=OWNER/REPO gh api repos/{owner}/{repo}/pulls/PR_NUMBER/reviews/REVIEW_ID --jq .state
 ```
 
-3. **Re-fetch pending-review state after posting.** This closes the race after the initial fetch and detects a draft created during the reply loop:
+3. **Re-fetch pending-review state after posting.** This closes the race after the initial fetch and detects a draft created during the reply loop. Query the reviews directly, as targeted mode does: `gh`'s built-in `--jq` needs no `jq` install, and `--paginate` is required because the endpoint pages at 30 in chronological order:
 ```bash
-SKILL_DIR="<absolute path of the directory containing the resolve-pr-feedback SKILL.md>";
-GH_HOST=<derived-host> bash "$SKILL_DIR/scripts/get-pr-comments" PR_NUMBER OWNER/REPO | jq -r '.pending_review // empty'
+GH_HOST=<derived-host> gh api --paginate repos/OWNER/REPO/pulls/PR_NUMBER/reviews --jq '.[] | select(.state == "PENDING") | .id'
 ```
 If this prints an ID, stop without resolving any thread from this reply pass. Report the pending review, but do not submit or discard it.
 
