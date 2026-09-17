@@ -25,8 +25,6 @@ the current work.
   the evidence and the requested outcome require.
 - For parallel work, use same-task candidates only when selection and synthesis
   matter. Partition coverage across disjoint slices. Isolate every writing worker.
-  In a Codex session, `codex-multi-agent` is the default shape for fanning work
-  out.
 
 ## Verification
 
@@ -74,9 +72,7 @@ to implementation; its size alone does not require a planning detour.
 | Refactoring | `refactoring` for structural changes with behavior preserved; `simplify-code` for readability in place. |
 | Delivery | Use `blast-radius` before delivery when safety depends on behavior beyond the diff. Use `commit-push-pr` for requested commits, pushes, and PRs; `babysit-pr` for an existing PR's readiness work; `release-ios-app` for an authorized iOS release. |
 
-For a long or unattended run with several consequential decisions, use
-`show-me-your-work`. Do not add a decision log to routine work. Keep
-`project-hq` reserved for standing projects with a durable task queue and
+Keep `project-hq` reserved for standing projects with a durable task queue and
 multiple execution owners.
 
 Use the project's tracker and ticket conventions when the work calls for tracked

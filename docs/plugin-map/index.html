@@ -355,6 +355,10 @@
      {
       "id": "teach",
       "optional": true
+     },
+     {
+      "id": "show-me",
+      "optional": true
      }
     ],
     "extras": []
@@ -446,14 +450,11 @@
    "project-hq",
    "setup-ossian-stack",
    "git-cleanup",
-   "codex-first",
-   "codex-multi-agent",
    "bro",
    "codify-conventions",
    "maintain-verification-skill",
    "skill-creator",
-   "skill-cleaner",
-   "show-me-your-work"
+   "skill-cleaner"
   ],
   "knowledge": {
    "title": "Principles",
@@ -661,42 +662,6 @@
    ],
    "routedBy": []
   },
-  "codex-first": {
-   "id": "codex-first",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Codex First",
-   "description": "Route implementation work to Codex CLI; Claude specs, reviews, verifies.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/steipete/agent-scripts",
-   "calls": [],
-   "routes": [],
-   "calledBy": [
-    "project-hq"
-   ],
-   "routedBy": []
-  },
-  "codex-multi-agent": {
-   "id": "codex-multi-agent",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Codex Multi-Agent",
-   "description": "Coordinate parallel Codex subagents while staying responsive to the user: read-only scouts for exploration, owned workers for the implementation, an advisor for what gets stuck. Use when a task is large enough to fan out, needs several areas explored at once, or the user asks to delegate, parallelize, or spawn agents.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "local",
-   "repo": null,
-   "calls": [],
-   "routes": [],
-   "calledBy": [],
-   "routedBy": [
-    "ossian-mode"
-   ]
-  },
   "codify-conventions": {
    "id": "codify-conventions",
    "type": "skill",
@@ -734,6 +699,7 @@
     "babysit-pr",
     "blast-radius",
     "git-cleanup",
+    "show-me",
     "unslop"
    ],
    "routes": [],
@@ -1019,9 +985,7 @@
    "argumentHint": "What will the next session be used for?",
    "origin": "vendored",
    "repo": "https://github.com/mattpocock/skills",
-   "calls": [
-    "show-me-your-work"
-   ],
+   "calls": [],
    "routes": [],
    "calledBy": [
     "project-hq"
@@ -1039,7 +1003,9 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
-   "calls": [],
+   "calls": [
+    "show-me"
+   ],
    "routes": [
     "why"
    ],
@@ -1220,13 +1186,11 @@
     "refactoring",
     "release-ios-app",
     "setup-ossian-stack",
-    "show-me-your-work",
     "simplify-code",
     "visual-parity",
     "why"
    ],
    "routes": [
-    "codex-multi-agent",
     "create-verification-skill",
     "mannered-prose",
     "project-hq"
@@ -1250,8 +1214,7 @@
    "calls": [
     "how",
     "principle-prove-it-works",
-    "principle-sequence-verifiable-units",
-    "show-me-your-work"
+    "principle-sequence-verifiable-units"
    ],
    "routes": [],
    "calledBy": [
@@ -1459,15 +1422,13 @@
    "repo": null,
    "calls": [
     "babysit-pr",
-    "codex-first",
     "commit-push-pr",
     "diagnosing-bugs",
     "grilling",
     "git-cleanup",
     "handoff",
     "prototype",
-    "setup-ossian-stack",
-    "show-me-your-work"
+    "setup-ossian-stack"
    ],
    "routes": [
     "ossian-mode"
@@ -1621,24 +1582,23 @@
    ],
    "routedBy": []
   },
-  "show-me-your-work": {
-   "id": "show-me-your-work",
+  "show-me": {
+   "id": "show-me",
    "type": "skill",
    "plugin": "ossian-stack",
-   "display": "Show Me Your Work",
-   "description": "Keep and audit a compact evidence-linked decision trail for long-running or unattended work.",
+   "display": "Show Me",
+   "description": "Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/cursor/plugins",
+   "origin": "vendored",
+   "repo": "https://github.com/humanlayer/skills",
    "calls": [],
    "routes": [],
    "calledBy": [
-    "handoff",
-    "ossian-mode",
-    "performance",
-    "project-hq"
+    "commit-push-pr",
+    "how",
+    "teach"
    ],
    "routedBy": []
   },
@@ -1714,6 +1674,7 @@
    "repo": "https://github.com/cursor/plugins",
    "calls": [
     "how",
+    "show-me",
     "why"
    ],
    "routes": [],
@@ -1807,7 +1768,7 @@
   }
  },
  "counts": {
-  "skills": 63,
+  "skills": 61,
   "agents": 0,
   "plugins": 1
  }

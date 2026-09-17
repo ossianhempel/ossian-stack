@@ -63,9 +63,7 @@ HQ continues without waiting for the user while useful authorized work remains:
    when the queue is empty, every ready item is blocked, or the next action needs
    human input or authority.
 
-For an unattended workstream with several consequential decisions, its brief may
-reference `show-me-your-work`; the workstream owns that trail and the ledger links
-it. Use `handoff` only when an owner must pause or move sessions.
+Use `handoff` only when an owner must pause or move sessions.
 
 ## Daily recovery watchdog
 

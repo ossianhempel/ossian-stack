@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-09",
+  "updated": "2026-09-16",
   "description": "Upstream map for skills/, the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -87,20 +87,6 @@
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
-    },
-    "codex-first": {
-      "origin": "adapted",
-      "repo": "https://github.com/steipete/agent-scripts",
-      "path": "skills/codex-first",
-      "refresh": "npx skills add steipete/agent-scripts -y --skill codex-first && echo 'Hand-merge the upstream scratch copy .agents/skills/codex-first/ with skills/codex-first/; preserve local adaptations and reference routing, then: trash .agents/skills/codex-first'",
-      "upstreamPath": "skills/codex-first",
-      "upstreamRev": "034471e2ce1c72f5884890befa8afc2b2a961c2f",
-      "upstreamCheckedAt": "2026-08-27",
-      "notes": "Local audit (2026-09-05): portable routing rationale and dead-link removal. Preserve on refresh. Local model pin (2026-09-09): delegation runs -m gpt-5.6-sol at model_reasoning_effort=medium on both exec and resume, set explicitly rather than inherited from ~/.codex/config.toml so config drift cannot change what delegation means. Preserve on refresh."
-    },
-    "codex-multi-agent": {
-      "origin": "local",
-      "notes": "Authored 2026-09-09. Codex-only counterpart to codex-first: codex-first routes work from Claude to Codex, this governs how a Codex session fans work out to its own subagents. The standing-instructions paragraph is Ossian's, from a Readwise highlight on giving a coordinator standing instructions. Local additions: workers on gpt-5.6-sol, scouts pinned to gpt-5.6-luna at max effort (verified in ~/.codex/models_cache.json as a supported level for that model), and the fork_turns override rule - Codex accepts model/reasoning_effort only when fork_turns is \"none\" or a positive integer string, and silently ignores overrides on a full-history fork. Adds gpt-6-astra as an Advisor role at medium effort - consulted when a worker stalls, never assigned an area - which is the resolution of the open Sol-uses-Astra-as-advisor idea. The advisor spawns with a positive-integer fork_turns because it needs the stuck context but \"all\" would silently drop the Astra override."
     },
     "codify-conventions": {
       "origin": "local",
@@ -361,7 +347,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/principle-prove-it-works",
       "refresh": "npx skills add cursor/plugins -y --skill principle-prove-it-works && echo 'Hand-merge the upstream scratch copy .agents/skills/principle-prove-it-works/ with skills/principle-prove-it-works/; preserve local adaptations and reference routing, then: trash .agents/skills/principle-prove-it-works'",
-      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Verify against the real artifact, never a proxy or a delegate's self-report. Cited by the refactoring skill's pin and equivalence steps. Note: mentions a show-me-your-work skill this plugin does not ship, a single parenthetical, not a route, left verbatim to keep the copy refreshable. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh. Local audit (2026-09-05): dead-link removal. Preserve on refresh.",
+      "notes": "From Cursor's pstack plugin, SKILL.md verbatim. Verify against the real artifact, never a proxy or a delegate's self-report. Cited by the refactoring skill's pin and equivalence steps. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh. Local audit (2026-09-05): dead-link removal. Preserve on refresh.",
       "upstreamPath": "pstack/skills/principle-prove-it-works",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
@@ -444,15 +430,16 @@
       "origin": "local",
       "notes": "Authored 2026-08-30, modelled on mattpocock's setup-matt-pocock-skills (explore, present, confirm, then write) and cursor's setup-pstack. Neither was vendored. This is post-install configuration: it verifies the invoking runtime first, migrates superseded plugins and hand-maintained skill symlinks, covers the hook-approval gate, checks per-project configuration, and classifies dependencies by real execution path (global, project-local, package runner, MCP, or bundled fallback) instead of bare-command presence. Tracker-only requests stay scoped to project tracker configuration; missing trackers are optional for general setup unless tracked delivery is chosen. Concise tracker reporting policy: meaningful events only, no unchanged blocker/HQ mirroring, minimal ownership and cross-runtime recovery records. Applied to all five tracker templates; project copies require a scoped merge preserving customizations. Existing Jira adoption starts with discovery: compare repository conventions with live project metadata, preserve the host scheme and recipes, and record each differing concept in issue-tracker.md. New shared Jira vocabulary or configuration requires explicit authorization. 2026-09-09: triage/to-spec/to-tickets/wayfinder were removed from the plugin, so the pickup loop, ticket brief, triage-label mapping, and jira-mapping overrides were deleted with them; what remains is plain tracker configuration plus the handoff-comment policy. Local audit (2026-09-05): focused description; task-specific reference routing. Preserve on refresh."
     },
-    "show-me-your-work": {
-      "origin": "adapted",
-      "repo": "https://github.com/cursor/plugins",
-      "path": "pstack/skills/show-me-your-work",
-      "notes": "Cross-runtime adaptation of pstack show-me-your-work. Keeps the compact append-only evidence-linked TSV and optional independent audit while removing Cursor transcript-path and mandatory cross-model assumptions. Intended only for consequential long or unattended work.",
-      "upstreamPath": "pstack/skills/show-me-your-work",
-      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
-      "upstreamCheckedAt": "2026-09-06",
-      "lastSynced": "2026-09-06"
+    "show-me": {
+      "origin": "vendored",
+      "repo": "https://github.com/humanlayer/skills",
+      "path": "plugins/show-me/skills/show-me",
+      "refresh": "npx skills add humanlayer/skills -y --skill show-me && cp -R .agents/skills/show-me/* skills/show-me/ && trash .agents/skills/show-me",
+      "upstreamPath": "plugins/show-me/skills/show-me",
+      "upstreamRev": "6ab9013a10c28f5046f7f999549cd5328a0b30d7",
+      "upstreamCheckedAt": "2026-09-16",
+      "lastSynced": "2026-09-16",
+      "notes": "humanlayer's show-me, SKILL.md verbatim. A visual presentation lens: pick the smallest view (pseudocode, call tree, component tree, file tree, mermaid, diff-shaped sketch, or one focused HTML file) that makes the current topic clear. It presents, it does not investigate, and it routes nowhere. Called in by how, teach, and commit-push-pr; for PR bodies only the text-native views apply, since a description renders mermaid and markdown but not an inline HTML file. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
     },
     "simplify-code": {
       "origin": "derived",
@@ -478,7 +465,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/teach",
       "refresh": "npx skills add cursor/plugins -y --skill teach && echo 'Hand-merge the upstream scratch copy .agents/skills/teach/ with skills/teach/; preserve local adaptations and reference routing, then: trash .agents/skills/teach'",
-      "notes": "From Cursor's pstack plugin. Replaced the prior mattpocock/skills `teach` (a stateful multi-session learning workspace) on 2026-08-28. Delegates to `how` and `why` and writes through `unslop`, keep all three vendored together. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh. Local audit (2026-09-05): proportional how/why use. Preserve on refresh.",
+      "notes": "From Cursor's pstack plugin. Replaced the prior mattpocock/skills `teach` (a stateful multi-session learning workspace) on 2026-08-28. Delegates to `how` and `why` and writes through `unslop`, keep all three vendored together. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh. Local audit (2026-09-05): proportional how/why use. Local adaptation (2026-09-16): view choice defers to `show-me`, and the medium enumeration plus the image-generation instruction are dropped (no host image tool, not portable); the build-up sequencing rule stays. Merge by hand on refresh; preserve on refresh.",
       "upstreamPath": "pstack/skills/teach",
       "upstreamRev": "8f008c41981dca484d5beaf688d3aa2ea4ecf89b",
       "upstreamCheckedAt": "2026-08-28",

@@ -29,7 +29,8 @@ gaps are explicit. Reference the files and symbols that let the reader verify it
 ## Explain, then critique when requested
 
 Lead with the behavior and develop the flow, concepts, ownership, and gotchas that
-matter to this question. Omit sections that add no value. The explanation should
+matter to this question. Use `show-me` when a view carries the flow faster than
+prose. Omit sections that add no value. The explanation should
 stand alone, without forcing a critique on a user who only asked how it works.
 
 For requested architectural critique, understand the architecture first, then use

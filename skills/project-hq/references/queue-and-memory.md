@@ -51,7 +51,6 @@ Use three layers:
   change future work.
 
 Do not append a general working log. It duplicates the sources above, grows
-without bound, and becomes a competing truth. Link a consequential
-`show-me-your-work` trail when one is warranted. Promote a reusable lesson only
+without bound, and becomes a competing truth. Promote a reusable lesson only
 after it is confirmed and within the user's authorization to edit its durable
 destination.

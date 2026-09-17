@@ -20,7 +20,7 @@ resume document in the operating system's temporary directory.
 Record the goal and finish condition, inherited authority and boundaries,
 branch/worktree and Git state, completed work and evidence, current blockers,
 open decisions, key artifacts, the first executable next step, and suggested
-skills. Link a `show-me-your-work` trail when present rather than duplicating it.
+skills.
 
 ## Resume
 

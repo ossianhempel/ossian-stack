@@ -64,12 +64,6 @@
     "clerk-cli": {
       "role": "both"
     },
-    "codex-first": {
-      "role": "both"
-    },
-    "codex-multi-agent": {
-      "role": "both"
-    },
     "codify-conventions": {
       "role": "both"
     },
@@ -199,7 +193,7 @@
     "setup-ossian-stack": {
       "role": "human"
     },
-    "show-me-your-work": {
+    "show-me": {
       "role": "both"
     },
     "simplify-code": {
@@ -247,6 +241,7 @@
       "babysit-pr",
       "blast-radius",
       "git-cleanup",
+      "show-me",
       "unslop"
     ],
     "copywriter": [
@@ -262,20 +257,21 @@
     "gplay-cli": [
       "one-password"
     ],
+    "how": [
+      "show-me"
+    ],
     "onboarding-flow": [
       "copywriter"
     ],
     "project-hq": [
       "babysit-pr",
-      "codex-first",
       "commit-push-pr",
       "diagnosing-bugs",
       "grilling",
       "git-cleanup",
       "handoff",
       "prototype",
-      "setup-ossian-stack",
-      "show-me-your-work"
+      "setup-ossian-stack"
     ],
     "ossian-mode": [
       "architect",
@@ -298,7 +294,6 @@
       "refactoring",
       "release-ios-app",
       "setup-ossian-stack",
-      "show-me-your-work",
       "simplify-code",
       "visual-parity",
       "why"
@@ -344,6 +339,7 @@
     ],
     "teach": [
       "how",
+      "show-me",
       "why"
     ],
     "app-store-optimization": [
@@ -375,17 +371,13 @@
     "performance": [
       "how",
       "principle-prove-it-works",
-      "principle-sequence-verifiable-units",
-      "show-me-your-work"
+      "principle-sequence-verifiable-units"
     ],
     "visual-parity": [
       "create-verification-skill"
     ],
     "grill-design": [
       "visual-parity"
-    ],
-    "handoff": [
-      "show-me-your-work"
     ],
     "autoreview": [
       "blast-radius"
@@ -593,6 +585,10 @@
           {
             "id": "teach",
             "optional": true
+          },
+          {
+            "id": "show-me",
+            "optional": true
           }
         ],
         "extras": []
@@ -684,14 +680,11 @@
       "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
-      "codex-first",
-      "codex-multi-agent",
       "bro",
       "codify-conventions",
       "maintain-verification-skill",
       "skill-creator",
-      "skill-cleaner",
-      "show-me-your-work"
+      "skill-cleaner"
     ],
     "knowledge": {
       "title": "Principles",
@@ -728,7 +721,6 @@
       "ossian-mode"
     ],
     "ossian-mode": [
-      "codex-multi-agent",
       "create-verification-skill",
       "mannered-prose",
       "project-hq"

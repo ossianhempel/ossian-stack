@@ -78,8 +78,8 @@ Name real symbols and paths, not abstractions.
 
 Do not use `## Summary` or `## Test plan` boilerplate. On small PRs the value-led
 opening is the whole body; no orphaned paragraph above a first heading. A visual
-(mermaid diagram or markdown table) only when it conveys the change faster than prose;
-prose is authoritative when they conflict.
+(mermaid diagram or markdown table), picked with `show-me`'s views, only when it
+conveys the change faster than prose; prose is authoritative when they conflict.
 
 ## Title
 

@@ -42,7 +42,7 @@ baseline. Run one hypothesis per iteration:
 4. Keep a change only when the metric moves beyond noise and behavior holds.
 5. Revert non-wins completely.
 
-Use `show-me-your-work` for a long or unattended run. One accepted change per
+One accepted change per
 commit when commits are authorized. Never loosen the target to declare success.
 
 Candidate strategies come from the trace: eliminate unused work, reduce input,
