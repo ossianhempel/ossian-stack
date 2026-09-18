@@ -9,7 +9,7 @@ Create, revise, and evaluate skills for the intended tasks and runtimes.
 
 When a completed task or retrospective proposes a workflow lesson, require
 evidence that it recurs across tasks and belongs in a reusable procedure. Route a
-repository convention to `codify-conventions`; encode a mechanical invariant in
+repository convention down where something checks it; encode a mechanical invariant in
 tooling; discard one-off facts instead of growing a skill around them.
 
 Start at the user's current stage: clarify missing intent, draft, revise, or

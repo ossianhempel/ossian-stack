@@ -64,9 +64,6 @@
     "clerk-cli": {
       "role": "both"
     },
-    "codify-conventions": {
-      "role": "both"
-    },
     "commit-push-pr": {
       "role": "both"
     },
@@ -187,6 +184,9 @@
     "resolve-pr-feedback": {
       "role": "both"
     },
+    "retro": {
+      "role": "human"
+    },
     "revenuecat-api": {
       "role": "human"
     },
@@ -231,10 +231,6 @@
     "babysit-pr": [
       "commit-push-pr",
       "resolve-pr-feedback"
-    ],
-    "codify-conventions": [
-      "grilling",
-      "skill-creator"
     ],
     "commit-push-pr": [
       "autoreview",
@@ -334,7 +330,6 @@
     ],
     "skill-creator": [
       "clerk-cli",
-      "codify-conventions",
       "ios-marketing-capture"
     ],
     "teach": [
@@ -681,7 +676,7 @@
       "setup-ossian-stack",
       "git-cleanup",
       "bro",
-      "codify-conventions",
+      "retro",
       "maintain-verification-skill",
       "skill-creator",
       "skill-cleaner"

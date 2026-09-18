@@ -451,7 +451,7 @@
    "setup-ossian-stack",
    "git-cleanup",
    "bro",
-   "codify-conventions",
+   "retro",
    "maintain-verification-skill",
    "skill-creator",
    "skill-cleaner"
@@ -656,27 +656,6 @@
    "origin": "adapted",
    "repo": "https://github.com/clerk/skills",
    "calls": [],
-   "routes": [],
-   "calledBy": [
-    "skill-creator"
-   ],
-   "routedBy": []
-  },
-  "codify-conventions": {
-   "id": "codify-conventions",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Codify Conventions",
-   "description": "Audit or define repository conventions and connect approved rules to linters, hooks, or review guidance.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "local",
-   "repo": null,
-   "calls": [
-    "grilling",
-    "skill-creator"
-   ],
    "routes": [],
    "calledBy": [
     "skill-creator"
@@ -966,7 +945,6 @@
    "calls": [],
    "routes": [],
    "calledBy": [
-    "codify-conventions",
     "grill-me",
     "grill-with-docs",
     "ossian-mode",
@@ -1534,6 +1512,22 @@
    ],
    "routedBy": []
   },
+  "retro": {
+   "id": "retro",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Retro",
+   "description": "Run a retrospective on a coding session: find where the environment slowed the agent down and propose fixes ordered by severity. Explicit invocation only.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
   "revenuecat-api": {
    "id": "revenuecat-api",
    "type": "skill",
@@ -1652,13 +1646,10 @@
    "repo": "https://github.com/anthropics/skills",
    "calls": [
     "clerk-cli",
-    "codify-conventions",
     "ios-marketing-capture"
    ],
    "routes": [],
-   "calledBy": [
-    "codify-conventions"
-   ],
+   "calledBy": [],
    "routedBy": []
   },
   "teach": {

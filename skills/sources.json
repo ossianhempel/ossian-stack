@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-16",
+  "updated": "2026-09-18",
   "description": "Upstream map for skills/, the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -87,10 +87,6 @@
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
-    },
-    "codify-conventions": {
-      "origin": "local",
-      "notes": "Authored 2026-08-31 via the skill-creator eval loop (iteration-1: with-skill 100% vs baseline 73.3%). Two modes, audit de-facto conventions or grill for declared ones, converging on a lazily-created CONVENTIONS.md with enforced-by-tooling and judgment-call rule classes; wires enforcement itself (no dependency on setup-pre-commit). Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description. Preserve on refresh."
     },
     "commit-push-pr": {
       "origin": "derived",
@@ -186,7 +182,7 @@
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/grill-me",
       "refresh": "npx skills add mattpocock/skills -y --skill grill-me && echo 'Hand-merge the upstream scratch copy .agents/skills/grill-me/ with skills/grill-me/; preserve local adaptations and reference routing, then: trash .agents/skills/grill-me'",
-      "notes": "Thin user-invoke router over the grilling body skill (2026-09-03: reverted the earlier body-merge into grill-me; the split matches upstream and makes grilling a real shipped sibling for triage, codify-conventions, and grill-design). Pairs with ce-brainstorm / ce-plan. Local audit (2026-09-05): host-neutral skill loading. Preserve on refresh.",
+      "notes": "Thin user-invoke router over the grilling body skill (2026-09-03: reverted the earlier body-merge into grill-me; the split matches upstream and makes grilling a real shipped sibling for triage, retro, and grill-design). Pairs with ce-brainstorm / ce-plan. Local audit (2026-09-05): host-neutral skill loading. Preserve on refresh.",
       "upstreamPath": "skills/productivity/grill-me",
       "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
       "upstreamCheckedAt": "2026-09-03"
@@ -420,6 +416,17 @@
       "upstreamPath": "skills/ce-resolve-pr-feedback",
       "upstreamRev": "0e758b60b35cec165470443fde5acf60db8bdae9",
       "upstreamCheckedAt": "2026-08-30"
+    },
+    "retro": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/in-progress/retro",
+      "refresh": "npx skills add mattpocock/skills -y --skill retro && echo 'Hand-merge the upstream scratch copy .agents/skills/retro/ with skills/retro/; keep this copy faithful to upstream and preserve the local description, then: trash .agents/skills/retro'",
+      "notes": "Faithful adaptation of mattpocock/skills skills/in-progress/retro (2026-09-18). Replaces codify-conventions, which was dropped rather than folded in. Kept: the seven improvement categories, the implementation-vs-review doctrine, and the mechanical-vs-judgement classification for coding-standards findings. Local changes are minimal: upstream's writing-for-agents call (a skill this plugin does not ship) is dropped, and the description states the task. Merge by hand on refresh; never overwrite. Upstream lives under skills/in-progress/, so upstreamPath may move; re-check it on refresh.",
+      "upstreamPath": "skills/in-progress/retro",
+      "upstreamRev": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "upstreamCheckedAt": "2026-09-18",
+      "lastSynced": "2026-09-18"
     },
     "revenuecat-api": {
       "origin": "companion",
