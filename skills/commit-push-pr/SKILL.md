@@ -183,9 +183,9 @@ Skip Steps 5-6 entirely for direct-branch delivery.
 **You MUST read `references/pr-description.md`** (in this skill's directory) in full,
 its core principle governs the writing: the diff is already visible; the description
 explains what the diff cannot show. Size the description to the change, use the
-`## Why` / `## Scope` / `## Tradeoffs` / `## Blast Radius` / `## Verification` section
-order, dropping empty sections; small PRs are a single value-led sentence with no
-headers.
+`## Why` / `## Scope` / `## Change outline` (when the shape is the story) / `## Tradeoffs`
+  / `## Blast Radius` / `## Verification` section order, dropping empty sections; small
+  PRs are a single value-led sentence with no headers.
 
 Title: `type(scope): summary` per the reference, matching the project's conventions.
 State how each check was run and its outcome; label anything you could not verify as
