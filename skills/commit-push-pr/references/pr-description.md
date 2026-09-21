@@ -58,9 +58,11 @@ not more content.
 | Data / model / migration change | Add a verification line: what was validated against real data (row-count parity, key uniqueness, null rates, before/after parity, tests green). For migrations and backfills also state risk and rollback. |
 | Performance improvement | Include before/after measurements as a markdown table. |
 
-For small + simple PRs, the value-led sentence is the entire description. For any change
-where the implementation shape is the story (schema/contract, key types, module or
-component boundaries, call/control/data flow), add a `## Change outline` (below).
+For small + simple PRs, the value-led sentence is the entire description. For medium and
+large PRs, and any change whose implementation shape is the story (schema/contract, key
+types, module or component boundaries, call/control/data flow), the `## Change outline`
+below is expected, not optional: a reviewer should see the shape, not reconstruct it from
+the diff.
 
 ## The body sections
 
@@ -71,12 +73,15 @@ Name real symbols and paths, not abstractions.
   lives; lead with what is now possible or fixed.
 - `## Scope`, facts from the diff. Name both sides of a rename or retarget. State
   what is in and out when the boundary matters.
-- `## Change outline`, optional, when the implementation shape is the story: schema or
-  contract changes, key data structures or types, module or component boundaries,
-  call-tree, control-flow, or data-flow. A compact structural view built from `show-me`,
-  preferring a `diff` block for a changed shape and a complete block for a mostly-new
-  one. Show only the views that help a reviewer; omit categories that did not change.
-  Skip it for small or prose-clear changes.
+- `## Change outline`, expected for medium/large PRs and any change whose shape is the
+  story: schema or contract changes, key data structures or types, module or component
+  boundaries, call-tree, control-flow, or data-flow. Load the `show-me` skill and pick the
+  smallest view that shows the shape; prefer a `diff` block for a changed shape and a
+  complete block for a mostly-new one. Include at least one concrete fenced block (diff,
+  code, tree, or table) — a one-line description of the shape is not the outline. Omit
+  categories that did not change. Mermaid renders on GitHub but not in an Azure DevOps PR
+  body, so use diff, code, tree, or table blocks on Azure. Skip only for small or
+  prose-clear changes.
 - `## Tradeoffs`, real choices only. Skip when there are none.
 - `## Blast Radius`, who and what the change touches, and why it is safe or risky.
   If the default branch is red without the fix, name the continuing cost.
@@ -85,9 +90,9 @@ Name real symbols and paths, not abstractions.
   verified; label results you could not check.
 
 Do not use `## Summary` or `## Test plan` boilerplate. On small PRs the value-led
-opening is the whole body; no orphaned paragraph above a first heading. Prose is
-authoritative; a view appears only when it conveys the change faster, and the
-`## Change outline` is the structured form of that.
+opening is the whole body; no orphaned paragraph above a first heading. When a view and
+prose disagree, prose is authoritative — but the `## Change outline` is expected wherever
+the shape is the story, not a decoration added only when convenient.
 
 ## Title
 
