@@ -1,11 +1,18 @@
 {
   "version": 1,
-  "updated": "2026-09-18",
+  "updated": "2026-09-22",
   "description": "Upstream map for skills/, the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
-      "origin": "local",
-      "notes": "Authored in agent-scripts (commit 3b1f581). Bespoke ASO workflow. Local audit (2026-09-05): focused description; task-specific reference routing. Preserve on refresh."
+      "origin": "adapted",
+      "repo": "https://github.com/coreyhaines31/marketingskills",
+      "path": "skills/aso",
+      "refresh": "npx skills add coreyhaines31/marketingskills -y --skill aso && echo 'Hand-merge from .agents/skills/aso/: scoring-criteria.md, benchmarks.md, and the report structure. Keep the local keyword-research, launch-planning, experiments, metadata-optimization and google-play references, the asc/gplay-cli boundaries, and the local platform-requirements corrections. Then: trash .agents/skills/aso'",
+      "notes": "Local strategy skill (authored in agent-scripts, commit 3b1f581) merged 2026-09-22 with coreyhaines31's aso audit layer: added references/scoring-criteria.md (6-dimension weighted rubric with Dominant/Established/Challenger brand-maturity adjustments), references/benchmarks.md, references/audit-report.md, and an Audit workflow section in SKILL.md. Also corrected platform-requirements.md (Google Play title is 30 not 50 chars; Apple keyword field is 100 bytes) and added Apple indexing changes (screenshot captions indexed since June 2025, CPPs in organic search since July 2025, SKStoreReviewController limits), Apple metadata rejection triggers, Google Play prohibited metadata, Android Vitals ranking thresholds, and a PPO/Store-Listing-Experiments comparison. Merge by hand on refresh; never overwrite the local strategy references.",
+      "upstreamPath": "skills/aso",
+      "upstreamRev": "2d4b091d122314ace4f0c93accb44c90ed70208f",
+      "upstreamCheckedAt": "2026-09-22",
+      "lastSynced": "2026-09-22"
     },
     "architect": {
       "origin": "adapted",

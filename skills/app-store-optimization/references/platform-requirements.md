@@ -24,7 +24,12 @@ Technical specifications and metadata requirements for Apple App Store and Googl
 | Subtitle | 30 characters | iOS 11+ only, appears below title |
 | Promotional Text | 170 characters | Editable without app update |
 | Description | 4,000 characters | Not indexed for search |
-| Keywords Field | 100 characters | Comma-separated, no spaces after commas |
+| Keywords Field | 100 bytes | Comma-separated, no spaces after commas; non-Latin scripts (Arabic, CJK) use 2-3 bytes per char |
+| IAP Name | 35 characters | Indexed for search |
+| IAP Description | 55 characters | Not indexed |
+| In-App Event Name | 30 characters | Indexed; title case required |
+| In-App Event Short Description | 50 characters | Indexed; sentence case |
+| In-App Event Long Description | 120 characters | Not indexed |
 | What's New | 4,000 characters | Release notes for updates |
 | Developer Name | 255 characters | Company or individual name |
 | Support URL | Required | Must be valid HTTPS URL |
@@ -87,7 +92,7 @@ task manager, todo list, productivity app, task tracking
 
 | Field | Character Limit | Notes |
 |-------|----------------|-------|
-| App Title | 50 characters | Increased from 30 in 2021 |
+| App Title | 30 characters | Reduced from 50 in Sept 2021; strongest search signal |
 | Short Description | 80 characters | Visible on store listing |
 | Full Description | 4,000 characters | Indexed for search keywords |
 | Developer Name | 64 characters | Organization or individual |
@@ -305,13 +310,101 @@ Each locale requires:
 
 ---
 
+## Apple: Indexing & Recent Changes
+
+What Apple actually indexes (and what it does not):
+
+| Field | Indexed for search? | Notes |
+|-------|--------------------|-------|
+| Title | Yes | Strongest signal |
+| Subtitle | Yes | |
+| Keywords field | Yes (hidden) | 100 bytes |
+| Description | **No** | Conversion only — Apple confirmed |
+| Promotional Text | **No** | Apple confirmed; editable without a release |
+| Screenshot captions | **Yes (since June 2025)** | AI extraction of caption text |
+| In-app events | Yes | Appear in search |
+| IAP names | Yes | |
+| Developer name | No | |
+
+- **Screenshot captions indexed since June 2025** — caption copy is now a ranking surface, not just conversion copy.
+- **Custom Product Pages appear in organic search since July 2025** — up to 70 CPPs (plus the default page); each keyword combination must be unique to one CPP.
+- **In-app events:** max 15 approved in App Store Connect, max 10 published simultaneously, max 31 days each, up to 14 days of pre-event promotion.
+- **App preview video:** up to 3 per app, 15-30 seconds, max 500 MB.
+- **SKStoreReviewController:** max 3 rating prompts per 365-day period; the system may show fewer. Never use a custom button to request a review.
+- **Product Page Optimization (A/B test):** up to 3 treatments vs the original; icon, screenshots, and preview video are testable — title, subtitle, description, and keywords are **not**; one test at a time; max 90 days; cannot be modified once started.
+
+## Apple: Metadata Rejection Triggers
+
+| Guideline | Rejection trigger |
+|-----------|-------------------|
+| 2.3.1 | Hidden features, misleading marketing, false pricing |
+| 2.3.2 | Not disclosing IAPs in description/screenshots |
+| 2.3.3 | Screenshots that don't show the app in use (splash/login only) |
+| 2.3.4 | Preview videos using non-app content |
+| 2.3.5 | Wrong category selected |
+| 2.3.7 | Keyword stuffing: trademarks, competitor names, pricing, irrelevant terms |
+| 2.3.8 | Metadata not appropriate for all audiences (must be 4+ rated) |
+| 2.3.10 | Other platform names/imagery (Android, etc.) in metadata |
+| 2.3.12 | Generic What's New for significant changes |
+| 2.3.13 | Inaccurate in-app event metadata |
+
+## Google Play: Prohibited Metadata Content
+
+Enforced since Sept 2021. Applies to **title, icon, and developer name** unless
+the term is a registered brand:
+
+- Emojis, emoticons, repeated special characters
+- ALL CAPS
+- Performance claims: "top", "best", "#1", "free", "no ads"
+- Misleading store performance or endorsement
+- Calls to action: "update now", "download now"
+
+The same performance claims and CTAs are prohibited in the **short description**,
+along with unattributed testimonials. **Screenshots, feature graphic, and video**
+must not carry time-sensitive taglines or CTAs, and must authentically show app
+functionality.
+
+## Google Play: Android Vitals Ranking Thresholds
+
+Apps exceeding these thresholds get **reduced visibility** in search and
+recommendations, plus warning labels on the listing.
+
+| Metric | Overall threshold | Per-device threshold |
+|--------|-------------------|----------------------|
+| User-perceived crash rate | **1.09%** | 8% |
+| User-perceived ANR rate | **0.47%** | 8% |
+| Excessive partial wake locks | 5% | N/A |
+
+Google evaluates a 28-day rolling average, checked daily. Recovery is automatic
+once the rate falls back under threshold.
+
+**Google Play confirmed ranking factors:** metadata relevance (title carries the
+most weight; NLP scans title + short + full description), app quality (Android
+Vitals), ratings and reviews (85% of featured apps are 4.0+), install volume and
+velocity, engagement/retention, update frequency, and localization.
+
+## Experiments & Custom Pages (Both Stores)
+
+| Capability | Apple | Google Play |
+|------------|-------|-------------|
+| A/B testing | Product Page Optimization | Store Listing Experiments |
+| Treatments | 3 vs original | 3 vs control |
+| Concurrent tests | 1 | 1 default-graphics experiment |
+| Testable | Icon, screenshots, preview video | Icon, feature graphic, screenshots, video, short + full description |
+| Not testable | Title, subtitle, description, keywords | — |
+| Min duration | — | 7 days (weekday/weekend variance) |
+| Custom pages | 70 CPPs (organic since July 2025) | 50 CSLs (100 for partners) |
+| Custom-page targeting | Keyword-specific | Country/region, install state, ad campaigns, churned users (28+ days) |
+
+---
+
 ## Quick Reference Card
 
 ### Apple vs Google Comparison
 
 | Attribute | Apple App Store | Google Play Store |
 |-----------|-----------------|-------------------|
-| Title Length | 30 chars | 50 chars |
+| Title Length | 30 chars | 30 chars |
 | Subtitle | 30 chars | N/A |
 | Short Description | N/A | 80 chars |
 | Full Description | 4,000 chars | 4,000 chars |
