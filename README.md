@@ -2,7 +2,7 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code, Codex, and Cursor.
 
-![skills](https://img.shields.io/badge/skills-61-blue)
+![skills](https://img.shields.io/badge/skills-62-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-8957e5)
 
@@ -151,13 +151,13 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-61 skills, grouped by what they are for.
+62 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
 | **Ship an app** | App Store Connect, Google Play, releases, store metadata, legal | `app-store-optimization` · `asc` · `gplay-cli` · `ios-marketing-capture` · `release-ios-app` · `privacy-policy` |
 | **Design & frontend** | Accessibility, UI craft and motion, decks, onboarding, throwaway prototypes | `better-accessibility` · `emil-design-eng` · `grill-design` · `frontend-slides` · `onboarding-flow` · `prototype` · `visual-parity` |
-| **Words** | Marketing copy, editorial audit and research, plain-statement and slop passes | `copywriter` · `online-writing` · `mannered-prose` · `unslop` |
+| **Words** | Marketing copy, editorial audit and research, content repurposing, plain-statement and slop passes | `copywriter` · `online-writing` · `content-repurposing` · `mannered-prose` · `unslop` |
 | **Backend & infra** | Convex, Clerk, RevenueCat, secrets, Post Queue, infrastructure operations | `convex-cli` · `clerk-cli` · `revenuecat-api` · `one-password` · `post-queue-cli` |
 | **Agent workflow** | Review, routing, chat orchestration, large-effort planning, simplification, refactoring, debugging, verification, session retrospectives, direct trunk delivery or PR creation with merge-ready follow-through, targeted post-merge cleanup, explicit repository-wide git hygiene, install and skill maintenance | `architect` · `autoreview` · `babysit-pr` · `blast-radius` · `commit-push-pr` · `retro` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `performance` · `create-verification-skill` · `maintain-verification-skill` · `git-cleanup` · `grill-me` · `grill-with-docs` · `grilling` · `handoff` · `project-hq` · `ossian-mode` · `refactoring` · `resolve-pr-feedback` · `simplify-code` · `bro` · `skill-creator` · `skill-cleaner` |
 | **Principles** | Short, explicitly-invoked rules for how to work — verification, design exploration, debugging posture, domain modeling | `principle-encode-lessons-in-structure` · `principle-exhaust-the-design-space` · `principle-fix-root-causes` · `principle-model-the-domain` · `principle-prove-it-works` · `principle-redesign-from-first-principles` · `principle-sequence-verifiable-units` · `principle-subtract-before-you-add` |

@@ -70,6 +70,9 @@
     "convex-cli": {
       "role": "both"
     },
+    "content-repurposing": {
+      "role": "both"
+    },
     "copywriter": {
       "role": "both"
     },
@@ -238,6 +241,12 @@
       "blast-radius",
       "git-cleanup",
       "show-me",
+      "unslop"
+    ],
+    "content-repurposing": [
+      "obsidian",
+      "online-writing",
+      "copywriter",
       "unslop"
     ],
     "copywriter": [
@@ -563,7 +572,12 @@
             "id": "unslop"
           }
         ],
-        "extras": []
+        "extras": [
+          {
+            "id": "content-repurposing",
+            "writes": "X, TikTok, YouTube drafts"
+          }
+        ]
       },
       {
         "id": "understand",

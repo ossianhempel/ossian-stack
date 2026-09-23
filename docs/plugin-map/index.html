@@ -338,7 +338,12 @@
       "id": "unslop"
      }
     ],
-    "extras": []
+    "extras": [
+     {
+      "id": "content-repurposing",
+      "writes": "X, TikTok, YouTube drafts"
+     }
+    ]
    },
    {
     "id": "understand",
@@ -690,6 +695,27 @@
    ],
    "routedBy": []
   },
+  "content-repurposing": {
+   "id": "content-repurposing",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Content Repurposing",
+   "description": "Turn an existing article, essay, newsletter, draft, or substantial note into native X and TikTok posts or a YouTube idea and script draft in the writer's voice. Use for editorial repurposing, not original long-form drafting or app ads.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "obsidian",
+    "online-writing",
+    "copywriter",
+    "unslop"
+   ],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
   "convex-cli": {
    "id": "convex-cli",
    "type": "skill",
@@ -724,6 +750,7 @@
    ],
    "routes": [],
    "calledBy": [
+    "content-repurposing",
     "onboarding-flow"
    ],
    "routedBy": []
@@ -1072,7 +1099,9 @@
    "repo": null,
    "calls": [],
    "routes": [],
-   "calledBy": [],
+   "calledBy": [
+    "content-repurposing"
+   ],
    "routedBy": []
   },
   "onboarding-flow": {
@@ -1129,7 +1158,9 @@
     "mannered-prose",
     "unslop"
    ],
-   "calledBy": [],
+   "calledBy": [
+    "content-repurposing"
+   ],
    "routedBy": []
   },
   "ossian-mode": {
@@ -1703,6 +1734,7 @@
    "routes": [],
    "calledBy": [
     "commit-push-pr",
+    "content-repurposing",
     "copywriter"
    ],
    "routedBy": [
@@ -1759,7 +1791,7 @@
   }
  },
  "counts": {
-  "skills": 61,
+  "skills": 62,
   "agents": 0,
   "plugins": 1
  }
