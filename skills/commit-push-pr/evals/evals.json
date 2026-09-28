@@ -84,6 +84,20 @@
         "Does not request or perform a repository-wide cleanup",
         "Preserves main, develop, the configured default branch, remote branch, dirty work, and identity mismatches"
       ]
+    },
+    {
+      "id": 8,
+      "name": "small-pr-follow-through-keeps-watch",
+      "prompt": "Use commit-push-pr to ship this finished one-file CI workflow change on feature/bypass-label as a PR. After you open it, checks are still pending and GitHub requires one human review before merge. Describe the actions and your final message to me without executing tools.",
+      "expected_output": "Open the PR, then hand off to babysit-pr in drive mode despite the small size. Wait on CI and review automation, run the feedback resolver, and treat the required human review as a wait rather than the end of the drive. Before ending the turn, arm a wake through the host's mechanism (a PR subscription, or else a self-scheduled wake-up), or, with no mechanism, say plainly that nothing is watching and give the resume request. The final message states the watch state and never promises follow-through that nothing is armed to deliver.",
+      "files": [],
+      "assertions": [
+        "Hands off to babysit-pr in drive mode, not a one-shot check, and does not downgrade the mode because the PR is small",
+        "Treats the required human review as a wait that keeps the drive alive, and would resolve review comments that land later",
+        "Arms a concrete wake (PR subscription, scheduled wake-up, or recurring task) before ending the turn, or states that no mechanism exists and gives the resume request",
+        "The final message reports the watch state (armed with mechanism and next check, or ended with reason) and does not claim to be watching without an armed wake",
+        "Does not merge or arm auto-merge"
+      ]
     }
   ]
 }

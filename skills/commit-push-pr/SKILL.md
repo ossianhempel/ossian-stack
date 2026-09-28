@@ -244,8 +244,10 @@ that uncommitted changes were left alone.
   merge-ready or a reported human/access blocker; PR creation alone is not the
   completion condition. A green CI snapshot is not the handoff: let the watcher
   complete its review-discovery window and any detected Codex, Copilot, or other
-  review automation before accepting `READY`. Include the final CI/review state
-  in the report.
+  review automation before accepting `READY`. The handoff mode is `drive` for
+  every PR size; a `check` snapshot is not follow-through. Tell the user you will
+  follow the PR only as far as `babysit-pr` reports its watch armed, and end the
+  report with its CI/review state and watch state.
 - **Build phase still open:** finish the agreed stack or batch first, then drive its
   lowest unmerged PR (the frontier). Do not block on each intermediate PR.
 - **An existing drive owns the work:** return the PR URL, changed head, and outcome
