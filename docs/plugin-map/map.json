@@ -560,7 +560,7 @@
         "steps": [
           {
             "id": "online-writing",
-            "writes": "research.md, swipefile.md"
+            "writes": "audit, headlines, hooks, research"
           },
           {
             "id": "copywriter"
@@ -724,7 +724,8 @@
     ],
     "online-writing": [
       "mannered-prose",
-      "unslop"
+      "unslop",
+      "copywriter"
     ],
     "project-hq": [
       "ossian-mode"

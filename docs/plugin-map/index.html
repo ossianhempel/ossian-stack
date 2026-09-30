@@ -326,7 +326,7 @@
     "steps": [
      {
       "id": "online-writing",
-      "writes": "research.md, swipefile.md"
+      "writes": "audit, headlines, hooks, research"
      },
      {
       "id": "copywriter"
@@ -753,7 +753,9 @@
     "content-repurposing",
     "onboarding-flow"
    ],
-   "routedBy": []
+   "routedBy": [
+    "online-writing"
+   ]
   },
   "create-verification-skill": {
    "id": "create-verification-skill",
@@ -1147,7 +1149,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Online Writing",
-   "description": "Audit and research for editorial writing published online - blog posts, newsletters, Substack, LinkedIn, X. Three jobs: score a draft (or someone else's post that performed) against the six persuasion elements, research what is already working on a topic before writing, and pick the week's topic by mining the last two weeks of reading and notes. Diagnosis and research only - it never drafts or rewrites prose.",
+   "description": "Audit online articles, newsletters, LinkedIn posts, and X threads for reader appeal, headline promises, hooks, pacing, structure, and credibility. Generate stronger headline and opening options when asked; research proven frames and select topics using reading, notes, and audience feedback. Does not draft full pieces or publish.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1156,7 +1158,8 @@
    "calls": [],
    "routes": [
     "mannered-prose",
-    "unslop"
+    "unslop",
+    "copywriter"
    ],
    "calledBy": [
     "content-repurposing"

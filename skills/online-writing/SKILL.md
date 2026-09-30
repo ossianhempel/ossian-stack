@@ -1,247 +1,287 @@
 ---
 name: online-writing
-description: "Audit and research for editorial writing published online - blog posts, newsletters, Substack, LinkedIn, X. Three jobs: score a draft (or someone else's post that performed) against the six persuasion elements, research what is already working on a topic before writing, and pick the week's topic by mining the last two weeks of reading and notes. Diagnosis and research only - it never drafts or rewrites prose."
+description: "Audit online articles, newsletters, LinkedIn posts, and X threads for reader appeal, headline promises, hooks, pacing, structure, and credibility. Generate stronger headline and opening options when asked; research proven frames and select topics using reading, notes, and audience feedback. Does not draft full pieces or publish."
 ---
 
 # Online Writing
 
-Two jobs sit outside drafting and get skipped: finding out what the market
-already rewards *before* writing, and checking afterwards whether the piece is
-persuasive rather than merely correct. This skill does those two and nothing
-else.
+Help the writer attract the intended reader, keep their attention, and deliver
+what the headline promised. A successful result identifies the specific reason
+a piece works or fails; requested headline and opening options improve its
+appeal without inventing experience, results, or a larger promise than it earns.
 
-**It never writes or rewrites prose.** When a draft needs to move, hand it to
-the drafting workflow the writer's own project points at. The value here comes
-from staying diagnostic, a reviewer that rewrites stops reporting what was
-wrong and starts hiding it.
+This is an editorial skill. Full drafts and body rewrites belong to the writer's
+drafting workflow. An audit stays diagnostic unless the user also asks for
+alternatives. Generating a headline or opening does not authorize changing the
+source file, publishing, or updating the writer's strategy.
 
-**Everything this skill hands back goes through `mannered-prose` first.** An
-audit that says a hook "doesn't earn its keep" has performed the exact failure
-it is complaining about, and a finding the writer has to decode is a finding
-they will not act on. Read that skill and apply it to your own output before
-sending, findings, frames, headlines, and the swipe-file entries alike.
+Apply `mannered-prose` to your own findings and options. Apply `unslop` as a
+diagnostic pass on supplied drafts, retaining findings rather than its rewrite.
+Strong writing can be vivid, emotional, and rhythmic; remove performed language,
+not the writer's personality.
 
-## Modes
+## Choose the work
 
 | The ask | Mode |
 |---|---|
-| "audit this", "is this good?", "why won't this land?" | **Audit** |
-| "why did this post do well?", "add this to the swipe file" | **Audit**, reverse direction |
-| "what's working on X right now?", "research this before I write" | **Research** |
-| "what should I write about this week?" | **Topic** |
+| Audit this; why won't it land; is this headline strong? | **Audit** |
+| Give me better headlines, hooks, or an opening; make this more compelling | **Packaging** |
+| Audit this and give me better hooks | **Audit + Packaging** |
+| Why did this post work; add it to the swipe file | **Reverse audit** |
+| What's working on this topic; research before I write | **Research** |
+| What should I write about next | **Topic** |
 
----
+Find and read the existing piece when the user refers to one. A title alone
+isn't a reason to substitute Research for an audit. Don't apply online article
+standards to an atomic knowledge note unless the user wants to adapt it for
+publication. Marketing copy belongs to `copywriter`.
 
-## Mode: Audit
+## Establish the reader contract
 
-Score the piece against six elements. Every one of them is about whether a
-stranger keeps reading, not whether the piece is true, useful, or well
-argued. Those belong to the writer's own style guide and are already covered
-elsewhere; do not re-litigate them here.
+Before scoring or generating options, read the complete piece or supplied
+material and the project's active writing guides. Determine:
 
-| # | Element | Passes when |
-|---|---|---|
-| **1** | **Hook** | The first sentence earns the second. Judge the *rendered* opening, line breaks, whitespace, and what survives the platform's preview cut are part of the hook, not decoration around it |
-| **2** | **Problem** | A problem is stated or implied that the named reader recognizes as theirs. Concrete beats high-level; "your agents produce mediocre code" lands where "AI adoption is hard" does not |
-| **3** | **Solution** | Something actionable, ideally done by the writer rather than collected from others |
-| **4** | **Benefit** | A desirable outcome is visible. It can be implied, but the reader must be able to name what they get |
-| **5** | **Stance** | The piece picks a side and stays on it. Hedges, "it depends", and both-sides endings fail this, not because confidence is a virtue, but because a reader cannot follow someone who has not decided |
-| **6** | **Novelty** | A perspective or framing the reader has not already met this week. The test is whether it advances their understanding, not whether it is contrarian |
+- **Reader and context:** who specifically, what they already know or want,
+  where they encounter this, and why they would care now. A reader can be named
+  by a shared interest, situation, or question rather than a demographic.
+- **Form:** actionable guide, opinion, curated list, story, or credible expert
+  explanation. A mixed form is fine when it serves one clear promise.
+- **Promise and payoff:** what the reader expects and what the material actually
+  delivers. Entertainment, recognition, or a changed understanding can be the
+  payoff; not every piece needs practical steps.
+- **Evidence and voice:** the real scene, observation, result, expertise,
+  researched material, or reasoning that gives this writer something to say.
+  Personal experience is useful evidence, not a requirement for every form.
 
-Read the whole piece before scoring anything. Elements 1 and 2 gate the rest:
-if nobody gets past the opening, findings about element 6 are unreachable, so
-say so and rank the fix order accordingly.
+Infer these from the material when possible and state consequential assumptions.
+If only a topic is supplied, ask for the missing experience or claim while doing
+independent research. Don't fill the gap with fabricated autobiography. Offer
+clearly labeled angle proposals when there is enough substance, and explain
+what material would be needed to fulfill each promise.
 
-### Then run the slop pass
+## Audit
 
-The six elements say nothing about whether the sentences sound like a person
-wrote them, and a draft that a model touched can pass all six and still read as
-generated. So run `unslop` over the same text and fold its findings in.
+Evaluate the whole reader journey. Use **strong / partial / weak**, supported by
+the smallest useful quote or location. Use **not applicable** with a reason when
+the form or purpose does not need a criterion, and **unverified** when the
+required surface or evidence is unavailable. Don't manufacture an overall
+numeric score or claim a prepublication judgment predicts engagement.
 
-Take its findings, not its rewrite. That skill cleans text end to end, which is
-the right default when someone asks it directly and the wrong one here, an
-audit that hands back a cleaned draft has stopped reporting what was wrong.
-Ask it for the tells and the lines they sit on, and report those.
+### The six core elements
 
-Keep them in their own section rather than mixed into the six. They are a
-different kind of problem: the elements are about whether the piece works on a
-reader, the tells are about whether the writer sounds like themselves, and a
-piece can fail one while passing the other. When the prose is clean, say so in
-a line and move on.
+| Element | What to assess |
+|---|---|
+| **Hook** | The headline and first sentence invite the next step. The opening starts with the strongest relevant tension, scene, observation, or claim rather than background. Judge what is visible before the platform's preview cut. |
+| **Problem / question** | The reader recognizes a specific question, desire, conflict, or difficulty. A story can create curiosity without naming a practical problem. |
+| **Solution / payoff** | The body answers that question or fulfills the experience promised. A guide supplies usable steps; an opinion supplies illuminating reasoning; a list supplies worthwhile selections; a story supplies an earned development or insight. |
+| **Benefit / stakes** | The reader can name why this matters: a desired outcome, avoided cost, felt recognition, entertainment, or new understanding. Concrete, imaginable stakes outperform abstract importance. |
+| **Stance** | The central point is clear and supported. Scope conditions and honest uncertainty can sharpen it; indiscriminate hedges and an ending that evades its own argument weaken it. Don't demand false certainty or a polarized opinion from every story. |
+| **Novelty / distinction** | There is a worthwhile observation, example, synthesis, or perspective beyond familiar advice. Judge it against the reader's knowledge and the category. A familiar topic can succeed through a fresh treatment; repetition across a writer's library is not itself a failure. |
 
-### Output
+### Delivery checks the six do not cover
 
-```
-Verdict: <one sentence naming the dominant problem, or saying it is sound>
+| Check | What to assess |
+|---|---|
+| **Headline promise** | Can the reader tell what it is about, whether it is for them, and what they get? Is there a specific unresolved question without hiding the subject? Does the body fulfill the same promise, including any scope, number, outcome, or implied certainty? A main title and subtitle may share this work. |
+| **Rate of Revelation** | Does each sentence add a needed fact, consequence, example, development, or feeling? Locate where progress stalls through setup, restatement, explanation of the obvious, or a repeated conclusion. Pacing is the speed of meaningful progress, not merely short sentences. |
+| **Structure and skimming** | Do subheads and emphasized main points communicate useful claims rather than vague labels? Can a skimmer follow the argument? Do paragraphs and sentence lengths vary? Is explanation proportional to each point's complexity? Use formatting suited to the platform; short posts need not have subheads. |
+| **Credibility and story** | Why trust this writer on this claim? Where useful, does a concrete experience show how they learned the lesson and help answer the reader's question? Research, curation, and clear reasoning can also establish credibility. Flag unsupported authority, interchangeable examples, or autobiography that serves only the writer. |
+| **Ending** | Does the piece stop once it delivers its promise? A final main point can conclude it. Keep a recap when length or complexity makes it useful; flag repeated summaries and generic moralizing. Further reading should extend a complete payoff, not withhold the promised answer. |
+| **Promotion / next step** | If present, is the product, author, or CTA relevant context or a useful next resource? Does the piece give value even without a click? Flag a sales interruption or a destination that fails to extend the reader's interest. Absence of a CTA is not a defect unless the stated goal needs one. |
 
-| Element | Verdict | Evidence |
-|---|---|---|
-| Hook | fail | "<smallest useful quote>" |
-...
+Inspect the actual rendering when accessible. Otherwise state that the preview,
+line breaks, and truncation are unverified; judge the supplied text without
+inventing a character limit. Treat 1/3/1 and 1/5/1 as optional opening rhythms
+(one sentence, a short middle paragraph, one sentence), not universal formulas.
+Their purpose is visible progress and readable chunks. Don't impose a fixed
+word count on every form.
 
-Findings, worst first:
-  <Element>, <what specifically fails> → <the fix, named>
+### Return a usable diagnosis
 
-AI tells: <none, or the tells with the lines they sit on>
-```
+Lead with the dominant issue and the inferred reader, form, and promise. Give
+compact verdict tables for the core elements and delivery checks, then up to
+three consequential findings in priority order. Each finding names the
+failure, points to its location, explains its reader effect, and names a fix.
+Report further material failures briefly; don't bury a real gap to meet a quota.
+Keep the report proportional to the piece: combine the two tables for a short
+post, use brief evidence cells, and don't explain the same defect in every row.
 
-Name the fix; do not perform it. "The hook opens on setup, the real opening
-is the sentence about the rejected build, four paragraphs down" is a finding.
-Rewriting the hook is not. If the writer then asks for a rewrite, that is a
-drafting request, route it rather than absorbing it.
+The title and opening usually come first because they determine entry, but an
+unsupported or unfulfilled promise must be resolved before polishing it. A good
+opening cannot compensate for a body that repeats itself or never delivers.
 
-### Reverse direction: auditing what worked
+Keep AI tells separate, with their lines, or say none found. Don't treat plain
+language, deliberate repetition, parallel subheads, or varied sentence length
+as AI tells by themselves. Don't rewrite the draft during an audit-only request.
+If alternatives are requested, follow Packaging after diagnosing the problem.
 
-The same six elements read backwards turn someone else's post into a reusable
-pattern, which is the whole reason to keep a swipe file: the elements only
-become instinct once they have been spotted in the wild.
+## Packaging: headlines and openings
 
-Score the post, then record only the transferable part, the structure and the
-framing, never the topic. Append to the swipe file of the piece it is research
-for (see below) as:
+Read [Headlines and hooks](references/headlines-and-hooks.md) for this mode.
+Use the actual material, not generic copy formulas. A hook can be a single
+opening sentence or a brief opening sequence; produce only the requested scope.
 
-```
-## <working title of the post>, <platform>, <date seen>
-Link: <url>
-Why it worked: <the one or two elements that did most of the work>
-The reusable frame: <the structure, with the topic stripped out>
-```
+**Choose the angle before wording it.** Identify the most compelling supported
+claim, scene, tension, reader outcome, or surprising consequence. Search the
+body for stronger material hidden beneath setup. Generate more candidates than
+you will show, across distinct approaches, then compare and refine the best.
+Changing adjectives or replacing one vague question with another is not an
+alternative angle. Plain language still needs a reason to care: prefer a
+specific, consequential detail over a tidy description of the broad topic.
 
-"The Notebook System That Saved My Brain" is stored as *`<System> that saved
-my <faculty>`, possession-under-threat, rescue framing*, not as a note about
-notebooks. Stripped that way it can carry a topic it was never written for.
+Default to **three to five distinct options**, honoring the user's count and
+scope. When they ask for both headlines and hooks, give paired options, each
+with an angle label, headline, opening, and one short explanation of why it fits
+this reader, the question or desire it creates, and what supports it in the
+material. For headline-only or hook-only
+requests, don't add the other component. Recommend one with a concrete reason
+and name its tradeoff. Don't return a long undifferentiated brainstorm.
 
----
+Keep refining until each shown option meets these conditions:
 
-## Mode: Research
+- The subject and intended reader are recognizable, explicitly or through
+  unmistakable context. The benefit or stakes are specific enough to imagine.
+- Curiosity comes from a meaningful unanswered question, tension, or unexpected
+  detail. It does not depend on empty teaser language or obscuring the topic.
+- The title's beginning identifies the interesting subject or situation, and
+  its ending adds a concrete payoff, consequence, or unresolved tension. Avoid
+  spending the strongest positions on setup or a generic category label.
+- The promise is no bigger than the body can support. Numbers, causal claims,
+  timeframes, emotional stakes, credentials, and first-person scenes are real.
+  Don't invent motives, dialogue, or feelings to complete a scene.
+- The opening advances the headline instead of repeating it or explaining why
+  the broad topic matters. Its first visible lines work on the chosen platform.
+- The voice sounds like this writer. Intensity comes from the material, not
+  exaggerated adjectives, manufactured outrage, or copied phrasing.
 
-The point is to find what the market has *already signaled it wants*, then
-merge that with the topic the writer wants to write about. Neither half alone
-is enough: chasing what performs produces work someone else should have
-written, and writing purely from the inside produces work nobody finds.
+Before presenting, check every factual clause against the supplied material,
+including connective explanations of why someone acted. Remove an unsupported
+detail even when it seems obvious or makes the story smoother. Keep an inference
+in the explanation, clearly labeled, rather than adding it to first-person copy.
 
-1. **Read the existing swipe files first.** They are the highest-signal source
-   because every entry was already filtered by hand. They live per piece, so
-   read across all of them, a frame recorded for one piece is exactly the thing
-   that should carry a different topic later.
-2. **Search the open web** for the topic, recent newsletters, blog posts, and
-   discussion that circulated. Be straight about the ceiling: X, LinkedIn, and
-   Instagram largely cannot be read programmatically, so engagement numbers
-   from those platforms come from the writer pasting posts in, not from you.
-   Do not present inferred popularity as measured popularity.
-3. **Report the frames, not the links.** A list of URLs is not research. What
-   transfers is the recurring angle, the headline shapes that keep appearing,
-   and the question everyone is answering badly.
+Compare the survivors with the original: what specific reason to start reading
+did each add? Reject cosmetic improvements. Choose the recommendation for reader
+appeal and promise fulfillment together, not merely because it is the shortest
+or safest. An accurate description of routine procedure can still be a weak
+headline. Prefer the supported option with the strongest concrete benefit or
+most compelling unresolved question; recognition alone need not win. Don't show
+a dull option just to fill the requested count: refine its angle or explain the
+material's limit. An emotional stake can be recognition, frustration, fear of a real
+mistake, or desire for a concrete outcome; don't invent the writer's feelings.
 
-Write findings into the piece's own `research.md` under a `## What's working`
-heading, alongside whatever interview or source material is already there.
-Where a per-piece working folder does not exist yet, ask before creating one,
-the writer's project defines that layout.
+If the material cannot support a strong option, say what is missing and give
+the strongest honest version. Don't compensate with invented drama. These are
+editorial candidates, not proven winners; improve later using observed results.
 
----
+## Reverse audit and the swipe file
 
-## Mode: Topic
+Analyze a successful post with the same form-sensitive rubric. Separate observed
+performance from your explanation: views establish reach, not why it happened.
+Consider audience size, placement, timing, and distribution before attributing
+success to a hook. Don't say a post performed merely because it was saved.
 
-Two filters, applied in this order:
+Record the transferable frame, stripped of its topic, plus:
 
-1. **Is it worth sharing, in the writer's judgement?** Filtering an idea
-   through a specific identity is what makes it unique, so do not propose
-   topics chosen to fit an audience the writer does not have.
+- Link, platform, date seen, and intended reader/form.
+- Available performance evidence, its source and date, or **unverified**.
+- The headline promise, opening mechanism, and body structure that may explain
+  its appeal; distinguish observations from hypotheses.
+- What could transfer and what depends on this writer, topic, or platform.
 
-   **A topic falling outside the writer's usual subjects is not a reason to
-   reject it.** Niching down is not the goal. A declared territory describes
-   what has been written so far, which is a record and not a boundary, so
-   "this sits outside the stated territories" is an observation to hand over,
-   never a verdict you reach on the writer's behalf. Propose the candidate and
-   note that it would be new ground. Where a topic genuinely fails, say which
-   filter it failed and why.
-2. **Is it framed so it gets attention?** An idea that passes filter 1 and
-   fails filter 2 goes unread. This is what the swipe file is for: take the
-   topic from filter 1 and the packaging from a frame that already worked.
+Use the project's swipe-file convention. If none exists, `swipefile.md` beside
+the piece's `research.md` and `outline.md` is a proposed convention, not a reason
+to create a folder without authorization. Read across existing swipe files;
+a frame found for one subject may serve another. Store patterns, not copied
+language. Topic-specific findings belong in research instead.
 
-### Mine the last two weeks
+## Research
 
-What the writer has actually been reading and thinking about is the best
-available evidence of what they can write with conviction *now*.
+Merge what the writer wants to say with evidence of what readers respond to.
+Read the writing guides, existing swipe files, relevant published work, and
+available performance data before seeking new examples.
 
-```bash
-SINCE_TS=$(date -u -v-14d +%Y-%m-%dT%H:%M:%SZ)
+Study the **category and platform**: intended readers, their recurring questions,
+leading comparable writers, native formats, headline promises, opening choices,
+credibility, and what remains poorly answered. Compare similar forms and
+audiences; a giant account's view count is not a useful standalone benchmark.
+Use the open web and available interfaces. If access limits the evidence, explain
+the limit and use supplied posts or analytics; a missing CLI is not proof a
+platform cannot be read.
 
-# Reading. Note the flag names differ between the two commands.
-readwise reader-list-documents --updated-after "$SINCE_TS" \
-  --category article --limit 50 --response-fields title,author,site_name,summary
-readwise readwise-list-highlights --highlighted-at-gt "$SINCE_TS" --page-size 100
-```
+Report three to five useful frames with examples, source links, evidence quality,
+why they might fit this writer, and the material needed to deliver them. Recurring
+headlines show a convention, not measured popularity. Saved titles show what
+attracted the writer, not audience performance. Don't infer proof from either.
 
-Highlights are the stronger signal, a saved document is an intention, a
-highlight is a reaction.
+Distinguish **timely** interest from **lasting** usefulness. Identify whether the
+angle can retain value after its news trigger, and whether proven smaller pieces
+justify a deeper resource. When audience growth or business is the goal, examine
+the path from a useful social piece to a relevant fuller resource or opt-in;
+recommend expanding demonstrated demand rather than inventing a product first.
+Distribution and publishing frequency affect results but are not draft defects.
 
-For the notes side, resolve the vault and filter on the `created:` frontmatter
-date, not on file mtime. Obsidian Sync rewrites modification times, so `find
--mtime` reports notes from years ago as touched this week:
+Return findings in chat unless saving research was requested or already authorized.
+When saving, follow the project's layout; don't overwrite human prose. Keep
+source observations, proposed angles, and the writer's confirmed views distinct.
 
-```bash
-VAULT=$(for d in ~/ossians-second-brain-sync ~/Developer/ossians-second-brain-sync; do [ -d "$d/.obsidian" ] && echo "$d" && break; done)
-SINCE=$(date -v-14d +%Y-%m-%d)
+## Topic
 
-grep -r --include='*.md' -m1 -H '^created:' "$VAULT/Notes" "$VAULT/Writing" 2>/dev/null \
-  | awk -F'created: *' -v s="$SINCE" '$2 >= s {sub(/:$/,"",$1); print $2, $1}' \
-  | grep -E '^[0-9]' | sort -r
+Use three signals together: what the writer cares about, what they have something
+specific to contribute to, and what available audience evidence supports.
+Audience feedback informs the choice; it doesn't replace the writer's interests.
 
-# Daily notes are named YYYY-MM-DD, so select them by filename
-for i in $(seq 0 13); do d=$(date -v-${i}d +%Y-%m-%d); [ -s "$VAULT/daily-notes/$d.md" ] && echo "$d"; done
-```
+Mine the last two weeks of reading, highlights, notes, and drafts through the
+available interfaces. Highlights indicate a reaction; saves alone indicate
+intention. Filter reading by the relevant saved or highlighted date after fetching
+and paginate as needed; an updated timestamp can retrieve an old document.
+Discover the vault and its active layout instead of assuming folder names.
+Use note creation metadata and daily-note filenames; sync can rewrite file mtimes.
+An overlap between reading and the writer's own notes is a promising signal,
+not proof they endorse the source or are ready to write on it.
 
-A topic that shows up in *both* the reading and the notes is the strongest
-candidate: it means the writer read about it and then had a thought of their
-own, which is exactly the raw material an original piece needs.
+Read the writer's own published results too, when available: which topics,
+headlines, forms, and stories prompted the response they wanted? Keep reach,
+discussion, saves, subscriptions, and sales distinct. Look for repeated signals,
+state evidence limits, and propose the next experiment rather than attributing
+causality to one outlier.
 
-### Propose
+Use declared content buckets as a way to compare audiences and learn, not an
+automatic veto on new interests. A general-interest question, a niche expertise
+question, and an industry question can all be approached through this writer's
+specific experience. Name the reader and category for each candidate even when
+the writer is still exploring. Don't impose permanent positioning on their behalf.
 
-Three to five candidates, each in this shape:
+Propose three to five candidates with:
 
-```
-<Topic>
-  Evidence: <what in the last two weeks points here, highlights, notes, drafts>
-  Borrowed frame: <the swipe-file pattern being applied, or "none found">
-  Working headline: <the merge of the two>
-  Draws on: <existing notes it would be built from>
-```
+- Reader, question, form, and the writer's contribution.
+- Specific reading/notes and audience evidence, keeping confirmed views separate.
+- A borrowed frame and its provenance, or **none found**.
+- A supported working headline and why it attracts that reader; use the Packaging
+  reference to improve it without inventing the eventual piece's evidence.
+- Notes to draw on, lasting versus timely value, and a meaningful next experiment
+  (for example, compare responses to a concrete story versus an explanation).
 
-Then recommend one and say why. One topic per week is the operating
-constraint: the long-form piece is the source, and the posts, scripts, and
-clips are re-cuts of it rather than separate efforts. Proposing two topics for
-one week is proposing two weeks of work.
+Count distinct ideas, not several formats of the same story. Group alternate
+treatments under one candidate. When the available evidence supports fewer
+topics, say so and return fewer rather than padding the shortlist.
 
-Landing the pick as an idea file, with the frontmatter and folder conventions
-that implies, belongs to the writer's project, follow its documented
-conventions rather than inventing a layout.
+Recommend one and explain why. Follow the project's cadence; for a weekly content
+project, choose one main topic and derive its shorter posts from that piece.
+More publishing opportunities can accelerate learning, but volume is not a
+substitute for delivering value. Related topics can be revisited with new examples
+and perspectives. Don't treat familiarity or a previously covered subject as
+automatic failure.
 
----
+After publication, compare the observed response to the goal and the writer's
+own comparable pieces. Suggest what to keep, what to test, and whether a deeper
+resource is justified. Don't invent analytics or publish to obtain them.
 
-## The swipe file
+## Basis and limits
 
-`swipefile.md`, in the piece's own folder, next to `research.md` and
-`outline.md`, the same support-file convention those follow, so it is
-referenced by path and never wikilinked.
-
-It is a pattern library rather than a clipping service. An entry is kept
-because the *frame* transfers, so one that cannot be restated with its topic
-removed does not belong in it. That is also what separates it from
-`research.md`: findings about this topic go there, and only the reusable shape
-comes here.
-
-Keeping it per piece rather than in one central file means the frames stay next
-to the work that found them. The cost is that they are spread out, so **read
-across every piece's swipe file** when researching or picking a topic, a frame
-recorded months ago for something else is the most likely one to carry a new
-topic well:
-
-```bash
-find "$VAULT/Writing" -name swipefile.md
-```
-
-When none exists yet, say so plainly rather than quietly substituting a weaker
-signal. Titles the writer merely clicked or saved are evidence the *headline*
-worked on them, not that the post performed, usable as a stand-in, but label
-it as one, and offer to start the file from what the pass turned up.
+The expanded rubric draws on Nicolas Cole's *The Art and Business of Online
+Writing*: specificity, category awareness, headline promises, curiosity, Rate of
+Revelation, readable structure, reader-centered stories, credibility, contextual
+promotion, and learning through public feedback. These are editorial heuristics,
+not guarantees or a requirement to reproduce every tactic in the book. The
+six-element rubric, diagnostic boundary, and candidate-selection procedure are
+local adaptations. Honor the writer's active voice, goals, and explicit choices.

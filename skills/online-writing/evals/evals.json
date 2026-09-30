@@ -1,0 +1,76 @@
+{
+  "skill_name": "online-writing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Give me three stronger LinkedIn headline and hook pairs. Use only these facts; don't draft the body. My audience is developers who direct AI agents command by command. I asked an agent to fix a failing test, then dictated each command and file edit. I realized I was still doing the debugging. On a later task I gave the failing behavior, constraints, and required checks. The agent returned a patch for review. I have no measured speed or quality improvement. My voice is plain, specific, and conversational; avoid hype and clever metaphors. The working headline is 'How to Use AI Agents Better' and the opening is 'AI agents are changing software development.' Recommend one pair.",
+      "expected_output": "Three materially different headline/opening pairs rooted in the supplied events, with a recommendation and tradeoff. Openings advance the titles; no invented measurements, scenes, or promises. No full draft or refusal to generate options.",
+      "files": [],
+      "assertions": [
+        "Returns exactly three headline/opening pairs without drafting the body.",
+        "The candidates use distinct sources of reader interest rather than synonym substitutions.",
+        "Claims and first-person events stay within supplied facts; no guaranteed results or invented metrics.",
+        "Each opening advances its headline rather than merely restating it.",
+        "Recommends one candidate with a specific reason and tradeoff."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Audit this article only; don't rewrite it or give alternative copy. It is for developers who micromanage coding agents. We cannot inspect its actual rendered preview. Title: 'The Big Idea'. Body: 'The agent was typing. I was making every debugging decision.\n\n## Context\nAI is increasingly important in software development. Software development is changing, and developers need to change too. Change brings opportunities. Opportunities can be useful for those who embrace change.\n\n## Solution\nI asked my agent to fix a failing test. I told it which command to run and which file to edit. I realized I was still doing the debugging. On my next task I described the failing behavior, the constraints, and the checks I needed to see pass. It returned a patch for review.\n\n## Thoughts\nClear requirements help. Being clear is useful because unclear requirements are confusing. Clarity makes it easier to know what is expected.\n\n## Conclusion\nThe lesson is to provide clear requirements. In summary, clarity matters. To conclude, clear requirements help developers adapt to the future of software development.\n\nBuy my AI Mastery Course today to unlock limitless productivity.'",
+      "expected_output": "Recognizes a useful opening and real experience while diagnosing the vague headline, stalled progress, empty subheads, repetition, repeated conclusion, and unsupported sales interruption. Gives evidence and prioritized fixes without alternative prose. Rendering remains unverified.",
+      "files": [],
+      "assertions": [
+        "Identifies headline promise, pacing, skimmability, ending, and promotional failures with locations or quotations.",
+        "Recognizes the concrete debugging example as useful support and does not fail the whole piece indiscriminately.",
+        "Explicitly leaves rendered preview unverified.",
+        "Names fixes without rewriting prose or generating headline alternatives."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Audit this short personal opinion post for LinkedIn. Don't rewrite it. Audience: solo developers who fear delegating debugging. Title: 'I let the agent choose the edits. I still reviewed the patch.' Body: 'I used to choose every edit while an agent typed. On my next debugging task I described the failing behavior and required checks, then reviewed the patch it returned. That felt like a different division of work. I still review code before merging, especially changes that affect stored user data. I have tried this on one task. I cannot tell you it is faster yet. What changed was who chose the debugging steps.' The post aims to share an experience and a perspective, not teach a comprehensive method or sell anything.",
+      "expected_output": "Judges it as a personal opinion supported by a concrete experience. Does not demand practical steps, an absolute stance, a CTA, subheads, or fabricated proof of speed. Identifies any real weakness without treating honest scope conditions as hedging failures.",
+      "files": [],
+      "assertions": [
+        "Evaluates opinion/story payoff instead of demanding a how-to solution.",
+        "Treats limited experience and review conditions as honest scope rather than automatic stance failures.",
+        "Does not require a CTA or subheads for this short post.",
+        "Keeps the supplied experience separate from unproven speed or quality improvement."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Please tidy this atomic Obsidian knowledge note. It is private reference material, not an article for publication: 'A database transaction groups changes into one unit. Atomicity means all changes commit or none do. Isolation controls which concurrent changes are visible.'",
+      "expected_output": "Does not route private note cleanup into an online persuasion audit or add headline promises, hooks, CTAs, or publishing requirements.",
+      "files": [],
+      "assertions": [
+        "Recognizes that this private atomic-note cleanup is outside online-writing's editorial remit."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Choose one topic for next week's main article from this supplied evidence; do not fetch more sources, browse, create files, or publish. I write for solo developers, but I want to explore cooking too. Reading from the last two weeks: highlighted an article about debugging agents; saved but have not read a tomato-growing guide. My notes: described the agent task where I gave behavior and checks and reviewed its patch; recorded three failed attempts at growing tomatoes on my windowsill. Published results: an agent-debugging story had 600 impressions and 8 substantive comments; an agent-tools list had 1200 impressions and no substantive comments; an unrelated life-advice post had 4000 impressions and 1 substantive comment. My goal is useful conversations, not maximum reach. I have no swipe file yet. Propose three candidates with working headlines and recommend one.",
+      "expected_output": "Uses the writer's own experience and discussion goal, labels the unread save and missing swipe evidence, proposes cooking as valid new ground, and produces supported headlines. Recommends one weekly topic with an observable experiment without claiming causal proof from these results or converting saves into endorsements.",
+      "files": [],
+      "assertions": [
+        "Does not discard cooking solely because it is outside the usual category.",
+        "Keeps saved-but-unread material and missing swipe evidence distinct from confirmed reading and proven frames.",
+        "Uses substantive discussion rather than maximum impressions to justify the recommendation.",
+        "Produces supported working headlines and one weekly recommendation with a meaningful next experiment.",
+        "Does not browse, create files, publish, or claim that one post proves causality."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Give me three headline and opening pairs for a personal newsletter essay aimed at people growing tomatoes in small apartments. No full body. Facts: I bought one windowsill tomato plant and watered on a fixed schedule. When its leaves drooped, I added more water each morning. I eventually lifted the pot and found the saucer full and the soil wet. I emptied the saucer and waited until the soil started drying before watering again. The leaves stood up over the next two days. This was one plant, not a controlled experiment. I want to share the mistake and what I noticed, not guarantee a gardening method. My voice is literal, conversational, and specific. Don't use clever metaphors. Recommend one pair.",
+      "expected_output": "Three distinct, concrete title/opening pairs drawing curiosity from the actual plant, repeated watering, full saucer, or recovery. No invented harvest, proven universal method, guarantees, or stock AI-agent language. Openings advance the title and the recommendation has a tradeoff.",
+      "files": [],
+      "assertions": [
+        "Returns exactly three distinct headline/opening pairs suited to the newsletter and apartment-gardening reader.",
+        "Uses the supplied concrete observations without inventing events, harvests, or evidence of a universal method.",
+        "Each opening adds new information or development instead of restating the title.",
+        "Recommends one option with a concrete reason and tradeoff."
+      ]
+    }
+  ]
+}
