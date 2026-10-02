@@ -64,6 +64,9 @@
     "clerk-cli": {
       "role": "both"
     },
+    "codex-first": {
+      "role": "both"
+    },
     "commit-push-pr": {
       "role": "both"
     },
@@ -270,6 +273,7 @@
     ],
     "project-hq": [
       "babysit-pr",
+      "codex-first",
       "commit-push-pr",
       "diagnosing-bugs",
       "grilling",
@@ -689,6 +693,7 @@
       "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
+      "codex-first",
       "bro",
       "retro",
       "maintain-verification-skill",

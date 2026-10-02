@@ -455,6 +455,7 @@
    "project-hq",
    "setup-ossian-stack",
    "git-cleanup",
+   "codex-first",
    "bro",
    "retro",
    "maintain-verification-skill",
@@ -664,6 +665,24 @@
    "routes": [],
    "calledBy": [
     "skill-creator"
+   ],
+   "routedBy": []
+  },
+  "codex-first": {
+   "id": "codex-first",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Codex First",
+   "description": "Route implementation work to Codex CLI; Claude specs, reviews, verifies.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/steipete/agent-scripts",
+   "calls": [],
+   "routes": [],
+   "calledBy": [
+    "project-hq"
    ],
    "routedBy": []
   },
@@ -1434,6 +1453,7 @@
    "repo": null,
    "calls": [
     "babysit-pr",
+    "codex-first",
     "commit-push-pr",
     "diagnosing-bugs",
     "grilling",
@@ -1794,7 +1814,7 @@
   }
  },
  "counts": {
-  "skills": 62,
+  "skills": 63,
   "agents": 0,
   "plugins": 1
  }

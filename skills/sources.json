@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-23",
+  "updated": "2026-10-01",
   "description": "Upstream map for skills/, the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -39,10 +39,10 @@
       "repo": "https://github.com/openclaw/agent-skills",
       "path": "skills/autoreview",
       "refresh": "npx skills add openclaw/agent-skills -y --skill autoreview && echo 'Hand-merge the upstream scratch copy .agents/skills/autoreview/ with skills/autoreview/; preserve local adaptations and reference routing, then: trash .agents/skills/autoreview'",
-      "notes": "Local overrides possible. Diff before overwriting customizations. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local default-priority override (2026-09-04): report through P1 by default across the skill contract, CLI help, filtering behavior, and tests; explicit P0-P3 limits still win. Local audit (2026-09-05): task-specific reference routing; loaded-helper anchors and local authoring authority. Preserve on refresh. Local default-effort override (2026-09-05): Codex reviews use high reasoning unless the caller explicitly overrides it.",
+      "notes": "Local overrides possible. Diff before overwriting customizations. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local default-priority override (2026-09-04): report through P1 by default across the skill contract, CLI help, filtering behavior, and tests; explicit P0-P3 limits still win. Local audit (2026-09-05): task-specific reference routing; loaded-helper anchors and local authoring authority. Preserve on refresh. Local default-effort override (2026-09-05): Codex reviews use high reasoning unless the caller explicitly overrides it. Model migration (2026-10-01): ported upstream commit 2530ad33c9f0a8b6536ce5d357cbbdfb4eeb3fa8 (feat(autoreview): default Codex reviews to GPT-6.1 Sol) into the local fork. Codex default is now gpt-6.1-sol with a gpt-6-sol access-failure retry, explicit gpt-6-sol falls back to gpt-6-luna, and thinking levels are model-filtered (gpt-6.1-sol/gpt-6-astra require low through max; gpt-6-sol/gpt-6-luna add none but not minimal). Full upstream refresh is not possible in one step: the local fork is ~12.5k lines against upstream's ~7.9k, with different engines (droid vs amp) and reference routing, so merge by hand and port model changes as they land upstream.",
       "upstreamPath": "skills/autoreview",
       "upstreamRev": "1b52afd0954511b8bfdf680361b1f4bed69f1355",
-      "upstreamCheckedAt": "2026-08-27"
+      "upstreamCheckedAt": "2026-10-01"
     },
     "babysit-pr": {
       "origin": "adapted",
@@ -94,6 +94,16 @@
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "codex-first": {
+      "origin": "adapted",
+      "repo": "https://github.com/steipete/agent-scripts",
+      "path": "skills/codex-first",
+      "refresh": "npx skills add steipete/agent-scripts -y --skill codex-first && echo 'Hand-merge the upstream scratch copy .agents/skills/codex-first/ with skills/codex-first/; preserve local adaptations and reference routing, then: trash .agents/skills/codex-first'",
+      "upstreamPath": "skills/codex-first",
+      "upstreamRev": "034471e2ce1c72f5884890befa8afc2b2a961c2f",
+      "upstreamCheckedAt": "2026-08-27",
+      "notes": "Local audit (2026-09-05): portable routing rationale and dead-link removal. Preserve on refresh. Local model pin (2026-09-09): delegation runs -m gpt-6.1-sol at model_reasoning_effort=medium on both exec and resume, set explicitly rather than inherited from ~/.codex/config.toml so config drift cannot change what delegation means. Updated 2026-10-01 to the current workhorse gpt-6.1-sol. Preserve on refresh; bump the pin when a newer default workhorse model ships."
     },
     "commit-push-pr": {
       "origin": "derived",

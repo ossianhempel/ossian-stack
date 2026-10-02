@@ -432,7 +432,7 @@
       "assertions": [
         "Updates the existing project-hq-daily-wake instead of creating a duplicate",
         "Preserves prior registry entries and adds hq-1 exactly once with host and ledger identity",
-        "Uses gpt-5.6-luna with low reasoning for the automation and follow-up when supported",
+        "Uses gpt-6-luna with low reasoning for the automation and follow-up when supported",
         "Calls list_threads at most once with limit 1; a returned error or cancellation stops the run before follow-ups",
         "Daily run identifies HQs from the registry plus pinned state, never title or emoji alone",
         "The daily watchdog complements rather than replaces active-item heartbeat monitoring"

@@ -12,7 +12,7 @@ otherwise update its registered-HQ list without duplicating the job.
 
 Configure it as a standalone, projectless daily run in the user's local timezone.
 Default to 08:00 when the user has not chosen a time. Use the cheapest suitable
-model with low reasoning. In Codex, prefer `gpt-5.6-luna` with `low` reasoning for
+model with low reasoning. In Codex, prefer `gpt-6-luna` with `low` reasoning for
 both the automation and each follow-up turn when model override is supported.
 
 Each registry entry contains:
