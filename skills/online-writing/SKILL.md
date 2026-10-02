@@ -1,6 +1,6 @@
 ---
 name: online-writing
-description: "Audit online articles, newsletters, LinkedIn posts, and X threads for reader appeal, headline promises, hooks, pacing, structure, and credibility. Generate stronger headline and opening options when asked; research proven frames and select topics using reading, notes, and audience feedback. Does not draft full pieces or publish."
+description: "Audit online articles, newsletters, LinkedIn posts, and X threads for reader appeal, hooks, pacing, structure, and credibility. Compare revisions and use fresh reviewers when independent judgment matters. Generate headlines and openings when asked; research frames and select topics using reading, notes, and audience feedback. Does not draft full pieces or publish."
 ---
 
 # Online Writing
@@ -20,11 +20,19 @@ diagnostic pass on supplied drafts, retaining findings rather than its rewrite.
 Strong writing can be vivid, emotional, and rhythmic; remove performed language,
 not the writer's personality.
 
+Help the writer decide what to change without supplying replacement prose during
+an audit. Avoid encouragement, generic praise, and obligatory strengths sections;
+identify what works only when it helps the writer preserve a useful choice.
+Don't manufacture faults to sound critical. Distinguish necessary repairs from
+matters of taste, and treat advice as choices the writer can reject.
+
 ## Choose the work
 
 | The ask | Mode |
 |---|---|
 | Audit this; why won't it land; is this headline strong? | **Audit** |
+| Check the clarity, repetition, or structure only | **Focused audit** |
+| Which version works better; did this revision help? | **Compare** |
 | Give me better headlines, hooks, or an opening; make this more compelling | **Packaging** |
 | Audit this and give me better hooks | **Audit + Packaging** |
 | Why did this post work; add it to the swipe file | **Reverse audit** |
@@ -60,6 +68,12 @@ clearly labeled angle proposals when there is enough substance, and explain
 what material would be needed to fulfill each promise.
 
 ## Audit
+
+Use a fresh reviewer when independence matters: the user requests fresh eyes,
+you helped develop the passage and must judge it, or a consequential publication
+decision needs an independent reader's understanding. Read
+[Independent reviews](references/independent-reviews.md) before dispatching.
+Routine audits can stay in the current context; don't create a panel by default.
 
 Evaluate the whole reader journey. Use **strong / partial / weak**, supported by
 the smallest useful quote or location. Use **not applicable** with a reason when
@@ -102,6 +116,8 @@ Lead with the dominant issue and the inferred reader, form, and promise. Give
 compact verdict tables for the core elements and delivery checks, then up to
 three consequential findings in priority order. Each finding names the
 failure, points to its location, explains its reader effect, and names a fix.
+Describe the revision operation, such as moving an example before its explanation
+or naming who performed an action, rather than supplying replacement sentences.
 Report further material failures briefly; don't bury a real gap to meet a quota.
 Keep the report proportional to the piece: combine the two tables for a short
 post, use brief evidence cells, and don't explain the same defect in every row.
@@ -114,6 +130,38 @@ Keep AI tells separate, with their lines, or say none found. Don't treat plain
 language, deliberate repetition, parallel subheads, or varied sentence length
 as AI tells by themselves. Don't rewrite the draft during an audit-only request.
 If alternatives are requested, follow Packaging after diagnosing the problem.
+
+### Focused passes
+
+When a specific concern is requested, inspect the whole piece for context but
+report only that concern and any material credibility or promise failure. Skip
+the full verdict tables. When several problems interact, resolve meaning and
+structure before polishing sentences. Useful passes include:
+
+- **Structure:** misplaced paragraphs, delayed examples, missing reasoning, or
+  transitions that hide a gap rather than connect ideas.
+- **Progress and repetition:** repeated conclusions, redundant setup, recurring
+  phrasing, and words that add no meaning or intentional emphasis.
+- **Sentence clarity:** buried actors or actions, nominalizations, ambiguous
+  references, and modifiers that obscure the point.
+
+Flag the reader effect, not merely the presence of passive voice, an adverb,
+repetition, or unusual punctuation. Preserve deliberate rhythm, humor, digression,
+and idiosyncratic phrasing when they serve the piece. Style preferences alone
+don't establish AI authorship or justify making every sentence uniform.
+
+## Compare revisions
+
+Read [Independent reviews](references/independent-reviews.md). Compare the versions
+against the same reader, purpose, evidence, and voice constraints. Use a fresh
+context without revision history or a preferred answer; knowing which version
+is newer invites agreement instead of judgment. Identify concrete gains and
+losses, allow a mixed result or no meaningful improvement, and leave the next
+rewrite to the writer unless they request wording. Comparing versions does not
+authorize applying the preferred one to the source file.
+Return concise comparison findings rather than the full audit tables. When no
+voice guides or samples are available, mark fidelity to this writer as unverified;
+describe tonal differences without treating your preferred style as their voice.
 
 ## Packaging: headlines and openings
 
@@ -285,3 +333,10 @@ promotion, and learning through public feedback. These are editorial heuristics,
 not guarantees or a requirement to reproduce every tactic in the book. The
 six-element rubric, diagnostic boundary, and candidate-selection procedure are
 local adaptations. Honor the writer's active voice, goals, and explicit choices.
+
+The diagnostic editing boundary, encouragement restraint, and independent
+revision comparison also draw on Thomas Ptacek's
+[How To Write With An LLM](https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/).
+These are workflow choices, not evidence that readers reliably detect generated
+prose. Requested Packaging remains a deliberate exception to his ban on generated
+wording.
