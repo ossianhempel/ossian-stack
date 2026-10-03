@@ -98,6 +98,19 @@
         "The final message reports the watch state (armed with mechanism and next check, or ended with reason) and does not claim to be watching without an armed wake",
         "Does not merge or arm auto-merge"
       ]
+    },
+    {
+      "id": 9,
+      "name": "direct-develop-push-runs-review-gate",
+      "prompt": "I'm on develop and the change is done. Commit and push it with commit-push-pr, no PR. Project instructions allow direct pushes to develop. Describe the actions without executing tools.",
+      "expected_output": "Before committing, run simplify-code and then autoreview over the uncommitted work plus any unpushed develop commits, fix accepted findings, and only then commit and push develop. Report the gate outcome. No branch, PR, or babysit run.",
+      "files": [],
+      "assertions": [
+        "Runs simplify-code and then autoreview before committing, even though no PR is involved",
+        "Fixes accepted review findings and reruns review before pushing",
+        "Stops and reports instead of pushing if a review pass cannot run",
+        "Reports what simplify and review changed or which exception applied"
+      ]
     }
   ]
 }

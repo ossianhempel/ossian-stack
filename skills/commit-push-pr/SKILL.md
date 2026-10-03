@@ -1,6 +1,6 @@
 ---
 name: commit-push-pr
-description: "Commit and push completed work directly on main or develop, or create, update, and drive a PR for other branches or when project policy requires it. Route verified merged branches and worktrees to targeted cleanup."
+description: "Simplify and review, then commit and push completed work directly on main or develop, or create, update, and drive a PR for other branches or when project policy requires it. Route verified merged branches and worktrees to targeted cleanup."
 argument-hint: "[optional: --push-only | --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \"...\" | --work-items <id>]"
 ---
 
@@ -16,10 +16,16 @@ active branching policy or branch selection requires one; it never authorizes
 merging. Preserve explicit stop boundaries and narrower modes. Handoff defines when
 to start or resume a PR drive.
 
+**Every push is gated on `simplify-code` and `autoreview` (Step 3).** This holds on
+every path that pushes, and most of all on a direct push to `main` or `develop`:
+that push has no PR, bot, or reviewer after it, so the gate is the only review the
+change gets. A session habit, a small diff, or an earlier green test run does not
+waive it.
+
 Resolve the forge from the explicit URL or selected project remote/configuration
 before PR calls. GitHub/GHE uses the gh examples below with the actual host. Azure
 DevOps Services uses `references/azure-devops.md` for every forge operation in
-Steps 1, 5, and 6, then the same babysit follow-through. Read it first; gh commands
+Steps 1, 6, and 7, then the same babysit follow-through. Read it first; gh commands
 below do not apply to Azure. On GitLab use glab; other unsupported follow-through
 providers get an explicit limitation. If no forge interface is available, push and
 report the compare/create URL instead of inventing a PR or readiness. Never mix
@@ -33,9 +39,9 @@ providers or assume Azure DevOps Server support.
   other branch, use PR delivery unless the user explicitly requests a direct push.
   When a PR was requested or is required, open or update it and follow through to
   merge-ready (see Handoff).
-- `--push-only`, commit complete local changes (if needed) and push the checked-out
-  branch, then stop. A project rule that forbids direct pushes still applies; report
-  that conflict instead of bypassing it.
+- `--push-only`, run the Step 3 gate, commit complete local changes (if needed),
+  and push the checked-out branch, then stop. A project rule that forbids direct
+  pushes still applies; report that conflict instead of bypassing it.
 - `--update`, refresh an existing PR's title/body for the current branch. Requires an
   open PR; if none, report and stop. Metadata only; no commit, push, or new babysit.
 - `--description-only` (add `--body-only` to print just the body), compose the title
@@ -107,7 +113,7 @@ instructions already in your context, then apply the selected path:
   branch, verify that it is checked out or ask before moving completed work. Do not
   create a branch or worktree. Verify that the branch is the intended work and that
   its upstream, when configured, matches the selected remote branch. Then continue
-  to Steps 3-4 and stop. If project policy forbids direct pushes to that branch,
+  to Steps 3-5 and stop. If project policy forbids direct pushes to that branch,
   report the policy conflict; do not silently convert an explicit no-PR request
   into a PR.
 
@@ -139,7 +145,36 @@ closeout, do not push into an unverified existing PR at all.
 
 In `--branch-only` mode, stop here and report the branch state.
 
-## Step 3: Commit complete work
+## Step 3: Simplify and review before committing
+
+Mandatory whenever this invocation will push commits: default delivery on either
+path, `--push-only`, and `--pr-only` when it pushes unpushed commits. Modes that
+push nothing (`--update`, `--description-only`, `--branch-only`) skip it. Run it
+before Step 4 so its fixes land in the commits being shipped. Under `--pr-only`,
+the scope is the unpushed commits; commit gate fixes on their own and leave the
+pre-existing uncommitted changes alone.
+
+Scope is everything the push will deliver: the complete uncommitted work plus local
+commits not yet on the push target (`git log @{upstream}..HEAD`, or
+`origin/<default>..HEAD` when the branch has no upstream).
+
+1. **Simplify.** Run `simplify-code` over that scope and keep its
+   behavior-preserving edits.
+2. **Review.** Then run `autoreview` over the same scope, including the simplify
+   edits. Follow its contract: verify each finding, fix the accepted ones, rerun
+   focused tests, and rerun review until no accepted actionable findings remain.
+
+The gate is already satisfied only when both passes ran in this session over exactly
+the content being pushed and nothing has changed since. A pass that declares the
+scope outside its own remit (simplify's "nothing to simplify" scopes, autoreview's
+prose-only exception) counts as run; record which exception applied. Skip a pass
+only when the user explicitly says to in this request.
+
+If a pass cannot run (engine unavailable, auth or tool failure), stop before
+committing and report the blocker. Push unreviewed work only after the user
+explicitly accepts that.
+
+## Step 4: Commit complete work
 
 Survey `git status`, `git diff`, and `git diff --staged`. Group the changes into
 coherent logical units, one commit per unit; not one giant commit, not one per file;
@@ -165,7 +200,7 @@ only when the user asks. If a hook rejects the commit, fix and create a new comm
 do not amend the failed one. If the branch implements a plan or spec with a tracked
 status, update that status to match what is shipping **before** the push.
 
-## Step 4: Push
+## Step 5: Push
 
 ```bash
 git push -u origin HEAD
@@ -176,9 +211,9 @@ force-push a shared branch. If the remote moved, follow the enclosing action sco
 a babysit helper reports the needed rebase to its owner and returns; outside that
 restriction, fetch and rebase rather than force.
 
-## Step 5: Compose the title and body for PR delivery
+## Step 6: Compose the title and body for PR delivery
 
-Skip Steps 5-6 entirely for direct-branch delivery.
+Skip Steps 6-7 entirely for direct-branch delivery.
 
 **You MUST read `references/pr-description.md`** (in this skill's directory) in full,
 its core principle governs the writing: the diff is already visible; the description
@@ -203,7 +238,7 @@ unlinked and say nothing about it.
 
 If `--title` was supplied, use it; otherwise compose. ASCII only.
 
-## Step 6: Apply and report
+## Step 7: Apply and report
 
 For GitHub, write the body to a temp file and pass it by file reference, never inline
 `--body "$(cat ...)"`, which can silently produce an empty body while the CLI exits 0:
@@ -232,10 +267,11 @@ Never merge (`gh pr merge`, `glab mr merge`, Azure `--auto-complete`) and never 
 auto-merge, landing is the user's call.
 
 **Report:** for direct-branch delivery, report the pushed branch, commits included,
+the Step 3 outcome (what simplify and review changed, or the exception that applied),
 and what stayed unstaged and why. For PR delivery, report the PR URL, target branch,
-the commits included, what stayed unstaged and why, and whether the PR is draft or
-ready. In `--update` mode report the title/body changes applied; in `--pr-only` note
-that uncommitted changes were left alone.
+the commits included, the Step 3 outcome, what stayed unstaged and why, and whether
+the PR is draft or ready. In `--update` mode report the title/body changes applied;
+in `--pr-only` note that uncommitted changes were left alone.
 
 ## Handoff
 
@@ -258,8 +294,6 @@ that uncommitted changes were left alone.
   result. Do not mark a draft ready to trigger follow-through.
 - On a forge unsupported by `babysit-pr`, report the delivered PR and unverified
   follow-through limitation; never claim merge-ready from creation alone.
-- The work has not had a review pass this session and the push is about to happen →
-  suggest `autoreview` before Step 4, not after.
 - After a merge, use the targeted post-merge cleanup below.
 
 ## Targeted post-merge cleanup

@@ -691,7 +691,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Commit Push PR",
-   "description": "Commit and push completed work directly on main or develop, or create, update, and drive a PR for other branches or when project policy requires it. Route verified merged branches and worktrees to targeted cleanup.",
+   "description": "Simplify and review, then commit and push completed work directly on main or develop, or create, update, and drive a PR for other branches or when project policy requires it. Route verified merged branches and worktrees to targeted cleanup.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": "[optional: --push-only | --update | --description-only | --pr-only | --branch-only | --draft | --base <branch> | --title \\\"...\\\" | --work-items <id>]",
@@ -703,6 +703,7 @@
     "blast-radius",
     "git-cleanup",
     "show-me",
+    "simplify-code",
     "unslop"
    ],
    "routes": [],
@@ -1666,6 +1667,7 @@
    ],
    "routes": [],
    "calledBy": [
+    "commit-push-pr",
     "ossian-mode",
     "refactoring"
    ],

@@ -244,6 +244,7 @@
       "blast-radius",
       "git-cleanup",
       "show-me",
+      "simplify-code",
       "unslop"
     ],
     "content-repurposing": [
