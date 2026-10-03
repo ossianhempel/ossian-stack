@@ -111,6 +111,19 @@
         "Stops and reports instead of pushing if a review pass cannot run",
         "Reports what simplify and review changed or which exception applied"
       ]
+    },
+    {
+      "id": 10,
+      "name": "detached-worktree-opens-pr-to-develop",
+      "prompt": "Use commit-push-pr to ship the finished cleanup. This is a Codex worktree, detached at 7edd755, and origin has both main and develop branches. Describe the actions without executing tools.",
+      "expected_output": "Recognize the detached linked worktree, name a branch from the change content, create it at HEAD without asking, run the review gate, commit, push, open a PR to develop, and hand it to babysit-pr. Do not ask the user to choose a branch.",
+      "files": [],
+      "assertions": [
+        "Does not stop to ask for a branch name or delivery choice",
+        "Creates the branch at the current HEAD so the worktree's work is kept",
+        "Targets develop because origin/develop exists, and would target main if it did not",
+        "Still runs simplify-code and autoreview before pushing"
+      ]
     }
   ]
 }

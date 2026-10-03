@@ -75,13 +75,20 @@ persist between calls):
 git status --short && git branch --show-current
 git --no-pager log --oneline -10
 git remote get-url origin
+git rev-parse --git-dir --git-common-dir
+git rev-parse --verify --quiet origin/develop
 ```
 
 Resolve the default branch from `git rev-parse --abbrev-ref origin/HEAD` (strip the
-`origin/` prefix, fall back to `main`). Select the delivery path before forge calls:
+`origin/` prefix, fall back to `main`). The checkout is a **linked worktree** when
+the git-dir and common-dir paths differ. The repository **uses develop** when
+`origin/develop` resolves. Select the delivery path before forge calls:
 
 - Choose direct-branch delivery by default only when the checked-out branch is
   exactly `main` or `develop` and project policy permits direct pushes.
+- A detached HEAD in a linked worktree selects PR delivery (Step 2). In any linked
+  worktree, a new PR without an explicit `--base` targets `develop` when the
+  repository uses develop, else the default branch.
 - Choose PR delivery for every other branch, when the user explicitly requests a
   PR, when a PR-specific mode is used, or when the project's active branching rule
   requires changes to land through a PR.
@@ -132,7 +139,16 @@ instructions already in your context, then apply the selected path:
   pop conflicts rather than auto-resolving. If the fetch failed, branch from local HEAD
   and say base freshness was not verified.
 
-- **Detached HEAD**, explain a branch is required and ask; never commit detached.
+- **Detached HEAD in a linked worktree**, do not ask. Agent harnesses create
+  worktrees detached, so this is the normal shape of worktree work, not an
+  ambiguity. Name a branch from the change content (the project's convention, else
+  the harness's branch prefix when it has one, else `feature/<slug>`), create it at
+  the current HEAD with `git switch -c <branch>` so local commits and uncommitted
+  work come along, and continue with PR delivery to the worktree base from Step 1.
+  The alignment check below still applies: if the detached commits are not this
+  work, or carry commits outside it relative to that base, stop and ask.
+- **Detached HEAD in the primary checkout**, explain a branch is required and ask;
+  never commit detached.
 
 Branch naming follows the project's convention; otherwise `feature/<slug>` from the
 change content.
