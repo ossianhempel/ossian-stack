@@ -182,7 +182,6 @@ conditions — that is the one place a description is maintained.
 | `.cursor-plugin/marketplace.json` | Cursor Git marketplace catalog |
 | `.gemini-plugin/plugin.json` | Antigravity plugin manifest, same `skills/` tree |
 | `plugin.json` | Symlink to `.gemini-plugin/plugin.json` (Antigravity discovery) |
-| `bin/docs-list` | Docs indexer — lists `./docs` for whatever repo you run it in |
 | `.agents/skills/` | Internal skills — loaded only in this checkout, never shipped |
 | `.claude/skills` | Symlink to `.agents/skills` so Claude Code sees the same tier |
 | `scripts/` | Repo-local dev tooling, not plugin surface |

@@ -91,7 +91,6 @@ commands/               Slash commands (currently empty)
 .cursor-plugin/         Cursor plugin manifest + marketplace catalog, same skills/ tree
 .gemini-plugin/         Antigravity plugin manifest, same skills/ tree
 plugin.json             Symlink to .gemini-plugin/plugin.json for Antigravity discovery
-bin/docs-list           Docs indexer — ships with the plugin
 scripts/                Repo-local dev tooling — NOT plugin surface
 .agents/skills/         Internal skills — loaded only in this checkout, never shipped
 .claude/skills          Symlink to .agents/skills so Claude Code loads the same tier
@@ -102,7 +101,7 @@ docs/                   Repo docs
 
 A change here touches one of three surfaces. Do not assume which without checking:
 
-- **Plugin content** — `skills/`, `commands/`, `bin/docs-list`, and the native
+- **Plugin content** — `skills/`, `commands/`, and the native
   manifests. This is what reaches users; changes need the relevant manifest and
   documentation checks.
 - **Repo tooling** — `scripts/`, `package.json`, `.agents/skills/`. Runs only in a
@@ -237,7 +236,10 @@ never here.
 
 - Use `bun run docs:list` for unfamiliar, architectural, installation, or workflow
   work — it prints `summary` + `read_when` for every doc. For a localized edit,
-  read the applicable document directly. In other repos, prefer that repo's own `docs:list` or `bin/docs-list`, then the
-  copy this plugin ships at `${CLAUDE_PLUGIN_ROOT}/bin/docs-list`, which lists `./docs`
-  from the current working directory and exits 0 when there is none.
+  read the applicable document directly. In other repos, prefer that repo's own
+  `docs:list` or `bin/docs-list`.
+- **No top-level `bin/`.** claude.ai rejects a plugin that ships one (its
+  executables go on the CLI's PATH but are not shown on the approval surface), and
+  the marketplace sync then fails with only "Check the repository URL". The docs
+  indexer lives at `scripts/docs-list` as repo tooling.
 - Add `read_when` hints to cross-cutting docs.

@@ -4,7 +4,7 @@
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-script="$here/../scripts/docs-list.ts"
+script="$here/docs-list.ts"
 
 if command -v node >/dev/null 2>&1 && node --experimental-strip-types --eval "" >/dev/null 2>&1; then
   exec node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON "$script" "$@"
@@ -15,6 +15,6 @@ elif command -v bun >/dev/null 2>&1; then
 elif command -v npx >/dev/null 2>&1; then
   exec npx --yes tsx "$script" "$@"
 else
-  echo "bin/docs-list: needs Node with --experimental-strip-types, tsx, bun, or npx (none found)" >&2
+  echo "scripts/docs-list: needs Node with --experimental-strip-types, tsx, bun, or npx (none found)" >&2
   exit 127
 fi
