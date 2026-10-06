@@ -11,9 +11,11 @@ whose contract is already obvious does not need this skill.
 
 ## Ground the boundary
 
-Run `how` over the affected subsystem. Use `why` only when existing ownership or
-layering may encode a deliberate constraint. State the current callers, data flow,
-owner, and invariants.
+Reuse current evidence of the affected subsystem's contract and ownership. Run
+`how` when that evidence is missing or stale; use `why` only when ownership or
+layering may encode a deliberate constraint. State the callers, data flow,
+owner, and invariants. Load `codebase-design` for interface, locality, and
+testability criteria; reuse its assessment if already established in this task.
 
 ## Sketch from the caller inward
 
@@ -23,16 +25,17 @@ registry, reducer, boundary parser, or other concrete form.
 3. Sketch types, signatures, errors, and module ownership. Bodies may remain
 pseudocode or `not implemented`.
 4. Name compatibility, migration, concurrency, and persistence constraints.
-5. Screen for pass-through layers, leaked implementation details, temporal
-coupling, shared mutable state, and escape hatches in the type system.
+5. Judge the sketch with `codebase-design` and screen for escape hatches in the
+type system. Apply the findings here; do not start a separate architecture audit.
 
 When the shape is genuinely unsettled, produce two or three structurally distinct
-candidates. Isolate the attempts, judge them against caller simplicity and hidden
-complexity, choose one base, and record what the alternatives exposed. Do not run
+candidates. Use the comparison lenses bundled with `codebase-design`, isolate
+the attempts, choose one base, and record what the alternatives exposed. Do not run
 a bakeoff when one established repository pattern already answers the question.
 
-Proceed to implementation unless the user requested a design checkpoint. During
-implementation, treat repeated deviations of the same shape as evidence that the
+Proceed to implementation when it is within the user's authorized scope; honor
+design-only and review-only requests. During implementation, treat repeated
+deviations of the same shape as evidence that the
 architecture is wrong. Re-ground and replace the sketch instead of adding a chain
 of exceptions.
 

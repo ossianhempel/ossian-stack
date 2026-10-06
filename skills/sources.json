@@ -18,7 +18,7 @@
       "origin": "adapted",
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/architect",
-      "notes": "Lean cross-runtime adaptation of pstack architect. Preserves caller-first contracts, data-shape and module sketches, alternatives for genuinely unsettled designs, and redesign on repeated implementation friction. Removes mandatory model names, todolist mechanics, mandatory arena fan-out, and scaffold commits.",
+      "notes": "Lean cross-runtime adaptation of pstack architect. Preserves caller-first contracts, data-shape and module sketches, alternatives for genuinely unsettled designs, and redesign on repeated implementation friction. Removes mandatory model names, todolist mechanics, mandatory arena fan-out, and scaffold commits. Local integration (2026-10-05): loads codebase-design for module design criteria and comparison lenses; architect retains caller-first sketching and workflow ownership, reusing an established assessment. Reuses current subsystem evidence rather than re-running how, and honors design-only/review-only scope.",
       "upstreamPath": "pstack/skills/architect",
       "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
       "upstreamCheckedAt": "2026-09-06",
@@ -105,6 +105,17 @@
       "upstreamPath": "skills/core/clerk-cli",
       "upstreamRev": "220d754d75de74108b07797d58e5306cc2cd87b2",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "codebase-design": {
+      "origin": "adapted",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/codebase-design",
+      "refresh": "npx skills add mattpocock/skills -y --skill codebase-design && echo 'Hand-merge .agents/skills/codebase-design/ into skills/codebase-design/; preserve local ownership, routing, terminology, proportional exploration, and test-coverage safeguards, then: trash .agents/skills/codebase-design'",
+      "notes": "Adapted 2026-10-05 as shared design criteria, automatically loaded by architect and refactoring when module boundaries or interfaces need judgment. Preserves deep modules, full caller obligations, deletion test, leverage/locality, dependency categories, and interface comparison lenses. Local adaptations: respect project terminology; retain valuable thin adapters and internal tests; qualify substitute fidelity; require replacement coverage before deleting tests; control necessary effects with existing construction patterns; no compulsory agent fan-out or separate audit. Reuse an established assessment and keep workflow ownership with the caller. Merge by hand on refresh; never overwrite.",
+      "upstreamPath": "skills/engineering/codebase-design",
+      "upstreamRev": "d80fa0f4ebe0c5714af0adf8670336065233ecc6",
+      "upstreamCheckedAt": "2026-10-05",
+      "lastSynced": "2026-10-05"
     },
     "codex-first": {
       "origin": "adapted",
@@ -311,9 +322,19 @@
       "origin": "local",
       "notes": "Renamed from orchestrate-threads on 2026-09-11. Establishes one pinned project HQ as the user's sole interface for a durable task queue. HQ captures task dumps with stable IDs, priorities, dependencies, authority and one owner; it records dispatching before creation, reuses workstream owners, monitors evidence, and continues ready work until the queue is empty or human input is required. Durable tasks serve ongoing isolated work, subagents serve bounded work, and the user never carries briefs or messages between them. The compact docs/agents/hq.md ledger is medium-term operational memory; detailed reports remain with owners and confirmed reusable lessons belong in project docs. A single idempotent project-hq-daily-wake automation registers active HQ addresses and uses a cheap model to wake registered pinned HQs daily, while active work retains its shorter heartbeat. Tracker use remains per item and never follows from availability. Repository action and delivery authority remain explicit. GitHub Copilot HQ preserves its checkout and delegates repository mutation only to a verified separate worktree."
     },
+    "optimise-github-actions": {
+      "origin": "derived",
+      "repo": "https://github.com/enesgules/dotfiles",
+      "path": "skills/optimise-github-actions",
+      "upstreamPath": "skills/optimise-github-actions",
+      "upstreamRev": "a94d573e88056df6ca45eaf2f1813145ffc7ef03",
+      "upstreamCheckedAt": "2026-10-04",
+      "refresh": "Inspect enesgules/dotfiles skills/optimise-github-actions and current official GitHub billing/API documentation; manually update the original local implementation. Do not copy upstream files without a verified license.",
+      "notes": "Original prose and Python 3/gh GET-only collector inspired by the pinned audit approach, not a vendored copy. Pinned tree contains no license file and GitHub license endpoint returned 404 on 2026-10-04. Current GitHub documentation owns API/billing semantics. Explicit user invocation only in both SKILL.md and agents/openai.yaml. Audits remain read-only; existing implementation/delivery authorization carries forward without a forced new approval. Preserve per-attempt allocation/label accounting, public-standard/Dependabot-own-run exemptions, unknown larger/custom runner handling, current pricing separate from actual spend, partial API errors with null definitive totals, and hydrated run-detail metadata after retries. No Node dependency. Fixture tests cover accounting and API contradictions/partial failures; live host invocation behavior is unverified."
+    },
     "ossian-mode": {
       "origin": "local",
-      "notes": "Authored from the approved Ossian Mode scope: explicitly invoked working standards and routing into existing skills. Routes command credentials through one-password and tracker-dependent work through project conventions, with setup only when required configuration is missing. No upstream playbook copied. Includes matching Claude/Cursor and Codex explicit-invocation metadata. Tracker routing preserves untracked planning/build work and limits missing-configuration setup to a chosen ticket workflow."
+      "notes": "Authored from the approved Ossian Mode scope: explicitly invoked working standards and routing into existing skills. Routes command credentials through one-password and tracker-dependent work through project conventions, with setup only when required configuration is missing. No upstream playbook copied. Includes matching Claude/Cursor and Codex explicit-invocation metadata. Tracker routing preserves untracked planning/build work and limits missing-configuration setup to a chosen ticket workflow. Local routing (2026-10-05): architect and refactoring own loading codebase-design; reuse established design decisions instead of treating support skills as separate phases."
     },
     "performance": {
       "origin": "adapted",
@@ -430,7 +451,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/poteto-mode",
       "refresh": "npx skills add cursor/plugins -y --skill poteto-mode && echo 'hand-merge playbooks/refactoring.md from .agents/skills/poteto-mode/ then: trash .agents/skills/poteto-mode'",
-      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/refactoring.md into a standalone skill. Adapted: the playbook cites twelve sibling skills this plugin does not ship, so each citation was replaced with the principle it stood for, stated inline. Three were restored on 2026-08-29 once we vendored them (principle-prove-it-works, principle-redesign-from-first-principles, principle-exhaust-the-design-space); the 'how' reference is kept since we ship it; a hardcoded default refactoring model was dropped. Boundary with simplify-code: that one makes settled code readable in place, this one moves modules, APIs, and call graphs. Merge by hand on refresh; never overwrite. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description; behavior proof, live compatibility, and authorized large scope. Preserve on refresh.",
+      "notes": "Extracted 2026-08-29 from poteto-mode's playbooks/refactoring.md into a standalone skill. Adapted: the playbook cites twelve sibling skills this plugin does not ship, so each citation was replaced with the principle it stood for, stated inline. Three were restored on 2026-08-29 once we vendored them (principle-prove-it-works, principle-redesign-from-first-principles, principle-exhaust-the-design-space); the 'how' reference is kept since we ship it; a hardcoded default refactoring model was dropped. Boundary with simplify-code: that one makes settled code readable in place, this one moves modules, APIs, and call graphs. Merge by hand on refresh; never overwrite. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description; behavior proof, live compatibility, and authorized large scope. Preserve on refresh. Local integration (2026-10-05): loads codebase-design for structural interface or boundary choices and architect only for unsettled contracts/ownership. Reuses existing design work; mechanical changes skip design skills. Deepening may earn its place through simpler caller obligations and locality without deleting branches. Wrapper removal follows the deletion test, preserving real translation and compatibility contracts regardless of caller count.",
       "upstreamPath": "pstack/skills/poteto-mode",
       "upstreamRev": "68836ddaf5697224520f1847d90cdb90ca8babaa",
       "upstreamCheckedAt": "2026-08-29"
@@ -546,6 +567,16 @@
       "upstreamRev": "63d938c2e4a165a0fec1bd0f61a8e325f0cb751e",
       "upstreamCheckedAt": "2026-08-28",
       "lastSynced": "2026-08-28"
+    },
+    "writing-for-agents": {
+      "origin": "vendored",
+      "repo": "https://github.com/mattpocock/skills",
+      "path": "skills/productivity/writing-for-agents",
+      "refresh": "npx skills add mattpocock/skills -y --skill writing-for-agents && cp -R .agents/skills/writing-for-agents/* skills/writing-for-agents/ && trash .agents/skills/writing-for-agents",
+      "upstreamPath": "skills/productivity/writing-for-agents",
+      "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
+      "upstreamCheckedAt": "2026-10-07",
+      "lastSynced": "2026-10-07"
     }
   }
 }

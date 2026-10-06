@@ -72,6 +72,11 @@ to implementation; its size alone does not require a planning detour.
 | Refactoring | `refactoring` for structural changes with behavior preserved; `simplify-code` for readability in place. |
 | Delivery | Use `blast-radius` before delivery when safety depends on behavior beyond the diff. Use `commit-push-pr` for requested commits, pushes, and PRs; `babysit-pr` for an existing PR's readiness work; `release-ios-app` for an authorized iOS release. |
 
+`architect` and `refactoring` load Codebase Design when module interfaces or
+boundaries need judgment. Let the selected workflow own the plan, implementation,
+and verification; reuse its design decisions instead of running each skill as a
+separate phase. Mechanical changes and readability cleanup skip that design work.
+
 Keep `project-hq` reserved for standing projects with a durable task queue and
 multiple execution owners.
 

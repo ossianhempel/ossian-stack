@@ -41,9 +41,10 @@ Say what shape the code is reaching for: a state machine over scattered booleans
 a table or registry over spread-out branching, a typed model over repeated shape
 assumptions, a reducer over ad hoc mutation.
 
-The reshape must **delete branches or make invalid states unrepresentable**. If
-it only adds indirection, it is not the right shape. Boring code stays when the
-shape is already clear and local.
+The reshape must remove needless decisions, make invalid states unrepresentable,
+or concentrate related behavior behind a simpler interface. If it only adds
+indirection, it is not the right shape. Boring code stays when the shape is
+already clear and local.
 
 ## 3. Name the target shape before moving
 
@@ -53,13 +54,21 @@ requirement reads as if it had been there on day one. Write it down before the
 first move, so the moves have something to aim at and you can tell when you have
 arrived.
 
-If the right shape is not obvious, do not pick the first one. Sketch two or three
-and compare them before committing, per `principle-exhaust-the-design-space`.
+For module boundary or interface changes, load `codebase-design` to judge the
+target shape. If caller contracts or ownership remain unsettled, use `architect`
+to settle them. Reuse a design and assessment already established in this task;
+do not repeat exploration or start a separate audit. Mechanical renames and moves
+with settled contracts and ownership skip both skills.
+
+If the right shape is not obvious, use the comparison lenses in `codebase-design`
+for two or three alternatives before moving. An existing comparison is sufficient.
 
 ## 4. Subtract before you add
 
-Delete dead weight, collapse one-caller wrappers, drop redundant validators, and
-remove orphan references **before** introducing the new shape. Deletion shrinks
+Delete dead weight, collapse wrappers that own no useful contract, drop redundant
+validators, and remove orphan references **before** introducing the new shape.
+Use the deletion test in `codebase-design` for module changes; a single caller
+does not make a translation or compatibility adapter redundant. Deletion shrinks
 the surface the reshape has to cover.
 
 The smallest change that reaches the target shape ships. A speculative cleanup
@@ -92,8 +101,9 @@ artifact.
 
 ## 7. Confirm the change earned its place
 
-The measure is **reduced reader load**: fewer layers between a question and its
-answer, less hidden state, fewer indirections that have only one consumer.
+The measure is **reduced reader load**. For module changes, use the
+`codebase-design` assessment: fewer caller obligations and more locality. For
+mechanical changes, confirm that naming or placement makes the code easier to find.
 
 If the diff does not lower reader load somewhere, revert it. A refactor that
 leaves the code equally hard to read has spent risk for nothing.

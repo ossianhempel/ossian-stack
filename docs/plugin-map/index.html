@@ -251,6 +251,10 @@
     ],
     "extras": [
      {
+      "id": "codebase-design",
+      "note": "module design criteria"
+     },
+     {
       "id": "create-verification-skill",
       "note": "when a reusable harness is missing"
      }
@@ -462,6 +466,7 @@
    }
   ],
   "sideDoors": [
+   "optimise-github-actions",
    "project-hq",
    "setup-ossian-stack",
    "git-cleanup",
@@ -470,7 +475,8 @@
    "retro",
    "maintain-verification-skill",
    "skill-creator",
-   "skill-cleaner"
+   "skill-cleaner",
+   "writing-for-agents"
   ],
   "knowledge": {
    "title": "Principles",
@@ -520,10 +526,8 @@
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [
+    "codebase-design",
     "how",
-    "principle-exhaust-the-design-space",
-    "principle-model-the-domain",
-    "principle-redesign-from-first-principles",
     "why"
    ],
    "routes": [],
@@ -691,6 +695,25 @@
    "routes": [],
    "calledBy": [
     "skill-creator"
+   ],
+   "routedBy": []
+  },
+  "codebase-design": {
+   "id": "codebase-design",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Codebase Design",
+   "description": "Design or assess module interfaces, hidden complexity, dependency seams, and testability. Supplies design criteria to architecture and structural refactoring; skip mechanical edits and readability-only cleanup.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "routes": [],
+   "calledBy": [
+    "architect",
+    "refactoring"
    ],
    "routedBy": []
   },
@@ -1212,6 +1235,22 @@
    ],
    "routedBy": []
   },
+  "optimise-github-actions": {
+   "id": "optimise-github-actions",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Optimise GitHub Actions",
+   "description": "Explicitly invoked GitHub Actions audit: reconstruct runner usage, diagnose slow or unreliable CI, and rank safe cost/speed changes. Audit requests are read-only.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "derived",
+   "repo": "https://github.com/enesgules/dotfiles",
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
   "ossian-mode": {
    "id": "ossian-mode",
    "type": "skill",
@@ -1326,10 +1365,8 @@
    "calls": [],
    "routes": [],
    "calledBy": [
-    "architect",
     "diagnosing-bugs",
-    "prototype",
-    "refactoring"
+    "prototype"
    ],
    "routedBy": []
   },
@@ -1365,9 +1402,7 @@
    "repo": "https://github.com/cursor/plugins",
    "calls": [],
    "routes": [],
-   "calledBy": [
-    "architect"
-   ],
+   "calledBy": [],
    "routedBy": []
   },
   "principle-prove-it-works": {
@@ -1407,7 +1442,6 @@
    "calls": [],
    "routes": [],
    "calledBy": [
-    "architect",
     "refactoring"
    ],
    "routedBy": []
@@ -1534,8 +1568,8 @@
    "calls": [
     "architect",
     "blast-radius",
+    "codebase-design",
     "how",
-    "principle-exhaust-the-design-space",
     "principle-prove-it-works",
     "principle-redesign-from-first-principles",
     "simplify-code"
@@ -1839,10 +1873,26 @@
    "routedBy": [
     "how"
    ]
+  },
+  "writing-for-agents": {
+   "id": "writing-for-agents",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Writing for Agents",
+   "description": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "vendored",
+   "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
   }
  },
  "counts": {
-  "skills": 64,
+  "skills": 67,
   "agents": 0,
   "plugins": 1
  }

@@ -67,6 +67,9 @@
     "clerk-cli": {
       "role": "both"
     },
+    "codebase-design": {
+      "role": "both"
+    },
     "codex-first": {
       "role": "both"
     },
@@ -143,6 +146,9 @@
       "role": "both"
     },
     "project-hq": {
+      "role": "human"
+    },
+    "optimise-github-actions": {
       "role": "human"
     },
     "ossian-mode": {
@@ -227,6 +233,9 @@
       "role": "both"
     },
     "why": {
+      "role": "both"
+    },
+    "writing-for-agents": {
       "role": "both"
     }
   },
@@ -317,8 +326,8 @@
     "refactoring": [
       "architect",
       "blast-radius",
+      "codebase-design",
       "how",
-      "principle-exhaust-the-design-space",
       "principle-prove-it-works",
       "principle-redesign-from-first-principles",
       "simplify-code"
@@ -369,10 +378,8 @@
       "principle-prove-it-works"
     ],
     "architect": [
+      "codebase-design",
       "how",
-      "principle-exhaust-the-design-space",
-      "principle-model-the-domain",
-      "principle-redesign-from-first-principles",
       "why"
     ],
     "blast-radius": [
@@ -492,6 +499,10 @@
           }
         ],
         "extras": [
+          {
+            "id": "codebase-design",
+            "note": "module design criteria"
+          },
           {
             "id": "create-verification-skill",
             "note": "when a reusable harness is missing"
@@ -704,6 +715,7 @@
       }
     ],
     "sideDoors": [
+      "optimise-github-actions",
       "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
@@ -712,7 +724,8 @@
       "retro",
       "maintain-verification-skill",
       "skill-creator",
-      "skill-cleaner"
+      "skill-cleaner",
+      "writing-for-agents"
     ],
     "knowledge": {
       "title": "Principles",
