@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-10-04",
+  "updated": "2026-10-07",
   "description": "Upstream map for skills/, the plugin ships this tree as-is; vendored skills must be refreshed manually. See docs/skills-sources.md.",
   "skills": {
     "app-store-optimization": {
@@ -63,6 +63,17 @@
       "upstreamPath": "skills/better-accessibility",
       "upstreamRev": "6c43b20ce00f720eed854591abe480127629c191",
       "upstreamCheckedAt": "2026-08-27"
+    },
+    "bird": {
+      "origin": "adapted",
+      "repo": "https://github.com/openclaw/openclaw",
+      "path": "skills/bird/SKILL.md",
+      "upstreamPath": "skills/bird/SKILL.md",
+      "upstreamRev": "76b5208b11eebf2071ad5a363666467417ea5792",
+      "upstreamCheckedAt": "2026-10-07",
+      "lastSynced": "2026-10-07",
+      "refresh": "gh api 'repos/openclaw/openclaw/contents/skills/bird/SKILL.md?ref=76b5208b11eebf2071ad5a363666467417ea5792' -H 'Accept: application/vnd.github.raw+json' # Compare and hand-merge; upstream removed this skill in 31a7e4f9375f64ee3177bdc955cbe73dadfd96b1.",
+      "notes": "Adapted historical OpenClaw Bird skill for portable runtimes, explicit write authorization, account consistency, credential protection (avoid check output), bounded reads, source attribution, and verified 0.8.0 flags. Adds local agents/openai.yaml and upstream MIT license. CLI dependency requires Node >=22; npm package is deprecated and old Homebrew formula unavailable as of 2026-10-07. No bundled Node/Bun executable or package installation during normal reads. Hand-merge on refresh; historical upstream skill was removed."
     },
     "blast-radius": {
       "origin": "adapted",

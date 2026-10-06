@@ -55,6 +55,9 @@
     "better-accessibility": {
       "role": "both"
     },
+    "bird": {
+      "role": "both"
+    },
     "blast-radius": {
       "role": "both"
     },
@@ -675,6 +678,16 @@
         "skills": [
           {
             "id": "things",
+            "phase": "reference"
+          }
+        ]
+      },
+      {
+        "id": "x",
+        "title": "X / Twitter",
+        "skills": [
+          {
+            "id": "bird",
             "phase": "reference"
           }
         ]
