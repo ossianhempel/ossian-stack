@@ -23,8 +23,8 @@ Select the target with the target-selection reference before invoking review. Th
 
 ## Contract
 
-- Default output includes P0 and P1 findings. Use `--max-priority P0` for a
-  narrower review, or `--max-priority P2` or `P3` when the caller explicitly
+- Default output includes P0, P1, and P2 findings. Use `--max-priority P0` or
+  `P1` for a narrower review, or `--max-priority P3` when the caller explicitly
   asks to include lower-priority findings.
 - Treat review output as advisory. Never blindly apply it.
 - Verify every finding by reading the real code path and adjacent files.
