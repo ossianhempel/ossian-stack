@@ -11,6 +11,12 @@ requested outcome regardless of PR size; status checks stay read-only. Default
 `commit-push-pr` follow-through starts the drive once the agreed build phase is
 complete, or resumes its existing owner. Babysitting never merges.
 
+Monitoring uses a host PR activity subscription when one is available. The bundled
+checker supplies fresh evidence on wakes; its polling command is the fallback.
+`references/monitoring.md` defines ownership, review discovery across wakes, and
+disarming at handback. Missing required approval is an explicit merge gate even
+when CI is green. Fixes belong in the shared checker rather than per-request loops.
+
 ## What changed from upstream
 
 | Upstream | Here |

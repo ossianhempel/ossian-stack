@@ -486,7 +486,7 @@
           },
           {
             "id": "babysit-pr",
-            "writes": "merge-ready PR"
+            "writes": "merge-ready PR + confirmed watch"
           },
           {
             "id": "resolve-pr-feedback",

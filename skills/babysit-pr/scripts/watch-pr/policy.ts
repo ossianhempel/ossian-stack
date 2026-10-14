@@ -169,6 +169,7 @@ function gateReason(
   if (row.kind === "merged") return null;
   if (row.kind === "closed") return "closed-without-merge";
   if (row.facts.isDraft && !allowDraft) return "draft-pr";
+  if (row.facts.reviewDecision === "REVIEW_REQUIRED") return "review-required";
   return row.facts.reviewDecision === "CHANGES_REQUESTED"
     ? "changes-requested"
     : null;
@@ -204,7 +205,8 @@ function readyContribution(
   )
     return null;
   const reviewDecision = row.facts.reviewDecision;
-  if (reviewDecision === "CHANGES_REQUESTED") return null;
+  if (reviewDecision === "CHANGES_REQUESTED" || reviewDecision === "REVIEW_REQUIRED")
+    return null;
   return {
     kind: "ready-pr",
     context: row.context,
@@ -450,6 +452,7 @@ export async function runSimple(args: {
           exitCode: 0,
           reason: "status-only",
           rows: complete,
+          decisions: complete.map((row) => classifyPr(row, args.options.allowDraft)),
         }),
       };
     if (args.mode === "queued-stack")

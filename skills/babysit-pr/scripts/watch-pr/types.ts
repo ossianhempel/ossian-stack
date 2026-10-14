@@ -165,7 +165,7 @@ export interface ReadyPr {
     readonly ci: CiClean;
     readonly gate: {
       readonly state: "OPEN";
-      readonly reviewDecision: Exclude<ReviewDecision, "CHANGES_REQUESTED">;
+      readonly reviewDecision: "APPROVED" | null;
       readonly draft: "not-draft" | "draft-allowed";
     };
   };
@@ -178,6 +178,7 @@ export interface MergedPr {
 export type MergeGateReason =
   | "closed-without-merge"
   | "draft-pr"
+  | "review-required"
   | "changes-requested";
 export type MergeBlocker =
   | {
@@ -347,6 +348,7 @@ export type TerminalVerdict =
   | (Terminal<"STATUS", 0> & {
       readonly reason: "status-only";
       readonly rows: NonEmpty<PrSnapshot>;
+      readonly decisions: readonly PrDecision[];
     })
   | (Terminal<"READY", 0, "single" | "stack"> & {
       readonly scope:
