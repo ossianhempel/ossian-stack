@@ -70,9 +70,6 @@
     "codebase-design": {
       "role": "both"
     },
-    "codex-first": {
-      "role": "both"
-    },
     "commit-push-pr": {
       "role": "both"
     },
@@ -237,6 +234,9 @@
     },
     "writing-for-agents": {
       "role": "both"
+    },
+    "your-call": {
+      "role": "human"
     }
   },
   "agents": {},
@@ -286,7 +286,6 @@
     ],
     "project-hq": [
       "babysit-pr",
-      "codex-first",
       "commit-push-pr",
       "diagnosing-bugs",
       "grilling",
@@ -443,6 +442,10 @@
           {
             "id": "grill-with-docs",
             "note": "plan vs docs"
+          },
+          {
+            "id": "your-call",
+            "note": "delegate a pending choice"
           }
         ]
       },
@@ -719,7 +722,6 @@
       "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
-      "codex-first",
       "bro",
       "retro",
       "maintain-verification-skill",

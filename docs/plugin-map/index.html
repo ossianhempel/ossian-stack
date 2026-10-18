@@ -194,6 +194,10 @@
      {
       "id": "grill-with-docs",
       "note": "plan vs docs"
+     },
+     {
+      "id": "your-call",
+      "note": "delegate a pending choice"
      }
     ]
    },
@@ -470,7 +474,6 @@
    "project-hq",
    "setup-ossian-stack",
    "git-cleanup",
-   "codex-first",
    "bro",
    "retro",
    "maintain-verification-skill",
@@ -714,24 +717,6 @@
    "calledBy": [
     "architect",
     "refactoring"
-   ],
-   "routedBy": []
-  },
-  "codex-first": {
-   "id": "codex-first",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Codex First",
-   "description": "Route implementation work to Codex CLI; Claude specs, reviews, verifies.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "adapted",
-   "repo": "https://github.com/steipete/agent-scripts",
-   "calls": [],
-   "routes": [],
-   "calledBy": [
-    "project-hq"
    ],
    "routedBy": []
   },
@@ -1514,7 +1499,6 @@
    "repo": null,
    "calls": [
     "babysit-pr",
-    "codex-first",
     "commit-push-pr",
     "diagnosing-bugs",
     "grilling",
@@ -1885,6 +1869,22 @@
    "argumentHint": null,
    "origin": "vendored",
    "repo": "https://github.com/mattpocock/skills",
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
+  "your-call": {
+   "id": "your-call",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Your Call",
+   "description": "Reply to an agent's question with \"you decide\": it makes the call itself and keeps working.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "derived",
+   "repo": null,
    "calls": [],
    "routes": [],
    "calledBy": [],

@@ -1,0 +1,13 @@
+{
+  "skill_name": "your-call",
+  "evals": [
+    {"id": 0, "name": "approach-choice", "prompt": "/your-call", "files": ["evals/fixtures/approach-choice.md"],
+     "expected_output": "Picks zod (project already validates with it) and 400 with field errors, one line each with a reason; then starts the validation work instead of asking again."},
+    {"id": 1, "name": "mixed-permission", "prompt": "/your-call", "files": ["evals/fixtures/mixed-permission.md"],
+     "expected_output": "Decides the helper name (formatPrice in format.ts, by project convention) and proceeds; holds the force-push of an already-pushed branch and asks for that one go-ahead, flagging it."},
+    {"id": 2, "name": "grilling-rest", "prompt": "/your-call rest", "files": ["evals/fixtures/grilling-rest.md"],
+     "expected_output": "Decides Q1, Q2, and the remaining expected branches itself, ends with the full decision set; asks no further grilling questions."},
+    {"id": 3, "name": "preference-except", "prompt": "/your-call except the copy", "files": ["evals/fixtures/preference-except.md"],
+     "expected_output": "Decides illustration and CTA with reasons, leaves the copy question to the user, and proceeds with the rest."}
+  ]
+}

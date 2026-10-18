@@ -117,16 +117,6 @@
       "upstreamCheckedAt": "2026-10-05",
       "lastSynced": "2026-10-05"
     },
-    "codex-first": {
-      "origin": "adapted",
-      "repo": "https://github.com/steipete/agent-scripts",
-      "path": "skills/codex-first",
-      "refresh": "npx skills add steipete/agent-scripts -y --skill codex-first && echo 'Hand-merge the upstream scratch copy .agents/skills/codex-first/ with skills/codex-first/; preserve local adaptations and reference routing, then: trash .agents/skills/codex-first'",
-      "upstreamPath": "skills/codex-first",
-      "upstreamRev": "034471e2ce1c72f5884890befa8afc2b2a961c2f",
-      "upstreamCheckedAt": "2026-08-27",
-      "notes": "Local audit (2026-09-05): portable routing rationale and dead-link removal. Preserve on refresh. Local model pin (2026-09-09): delegation runs -m gpt-6.1-sol at model_reasoning_effort=medium on both exec and resume, set explicitly rather than inherited from ~/.codex/config.toml so config drift cannot change what delegation means. Updated 2026-10-01 to the current workhorse gpt-6.1-sol. Preserve on refresh; bump the pin when a newer default workhorse model ships."
-    },
     "commit-push-pr": {
       "origin": "derived",
       "lastSynced": "2026-09-04",
@@ -577,6 +567,11 @@
       "upstreamRev": "321658273cb1d20b76026717d027d505790106d4",
       "upstreamCheckedAt": "2026-10-07",
       "lastSynced": "2026-10-07"
+    },
+    "your-call": {
+      "origin": "derived",
+      "lastSynced": "2026-10-18",
+      "notes": "Authored 2026-10-18 as a lightweight, explicit-only reply that hands an agent's pending question back for it to decide. Derived from cursor/plugins pstack figure-it-out (decide and log rather than block) and principle-never-block-on-the-human (decisions delegated, irreversible actions still confirmed); pstack's multi-phase planning, arena, and audit-trail machinery deliberately dropped. Written against writing-for-agents."
     }
   }
 }
