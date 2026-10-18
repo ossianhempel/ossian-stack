@@ -75,6 +75,14 @@ Load the model-invoked testing principle when writing or assessing tests.
   useful unit, change it, and run its check before advancing. Order commits and
   PRs so each state is independently understandable and verifiable under the
   project's branching conventions.
+- **Show visual changes.** When a change alters what an app or site renders
+  (layout, styling, copy, component states, motion), capture the affected
+  screens from the running artifact and bring them back in the final response.
+  Use a short recording when the change is an interaction or animation. Include
+  the prior state when it is cheap to capture, and cover the variants the change
+  touches, such as viewport, theme, or locale. Embed the images where the host
+  renders them; otherwise give their file paths. If nothing can be captured, say
+  why and list the visual change as unverified.
 
 **Use the project's verification skill.** When the project ships a verification
 skill (`verify-*`) or equivalent control harness, load and run it for every
@@ -86,7 +94,8 @@ asserted. Creating it is a suggestion, not a gate.
 
 Before delivery, complete this behavioral proof as well as the relevant focused
 checks and `autoreview`. In the final response, name the artifact exercised, the
-behavior observed, and anything that remains unverified.
+behavior observed, the visual proof for any UI change, and anything that remains
+unverified.
 
 ## Choose the relevant workflow
 

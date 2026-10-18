@@ -22,6 +22,7 @@ Code and features:
 2. Run it and exercise the actual feature path
 3. Check the full chain: does data flow from input to output?
 4. For integrations, test the full communication path end-to-end
+5. For UI changes, capture fresh screenshots (or a recording for motion) of the affected screens in the running app and show them to the user
 
 Delegation: trust artifacts, not self-reports.
 When verifying delegated work, inspect the actual output artifact (git diff, file contents, runtime behavior), not the delegate's summary. Agents report what they intended, not always what happened.
