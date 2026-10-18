@@ -24,6 +24,26 @@ Before exploring, read the project's `GLOSSARY.md` if it has one, for the terms
 and mental model of the modules involved, and check any architecture decision
 records covering the area you are touching.
 
+Record owned scratch paths, resources, and cleanup actions before creating them.
+On resumption, reconcile those entries before allocating replacements. Preserve
+concise evidence in the task record and verify cleanup before closing the task.
+
+### Reset after two failed fixes
+
+When the original symptom survives two fix attempts based on the same assumption,
+pause patching before a third attempt. State the shared assumption and the
+observations that supported it. Run the smallest experiment that could disprove
+it or distinguish it from the strongest alternative. Reuse the original repro;
+changing the expected outcome does not resolve the failure.
+
+Remove only task-owned changes whose premise the evidence refutes, preserving
+unrelated edits and independently justified fixes. Resume implementation when
+new evidence supports the mechanism being changed. If the decisive probe is
+unavailable, keep the diagnosis unverified and continue useful investigation;
+another speculative patch is not progress. Record the conclusion in the existing
+task record, without a new report or approval step. Count attempts against the
+same premise, not unrelated defects or failed environment setup.
+
 ## Redact
 
 This skill has you show commands, outputs, and captured artifacts. **Redact every
@@ -70,11 +90,12 @@ real-surface signal used instead.
 7. **Property / fuzz loop.** If the bug is "sometimes wrong output", run 1000 random inputs and look for the failure mode.
 8. **Bisection harness.** If the bug appeared between two known states (commit, dataset, version), automate "boot at state X, check, repeat" so you can `git bisect run` it.
 9. **Differential loop.** Run the same input through old-version vs new-version (or two configs) and diff outputs.
-10. **Human-in-the-loop script.** Last resort. If a human must click, drive _them_ with the bundled template so the loop is still structured, and feed the captured output back to yourself. Copy it out of the skill directory before editing, set the path inline, in the same command, since shell state does not persist between calls:
+10. **Human-in-the-loop script.** Last resort. If a human must click, drive _them_ with the bundled template so the loop is still structured, and feed the captured output back to yourself. Allocate a unique task-owned scratch directory and record its path and cleanup action before copying. Use an unused destination there; preserve any existing file. Set both paths in the same command, since shell state does not persist between calls:
 
     ```
     SKILL_DIR="<absolute path of the directory containing the SKILL.md you just read>";
-    cp "$SKILL_DIR/scripts/hitl-loop.template.sh" ./hitl-loop.sh
+    REPRO_DIR="<absolute path of the recorded task-owned scratch directory>";
+    cp -n "$SKILL_DIR/scripts/hitl-loop.template.sh" "$REPRO_DIR/hitl-loop.sh"
     ```
 
     It gives you two helpers: `step "<instruction>"` shows an instruction and waits
@@ -160,8 +181,8 @@ committing to one. For hard bugs, 3–5 candidates can counter anchoring; do not
 invent alternatives after direct evidence already establishes the cause.
 
 Use `how` for an unclear mechanism and `why` for relevant regression history.
-Delegate independent investigations when useful and supported; reuse established
-facts instead of starting both investigators for every bug.
+Reuse established facts and investigate inline; an independent challenge is
+optional when competing explanations remain difficult to separate.
 
 Each hypothesis must be **falsifiable**: state the prediction it makes.
 
@@ -243,7 +264,7 @@ Required before declaring done:
 - [ ] Original repro passes; reuse the Phase 5 result unless cleanup or new evidence invalidated it
 - [ ] Regression test passes (or absence of seam is documented)
 - [ ] All `[DEBUG-...]` instrumentation removed (`grep` the prefix)
-- [ ] Throwaway prototypes and any copied loop script deleted (or moved to a clearly-marked debug location)
+- [ ] Task-owned prototypes, copied loop scripts, and scratch outputs removed after preserving concise repro evidence; verify their exact paths are absent, including ignored and external paths
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message, so the next debugger learns
 
 Keep failing-before-passing evidence without requiring a broken commit. When

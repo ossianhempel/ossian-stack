@@ -27,6 +27,31 @@ the current work.
   review or focused investigation when useful; delegate implementation when the
   user requests it. Isolate any writing worker and retain one integration owner.
 
+## Substantial work
+
+For work with several verifiable units or a likely session boundary, keep one
+short working record in the host's plan or thread. Reuse an existing project
+plan when it already owns this work. This structures execution of the agreed
+scope; it introduces no additional approval gate.
+
+1. **Define done.** Name the observable result, scope, and constraints that must
+   still hold. Reuse requirements already settled with the user.
+2. **Ground the work.** Establish the current revision or artifact, affected
+   callers and owners, and actual behavior. Distinguish evidence from assumptions;
+   investigate only the uncertainty that affects the next step.
+3. **Work in verifiable units.** Give each useful increment an observable check.
+   Complete that check before advancing; when it fails, resolve the failure or
+   record the blocked unit and continue only independent work. Keep consequential
+   decisions, check results, and the next step current in the same record.
+4. **Close against the goal.** Run the verification below against the original
+   requirements, complete scratch cleanup, and report the result and remaining
+   gaps. A completed plan alone is not evidence that the result works.
+
+Keep small, clear fixes direct. For any temporary files or resources created
+during this request, follow [artifact lifecycle](references/artifact-lifecycle.md)
+before creating them and again at closeout. Plans and decision notes stay in the
+host unless a file is necessary for resumption or is a requested deliverable.
+
 ## Verification
 
 Apply these rules directly during the work. Explicit-only principles provide

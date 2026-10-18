@@ -29,9 +29,10 @@ pseudocode or `not implemented`.
 type system. Apply the findings here; do not start a separate architecture audit.
 
 When the shape is genuinely unsettled, produce two or three structurally distinct
-candidates. Use the comparison lenses bundled with `codebase-design`, isolate
-the attempts, choose one base, and record what the alternatives exposed. Do not run
-a bakeoff when one established repository pattern already answers the question.
+candidates in the main agent. Use the comparison procedure bundled with
+`codebase-design`: hold requirements fixed, challenge each candidate, choose one
+base, and record its tradeoff and required proof in the existing task record.
+Reuse an established repository pattern when it already answers the question.
 
 Proceed to implementation when it is within the user's authorized scope; honor
 design-only and review-only requests. During implementation, treat repeated

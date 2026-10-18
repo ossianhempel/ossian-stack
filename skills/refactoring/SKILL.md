@@ -85,9 +85,9 @@ Spot-check every rename against the actual files. Renames silently miss usages
 in strings, prose, comments, and back-references, and a type checker will not
 catch any of them.
 
-Mechanical edits can be delegated to a subagent, with a specific scope: the file
-paths, the exact names being moved, and the behavior to hold. Review the diff
-yourself. A delegate's "looks good" is not review.
+Keep mechanical edits with the main agent. If the user requests implementation
+delegation, provide the file paths, exact names being moved, and behavior to hold.
+Review the resulting diff yourself; a delegate's summary is not review.
 
 ## 6. Prove behavior is unchanged
 

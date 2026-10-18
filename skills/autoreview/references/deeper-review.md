@@ -47,6 +47,42 @@ format needs the decoder, write boundary, and representative record envelope.
 Ask whether unreadable records survive a write attempt; an internal decoder-flag
 assertion alone does not prove that behavior.
 
+## Exercise the contract
+
+The main agent runs the project's existing verification skill or harness. Keep
+the source-review helper isolated; it is not the execution environment. Reuse
+current evidence for the same artifact and conditions. A small, clear fix with
+adequate behavioral proof does not need a new campaign.
+
+1. Identify the exact revision and local changes, build, or deployed artifact.
+   Define expected outcomes from the user's requirements before choosing probes;
+   the implementation cannot redefine success.
+2. Choose the smallest set of realistic scenarios that challenges the changed
+   contract: retry after a committed write loses its response, reconnect stale
+   state after deletion, interrupt a migration, or use a representative large
+   workload. State each expected result before running it.
+3. Exercise the real surface with isolated fixtures or a test mode whose effects
+   are understood. Stay within the task's data and action permissions; use test
+   accounts or copies for destructive probes. When no harness exists, use the
+   strongest available surface and report the coverage limit.
+4. Record reproducible actions, fixture conditions, expected and observed results,
+   and artifact identity. An unavailable or inconclusive probe leaves that
+   requirement unverified. Rerun affected scenarios when behavior changes.
+
+When confidence in an important invariant depends on tests that may miss its
+failure, check their sensitivity. Prefer replaying the original defect or a known
+failing case. Otherwise introduce one representative defect in a disposable copy
+of the exact code under test. The test must fail because it detects that defect;
+a build error or unrelated crash proves nothing. A surviving defect exposes a
+coverage gap. Restore the baseline, rerun the relevant check, and verify that the
+intentional defect is absent. This is selective proof for critical logic, not a
+requirement to mutate every change or add tests that mirror implementation.
+
+Record exact owned scratch paths and resources before use. Arrange cleanup on
+success, failure, and catchable interruption; on resumption reconcile leftovers
+before replacing them. Preserve concise evidence and requested deliverables,
+stop owned processes, restore test data, remove scratch, and verify cleanup.
+
 ## Evaluate findings in the existing loop
 
 A finding needs a realistic trigger, expected and actual behavior, a precise
@@ -55,9 +91,8 @@ source trace can also demonstrate a defect. Label untested assumptions and
 missing evidence explicitly. Do not invent a defect because context is absent.
 
 The main agent verifies findings, classifies their scope, implements accepted
-fixes, and runs focused proof. For important regressions, show that the test fails
-for the original defect or a deliberate local break, then passes with the fix.
-Use a disposable copy for deliberate breaks; preserve unrelated working changes.
+fixes, and runs focused proof. Preserve unrelated working changes and keep useful
+regression coverage in the product.
 
 If a concrete question cannot be resolved from the bundle, the main agent
 investigates it. A focused investigative subagent is optional when independent
@@ -65,6 +100,11 @@ exploration is useful. It reports once, may use an isolated scratch reproduction
 and leaves product edits and integration to the main agent. Keep shared devices
 and live verification under one driver. A read-only prompt is not a sandbox;
 honor the host's actual permissions and the original task's scope.
+
+For an independent source-blind execution check, give the reviewer the behavior
+contract, artifact identity, safe access instructions, and fixtures; omit the
+implementation narrative and code. Report any later source inspection separately
+as a test audit. This optional check does not start another fix-and-review loop.
 
 Feed the resulting evidence back into the next helper pass. After a code change,
 review the updated complete target with the selected reviewer configuration and
