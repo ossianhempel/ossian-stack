@@ -282,11 +282,6 @@
       "upstreamCheckedAt": "2026-09-05",
       "lastSynced": "2026-09-05"
     },
-    "mannered-prose": {
-      "origin": "derived",
-      "lastSynced": "2026-09-09",
-      "notes": "Encodes Anthropic's mannered-prose definition from the official docs: Prompting Claude Fable 5.1, 'Writing density' section (https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1). The block quote and the short 'Please remove all mannered prose.' instruction are Anthropic's text, reproduced verbatim; the availability test, the two precision consequences, the application modes, and the unslop boundary are local. Not a git upstream, so there is nothing to pin - re-read the docs page if the Writing density section changes. Authored 2026-09-09 to give online-writing an output pass."
-    },
     "obsidian": {
       "origin": "local",
       "notes": "Authored in agent-scripts (848085c). Vault-specific Obsidian workflows."
@@ -535,7 +530,7 @@
       "repo": "https://github.com/cursor/plugins",
       "path": "pstack/skills/unslop",
       "refresh": "npx skills add cursor/plugins -y --skill unslop && echo 'Hand-merge the upstream scratch copy .agents/skills/unslop/ with skills/unslop/; preserve local adaptations and reference routing, then: trash .agents/skills/unslop'",
-      "notes": "From Cursor's pstack plugin. Adapted 2026-08-28 by merging in the former local ai-slop-reviewer (bundled linter + checklist). Upstream rules 1-31 kept verbatim; local additions continue at 32. Merge by hand on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description. Preserve on refresh.",
+      "notes": "From Cursor's pstack plugin. Adapted 2026-08-28 by merging in the former local ai-slop-reviewer (bundled linter + checklist). Upstream rules 1-31 kept verbatim; local additions continue at 32. Merge by hand on refresh. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description. Preserve on refresh. Local merge (2026-10-18): the former local mannered-prose skill (Anthropic's mannered-prose definition, quoted verbatim from Prompting Claude Fable 5.1, 'Writing density', https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1) was folded in as the Mannered prose section, plus the Modes and Deslopify sections, Clarity rules 42-46, and references/before-after.md. The deslopify mode and rules 42-46 adapt ideas from docwriter-org/plain-writing-skill (MIT); the wording and examples are local. Preserve all of these on refresh.",
       "upstreamPath": "pstack/skills/unslop",
       "upstreamRev": "99559f2f52047978602ef365589275831e76af07",
       "upstreamCheckedAt": "2026-08-28",

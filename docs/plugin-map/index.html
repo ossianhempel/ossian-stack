@@ -344,9 +344,6 @@
       "id": "copywriter"
      },
      {
-      "id": "mannered-prose"
-     },
-     {
       "id": "unslop"
      }
     ],
@@ -1130,27 +1127,6 @@
     "setup-ossian-stack"
    ]
   },
-  "mannered-prose": {
-   "id": "mannered-prose",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Mannered Prose",
-   "description": "Replace metaphor and flourish with direct statement, in your own output or in text you are given. Use when writing or reviewing anything a person will read - a report, a review, an audit, a summary, a draft - and whenever the user asks for plainer, less writerly, less performed prose, or says something reads as trying too hard. Also use as a standing constraint on your own user-facing writing when a skill or workflow routes its output through it.",
-   "role": "both",
-   "humanOnly": false,
-   "argumentHint": null,
-   "origin": "derived",
-   "repo": null,
-   "calls": [],
-   "routes": [
-    "unslop"
-   ],
-   "calledBy": [],
-   "routedBy": [
-    "online-writing",
-    "ossian-mode"
-   ]
-  },
   "obsidian": {
    "id": "obsidian",
    "type": "skill",
@@ -1220,7 +1196,6 @@
    "repo": null,
    "calls": [],
    "routes": [
-    "mannered-prose",
     "unslop",
     "copywriter"
    ],
@@ -1284,7 +1259,7 @@
    ],
    "routes": [
     "create-verification-skill",
-    "mannered-prose",
+    "unslop",
     "project-hq"
    ],
    "calledBy": [],
@@ -1823,7 +1798,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Unslop",
-   "description": "Remove AI writing tells and improve human voice. Use for a requested writing pass or a workflow that needs the full style rubric.",
+   "description": "Remove AI writing tells, mannered prose, and stock phrasing, and write plainly for a reader without context. Use when writing or reviewing anything a person will read, when asked for plainer or less performed prose, when asked to deslopify a response, or as a standing constraint on user-facing output.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1837,8 +1812,8 @@
     "copywriter"
    ],
    "routedBy": [
-    "mannered-prose",
-    "online-writing"
+    "online-writing",
+    "ossian-mode"
    ]
   },
   "up-to-speed": {
@@ -1938,7 +1913,7 @@
   }
  },
  "counts": {
-  "skills": 69,
+  "skills": 68,
   "agents": 0,
   "plugins": 1
  }

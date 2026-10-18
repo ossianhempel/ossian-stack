@@ -3,7 +3,8 @@
 Adapted from [cursor/plugins](https://github.com/cursor/plugins)
 (`pstack/skills/unslop`). On 2026-08-28 the former local `ai-slop-reviewer`
 skill was merged into it, so this is now one skill for both the write-through
-style pass and the audit/cleanup job.
+style pass and the audit/cleanup job. On 2026-10-18 the former local `mannered-prose` skill
+was folded in as well, along with a deslopify mode and before/after examples.
 
 Upstream's pattern list is kept verbatim and numbered (rules 1–31); local
 additions continue at 32. Everything under `references/` is local.

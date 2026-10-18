@@ -15,8 +15,9 @@ drafting workflow. An audit stays diagnostic unless the user also asks for
 alternatives. Generating a headline or opening does not authorize changing the
 source file, publishing, or updating the writer's strategy.
 
-Apply `mannered-prose` to your own findings and options. Apply `unslop` as a
-diagnostic pass on supplied drafts, retaining findings rather than its rewrite.
+Apply `unslop` as a write-through constraint on your own findings and options,
+and as a diagnostic pass on supplied drafts, retaining findings rather than its
+rewrite.
 Strong writing can be vivid, emotional, and rhythmic; remove performed language,
 not the writer's personality.
 
