@@ -1,0 +1,58 @@
+{
+  "skill_name": "up-to-speed",
+  "evals": [
+    {
+      "id": 0,
+      "name": "pr-drift",
+      "prompt": "I've lost track of this thread, get me up to speed",
+      "files": [
+        "evals/fixtures/pr-drift.md"
+      ],
+      "expected_output": "Says the toggle is done and PR #42 is open, but the RecipeCard border fix is uncommitted and not on the PR, and one e2e check (theme persists across reload) is failing. Surfaces the unanswered two-vs-three-state question as needing the user. Does not commit, push, or fix anything; offers a next step.",
+      "assertions": [
+        "States the RecipeCard border fix is uncommitted and not in PR #42",
+        "States PR #42 is open with the failing 'toggle persists across reload' e2e check",
+        "Surfaces the unanswered two-vs-three-state toggle question as needing the user",
+        "Takes no action: does not commit, push, fix, or submit anything; offers a next step and waits",
+        "Opens with a 2-3 sentence plain-language summary of purpose and current status",
+        "Separates what needs the user (open questions) from leftovers to do or fix"
+      ]
+    },
+    {
+      "id": 1,
+      "name": "compacted-merged",
+      "prompt": "where are we with this?",
+      "files": [
+        "evals/fixtures/compacted-merged.md"
+      ],
+      "expected_output": "Says the sync migration is merged (PR #118). Lists leftovers: debug console.log still in subscription.ts on main, the stash, the scratch branch and the merged feature branch, old usePollingSync hook still present with its delete-now-or-later question unanswered, and reconnection untested on a real device. Plain language, no action taken.",
+      "assertions": [
+        "States PR #118 is merged",
+        "Flags the [sync-debug] console.log still present on main",
+        "Lists the leftover stash and scratch/sync-repro branch for cleanup",
+        "Surfaces the unanswered delete-usePollingSync-now-or-later question",
+        "Notes reconnection was never tested on a real device",
+        "Takes no action: does not commit, push, fix, or submit anything; offers a next step and waits",
+        "Opens with a 2-3 sentence plain-language summary of purpose and current status",
+        "Separates what needs the user (open questions) from leftovers to do or fix"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "release-unreachable",
+      "prompt": "catch me up, what happened here",
+      "files": [
+        "evals/fixtures/release-unreachable.md"
+      ],
+      "expected_output": "Says version 2.4.0 (312) is committed and pushed and was in TestFlight, English notes set, the Swedish notes were mid-retry when the thread ended, and review submission had not happened. States plainly that App Store Connect could not be checked, so current Swedish notes and review status are unknown. Does not attempt the submission.",
+      "assertions": [
+        "States the commit is pushed and build 312 reached TestFlight",
+        "States App Store review submission has not happened",
+        "Says plainly App Store Connect could not be checked, so Swedish notes and submission status are unknown",
+        "Takes no action: does not commit, push, fix, or submit anything; offers a next step and waits",
+        "Opens with a 2-3 sentence plain-language summary of purpose and current status",
+        "Separates what needs the user (open questions) from leftovers to do or fix"
+      ]
+    }
+  ]
+}

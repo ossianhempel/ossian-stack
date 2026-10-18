@@ -229,6 +229,9 @@
     "visual-parity": {
       "role": "both"
     },
+    "up-to-speed": {
+      "role": "both"
+    },
     "why": {
       "role": "both"
     },
@@ -509,6 +512,10 @@
           }
         ],
         "extras": [
+          {
+            "id": "up-to-speed",
+            "note": "catch up on a forgotten thread"
+          },
           {
             "id": "codebase-design",
             "note": "module design criteria"

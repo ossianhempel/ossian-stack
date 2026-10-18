@@ -255,6 +255,10 @@
     ],
     "extras": [
      {
+      "id": "up-to-speed",
+      "note": "catch up on a forgotten thread"
+     },
+     {
       "id": "codebase-design",
       "note": "module design criteria"
      },
@@ -1837,6 +1841,22 @@
     "online-writing"
    ]
   },
+  "up-to-speed": {
+   "id": "up-to-speed",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Up to Speed",
+   "description": "Catch the user up on a thread they lost track of — what was done, where it stands now, and what is left — checked against live repo and PR state. Use when they ask to be caught up, ask where things stand, or return to a long or summarized thread. Not for continuing the work.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
   "visual-parity": {
    "id": "visual-parity",
    "type": "skill",
@@ -1918,7 +1938,7 @@
   }
  },
  "counts": {
-  "skills": 68,
+  "skills": 69,
   "agents": 0,
   "plugins": 1
  }

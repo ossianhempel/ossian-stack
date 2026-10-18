@@ -572,6 +572,11 @@
       "upstreamCheckedAt": "2026-10-07",
       "lastSynced": "2026-10-07"
     },
+    "up-to-speed": {
+      "origin": "local",
+      "lastSynced": "2026-10-18",
+      "notes": "Authored 2026-10-18 for returning to a forgotten or compacted thread: rebuilds goal, outcomes, live Git/PR state, and leftovers as a read-only report. The plain-language register is inlined from bro, which is explicit-only and so cannot be invoked as a step. Complements handoff (which writes or resumes from a durable note) by working from the transcript itself."
+    },
     "your-call": {
       "origin": "derived",
       "lastSynced": "2026-10-18",
