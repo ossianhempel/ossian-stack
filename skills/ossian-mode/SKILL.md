@@ -23,13 +23,15 @@ the current work.
   `mannered-prose`.
 - Prefer simple changes that address the underlying condition. Add only what
   the evidence and the requested outcome require.
-- For parallel work, use same-task candidates only when selection and synthesis
-  matter. Partition coverage across disjoint slices. Isolate every writing worker.
+- Keep implementation with the main agent by default. Use subagents for independent
+  review or focused investigation when useful; delegate implementation when the
+  user requests it. Isolate any writing worker and retain one integration owner.
 
 ## Verification
 
-Apply these rules directly during the work. Their matching principle skills are
-explicit-only deeper references; the rules here do not depend on invoking them.
+Apply these rules directly during the work. Explicit-only principles provide
+deeper references when the user invokes them; the rules here already apply.
+Load the model-invoked testing principle when writing or assessing tests.
 
 - **Prove it works (`principle-prove-it-works`).** After implementation and
   before declaring done, exercise the real artifact on the surface the user
@@ -40,6 +42,9 @@ explicit-only deeper references; the rules here do not depend on invoking them.
   reproduce the exact symptom first, trace it to the mechanism that produces it,
   and fix that mechanism. Do not turn an unexpected state into an accepted state
   merely by adding a guard.
+- **Test behavior (`principle-test-behavior-not-implementation`).** Use tests that
+  catch broken observable behavior and survive internal refactoring. Match the
+  test boundary to the failure and establish meaningful regression evidence.
 - **Sequence verifiable units (`principle-sequence-verifiable-units`).** In a
   migration, sweep, repeated edit, or multi-commit delivery, choose the smallest
   useful unit, change it, and run its check before advancing. Order commits and

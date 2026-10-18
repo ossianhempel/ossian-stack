@@ -491,7 +491,8 @@
     "principle-prove-it-works",
     "principle-redesign-from-first-principles",
     "principle-sequence-verifiable-units",
-    "principle-subtract-before-you-add"
+    "principle-subtract-before-you-add",
+    "principle-test-behavior-not-implementation"
    ]
   }
  },
@@ -575,7 +576,8 @@
    "origin": "adapted",
    "repo": "https://github.com/openclaw/agent-skills",
    "calls": [
-    "blast-radius"
+    "blast-radius",
+    "principle-test-behavior-not-implementation"
    ],
    "routes": [],
    "calledBy": [
@@ -852,7 +854,8 @@
     "principle-exhaust-the-design-space",
     "principle-fix-root-causes",
     "principle-prove-it-works",
-    "why"
+    "why",
+    "principle-test-behavior-not-implementation"
    ],
    "routes": [
     "create-verification-skill"
@@ -1270,7 +1273,8 @@
     "setup-ossian-stack",
     "simplify-code",
     "visual-parity",
-    "why"
+    "why",
+    "principle-test-behavior-not-implementation"
    ],
    "routes": [
     "create-verification-skill",
@@ -1467,6 +1471,26 @@
    "routes": [],
    "calledBy": [
     "simplify-code"
+   ],
+   "routedBy": []
+  },
+  "principle-test-behavior-not-implementation": {
+   "id": "principle-test-behavior-not-implementation",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Test Behavior, Not Implementation",
+   "description": "Choose and review tests that protect observable behavior and survive internal refactoring. Use when writing regression tests, assessing test quality, or deciding whether coverage proves a change.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "routes": [],
+   "calledBy": [
+    "autoreview",
+    "diagnosing-bugs",
+    "ossian-mode"
    ],
    "routedBy": []
   },
@@ -1892,7 +1916,7 @@
   }
  },
  "counts": {
-  "skills": 67,
+  "skills": 68,
   "agents": 0,
   "plugins": 1
  }

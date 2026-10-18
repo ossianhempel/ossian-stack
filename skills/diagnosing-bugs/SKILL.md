@@ -7,9 +7,9 @@ description: "Diagnose and fix bugs or performance regressions using a reproduci
 
 Scale the investigation to the uncertainty. For a narrow bug with a clear failure signal, reuse that evidence, test the cause, fix within scope, and verify the original symptom. Use the full playbook below for uncertain, intermittent, or cross-system failures. Diagnosis-only requests stop at findings and proposed fixes.
 
-**You own this task.** Delegate independent investigation or implementation when useful and supported;
-otherwise work inline. Stay in the lead. Reviewing a delegate's diff is yours; so is every decision about what the
-evidence means.
+**You own this task.** Implement directly by default. Use independent investigation
+or review when useful and supported; delegate implementation when the user asks.
+Stay in the lead: every decision about what the evidence means remains yours.
 
 ## Evidence discipline
 
@@ -54,6 +54,8 @@ lives behind a UI, CLI, or service you cannot otherwise drive.
 
 Choose the cheapest signal that proves the symptom. A failing test is valuable
 when it reaches the real contract without recreating the implementation in mocks.
+Apply `principle-test-behavior-not-implementation` when choosing or evaluating
+that test boundary.
 Do not add a regression test merely because a bug was fixed: skip it when the
 test would duplicate existing coverage, assert private implementation details,
 or cost more to maintain than the failure it catches. Record the choice and the
@@ -206,9 +208,9 @@ condition is expected.
 
 If the fix crosses a function boundary, decide its shape before writing it; when
 the shape is not obvious, sketch two and compare rather than taking the first
-(`principle-exhaust-the-design-space`). Implementation can go to a subagent with a
-specific scope: the files, the mechanism you confirmed, and the behavior to hold.
-Review the diff yourself, a delegate's summary is not review.
+(`principle-exhaust-the-design-space`). If the user requested delegated implementation,
+specify the files, confirmed mechanism, and behavior to hold, then review the
+actual diff. Otherwise implement the fix directly.
 
 Write the regression test **before the fix**, but only if there is a **correct
 seam** for it.

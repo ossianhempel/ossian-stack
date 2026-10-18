@@ -21,6 +21,27 @@ Do not require autoreview for a change whose entire diff is prose-only internal 
 
 Select the target with the target-selection reference before invoking review. The default engine/model contract above still applies; engine details and opt-in panels are in their reference. A successful helper exit with no accepted actionable findings ends review.
 
+## Review depth and test evidence
+
+The main agent owns implementation and the review → validate → fix → test →
+re-review loop. Reviewers return findings in one pass; they do not implement fixes
+or start another review loop. Ordinary development stays with the main agent.
+
+Before the first pass, consider the consequences of a failure. When changed
+behavior could lose data, cross an ownership or authorization boundary, charge
+incorrectly, break migration compatibility, or fail under concurrent operations,
+retries, or interruption, read [Deeper review](references/deeper-review.md).
+Use that reference to supply a focused brief to the existing helper. Start with
+one reviewer; add a panel only for serious consequences or material uncertainty
+that benefits from independent judgment. File names and diff size alone do not
+determine depth.
+
+For every pass, apply `principle-test-behavior-not-implementation` to changed tests
+and the evidence for changed behavior. The helper includes the core criteria in
+every reviewer prompt. A test gap is actionable when it leaves an important
+changed behavior unproven; ordinary priority and scope thresholds still apply.
+Test-count, coverage-percentage, and stylistic objections do not prolong review.
+
 ## Contract
 
 - Default output includes P0 and P1 findings. Use `--max-priority P0` for a
@@ -142,6 +163,7 @@ Do not run another review solely to improve the final report wording. If the fin
 Read the reference for the task at hand; do not load every recipe.
 
 - [Target selection](references/target-selection.md): choosing dirty, branch/PR, or committed review scope.
+- [Deeper review](references/deeper-review.md): consequential changes, focused failure scenarios, evidence, and escalation within the existing loop.
 - [Oversized and parallel](references/oversized-and-parallel.md): a large bundle or parallel focused validation.
 - [Engines and panels](references/engines-and-panels.md): an explicitly selected engine/model, override, or opt-in reviewer panel.
 - [Helper usage](references/helper-usage.md): helper options, native Windows invocation, or harness verification.
