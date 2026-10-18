@@ -427,16 +427,13 @@
       },
       {
         "id": "plan",
-        "title": "Plan big work",
-        "outcome": "too big for one session",
+        "title": "Main flow: plan",
+        "outcome": "a spec to build from",
         "tag": "Agent workflow",
         "steps": [
           {
-            "id": "domain-modeling",
-            "writes": "GLOSSARY.md"
-          },
-          {
-            "id": "grilling"
+            "id": "grill-with-docs",
+            "writes": "spec, ADRs, GLOSSARY.md"
           },
           {
             "id": "prototype",
@@ -446,12 +443,16 @@
         ],
         "extras": [
           {
-            "id": "grill-me",
-            "note": "any plan"
+            "id": "grilling",
+            "note": "interview only"
           },
           {
-            "id": "grill-with-docs",
-            "note": "plan vs docs"
+            "id": "domain-modeling",
+            "note": "glossary and ADRs only"
+          },
+          {
+            "id": "grill-me",
+            "note": "any plan"
           },
           {
             "id": "your-call",
@@ -461,7 +462,7 @@
       },
       {
         "id": "build",
-        "title": "Build, review, ship changes",
+        "title": "Main flow: build, review, ship",
         "outcome": "change + real-surface proof",
         "tag": "Agent workflow",
         "steps": [
@@ -509,6 +510,11 @@
             "id": "handoff",
             "optional": true,
             "writes": "handoff note"
+          },
+          {
+            "id": "retro",
+            "optional": true,
+            "writes": "repo fixes"
           }
         ],
         "extras": [
@@ -737,7 +743,6 @@
       "setup-ossian-stack",
       "git-cleanup",
       "bro",
-      "retro",
       "maintain-verification-skill",
       "skill-creator",
       "skill-cleaner",
@@ -781,6 +786,7 @@
     ],
     "ossian-mode": [
       "create-verification-skill",
+      "grill-with-docs",
       "mannered-prose",
       "project-hq"
     ],

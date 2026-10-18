@@ -8,6 +8,9 @@ Thin user-invoke router that runs a `grilling` session composed with
 convention), so the interview writes glossary terms and ADRs as they
 crystallise.
 
+Local adaptation: the session ends by writing a spec (`SPEC-FORMAT.md`) with a
+build order in place of tickets. Preserve it on refresh.
+
 To update:
 
 ```bash

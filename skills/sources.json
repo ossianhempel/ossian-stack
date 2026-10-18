@@ -225,7 +225,7 @@
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/grill-with-docs",
       "refresh": "npx skills add mattpocock/skills -y --skill grill-with-docs && echo 'Hand-merge the upstream scratch copy .agents/skills/grill-with-docs/ with skills/grill-with-docs/; preserve local adaptations and reference routing, then: trash .agents/skills/grill-with-docs'",
-      "notes": "Thin user-invoke router that composes grilling + domain-modeling (shipped here, adapted to GLOSSARY.md). Vendored 2026-09-03. Local audit (2026-09-05): host-neutral skill loading. Preserve on refresh.",
+      "notes": "Thin user-invoke router that composes grilling + domain-modeling (shipped here, adapted to GLOSSARY.md). Vendored 2026-09-03. Local audit (2026-09-05): host-neutral skill loading. Local adaptation (2026-10-18): ends by writing a spec with a build order instead of tickets (SPEC-FORMAT.md). Preserve on refresh.",
       "upstreamPath": "skills/engineering/grill-with-docs",
       "upstreamRev": "6654f6b60cd9d5be8b54c6fafe44346dabeb3b76",
       "upstreamCheckedAt": "2026-09-03"

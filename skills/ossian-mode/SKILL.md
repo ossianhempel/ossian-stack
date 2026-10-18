@@ -107,7 +107,7 @@ to implementation; its size alone does not require a planning detour.
 | Questions or investigation | `how` for behavior and ownership; `why` for rationale and evidence. A question alone does not authorize a change. |
 | Diagnosis | `diagnosing-bugs` for broken behavior. Use `performance` for latency, CPU, memory, energy, frame time, throughput, or captured profiles. Preserve diagnosis-only scope. |
 | Unsettled design | `grilling` for product decisions, `prototype` for observable alternatives, and `architect` for caller contracts and module boundaries. |
-| Implementation | Implement the agreed scope directly. For cross-boundary work settle caller usage and the data shape through `architect`. Load a relevant platform or craft skill only where needed. Use `visual-parity` when a UI must match a fixed reference. |
+| Implementation | Implement the agreed scope directly. When a spec from `grill-with-docs` exists, build its units in order and write each unit's behavior checks as failing tests before the code. For cross-boundary work settle caller usage and the data shape through `architect`. Load a relevant platform or craft skill only where needed. Use `visual-parity` when a UI must match a fixed reference. |
 | Refactoring | `refactoring` for structural changes with behavior preserved; `simplify-code` for readability in place. |
 | Delivery | Use `blast-radius` before delivery when safety depends on behavior beyond the diff. Use `commit-push-pr` for requested commits, pushes, and PRs; `babysit-pr` for an existing PR's readiness work; `release-ios-app` for an authorized iOS release. |
 
