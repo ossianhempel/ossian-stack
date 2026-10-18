@@ -27,8 +27,8 @@ written. Update an existing spec for the same work instead of adding a second.
 
 ## Behavior
 - {Observable behavior that proves the change works, one check per line:
-  input or action → expected result on the surface the user touches. These
-  become the first tests.}
+  input or action → expected result on the surface the user touches. Where a
+  test can prove a check, it is written before the code.}
 
 ## Build order
 1. {The smallest unit that can be built and checked on its own, naming the

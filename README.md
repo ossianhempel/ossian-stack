@@ -145,7 +145,7 @@ leaves something on disk the next one reads; there are no tickets.
 | --- | --- | --- |
 | 1. Grill the plan | **grill-with-docs** | ADRs, GLOSSARY.md terms, and a spec with behavior checks and a build order |
 | 2. Settle interfaces | **architect**, when the change crosses module boundaries | agreed caller usage and types |
-| 3. Build | **ossian-mode** with the spec: each unit of the build order, its behavior checks written as tests first | working code, proven on the real surface |
+| 3. Build | **ossian-mode** with the spec: each unit of the build order, its uncovered behavior checks written as tests first where a test can prove them | working code, proven on the real surface |
 | 4. Review | **autoreview**, plus **blast-radius** when safety depends on code outside the diff | review findings, fixed |
 | 5. Ship | **commit-push-pr**, then **babysit-pr** for a PR | a commit on main, or a merge-ready PR |
 | 6. Look back | **retro** | proposed fixes to the repo and its instructions |
