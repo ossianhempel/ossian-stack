@@ -262,7 +262,7 @@
     "extras": [
      {
       "id": "up-to-speed",
-      "note": "catch up on a forgotten thread"
+      "note": "progress + decisions"
      },
      {
       "id": "codebase-design",
@@ -478,7 +478,6 @@
   ],
   "sideDoors": [
    "optimise-github-actions",
-   "project-hq",
    "setup-ossian-stack",
    "git-cleanup",
    "bro",
@@ -612,7 +611,6 @@
    "calledBy": [
     "commit-push-pr",
     "ossian-mode",
-    "project-hq",
     "release-ios-app",
     "resolve-pr-feedback",
     "setup-ossian-stack"
@@ -753,7 +751,6 @@
    "calledBy": [
     "babysit-pr",
     "ossian-mode",
-    "project-hq",
     "release-ios-app"
    ],
    "routedBy": []
@@ -870,7 +867,6 @@
    "calledBy": [
     "autoreview",
     "ossian-mode",
-    "project-hq",
     "setup-ossian-stack"
    ],
    "routedBy": []
@@ -943,7 +939,6 @@
    "routes": [],
    "calledBy": [
     "commit-push-pr",
-    "project-hq",
     "setup-ossian-stack"
    ],
    "routedBy": []
@@ -1043,8 +1038,7 @@
    "calledBy": [
     "grill-me",
     "grill-with-docs",
-    "ossian-mode",
-    "project-hq"
+    "ossian-mode"
    ],
    "routedBy": []
   },
@@ -1061,9 +1055,7 @@
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "routes": [],
-   "calledBy": [
-    "project-hq"
-   ],
+   "calledBy": [],
    "routedBy": []
   },
   "how": {
@@ -1267,13 +1259,10 @@
    "routes": [
     "create-verification-skill",
     "grill-with-docs",
-    "unslop",
-    "project-hq"
+    "unslop"
    ],
    "calledBy": [],
-   "routedBy": [
-    "project-hq"
-   ]
+   "routedBy": []
   },
   "performance": {
    "id": "performance",
@@ -1499,35 +1488,6 @@
    "calledBy": [],
    "routedBy": []
   },
-  "project-hq": {
-   "id": "project-hq",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Project HQ",
-   "description": "Establish or resume one persistent project HQ that accepts the user's task queue, coordinates execution owners, and keeps durable operational state. Explicit invocation only.",
-   "role": "human",
-   "humanOnly": true,
-   "argumentHint": "Project name, optionally one or more initial tasks",
-   "origin": "local",
-   "repo": null,
-   "calls": [
-    "babysit-pr",
-    "commit-push-pr",
-    "diagnosing-bugs",
-    "grilling",
-    "git-cleanup",
-    "handoff",
-    "prototype",
-    "setup-ossian-stack"
-   ],
-   "routes": [
-    "ossian-mode"
-   ],
-   "calledBy": [],
-   "routedBy": [
-    "ossian-mode"
-   ]
-  },
   "prototype": {
    "id": "prototype",
    "type": "skill",
@@ -1546,8 +1506,7 @@
     "create-verification-skill"
    ],
    "calledBy": [
-    "ossian-mode",
-    "project-hq"
+    "ossian-mode"
    ],
    "routedBy": []
   },
@@ -1683,8 +1642,7 @@
     "maintain-verification-skill"
    ],
    "calledBy": [
-    "ossian-mode",
-    "project-hq"
+    "ossian-mode"
    ],
    "routedBy": []
   },
@@ -1829,7 +1787,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Up to Speed",
-   "description": "Catch the user up on a thread they lost track of — what was done, where it stands now, and what is left — checked against live repo and PR state. Use when they ask to be caught up, ask where things stand, or return to a long or summarized thread. Not for continuing the work.",
+   "description": "Catch the user up on a thread: progress since their last message, current state, and decisions needing them, with context and recommendations. Use for catch-up requests, where things stand, what changed while away, or what needs their attention. A report, not authorization for new work.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1921,7 +1879,7 @@
   }
  },
  "counts": {
-  "skills": 68,
+  "skills": 67,
   "agents": 0,
   "plugins": 1
  }

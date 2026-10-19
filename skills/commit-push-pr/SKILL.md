@@ -320,7 +320,7 @@ local source branch, and auxiliary worktree path when one exists. Report cleanup
 pending when the flow stops at merge-ready. Do not poll indefinitely to wait for a
 human merge.
 
-When this workflow, its HQ, or a later invocation observes the PR as merged, verify
+When this workflow or a later invocation observes the PR as merged, verify
 the merge and refresh those exact identities. Then invoke `git-cleanup` for that one
 branch and worktree. Never pass a repository-wide cleanup request from this flow.
 The cleanup call may remove only the recorded local branch and recorded auxiliary

@@ -117,9 +117,6 @@ boundaries need judgment. Let the selected workflow own the plan, implementation
 and verification; reuse its design decisions instead of running each skill as a
 separate phase. Mechanical changes and readability cleanup skip that design work.
 
-Keep `project-hq` reserved for standing projects with a durable task queue and
-multiple execution owners.
-
 Use the project's tracker and ticket conventions when the work calls for tracked
 delivery or the user requests tickets. Tracker availability and delegation alone
 do not authorize issue creation. Planning, research, and builds can proceed from
@@ -141,9 +138,8 @@ required, prepare the concrete, reviewable result first.
 ## Keep the roles distinct
 
 **setup-ossian-stack** configures the installation and project. **ossian-mode**
-handles this request. **project-hq** provides one persistent interface for a
-project queue and its execution owners when explicitly invoked; this skill
-creates no tasks automatically. Direct calls to any existing skill remain valid.
+handles this request without creating tasks automatically. Direct calls to any
+existing skill remain valid.
 
 Finish with the answer or artifact, the evidence that supports it, and any
 remaining limitation or decision. Choosing a route alone is not completion.

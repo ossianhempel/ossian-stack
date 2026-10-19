@@ -139,9 +139,6 @@
     "online-writing": {
       "role": "both"
     },
-    "project-hq": {
-      "role": "human"
-    },
     "optimise-github-actions": {
       "role": "human"
     },
@@ -287,16 +284,6 @@
     ],
     "onboarding-flow": [
       "copywriter"
-    ],
-    "project-hq": [
-      "babysit-pr",
-      "commit-push-pr",
-      "diagnosing-bugs",
-      "grilling",
-      "git-cleanup",
-      "handoff",
-      "prototype",
-      "setup-ossian-stack"
     ],
     "ossian-mode": [
       "architect",
@@ -517,7 +504,7 @@
         "extras": [
           {
             "id": "up-to-speed",
-            "note": "catch up on a forgotten thread"
+            "note": "progress + decisions"
           },
           {
             "id": "codebase-design",
@@ -733,7 +720,6 @@
     ],
     "sideDoors": [
       "optimise-github-actions",
-      "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
       "bro",
@@ -771,14 +757,10 @@
       "unslop",
       "copywriter"
     ],
-    "project-hq": [
-      "ossian-mode"
-    ],
     "ossian-mode": [
       "create-verification-skill",
       "grill-with-docs",
-      "unslop",
-      "project-hq"
+      "unslop"
     ],
     "prototype": [
       "create-verification-skill"

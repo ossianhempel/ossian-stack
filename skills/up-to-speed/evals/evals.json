@@ -44,15 +44,114 @@
       "files": [
         "evals/fixtures/release-unreachable.md"
       ],
-      "expected_output": "Says version 2.4.0 (312) is committed and pushed and was in TestFlight, English notes set, the Swedish notes were mid-retry when the thread ended, and review submission had not happened. States plainly that App Store Connect could not be checked, so current Swedish notes and review status are unknown. Does not attempt the submission.",
+      "expected_output": "Says version 2.4.0 (312) is committed and pushed and was in TestFlight, English notes set, and the Swedish notes were mid-retry when the thread ended. Submission had not happened at that last observation. States plainly that App Store Connect could not be checked, so current Swedish notes and review status are unknown. Does not attempt submission or ask for release notes already supplied.",
       "assertions": [
         "States the commit is pushed and build 312 reached TestFlight",
-        "States App Store review submission has not happened",
+        "States submission had not happened at the last observation without claiming the current provider status is known",
         "Says plainly App Store Connect could not be checked, so Swedish notes and submission status are unknown",
         "Takes no action: does not commit, push, fix, or submit anything; offers a next step and waits",
         "Opens with a 2-3 sentence plain-language summary of purpose and current status",
-        "Separates what needs the user (open questions) from leftovers to do or fix"
+        "Separates what needs the user (open questions) from leftovers to do or fix",
+        "Does not ask the user to supply release notes again when both locales are already in the transcript"
       ]
+    },
+    {
+      "id": 3,
+      "name": "since-last-message-decision",
+      "prompt": "Catch me up on everything since my last message, and give me enough context to make any calls that need me.",
+      "files": [
+        "evals/fixtures/since-last-message.md"
+      ],
+      "expected_output": "Summarizes progress after 09:30, current open PR with all checks passed, and the still-open malformed-row policy. Explains whole-import blocking versus explicit partial import, recommends blocking from the no-silent-loss constraint, and states what the choice unblocks. Does not invent a deadline or merge.",
+      "assertions": [
+        "Uses the 09:30 user message as the boundary, not the automated wakeup or current recap request",
+        "Does not present the earlier prototype or abandoned-parser removal as new progress",
+        "Reports PR #57 as pushed and open with all three checks passed, not merged or deployed",
+        "Surfaces the older malformed-row policy as still open and explains both viable choices and the 120-row, two-error evidence",
+        "Gives a supported recommendation and explains that the decision unblocks import confirmation",
+        "Invents no deadline and performs no mutation or resumed work in this idle thread"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "active-no-user-action",
+      "prompt": "Quick catch-up: what changed since my last message and is there anything you need from me?",
+      "files": [
+        "evals/fixtures/active-no-decision.md"
+      ],
+      "expected_output": "States the local wrapping fix and passed focused check, with the long-title preview still in progress. Explicitly says no user action is needed and that the existing verification work continues without fresh approval; no commit or push.",
+      "assertions": [
+        "States the fix is local, with no commit or PR",
+        "Separates the passed focused check from the unfinished long-title preview",
+        "Explicitly says nothing is needed from the user",
+        "Keeps the already-authorized preview work active instead of asking to continue or waiting for approval",
+        "Does not claim the overall task is done or authorize commit/push"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "missing-window-resolved-question",
+      "prompt": "What changed since my last message? Anything waiting on me?",
+      "files": [
+        "evals/fixtures/missing-window.md"
+      ],
+      "expected_output": "Gives a useful recap while disclosing that the exact message boundary is unavailable. Reports the saved draft and selected headline, leaves publication unverified, and does not revive the settled headline choice or invent an approval need.",
+      "assertions": [
+        "Discloses the missing message boundary without claiming exact since-last-message changes",
+        "Confirms the local draft and selected headline from available evidence",
+        "Does not present the headline as an unanswered user decision",
+        "Labels publication status unverified rather than published or definitely unpublished",
+        "Reports usefully without requiring a timestamp or inventing a publication approval request",
+        "Stays within the named thread and artifact instead of searching every project"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "idle-explicit-follow-on",
+      "prompt": "Catch me up, then finish the long-title verification. Still keep everything local, no commit or push.",
+      "files": [
+        "evals/fixtures/explicit-resume.md"
+      ],
+      "expected_output": "Reports the local wrapping change, passed focused check, and missing long-title proof. Recognizes the explicit follow-on instruction even though the thread was idle; proceeds to that verification under the local-only scope without a new approval question or claiming it already passed.",
+      "assertions": [
+        "Separates the completed focused check from the pending long-title preview",
+        "Recognizes the explicit continuation as authorized despite the idle starting state",
+        "Does not ask for fresh permission or stop at offering to do the requested verification",
+        "Keeps commit and push outside scope",
+        "Does not claim a preview result before it exists"
+      ]
+    }
+  ],
+  "trigger_checks": [
+    {
+      "prompt": "Catch me up on everything since my last message and tell me what needs a decision.",
+      "should_trigger": true,
+      "reason": "Progress recap plus decision context."
+    },
+    {
+      "prompt": "I forgot what this thread was for. Where are we?",
+      "should_trigger": true,
+      "reason": "Full reorientation remains supported."
+    },
+    {
+      "prompt": "What needs my attention on this export work?",
+      "should_trigger": true,
+      "reason": "A status and user-action summary."
+    },
+    {
+      "prompt": "Continue implementing the CSV importer and run its tests.",
+      "should_trigger": false,
+      "reason": "Implementation request, not a recap."
+    },
+    {
+      "prompt": "Summarize this article about catching up on sleep.",
+      "should_trigger": false,
+      "reason": "Document summarization, not thread state."
+    },
+    {
+      "prompt": "Pause this task and write a handoff file for a new agent.",
+      "should_trigger": false,
+      "reason": "Explicit pause and durable handoff, handled by the handoff workflow."
     }
   ]
 }

@@ -11,7 +11,7 @@ and linked evidence together, not from the latest comment alone.
 
 Comment on meaningful progress, a new or changed blocker, a decision needed, or
 completion. Read recent comments first: do not repeat an unchanged blocker or
-already-recorded result. Do not mirror HQ reports, agent coordination, polls, or
+already-recorded result. Do not mirror agent coordination, polls, or
 routine checkpoints. A status field can be reconciled without a new comment.
 
 Default to a few sentences: what changed, the evidence link, and any next action

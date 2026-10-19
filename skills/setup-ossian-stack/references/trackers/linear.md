@@ -71,7 +71,7 @@ and summarise before coding.
 Follow `docs/agents/handoff-comment.md`: comment only on meaningful progress,
 a new or changed blocker, a decision needed, or completion. Use a few sentences
 with evidence links and no empty sections. Do not repeat unchanged blockers or
-mirror HQ/agent coordination. Preserve the minimal claim/release/resume records
+mirror agent coordination. Preserve the minimal claim/release/resume records
 the project's own protocol requires; those ownership transitions still need their
 protocol evidence. Blocked, paused, and done updates are state transitions, not
 routine polls.
