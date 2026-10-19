@@ -127,9 +127,6 @@
     "maintain-verification-skill": {
       "role": "human"
     },
-    "mannered-prose": {
-      "role": "both"
-    },
     "obsidian": {
       "role": "both"
     },
@@ -608,9 +605,6 @@
             "id": "copywriter"
           },
           {
-            "id": "mannered-prose"
-          },
-          {
             "id": "unslop"
           }
         ],
@@ -773,11 +767,7 @@
     "how": [
       "why"
     ],
-    "mannered-prose": [
-      "unslop"
-    ],
     "online-writing": [
-      "mannered-prose",
       "unslop",
       "copywriter"
     ],
@@ -787,7 +777,7 @@
     "ossian-mode": [
       "create-verification-skill",
       "grill-with-docs",
-      "mannered-prose",
+      "unslop",
       "project-hq"
     ],
     "prototype": [

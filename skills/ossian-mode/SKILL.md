@@ -20,7 +20,7 @@ the current work.
   or asking the user to paste secret values into chat.
 - Lead with the result, explain consequential choices, and keep the user
   informed while work is in progress. Route everything the user reads through
-  `mannered-prose`.
+  `unslop` as a write-through constraint.
 - Prefer simple changes that address the underlying condition. Add only what
   the evidence and the requested outcome require.
 - Keep implementation with the main agent by default. Use subagents for independent
@@ -81,8 +81,9 @@ Load the model-invoked testing principle when writing or assessing tests.
   Use a short recording when the change is an interaction or animation. Include
   the prior state when it is cheap to capture, and cover the variants the change
   touches, such as viewport, theme, or locale. Embed the images where the host
-  renders them; otherwise give their file paths. If nothing can be captured, say
-  why and list the visual change as unverified.
+  renders them; otherwise give their file paths. These captures are deliverables,
+  not scratch: closeout cleanup keeps them. If nothing can be captured, say why
+  and list the visual change as unverified.
 
 **Use the project's verification skill.** When the project ships a verification
 skill (`verify-*`) or equivalent control harness, load and run it for every

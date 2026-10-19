@@ -1,27 +1,95 @@
 ---
 name: unslop
-description: "Remove AI writing tells and improve human voice. Use for a requested writing pass or a workflow that needs the full style rubric."
+description: "Remove AI writing tells, mannered prose, and stock phrasing, and write plainly for a reader without context. Use when writing or reviewing anything a person will read, when asked for plainer or less performed prose, when asked to deslopify a response, or as a standing constraint on user-facing output."
 ---
 
 # Unslop
 
-Edit text to remove AI patterns and add human voice.
+Edit text to remove AI patterns and performed phrasing, and add human voice.
+
+## Modes
+
+Pick the mode from the request. All three use the same rubric below.
+
+- **Write-through.** A standing constraint on your own user-facing output
+  (reports, reviews, summaries, chat replies). Apply the rubric while writing
+  and reread once before sending. No audit output.
+- **Cleanup or audit.** Supplied text. Follow the process below and return the
+  output described at the end.
+- **Deslopify.** The user says "deslopify", or asks for a response to be
+  rewritten so anyone can follow it. See the section below.
 
 ## Boundary
 
-- Auditing or cleaning existing text: this skill handles it end to end.
 - Generating marketing or product copy is a different job. This skill may serve
   as the final quality gate on generated copy, but it does not invent
   positioning, argument, or campaign.
-- For short write-through passes on conversational output, apply the process
-  inline, without the file-audit steps.
+- This pass changes phrasing, never claims. Preserve the writer's meaning,
+  examples, and voice.
 
 ## Process
 
-1. Scan for the patterns below.
-2. Rewrite. Preserve meaning, match intended tone.
-3. Add soul (see next section).
+1. Scan for the patterns below, including mannered prose.
+2. Rewrite. Preserve meaning, match intended tone. Read
+   `references/before-after.md` when a fix is not obvious; it pairs each
+   common tell with a rewrite.
+3. Add soul (see below).
 4. Self-audit: "What makes this obviously AI generated?" Fix remaining tells.
+
+`references/ai-slop-checklist.md` is the long-form rubric with the full banned
+word lists, for workflows that run an explicit slop gate.
+
+## Mannered prose
+
+Anthropic's definition, quoted as published:
+
+> Mannered prose substitutes metaphor and flourish for direct statement. Instead
+> of "a parameter worth varying," the mannered writer produces "a dial worth
+> turning." Instead of "this point still matters," they write "this point earns
+> its keep." The phrases exist to display the writer, not to convey the idea, and
+> readers can tell. That is why mannered prose irritates: it makes the reader work
+> harder so the writer can perform. It is also imprecise. Metaphors drag in
+> connotations the writer did not choose and cannot control. The fix is to say
+> what you mean. When a literal phrase is available, use it.
+
+The test, one question per suspect phrase: **is a literal phrase available?**
+If yes, the figure is decoration; replace it. If no, the idea has no plain name
+and the comparison is doing explanatory work, so keep it. Stripping every figure
+of speech produces flat text, which is a different failure, not a fix.
+
+Two consequences make this a correctness problem rather than taste:
+
+- A metaphor imports connotations you did not pick. "A dial worth turning"
+  suggests a continuous range; if the parameter has three discrete values, the
+  phrase told the reader something false.
+- Mannered phrasing hides vagueness. When the literal rewrite is hard to write,
+  the underlying thought is not yet specific. Write the literal version anyway
+  and let it expose the gap.
+
+Common shapes: a mechanical noun turned into a physical action, an abstract
+point given a body ("earns its keep", "does the heavy lifting", "carries its
+weight"), and a claim dressed as a scene. When the full definition is more than
+the moment needs, Anthropic's short instruction is enough: "Please remove all
+mannered prose."
+
+Source: Anthropic, *Prompting Claude Fable 5.1*, "Writing density":
+<https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1>
+
+## Deslopify
+
+Rewrite the previous response, or the text given with the request, for a sharp
+reader who has no project context: an executive, or an engineer from another
+team. Return only the rewrite.
+
+1. Open with the conclusion or the decision needed.
+2. Give the background in a sentence or two: what the problem was and what was
+   happening before.
+3. Explain what changed or how it works, in order. Walk a sequence step by step.
+4. Keep the technical details the reader needs. Use the established name for
+   each thing, not a term coined during the work, and define anything a
+   newcomer would not know. Drop internal ids, branch names, and file paths
+   unless the reader must act on them.
+5. Apply the rest of this rubric.
 
 ## Adding soul
 
@@ -107,6 +175,14 @@ Removing patterns is half the job. Sterile, voiceless writing is just as obvious
 40. **Bullets for prose.** Lists for things that aren't a list. If items read as sentences, write sentences.
 41. **Colon capitalization.** Lowercase the word after a colon unless grammar, a proper noun, a title, or code requires a capital.
 
+### Clarity
+
+42. **Fake agency.** An object that "decides", "transforms", or "becomes" when a person or process is the real actor. "The logs become searchable records" becomes "you can search the logs once the job finishes". Plain factual verbs for tools are fine: "the API returns JSON".
+43. **Vague demonstratives.** A sentence, and above all a paragraph, that opens with a bare "This", "That", or "These" whose referent the reader has to look back for. Name the thing: "That context carries over" becomes "The agent keeps your saved rules on the next turn".
+44. **Count openers.** "Two cautions." "Three things to know." Announcing the number before the content. State the first point.
+45. **Invented hyphen compounds.** Adjectives coined by gluing words together to sound compact: "reveal-style colon", "agent-shaped workflow". If a dictionary or the field doesn't use it, write the phrase out. Established compounds ("well-known", "read-only") are fine.
+46. **Missing context in chat.** A report that names the change but not the problem: "The exporter now waits on the reset header." Say what was wrong first, in one sentence, then what changed and how you know it works. Keep the setup short.
+
 ### Judgment, not hard rules
 
 These have legitimate uses, so read for them by hand instead of blanket-banning.
@@ -119,7 +195,7 @@ These have legitimate uses, so read for them by hand instead of blanket-banning.
 ## Output (when auditing)
 
 1. **Verdict:** one sentence naming the dominant problem, or "already clean".
-2. **Findings:** meaningful issues only, the smallest useful fragment plus the tell name.
+2. **Findings:** meaningful issues only, the smallest useful fragment plus the tell name and what it became, so the writer sees the pattern. Where you kept a metaphor because no literal phrase exists, say so.
 3. **Revised draft:** the full cleaned version when changes are needed.
 
 Lead with the revised draft when the ask is a rewrite rather than an audit, and
