@@ -87,7 +87,8 @@ declaring copy done.
   reliable. Less expensive." / "Sleep better. Live longer." / "Thinner.
   Lighter. Faster." The default voice of AI landing pages and ads, so in
   headlines, taglines, and feature copy even one pair is a hit. Join the
-  ideas in a sentence and name the mechanism or number behind them.
+  ideas in a sentence. Add the mechanism or number behind them only when the
+  source gives it; otherwise ask for it.
 
 ### Tone tells
 

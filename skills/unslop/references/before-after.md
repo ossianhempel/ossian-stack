@@ -84,7 +84,7 @@ After: Setup is one file and one command.
 
 36. Staccato sentences
 Before: More reliable. Less expensive.
-After: Retries a failed upload on its own, for half the price of the old plan.
+After: It is more reliable and costs less.
 
 ## Clarity
 
