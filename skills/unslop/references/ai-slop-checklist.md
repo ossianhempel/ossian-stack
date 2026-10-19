@@ -83,6 +83,11 @@ declaring copy done.
   twist:". Manufactured suspense. Cut and make the claim directly.
 - **Dramatic fragmentation.** "That's it. That's the whole thing." Punchy
   fragments stacked for effect. One is a beat; three is a tic.
+- **Staccato sentences.** Two or three clipped, parallel fragments: "More
+  reliable. Less expensive." / "Sleep better. Live longer." / "Thinner.
+  Lighter. Faster." The default voice of AI landing pages and ads, so in
+  headlines, taglines, and feature copy even one pair is a hit. Join the
+  ideas in a sentence and name the mechanism or number behind them.
 
 ### Tone tells
 

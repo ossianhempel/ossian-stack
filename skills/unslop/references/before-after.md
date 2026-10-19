@@ -82,6 +82,10 @@ After: The new API ships to all users on Monday.
 Before: One file. One command. Done.
 After: Setup is one file and one command.
 
+36. Staccato sentences
+Before: More reliable. Less expensive.
+After: Retries a failed upload on its own, for half the price of the old plan.
+
 ## Clarity
 
 42. Fake agency

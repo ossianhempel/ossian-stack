@@ -39,6 +39,9 @@ broken.
   beats "The smart workout tracker".
 - **≤10 words.** If it doesn't fit, it isn't sharp enough yet.
 - **No "Welcome to..." / "Introducing..." / "Meet ___".**
+- **No staccato fragments.** "More reliable. Less expensive." or "Sleep
+  better. Live longer." reads as AI-written. Write one sentence that names the
+  outcome. This applies to subheads, section headlines, and CTAs too.
 - **Pass the hand test.** Cover the visual. Does the headline stand on its own?
 
 ### Subhead rules
@@ -134,7 +137,7 @@ reminder of the offer.
 ```
 [ Restated outcome, same energy as the hero, different angle ]
 [ Primary CTA ]
-[ Tiny reassurance: "Free to try. No credit card." ]
+[ Tiny reassurance: "Free to try, no credit card needed" ]
 ```
 
 ## Things Marketers Love That You Should Cut

@@ -56,8 +56,8 @@ Smart people scrolling fast read like 3rd graders.
 | Too smart                          | 3rd-grader version              |
 |------------------------------------|---------------------------------|
 | "Optimize your nutrition"          | "Eat better"                    |
-| "Track macronutrients effortlessly"| "Snap a photo. See the calories."|
-| "Maximize your training output"    | "Lift more. Every week."        |
+| "Track macronutrients effortlessly"| "Snap your meal to see the calories" |
+| "Maximize your training output"    | "Lift a little more every week" |
 
 ### 3. Buttons so obvious you can't get lost
 
