@@ -1,0 +1,3 @@
+interface:
+  display_name: "Test Behavior, Not Implementation"
+  short_description: "Protect observable behavior with refactor-safe tests"

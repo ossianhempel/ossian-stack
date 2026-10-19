@@ -119,6 +119,7 @@ describe("rendering", () => {
     terminal: true,
     exitCode: 0,
     reason: "status-only",
+    decisions: [{ kind: "merged", pr: { kind: "merged-pr", context, mergedAt: "now" } }],
     rows: [
       {
         kind: "merged",
@@ -212,6 +213,46 @@ describe("main", () => {
         kind: "failing-checks",
         ci: { kind: "ci-github-rejected" },
       },
+    });
+  });
+
+  it("blocks on required approval even with green CI and drafts allowed", async () => {
+    const harness = testRuntime(
+      fakeReader({
+        facts: {
+          mergeStateStatus: "BLOCKED",
+          reviewDecision: "REVIEW_REQUIRED",
+        },
+      })
+    );
+    const code = await main(
+      [
+        "--owner", "owner", "--repo", "repo", "--pr", "1",
+        "--allow-draft", "--review-grace", "0",
+      ],
+      harness.runtime
+    );
+    expect(code).toBe(6);
+    expect(JSON.parse(harness.stdout.at(-1)!)).toMatchObject({
+      kind: "BLOCKER",
+      blocker: { kind: "merge-gate", reason: "review-required" },
+    });
+  });
+
+  it("classifies a required approval in a single status-only snapshot", async () => {
+    const harness = testRuntime(fakeReader({
+      facts: { mergeStateStatus: "BLOCKED", reviewDecision: "REVIEW_REQUIRED" },
+    }));
+    expect(await main([
+      "--owner", "owner", "--repo", "repo", "--pr", "1", "--status-only",
+    ], harness.runtime)).toBe(0);
+    expect(harness.stdout).toHaveLength(1);
+    expect(JSON.parse(harness.stdout[0])).toMatchObject({
+      kind: "STATUS",
+      decisions: [{
+        kind: "blocker",
+        blocker: { kind: "merge-gate", reason: "review-required" },
+      }],
     });
   });
 

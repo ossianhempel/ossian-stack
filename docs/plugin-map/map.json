@@ -55,6 +55,9 @@
     "better-accessibility": {
       "role": "both"
     },
+    "bird": {
+      "role": "both"
+    },
     "blast-radius": {
       "role": "both"
     },
@@ -64,7 +67,7 @@
     "clerk-cli": {
       "role": "both"
     },
-    "codex-first": {
+    "codebase-design": {
       "role": "both"
     },
     "commit-push-pr": {
@@ -124,9 +127,6 @@
     "maintain-verification-skill": {
       "role": "human"
     },
-    "mannered-prose": {
-      "role": "both"
-    },
     "obsidian": {
       "role": "both"
     },
@@ -140,6 +140,9 @@
       "role": "both"
     },
     "project-hq": {
+      "role": "human"
+    },
+    "optimise-github-actions": {
       "role": "human"
     },
     "ossian-mode": {
@@ -223,7 +226,19 @@
     "visual-parity": {
       "role": "both"
     },
+    "up-to-speed": {
+      "role": "both"
+    },
     "why": {
+      "role": "both"
+    },
+    "writing-for-agents": {
+      "role": "both"
+    },
+    "your-call": {
+      "role": "human"
+    },
+    "principle-test-behavior-not-implementation": {
       "role": "both"
     }
   },
@@ -261,7 +276,8 @@
       "principle-exhaust-the-design-space",
       "principle-fix-root-causes",
       "principle-prove-it-works",
-      "why"
+      "why",
+      "principle-test-behavior-not-implementation"
     ],
     "gplay-cli": [
       "one-password"
@@ -274,7 +290,6 @@
     ],
     "project-hq": [
       "babysit-pr",
-      "codex-first",
       "commit-push-pr",
       "diagnosing-bugs",
       "grilling",
@@ -306,7 +321,8 @@
       "setup-ossian-stack",
       "simplify-code",
       "visual-parity",
-      "why"
+      "why",
+      "principle-test-behavior-not-implementation"
     ],
     "prototype": [
       "principle-exhaust-the-design-space"
@@ -314,8 +330,8 @@
     "refactoring": [
       "architect",
       "blast-radius",
+      "codebase-design",
       "how",
-      "principle-exhaust-the-design-space",
       "principle-prove-it-works",
       "principle-redesign-from-first-principles",
       "simplify-code"
@@ -366,10 +382,8 @@
       "principle-prove-it-works"
     ],
     "architect": [
+      "codebase-design",
       "how",
-      "principle-exhaust-the-design-space",
-      "principle-model-the-domain",
-      "principle-redesign-from-first-principles",
       "why"
     ],
     "blast-radius": [
@@ -389,7 +403,9 @@
       "visual-parity"
     ],
     "autoreview": [
-      "blast-radius"
+      "blast-radius",
+      "diagnosing-bugs",
+      "principle-test-behavior-not-implementation"
     ]
   },
   "sections": {
@@ -397,7 +413,7 @@
       {
         "id": "current-request",
         "title": "Work on this request",
-        "outcome": "verified answer or artifact",
+        "outcome": "verified result + scratch cleanup",
         "tag": "Explicit invocation",
         "steps": [
           {
@@ -433,6 +449,10 @@
           {
             "id": "grill-with-docs",
             "note": "plan vs docs"
+          },
+          {
+            "id": "your-call",
+            "note": "delegate a pending choice"
           }
         ]
       },
@@ -476,7 +496,7 @@
           },
           {
             "id": "babysit-pr",
-            "writes": "merge-ready PR"
+            "writes": "merge-ready PR + confirmed watch"
           },
           {
             "id": "resolve-pr-feedback",
@@ -489,6 +509,14 @@
           }
         ],
         "extras": [
+          {
+            "id": "up-to-speed",
+            "note": "catch up on a forgotten thread"
+          },
+          {
+            "id": "codebase-design",
+            "note": "module design criteria"
+          },
           {
             "id": "create-verification-skill",
             "note": "when a reusable harness is missing"
@@ -569,9 +597,6 @@
           },
           {
             "id": "copywriter"
-          },
-          {
-            "id": "mannered-prose"
           },
           {
             "id": "unslop"
@@ -680,6 +705,16 @@
         ]
       },
       {
+        "id": "x",
+        "title": "X / Twitter",
+        "skills": [
+          {
+            "id": "bird",
+            "phase": "reference"
+          }
+        ]
+      },
+      {
         "id": "google-play",
         "title": "Google Play",
         "skills": [
@@ -691,15 +726,16 @@
       }
     ],
     "sideDoors": [
+      "optimise-github-actions",
       "project-hq",
       "setup-ossian-stack",
       "git-cleanup",
-      "codex-first",
       "bro",
       "retro",
       "maintain-verification-skill",
       "skill-creator",
-      "skill-cleaner"
+      "skill-cleaner",
+      "writing-for-agents"
     ],
     "knowledge": {
       "title": "Principles",
@@ -711,7 +747,8 @@
         "principle-prove-it-works",
         "principle-redesign-from-first-principles",
         "principle-sequence-verifiable-units",
-        "principle-subtract-before-you-add"
+        "principle-subtract-before-you-add",
+        "principle-test-behavior-not-implementation"
       ]
     }
   },
@@ -725,11 +762,7 @@
     "how": [
       "why"
     ],
-    "mannered-prose": [
-      "unslop"
-    ],
     "online-writing": [
-      "mannered-prose",
       "unslop",
       "copywriter"
     ],
@@ -738,7 +771,7 @@
     ],
     "ossian-mode": [
       "create-verification-skill",
-      "mannered-prose",
+      "unslop",
       "project-hq"
     ],
     "prototype": [

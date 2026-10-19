@@ -9,7 +9,7 @@ Run the bundled structured review helper as a closeout check. This is code revie
 
 Codex review is the default when no engine is set. It uses `gpt-6.1-sol` with `high` reasoning by default, then retries once with `gpt-6-sol` only when the account cannot access Sol. Claude review is optional and uses `claude-fable-5` by default.
 
-For user-visible behavior, pair autoreview with a source-blind behavior check. Autoreview is source-aware and judges the change bundle; behavior validation judges the running product or tool against a behavior contract. A clean autoreview is not proof that a UI, CLI, API, or generated artifact works from the user's perspective.
+For user-visible behavior, pair autoreview with a check against the user's behavior contract. Autoreview judges the change bundle; behavior validation judges the running product or tool. Reuse current proof from the project's verification workflow. The main agent owns this proof; an independent execution reviewer is optional. A clean source review does not prove observed behavior.
 
 Use when:
 
@@ -19,7 +19,29 @@ Use when:
 
 Do not require autoreview for a change whose entire diff is prose-only internal notes or `SKILL.md` documentation. Still inspect the diff directly and run the repository's lightweight documentation validation, if any. This exception does not cover user-facing documentation, executable examples, configuration, scripts, generated files, or behavior changes.
 
-Select the target with the target-selection reference before invoking review. The default engine/model contract above still applies; engine details and opt-in panels are in their reference. A successful helper exit with no accepted actionable findings ends review.
+Select the target with the target-selection reference before invoking review. The default engine/model contract above still applies; engine details and opt-in panels are in their reference. A successful helper exit with no accepted actionable findings ends the source-review phase; complete any outstanding behavior proof before delivery.
+
+## Review depth and test evidence
+
+The main agent owns implementation and the review → validate → fix → test →
+re-review loop. Reviewers return findings in one pass; they do not implement fixes
+or start another review loop. Ordinary development stays with the main agent.
+
+Before the first pass, consider the consequences of a failure. When changed
+behavior could lose data, cross an ownership or authorization boundary, charge
+incorrectly, break migration compatibility, or fail under concurrent operations,
+retries, or interruption, read [Deeper review](references/deeper-review.md).
+Use that reference to supply a focused brief to the existing helper and exercise
+the consequential failure scenarios. Start with one reviewer; add a panel only
+for serious consequences or material uncertainty
+that benefits from independent judgment. File names and diff size alone do not
+determine depth.
+
+For every pass, apply `principle-test-behavior-not-implementation` to changed tests
+and the evidence for changed behavior. The helper includes the core criteria in
+every reviewer prompt. A test gap is actionable when it leaves an important
+changed behavior unproven; ordinary priority and scope thresholds still apply.
+Test-count, coverage-percentage, and stylistic objections do not prolong review.
 
 ## Contract
 
@@ -47,7 +69,7 @@ Select the target with the target-selection reference before invoking review. Th
 - For regression provenance, keep roles separate: blamed code author, blamed PR author, PR merger/committer, current PR author, and PR/date. If no blamed PR is traceable, use the blamed commit as the provenance: commit SHA, date, and author username. Do not guess a merger or frame missing PR metadata as a separate finding.
 - If the blamed PR was merged by `clawsweeper[bot]` or another automation, identify the human trigger when practical. Check timeline/comments first; if rate-limited, use gitcrawl/cache or public PR HTML. Look for maintainer commands such as `@clawsweeper automerge`, `/landpr`, or labels/status comments that armed automerge. Report `automerge triggered by @login`; if not found, say trigger unknown.
 - Do not invoke built-in `codex review`, nested reviewers, or reviewer panels from inside the review. The helper builds one validated bundle, calls the selected engine once for normal inputs or once per complete bounded chunk for oversized inputs, validates the structured results, and stops.
-- Stop as soon as the helper exits 0 with no accepted/actionable findings. Do not run an extra review just to get a nicer "clean" line, a second opinion, or clearer closeout wording.
+- End the source-review loop as soon as the helper exits 0 with no accepted/actionable findings. Do not run an extra source review just to get a nicer "clean" line, a second opinion, or clearer closeout wording.
 - Treat the helper's successful exit plus absence of actionable findings as the clean review result, even if the underlying Codex CLI output is terse.
 - Multi-reviewer panels are opt-in only. Use them when explicitly requested or when risk justifies the extra spend; the main agent still verifies every accepted finding before fixing.
 - If rejecting a finding as intentional/not worth fixing, add a brief inline code comment only when it explains a real invariant or ownership decision that future reviewers should know.
@@ -76,6 +98,10 @@ Stop patching and report the scope break instead of continuing when:
 - fixing the accepted finding would make the PR no longer describe the same behavior, issue, or owner boundary.
 
 After the two-cycle pause, continue only when every remaining accepted finding is still an in-scope blocker. Otherwise preserve the useful analysis, identify the smallest safe landed subset if one exists, and open or request a follow-up for the larger fix. Do not keep committing speculative fixes just to satisfy the reviewer.
+
+When the same failure persists through two fixes based on the same assumption,
+use the premise reset in `diagnosing-bugs` before another patch. A finding can
+remain in scope while its proposed cause is wrong.
 
 Do not stack or push review-triggered fix commits while scope classification or focused proof is unresolved. Keep exploratory edits local until the cycle is proven in scope; if scope breaks, remove them from the landing lane instead of preserving them as branch history.
 
@@ -131,7 +157,7 @@ Run the helper directly so target selection, engine choice, structured validatio
 Include:
 
 - review command used
-- tests/proof run
+- tests/proof run, tied to the checked revision or artifact; distinguish source-review results from behavior actually observed and any unverified requirements
 - findings accepted/rejected, briefly why
 - the clean review result from the final helper/review run, or why a remaining finding was consciously rejected
 
@@ -142,6 +168,7 @@ Do not run another review solely to improve the final report wording. If the fin
 Read the reference for the task at hand; do not load every recipe.
 
 - [Target selection](references/target-selection.md): choosing dirty, branch/PR, or committed review scope.
+- [Deeper review](references/deeper-review.md): consequential changes, focused failure scenarios, evidence, and escalation within the existing loop.
 - [Oversized and parallel](references/oversized-and-parallel.md): a large bundle or parallel focused validation.
 - [Engines and panels](references/engines-and-panels.md): an explicitly selected engine/model, override, or opt-in reviewer panel.
 - [Helper usage](references/helper-usage.md): helper options, native Windows invocation, or harness verification.

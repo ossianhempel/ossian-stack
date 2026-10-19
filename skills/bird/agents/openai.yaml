@@ -1,0 +1,3 @@
+interface:
+  display_name: "Bird"
+  short_description: "Read X posts and perform authorized account actions"

@@ -29,7 +29,7 @@ Choose by what remains unsettled:
   recommendation or artifact. Use `grilling`, `domain-modeling`, or `prototype`
   when useful.
 - **Build:** implement an agreed outcome. Carry accepted decisions and the proof
-  contract. On Claude Code, use `codex-first` when applicable.
+  contract.
 - **Babysit:** inspect or drive an existing PR through the authorized boundary with
   `babysit-pr`.
 - **Diagnose:** establish a reproducible cause with `diagnosing-bugs`; return the

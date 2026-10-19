@@ -20,16 +20,43 @@ the current work.
   or asking the user to paste secret values into chat.
 - Lead with the result, explain consequential choices, and keep the user
   informed while work is in progress. Route everything the user reads through
-  `mannered-prose`.
+  `unslop` as a write-through constraint.
 - Prefer simple changes that address the underlying condition. Add only what
   the evidence and the requested outcome require.
-- For parallel work, use same-task candidates only when selection and synthesis
-  matter. Partition coverage across disjoint slices. Isolate every writing worker.
+- Keep implementation with the main agent by default. Use subagents for independent
+  review or focused investigation when useful; delegate implementation when the
+  user requests it. Isolate any writing worker and retain one integration owner.
+
+## Substantial work
+
+For work with several verifiable units or a likely session boundary, keep one
+short working record in the host's plan or thread. Reuse an existing project
+plan when it already owns this work. This structures execution of the agreed
+scope; it introduces no additional approval gate.
+
+1. **Define done.** Name the observable result, scope, and constraints that must
+   still hold. Reuse requirements already settled with the user.
+2. **Ground the work.** Establish the current revision or artifact, affected
+   callers and owners, and actual behavior. Distinguish evidence from assumptions;
+   investigate only the uncertainty that affects the next step.
+3. **Work in verifiable units.** Give each useful increment an observable check.
+   Complete that check before advancing; when it fails, resolve the failure or
+   record the blocked unit and continue only independent work. Keep consequential
+   decisions, check results, and the next step current in the same record.
+4. **Close against the goal.** Run the verification below against the original
+   requirements, complete scratch cleanup, and report the result and remaining
+   gaps. A completed plan alone is not evidence that the result works.
+
+Keep small, clear fixes direct. For any temporary files or resources created
+during this request, follow [artifact lifecycle](references/artifact-lifecycle.md)
+before creating them and again at closeout. Plans and decision notes stay in the
+host unless a file is necessary for resumption or is a requested deliverable.
 
 ## Verification
 
-Apply these rules directly during the work. Their matching principle skills are
-explicit-only deeper references; the rules here do not depend on invoking them.
+Apply these rules directly during the work. Explicit-only principles provide
+deeper references when the user invokes them; the rules here already apply.
+Load the model-invoked testing principle when writing or assessing tests.
 
 - **Prove it works (`principle-prove-it-works`).** After implementation and
   before declaring done, exercise the real artifact on the surface the user
@@ -40,11 +67,23 @@ explicit-only deeper references; the rules here do not depend on invoking them.
   reproduce the exact symptom first, trace it to the mechanism that produces it,
   and fix that mechanism. Do not turn an unexpected state into an accepted state
   merely by adding a guard.
+- **Test behavior (`principle-test-behavior-not-implementation`).** Use tests that
+  catch broken observable behavior and survive internal refactoring. Match the
+  test boundary to the failure and establish meaningful regression evidence.
 - **Sequence verifiable units (`principle-sequence-verifiable-units`).** In a
   migration, sweep, repeated edit, or multi-commit delivery, choose the smallest
   useful unit, change it, and run its check before advancing. Order commits and
   PRs so each state is independently understandable and verifiable under the
   project's branching conventions.
+- **Show visual changes.** When a change alters what an app or site renders
+  (layout, styling, copy, component states, motion), capture the affected
+  screens from the running artifact and bring them back in the final response.
+  Use a short recording when the change is an interaction or animation. Include
+  the prior state when it is cheap to capture, and cover the variants the change
+  touches, such as viewport, theme, or locale. Embed the images where the host
+  renders them; otherwise give their file paths. These captures are deliverables,
+  not scratch: closeout cleanup keeps them. If nothing can be captured, say why
+  and list the visual change as unverified.
 
 **Use the project's verification skill.** When the project ships a verification
 skill (`verify-*`) or equivalent control harness, load and run it for every
@@ -56,7 +95,8 @@ asserted. Creating it is a suggestion, not a gate.
 
 Before delivery, complete this behavioral proof as well as the relevant focused
 checks and `autoreview`. In the final response, name the artifact exercised, the
-behavior observed, and anything that remains unverified.
+behavior observed, the visual proof for any UI change, and anything that remains
+unverified.
 
 ## Choose the relevant workflow
 
@@ -71,6 +111,11 @@ to implementation; its size alone does not require a planning detour.
 | Implementation | Implement the agreed scope directly. For cross-boundary work settle caller usage and the data shape through `architect`. Load a relevant platform or craft skill only where needed. Use `visual-parity` when a UI must match a fixed reference. |
 | Refactoring | `refactoring` for structural changes with behavior preserved; `simplify-code` for readability in place. |
 | Delivery | Use `blast-radius` before delivery when safety depends on behavior beyond the diff. Use `commit-push-pr` for requested commits, pushes, and PRs; `babysit-pr` for an existing PR's readiness work; `release-ios-app` for an authorized iOS release. |
+
+`architect` and `refactoring` load Codebase Design when module interfaces or
+boundaries need judgment. Let the selected workflow own the plan, implementation,
+and verification; reuse its design decisions instead of running each skill as a
+separate phase. Mechanical changes and readability cleanup skip that design work.
 
 Keep `project-hq` reserved for standing projects with a durable task queue and
 multiple execution owners.

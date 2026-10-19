@@ -1,0 +1,5 @@
+interface:
+  display_name: "Your Call"
+  short_description: "Let the agent decide a pending question and continue"
+policy:
+  allow_implicit_invocation: false

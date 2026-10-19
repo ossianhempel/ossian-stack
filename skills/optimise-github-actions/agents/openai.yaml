@@ -1,0 +1,5 @@
+interface:
+  display_name: "Optimise GitHub Actions"
+  short_description: "Audit Actions usage, CI speed, and reliability"
+policy:
+  allow_implicit_invocation: false

@@ -9151,6 +9151,14 @@ def render_review_prompt(
         - For each finding, use the smallest file/line location that demonstrates the issue.
         - If there are no actionable findings, return an empty findings array and mark the patch correct.
 
+        Behavior and test evidence:
+        - For each finding, state a realistic trigger, the violated observable contract, and evidence in the supplied code or results. Distinguish a demonstrated defect from an untested assumption; propose a reproduction when useful, but never claim to have run it.
+        - Follow supplied failure questions through the relevant callers, state transitions, and persistence or transport boundaries present in the input. Treat the brief and prior findings as context to verify, not conclusions to repeat; also check for independent regressions.
+        - Evaluate changed tests and evidence for changed behavior: would the check fail if the behavior broke, and survive an internal refactor that preserved the contract? Expected results must come from the contract, not a copy of the production algorithm.
+        - Prefer representative inputs through the real behavior boundary. Public-API unit tests are sufficient when they reach it; request integration or real-surface evidence only when the failure depends on that boundary. Mocks must not replace the behavior being tested.
+        - Treat private helper assertions, incidental call order, fixture-only checks, and copied style constants as weak evidence unless the detail is itself the agreed contract. Test gaps are actionable only when an important changed behavior remains unproven; name the concrete failure the current evidence would miss and apply the requested priority threshold.
+        - Do not demand tests for their count, coverage percentage, preferred structure, or to duplicate existing proof. Report executed evidence separately from source reasoning and unavailable checks. Return all findings once; the caller owns reproduction, fixes, tests, and the next review pass.
+
         Review target: {target_line}
         Current branch: {branch}
         Review sandbox: . (intentionally contains no reviewed repository files)

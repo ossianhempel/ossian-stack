@@ -51,7 +51,8 @@ interpret successful `az repos` authentication as proof this REST helper has acc
   feedback before CI work or accepting READY. Apply the main skill's classification,
   fix, verify, push and rearm rules. Use the same owning task/drive across helpers.
 
-Without status-only the helper polls pending/stale evidence every 60 seconds,
+With a host PR subscription, use status-only snapshots on wakes under the ownership
+rules in `monitoring.md`. Without status-only the helper polls pending/stale evidence every 60 seconds,
 ending at READY, COMPLETE/CLOSED for an already completed/abandoned PR, an
 actionable/human/read failure, or the one-hour deadline. Terminal PR state is read
 before refs, so deleted source branches do not obscure completion. It
