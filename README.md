@@ -136,6 +136,23 @@ project work. Ossian Mode handles the current request without creating tasks
 automatically. Direct skill calls remain valid, and downstream
 explicit-invocation and action permissions still apply.
 
+## Main flow
+
+For a new feature or change that starts as an idea, run these in order. Each step
+leaves something on disk the next one reads; there are no tickets.
+
+| Step | Skill | Leaves behind |
+| --- | --- | --- |
+| 1. Grill the plan | **grill-with-docs** | ADRs, GLOSSARY.md terms, and a spec with behavior checks and a build order |
+| 2. Settle interfaces | **architect**, when the change crosses module boundaries | agreed caller usage and types |
+| 3. Build | **ossian-mode** with the spec: each unit of the build order, its uncovered behavior checks written as tests first where a test can prove them | working code, proven on the real surface |
+| 4. Review | **autoreview**, plus **blast-radius** when safety depends on code outside the diff | review findings, fixed |
+| 5. Ship | **commit-push-pr**, then **babysit-pr** for a PR | a commit on main, or a merge-ready PR |
+| 6. Look back | **retro** | proposed fixes to the repo and its instructions |
+
+Skip a step only when its output already exists: an agreed scope skips step 1, a
+change inside one module skips step 2.
+
 ## Philosophy
 
 One repo, one install, every runtime. These skills previously lived in a private
