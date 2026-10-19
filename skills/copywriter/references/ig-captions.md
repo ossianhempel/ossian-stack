@@ -116,7 +116,7 @@ Positive motivation without a pain or a worry behind it rarely breaks through.
 Leave a feeling before the CTA. Motivation, curiosity to try, or validation.
 
 - Challenge: "Try it next time and feel the difference"
-- Simplification: "One change. Better results."
+- Simplification: "Change one thing and see what happens"
 - Casual confidence: "Not complicated, but it works"
 
 The CTA should never be the emotional close.

@@ -33,8 +33,8 @@ Cover your UI with your hand and read only the text. Does it tell a story? Or do
 |--------------|----------|
 | "Customizable dashboard" | "See everything that matters, at a glance." |
 | "Workout tracking" | "You'll never forget what you lifted again." |
-| "Notes → Slides. Instantly." | "Stop designing slides. Write notes. Start presenting." |
-| "Full screen always readable" | "Stay focused while you present. Clean slides. No distractions." |
+| "Notes → Slides. Instantly." | "Write your notes and present them as slides." |
+| "Full screen always readable" | "Present full screen with nothing but your slides." |
 | "Slides over any app" | "Stay in your flow. Present without breaking your momentum." |
 | "Auto-numbering that works" | "Never fix slides manually again. Your structure stays clean automatically." |
 

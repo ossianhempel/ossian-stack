@@ -191,7 +191,7 @@ describing features, show what changes for the user.
 |--------------|----------|
 | "Customizable dashboard" | "See everything that matters, at a glance." |
 | "Workout tracking" | "You'll never forget what you lifted again." |
-| "Notes → Slides. Instantly." | "Stop designing slides. Write notes. Start presenting." |
+| "Notes → Slides. Instantly." | "Write your notes and present them as slides." |
 | "Auto-numbering that works" | "Never fix slides manually again." |
 | "Smart notifications" | "Only the alerts that actually need you." |
 | "Powerful editor" | "Write the way your brain works." |
