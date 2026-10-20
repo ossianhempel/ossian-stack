@@ -24,7 +24,7 @@ Check available MCPs - if useful for research (searching docs, finding similar s
 Based on the user interview, fill in these components:
 
 - **name**: Skill identifier
-- **description**: Describe the task that benefits from this skill, its distinctive capability, and any important exclusion. Keep it concise. Do not broaden triggers to compensate for a particular model's past behavior. Evaluate representative positive requests and close negative matches on the intended hosts and models.
+- **description**: The skill's always-loaded context pointer; `writing-for-agents` covers how to word it and whether the skill should be model- or user-invoked. Describe the task that benefits from this skill, its distinctive capability, and any important exclusion. Keep it concise. Do not broaden triggers to compensate for a particular model's past behavior. Evaluate representative positive requests and close negative matches on the intended hosts and models.
 - **compatibility**: Required tools, dependencies (optional, rarely needed)
 - **the rest of the skill :)**
 
@@ -75,17 +75,12 @@ skill-name/
 
 #### Progressive Disclosure
 
-Skills use a three-level loading system:
-1. **Metadata** (name + description) - Always in context (~100 words)
-2. **SKILL.md body** - In context whenever skill triggers (<500 lines ideal)
-3. **Bundled resources** - As needed (unlimited, scripts can execute without loading)
-
-These word counts are approximate and you can feel free to go longer if needed.
-
-**Key patterns:**
-- Keep SKILL.md under 500 lines; if you're approaching this limit, add an additional layer of hierarchy along with clear pointers about where the model using the skill should go next to follow up.
-- Reference files clearly from SKILL.md with guidance on when to read them
-- For large reference files (>300 lines), include a table of contents
+Skills load in three levels: metadata (name + description) is always in context,
+the SKILL.md body loads when the skill triggers, and bundled resources load only
+when a pointer sends the agent to them (scripts can run without loading). Keep
+SKILL.md under about 500 lines and give a reference file over 300 lines a table of
+contents. What belongs on which level is the information hierarchy in
+`writing-for-agents`.
 
 **Domain organization**: When a skill supports multiple domains/frameworks, organize by variant:
 ```
@@ -126,7 +121,8 @@ Output: feat(auth): implement JWT-based authentication
 
 ### Writing Style
 
-Try to explain to the model why things are important in lieu of heavy-handed musty MUSTs. Use theory of mind and try to make the skill general and not super-narrow to specific examples. Start by writing a draft and then look at it with fresh eyes and improve it.
+Write the body against `writing-for-agents`, which you loaded before drafting. When
+the draft exists, reread it with fresh eyes and prune it by that skill's rules.
 
 ### Test Cases
 
