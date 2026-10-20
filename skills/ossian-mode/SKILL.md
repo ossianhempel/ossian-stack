@@ -91,6 +91,8 @@ Load the model-invoked testing principle when writing or assessing tests.
   you did not create. For iOS simulators, including the clones `xcodebuild`
   makes for parallel tests, use the ledger in
   [artifact lifecycle](references/artifact-lifecycle.md#simulators-and-devices).
+  Branches and worktrees from PRs merged after a session ended are closed
+  out by the next `commit-push-pr` delivery in that repository.
 
 **Use the project's verification skill.** When the project ships a verification
 skill (`verify-*`) or equivalent control harness, load and run it for every
