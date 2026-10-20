@@ -41,7 +41,8 @@ python3 "$SKILL_DIR/scripts/sim-ledger.py" begin "<task scratch directory>/sims.
   making one another way. Each prints the UDID to drive.
 - At closeout run `end LEDGER`. It shuts down and runs `xcrun simctl delete` on
   owned devices only, then verifies they are gone; a non-zero exit names the
-  leftovers to report. A device you only booted is not owned: shut it down if
+  leftovers to report. Test clones are skipped while any `xcodebuild` process
+  runs, since another test run may own them; rerun `end` once it exits. A device you only booted is not owned: shut it down if
   you booted it, and leave it in place.
 - Without Python, record each UDID in the durable record when it is created and
   run `xcrun simctl shutdown <udid>` then `xcrun simctl delete <udid>` for each
