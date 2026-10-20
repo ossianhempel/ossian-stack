@@ -248,7 +248,7 @@
       "upstreamPath": "skills/productivity/handoff",
       "upstreamRev": "d28dfdc39beadc3142a33359b5cfa4765dcbd0bc",
       "upstreamCheckedAt": "2026-08-27",
-      "notes": "Started from mattpocock's handoff; rewritten 2026-10-20 as a minimal pause-only skill. Writes a short note for a fresh session (goal, location, evidence, blockers, next step), saves it to the temp directory, and copies it to the clipboard with whichever of pbcopy, clip.exe, wl-copy, xclip, or xsel exists, printing the note when none works. Resume mode was dropped: the note itself tells the next agent to reconcile against live Git and PR state. Merge by hand on refresh; keep the clipboard step."
+      "notes": "Started from mattpocock's handoff; rewritten 2026-10-20 as a minimal pause-only skill. Writes a short note for a fresh session (goal, location, evidence, blockers, next step), saves it to the temp directory, and copies it to the clipboard with the first of pbcopy, clip.exe, wl-copy, xclip, or xsel that succeeds, printing the note when none does. Resume mode was dropped: the note itself tells the next agent to reconcile against live Git and PR state. Merge by hand on refresh; keep the clipboard step."
     },
     "how": {
       "origin": "adapted",

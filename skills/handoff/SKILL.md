@@ -38,14 +38,11 @@ Write the note to `handoff-<YYYYMMDD-HHMMSS>.md` in the system temp directory
 
 ```bash
 f="<absolute path of the note>";
-if command -v pbcopy >/dev/null; then pbcopy < "$f";
-elif command -v clip.exe >/dev/null; then clip.exe < "$f";
-elif [ -n "$WAYLAND_DISPLAY" ] && command -v wl-copy >/dev/null; then wl-copy < "$f";
-elif command -v xclip >/dev/null; then xclip -selection clipboard < "$f";
-elif command -v xsel >/dev/null; then xsel --clipboard --input < "$f";
-else exit 3; fi
+pbcopy < "$f" || clip.exe < "$f" || wl-copy < "$f" ||
+  xclip -selection clipboard < "$f" || xsel --clipboard --input < "$f"
 ```
 
+Each tool is tried in turn until one succeeds; missing tools just fail through.
 A non-zero exit means nothing was copied, which is normal in a remote or headless
 session.
 
