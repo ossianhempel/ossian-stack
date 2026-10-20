@@ -33,7 +33,7 @@ How it works:
 1. A DEBUG-only `MarketingCapture.swift` file lives in the main app target
 2. When launched with `-MarketingCapture 1`, the app seeds data, then a coordinator walks a list of `CaptureStep`s, each step navigates, waits for settle, snapshots, and cleans up
 3. PNGs are written to the app's sandbox `Documents/marketing/<locale>/` directory
-4. A shell script builds once, installs, then loops locales by relaunching with `-AppleLanguages (xx) -AppleLocale xx`, pulling files out via `simctl get_app_container`
+4. A shell script builds once, installs, then loops locales by relaunching with `-AppleLanguages (xx) -AppleLocale xx`, pulling files out via `simctl get_app_container`. On exit it deletes a simulator it created and shuts down one it booted; keep that teardown when adapting the template
 
 ## Output Layout
 

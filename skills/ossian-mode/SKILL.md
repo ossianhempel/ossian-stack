@@ -84,6 +84,13 @@ Load the model-invoked testing principle when writing or assessing tests.
   renders them; otherwise give their file paths. These captures are deliverables,
   not scratch: closeout cleanup keeps them. If nothing can be captured, say why
   and list the visual change as unverified.
+- **Leave the machine as you found it.** Simulators, emulators, servers,
+  browser profiles, and test data that verification creates are scratch, not
+  setup to keep for next time. Record each one when you create it and remove it
+  once its proof is captured, on failure as well as success; never remove one
+  you did not create. For iOS simulators, including the clones `xcodebuild`
+  makes for parallel tests, use the ledger in
+  [artifact lifecycle](references/artifact-lifecycle.md#simulators-and-devices).
 
 **Use the project's verification skill.** When the project ships a verification
 skill (`verify-*`) or equivalent control harness, load and run it for every
