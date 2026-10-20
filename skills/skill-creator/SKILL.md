@@ -17,6 +17,12 @@ evaluate. Use existing decisions and preserve review-only/no-commit boundaries.
 A skill states the goal, completion condition, constraints, safe failure direction,
 and facts the agent cannot derive locally. Keep task-specific recipes in references.
 
+Before drafting or revising any text an agent will read (the SKILL.md body, its
+description, a reference file), load `writing-for-agents` and write against it. It
+owns how that text is written: pointers, information hierarchy, completion
+criteria, leading words, and pruning. This skill owns packaging, metadata, and
+evaluation.
+
 Descriptions should name the real task, distinctive capability, and important
 exclusions concisely. Do not make unrelated prompts trigger to compensate for a
 particular model. Preserve explicit-only invocation policy and existing metadata.

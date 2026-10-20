@@ -500,7 +500,7 @@
       "repo": "https://github.com/anthropics/skills",
       "path": "skills/skill-creator",
       "refresh": "npx skills add anthropics/skills -y --skill skill-creator && echo 'Hand-merge the upstream scratch copy .agents/skills/skill-creator/ with skills/skill-creator/; preserve local adaptations and reference routing, then: trash .agents/skills/skill-creator'",
-      "notes": "Updated from Anthropic upstream (dd63a74); local eval harness may differ. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description; task-specific reference routing; model-neutral authoring and explicit Claude optimizer contract. Preserve on refresh.",
+      "notes": "Updated from Anthropic upstream (dd63a74); local eval harness may differ. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description; task-specific reference routing; model-neutral authoring and explicit Claude optimizer contract. Local change (2026-10-20): writing guidance routes through writing-for-agents; the SKILL.md routing line and the trimmed Progressive Disclosure and Writing Style sections in references/authoring.md replace upstream prose. Preserve on refresh.",
       "upstreamPath": "skills/skill-creator",
       "upstreamRev": "b9e19e6f44773509fbdd7001d77ff41a49a486c1",
       "upstreamCheckedAt": "2026-08-27"
