@@ -20,6 +20,35 @@ deliverables; temporary plans, logs, fixtures, and prototypes are scratch.
   the goal, decisions, completed checks, next step, and outstanding cleanup.
   Reuse existing durable project records instead of adding a second tracker.
 
+## Simulators and devices
+
+A simulator costs gigabytes of disk and outlives the session, so a leaked one is
+the most expensive scratch an agent leaves. Reuse an existing device when the
+check allows it; create one only when the check needs a clean or specific device.
+Track ownership with `scripts/sim-ledger.py` (Python 3, wraps `xcrun simctl`),
+anchored to this skill's directory and keeping the ledger in the task's scratch
+directory:
+
+```
+SKILL_DIR="<absolute path of the ossian-mode directory>";
+python3 "$SKILL_DIR/scripts/sim-ledger.py" begin "<task scratch directory>/sims.json"
+```
+
+- Run `begin` before the first build or test, so the clones `xcodebuild` adds
+  for parallel testing count as owned.
+- Create or clone devices through the ledger (`create LEDGER NAME DEVICE_TYPE
+  RUNTIME`, `clone LEDGER SOURCE_UDID NAME`), or `adopt LEDGER UDID` right after
+  making one another way. Each prints the UDID to drive.
+- At closeout run `end LEDGER`. It shuts down and runs `xcrun simctl delete` on
+  owned devices only, then verifies they are gone; a non-zero exit names the
+  leftovers to report. Test clones are skipped while any `xcodebuild` process
+  runs, since another test run may own them; rerun `end` once it exits. A device you only booted is not owned: shut it down if
+  you booted it, and leave it in place.
+- Without Python, record each UDID in the durable record when it is created and
+  run `xcrun simctl shutdown <udid>` then `xcrun simctl delete <udid>` for each
+  at closeout. Never use `delete all`, `delete unavailable`, or `erase` on a set
+  you share with the user.
+
 ## Closeout and recovery
 
 Before reporting completion or closing cancelled work:

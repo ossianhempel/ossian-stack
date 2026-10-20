@@ -39,7 +39,7 @@ else
 fi
 
 echo "==> Ensuring $SIM_NAME simulator exists and is booted"
-DEVICE_ID=$(xcrun simctl list devices available -j 2>/dev/null \
+DEVICE_LINE=$(xcrun simctl list devices available -j 2>/dev/null \
     | python3 -c "
 import json, sys
 data = json.load(sys.stdin)
@@ -48,9 +48,38 @@ for runtime, devices in data['devices'].items():
         continue
     for d in devices:
         if d['name'] == '$SIM_NAME':
-            print(d['udid'])
+            print(d['udid'], d['state'])
             sys.exit()
 " || true)
+DEVICE_ID="${DEVICE_LINE%% *}"
+CREATED_SIM=0
+BOOTED_SIM=0
+[ -n "$DEVICE_LINE" ] && [ "${DEVICE_LINE#* }" != "Booted" ] && BOOTED_SIM=1
+
+# Leave the machine as we found it: delete a simulator this run created, shut
+# down one it booted, never touch one that was already running. Runs on
+# success, failure, and Ctrl-C. Screenshots in $OUT_ROOT are kept. A failed
+# teardown makes an otherwise successful run exit non-zero.
+cleanup_sim() {
+    local status=$?
+    [ -n "${DEVICE_ID:-}" ] || exit "$status"
+    if [ "$CREATED_SIM" = 1 ]; then
+        xcrun simctl shutdown "$DEVICE_ID" 2>/dev/null || true
+        if xcrun simctl delete "$DEVICE_ID"; then
+            echo "==> Deleted simulator $DEVICE_ID created by this run"
+        else
+            echo "Leftover simulator $DEVICE_ID; remove it with: xcrun simctl delete $DEVICE_ID" >&2
+            [ "$status" = 0 ] && status=1
+        fi
+    elif [ "$BOOTED_SIM" = 1 ]; then
+        if ! xcrun simctl shutdown "$DEVICE_ID"; then
+            echo "Could not shut down simulator $DEVICE_ID; run: xcrun simctl shutdown $DEVICE_ID" >&2
+            [ "$status" = 0 ] && status=1
+        fi
+    fi
+    exit "$status"
+}
+trap cleanup_sim EXIT
 
 if [ -z "${DEVICE_ID:-}" ]; then
     echo "Creating $SIM_NAME simulator"
@@ -69,6 +98,7 @@ for d in data['devicetypes']:
         print(d['identifier']); sys.exit()
 ")
     DEVICE_ID=$(xcrun simctl create "$SIM_NAME" "$DEVICE_TYPE" "$RUNTIME")
+    CREATED_SIM=1
 fi
 
 xcrun simctl boot "$DEVICE_ID" 2>/dev/null || true
