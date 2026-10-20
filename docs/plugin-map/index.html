@@ -1047,11 +1047,11 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Handoff",
-   "description": "Pause work at a safe boundary or resume it from a durable handoff reconciled with live repository state.",
+   "description": "Write a compact handoff so a fresh session can continue this work, save it, and copy it to the clipboard.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": "What will the next session be used for?",
-   "origin": "vendored",
+   "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "routes": [],
@@ -1588,7 +1588,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Retro",
-   "description": "Run a retrospective on a coding session: find where the environment slowed the agent down and propose fixes ordered by severity. Explicit invocation only.",
+   "description": "Run a retrospective on a coding session, or across many past sessions to find instructions the user keeps repeating; propose environment fixes ordered by severity. Explicit invocation only.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,
@@ -1717,7 +1717,8 @@
    "repo": "https://github.com/anthropics/skills",
    "calls": [
     "clerk-cli",
-    "ios-marketing-capture"
+    "ios-marketing-capture",
+    "writing-for-agents"
    ],
    "routes": [],
    "calledBy": [],
@@ -1858,7 +1859,9 @@
    "repo": "https://github.com/mattpocock/skills",
    "calls": [],
    "routes": [],
-   "calledBy": [],
+   "calledBy": [
+    "skill-creator"
+   ],
    "routedBy": []
   },
   "your-call": {

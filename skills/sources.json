@@ -241,14 +241,14 @@
       "upstreamCheckedAt": "2026-09-03"
     },
     "handoff": {
-      "origin": "vendored",
+      "origin": "adapted",
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/productivity/handoff",
-      "refresh": "npx skills add mattpocock/skills -y --skill handoff && cp -R .agents/skills/handoff/* skills/handoff/ && trash .agents/skills/handoff",
       "lastSynced": "2026-08-03",
       "upstreamPath": "skills/productivity/handoff",
       "upstreamRev": "d28dfdc39beadc3142a33359b5cfa4765dcbd0bc",
-      "upstreamCheckedAt": "2026-08-27"
+      "upstreamCheckedAt": "2026-08-27",
+      "notes": "Started from mattpocock's handoff; rewritten 2026-10-20 as a minimal pause-only skill. Writes a short note for a fresh session (goal, location, evidence, blockers, next step), saves it to the temp directory, and copies it to the clipboard with the first of pbcopy, clip.exe, wl-copy, xclip, or xsel that succeeds, printing the note when none does. Resume mode was dropped: the note itself tells the next agent to reconcile against live Git and PR state. Merge by hand on refresh; keep the clipboard step."
     },
     "how": {
       "origin": "adapted",
@@ -460,7 +460,7 @@
       "repo": "https://github.com/mattpocock/skills",
       "path": "skills/engineering/retro",
       "refresh": "npx skills add mattpocock/skills -y --skill retro && echo 'Hand-merge the upstream scratch copy .agents/skills/retro/ with skills/retro/; keep this copy faithful to upstream and preserve the local description, then: trash .agents/skills/retro'",
-      "notes": "Faithful adaptation of mattpocock/skills retro (2026-09-18; upstream graduated it from skills/in-progress/ to skills/engineering/ in the 2026-10-04 release with no content change). Replaces codify-conventions, which was dropped rather than folded in. Kept: the seven improvement categories, the implementation-vs-review doctrine, and the mechanical-vs-judgement classification for coding-standards findings. Local changes are minimal: upstream's writing-for-agents call (a skill this plugin does not ship) is dropped, and the description states the task. Merge by hand on refresh; never overwrite.",
+      "notes": "Faithful adaptation of mattpocock/skills retro (2026-09-18; upstream graduated it from skills/in-progress/ to skills/engineering/ in the 2026-10-04 release with no content change). Replaces codify-conventions, which was dropped rather than folded in. Kept: the seven improvement categories, the implementation-vs-review doctrine, and the mechanical-vs-judgement classification for coding-standards findings. Local changes: an added Across-sessions mode (2026-10-20) that mines past transcripts for instructions the user keeps repeating and routes them to lints or skill edits; upstream's writing-for-agents call (a skill this plugin does not ship) is dropped, and the description states the task. Merge by hand on refresh; never overwrite.",
       "upstreamPath": "skills/engineering/retro",
       "upstreamRev": "24fe0ef7737efae15c87225755e9f6f5965e4888",
       "upstreamCheckedAt": "2026-10-04",
@@ -500,7 +500,7 @@
       "repo": "https://github.com/anthropics/skills",
       "path": "skills/skill-creator",
       "refresh": "npx skills add anthropics/skills -y --skill skill-creator && echo 'Hand-merge the upstream scratch copy .agents/skills/skill-creator/ with skills/skill-creator/; preserve local adaptations and reference routing, then: trash .agents/skills/skill-creator'",
-      "notes": "Updated from Anthropic upstream (dd63a74); local eval harness may differ. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description; task-specific reference routing; model-neutral authoring and explicit Claude optimizer contract. Preserve on refresh.",
+      "notes": "Updated from Anthropic upstream (dd63a74); local eval harness may differ. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh. Local audit (2026-09-05): focused description; task-specific reference routing; model-neutral authoring and explicit Claude optimizer contract. Local change (2026-10-20): writing guidance routes through writing-for-agents; the SKILL.md routing line and the trimmed Progressive Disclosure and Writing Style sections in references/authoring.md replace upstream prose. Preserve on refresh.",
       "upstreamPath": "skills/skill-creator",
       "upstreamRev": "b9e19e6f44773509fbdd7001d77ff41a49a486c1",
       "upstreamCheckedAt": "2026-08-27"
@@ -566,7 +566,7 @@
     "up-to-speed": {
       "origin": "local",
       "lastSynced": "2026-10-18",
-      "notes": "Authored 2026-10-18 for returning to a forgotten or compacted thread: rebuilds goal, outcomes, live Git/PR state, and leftovers as a read-only report. The plain-language register is inlined from bro, which is explicit-only and so cannot be invoked as a step. Complements handoff (which writes or resumes from a durable note) by working from the transcript itself. Local extension (2026-10-19): supports a since-last-message recap window, current-state evidence, concise decision briefs with recommendations, and a clear split between user actions and already-authorized agent work. Preserves idle read-only reporting, active-task continuity, and no extra report artifacts."
+      "notes": "Authored 2026-10-18 for returning to a forgotten or compacted thread: rebuilds goal, outcomes, live Git/PR state, and leftovers as a read-only report. The plain-language register is inlined from bro, which is explicit-only and so cannot be invoked as a step. Complements handoff (which writes a note for a fresh session) by working from the transcript itself. Local extension (2026-10-19): supports a since-last-message recap window, current-state evidence, concise decision briefs with recommendations, and a clear split between user actions and already-authorized agent work. Preserves idle read-only reporting, active-task continuity, and no extra report artifacts."
     },
     "your-call": {
       "origin": "derived",
