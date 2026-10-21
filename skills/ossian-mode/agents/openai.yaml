@@ -2,4 +2,4 @@ interface:
   display_name: "Ossian Mode"
   short_description: "Apply working standards and route the current request"
 policy:
-  allow_implicit_invocation: false
+  allow_implicit_invocation: true

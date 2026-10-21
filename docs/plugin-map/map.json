@@ -143,7 +143,7 @@
       "role": "human"
     },
     "ossian-mode": {
-      "role": "human"
+      "role": "both"
     },
     "performance": {
       "role": "both"
@@ -402,7 +402,7 @@
         "id": "current-request",
         "title": "Work on this request",
         "outcome": "verified result + scratch cleanup",
-        "tag": "Explicit invocation",
+        "tag": "Agent workflow",
         "steps": [
           {
             "id": "ossian-mode"
