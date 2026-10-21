@@ -1,7 +1,6 @@
 ---
 name: ossian-mode
-description: Apply Ossian Stack's working standards to the current request and choose the relevant workflow. Use only when the user explicitly invokes ossian-mode.
-disable-model-invocation: true
+description: Build agreed work to Ossian Stack's standards, routing to the right workflow and proving the result on the real surface. Use when implementing a spec or an agreed change, or when the user names ossian-mode.
 ---
 
 # Ossian Mode
