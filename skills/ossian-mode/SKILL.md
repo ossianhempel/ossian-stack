@@ -1,6 +1,6 @@
 ---
 name: ossian-mode
-description: Build agreed work to Ossian Stack's standards, routing to the right workflow and proving the result on the real surface. Use when implementing a spec or an agreed change, or when the user names ossian-mode.
+description: Build agreed work to Ossian Stack's standards, routing to the right workflow and proving the result on the real surface. Use when building a spec or a multi-step agreed change, or when the user names ossian-mode. Skip it for one-off edits.
 ---
 
 # Ossian Mode

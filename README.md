@@ -125,7 +125,7 @@ trade is that pushing is what publishes: an unpushed edit reaches no runtime.
 
 ## Use Ossian Mode
 
-Agents load **ossian-mode** on their own when they build a spec or an agreed
+Agents load **ossian-mode** on their own when they build a spec or a multi-step agreed
 change. You can also name it to apply the working standards and select the
 relevant workflow. For example: “Use ossian-mode to fix this regression; leave
 the changes local.” It carries your scope and permissions
