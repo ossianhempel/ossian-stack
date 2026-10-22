@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Track the iOS simulators a task creates and delete exactly those at the end.
 
-Ownership is explicit, never inferred from names or age:
+Ownership is explicit, never inferred from age:
   - devices created or cloned through this script (or adopted by UDID) are owned;
-  - a device that appears in Xcode's test-clone set (`simctl --set testing`)
+  - the one name-based rule: a device that appears in Xcode's test-clone set (`simctl --set testing`)
     after `begin` is this task's leaked clone only when its name says it was
     cloned from an owned device ("Clone N of <name>") and no device the task
     does not own shares that name. Other new clones may belong to Xcode.app or
@@ -69,11 +69,14 @@ def scan(ledger):
     """(owned, unclaimed): (udid, testing) pairs this task owns that still exist,
     and new test clones it cannot prove are its own."""
     present = devices(False)
-    mine = {u for u in ledger['owned'] if u in present}
-    mine_names = {present[u] for u in mine}
+    mine = set(ledger['owned']) | set(ledger.get('clones', []))
+    mine_names = {present[u] for u in mine if u in present}
     other_names = {n for u, n in present.items() if u not in mine}
     clones, unclaimed = [], []
     for u, name in sorted(devices(True).items()):
+        if u in mine:
+            clones.append((u, True))  # adopted, or claimed by an earlier `end`
+            continue
         if u in ledger['testing_baseline']:
             continue
         m = CLONE_NAME.fullmatch(name)
@@ -82,7 +85,7 @@ def scan(ledger):
             clones.append((u, True))
         else:
             unclaimed.append(u)
-    return [(u, False) for u in sorted(mine)] + clones, unclaimed
+    return [(u, False) for u in sorted(mine) if u in present] + clones, unclaimed
 
 
 def deletable(pairs):
@@ -129,6 +132,10 @@ def main(argv):
     elif cmd == 'end':
         ledger = load(path)
         pairs, unclaimed = scan(ledger)
+        # Record claimed clones before deleting their source devices, which
+        # are what ties them to this task; a retry still finds them.
+        ledger['clones'] = sorted(set(ledger.get('clones', [])) | {u for u, t in pairs if t})
+        save(path, ledger)
         now, skipped = deletable(pairs)
         for udid, testing in now:
             simctl('shutdown', udid, testing=testing, check=False)  # delete refuses a booted device

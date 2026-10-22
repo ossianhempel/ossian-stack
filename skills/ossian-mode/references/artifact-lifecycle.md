@@ -40,6 +40,8 @@ python3 "$SKILL_DIR/scripts/sim-ledger.py" begin "<task scratch directory>/sims.
   create the destination through the ledger with a distinct name. Other new
   clones may be Xcode.app's or another session's; `end` lists them and leaves
   them alone.
+- Run every subcommand below in the same anchored form as `begin`, with
+  `SKILL_DIR` set in the same command.
 - Create or clone devices through the ledger (`create LEDGER NAME DEVICE_TYPE
   RUNTIME`, `clone LEDGER SOURCE_UDID NAME`), or `adopt LEDGER UDID` right after
   making one another way. Each prints the UDID to drive.

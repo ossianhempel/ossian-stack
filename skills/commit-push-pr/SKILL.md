@@ -351,22 +351,26 @@ or opens a PR therefore closes out earlier ones in the same repository after
 Step 1. Modes that stop before a commit (`--description-only`, `--update`,
 `--branch-only`) skip it.
 
-1. `git fetch --prune <remote>`. If the fetch fails, skip the sweep and say so.
-2. List local branches with their tips:
-   `git for-each-ref --format='%(refname:short) %(objectname)' refs/heads`.
+1. List the branches this flow delivered:
+   `git config --get-regexp '^branch\..*\.deliveredpr$'` (Git reports the key in
+   lowercase; exit 1 means none). With none, the sweep is done: skip the rest
+   silently. A branch without the marker was not delivered here, so it is not
+   this flow's to clean up.
+2. `git fetch --prune <remote>`. If the fetch fails, skip the sweep and say so.
    Drop `main`, `develop`, the configured default branch, project-protected
-   branches, and the branch this delivery is on. Drop any branch without a
-   `branch.<name>.deliveredPr` marker: this flow did not deliver it, so it is not
-   this flow's to clean up. Drop any branch checked out in the primary checkout
-   (the first entry of `git worktree list --porcelain`): the sweep never switches
-   the user's main working copy; the targeted cleanup above handles that case
-   when the user is present.
-3. Ask the forge for recently merged PRs in this repository, with head branch,
-   head commit, base branch, and URL. On GitHub:
-   `gh pr list --state merged --limit 50 --json url,headRefName,headRefOid,baseRefName`.
-   A local branch is a candidate only when its name and tip both equal a merged
-   PR's head and its `deliveredPr` marker names that PR's URL. A branch with extra
-   commits, or one without a matching merged PR, is not a candidate and stays.
+   branches, the branch this delivery is on, and any marked branch that no longer
+   exists locally. Drop any branch checked out in the primary checkout (the first
+   entry of `git worktree list --porcelain`): the sweep never switches the user's
+   main working copy; the targeted cleanup above handles that case when the user
+   is present.
+3. For each remaining branch, ask the forge for the PR its marker names, with
+   state, head branch, head commit, base branch, and URL. On GitHub:
+   `gh pr view "<marker URL>" --json state,url,headRefName,headRefOid,baseRefName`.
+   On Azure DevOps, `az repos pr show` from the Azure reference, by the id in the
+   URL. On a forge with no such lookup, skip the sweep and say so. A branch is a
+   candidate only when the PR is merged and the branch's name and tip
+   (`git rev-parse refs/heads/<branch>`) both equal its head. A branch with extra
+   commits or an unmerged PR is not a candidate and stays.
 4. Invoke `git-cleanup` once per candidate in targeted mode, passing that PR's URL,
    head commit, and target branch, plus the branch's worktree path when one exists.
    `git-cleanup` re-verifies everything and refuses dirty worktrees, unknown ignored
