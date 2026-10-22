@@ -40,7 +40,7 @@ Write one command, `control-<app>`, in the project's own tooling: its existing r
 
 - `doctor`: read-only answer to "is this instance worth driving?": process up, right version/build, port owned by us, auth valid. When setup is missing (unmigrated database, no seed data) it prints the exact command that fixes it.
 - `dev` (or `launch`): start the app for verification and wait until it is ready; `stop` tears down what it started.
-- `login`: sign in as a seed account and keep the session where the other subcommands find it. Credentials and cookies never pass through the agent's own shell commands.
+- `login`, when the app has auth: sign in as a seed account and keep the session where the other subcommands find it. Credentials and cookies never pass through the agent's own shell commands.
 - Drive subcommands for the surface: `request <METHOD> <path>` with body assertions (`--contains`, `--dump`) for HTTP, `browse --path` with `--screenshot` for UI, a PTY/tmux runner for CLI/TUI. Reuse existing harnesses underneath.
 - `map` and `map --check` (step 4).
 - `health --sha <commit>` when the interview found a reachable deploy that reports its build: it passes only when that origin runs the given commit or a descendant of it. Skip it otherwise.
@@ -52,7 +52,7 @@ Each subcommand exits non-zero on failure and prints what it checked. Make it ex
 Write `<skills-dir>/verify-<app>/SKILL.md` with YAML frontmatter (`name: verify-<app>` and a `description` that names the app, the surface, and when to reach for it, without frontmatter the skill never registers) and these sections, each grounded in what the interview actually found (no placeholders left):
 
 - **Opening:** the `control-<app>` command list, then the rule that the CLI is the only way in: no throwaway curl or scripts, no copying session cookies or tokens into other tools, no rediscovering routes or commands from source. When the CLI lacks an action the task needs, add a subcommand and document it here instead of working around it.
-- **Launch:** the exact command that starts the app for verification, and how to tell it's ready (a log line, a port answering, a prompt). Include teardown. For a short-lived CLI or TUI there is no server to keep alive: launch means build the binary (or install deps) once, then start each drive in its own isolated PTY or tmux session.
+- **Launch:** `control-<app> dev` (or `launch`) and what it wraps, and how to tell it's ready (a log line, a port answering, a prompt). Include teardown. For a short-lived CLI or TUI there is no server to keep alive: launch means build the binary (or install deps) once, then start each drive in its own isolated PTY or tmux session.
 - **Doctor:** `control-<app> doctor`. An agent runs it first, and again whenever anything looks off.
 - **Seed accounts:** which test accounts exist where (local, preview), what each can and cannot reach, and where the password comes from (a committed test-only value, or a secret-manager reference). Never write a real credential into the skill.
 - **Drive:** the `control-<app>` invocations with real selectors, paths, and commands from this repo, not examples. Prefer stable handles (ARIA labels, data attributes, prompt strings, route paths) over coordinates and tab order.
