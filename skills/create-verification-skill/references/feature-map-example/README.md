@@ -18,6 +18,8 @@ This directory is the maintained source for verifying the user-facing behavior o
 - Treat every command as literal. Keep quoted names and flags unchanged.
 - Run browser actions through `control-notes browser`.
 - Run terminal actions through `control-notes cli -- <command>`.
+- Use `control-notes` for every action. Do not write throwaway scripts or pass session state to other tools.
+- Run `control-notes map --check` after editing this map. It fails on a route or command this map cites that the app does not have, and on a user-facing surface with no feature file.
 - Restore seeded data after a mutation. Do not remove proof artifacts during cleanup.
 
 ## Proof and skip reporting

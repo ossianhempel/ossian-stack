@@ -22,6 +22,10 @@ assuming `.cursor/skills/verify-*/`. The local workflow also preserves inherited
 edit boundaries, supports sequential source review when subagents are unavailable,
 and tightens live evidence, retry, cleanup, and unreachable-path requirements.
 
+When the target skill ships `control-<app> map --check`, the pass runs it first and
+cannot end `clean` while it fails. Harness fixes go into that control CLI as
+subcommands, and map recipes that bypass it count as drift.
+
 `agents/openai.yaml` is a local addition so Codex honors the same user-invoke-only
 policy as `disable-model-invocation`.
 

@@ -19,6 +19,13 @@ project's own skills directory instead: first existing of `.agents/skills/`,
 `.claude/skills/`, `.cursor/skills/`; otherwise it creates `.agents/skills/` and
 symlinks `.claude/skills` to it when Claude Code support is needed.
 
+A local addition borrowed from Kent C. Dodds' `control-kody` skill: the generated
+skill drives the app only through one project command, `control-<app>`, with
+`doctor`, `dev`, `login`, drive subcommands, `map --check`, and `health --sha` when
+the app has a reachable deploy. Throwaway curl scripts and hand-carried session
+cookies are banned. `map --check` derives the route or command inventory from source
+and runs in CI, so map drift fails a build instead of waiting for a maintenance pass.
+
 `agents/openai.yaml` is a local addition so Codex honors the same user-invoke-only
 policy as `disable-model-invocation`.
 
