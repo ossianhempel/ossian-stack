@@ -109,7 +109,8 @@ other `gh` failure as a blocking error, not as NO_OPEN_PR. In `--description-onl
 stay read-only: no branch switch, no fetch that mutates, no PR calls unless a PR
 URL/id was supplied.
 
-Then, outside the read-only modes, run [Sweep earlier merged deliveries](#sweep-earlier-merged-deliveries)
+Then, unless the mode stops before a commit (`--description-only`, `--update`,
+`--branch-only`), run [Sweep earlier merged deliveries](#sweep-earlier-merged-deliveries)
 before continuing.
 
 ## Step 2: Delivery path and branch safety
@@ -321,7 +322,10 @@ in `--pr-only` note that uncommitted changes were left alone.
 
 PR creation and merge-ready status are too early for cleanup. Before handing off a
 PR, retain the exact repository, PR URL or stable ID, target branch, PR head commit,
-local source branch, and auxiliary worktree path when one exists. Report cleanup as
+local source branch, and auxiliary worktree path when one exists. Also mark the
+branch as this flow's delivery in the repository, so a later sweep can tell it
+from branches the user or someone else checked out:
+`git config "branch.<branch>.deliveredPr" "<PR URL>"`. Report cleanup as
 pending when the flow stops at merge-ready. Do not poll indefinitely to wait for a
 human merge.
 
@@ -351,13 +355,18 @@ Step 1. Modes that stop before a commit (`--description-only`, `--update`,
 2. List local branches with their tips:
    `git for-each-ref --format='%(refname:short) %(objectname)' refs/heads`.
    Drop `main`, `develop`, the configured default branch, project-protected
-   branches, and the branch this delivery is on.
+   branches, and the branch this delivery is on. Drop any branch without a
+   `branch.<name>.deliveredPr` marker: this flow did not deliver it, so it is not
+   this flow's to clean up. Drop any branch checked out in the primary checkout
+   (the first entry of `git worktree list --porcelain`): the sweep never switches
+   the user's main working copy; the targeted cleanup above handles that case
+   when the user is present.
 3. Ask the forge for recently merged PRs in this repository, with head branch,
    head commit, base branch, and URL. On GitHub:
    `gh pr list --state merged --limit 50 --json url,headRefName,headRefOid,baseRefName`.
    A local branch is a candidate only when its name and tip both equal a merged
-   PR's head. A branch with extra commits, or one without a matching merged PR, is
-   not a candidate and stays.
+   PR's head and its `deliveredPr` marker names that PR's URL. A branch with extra
+   commits, or one without a matching merged PR, is not a candidate and stays.
 4. Invoke `git-cleanup` once per candidate in targeted mode, passing that PR's URL,
    head commit, and target branch, plus the branch's worktree path when one exists.
    `git-cleanup` re-verifies everything and refuses dirty worktrees, unknown ignored

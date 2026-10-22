@@ -3,10 +3,12 @@
 
 Ownership is explicit, never inferred from names or age:
   - devices created or cloned through this script (or adopted by UDID) are owned;
-  - devices that appear in Xcode's test-clone set (`simctl --set testing`) after
-    `begin` are treated as this task's leaked clones, but only while no
-    xcodebuild process is running: a running one may own them, so `end` skips
-    them and keeps the ledger until a retry finds xcodebuild idle.
+  - a device that appears in Xcode's test-clone set (`simctl --set testing`)
+    after `begin` is this task's leaked clone only when its name says it was
+    cloned from an owned device ("Clone N of <name>") and no device the task
+    does not own shares that name. Other new clones may belong to Xcode.app or
+    another session, so they are reported and left alone. While an xcodebuild
+    process runs, `end` skips owned clones too and keeps the ledger for a retry.
 Every other simulator, including any the user already had, is left alone.
 A failed `simctl` call stops the script without deleting anything.
 
@@ -23,6 +25,7 @@ prints the leftovers, keeps the ledger for a retry, and exits 1.
 """
 import json
 import os
+import re
 import subprocess
 import sys
 
@@ -35,11 +38,15 @@ def simctl(*args, testing=False, check=True):
 TESTING_SET = os.path.expanduser('~/Library/Developer/XCTestDevices')
 
 
-def udids(testing):
+def devices(testing):
+    """{udid: name} for every device in the default or test-clone set."""
     if testing and not os.path.isdir(TESTING_SET):
-        return set()  # xcodebuild has never made a test clone on this machine
+        return {}  # xcodebuild has never made a test clone on this machine
     out = simctl('list', 'devices', '-j', testing=testing).stdout  # raises on failure
-    return {d['udid'] for devices in json.loads(out)['devices'].values() for d in devices}
+    return {d['udid']: d['name'] for ds in json.loads(out)['devices'].values() for d in ds}
+
+
+CLONE_NAME = re.compile(r'Clone \d+ of (.+)')
 
 
 def xcodebuild_running():
@@ -58,11 +65,24 @@ def save(path, ledger):
     os.replace(tmp, path)
 
 
-def owned(ledger):
-    """(udid, testing) pairs this task owns that still exist."""
-    default = [(u, False) for u in ledger['owned'] if u in udids(False)]
-    clones = [(u, True) for u in sorted(udids(True) - set(ledger['testing_baseline']))]
-    return default + clones
+def scan(ledger):
+    """(owned, unclaimed): (udid, testing) pairs this task owns that still exist,
+    and new test clones it cannot prove are its own."""
+    present = devices(False)
+    mine = {u for u in ledger['owned'] if u in present}
+    mine_names = {present[u] for u in mine}
+    other_names = {n for u, n in present.items() if u not in mine}
+    clones, unclaimed = [], []
+    for u, name in sorted(devices(True).items()):
+        if u in ledger['testing_baseline']:
+            continue
+        m = CLONE_NAME.fullmatch(name)
+        source = m.group(1) if m else None
+        if source in mine_names and source not in other_names:
+            clones.append((u, True))
+        else:
+            unclaimed.append(u)
+    return [(u, False) for u in sorted(mine)] + clones, unclaimed
 
 
 def deletable(pairs):
@@ -72,8 +92,7 @@ def deletable(pairs):
     return [p for p in pairs if not p[1]], [p for p in pairs if p[1]]
 
 
-def record(path, udid):
-    ledger = load(path)
+def record(path, ledger, udid):
     if udid not in ledger['owned']:
         ledger['owned'].append(udid)
         save(path, ledger)
@@ -89,26 +108,35 @@ def main(argv):
         if os.path.exists(path):
             print(f'ledger exists, resuming: {path}', file=sys.stderr)
             return
-        save(path, {'testing_baseline': sorted(udids(True)), 'owned': []})
+        save(path, {'testing_baseline': sorted(devices(True)), 'owned': []})
     elif cmd == 'create' and len(rest) == 3:
-        record(path, simctl('create', *rest).stdout.strip())
+        ledger = load(path)  # before simctl, so a missing ledger leaks nothing
+        record(path, ledger, simctl('create', *rest).stdout.strip())
     elif cmd == 'clone' and len(rest) == 2:
-        record(path, simctl('clone', *rest).stdout.strip())
+        ledger = load(path)
+        record(path, ledger, simctl('clone', *rest).stdout.strip())
     elif cmd == 'adopt' and len(rest) == 1:
-        record(path, rest[0])
+        record(path, load(path), rest[0])
     elif cmd == 'status':
-        now, skipped = deletable(owned(load(path)))
+        pairs, unclaimed = scan(load(path))
+        now, skipped = deletable(pairs)
         for udid, testing in now:
             print(f"{udid}{' (test clone)' if testing else ''}")
         for udid, _ in skipped:
             print(f'{udid} (test clone, skipped while xcodebuild runs)')
+        for udid in unclaimed:
+            print(f'{udid} (new test clone, not provably this task\'s; left alone)')
     elif cmd == 'end':
         ledger = load(path)
-        now, skipped = deletable(owned(ledger))
+        pairs, unclaimed = scan(ledger)
+        now, skipped = deletable(pairs)
         for udid, testing in now:
             simctl('shutdown', udid, testing=testing, check=False)  # delete refuses a booted device
             simctl('delete', udid, testing=testing, check=False)
-        left = owned(ledger)
+        if unclaimed:
+            print('left alone, may belong to Xcode.app or another session: '
+                  + ', '.join(unclaimed), file=sys.stderr)
+        left, _ = scan(ledger)
         if left:
             print('not deleted: ' + ', '.join(u for u, _ in left), file=sys.stderr)
             if skipped:

@@ -34,8 +34,12 @@ SKILL_DIR="<absolute path of the ossian-mode directory>";
 python3 "$SKILL_DIR/scripts/sim-ledger.py" begin "<task scratch directory>/sims.json"
 ```
 
-- Run `begin` before the first build or test, so the clones `xcodebuild` adds
-  for parallel testing count as owned.
+- Run `begin` before the first build or test. The clones `xcodebuild` adds for
+  parallel testing count as owned only when the test destination is a device
+  the ledger owns and whose name no other device uses, so for parallel tests
+  create the destination through the ledger with a distinct name. Other new
+  clones may be Xcode.app's or another session's; `end` lists them and leaves
+  them alone.
 - Create or clone devices through the ledger (`create LEDGER NAME DEVICE_TYPE
   RUNTIME`, `clone LEDGER SOURCE_UDID NAME`), or `adopt LEDGER UDID` right after
   making one another way. Each prints the UDID to drive.

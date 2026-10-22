@@ -54,15 +54,21 @@ for runtime, devices in data['devices'].items():
 DEVICE_ID="${DEVICE_LINE%% *}"
 CREATED_SIM=0
 BOOTED_SIM=0
+OPENED_APP=0
+pgrep -x Simulator >/dev/null || OPENED_APP=1
 [ -n "$DEVICE_LINE" ] && [ "${DEVICE_LINE#* }" != "Booted" ] && BOOTED_SIM=1
 
 # Leave the machine as we found it: delete a simulator this run created, shut
-# down one it booted, never touch one that was already running. Runs on
+# down one it booted, never touch one that was already running, and quit
+# Simulator.app only if this run launched it. Runs on
 # success, failure, and Ctrl-C. Screenshots in $OUT_ROOT are kept. A failed
 # teardown makes an otherwise successful run exit non-zero.
 cleanup_sim() {
     local status=$?
     [ -n "${DEVICE_ID:-}" ] || exit "$status"
+    if [ "$OPENED_APP" = 1 ] && pgrep -x Simulator >/dev/null; then
+        osascript -e 'quit app "Simulator"' >/dev/null 2>&1 || true
+    fi
     if [ "$CREATED_SIM" = 1 ]; then
         xcrun simctl shutdown "$DEVICE_ID" 2>/dev/null || true
         if xcrun simctl delete "$DEVICE_ID"; then
