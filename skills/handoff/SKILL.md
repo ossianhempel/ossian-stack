@@ -17,8 +17,10 @@ commit, push, or open a PR just to hand off unless the user already authorized i
 ## Write it
 
 Include only what the next agent cannot read from the repo. Point at specs, plans,
-commits, PRs, and files by path or URL instead of copying them. Redact secrets and
-personal data.
+commits, PRs, and files by path or URL instead of copying them. A decision made
+in this conversation that belongs in one of those existing documents goes there
+first, so the note only points at it; do not create a new document for this.
+Redact secrets and personal data.
 
 Open with one line to the next agent: check this note against current Git and PR
 state before acting, trust live state where they disagree, and do not redo work
