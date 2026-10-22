@@ -23,8 +23,15 @@ edit boundaries, supports sequential source review when subagents are unavailabl
 and tightens live evidence, retry, cleanup, and unreachable-path requirements.
 
 When the target skill ships `control-<app> map --check`, the pass runs it first and
-cannot end `clean` while it fails. Harness fixes go into that control CLI as
-subcommands, and map recipes that bypass it count as drift.
+cannot end `clean` while it fails, and it must run in CI or the project's check
+command. Harness fixes go into that control CLI as subcommands, and map recipes
+that bypass it count as drift.
+
+The pass also checks the target skill against what `create-verification-skill`
+generates today (control-CLI opening, seed accounts, device cleanup, proof ladder,
+load one feature file), runs every documented CLI subcommand live, and snapshots
+simulators, emulators, and processes before launch so anything the run leaves
+behind fails it.
 
 `agents/openai.yaml` is a local addition so Codex honors the same user-invoke-only
 policy as `disable-model-invocation`.
