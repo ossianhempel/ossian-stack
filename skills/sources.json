@@ -538,9 +538,9 @@
       "path": "pstack/skills/poteto-mode/playbooks/visual-parity.md",
       "notes": "Portable adaptation of pstack visual parity. Keeps immutable baselines, controlled capture conditions, image-diff convergence, and isolated component ownership while allowing an explicit tolerance for nondeterministic platform rendering.",
       "upstreamPath": "pstack/skills/poteto-mode/playbooks/visual-parity.md",
-      "upstreamRev": "93b00b89ef425a9c1bac0d0b317dfc49c930ac99",
-      "upstreamCheckedAt": "2026-09-06",
-      "lastSynced": "2026-09-06"
+      "upstreamRev": "9b93e81fb2921b9263d9463c15bafeabfe3903aa",
+      "upstreamCheckedAt": "2026-10-22",
+      "lastSynced": "2026-10-22"
     },
     "why": {
       "origin": "adapted",
