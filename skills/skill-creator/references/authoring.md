@@ -73,6 +73,9 @@ skill-name/
     └── assets/     - Files used in output (templates, icons, fonts)
 ```
 
+Which steps become `scripts/` and which stay prose is the determinism rule in
+SKILL.md: script a step when it has one right answer for given inputs.
+
 #### Progressive Disclosure
 
 Skills load in three levels: metadata (name + description) is always in context,

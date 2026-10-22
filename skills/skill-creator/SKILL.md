@@ -17,6 +17,13 @@ evaluate. Use existing decisions and preserve review-only/no-commit boundaries.
 A skill states the goal, completion condition, constraints, safe failure direction,
 and facts the agent cannot derive locally. Keep task-specific recipes in references.
 
+Choose determinism where it is an option. While drafting, split the procedure into
+steps with one right answer for given inputs (parsing, validating, transforming
+files, fixed-shape API calls, checks) and steps that need judgment. Bundle a script
+for the first kind, in a runtime the user already has (Python 3 by default), and
+have the prose say when to run it and how to read its output and exit status. Keep
+prose for the judgment steps; do not script judgment to make it look deterministic.
+
 Before drafting or revising any text an agent will read (the SKILL.md body, its
 description, a reference file), load `writing-for-agents` and write against it. It
 owns how that text is written: pointers, information hierarchy, completion
