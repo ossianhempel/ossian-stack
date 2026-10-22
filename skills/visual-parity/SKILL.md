@@ -13,8 +13,8 @@ it.
 
 1. Name the components, states, devices, locales, appearances, content, fonts,
 scale, and viewport covered.
-2. Capture the baseline before changing code. Preserve it outside generated build
-output and record its provenance.
+2. Capture the baseline before changing code. No baseline, no parity claim.
+Preserve it outside generated build output and record its provenance.
 3. Capture the implementation under the same conditions. Normalize only transport
 properties that do not affect appearance; never edit the baseline to reduce a diff.
 4. Choose the pass rule. Pixel-zero is suitable for deterministic renderer-to-
