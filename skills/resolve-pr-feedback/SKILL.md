@@ -1,6 +1,6 @@
 ---
 name: resolve-pr-feedback
-description: Resolve GitHub/GHE or Azure DevOps Services PR review feedback. Use when addressing feedback already left on a PR. Not for reviewing the code before feedback exists; that is code-review.
+description: Resolve GitHub/GHE or Azure DevOps Services PR review feedback. Use when addressing feedback already left on a PR. Not for reviewing the code before feedback exists; that is autoreview.
 argument-hint: "[PR number, comment URL, or blank for current branch's PR]"
 allowed-tools: Bash(gh *), Bash(git *), Bash(az *), Bash(python3 *), Read
 ---
