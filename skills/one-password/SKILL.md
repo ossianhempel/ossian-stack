@@ -1,6 +1,6 @@
 ---
 name: one-password
-description: "Retrieve missing secrets and environment values securely with the 1Password op CLI. Use existing secure authentication when it already meets the task."
+description: "Retrieve missing secrets and environment values securely with the 1Password op CLI. Use before asking the user for any credential: an auth or push failure, or a missing token, PAT, API key or deploy key. Use existing secure authentication when it already meets the task."
 metadata: {"requires":{"bins":["op"]},"install":[{"id":"brew","kind":"brew","formula":"1password-cli","bins":["op"],"label":"Install 1Password CLI (brew)"}]}
 ---
 
@@ -137,7 +137,11 @@ op item list --vault Development --format json        # titles/ids/categories on
 op item get "OpenAI" --vault Development --format json # inspect field LABELS, not values
 ```
 
-Do not enumerate other vaults by default. Search only when the user asks.
+Always pass `--vault` to `op item list`. A list across all vaults fails anyway (the
+service account needs a vault) and agent permission classifiers block it as credential
+exploration. Do not enumerate other vaults by default. Search only when the user asks.
+
+Agents cannot reach the 1Password browser extension. Use the `op` CLI only.
 
 ## Guardrails
 
