@@ -261,6 +261,10 @@
       "upstreamCheckedAt": "2026-08-28",
       "lastSynced": "2026-08-28"
     },
+    "in-your-words": {
+      "origin": "local",
+      "notes": "Authored 2026-10-30 at Ossian's request: an explicit-only check that has the agent restate the user's request and intent in its own words, so misunderstandings surface before work starts. Sibling of bro (which restates the agent's own last message) and your-call. Written against writing-for-agents."
+    },
     "ios-marketing-capture": {
       "origin": "adapted",
       "repo": "https://github.com/ParthJadhav/ios-marketing-capture",

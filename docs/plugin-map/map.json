@@ -235,6 +235,9 @@
     "your-call": {
       "role": "human"
     },
+    "in-your-words": {
+      "role": "human"
+    },
     "principle-test-behavior-not-implementation": {
       "role": "both"
     }
@@ -442,6 +445,10 @@
           {
             "id": "your-call",
             "note": "delegate a pending choice"
+          },
+          {
+            "id": "in-your-words",
+            "note": "check intent"
           }
         ]
       },

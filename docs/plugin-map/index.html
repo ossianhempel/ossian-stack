@@ -199,6 +199,10 @@
      {
       "id": "your-call",
       "note": "delegate a pending choice"
+     },
+     {
+      "id": "in-your-words",
+      "note": "check intent"
      }
     ]
    },
@@ -1088,6 +1092,22 @@
     "why"
    ]
   },
+  "in-your-words": {
+   "id": "in-your-words",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "In Your Words",
+   "description": "Restate what the user just asked, and the intent behind it, in your own words so they can confirm you understood before you act.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
   "ios-marketing-capture": {
    "id": "ios-marketing-capture",
    "type": "skill",
@@ -1882,7 +1902,7 @@
   }
  },
  "counts": {
-  "skills": 67,
+  "skills": 68,
   "agents": 0,
   "plugins": 1
  }
