@@ -63,6 +63,7 @@ App Store submissions must **attach an already-uploaded, `VALID` TestFlight buil
 2. Pick the uploaded, `VALID` TestFlight build to ship.
 3. Use `asc` to draft/update What's New before submission. If tags are stale, derive notes from the actual commits since the last submitted App Store version.
 4. Hand off to the `asc` release/submission flow to attach the build and run readiness (`asc validate`, screenshots, availability, IAP/subscriptions, App Privacy). **Never create the final review submission without explicit go-ahead.** If a command asks for an IPA path during App Store submission, stop and switch to the attach-existing-build path.
+5. **Right after the submission is created, bump the version on the beta branch, regenerate the project, and push.** Start the next train on `IOS_RELEASE_BETA_BRANCH` (the next MINOR is the usual placeholder; Decision tree step 2 can still adjust it before that release), run `xcodegen` in `IOS_RELEASE_XCODEGEN_DIR` for `xcodegen` repos, and commit the version source with the regenerated project. Why: Apple closes a version when it approves it, not when anyone pushes. If the beta branch still carries the submitted version at approval, every later Xcode Cloud build fails in post-clone because that version is no longer open, whatever the commit changed. No push-time check can catch this, so the bump belongs here.
 
 ## Pitfalls
 
@@ -92,5 +93,6 @@ App Store submissions must **attach an already-uploaded, `VALID` TestFlight buil
 - Required release PR, if any, reached merge-ready and was merged by Ossian; the release branch has the intended version and release changes.
 - Selected build is `VALID` in App Store Connect and attached to the target version.
 - `asc` readiness is clean (or only understood non-blocking warnings); What's New matches the shipped commits.
+- After an App Store submission, the beta branch is already on the next version and pushed.
 - Backend production deploy (when applicable) completed before the binary shipped.
 - For Expo dual-platform: Android artifact uploaded to Play Console.
