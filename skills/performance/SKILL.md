@@ -7,6 +7,9 @@ description: "Diagnose live performance, analyze captured profiles, or improve o
 
 Choose the mode from the evidence the user has and preserve diagnosis-only scope.
 Every claim rests on a measured workload, not source inspection alone.
+Vet each baseline, harness, and reported number with
+[references/benchmark-checklist.md](references/benchmark-checklist.md) before
+planning from it or reporting it.
 
 ## Live diagnosis
 

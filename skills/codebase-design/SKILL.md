@@ -53,6 +53,18 @@ clarify design reasoning; they do not require renaming a service, component, or 
   owns it. Keep internal seams internal and useful algorithm or integration tests
   where they establish distinct behavior. Testability alone does not justify
   exposing implementation details to every caller.
+- **Design for agent contributors.** Assume the next contributor sees only the
+  files it opened, copies the nearest example, and takes the shortest path that
+  compiles. Prefer the shape where a change that looks right from one file is
+  right for the whole repo. Reject these four shapes:
+  - **Split ownership.** Two modules write the same state or keep their own copy
+    of it. Give the state one owner; others read it or ask the owner to change it.
+  - **Two ways to do one task.** Each way keeps gaining callers. Keep one, move
+    callers off the others, and delete them in the same change.
+  - **Importable internals.** Whatever compiles becomes interface. Make internals
+    unreachable from outside the module, so such an import fails the build.
+  - **Hand-synced lists.** An agent updates only the list it sees. Derive the
+    others from one list, or fail the build when they disagree.
 - **Make effects controllable.** Prefer returned values for computation. For
   necessary I/O, use the project's dependency construction pattern to control
   external effects in tests without threading dependencies through every caller.
