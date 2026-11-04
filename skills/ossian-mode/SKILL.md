@@ -36,8 +36,9 @@ scope; it introduces no additional approval gate.
 1. **Define done.** Name the observable result, scope, and constraints that must
    still hold. Reuse requirements already settled with the user.
 2. **Ground the work.** Establish the current revision or artifact, affected
-   callers and owners, and actual behavior. Distinguish evidence from assumptions;
-   investigate only the uncertainty that affects the next step.
+   callers and owners, and actual behavior, observed through the project's
+   verification skill when it has one (see below). Distinguish evidence from
+   assumptions; investigate only the uncertainty that affects the next step.
 3. **Work in verifiable units.** Give each useful increment an observable check.
    Complete that check before advancing; when it fails, resolve the failure or
    record the blocked unit and continue only independent work. Keep consequential
@@ -93,13 +94,20 @@ Load the model-invoked testing principle when writing or assessing tests.
   Branches and worktrees from PRs merged after a session ended are closed
   out by the next `commit-push-pr` delivery in that repository.
 
-**Use the project's verification skill.** When the project ships a verification
-skill (`verify-*`) or equivalent control harness, load and run it for every
-user-facing feature this change touched; that run is the required behavioral
-proof, and it comes ahead of any weaker surface. When it has none, say so plainly,
-fall back to the strongest real surface available, and offer
-`/create-verification-skill` once, so the next change can be proven rather than
-asserted. Creating it is a suggestion, not a gate.
+**Verify through the project's verification skill.** Most work here is proven
+by the project's `verify-*` skill, made by `create-verification-skill`. Load it
+while grounding the work and follow its own instructions for observing current
+behavior, each unit's check, and the closing proof; it owns how the app is
+driven and what counts as evidence, so do not restate or bypass it. Its run is
+the required behavioral proof, ahead of any weaker surface. When it no longer
+matches the app, say so and recommend `/maintain-verification-skill`.
+
+When the change has a drivable user-facing surface and the project has no
+verification skill, stop before implementing and ask the user to run
+`/create-verification-skill`, so this change is the first one proven through it.
+Skip the ask for one-off edits, docs-only changes, or work with nothing to drive.
+If the user declines, fall back to the strongest real surface and list what that
+leaves unverified.
 
 Before delivery, complete this behavioral proof as well as the relevant focused
 checks and `autoreview`. In the final response, name the artifact exercised, the
