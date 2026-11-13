@@ -257,6 +257,8 @@ Verify on the same surface the bug appeared on. "Inconclusive" or a different
 surface is not a pass; flag it. Unit tests show branch behavior, not bug absence,
 the proof is the Phase 1 loop going green (`principle-prove-it-works`).
 
+When the bug shipped through review (merged, released, or caught by a person after the change landed), it is a miss. Once the fix is verified, hand it to `learn-from-miss` with the report, the fix, and the commit that introduced the bug (blame or bisect) as the miss commit. Diagnosis-only runs name the miss in their findings instead.
+
 ## Phase 6: Cleanup
 
 Required before declaring done:

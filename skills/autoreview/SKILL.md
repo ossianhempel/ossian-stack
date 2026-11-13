@@ -19,6 +19,8 @@ Use when:
 
 Do not require autoreview for a change whose entire diff is prose-only internal notes or `SKILL.md` documentation. Still inspect the diff directly and run the repository's lightweight documentation validation, if any. This exception does not cover user-facing documentation, executable examples, configuration, scripts, generated files, or behavior changes.
 
+The project's `CODING_STANDARDS.md` is the reviewer's standing brief: the helper includes it from the repository root on every review (`--no-standards` skips it), because the reviewer runs isolated and never sees the project's agent instructions. Judgment rules meant for review belong there.
+
 Select the target with the target-selection reference before invoking review. The default engine/model contract above still applies; engine details and opt-in panels are in their reference. A successful helper exit with no accepted actionable findings ends the source-review phase; complete any outstanding behavior proof before delivery.
 
 ## Review depth and test evidence

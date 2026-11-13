@@ -1,6 +1,6 @@
 ---
 name: setup-ossian-stack
-description: "Verify plugin installation and configure approved machine or project prerequisites, hooks, migrations, and issue-tracker integration."
+description: "Verify plugin installation and configure approved machine or project prerequisites, hooks, migrations, review standards and evals, and issue-tracker integration."
 disable-model-invocation: true
 ---
 
@@ -73,4 +73,5 @@ Read the reference for the task at hand; do not load every recipe.
 - [Machine migration](references/machine-migration.md): machine-wide setup or approved retirement of superseded installs.
 - [Session start hook](references/session-start-hook.md): hook feature readiness and host trust approval.
 - [Dependencies and project](references/dependencies-and-project.md): capability probes and current-project prerequisites.
+- [Review standards and evals](references/review-loop.md): offering `CODING_STANDARDS.md` and `evals/` for a project.
 - [Issue tracker](references/issue-tracker.md): tracker-only setup or a requested tracked-delivery workflow.

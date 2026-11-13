@@ -258,6 +258,11 @@
       "writes": "handoff note"
      },
      {
+      "id": "learn-from-miss",
+      "optional": true,
+      "writes": "guardrail + eval case"
+     },
+     {
       "id": "retro",
       "optional": true,
       "writes": "repo fixes"
@@ -493,7 +498,6 @@
   "knowledge": {
    "title": "Principles",
    "ids": [
-    "principle-encode-lessons-in-structure",
     "principle-exhaust-the-design-space",
     "principle-fix-root-causes",
     "principle-model-the-domain",
@@ -592,6 +596,7 @@
    "routes": [],
    "calledBy": [
     "commit-push-pr",
+    "learn-from-miss",
     "ossian-mode"
    ],
    "routedBy": []
@@ -609,6 +614,7 @@
    "repo": "https://github.com/cursor/plugins",
    "calls": [
     "commit-push-pr",
+    "learn-from-miss",
     "resolve-pr-feedback"
    ],
    "routes": [],
@@ -727,6 +733,7 @@
    "routes": [],
    "calledBy": [
     "architect",
+    "learn-from-miss",
     "refactoring"
    ],
    "routedBy": []
@@ -863,7 +870,8 @@
     "principle-fix-root-causes",
     "principle-prove-it-works",
     "why",
-    "principle-test-behavior-not-implementation"
+    "principle-test-behavior-not-implementation",
+    "learn-from-miss"
    ],
    "routes": [
     "create-verification-skill"
@@ -1127,6 +1135,31 @@
    ],
    "routedBy": []
   },
+  "learn-from-miss": {
+   "id": "learn-from-miss",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Learn From Miss",
+   "description": "Turn a caught mistake into a proven guardrail so the same miss never reaches a human twice. Use after an accepted review comment, a CI or production failure the review let through, a bug found after merge, or a correction you have now made twice.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "autoreview",
+    "codebase-design",
+    "refactoring"
+   ],
+   "routes": [],
+   "calledBy": [
+    "babysit-pr",
+    "diagnosing-bugs",
+    "resolve-pr-feedback",
+    "retro"
+   ],
+   "routedBy": []
+  },
   "maintain-verification-skill": {
    "id": "maintain-verification-skill",
    "type": "skill",
@@ -1317,22 +1350,6 @@
    "argumentHint": null,
    "origin": "companion",
    "repo": "https://github.com/ossianhempel/post-queue",
-   "calls": [],
-   "routes": [],
-   "calledBy": [],
-   "routedBy": []
-  },
-  "principle-encode-lessons-in-structure": {
-   "id": "principle-encode-lessons-in-structure",
-   "type": "skill",
-   "plugin": "ossian-stack",
-   "display": "Encode Lessons in Structure",
-   "description": "Apply when you catch yourself writing the same instruction a second time, or notice a recurring correction. Encode the rule as a lint, metadata flag, runtime check, or script instead of more text.",
-   "role": "knowledge",
-   "humanOnly": true,
-   "argumentHint": null,
-   "origin": "vendored",
-   "repo": "https://github.com/cursor/plugins",
    "calls": [],
    "routes": [],
    "calledBy": [],
@@ -1552,6 +1569,7 @@
    ],
    "routes": [],
    "calledBy": [
+    "learn-from-miss",
     "ossian-mode"
    ],
    "routedBy": []
@@ -1594,7 +1612,8 @@
    "origin": "adapted",
    "repo": "https://github.com/EveryInc/compound-engineering-plugin",
    "calls": [
-    "babysit-pr"
+    "babysit-pr",
+    "learn-from-miss"
    ],
    "routes": [],
    "calledBy": [
@@ -1614,7 +1633,9 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
-   "calls": [],
+   "calls": [
+    "learn-from-miss"
+   ],
    "routes": [],
    "calledBy": [],
    "routedBy": []
@@ -1642,7 +1663,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Setup ossian-stack",
-   "description": "Verify plugin installation and configure approved machine or project prerequisites, hooks, migrations, and issue-tracker integration.",
+   "description": "Verify plugin installation and configure approved machine or project prerequisites, hooks, migrations, review standards and evals, and issue-tracker integration.",
    "role": "human",
    "humanOnly": true,
    "argumentHint": null,

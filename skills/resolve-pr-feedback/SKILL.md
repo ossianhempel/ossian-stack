@@ -59,10 +59,15 @@ After determining mode, read the matching reference and follow it; each is self-
 - Evaluation rubric → `references/evaluation-rubric.md` (the orchestrator reads this to judge each item before any fix is dispatched)
 - Fixer prompt asset → `references/agents/pr-comment-resolver.md` (read before dispatching fixer subagents for approved fixes; do not dispatch a standalone agent by type/name)
 
+## Learn from the misses
+
+Every item that ended fixed (either fix verdict) is a miss the earlier checks let through. After the summary, hand them to `learn-from-miss` in one batch, each with its feedback link, the fix commit, the commit the feedback was left on as the miss commit, and the PR's merge base. Pass `mode:pipeline` and the inherited scope through when you received them. Proven guardrails it commits go out with one more push under that scope; its proposals join your returned results.
+
 ## Success Criteria
 
 - Every unresolved item in the selected provider/scope evaluated
 - Valid fixes committed and pushed
 - Each thread replied to with quoted context
 - Threads resolved through the provider API with readback (except needs-human)
+- Every fixed item handed to `learn-from-miss`
 - No unaccounted unresolved feedback on provider verification (minus intentionally-open threads)

@@ -4602,6 +4602,22 @@ class AutoreviewHardeningTests(unittest.TestCase):
             self.assertIn("# Prompt file: review.md", prompt)
             self.assertFalse(truncated)
 
+    def test_project_standards_file_is_included_once_by_default(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            repo = init_repo(Path(tempdir))
+            (repo / "CODING_STANDARDS.md").write_text("dedup at the declared key\n", encoding="utf-8")
+
+            prompt, _ = self.helper["load_extra_prompt"](argparse.Namespace(prompt=[], prompt_file=[]), repo)
+            self.assertIn("# Prompt file: CODING_STANDARDS.md\ndedup at the declared key", prompt)
+
+            explicit = argparse.Namespace(prompt=[], prompt_file=["CODING_STANDARDS.md"])
+            prompt, _ = self.helper["load_extra_prompt"](explicit, repo)
+            self.assertEqual(prompt.count("# Prompt file: CODING_STANDARDS.md"), 1)
+
+            skipped = argparse.Namespace(prompt=[], prompt_file=[], standards=False)
+            prompt, _ = self.helper["load_extra_prompt"](skipped, repo)
+            self.assertNotIn("CODING_STANDARDS.md", prompt)
+
     def test_build_prompt_omits_absolute_repo_path_and_caps_aggregate_input(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             repo = init_repo(Path(tempdir))

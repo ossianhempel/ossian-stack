@@ -84,7 +84,10 @@ Name real symbols and paths, not abstractions.
   prose-clear changes.
 - `## Tradeoffs`, real choices only. Skip when there are none.
 - `## Blast Radius`, who and what the change touches, and why it is safe or risky.
-  If the default branch is red without the fix, name the continuing cost.
+  If the default branch is red without the fix, name the continuing cost. Add a
+  **Detection** line for any change that runs in production: what would alert if it
+  broke there, or "nothing: it would fail silently". Add a **Rollback** line only when
+  reverting the PR is not enough (a backfill, a rebuild, a migration to undo).
 - `## Verification`, how you ran each check and its rigor: the real command, test
   file, or surface, and the outcome of each. Never present an unverified claim as
   verified; label results you could not check.

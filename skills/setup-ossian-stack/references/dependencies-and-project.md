@@ -76,6 +76,9 @@ created lazily on purpose; pre-creating them is a mistake**, because an empty
   skill's own `references/manifest.md`, which documents every key. Do not guess
   values, the manifest carries app IDs and branch names only its owner knows.
 
+- `CODING_STANDARDS.md` and `evals/` are the other exception: the reviewer reads the
+  first on every review. Offer them through `references/review-loop.md` after this step.
+
 Report what is missing and who creates it. Create nothing in this step.
 
 If the project has no `verify-*` skill or equivalent harness that can drive the

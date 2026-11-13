@@ -8699,13 +8699,24 @@ def validate_evidence_file(repo: Path, raw_path: str, label: str) -> tuple[Path,
     return path, content, truncated
 
 
+# The project's review standards: read on every review so judgment rules written
+# for the reviewer reach it without the caller passing --prompt-file each time.
+PROJECT_STANDARDS_FILE = "CODING_STANDARDS.md"
+
+
 def load_extra_prompt(args: argparse.Namespace, repo: Path) -> tuple[str, bool]:
     chunks: list[str] = []
     input_truncated = False
     for value in args.prompt or []:
         require_no_secret_values("--prompt", value)
         chunks.append(value)
-    for path in args.prompt_file or []:
+    prompt_files = list(args.prompt_file or [])
+    standards = repo / PROJECT_STANDARDS_FILE
+    if getattr(args, "standards", True) and standards.is_file() and not standards.is_symlink():
+        explicit = {(repo / path).resolve() for path in prompt_files}
+        if standards.resolve() not in explicit:
+            prompt_files.insert(0, PROJECT_STANDARDS_FILE)
+    for path in prompt_files:
         resolved, content, truncated = validate_evidence_file(repo, path, "--prompt-file")
         input_truncated = input_truncated or truncated
         chunks.append(f"# Prompt file: {resolved.relative_to(repo.resolve())}\n{content}")
@@ -11668,6 +11679,13 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--prompt", action="append", help="Additional review instruction text.")
     parser.add_argument("--prompt-file", action="append", help="Additional review instruction file.")
+    parser.add_argument(
+        "--no-standards",
+        dest="standards",
+        action="store_false",
+        default=True,
+        help="Skip the repository's CODING_STANDARDS.md, which is otherwise included as a prompt file.",
+    )
     parser.add_argument("--dataset", action="append", help="Extra evidence file to include in the review bundle.")
     parser.add_argument(
         "--max-priority",

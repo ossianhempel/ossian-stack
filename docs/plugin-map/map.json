@@ -124,6 +124,9 @@
     "ios-marketing-capture": {
       "role": "both"
     },
+    "learn-from-miss": {
+      "role": "both"
+    },
     "maintain-verification-skill": {
       "role": "human"
     },
@@ -150,9 +153,6 @@
     },
     "post-queue-cli": {
       "role": "both"
-    },
-    "principle-encode-lessons-in-structure": {
-      "role": "knowledge"
     },
     "principle-exhaust-the-design-space": {
       "role": "knowledge"
@@ -251,6 +251,7 @@
     ],
     "babysit-pr": [
       "commit-push-pr",
+      "learn-from-miss",
       "resolve-pr-feedback"
     ],
     "commit-push-pr": [
@@ -277,7 +278,8 @@
       "principle-fix-root-causes",
       "principle-prove-it-works",
       "why",
-      "principle-test-behavior-not-implementation"
+      "principle-test-behavior-not-implementation",
+      "learn-from-miss"
     ],
     "gplay-cli": [
       "one-password"
@@ -334,7 +336,8 @@
       "resolve-pr-feedback"
     ],
     "resolve-pr-feedback": [
-      "babysit-pr"
+      "babysit-pr",
+      "learn-from-miss"
     ],
     "setup-ossian-stack": [
       "babysit-pr",
@@ -397,6 +400,14 @@
       "blast-radius",
       "diagnosing-bugs",
       "principle-test-behavior-not-implementation"
+    ],
+    "retro": [
+      "learn-from-miss"
+    ],
+    "learn-from-miss": [
+      "autoreview",
+      "codebase-design",
+      "refactoring"
     ]
   },
   "sections": {
@@ -502,6 +513,11 @@
             "id": "handoff",
             "optional": true,
             "writes": "handoff note"
+          },
+          {
+            "id": "learn-from-miss",
+            "optional": true,
+            "writes": "guardrail + eval case"
           },
           {
             "id": "retro",
@@ -739,7 +755,6 @@
     "knowledge": {
       "title": "Principles",
       "ids": [
-        "principle-encode-lessons-in-structure",
         "principle-exhaust-the-design-space",
         "principle-fix-root-causes",
         "principle-model-the-domain",
