@@ -2,7 +2,7 @@
 
 Ossian's personal agent skills, packaged as one plugin for Claude Code, Codex, and Cursor.
 
-![skills](https://img.shields.io/badge/skills-68-blue)
+![skills](https://img.shields.io/badge/skills-69-blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
 ![runtimes](https://img.shields.io/badge/runtimes-Claude%20Code%20%C2%B7%20Codex%20%C2%B7%20Cursor-8957e5)
 
@@ -173,7 +173,7 @@ refreshed instead of quietly rotting.
 
 ## Skills at a glance
 
-68 skills, grouped by what they are for.
+69 skills, grouped by what they are for.
 
 | Group | Covers | Skills |
 | --- | --- | --- |
@@ -184,7 +184,7 @@ refreshed instead of quietly rotting.
 | **Agent workflow** | Review, routing, large-effort planning, simplification, refactoring, debugging, verification, session retrospectives, direct trunk delivery or PR creation with merge-ready follow-through, targeted post-merge cleanup, explicit repository-wide git hygiene, install and skill maintenance | `architect` · `codebase-design` · `autoreview` · `babysit-pr` · `blast-radius` · `commit-push-pr` · `retro` · `setup-ossian-stack` · `diagnosing-bugs` · `domain-modeling` · `performance` · `create-verification-skill` · `maintain-verification-skill` · `git-cleanup` · `grill-me` · `grill-with-docs` · `grilling` · `in-your-words` · `your-call` · `handoff` · `up-to-speed` · `ossian-mode` · `refactoring` · `resolve-pr-feedback` · `simplify-code` · `bro` · `skill-creator` · `skill-cleaner` · `writing-for-agents` |
 | **Principles** | Working principles — verification, behavior-based testing, design exploration, debugging posture, domain modeling | `principle-encode-lessons-in-structure` · `principle-exhaust-the-design-space` · `principle-fix-root-causes` · `principle-model-the-domain` · `principle-prove-it-works` · `principle-redesign-from-first-principles` · `principle-sequence-verifiable-units` · `principle-subtract-before-you-add` · `principle-test-behavior-not-implementation` |
 | **Understand code** | Codebase walkthroughs, design rationale, explaining a change, visual sketches | `how` · `why` · `teach` · `show-me` |
-| **Personal tooling** | Notes, tasks, and X/Twitter reads and authorized actions | `obsidian` · `things` · `bird` |
+| **Personal tooling** | Notes, tasks, past AI chat search, and X/Twitter reads and authorized actions | `obsidian` · `things` · `bird` · `chat-history` |
 
 Each skill's own `SKILL.md` frontmatter carries its full description and trigger
 conditions — that is the one place a description is maintained.

@@ -95,6 +95,10 @@
       "upstreamCheckedAt": "2026-08-27",
       "notes": " Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false, so Codex honors the same user-invoke-only policy as SKILL.md's disable-model-invocation. Upstream does not ship this file; keep it on refresh."
     },
+    "chat-history": {
+      "origin": "local",
+      "notes": "Authored 2026-11-17. Bundles scripts/chat_history.py (Python 3 stdlib, read-only) that parses Claude Code, Codex, Pi and Cursor stores plus claude.ai and ChatGPT exports. Store paths match retro's across-sessions mode."
+    },
     "clerk-cli": {
       "origin": "adapted",
       "repo": "https://github.com/clerk/skills",

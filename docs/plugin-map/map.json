@@ -64,6 +64,9 @@
     "bro": {
       "role": "human"
     },
+    "chat-history": {
+      "role": "both"
+    },
     "clerk-cli": {
       "role": "both"
     },
@@ -701,6 +704,16 @@
         "skills": [
           {
             "id": "things",
+            "phase": "reference"
+          }
+        ]
+      },
+      {
+        "id": "chat-history",
+        "title": "AI chat history",
+        "skills": [
+          {
+            "id": "chat-history",
             "phase": "reference"
           }
         ]

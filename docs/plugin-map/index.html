@@ -460,6 +460,16 @@
     ]
    },
    {
+    "id": "chat-history",
+    "title": "AI chat history",
+    "skills": [
+     {
+      "id": "chat-history",
+      "phase": "reference"
+     }
+    ]
+   },
+   {
     "id": "x",
     "title": "X / Twitter",
     "skills": [
@@ -689,6 +699,22 @@
    "argumentHint": null,
    "origin": "vendored",
    "repo": "https://github.com/dmmulroy/skills",
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
+  "chat-history": {
+   "id": "chat-history",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Chat History",
+   "description": "Search the user's own past AI chats across tools (Claude Code, Codex, Pi, Cursor, claude.ai and ChatGPT exports). Use when the user asks what they discussed, decided, or asked before, or wants an earlier conversation found.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
    "calls": [],
    "routes": [],
    "calledBy": [],
@@ -1902,7 +1928,7 @@
   }
  },
  "counts": {
-  "skills": 68,
+  "skills": 69,
   "agents": 0,
   "plugins": 1
  }

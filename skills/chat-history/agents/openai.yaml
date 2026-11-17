@@ -1,0 +1,3 @@
+interface:
+  display_name: "Chat History"
+  short_description: "Search your past AI chats across tools"
