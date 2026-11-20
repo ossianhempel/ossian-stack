@@ -460,6 +460,16 @@
     ]
    },
    {
+    "id": "agentic-todo",
+    "title": "Agentic Todo",
+    "skills": [
+     {
+      "id": "agentic-todo-cli",
+      "phase": "reference"
+     }
+    ]
+   },
+   {
     "id": "x",
     "title": "X / Twitter",
     "skills": [
@@ -506,6 +516,22 @@
   }
  },
  "nodes": {
+  "agentic-todo-cli": {
+   "id": "agentic-todo-cli",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Agentic Todo CLI",
+   "description": "Read, capture, schedule, and update Agentic Todo tasks, projects, areas, tags, and sync with the agentic-todo CLI. Use when the user asks to check or change their Agentic Todo tasks from a terminal or agent.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "companion",
+   "repo": "https://github.com/ossianhempel/agentic-todo-list",
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": []
+  },
   "app-store-optimization": {
    "id": "app-store-optimization",
    "type": "skill",
@@ -1902,7 +1928,7 @@
   }
  },
  "counts": {
-  "skills": 68,
+  "skills": 69,
   "agents": 0,
   "plugins": 1
  }

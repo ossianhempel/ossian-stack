@@ -266,6 +266,7 @@ for (const dir of skillDirs) {
 // model id has to be added to the list -- visible friction with an obvious fix,
 // versus silent misses.
 const NON_SKILL_TOKENS = new Set([
+  "agentic-todo",
   // CSS properties, media features, and utility classes
   "background-image", "clip-path", "ease-in", "ease-out", "min-height",
   "pointer-events", "prefers-reduced-motion", "scroll-margin-top",

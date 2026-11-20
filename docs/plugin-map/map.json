@@ -217,6 +217,9 @@
     "things": {
       "role": "both"
     },
+    "agentic-todo-cli": {
+      "role": "both"
+    },
     "unslop": {
       "role": "both"
     },
@@ -701,6 +704,16 @@
         "skills": [
           {
             "id": "things",
+            "phase": "reference"
+          }
+        ]
+      },
+      {
+        "id": "agentic-todo",
+        "title": "Agentic Todo",
+        "skills": [
+          {
+            "id": "agentic-todo-cli",
             "phase": "reference"
           }
         ]

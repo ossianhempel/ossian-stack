@@ -331,6 +331,11 @@
       "upstreamCheckedAt": "2026-09-06",
       "lastSynced": "2026-09-06"
     },
+    "agentic-todo-cli": {
+      "origin": "companion",
+      "repo": "https://github.com/ossianhempel/agentic-todo-list",
+      "notes": "Documents the agentic-todo CLI (docs/cli.md in that repo); track it when commands change. Local addition: agents/openai.yaml carrying Codex UI metadata (interface.display_name + short_description); merge by hand on refresh."
+    },
     "post-queue-cli": {
       "origin": "companion",
       "repo": "https://github.com/ossianhempel/post-queue",
