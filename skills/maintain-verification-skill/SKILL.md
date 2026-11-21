@@ -24,7 +24,7 @@ Honor inherited scope: audit-only runs report proposed corrections without edits
 
 ## Pass
 
-0. **Locate the target.** Find the verification skill to maintain: the project-local skill whose body has launch/drive sections and a feature map (usually `verify-*/` under whichever of `.agents/skills/`, `.claude/skills/`, or `.cursor/skills/` the repo uses). Several candidates → ask which one; none → stop and point at `/create-verification-skill` instead of inventing a target.
+0. **Locate the target.** Find the verification skill to maintain: the project-local skill whose body has launch/drive sections and a feature map (usually `verify-*/` under `.agents/skills/`, or under `.claude/skills/` or `.cursor/skills/` where an older project kept it). A real `.agents/skills/verify-*` wins when both exist: the other two are meant to be symlinks to it, so a separate copy there is drift to report, not a second target. Several candidates → ask which one; none → stop and point at `/create-verification-skill` instead of inventing a target.
 
 1. **Index hygiene.** When the skill ships a mechanical map check (`control-<app> map --check`), run it first; each failure is drift to fix, and the pass cannot end `clean` while it fails. Then read the feature map README and glob its sibling files. Fix missing, extra, duplicate, or dead entries. A map check that exists but runs nowhere automatic is a harness gap: once it passes at the end of the run, wire it into the project's CI or existing check command; while it still fails, record the gap instead, so the PR never turns CI red. A skill with no map check and a source inventory it could derive from (route tree, command registry) has a harness gap: record it.
 
