@@ -15,9 +15,10 @@ changes.
 ## What changed
 
 Upstream hardcodes `.cursor/skills/verify-<app>/`. A new step 0 resolves the
-project's own skills directory instead: first existing of `.agents/skills/`,
-`.claude/skills/`, `.cursor/skills/`; otherwise it creates `.agents/skills/` and
-symlinks `.claude/skills` to it when Claude Code support is needed.
+project's own skills directory instead. There is one canonical tree,
+`.agents/skills/`: Codex and Cursor read it directly and Claude Code through a
+`.claude/skills` symlink, so the generated skill never lands in `.claude/skills/`
+or `.cursor/skills/` as a real directory.
 
 A local addition borrowed from Kent C. Dodds' `control-kody` skill: the generated
 skill drives the app only through one project command, `control-<app>`, with

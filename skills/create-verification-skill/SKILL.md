@@ -10,12 +10,18 @@ Every serious project needs a scripted way to drive the real app and prove behav
 
 ## 0. Resolve where project-local skills live
 
-Do not assume a path. Look for a skills directory the repo already uses, in this
-order, and write into the first that exists: `.agents/skills/`, `.claude/skills/`,
-`.cursor/skills/`. If none exists, create `.agents/skills/`, Codex and Cursor
-both read it. Claude Code does not, so when the project is also used with Claude
-Code, add `.claude/skills` as a symlink to `.agents/skills` rather than a second
-copy, so one tree serves every runtime.
+One tree serves every runtime, and it is `.agents/skills/`. Codex and Cursor read
+it directly; Claude Code reads it through a symlink. So that is the only place you
+write, whatever else the repo already has:
+
+- `.agents/skills/` exists: use it.
+- It does not: create it, even when `.claude/skills/` or `.cursor/skills/` already
+  exists as a real directory. Never put the generated skill in those. A copy there
+  is invisible to the other runtimes and drifts from the original.
+- `.claude/skills` is a symlink to `.agents/skills`, never a second tree. Create
+  the symlink when it is missing. If it already exists as a real directory holding
+  its own skills, stop and tell the user: migrating it is their call, not a side
+  effect of generating a verification skill.
 
 Everything below writes `<skills-dir>/verify-<app>/`. Say which directory you
 resolved, once, before you write.
