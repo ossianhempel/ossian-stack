@@ -6,6 +6,7 @@ import copy
 import importlib.util
 import json
 import os
+import re
 import runpy
 import subprocess
 import sys
@@ -291,59 +292,13 @@ class AutoreviewCompatibilityTests(unittest.TestCase):
         args = argparse.Namespace(codex_config=['model_verbosity="low"'])
         self.assertEqual(AUTOREVIEW.codex_config_keys(args), ["model_verbosity"])
 
-    def test_codex_retries_terra_after_sol_access_failure(self) -> None:
-        args = argparse.Namespace(
-            codex_bin="codex",
-            codex_config=None,
-            codex_speed=None,
-            fallback_model="gpt-6-sol",
-            model="gpt-6.1-sol",
-            stream_engine_output=False,
-            thinking="high",
-            tools=True,
-            web_search=False,
-        )
-        models: list[str] = []
-
-        def fake_run(command: list[str], *_args: object, **_kwargs: object) -> subprocess.CompletedProcess[str]:
-            model = command[command.index("--model") + 1]
-            models.append(model)
-            if model == "gpt-6.1-sol":
-                return subprocess.CompletedProcess(
-                    command,
-                    1,
-                    "",
-                    "The model `gpt-6.1-sol` does not exist or you do not have access to it.",
-                )
-            output_path = Path(command[command.index("--output-last-message") + 1])
-            output_path.write_text(json.dumps(FINAL_REPORT))
-            return subprocess.CompletedProcess(command, 0, "", "")
-
-        with tempfile.TemporaryDirectory(prefix="autoreview-codex-fallback.") as tmpdir, mock.patch.object(
-            AUTOREVIEW,
-            "resolve_command",
-            return_value="/usr/bin/codex",
-        ), mock.patch.object(AUTOREVIEW, "codex_auth_config_flags", return_value=[]), mock.patch.object(
-            AUTOREVIEW,
-            "prepare_codex_runtime_auth",
-            return_value=None,
-        ), mock.patch.object(
-            AUTOREVIEW,
-            "run_with_heartbeat",
-            side_effect=fake_run,
-        ):
-            output = AUTOREVIEW.run_codex(args, Path(tmpdir), "review")
-
-        self.assertEqual(json.loads(output), FINAL_REPORT)
-        self.assertEqual(models, ["gpt-6.1-sol", "gpt-6-sol"])
-
     def test_codex_runs_outside_repo_with_bundle_only_workspace(self) -> None:
         args = argparse.Namespace(
             codex_bin="codex",
             codex_config=None,
             codex_speed=None,
             fallback_model=None,
-            model="gpt-6.1-sol",
+            model="gpt-6.2-sol",
             stream_engine_output=False,
             thinking="high",
             tools=True,
@@ -419,133 +374,56 @@ class AutoreviewCompatibilityTests(unittest.TestCase):
             self.assertIn("features.plugins=false", observed["command"])
             self.assertIn("skills.include_instructions=false", observed["command"])
 
-    def test_codex_does_not_fallback_after_unrelated_failure(self) -> None:
+    def test_codex_reports_failure_without_switching_review_models(self) -> None:
         args = argparse.Namespace(
             codex_bin="codex",
             codex_config=None,
             codex_speed=None,
             fallback_model="gpt-6-sol",
-            model="gpt-6.1-sol",
-            stream_engine_output=False,
+            model=AUTOREVIEW.DEFAULT_MODEL_BY_ENGINE["codex"],
+            stream_engine_output=True,
             thinking="high",
             tools=True,
             web_search=False,
         )
-        models: list[str] = []
-
-        def fake_run(command: list[str], *_args: object, **_kwargs: object) -> subprocess.CompletedProcess[str]:
-            models.append(command[command.index("--model") + 1])
-            return subprocess.CompletedProcess(command, 1, "", "network timeout")
-
-        with tempfile.TemporaryDirectory(prefix="autoreview-codex-fallback.") as tmpdir, mock.patch.object(
-            AUTOREVIEW,
-            "resolve_command",
-            return_value="/usr/bin/codex",
-        ), mock.patch.object(AUTOREVIEW, "codex_auth_config_flags", return_value=[]), mock.patch.object(
-            AUTOREVIEW,
-            "prepare_codex_runtime_auth",
-            return_value=None,
-        ), mock.patch.object(
-            AUTOREVIEW,
-            "run_with_heartbeat",
-            side_effect=fake_run,
-        ):
-            with self.assertRaisesRegex(SystemExit, "network timeout"):
-                AUTOREVIEW.run_codex(args, Path(tmpdir), "review")
-
-        self.assertEqual(models, ["gpt-6.1-sol"])
-
-    def test_codex_does_not_fallback_after_model_capacity_failure(self) -> None:
-        args = argparse.Namespace(
-            codex_bin="codex",
-            codex_config=None,
-            codex_speed=None,
-            fallback_model="gpt-6-sol",
-            model="gpt-6.1-sol",
-            stream_engine_output=False,
-            thinking="high",
-            tools=True,
-            web_search=False,
+        access_error = "The model gpt-6.2-sol does not exist or you do not have access to it."
+        stream_chatter = "Unrelated assistant output"
+        access_stdout = "\n".join((
+            json.dumps({"type": "item.completed", "item": {"type": "agent_message", "text": stream_chatter}}),
+            json.dumps({"type": "turn.failed", "error": {"message": access_error}}),
+        ))
+        failures = (
+            (access_stdout, "CLI warning", access_error),
+            ("", "Network timeout", "Network timeout"),
+            ("", "The model is temporarily unavailable due to capacity", "temporarily unavailable"),
         )
-        models: list[str] = []
+        for stdout, stderr, expected in failures:
+            with self.subTest(error=expected):
+                models = []
 
-        def fake_run(command: list[str], *_args: object, **_kwargs: object) -> subprocess.CompletedProcess[str]:
-            models.append(command[command.index("--model") + 1])
-            return subprocess.CompletedProcess(
-                command,
-                1,
-                "",
-                "model_not_available: gpt-6.1-sol is temporarily unavailable due to capacity",
-            )
+                def fake_run(command: list[str], *_args: object, **_kwargs: object) -> subprocess.CompletedProcess[str]:
+                    models.append(command[command.index("--model") + 1])
+                    return subprocess.CompletedProcess(command, 1, stdout, stderr)
 
-        with tempfile.TemporaryDirectory(prefix="autoreview-codex-fallback.") as tmpdir, mock.patch.object(
-            AUTOREVIEW,
-            "resolve_command",
-            return_value="/usr/bin/codex",
-        ), mock.patch.object(AUTOREVIEW, "codex_auth_config_flags", return_value=[]), mock.patch.object(
-            AUTOREVIEW,
-            "prepare_codex_runtime_auth",
-            return_value=None,
-        ), mock.patch.object(
-            AUTOREVIEW,
-            "run_with_heartbeat",
-            side_effect=fake_run,
-        ):
-            with self.assertRaisesRegex(SystemExit, "temporarily unavailable"):
-                AUTOREVIEW.run_codex(args, Path(tmpdir), "review")
+                with tempfile.TemporaryDirectory(prefix="autoreview-codex-failure.") as tmpdir, mock.patch.object(
+                    AUTOREVIEW,
+                    "resolve_command",
+                    return_value="/usr/bin/codex",
+                ), mock.patch.object(AUTOREVIEW, "codex_auth_config_flags", return_value=[]), mock.patch.object(
+                    AUTOREVIEW,
+                    "prepare_codex_runtime_auth",
+                    return_value=None,
+                ), mock.patch.object(
+                    AUTOREVIEW,
+                    "run_with_heartbeat",
+                    side_effect=fake_run,
+                ):
+                    with self.assertRaisesRegex(SystemExit, re.escape(expected)) as failure:
+                        AUTOREVIEW.run_codex(args, Path(tmpdir), "review")
 
-        self.assertEqual(models, ["gpt-6.1-sol"])
-
-    def test_codex_access_fallback_ignores_structured_output_text(self) -> None:
-        result = subprocess.CompletedProcess(
-            ["codex"],
-            1,
-            '{"type":"agent_message","text":"gpt-6.1-sol does not exist or you do not have access"}',
-            '{"type":"agent_message","message":"gpt-6.1-sol does not exist or you do not have access"}',
-        )
-
-        self.assertFalse(
-            AUTOREVIEW.codex_model_access_failure(result, "gpt-6.1-sol")
-        )
-
-    def test_codex_access_fallback_accepts_terminal_error_event(self) -> None:
-        result = subprocess.CompletedProcess(
-            ["codex"],
-            1,
-            '{"type":"error","message":"gpt-6.1-sol does not exist or you do not have access"}',
-            "",
-        )
-
-        self.assertTrue(
-            AUTOREVIEW.codex_model_access_failure(result, "gpt-6.1-sol")
-        )
-
-    def test_codex_access_fallback_accepts_account_model_list_error(self) -> None:
-        result = subprocess.CompletedProcess(
-            ["codex"],
-            1,
-            "",
-            (
-                "The model gpt-6.1-sol does not appear in the list of models "
-                "available to your account"
-            ),
-        )
-
-        self.assertTrue(
-            AUTOREVIEW.codex_model_access_failure(result, "gpt-6.1-sol")
-        )
-
-    def test_codex_access_fallback_ignores_plain_stdout(self) -> None:
-        message = "gpt-6.1-sol does not exist or you do not have access"
-        stdout_result = subprocess.CompletedProcess(["codex"], 1, message, "")
-        stderr_result = subprocess.CompletedProcess(["codex"], 1, "", message)
-
-        self.assertFalse(
-            AUTOREVIEW.codex_model_access_failure(stdout_result, "gpt-6.1-sol")
-        )
-        self.assertTrue(
-            AUTOREVIEW.codex_model_access_failure(stderr_result, "gpt-6.1-sol")
-        )
+                self.assertIn(stderr, str(failure.exception))
+                self.assertNotIn(stream_chatter, str(failure.exception))
+                self.assertEqual(models, ["gpt-6.2-sol"])
 
     def test_extract_json_accepts_dict_result_payload(self) -> None:
         payload = {

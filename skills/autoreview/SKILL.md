@@ -7,7 +7,7 @@ description: "Pre-commit/ship code review: Codex default; optional Claude or Pi.
 
 Run the bundled structured review helper as a closeout check. This is code review, not Guardian `auto_review` approval routing.
 
-Codex review is the default when no engine is set. It uses `gpt-6.1-sol` with `high` reasoning by default, then retries once with `gpt-6-sol` only when the account cannot access Sol. Claude review is optional and uses `claude-fable-5` by default.
+Codex review is the default when no engine is set. It uses `gpt-6.2-sol` with `high` reasoning by default and reports account access errors directly. Claude review is optional and uses `claude-fable-5` by default.
 
 For user-visible behavior, pair autoreview with a check against the user's behavior contract. Autoreview judges the change bundle; behavior validation judges the running product or tool. Reuse current proof from the project's verification workflow. The main agent owns this proof; an independent execution reviewer is optional. A clean source review does not prove observed behavior.
 
@@ -58,7 +58,7 @@ Test-count, coverage-percentage, and stylistic objections do not prolong review.
 - Keep going until structured review returns no accepted/actionable findings only while the work remains inside the original task scope.
 - If a review-triggered fix changes code, rerun focused tests and rerun the structured review helper.
 - For security-audit suppression changes, verify accepted findings remain auditable: suppressed findings stay in structured output, active output keeps an unsuppressible suppression notice, and aggregate findings cannot hide unrelated active risk.
-- Never switch or override the requested review engine/model except for the documented Codex Sol-to-Terra account-access fallback. Capacity, rate-limit, and unrelated failures keep the same engine/model.
+- Use the selected engine and model. Codex reports engine failures directly. Claude may use an explicitly configured fallback.
 - Be patient with large bundles. Structured review can take up to 30 minutes while the model call is active, especially with Codex tools or web search.
 - Treat heartbeat lines like `review still running: ... elapsed=... pid=...` as healthy progress, not a hang. Let the helper continue while heartbeats are advancing. Pass `--stream-engine-output` when live engine text is useful; Codex and Claude filter tool/file chatter, other runnable engines pass raw output through.
 - Do not kill a review just because it has been quiet for 2-5 minutes, or because it is still running under the 30-minute window. Inspect the process only after missing multiple expected heartbeats, after 30 minutes, or after an obviously failed subprocess; prefer letting the same helper command finish.
