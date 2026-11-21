@@ -233,6 +233,11 @@
       "optional": true
      },
      {
+      "id": "hillclimb",
+      "optional": true,
+      "writes": "decision.tsv"
+     },
+     {
       "id": "autoreview",
       "writes": "review findings"
      },
@@ -780,6 +785,7 @@
    "routes": [],
    "calledBy": [
     "babysit-pr",
+    "hillclimb",
     "ossian-mode",
     "release-ios-app"
    ],
@@ -1088,6 +1094,29 @@
    "calledBy": [],
    "routedBy": []
   },
+  "hillclimb": {
+   "id": "hillclimb",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Hillclimb",
+   "description": "Improve one measurable thing against a target in a loop: one change, one measurement, keep or revert. Use for sustained metric work (latency, bundle size, eval score, build time); a one-off fix is diagnosing-bugs or performance.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [
+    "commit-push-pr",
+    "principle-prove-it-works",
+    "principle-sequence-verifiable-units"
+   ],
+   "routes": [],
+   "calledBy": [
+    "ossian-mode",
+    "performance"
+   ],
+   "routedBy": []
+  },
   "how": {
    "id": "how",
    "type": "skill",
@@ -1300,7 +1329,8 @@
     "simplify-code",
     "visual-parity",
     "why",
-    "principle-test-behavior-not-implementation"
+    "principle-test-behavior-not-implementation",
+    "hillclimb"
    ],
    "routes": [
     "create-verification-skill",
@@ -1315,13 +1345,14 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Performance",
-   "description": "Diagnose live performance, analyze captured profiles, or improve one metric through measured experiments.",
+   "description": "Diagnose live performance or analyze captured profiles; hands sustained metric improvement to hillclimb.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/cursor/plugins",
    "calls": [
+    "hillclimb",
     "how",
     "principle-prove-it-works",
     "principle-sequence-verifiable-units"
@@ -1434,6 +1465,7 @@
    "calledBy": [
     "blast-radius",
     "diagnosing-bugs",
+    "hillclimb",
     "ossian-mode",
     "performance",
     "principle-sequence-verifiable-units",
@@ -1475,6 +1507,7 @@
    ],
    "routes": [],
    "calledBy": [
+    "hillclimb",
     "ossian-mode",
     "performance"
    ],
@@ -1928,7 +1961,7 @@
   }
  },
  "counts": {
-  "skills": 69,
+  "skills": 70,
   "agents": 0,
   "plugins": 1
  }

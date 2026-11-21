@@ -1,6 +1,6 @@
 ---
 name: performance
-description: "Diagnose live performance, analyze captured profiles, or improve one metric through measured experiments."
+description: "Diagnose live performance or analyze captured profiles; hands sustained metric improvement to hillclimb."
 ---
 
 # Performance
@@ -35,23 +35,10 @@ to fix it.
 
 ## Metric improvement
 
-For a sustained target, freeze one repeatable measurement command, prove it
-separates realistic workloads, sample enough to clear noise, and record the
-baseline. Run one hypothesis per iteration:
-
-1. State the mechanism.
-2. Make the smallest relevant change.
-3. Measure with the frozen harness and run the behavior regression gate.
-4. Keep a change only when the metric moves beyond noise and behavior holds.
-5. Revert non-wins completely.
-
-One accepted change per
-commit when commits are authorized. Never loosen the target to declare success.
-
-Candidate strategies come from the trace: eliminate unused work, reduce input,
-cache repeated work with explicit invalidation, batch fixed overhead, defer unused
-work, move required work away from the interactive path, or add an index or queue
-that removes more cost than it adds.
+For a sustained target (improve one metric until it meets a threshold), run
+`hillclimb`. It owns the frozen harness, the keep-or-revert loop, the decision
+log, and the stop predicate. Ground its hypotheses in the trace from a diagnosis
+above.
 
 ## Reply
 

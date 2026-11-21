@@ -118,6 +118,9 @@
     "handoff": {
       "role": "human"
     },
+    "hillclimb": {
+      "role": "both"
+    },
     "how": {
       "role": "both"
     },
@@ -285,6 +288,11 @@
     "gplay-cli": [
       "one-password"
     ],
+    "hillclimb": [
+      "commit-push-pr",
+      "principle-prove-it-works",
+      "principle-sequence-verifiable-units"
+    ],
     "how": [
       "show-me"
     ],
@@ -315,7 +323,8 @@
       "simplify-code",
       "visual-parity",
       "why",
-      "principle-test-behavior-not-implementation"
+      "principle-test-behavior-not-implementation",
+      "hillclimb"
     ],
     "prototype": [
       "principle-exhaust-the-design-space"
@@ -386,6 +395,7 @@
       "why"
     ],
     "performance": [
+      "hillclimb",
       "how",
       "principle-prove-it-works",
       "principle-sequence-verifiable-units"
@@ -480,6 +490,11 @@
           {
             "id": "performance",
             "optional": true
+          },
+          {
+            "id": "hillclimb",
+            "optional": true,
+            "writes": "decision.tsv"
           },
           {
             "id": "autoreview",
