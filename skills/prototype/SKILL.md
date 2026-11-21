@@ -104,22 +104,15 @@ the interaction, the eye is the test. For a behavioral or timing decision,
 observe the thing you are deciding: log the timing, print the output, watch the
 render.
 
-**The observation is the test here**, not an assertion. If the project has no
-scripted way to drive its own surface, `create-verification-skill` builds one.
+Capture the actual behavior using the project's existing verification tooling
+or direct observation on the prototype's surface.
 
 ## 8. Present, then capture
 
-Present the variants, the tradeoffs, and a recommendation. The output is the
-decision plus the throwaway artifact, not shippable code.
-
-Then capture both, because a prototype answers a question once and the answer
-outlives the code:
-
-- Fold the validated decision into the real code.
-- Commit the prototype itself to a throwaway branch, off main, and leave a pointer
-  to that branch wherever the implementation work is tracked.
-- Record the verdict *and the question it settled* alongside it. Main keeps only
-  the validated decision.
+Deliver the prototype, observed behavior for each variant, tradeoffs, and a
+recommendation with the question it settles. Keep the artifact in the agreed
+sandbox and provide its path. Production implementation, Git delivery, and
+tracker updates each require scope that includes that action.
 
 ## Reply
 

@@ -141,6 +141,16 @@ validate` checks that the five native manifest files remain versionless.
 bun run validate
 ```
 
+On 2026-08-30, Claude Code used the short SHA as the plugin version and updated
+from `c7c72b25bc7c` to `463681f1b29a` after a plain commit. Adding an explicit
+version pins Claude Code to that value across subsequent pushes. Claude's
+validator warns about the missing version, so the repo's schema check runs
+without strict mode.
+
+On the same date, Codex used a constant cache key and overwrote its contents on
+`plugin marketplace upgrade`. For current refresh commands, see the
+[host guide](supported-agents.md).
+
 ## Namespacing
 
 Claude Code and Codex address plugin skills as `ossian-stack:<skill-name>` — e.g.

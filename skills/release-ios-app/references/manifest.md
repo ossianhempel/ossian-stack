@@ -15,7 +15,7 @@ flags. The global `release-ios-app` skill and `scripts/ios-release` read it.
 | `IOS_RELEASE_XCODEGEN_DIR` | xcodegen only | Dir to run `xcodegen` in (`ios` or `.`). Empty/unset for non-xcodegen. |
 | `IOS_RELEASE_RELEASE_BRANCH` | yes | App Store channel branch (usually `main`). |
 | `IOS_RELEASE_BETA_BRANCH` | yes | TestFlight channel branch (usually `develop`). Set equal to the release branch if the repo has no develop branch yet. |
-| `IOS_RELEASE_VERSION_CHECK_CMD` | optional | Repo command that enforces version > live (e.g. `pnpm run version:check`). `scripts/ios-release check-version` is the manifest-driven fallback. |
+| `IOS_RELEASE_VERSION_CHECK_CMD` | optional | Repo command that enforces version > live (e.g. `pnpm run version:check`). Use it after verifying that it and the commands it calls are read-only. Otherwise use the bundled version check. |
 | `IOS_RELEASE_TEST_CMDS` | optional | `;`-separated test commands to run for changed surfaces. |
 | `IOS_RELEASE_BACKEND_DEPLOY` | optional | `convex` or `none`. If `convex`, confirm prod deploy before shipping. |
 | `IOS_RELEASE_ENV_PREFIX` | optional | Xcode Cloud env-override prefix (e.g. `PLATESNAP`, `WALKMON`). |
@@ -54,7 +54,7 @@ IOS_RELEASE_BUILD_SYSTEM="eas"
 IOS_RELEASE_VERSION_SOURCE="app.json"        # expo.version
 IOS_RELEASE_RELEASE_BRANCH="main"
 IOS_RELEASE_BETA_BRANCH="develop"
-IOS_RELEASE_VERSION_CHECK_CMD="pnpm run submit:ios"   # blocks re-submitting the same expo.version
+IOS_RELEASE_VERSION_CHECK_CMD="pnpm run version:check" # optional read-only check
 IOS_RELEASE_TEST_CMDS="pnpm test; pnpm run test:convex"
 IOS_RELEASE_BACKEND_DEPLOY="convex"
 IOS_RELEASE_APPSTORE_LOOKUP_COUNTRY="us"

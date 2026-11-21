@@ -45,7 +45,15 @@ If a release mixes both, the user-facing change wins → bump MINOR. **State the
 
 3. **Drive the required release PR before merge handoff.** Create or reuse the PR from `IOS_RELEASE_BETA_BRANCH` to `IOS_RELEASE_RELEASE_BRANCH`, including the intended version and release changes. Explicitly invoke `babysit-pr` in `drive` mode with the full PR URL and inherited, release-limited fix/commit/push/reply/resolve scope. The release outcome selects drive regardless of PR size; preserve explicit narrower user limits. If `commit-push-pr` or another caller already started its drive, resume that owner instead of starting a second babysitter. `babysit-pr` handles CI and invokes `resolve-pr-feedback`; do not start another feedback loop here. After an authorized release fix is validated and pushed, resume the watcher on the changed head. Continue to merge-ready or a genuine blocker with no remaining authorized work; report blockers without claiming readiness. At merge-ready, ask Ossian to merge manually and continue the dependent release steps only after he confirms. A narrower stop request ends at its requested boundary without authorizing merge or submission.
 
-4. **Validate readiness.** Run `IOS_RELEASE_VERSION_CHECK_CMD` (or `scripts/ios-release check-version`), the selected version must be strictly greater than the live App Store version. Run `IOS_RELEASE_TEST_CMDS` for the changed surface when practical.
+4. **Validate readiness.** Use the bundled `ios-release check-version` command
+   below by default. If the repo configures `IOS_RELEASE_VERSION_CHECK_CMD`,
+   inspect its implementation and any commands it calls before executing it.
+   Use it only when you can verify it performs a read-only version check.
+   Require a version strictly above the live version. If the lookup fails or
+   the helper exits 3 for an empty storefront, verify the app and live version
+   in App Store Connect. Proceed only if that comparison passes or App Store
+   Connect confirms this is the first release. Run `IOS_RELEASE_TEST_CMDS` for
+   the changed surface when practical.
 
 5. **Backend safeguard.** If `IOS_RELEASE_BACKEND_DEPLOY=convex`, confirm the production Convex deploy from the release branch has completed **before** shipping a binary that depends on backend changes. Don't ship against backend code that hasn't reached production.
 
@@ -76,11 +84,16 @@ App Store submissions must **attach an already-uploaded, `VALID` TestFlight buil
 
 ## Commands
 
+Run from the project root with its release manifest. The version check uses
+the project version by default and also accepts an explicit version.
+
 ```bash
-./.agents/skills/release-ios-app/scripts/ios-release status
-./.agents/skills/release-ios-app/scripts/ios-release check-version [version]
-./.agents/skills/release-ios-app/scripts/ios-release live-version
+SKILL_DIR="<absolute directory containing this SKILL.md>";
+"$SKILL_DIR/scripts/ios-release" check-version
 ```
+
+Use the same path with `ios-release status` for the manifest and gate summary
+or `ios-release live-version` for the storefront version.
 
 ## Manifest & references
 

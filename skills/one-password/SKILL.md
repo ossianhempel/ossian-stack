@@ -36,7 +36,8 @@ the service account's scope), unset the token for that one command so `op` uses
 desktop app integration and prompts Touch ID:
 
 ```bash
-env -u OP_SERVICE_ACCOUNT_TOKEN op read "op://Personal/SomeItem/field"
+env -u OP_SERVICE_ACCOUNT_TOKEN SERVICE_TOKEN='op://Personal/SomeItem/field' \
+  op run -- some-tool
 ```
 
 This requires the user present to approve, use it only when the secret genuinely
@@ -47,42 +48,25 @@ isn't (and can't be) in `Development`.
 Reference syntax is `op://<vault>/<item>/<field>`. Pick the vault that owns the
 secret: `Development` for personal/agent projects, `H&M` or `Rebtech` for work.
 
-**`H&M` cannot be named in an `op://` ref.** `&` is not a legal character in a
-secret reference, so `op read "op://H&M/Item/field"` fails with
-`invalid character in secret reference: '&'`, this is a parse error, not an auth
-error, and no amount of shell quoting fixes it. Use the vault UUID instead:
+The `H&M` vault uses its UUID in a secret reference because the reference
+parser rejects `&`. Item metadata commands accept the vault name directly.
 
 ```bash
-op read "op://jppnx6odwrvy62mr2brqap552y/ATLASSIAN_API_TOKEN/username"   # H&M by UUID
-op vault list --format json                                              # look up UUIDs
+SERVICE_TOKEN='op://jppnx6odwrvy62mr2brqap552y/SomeItem/credential' op run -- some-tool
 ```
 
-Or bypass references entirely with the item API, which takes the name directly:
+### Run a command with secrets injected
+
+Pass references in the environment. Choose a command that consumes the secret
+without printing it.
 
 ```bash
-op item get "ATLASSIAN_API_TOKEN" --vault "H&M" --fields credential --reveal
+OPENAI_API_KEY='op://Development/OpenAI/api_key' op run -- some-tool
 ```
 
-`--reveal` is required for concealed fields, otherwise the value comes back masked.
+For several variables, use a local env file containing references:
 
-### Read one secret
-
-```bash
-op read "op://Development/OpenAI/api_key"
-```
-
-Inline for a single command so the value never lands in a variable or log:
-
-```bash
-OPENAI_API_KEY="$(op read 'op://Development/OpenAI/api_key')" some-tool --run
-```
-
-### Run a command with secrets injected (preferred for many vars)
-
-Keep a `.env` of `op://` references (safe to commit, they're pointers, not values):
-
-```bash
-# .env
+```dotenv
 OPENAI_API_KEY=op://Development/OpenAI/api_key
 DATABASE_URL=op://Development/AppDB/connection_string
 ```
@@ -91,82 +75,79 @@ DATABASE_URL=op://Development/AppDB/connection_string
 op run --env-file=.env -- npm run dev
 ```
 
-`op` resolves every `op://` ref into the child process's environment and nowhere else.
+### Write a private file only when the consumer needs one
 
-### Inject secrets into a config template
-
-```bash
-echo "db_password: {{ op://Development/AppDB/password }}" | op inject
-op inject -i config.tpl.yml -o config.yml      # render a whole file
-```
-
-### Special field attributes
+Use paths within a task-owned directory with mode `0700`. Set `umask 077`,
+keep rendered files out of the checkout, and remove them after use, including
+after failure.
 
 ```bash
-op read "op://Development/SomeItem/one-time password?attribute=otp"   # TOTP code
-op read "op://Development/server/private key?ssh-format=openssh"      # SSH key
-op read --out-file ./key.pem "op://Development/server/ssh/key.pem"    # write to file
+op inject -i config.tpl.yml -o "$PRIVATE_CONFIG_PATH" --file-mode 0600
+op read --out-file "$PRIVATE_KEY_PATH" --file-mode 0600 'op://Development/server/private key?ssh-format=openssh'
 ```
+
+For a one-time password, use the reference's `?attribute=otp` with a consumer
+that can receive the code securely.
 
 ## Adding a new secret for agents to use
 
 Pick the owning vault (`Development`, `H&M`, or `Rebtech`). Use repo-specific
-item names, tags, and sections so secrets do not get mixed across projects:
+names, tags, and sections. If authorized to create the item, pass its fields
+through a private JSON template and discard the command's stdout. Remove the
+private template when finished.
 
 ```bash
 op item create --vault Development \
   --category "API Credential" --title "Some Service" \
   --tags "repo:some-repo,project:some-project" \
-  "api_key[password]=…"
+  --template "$PRIVATE_ITEM_TEMPLATE" >/dev/null
 ```
-
-Then agents read it non-interactively via `op read "op://Development/Some Service/api_key"`.
-
-For sensitive values, prefer JSON templates or `op run`/`op inject` over command-line
-assignment statements so secrets do not appear in process arguments. For `Personal`,
-unset the service account token and use the Touch ID fallback.
 
 ## Finding the right reference
 
-Prefer asking the user for the exact `op://` path, or copy it from the app
-(right-click a field → "Copy Secret Reference"). If you must discover it, stay
-metadata-only and vault-scoped, list titles, never field values:
+Use the supplied reference or a reference copied from the app. For authorized
+vault-scoped discovery, list item titles and IDs. Project item details to field
+IDs, labels, and section IDs before returning any output. If a projection tool
+is unavailable, use the exact reference or ask for it.
 
 ```bash
-op item list --vault Development --format json        # titles/ids/categories only
-op item get "OpenAI" --vault Development --format json # inspect field LABELS, not values
+op item list --vault Development --format json | jq '[.[] | {id, title}]'
+op item get "OpenAI" --vault Development --format json |
+  jq '[.fields[] | {id, label, section: .section.id}]'
 ```
 
-Always pass `--vault` to `op item list`. A list across all vaults fails anyway (the
-service account needs a vault) and agent permission classifiers block it as credential
-exploration. Do not enumerate other vaults by default. Search only when the user asks.
-
-Agents cannot reach the 1Password browser extension. Use the `op` CLI only.
+When field names are duplicated, use the matching section and field IDs to
+resolve the reference. Agents use the `op` CLI. The desktop app handles any
+interactive approval.
 
 ## Guardrails
 
-- **Never print or log secret values or the token.** No `echo $TOKEN`, no `set -x`
-  around `op`, no `cat` of rendered output. To sanity-check a read, print shape
-  only (length, prefix), never the value.
-- **Prefer `op run` / `op inject`** over writing secrets to disk. If a file is
-  unavoidable (`--out-file`), delete it as soon as the command that needs it is done.
-- **No broad enumeration.** Don't run `env`, `export -p`, or list every vault to
-  "find" a secret, query the exact item/field in the vault that owns it.
-- Use the Touch ID fallback deliberately for `Personal` only.
-- If `op read` returns the wrong field (items with duplicate/legacy fields), read
-  the item as JSON and pick the exact label rather than guessing.
+- Keep secret values, prefixes, and service-account tokens out of tool output,
+  logs, shell traces, and process arguments. Verify success through the consumer
+  or report only whether a value is present.
+- Use the exact owning vault. Keep discovery limited to the user's requested
+  item or vault.
+- Use Touch ID for credentials outside the service account's scope through the
+  fallback above.
 
 ## Operations
 
 - Token lives in `~/.zshenv` (`OP_SERVICE_ACCOUNT_TOKEN`). Scoped to `Development`,
   `H&M`, and `Rebtech` with `read_items` and `write_items` in each.
 - Rate limits: `op service-account ratelimit` shows usage if reads start failing.
-- Rotate/replace: vault access is immutable, create a new service account with
-  `env -u OP_SERVICE_ACCOUNT_TOKEN op service-account create <name> \
+- Vault access is immutable. For an authorized rotation, create the replacement
+  from a desktop-authenticated session and redirect the raw token to a private
+  file under the same file-handling rules above.
+
+```bash
+env -u OP_SERVICE_ACCOUNT_TOKEN op service-account create "$ACCOUNT_NAME" \
   --vault Development:read_items,write_items \
   --vault "H&M:read_items,write_items" \
-  --vault Rebtech:read_items,write_items --raw`, update `~/.zshenv` and the
-  credential item. Delete the old account in the 1Password web UI (CLI has no delete).
+  --vault Rebtech:read_items,write_items --raw >"$PRIVATE_TOKEN_PATH"
+```
+
+Update `~/.zshenv` and the credential item through secure inputs and verify
+that the replacement works before retiring the old account in the 1Password web UI.
 
 ## Service Account Credential
 

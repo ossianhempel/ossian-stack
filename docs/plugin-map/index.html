@@ -180,7 +180,7 @@
      {
       "id": "prototype",
       "optional": true,
-      "writes": "throwaway branch"
+      "writes": "prototype artifact and observed tradeoffs"
      }
     ],
     "extras": [
@@ -353,7 +353,7 @@
     "steps": [
      {
       "id": "online-writing",
-      "writes": "audit & revision comparison"
+      "writes": "audit, headlines, or editorial research"
      },
      {
       "id": "copywriter"
@@ -873,8 +873,6 @@
    ],
    "routedBy": [
     "diagnosing-bugs",
-    "ossian-mode",
-    "prototype",
     "setup-ossian-stack"
    ]
   },
@@ -1262,7 +1260,7 @@
    "type": "skill",
    "plugin": "ossian-stack",
    "display": "Online Writing",
-   "description": "Audit online articles, newsletters, LinkedIn posts, and X threads for reader appeal, hooks, pacing, structure, and credibility. Compare revisions and use fresh reviewers when independent judgment matters. Generate headlines and openings when asked; research frames and select topics using reading, notes, and audience feedback. Does not draft full pieces or publish.",
+   "description": "Audit articles, newsletters, and social posts. Compare revisions, generate headlines and openings, and research editorial angles or topics. Full drafting and publication are separate workflows.",
    "role": "both",
    "humanOnly": false,
    "argumentHint": null,
@@ -1333,7 +1331,6 @@
     "hillclimb"
    ],
    "routes": [
-    "create-verification-skill",
     "grill-with-docs",
     "unslop"
    ],
@@ -1581,9 +1578,7 @@
    "calls": [
     "principle-exhaust-the-design-space"
    ],
-   "routes": [
-    "create-verification-skill"
-   ],
+   "routes": [],
    "calledBy": [
     "ossian-mode"
    ],

@@ -49,16 +49,6 @@ Provide a checklist the user can follow in App Store Connect.
 - [ ] Test that privacy policy URL loads correctly
 - [ ] Set a calendar reminder to review documents annually
 
-## References
-
-- **templates.md** -- Full legal document templates with placeholders
-- Related: `generators/consent-flow` -- GDPR/CCPA consent UI generation
-- Related: `generators/account-deletion` -- Account deletion flow (App Store requirement)
-- Related: `generators/permission-priming` -- Pre-permission UI for ATT
-- Related: `monetization/` -- Subscription terms and pricing disclosures
-- Apple App Review Guidelines Section 5.1 (Privacy)
-- Apple App Store Connect Privacy Details documentation
-
 ## Task references
 
 Read the reference for the task at hand; do not load every recipe.

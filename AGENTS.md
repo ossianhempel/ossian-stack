@@ -23,24 +23,9 @@ bun run check:upstream   # which vendored skills moved upstream (needs `gh` + `j
 bun run docs:list        # index docs/ for unfamiliar or cross-cutting work
 ```
 
-Bun is a **dev-time task runner** for this repo's own checks. Skills may bundle
-executables, but only in a runtime the user is likely to already have: Python 3 is
-the default, and several skills ship `.py` helpers. Do not reach for Bun or Node in
-a skill without a reason worth writing down.
-
-`babysit` vendors `scripts/watch-pr`, a Bun-only TypeScript
-CLI, because it is the mechanism the playbook is built around and rewriting it on
-`gh` would lose its merge-state verdict. It runs `bun install` into its own
-directory on first use — under a plugin install that is the versioned cache, which
-is replaced on every update. The skill degrades to plain status reporting when
-`bun` is absent. Any further exception needs the same kind of justification in
-`skills/sources.json`.
-
-`skill-cleaner` also retains an optional Node 22.6+ TypeScript analyzer: its
-existing dependency-free inventory, transcript heuristics, and Codex-style budget
-simulation stay together. It does not install packages or require Bun. Without
-Node, the skill audits through filesystem tools and reports missing numeric
-estimates. This runtime choice is recorded in `skills/sources.json`.
+Use Bun for repo checks and prefer Python 3 for bundled skill executables.
+Record runtime exceptions in `skills/sources.json`. See
+`docs/skills-sources.md` for the existing exceptions and their fallback behavior.
 
 ## Local plugin development
 
@@ -68,15 +53,8 @@ Never distribute the checkout-local `.agents/skills/` tier as the public package
   `sources.json`, or `README.md`. It is fast and offline. `.githooks/pre-commit`
   runs `bun run validate` automatically; enable it once per clone with
   `git config core.hooksPath .githooks`.
-- **No version field. The commit is the release.** The native manifest files ship
-  version-less on purpose, so every runtime keys its install off the git SHA and a
-  push is all that publishes. Verified 2026-08-30: Claude Code adopts the short SHA
-  as the version and updated `c7c72b25bc7c` → `463681f1b29a` on a plain commit;
-  Codex falls back to a constant key it overwrites on `plugin marketplace upgrade`.
-  Adding a `version` back silently re-pins Claude Code to it and blocks every later
-  push, so `bun run validate` fails on the field's presence.
-  `bun run plugin:validate` runs without `--strict` for the same reason — the
-  absent version is a strict-mode warning, and it is the state we want.
+- **The commit is the release.** Keep native manifests versionless. See
+  `docs/plugin-workflow.md` for host behavior and validation details.
 - **Secrets:** `.env*` files and/or 1Password (`op` CLI). Never commit one.
 
 ## Repo Layout
@@ -96,17 +74,6 @@ scripts/                Repo-local dev tooling — NOT plugin surface
 .claude/skills          Symlink to .agents/skills so Claude Code loads the same tier
 docs/                   Repo docs
 ```
-
-## Repo Surfaces
-
-A change here touches one of three surfaces. Do not assume which without checking:
-
-- **Plugin content** — `skills/`, `commands/`, and the native
-  manifests. This is what reaches users; changes need the relevant manifest and
-  documentation checks.
-- **Repo tooling** — `scripts/`, `package.json`, `.agents/skills/`. Runs only in a
-  checkout. No version bump.
-- **Docs** — `docs/`, `README.md`, `AGENTS.md`.
 
 ## Two skill tiers
 

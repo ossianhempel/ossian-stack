@@ -1,6 +1,6 @@
 ---
 name: online-writing
-description: "Audit online articles, newsletters, LinkedIn posts, and X threads for reader appeal, hooks, pacing, structure, and credibility. Compare revisions and use fresh reviewers when independent judgment matters. Generate headlines and openings when asked; research frames and select topics using reading, notes, and audience feedback. Does not draft full pieces or publish."
+description: "Audit articles, newsletters, and social posts. Compare revisions, generate headlines and openings, and research editorial angles or topics. Full drafting and publication are separate workflows."
 ---
 
 # Online Writing
@@ -36,11 +36,12 @@ matters of taste, and treat advice as choices the writer can reject.
 | Which version works better; did this revision help? | **Compare** |
 | Give me better headlines, hooks, or an opening; make this more compelling | **Packaging** |
 | Audit this and give me better hooks | **Audit + Packaging** |
-| Why did this post work; add it to the swipe file | **Reverse audit** |
-| What's working on this topic; research before I write | **Research** |
-| What should I write about next | **Topic** |
+| Why did this post work; add it to the swipe file | **[Reverse audit](references/reverse-audit.md)** |
+| What's working on this topic; research before I write | **[Research](references/editorial-research.md)** |
+| What should I write about next | **[Topic](references/topic-selection.md)** |
 
-Find and read the existing piece when the user refers to one. A title alone
+Read the linked reference only for the selected mode. Find and read the existing
+piece when the user refers to one. A title alone
 isn't a reason to substitute Research for an audit. Don't apply online article
 standards to an atomic knowledge note unless the user wants to adapt it for
 publication. Marketing copy belongs to `copywriter`.
@@ -221,109 +222,6 @@ mistake, or desire for a concrete outcome; don't invent the writer's feelings.
 If the material cannot support a strong option, say what is missing and give
 the strongest honest version. Don't compensate with invented drama. These are
 editorial candidates, not proven winners; improve later using observed results.
-
-## Reverse audit and the swipe file
-
-Analyze a successful post with the same form-sensitive rubric. Separate observed
-performance from your explanation: views establish reach, not why it happened.
-Consider audience size, placement, timing, and distribution before attributing
-success to a hook. Don't say a post performed merely because it was saved.
-
-Record the transferable frame, stripped of its topic, plus:
-
-- Link, platform, date seen, and intended reader/form.
-- Available performance evidence, its source and date, or **unverified**.
-- The headline promise, opening mechanism, and body structure that may explain
-  its appeal; distinguish observations from hypotheses.
-- What could transfer and what depends on this writer, topic, or platform.
-
-Use the project's swipe-file convention. If none exists, `swipefile.md` beside
-the piece's `research.md` and `outline.md` is a proposed convention, not a reason
-to create a folder without authorization. Read across existing swipe files;
-a frame found for one subject may serve another. Store patterns, not copied
-language. Topic-specific findings belong in research instead.
-
-## Research
-
-Merge what the writer wants to say with evidence of what readers respond to.
-Read the writing guides, existing swipe files, relevant published work, and
-available performance data before seeking new examples.
-
-Study the **category and platform**: intended readers, their recurring questions,
-leading comparable writers, native formats, headline promises, opening choices,
-credibility, and what remains poorly answered. Compare similar forms and
-audiences; a giant account's view count is not a useful standalone benchmark.
-Use the open web and available interfaces. If access limits the evidence, explain
-the limit and use supplied posts or analytics; a missing CLI is not proof a
-platform cannot be read.
-
-Report three to five useful frames with examples, source links, evidence quality,
-why they might fit this writer, and the material needed to deliver them. Recurring
-headlines show a convention, not measured popularity. Saved titles show what
-attracted the writer, not audience performance. Don't infer proof from either.
-
-Distinguish **timely** interest from **lasting** usefulness. Identify whether the
-angle can retain value after its news trigger, and whether proven smaller pieces
-justify a deeper resource. When audience growth or business is the goal, examine
-the path from a useful social piece to a relevant fuller resource or opt-in;
-recommend expanding demonstrated demand rather than inventing a product first.
-Distribution and publishing frequency affect results but are not draft defects.
-
-Return findings in chat unless saving research was requested or already authorized.
-When saving, follow the project's layout; don't overwrite human prose. Keep
-source observations, proposed angles, and the writer's confirmed views distinct.
-
-## Topic
-
-Use three signals together: what the writer cares about, what they have something
-specific to contribute to, and what available audience evidence supports.
-Audience feedback informs the choice; it doesn't replace the writer's interests.
-
-Mine the last two weeks of reading, highlights, notes, and drafts through the
-available interfaces. Highlights indicate a reaction; saves alone indicate
-intention. Filter reading by the relevant saved or highlighted date after fetching
-and paginate as needed; an updated timestamp can retrieve an old document.
-Discover the vault and its active layout instead of assuming folder names.
-Use note creation metadata and daily-note filenames; sync can rewrite file mtimes.
-An overlap between reading and the writer's own notes is a promising signal,
-not proof they endorse the source or are ready to write on it.
-
-Read the writer's own published results too, when available: which topics,
-headlines, forms, and stories prompted the response they wanted? Keep reach,
-discussion, saves, subscriptions, and sales distinct. Look for repeated signals,
-state evidence limits, and propose the next experiment rather than attributing
-causality to one outlier.
-
-Use declared content buckets as a way to compare audiences and learn, not an
-automatic veto on new interests. A general-interest question, a niche expertise
-question, and an industry question can all be approached through this writer's
-specific experience. Name the reader and category for each candidate even when
-the writer is still exploring. Don't impose permanent positioning on their behalf.
-
-Propose three to five candidates with:
-
-- Reader, question, form, and the writer's contribution.
-- Specific reading/notes and audience evidence, keeping confirmed views separate.
-- A borrowed frame and its provenance, or **none found**.
-- A supported working headline and why it attracts that reader; use the Packaging
-  reference to improve it without inventing the eventual piece's evidence.
-- Notes to draw on, lasting versus timely value, and a meaningful next experiment
-  (for example, compare responses to a concrete story versus an explanation).
-
-Count distinct ideas, not several formats of the same story. Group alternate
-treatments under one candidate. When the available evidence supports fewer
-topics, say so and return fewer rather than padding the shortlist.
-
-Recommend one and explain why. Follow the project's cadence; for a weekly content
-project, choose one main topic and derive its shorter posts from that piece.
-More publishing opportunities can accelerate learning, but volume is not a
-substitute for delivering value. Related topics can be revisited with new examples
-and perspectives. Don't treat familiarity or a previously covered subject as
-automatic failure.
-
-After publication, compare the observed response to the goal and the writer's
-own comparable pieces. Suggest what to keep, what to test, and whether a deeper
-resource is justified. Don't invent analytics or publish to obtain them.
 
 ## Basis and limits
 

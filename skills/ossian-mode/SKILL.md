@@ -94,20 +94,17 @@ Load the model-invoked testing principle when writing or assessing tests.
   Branches and worktrees from PRs merged after a session ended are closed
   out by the next `commit-push-pr` delivery in that repository.
 
-**Verify through the project's verification skill.** Most work here is proven
-by the project's `verify-*` skill, made by `create-verification-skill`. Load it
-while grounding the work and follow its own instructions for observing current
-behavior, each unit's check, and the closing proof; it owns how the app is
-driven and what counts as evidence, so do not restate or bypass it. Its run is
-the required behavioral proof, ahead of any weaker surface. When it no longer
-matches the app, say so and recommend `/maintain-verification-skill`.
+**Use the project's verification skill when it covers the change.** Load the
+applicable `verify-*` skill while grounding the work. Follow its instructions
+for observing current behavior, checking each unit, and capturing closing proof.
+If its procedure no longer matches the app, report the gap.
 
-When the change has a drivable user-facing surface and the project has no
-verification skill, stop before implementing and ask the user to run
-`/create-verification-skill`, so this change is the first one proven through it.
-Skip the ask for one-off edits, docs-only changes, or work with nothing to drive.
-If the user declines, fall back to the strongest real surface and list what that
-leaves unverified.
+When the project has no applicable verification skill or it cannot drive the
+changed behavior, continue through the strongest available real surface. Use
+the project's existing harness, exercise the changed UI or command, or run a
+focused behavior check through the affected entry point. State what the check
+proves and what remains unverified. Creating or maintaining a verification
+skill is separate work.
 
 Before delivery, complete this behavioral proof as well as the relevant focused
 checks and `autoreview`. In the final response, name the artifact exercised, the

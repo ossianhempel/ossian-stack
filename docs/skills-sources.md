@@ -38,6 +38,21 @@ commit the local copy is pinned to.
 | `lastSynced` | When files were actually copied down. |
 | `refresh` | One-liner that re-vendors the skill. |
 
+## Bundled executable runtimes
+
+Python 3 is the default for bundled executables. Bun normally runs checkout
+checks only. Record any skill runtime exception and its reason in
+`skills/sources.json`.
+
+- `babysit-pr` retains the Bun-only `scripts/watch-pr` helper for its merge-state
+  verdict. It installs its dependencies in its own directory on first use. When
+  the skill is installed, a plugin update replaces that cache directory. Without
+  Bun, the skill falls back to status reporting.
+- `skill-cleaner` retains a dependency-free Node 22.6+ TypeScript analyzer for
+  inventory, transcript heuristics, and Codex-style budget simulation. It needs
+  no package install. Without Node, use filesystem tools and report unavailable
+  numeric estimates.
+
 ## Check for drift
 
 ```bash

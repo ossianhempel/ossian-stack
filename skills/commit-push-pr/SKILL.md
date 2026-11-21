@@ -47,7 +47,8 @@ providers or assume Azure DevOps Server support.
 - `--description-only` (add `--body-only` to print just the body), compose the title
   and body and print them. Read-only: no branch, commit, push, or PR mutation.
 - `--pr-only`, open or update the PR for already-committed work. Leave uncommitted
-  changes in the tree and out of the description. No review fixes or new babysit
+  changes in the tree and out of the description. Skip the merged-delivery sweep
+  unless cleanup is separately authorized. No review fixes or new babysit
   unless the enclosing request already includes drive follow-through.
 - `--branch-only`, establish branch safety, then stop. No commit, push, or PR.
 - `--draft`, open the PR as a draft. Default is ready for review; a draft is for
@@ -109,9 +110,10 @@ other `gh` failure as a blocking error, not as NO_OPEN_PR. In `--description-onl
 stay read-only: no branch switch, no fetch that mutates, no PR calls unless a PR
 URL/id was supplied.
 
-Then, unless the mode stops before a commit (`--description-only`, `--update`,
-`--branch-only`), run [Sweep earlier merged deliveries](#sweep-earlier-merged-deliveries)
-before continuing.
+Run [Sweep earlier merged deliveries](#sweep-earlier-merged-deliveries) for a
+regular delivery. Skip it in `--description-only`, `--update`, `--branch-only`,
+and standalone `--pr-only`. When a narrow helper call belongs to an existing
+delivery, leave the sweep to that delivery owner.
 
 ## Step 2: Delivery path and branch safety
 
@@ -347,9 +349,9 @@ exact blocker.
 
 Agents stop at merge-ready and the human merges later, so post-merge cleanup is
 usually still pending when the session ends. Each delivery that commits, pushes,
-or opens a PR therefore closes out earlier ones in the same repository after
-Step 1. Modes that stop before a commit (`--description-only`, `--update`,
-`--branch-only`) skip it.
+or opens a PR under its regular delivery scope closes out earlier ones in the
+same repository after Step 1. Narrow modes follow the Step 1 limits. A separately
+authorized cleanup uses only the requested scope.
 
 1. List the branches this flow delivered:
    `git config --get-regexp '^branch\..*\.deliveredpr$'` (Git reports the key in

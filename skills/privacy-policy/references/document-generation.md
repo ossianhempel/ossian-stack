@@ -4,11 +4,19 @@ Read for writing the selected policies, terms, or EULA. Follow the scope and saf
 
 ## Generation Process
 
-### Step 1: Select Template Sections
+### Step 1: Structure the requested drafts
 
-Read `templates.md` for the document templates.
+Use the [practice inventory](practice-inventory.md) and the source requirements
+you verified for the target app and regions. Use the following sections as
+starting points, omitting optional sections when they do not apply.
 
-Based on configuration answers, include or exclude sections:
+| Document | Draft sections |
+| --- | --- |
+| Privacy policy | Publisher and scope, data and sources, purposes, recipients and SDKs, retention and deletion, user rights and request process, children's privacy when applicable, changes, effective date, and contact. |
+| Terms of service | Scope and acceptance, eligibility and accounts, acceptable use, purchases and subscription terms where offered, ownership and user content where relevant, suspension and termination, support, changes, effective date, and contact. Verify any liability, warranty, and dispute clauses against the applicable requirements. |
+| EULA | Licensor and scope of the license, permitted use and restrictions, ownership, maintenance and support, termination, contact, and any verified distribution-platform requirements. Establish whether the platform's standard EULA or a custom one applies before drafting platform-specific clauses. |
+
+For the privacy policy, use confirmed answers to select additional disclosures:
 
 | Answer | Sections Added |
 |--------|---------------|
@@ -21,7 +29,7 @@ Based on configuration answers, include or exclude sections:
 
 ### Step 2: Fill in App-Specific Details
 
-Replace template placeholders with detected or user-provided values:
+Use detected or user-provided values. Mark unresolved facts for confirmation and keep the document in draft:
 - `[APP_NAME]` -- App display name
 - `[DEVELOPER_NAME]` -- Developer or company name
 - `[CONTACT_EMAIL]` -- Privacy contact email

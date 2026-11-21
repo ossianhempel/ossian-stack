@@ -43,50 +43,82 @@ PY
   esac
 }
 
-# Live App Store version via Apple's public lookup API. Empty if unavailable / unreleased.
+# Live App Store version via Apple's public lookup API. Blank only for a valid empty result.
 live_version() {
-  local cc="$IOS_RELEASE_APPSTORE_LOOKUP_COUNTRY"
-  command -v curl >/dev/null 2>&1 || { echo ""; return 0; }
   local json
-  json=$(curl -fsS "https://itunes.apple.com/lookup?id=${IOS_RELEASE_APP_ID}&country=${cc}" 2>/dev/null) || { echo ""; return 0; }
-  printf '%s' "$json" | /usr/bin/python3 -c 'import json,sys
+  json=$(curl -fsS --max-time 15 --get https://itunes.apple.com/lookup \
+    --data-urlencode "id=$IOS_RELEASE_APP_ID" \
+    --data-urlencode "country=$IOS_RELEASE_APPSTORE_LOOKUP_COUNTRY") || return 1
+  printf '%s' "$json" | /usr/bin/python3 -c 'import json
+import re
+import sys
+
 try:
-    d=json.load(sys.stdin); r=d.get("results") or []
-    print(r[0].get("version","") if r else "")
-except Exception:
-    print("")'
+    data = json.load(sys.stdin)
+    results = data["results"]
+    count = data["resultCount"]
+    if type(count) is not int or not isinstance(results, list) or count != len(results):
+        raise ValueError
+    if count:
+        app = results[0]
+        version = app["version"]
+        if count != 1 or str(app["trackId"]) != sys.argv[1]:
+            raise ValueError
+        if not re.fullmatch(r"[0-9]+(?:\.[0-9]+)*", version):
+            raise ValueError
+        print(version)
+except (KeyError, TypeError, ValueError):
+    sys.exit("Unexpected App Store lookup response")' "$IOS_RELEASE_APP_ID"
 }
 
-# Return 0 if $1 > $2 (dotted numeric). Equal or lower → non-zero.
+valid_version() { [[ "$1" =~ ^[0-9]+(\.[0-9]+)*$ ]]; }
+
+# Compare numeric components. Missing trailing components have value zero.
 version_gt() {
-  [[ "$1" != "$2" ]] || return 1
-  local hi
-  hi=$(printf '%s\n%s\n' "$1" "$2" | sort -V | tail -n1)
-  [[ "$hi" == "$1" ]]
+  /usr/bin/python3 - "$1" "$2" <<'PYTHON'
+from itertools import zip_longest
+import sys
+
+current, live = (map(int, version.split(".")) for version in sys.argv[1:])
+for left, right in zip_longest(current, live, fillvalue=0):
+    if left != right:
+        sys.exit(0 if left > right else 1)
+sys.exit(1)
+PYTHON
 }
 
-cmd_live_version() { load_manifest; live_version; }
+cmd_live_version() {
+  load_manifest
+  live_version || die "App Store version lookup unavailable"
+}
 
 cmd_status() {
   load_manifest
-  local cur live
+  local cur live lookup_available=true
   cur=$(current_version || true)
-  live=$(live_version || true)
+  live=$(live_version) || lookup_available=false
   echo "app:           $IOS_RELEASE_APP_ID  (${IOS_RELEASE_BUNDLE_ID:-?})"
   echo "build system:  ${IOS_RELEASE_BUILD_SYSTEM:-?}"
   echo "version source: $IOS_RELEASE_VERSION_SOURCE"
   echo "branches:      beta=${IOS_RELEASE_BETA_BRANCH:-?} -> release=${IOS_RELEASE_RELEASE_BRANCH:-?}"
   echo "backend:       ${IOS_RELEASE_BACKEND_DEPLOY:-none}"
   echo "current version: ${cur:-<unparsed>}"
-  echo "live App Store:  ${live:-<none / unavailable>}"
-  if [[ -n "$cur" && -n "$live" ]]; then
+  if [[ "$lookup_available" == false ]]; then
+    echo "live App Store:  <unavailable>"
+    echo "gate:          UNVERIFIED (App Store lookup failed)"
+  elif ! valid_version "$cur"; then
+    echo "live App Store:  ${live:-<no listing in selected storefront>}"
+    echo "gate:          UNVERIFIED (current version could not be parsed)"
+  elif [[ -n "$live" ]]; then
+    echo "live App Store:  $live"
     if version_gt "$cur" "$live"; then
       echo "gate:          OK ($cur > $live)"
     else
       echo "gate:          BLOCKED ($cur is not > live $live, bump before pushing the release train)"
     fi
   else
-    echo "gate:          (skipped, missing current or live version)"
+    echo "live App Store:  <no listing in selected storefront>"
+    echo "gate:          NO LIVE VERSION IN STOREFRONT (verify in App Store Connect)"
   fi
   [[ -n "${IOS_RELEASE_NOTES_FILE:-}" ]] && echo "repo notes:    $IOS_RELEASE_NOTES_FILE (read before release moves)"
   return 0
@@ -96,11 +128,11 @@ cmd_check_version() {
   load_manifest
   local cur="${1:-}" live
   [[ -n "$cur" ]] || cur=$(current_version || true)
-  [[ -n "$cur" ]] || die "Could not determine current version; pass it explicitly"
-  live=$(live_version || true)
+  valid_version "$cur" || die "Could not determine a numeric current version; pass it explicitly"
+  live=$(live_version) || die "App Store version lookup unavailable; verify the live version before release"
   if [[ -z "$live" ]]; then
-    echo "No live App Store version found (unreleased or lookup unavailable); gate passes for $cur."
-    return 0
+    echo "No live version in the selected storefront. Verify the app ID and live version or first-release status in App Store Connect."
+    return 3
   fi
   if version_gt "$cur" "$live"; then
     echo "OK: $cur > live $live"
@@ -120,7 +152,7 @@ Usage: ios-release <command>
 
 Commands:
   status                 Show app/build-system/branch/version summary and the version gate.
-  check-version [ver]    Fail if the (given or current) version is not > the live App Store version.
+  check-version [ver]    Require a higher version than the live version. Exit 3 for a valid empty lookup.
   live-version           Print the live App Store version (Apple public lookup).
 EOF
     exit 2 ;;

@@ -439,7 +439,7 @@
           {
             "id": "prototype",
             "optional": true,
-            "writes": "throwaway branch"
+            "writes": "prototype artifact and observed tradeoffs"
           }
         ],
         "extras": [
@@ -612,7 +612,7 @@
         "steps": [
           {
             "id": "online-writing",
-            "writes": "audit & revision comparison"
+            "writes": "audit, headlines, or editorial research"
           },
           {
             "id": "copywriter"
@@ -794,12 +794,8 @@
       "copywriter"
     ],
     "ossian-mode": [
-      "create-verification-skill",
       "grill-with-docs",
       "unslop"
-    ],
-    "prototype": [
-      "create-verification-skill"
     ],
     "setup-ossian-stack": [
       "create-verification-skill",

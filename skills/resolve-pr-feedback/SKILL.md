@@ -46,23 +46,24 @@ Unknown providers or ambiguous identity are reported blockers.
 | PR number (e.g., `123`) | **Full** -- all unresolved feedback on that PR |
 | PR URL (e.g., `https://HOST/OWNER/REPO/pull/123`, no comment fragment) | **Full** -- all unresolved feedback on that PR; parse `HOST`, `OWNER/REPO`, and the number from the URL (this is how `babysit-pr` hands a fork→upstream PR to full mode against the right host/base) |
 | Review-comment URL (a `pull/123#discussion_r...` fragment, a diff/review-thread comment) | **Targeted** -- only that specific review thread |
-| Issue-comment URL (a `pull/123#issuecomment-...` fragment, a top-level PR comment) | **Full** -- a top-level comment has no review thread to resolve; process the PR and address it as non-thread feedback |
+| Issue-comment URL (a `pull/123#issuecomment-...` fragment, a top-level PR comment) | **Targeted** -- only that top-level PR comment |
 
-Only a `#discussion_r` fragment is **Targeted**: that mode resolves a thread via `repos/OWNER/REPO/pulls/comments/COMMENT_ID`, which exists only for diff comments, an `#issuecomment-` ID sent there 404s.
-
-**Targeted mode**: When a comment/thread URL is provided, ONLY address that feedback. Do not fetch or process other threads.
+**Targeted mode**: Address only the linked feedback. A `#discussion_r` fragment
+selects an inline review thread. An `#issuecomment-` fragment selects a top-level
+PR comment. For an unrecognized comment fragment, report that the target could
+not be identified and stop.
 
 After determining mode, read the matching reference and follow it; each is self-contained for that mode:
 
 - **Full Mode** → `references/full-mode.md`, covers all three feedback surfaces (inline review threads, review submission bodies, top-level PR comments), which differ only in whether GitHub can resolve them, never in whether they are judged (9 steps: fetch, triage, consolidate & decide (the gate), parallel fix, validate, commit/push, reply/resolve, verify, summary)
-- **Targeted Mode** → `references/targeted-mode.md` (2 steps: extract thread context from URL, then judge/fix/reply/resolve via the same validate/commit/push/reply pipeline)
+- **Targeted Mode** → `references/targeted-mode.md` (fetch the linked inline thread or top-level comment, then apply the relevant judgment, validation, and reply steps)
 - Evaluation rubric → `references/evaluation-rubric.md` (the orchestrator reads this to judge each item before any fix is dispatched)
 - Fixer prompt asset → `references/agents/pr-comment-resolver.md` (read before dispatching fixer subagents for approved fixes; do not dispatch a standalone agent by type/name)
 
 ## Success Criteria
 
 - Every unresolved item in the selected provider/scope evaluated
-- Valid fixes committed and pushed
-- Each thread replied to with quoted context
-- Threads resolved through the provider API with readback (except needs-human)
-- No unaccounted unresolved feedback on provider verification (minus intentionally-open threads)
+- Authorized fixes validated, committed, and pushed within scope
+- Authorized replies verified with quoted context
+- In-scope review threads resolved with provider readback where the verdict permits it
+- In full mode, no in-scope unresolved feedback left unaccounted for
