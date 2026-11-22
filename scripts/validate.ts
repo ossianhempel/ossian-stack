@@ -267,6 +267,8 @@ for (const dir of skillDirs) {
 // versus silent misses.
 const NON_SKILL_TOKENS = new Set([
   "agentic-todo",
+  // autoreview machine-status values
+  "scoped-clean",
   // CSS properties, media features, and utility classes
   "background-image", "clip-path", "ease-in", "ease-out", "min-height",
   "pointer-events", "prefers-reduced-motion", "scroll-margin-top",

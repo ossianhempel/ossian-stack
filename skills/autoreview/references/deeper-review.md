@@ -11,11 +11,12 @@ to data preservation, migration compatibility, access or ownership, money,
 concurrent state, retries, or recovery warrant a focused brief. A wording change
 on a payment screen does not by itself change the payment contract.
 
-Start with the configured single reviewer. Use the existing panel when a failure
-would cause serious loss or exposure, or an unresolved assumption needs a second
-independent judgment. Each panel member receives the same frozen bundle and
-brief and reports all actionable findings in one pass. State the reason for the
-extra reviewer; the skill does not delegate ordinary implementation.
+Start with the default reviewer. Add a second independent pass only when a
+failure would cause serious loss or exposure, or an unresolved assumption needs
+a second judgment: run the helper again on the same target and brief with a
+different explicitly selected engine (for example `--engine claude`). Each pass
+reports all actionable findings once. State the reason for the extra reviewer;
+the skill does not delegate ordinary implementation.
 
 ## Prepare the brief and evidence
 
@@ -35,10 +36,12 @@ Give the reviewer enough context to challenge the change:
   reviewers independently check the current change for new defects too.
 
 Pass a short brief with the helper's existing `--prompt`, or put a longer one in
-a repo-relative file passed with `--prompt-file`. Supply necessary unchanged
-source or test evidence through explicit repo-relative `--dataset` files. Select
-the relevant context; all input retains the helper's scanning, redaction, size,
-and isolation checks. Reviewers cannot read the working repository, and adding a
+a file inside the repository passed with `--prompt-file`. Supply necessary
+unchanged source or test evidence through explicit repo-relative `--dataset`
+files, or, in branch and commit mode, `--source-context` paths from the
+reviewed commit. Select
+the relevant context; all input retains the helper's sensitive-path, size, and
+isolation checks. Reviewers cannot read the working repository, and adding a
 brief does not grant repository access or permission to execute tests. Temporary
 briefs and evidence stay outside the delivery diff.
 
@@ -114,7 +117,7 @@ proof and review of that result.
 
 The existing scope governor still applies: after two correction cycles without
 convergence, reclassify remaining findings before editing again. Continue only
-for in-scope blockers. A failed or partial panel is incomplete review, not a clean
+for in-scope blockers. A failed or partial pass is incomplete review, not a clean
 result. Once the selected review completes with no accepted actionable findings
 and the required behavior proof passes, stop. Another reviewer needs new evidence
 or a newly identified risk, not a desire for reassurance.
