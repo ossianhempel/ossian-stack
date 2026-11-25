@@ -280,6 +280,10 @@
      {
       "id": "create-verification-skill",
       "note": "when a reusable harness is missing"
+     },
+     {
+      "id": "create-formal-verification-skill",
+      "note": "when tests can’t reach a race or invariant"
      }
     ]
    },
@@ -501,6 +505,7 @@
    "git-cleanup",
    "bro",
    "maintain-verification-skill",
+   "maintain-formal-verification-skill",
    "skill-creator",
    "skill-cleaner",
    "writing-for-agents"
@@ -853,6 +858,24 @@
     "online-writing"
    ]
   },
+  "create-formal-verification-skill": {
+   "id": "create-formal-verification-skill",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Create Formal Verification Skill",
+   "description": "Generate a project-local skill that formally verifies the code where a bug costs the most and tests reach the least, in any language, with whichever verification tool fits. Use for /create-formal-verification-skill, \\\"model-check this race\\\", \\\"prove this invariant\\\", or when concurrency, retries, state machines, parsers, or unsafe code need more than tests.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "routes": [
+    "maintain-formal-verification-skill"
+   ],
+   "calledBy": [],
+   "routedBy": []
+  },
   "create-verification-skill": {
    "id": "create-verification-skill",
    "type": "skill",
@@ -1179,6 +1202,24 @@
     "skill-creator"
    ],
    "routedBy": []
+  },
+  "maintain-formal-verification-skill": {
+   "id": "maintain-formal-verification-skill",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Maintain Formal Verification Skill",
+   "description": "Bring a project's formal verification back in line with the code after the code changes: find the commits that touched verified code, update the model, harness, or properties to describe the code as it is now, rerun, and say whether each failure is drift in the verification or a bug in the code. Use for /maintain-formal-verification-skill, \\\"is the model still true to the code\\\", or after merges and refactors that touched verified code without rechecking it.",
+   "role": "human",
+   "humanOnly": true,
+   "argumentHint": null,
+   "origin": "adapted",
+   "repo": "https://github.com/cursor/plugins",
+   "calls": [],
+   "routes": [],
+   "calledBy": [],
+   "routedBy": [
+    "create-formal-verification-skill"
+   ]
   },
   "maintain-verification-skill": {
    "id": "maintain-verification-skill",
@@ -1956,7 +1997,7 @@
   }
  },
  "counts": {
-  "skills": 70,
+  "skills": 72,
   "agents": 0,
   "plugins": 1
  }

@@ -85,6 +85,9 @@
     "create-verification-skill": {
       "role": "human"
     },
+    "create-formal-verification-skill": {
+      "role": "human"
+    },
     "diagnosing-bugs": {
       "role": "both"
     },
@@ -128,6 +131,9 @@
       "role": "both"
     },
     "maintain-verification-skill": {
+      "role": "human"
+    },
+    "maintain-formal-verification-skill": {
       "role": "human"
     },
     "obsidian": {
@@ -539,6 +545,10 @@
           {
             "id": "create-verification-skill",
             "note": "when a reusable harness is missing"
+          },
+          {
+            "id": "create-formal-verification-skill",
+            "note": "when tests can’t reach a race or invariant"
           }
         ]
       },
@@ -760,6 +770,7 @@
       "git-cleanup",
       "bro",
       "maintain-verification-skill",
+      "maintain-formal-verification-skill",
       "skill-creator",
       "skill-cleaner",
       "writing-for-agents"
@@ -780,6 +791,9 @@
     }
   },
   "routes": {
+    "create-formal-verification-skill": [
+      "maintain-formal-verification-skill"
+    ],
     "create-verification-skill": [
       "maintain-verification-skill"
     ],
