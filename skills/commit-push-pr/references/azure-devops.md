@@ -79,6 +79,35 @@ and inherited action scope. Azure follows the same lifecycle as GitHub: finish a
 agreed stack build first and resume an existing drive owner rather than starting a
 second one. Report unsupported/inaccessible evidence as a limitation, never READY.
 
+## Inline image attachments
+
+Azure DevOps PR bodies render inline Markdown images (`![alt](url)`), not Mermaid or
+inline MP4 players. For motion or multi-step UI changes on Azure, attach a GIF or
+screenshot sequence rather than a video file (or use the escape path in
+`pr-description.md` if usable inline image evidence cannot be produced). Because PR
+attachments require a `pullRequestId`, create the PR first with an initial description
+that fits within Azure's 4,000-character PR description limit (or use an existing active
+PR), upload media, then update the description with the returned URLs:
+
+1. Inside the upload process (never as a standalone shell command whose stdout reaches
+   the transcript), capture an Azure DevOps token directly into memory — for example via
+   `subprocess.check_output(["az", "account", "get-access-token", "--resource", "499b84ac-1321-427f-aa17-267ca6975798", "--query", "accessToken", "-o", "tsv"], text=True).strip()`
+   for a `Bearer` header, or `base64.b64encode(f":{os.environ['AZURE_DEVOPS_EXT_PAT']}".encode()).decode()`
+   for a `Basic` header — and pass it only in the request `Authorization` header without
+   printing or logging it.
+2. POST the raw file bytes with `Content-Type: application/octet-stream` to
+   `<org-url>/<encoded-project>/_apis/git/repositories/<repository-id>/pullRequests/<pr-id>/attachments/<encoded-file-name>?api-version=7.1`
+   (using `repository.id` from the PR response) and read the returned `url` field. On an
+   existing PR, use a fresh filename for each updated capture (Azure rejects filename
+   reuse) and reuse the existing URL for unchanged captures.
+3. Embed `![<alt>](<url>)` in the PR body (or a Before/After Markdown table), verify
+   the final Markdown including attachment URLs still fits within Azure's
+   4,000-character PR description limit (trim prose if needed rather than dropping
+   visual evidence), and apply it with `az repos pr update` using the argv/file-content
+   pattern above.
+4. If upload fails or auth is unavailable, follow the blocked-upload escape path in
+   `pr-description.md`.
+
 CLI contracts: [az repos pr list/create/show/update](https://learn.microsoft.com/en-us/cli/azure/repos/pr?view=azure-cli-latest).
 
-REST contract: [PR Update](https://learn.microsoft.com/en-us/rest/api/azure/devops/git/pull-requests/update?view=azure-devops-rest-7.1); [az devops invoke](https://learn.microsoft.com/en-us/cli/azure/devops?view=azure-cli-latest#az-devops-invoke).
+REST contracts: [PR Update](https://learn.microsoft.com/en-us/rest/api/azure/devops/git/pull-requests/update?view=azure-devops-rest-7.1); [PR Attachments - Create](https://learn.microsoft.com/en-us/rest/api/azure/devops/git/pull-request-attachments/create?view=azure-devops-rest-7.1); [az devops invoke](https://learn.microsoft.com/en-us/cli/azure/devops?view=azure-cli-latest#az-devops-invoke).

@@ -124,6 +124,43 @@
         "Targets develop because origin/develop exists, and would target main if it did not",
         "Still runs simplify-code and autoreview before pushing"
       ]
+    },
+    {
+      "id": 11,
+      "name": "ui-pr-attaches-rendered-screenshots-inline",
+      "prompt": "Use commit-push-pr to open a GitHub PR for this completed UI layout tweak on feature/compact-header. We already captured ./before.png and ./after.png using synthetic test data from the running app, and gh supports --attach. Describe the PR body and creation command without executing tools.",
+      "expected_output": "Confirm the captures contain only synthetic or redacted data, reference ./before.png and ./after.png inline in the PR body (for example in a Before/After table under ## Visual evidence or inline for a small PR), and pass --attach for both files to gh pr create --body-file so GitHub uploads and rewrites them to rendered asset URLs rather than links or local paths. Do not substitute a Mermaid diagram for the UI screenshots.",
+      "files": [],
+      "assertions": [
+        "Verifies captures are safe (synthetic or redacted) before uploading, and includes inline Markdown image references rather than bare links or prose-only descriptions",
+        "Checks or uses gh pr create --body-file with repeatable --attach flags so local paths are uploaded and rewritten inline",
+        "Does not substitute a diagram or code block for real UI screenshots"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "pr-visual-evidence-escape-path",
+      "prompt": "Use commit-push-pr to handle three cases without executing tools: (a) --description-only for a one-line typo fix in README.md; (b) a UI PR with a safe local screenshot when gh is v2.95.0 (no --attach); (c) a UI PR whose only available capture shows unredacted customer records and no synthetic replacement can be produced.",
+      "expected_output": "In (a), use the non-visual escape path: keep the description to a short value-led sentence without inventing a decorative diagram, and note briefly why no visual was included. In (b), strip local paths from the PR body so nothing renders broken, state the exact blocker (gh lacks --attach) and mark visual verification unverified in ## Verification, and include the safe local screenshot in the final chat response. In (c), keep the unsafe capture out of both the PR upload and the chat response, state the privacy blocker and mark visual verification unverified in ## Verification.",
+      "files": [],
+      "assertions": [
+        "Uses the non-visual escape path for the typo fix without fabricating a decorative diagram and states the brief reason",
+        "Does not ship broken local paths or bare links when --attach is unavailable on gh v2.95.0, records the blocker and unverified visual status in ## Verification, and shares the local capture in chat only because it is safe",
+        "Keeps the unredacted customer capture out of both the PR and chat in (c) and marks visual verification unverified with the exact blocker"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "github-attach-partial-and-zero-upload-recovery",
+      "prompt": "Use commit-push-pr on GitHub with gh v2.99.0+ (--attach supported). Describe how you recover from each nonzero CLI failure without executing tools: (a) gh pr create --title ... --body-file ... --attach ./before.png --attach ./after.png prints a PR URL and exits nonzero with an upload error for ./after.png; (b) gh pr create --title ... --body-file ... --attach ./only.png exits nonzero with an upload error and prints no PR URL; (c) gh pr edit 42 --title ... --body-file ... --attach ./only.png prints the PR #42 URL and exits nonzero with an upload error.",
+      "expected_output": "Inspect the live PR state (gh pr view) before deciding what was written. In (a), read the live PR body to preserve the uploaded before.png asset URL, remove ./after.png, record the upload blocker and unverified visual status in ## Verification, and apply the cleaned body with gh pr edit without --attach (never run gh pr create again). In (b), confirm no PR was created, strip ./only.png from $BODY_FILE, record the blocker per the escape path, and run gh pr create without --attach. In (c), do not assume the edit body was saved from the printed URL: keep the intended updated description with ./only.png stripped and the blocker recorded, and apply both --title and --body-file via gh pr edit 42 without --attach so stale prose is not left behind.",
+      "files": [],
+      "assertions": [
+        "Inspects the live PR state (gh pr view) before recovering instead of assuming create or edit succeeded or rolled back atomically",
+        "Preserves the already-uploaded before.png asset URL in (a), removes ./after.png, and uses gh pr edit without --attach rather than creating a duplicate PR",
+        "Confirms no PR exists and retries gh pr create without --attach using the cleaned body in (b)",
+        "Re-applies the intended updated description and title via gh pr edit without --attach in (c) so stale prose is replaced and no broken local path ships"
+      ]
     }
   ]
 }

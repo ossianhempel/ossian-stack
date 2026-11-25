@@ -240,12 +240,11 @@ Skip Steps 6-7 entirely for direct-branch delivery.
 **You MUST read `references/pr-description.md`** (in this skill's directory) in full,
 its core principle governs the writing: the diff is already visible; the description
 explains what the diff cannot show. Size the description to the change, use the
-`## Why` / `## Scope` / `## Change outline` / `## Tradeoffs` / `## Blast Radius` /
-`## Verification` section order, dropping empty sections; small PRs are a single value-led
-sentence with no headers. The `## Change outline` is expected for medium/large PRs and any
-change whose shape is the story: load the `show-me` skill and emit at least one concrete
-fenced structural block (diff, code, tree, or table). On Azure, use those blocks rather
-than mermaid, which an Azure PR body does not render.
+`## Why` / `## Scope` / `## Visual evidence` / `## Change outline` / `## Tradeoffs` /
+`## Blast Radius` / `## Verification` section order, dropping empty sections; small PRs
+stay headerless. Every PR includes rendered visual evidence inline (screenshots or
+recordings for UI changes; `show-me` rendered views for non-UI changes, without Mermaid
+on Azure) unless the escape path in `references/pr-description.md` applies.
 
 Title: `type(scope): summary` per the reference, matching the project's conventions.
 State how each check was run and its outcome; label anything you could not verify as
@@ -274,12 +273,28 @@ __PR_BODY_END__
 The quoted sentinel keeps `$VAR`, backticks, and literal `EOF` inside the body from
 expanding.
 
+- **Inline media uploads (GitHub/GHE Cloud):** When the body includes local images or
+  videos, reference each local path inside `$BODY_FILE` using Markdown image syntax and
+  pass repeatable `--attach "<path>"` to `gh pr create` or `gh pr edit`. Put images in
+  `![After](./after.png)` or a Before/After table; put each video as `![Walkthrough](./repro.mp4)`
+  on its own standalone paragraph (never inside a table cell or link syntax) so `gh`
+  rewrites it for GitHub's inline player rather than a clickable link. `gh` (v2.99.0+)
+  uploads each file and rewrites the local path in place to a rendered asset URL. Check
+  `gh pr create --help | grep -q -- --attach` first; if unavailable, follow the
+  blocked-upload escape path in `references/pr-description.md`. If an upload fails,
+  inspect the live PR (if one exists or was just created) so `$BODY_FILE` keeps any
+  uploaded asset URLs while dropping every failed local path and recording the blocker
+  per the escape path, then apply that cleaned body without `--attach` (`gh pr edit`
+  with `--title` and `--body-file` when the PR exists, or `gh pr create` when a new-PR
+  attempt created none).
 - **New PR** (no open PR from Step 1): `gh pr create --base "$BASE" --title "<TITLE>"
-  --body-file "$BODY_FILE"`. Add `--draft` only when requested.
+  --body-file "$BODY_FILE"` (plus `--attach "<path>"` per media file, and `--draft` only
+  when requested).
 - **Existing PR** (default, `--pr-only`, or `--update`): preview
   before overwriting, ask: new title, the first sentence or two of the body, total
   line count. On confirmation, `gh pr edit <number> --title "<TITLE>" --body-file
-  "$BODY_FILE"`. In autonomous closeout, apply directly and report what changed. If
+  "$BODY_FILE"` (plus `--attach "<path>"` per media file). In autonomous closeout, apply
+  directly and report what changed. If
   `--base` was given and differs from the PR's base, retarget with
   `gh pr edit <number> --base "$BASE"`; otherwise preserve the existing base.
 - **`--description-only`**: print the title and body. Stop.
