@@ -39,7 +39,7 @@ Edit only the verification: models, harnesses, property files, and the verify sk
 
 5. **Rerun and judge each result.**
    - **Pass:** the check can now pass on a description that has lost the ability to fail. Break the new code the way the property guards against, such as removing a new check or reordering a new step, and confirm that the check catches it. For a separate model, make the same break in the action that stands for that code and confirm the checker fails there. Make every such break in a disposable copy of the working tree (a scratch git worktree with the current uncommitted changes and verification files applied), never in the user's checkout; this is the one product-code edit the run makes, and it never leaves the copy. Then drop the copy.
-   - **Fail:** replay the counterexample against the real code, step by step. If a step cannot happen in the code, the verification is wrong. Fix the verification, and say what was wrong. If every step can happen, it is a bug. Name the commit that introduced it, tell the counterexample as a sequence of steps in the code's own words, and state the harm in one sentence. If a cheap test or reproduction against the real code shows the bug, add it to the report as evidence. Do not commit it to the product code.
+   - **Fail:** replay the counterexample against the real code, step by step. If a step cannot happen in the code, the verification is wrong. Fix the verification, say what was wrong, and judge the rerun again from the top of this step, so a repaired check also passes the break test before it counts. If every step can happen, it is a bug. Name the commit that introduced it (or the uncommitted change, when that is the cause; say unknown when the evidence does not settle it), tell the counterexample as a sequence of steps in the code's own words, and state the harm in one sentence. If a cheap test or reproduction against the real code shows the bug, add it to the report as evidence. Do not commit it to the product code.
 
 6. **Update the verify skill.** Update the code that each check covers, the commands, the bounds, the assumptions, and the sync commit. Set the sync commit to the commit that you checked, or mark it pending when the check describes uncommitted covered code (step 3). Do not move the sync commit for a blocked check, and say so in the report. Then follow the verify skill once as the next agent would, so that you know its steps still run. If it reads a model checker's trace, its instructions must retell a violation as the shortest sequence of steps in the code's words; a skill that hands over raw traces is drift to fix.
 
@@ -50,7 +50,7 @@ Tell the user, for each check:
 - the outcome, and the commits that you read;
 - what changed in the verification and why, with a short reason for each change: the code changed shape, or the promise changed on purpose (with the evidence);
 - the rerun result, and the break that you used to show the updated check can still fail;
-- each bug, in plain words: the counterexample as steps in the code's words, the harm, and the commit that introduced it;
+- each bug, in plain words: the counterexample as steps in the code's words, the harm, and what introduced it (a commit, the uncommitted change, or unknown);
 - what the verification still does not cover, including new code that it should cover and does not.
 
 Say outright which failures were drift in the verification and which were bugs in the code. For a check that passed before you updated it and fails after, say that the old pass was on a stale description.
