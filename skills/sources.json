@@ -593,6 +593,28 @@
       "origin": "derived",
       "lastSynced": "2026-10-18",
       "notes": "Authored 2026-10-18 as a lightweight, explicit-only reply that hands an agent's pending question back for it to decide. Derived from cursor/plugins pstack figure-it-out (decide and log rather than block) and principle-never-block-on-the-human (decisions delegated, irreversible actions still confirmed); pstack's multi-phase planning, arena, and audit-trail machinery deliberately dropped. Written against writing-for-agents."
+    },
+    "create-formal-verification-skill": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/create-formal-verification-skill",
+      "refresh": "npx skills add cursor/plugins -y --skill create-formal-verification-skill && echo 'hand-merge into skills/create-formal-verification-skill/ then: trash .agents/skills/create-formal-verification-skill'",
+      "notes": "From Cursor's pstack plugin. Picks the highest-stakes, least-tested promise in a repo, verifies one property with the fitting tool, shows it failing on a broken variant, and generates a project-local verify skill with a coverage record and sync commit. Adapted: writes to .agents/skills/ (symlinked .claude/skills), same rule as create-verification-skill, and names the output verify-<area>-formal. Upstream routes TLA+ results through pstack's statechart skill, which this plugin does not ship; replaced with inline rules (retell a violation as the shortest path in code words, state what a pass covers, name model actions after code steps). Local addition: the check runs through one pinned command in project tooling. Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Merge by hand on refresh, never overwrite.",
+      "upstreamPath": "pstack/skills/create-formal-verification-skill",
+      "upstreamRev": "34b1b7c96f09f81a21a6c78f65b7833f7dcb5b24",
+      "upstreamCheckedAt": "2026-11-25",
+      "lastSynced": "2026-11-25"
+    },
+    "maintain-formal-verification-skill": {
+      "origin": "adapted",
+      "repo": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/maintain-formal-verification-skill",
+      "refresh": "npx skills add cursor/plugins -y --skill maintain-formal-verification-skill && echo 'hand-merge into skills/maintain-formal-verification-skill/ then: trash .agents/skills/maintain-formal-verification-skill'",
+      "notes": "From Cursor's pstack plugin. Upkeep pass for formal verify skills: diffs covered code since the sync commit, updates the model from the code, reruns, and classifies each check as in sync, updated, bug, or blocked. Adapted: target discovery prefers .agents/skills/verify-*-formal/ and treats copies elsewhere as drift; a verify skill that hands over raw checker traces is drift (no statechart skill here). Local addition: agents/openai.yaml carrying policy.allow_implicit_invocation: false. Merge by hand on refresh, never overwrite.",
+      "upstreamPath": "pstack/skills/maintain-formal-verification-skill",
+      "upstreamRev": "7b353f78f6ec193bdbe48ed8059444eb09b6878e",
+      "upstreamCheckedAt": "2026-11-25",
+      "lastSynced": "2026-11-25"
     }
   }
 }
