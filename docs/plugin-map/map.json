@@ -130,6 +130,9 @@
     "ios-marketing-capture": {
       "role": "both"
     },
+    "learn-from-miss": {
+      "role": "both"
+    },
     "maintain-verification-skill": {
       "role": "human"
     },
@@ -270,6 +273,7 @@
       "babysit-pr",
       "blast-radius",
       "git-cleanup",
+      "learn-from-miss",
       "show-me",
       "simplify-code",
       "unslop"
@@ -285,6 +289,7 @@
     ],
     "diagnosing-bugs": [
       "how",
+      "learn-from-miss",
       "principle-exhaust-the-design-space",
       "principle-fix-root-causes",
       "principle-prove-it-works",
@@ -352,7 +357,14 @@
       "resolve-pr-feedback"
     ],
     "resolve-pr-feedback": [
-      "babysit-pr"
+      "babysit-pr",
+      "learn-from-miss"
+    ],
+    "retro": [
+      "learn-from-miss"
+    ],
+    "learn-from-miss": [
+      "principle-test-behavior-not-implementation"
     ],
     "setup-ossian-stack": [
       "babysit-pr",
@@ -521,6 +533,11 @@
           {
             "id": "resolve-pr-feedback",
             "optional": true
+          },
+          {
+            "id": "learn-from-miss",
+            "optional": true,
+            "writes": "guardrail check, test, or rule"
           },
           {
             "id": "handoff",

@@ -83,6 +83,7 @@ query Threads($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
               body
               createdAt
               url
+              originalCommit { oid }
             }
           }
         }

@@ -185,6 +185,12 @@ commits not yet on the push target (`git log @{upstream}..HEAD`, or
 2. **Review.** Then run `autoreview` over the same scope, including the simplify
    edits. Follow its contract: verify each finding, fix the accepted ones, rerun
    focused tests, and rerun review until no accepted actionable findings remain.
+   When an accepted finding exposes a repeatable rule break or bug class that
+   local checks missed (not a one-off bug in newly written code), run
+   `learn-from-miss` before closing the Step 3 gate: keep its guardrail edits
+   inside the reviewed scope, rerun checks and final `autoreview` over the
+   combined content being pushed, and commit the guardrail as its own unit in
+   Step 4. Skip silently when review is clean or findings are one-offs.
 
 The gate is already satisfied only when both passes ran in this session over exactly
 the content being pushed and nothing has changed since. A pass that declares the
@@ -304,9 +310,10 @@ Never merge (`gh pr merge`, `glab mr merge`, Azure `--auto-complete`) and never 
 auto-merge, landing is the user's call.
 
 **Report:** for direct-branch delivery, report the pushed branch, commits included,
-the Step 3 outcome (what simplify and review changed, or the exception that applied),
+the Step 3 outcome (what simplify and review changed, any guardrail added or
+proposed by `learn-from-miss`, or the exception that applied),
 and what stayed unstaged and why. For PR delivery, report the PR URL, target branch,
-the commits included, the Step 3 outcome, what stayed unstaged and why, and whether
+the commits included, the Step 3 outcome (including any `learn-from-miss` result), what stayed unstaged and why, and whether
 the PR is draft or ready. In `--update` mode report the title/body changes applied;
 in `--pr-only` note that uncommitted changes were left alone.
 

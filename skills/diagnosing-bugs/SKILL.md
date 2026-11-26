@@ -257,12 +257,23 @@ Verify on the same surface the bug appeared on. "Inconclusive" or a different
 surface is not a pass; flag it. Unit tests show branch behavior, not bug absence,
 the proof is the Phase 1 loop going green (`principle-prove-it-works`).
 
+When a confirmed bug escaped existing checks (not diagnosis-only scope) and
+points to a preventable class or missing check beyond the regression test itself
+— including when no clean test seam existed — run `learn-from-miss` with the
+confirmed pre-fix failing revision from Phase 2 as the miss commit (inspecting
+that pre-fix revision if attributing an earlier introducing commit). If the
+guardrail edits the affected code or verification path, re-run the original
+repro and regression test on the final state. Keep any guardrail in its own
+commit or report a structural gap that exceeds this task's scope. Skip one-off
+bugs the regression test already covers.
+
 ## Phase 6: Cleanup
 
 Required before declaring done:
 
-- [ ] Original repro passes; reuse the Phase 5 result unless cleanup or new evidence invalidated it
+- [ ] Original repro passes; reuse the Phase 5 result unless cleanup, guardrail edits, or new evidence invalidated it
 - [ ] Regression test passes (or absence of seam is documented)
+- [ ] Escaped bug class checked through `learn-from-miss` (or skipped as one-off)
 - [ ] All `[DEBUG-...]` instrumentation removed (`grep` the prefix)
 - [ ] Task-owned prototypes, copied loop scripts, and scratch outputs removed after preserving concise repro evidence; verify their exact paths are absent, including ignored and external paths
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message, so the next debugger learns
@@ -272,5 +283,5 @@ commits are authorized, follow the project's green-history and CI conventions.
 
 ## Reply
 
-What was broken, the root cause, the fix, and how you verified it. Paste the
+What was broken, the root cause, the fix, how you verified it, and any guardrail added or proposed by `learn-from-miss` when it ran. Paste the
 failing-then-passing repro output verbatim.

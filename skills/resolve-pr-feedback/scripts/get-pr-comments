@@ -114,6 +114,7 @@ query Threads($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
               body
               createdAt
               url
+              originalCommit { oid }
             }
           }
         }
@@ -134,6 +135,7 @@ query Comments($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
           id
           author { login }
           body
+          createdAt
         }
         pageInfo { hasNextPage endCursor }
       }
@@ -154,6 +156,7 @@ query Reviews($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
           author { login }
           body
           state
+          commit { oid }
         }
         pageInfo { hasNextPage endCursor }
       }

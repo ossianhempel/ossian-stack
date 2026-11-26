@@ -258,6 +258,11 @@
       "optional": true
      },
      {
+      "id": "learn-from-miss",
+      "optional": true,
+      "writes": "guardrail check, test, or rule"
+     },
+     {
       "id": "handoff",
       "optional": true,
       "writes": "handoff note"
@@ -783,6 +788,7 @@
     "babysit-pr",
     "blast-radius",
     "git-cleanup",
+    "learn-from-miss",
     "show-me",
     "simplify-code",
     "unslop"
@@ -912,6 +918,7 @@
    "repo": "https://github.com/mattpocock/skills",
    "calls": [
     "how",
+    "learn-from-miss",
     "principle-exhaust-the-design-space",
     "principle-fix-root-causes",
     "principle-prove-it-works",
@@ -1200,6 +1207,29 @@
    "calledBy": [
     "asc",
     "skill-creator"
+   ],
+   "routedBy": []
+  },
+  "learn-from-miss": {
+   "id": "learn-from-miss",
+   "type": "skill",
+   "plugin": "ossian-stack",
+   "display": "Learn From Miss",
+   "description": "Encode a guardrail after a fixed defect or rule break slipped past existing checks — PR review feedback fixed, a diagnosed bug or post-merge failure, a recurring autoreview miss, or 'make sure this never happens again'. Picks the cheapest guardrail that holds (type, check, test, or review rule) and proves it.",
+   "role": "both",
+   "humanOnly": false,
+   "argumentHint": null,
+   "origin": "local",
+   "repo": null,
+   "calls": [
+    "principle-test-behavior-not-implementation"
+   ],
+   "routes": [],
+   "calledBy": [
+    "commit-push-pr",
+    "diagnosing-bugs",
+    "resolve-pr-feedback",
+    "retro"
    ],
    "routedBy": []
   },
@@ -1585,6 +1615,7 @@
    "calledBy": [
     "autoreview",
     "diagnosing-bugs",
+    "learn-from-miss",
     "ossian-mode"
    ],
    "routedBy": []
@@ -1689,7 +1720,8 @@
    "origin": "adapted",
    "repo": "https://github.com/EveryInc/compound-engineering-plugin",
    "calls": [
-    "babysit-pr"
+    "babysit-pr",
+    "learn-from-miss"
    ],
    "routes": [],
    "calledBy": [
@@ -1709,7 +1741,9 @@
    "argumentHint": null,
    "origin": "adapted",
    "repo": "https://github.com/mattpocock/skills",
-   "calls": [],
+   "calls": [
+    "learn-from-miss"
+   ],
    "routes": [],
    "calledBy": [],
    "routedBy": []
@@ -1997,7 +2031,7 @@
   }
  },
  "counts": {
-  "skills": 72,
+  "skills": 73,
   "agents": 0,
   "plugins": 1
  }

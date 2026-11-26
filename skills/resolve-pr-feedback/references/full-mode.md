@@ -147,7 +147,7 @@ Fixers run only targeted tests on their own changes. This step runs the project'
 
 Record the validation outcome (command run, pass/fail counts, any pre-existing failures noted) for the step 9 summary.
 
-## 6. Commit and Push
+## 6. Commit, Learn From Misses, and Push
 
 1. Stage only files reported by fixers and commit with a message referencing the PR:
 
@@ -158,7 +158,13 @@ git commit -m "Address PR review feedback (#PR_NUMBER)
 - [list changes from fixer summaries]"
 ```
 
-2. Push to remote:
+### 6a. Learn From Fixed Findings
+
+A review finding we fixed is one our own checks missed. Run `learn-from-miss` once with every item whose verdict is `fixed` or `fixed-differently`, passing for each its file path and lines, what was wrong, the PR number, and the reviewed commit as the miss commit: `originalCommit.oid` for inline threads, `commit.oid` for review bodies, and the PR head at comment time or `createdAt` for top-level comments. Preserve inherited scope and pipeline limits (in `mode:pipeline`, commit only small, proven guardrails and surface broader proposals instead of widening the PR). `learn-from-miss` commits any guardrail separately from the fix or skips one-offs. If a guardrail commit was added, rerun step 5 combined validation on the final state before pushing (if it breaks validation and a single focused repair does not clear it, drop the guardrail commit and surface it as a proposal instead). Carry the `learn-from-miss` report (guardrails added and anything needing human approval or decision) into step 9.
+
+### 6b. Push
+
+Push the fix commit and any separate guardrail commit(s) together:
 ```bash
 git push
 ```
@@ -280,6 +286,7 @@ Not addressing (count): [what was skipped and the evidence]
 Declined (count): [what was declined and the harm cited]
 
 Validation: [one line -- e.g., "bun test passed (893/893)" or "bun test passed with pre-existing failure in X noted"; omit when no code changes were committed]
+Learn from miss: [guardrails added with commit/proof, items skipped as one-off, and anything needing human approval; omit when no findings were fixed]
 ```
 
 If any item is `needs-human`, append a decisions section. These are rare but high-signal. Each carries the typed residual composed in step 3: quoted feedback, investigation, the reason autonomous action is unsafe or ambiguous, concrete options with tradeoffs, a recommendation if any, and links to every still-open thread it covers.

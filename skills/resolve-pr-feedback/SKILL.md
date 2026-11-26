@@ -13,7 +13,7 @@ Evaluate and fix PR review feedback, then reply and resolve threads. The orchest
 
 **`mode:pipeline`** (set by an orchestrator such as `babysit-pr`): the run is unattended, so **never call the blocking-question tool for any reason**, and read `references/pipeline-mode.md` before acting. It owns the two things ordinary mode leaves open. First, the open thread is the escalation ledger, so never write a PR-body residual section of your own. Second, the caller may pass a `trajectory` (`unresolved_trend`, `new_threads_this_tick`); when it shows that the feedback is not converging, answer with one approach-level needs-human rather than fixing nit after nit.
 
-**Authority in pipeline mode.** Being invoked by an orchestrator is **not** itself authorization. You act under the **inherited** scope it holds from the user: **actions** = fix / commit / push / reply / resolve on the PR head, plus ticking a `## Unapplied review findings` bullet a committed fix closed (below); **exclusions** = merge, rebase, force-push, approve CI. You may *narrow* this (decline a fix, defer a needs-human) but never *broaden* it, if resolving a thread would require an excluded action, defer it as needs-human rather than perform it.
+**Authority in pipeline mode.** Being invoked by an orchestrator is **not** itself authorization. You act under the **inherited** scope it holds from the user: **actions** = fix / commit / push / reply / resolve on the PR head, plus small, proven guardrail commits from `learn-from-miss` and ticking a `## Unapplied review findings` bullet a committed fix closed (below); **exclusions** = merge, rebase, force-push, approve CI. You may *narrow* this (decline a fix, defer a needs-human) but never *broaden* it, if resolving a thread would require an excluded action, defer it as needs-human rather than perform it.
 
 > **Default to fixing. Don't churn on what isn't real.** Most review feedback -- nitpicks included -- is correct and worth fixing; work the list and fix. Validation is a tripwire, not a gate: you read the code to make the fix anyway, so divert only on a concrete signal. Judge every item on its merits regardless of source (human or bot) or form. `references/evaluation-rubric.md` carries the four diverts and the evidence each one owes; read it before judging any item.
 
@@ -55,8 +55,8 @@ not be identified and stop.
 
 After determining mode, read the matching reference and follow it; each is self-contained for that mode:
 
-- **Full Mode** → `references/full-mode.md`, covers all three feedback surfaces (inline review threads, review submission bodies, top-level PR comments), which differ only in whether GitHub can resolve them, never in whether they are judged (9 steps: fetch, triage, consolidate & decide (the gate), parallel fix, validate, commit/push, reply/resolve, verify, summary)
-- **Targeted Mode** → `references/targeted-mode.md` (fetch the linked inline thread or top-level comment, then apply the relevant judgment, validation, and reply steps)
+- **Full Mode** → `references/full-mode.md`, covers all three feedback surfaces (inline review threads, review submission bodies, top-level PR comments), which differ only in whether GitHub can resolve them, never in whether they are judged (9 steps: fetch, triage, consolidate & decide (the gate), parallel fix, validate, commit / `learn-from-miss` / push, reply/resolve, verify, summary)
+- **Targeted Mode** → `references/targeted-mode.md` (fetch the linked inline thread or top-level comment, then apply the relevant judgment, validation, `learn-from-miss`, and reply steps)
 - Evaluation rubric → `references/evaluation-rubric.md` (the orchestrator reads this to judge each item before any fix is dispatched)
 - Fixer prompt asset → `references/agents/pr-comment-resolver.md` (read before dispatching fixer subagents for approved fixes; do not dispatch a standalone agent by type/name)
 
@@ -64,6 +64,7 @@ After determining mode, read the matching reference and follow it; each is self-
 
 - Every unresolved item in the selected provider/scope evaluated
 - Authorized fixes validated, committed, and pushed within scope
+- Fixed findings evaluated through `learn-from-miss` (full mode step 6a)
 - Authorized replies verified with quoted context
 - In-scope review threads resolved with provider readback where the verdict permits it
 - In full mode, no in-scope unresolved feedback left unaccounted for

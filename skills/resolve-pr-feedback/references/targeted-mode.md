@@ -15,7 +15,7 @@ linked top-level comment.
 
 ```bash
 gh api --hostname "$HOST" repos/OWNER/REPO/issues/comments/COMMENT_ID \
-  --jq '{id, issue_url, html_url, author: .user.login, body}'
+  --jq '{id, issue_url, html_url, created_at, author: .user.login, body}'
 ```
 
 Verify the returned comment ID and `issue_url` against the selected repository
@@ -49,7 +49,7 @@ environment prefix.
 **Step 1** -- Get comment details and GraphQL node ID via REST (cheap, single comment):
 ```bash
 GH_HOST=<host> gh api repos/OWNER/REPO/pulls/comments/COMMENT_ID \
-  --jq '{node_id, path, line, body}'   # omit GH_HOST=<host> on github.com
+  --jq '{node_id, path, line, original_commit_id, body}'   # omit GH_HOST=<host> on github.com
 ```
 
 **Step 2** -- Map comment to its thread ID. Use [scripts/get-thread-for-comment](../scripts/get-thread-for-comment). Set `SKILL_DIR` to the absolute directory you loaded the resolve-pr-feedback SKILL.md from, the Bash tool's CWD is the user's project, not the skill dir, and shell state does not persist between Bash calls, so set it inline. If the bundled script is missing, use Full Mode's fallback `gh` commands to inspect the PR comments:
@@ -92,9 +92,10 @@ and send a reply only when authorized.
 - **`replied` / `not-addressing` / `declined`**, no subagent. Compose the reply text per the rubric and proceed to the reply step for the selected comment type.
 - **`needs-human`**, compose `decision_context` and the natural-sounding reply per the rubric, leave any review thread open, and report the decision for the user or caller. The shared reply step below posts the reply once, do not post it here.
 
-Use [Full Mode steps 5 and 6](full-mode.md) for validation and authorized
-commit or push when code changed. For a top-level comment, use the reply and
-readback above.
+Use [Full Mode steps 5 and 6](full-mode.md) for validation, authorized commit,
+`learn-from-miss` (step 6a, passing `originalCommit.oid` / `original_commit_id`
+or `created_at` as the miss commit), and push when code changed. For a top-level
+comment, use the reply and readback above.
 
 ## Post an authorized inline reply
 

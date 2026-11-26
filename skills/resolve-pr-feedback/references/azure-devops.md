@@ -49,7 +49,14 @@ source IDs and resolved locations; inline and general Azure discussions both use
 feedback_type review_thread because both have a thread resource.
 
 Confirm the local checkout is the PR source repository and head before edits. Fix
-only in inherited scope, validate the combined change, commit and push if authorized.
+only in inherited scope, validate the combined change, and commit if authorized.
+Before pushing, run `learn-from-miss` once on `fixed` and `fixed-differently`
+findings (passing the assessed PR head or iteration commit as the miss commit)
+within inherited scope, keeping any guardrail in a separate commit. If a
+guardrail commit was added, rerun the combined validation on the final state
+before pushing (or drop it and surface it as a proposal if validation fails),
+then push fixes and guardrails together. Carry anything `learn-from-miss` added
+or flagged for human approval into the final report.
 Do not copy the GitHub fetch/reply/resolve commands. Re-fetch after a push: both the
 expected head and thread digest must describe the newly assessed state. The adapter
 supports mutation only on active, same-repository PRs; fork PRs need a reported
